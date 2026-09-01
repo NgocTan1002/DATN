@@ -1,0 +1,86 @@
+{
+  "audit_version": 1,
+  "generated_at_utc": "2026-09-01T10:38:50.840141+00:00",
+  "metadata": {
+    "path": "data/metadata/vsasv_metadata.csv",
+    "sha256": "254887ac5a1e357cbe1a8f0ee4bde266c491c9c349505e61c5b3dd2b461e73fb",
+    "size_bytes": 12032062
+  },
+  "passed": true,
+  "issues": [],
+  "schema": {
+    "expected_columns": [
+      "file",
+      "label",
+      "utt_type"
+    ],
+    "actual_columns": [
+      "file",
+      "label",
+      "utt_type"
+    ],
+    "valid": true,
+    "malformed_rows": 0
+  },
+  "integrity": {
+    "total_rows": 220963,
+    "unique_files": 220963,
+    "exact_duplicate_rows": 0,
+    "duplicate_file_occurrences": 0,
+    "missing_values": {
+      "file": 0,
+      "label": 0,
+      "utt_type": 0
+    },
+    "label_prefix_match": {
+      "comparable_rows": 220963,
+      "matching_rows": 220963,
+      "mismatching_rows": 0,
+      "percentage": 100.0
+    }
+  },
+  "speakers": {
+    "unique": 1141,
+    "samples_per_speaker": {
+      "minimum": 1,
+      "median": 64,
+      "maximum": 6720
+    }
+  },
+  "utterance_types": {
+    "adversarial_attack": {
+      "samples": 60949,
+      "percentage": 27.5834,
+      "speakers": 144
+    },
+    "bonafide": {
+      "samples": 98305,
+      "percentage": 44.4893,
+      "speakers": 1141
+    },
+    "replay": {
+      "samples": 760,
+      "percentage": 0.3439,
+      "speakers": 19
+    },
+    "voice_conversion": {
+      "samples": 60949,
+      "percentage": 27.5834,
+      "speakers": 144
+    }
+  },
+  "binary_distribution": {
+    "bonafide": {
+      "samples": 98305,
+      "percentage": 44.4893
+    },
+    "spoof": {
+      "samples": 122658,
+      "percentage": 55.5107
+    },
+    "unclassified": {
+      "samples": 0,
+      "percentage": 0.0
+    }
+  }
+}
