@@ -1,0 +1,75 @@
+{
+  "version": 3,
+  "dataset": "VSASV-HF-public-snapshot-v1",
+  "waveform": {
+    "channels": 1,
+    "target_sample_rate_hz": 16000,
+    "resampling": "bandlimited_sinc",
+    "decode_scale": "pcm_to_float32_minus1_to_1",
+    "amplitude_policy": {
+      "specification_status": "candidate_rules_locked",
+      "selection_status": "pending_closed_dev_ablation",
+      "candidates": [
+        "none",
+        "peak",
+        "rms_dbfs"
+      ],
+      "application_stage": "after_resampling_before_segmentation",
+      "measurement_scope": "full_resampled_utterance",
+      "apply_identically_to_all_labels_and_splits": true,
+      "empty_or_nonfinite_input": "reject",
+      "numeric_epsilon": 1e-8,
+      "none_behavior": "return_unchanged",
+      "peak_target": 0.95,
+      "peak_formula": "gain=peak_target/input_peak",
+      "rms_target_dbfs": -25.0,
+      "minimum_input_rms_dbfs": -50.0,
+      "near_silence_applies_to": [
+        "peak",
+        "rms_dbfs"
+      ],
+      "near_silence_behavior": "leave_unchanged_and_flag",
+      "rms_formula": "gain=10^((rms_target_dbfs-input_rms_dbfs)/20)",
+      "rms_peak_safety_target": 0.95,
+      "rms_peak_safety_behavior": "limit_gain_without_clipping_and_flag",
+      "hard_clipping_allowed": false,
+      "required_audit_fields": [
+        "input_peak",
+        "output_peak",
+        "input_rms",
+        "output_rms",
+        "input_rms_dbfs",
+        "output_rms_dbfs",
+        "applied_gain",
+        "near_silence",
+        "peak_limited"
+      ],
+      "selection_metric": "development_eer",
+      "selection_model": "B0_LFCC_LCNN_pilot",
+      "selection_protocol": "same_train_subset_dev_subset_seed_and_step_budget",
+      "lock_deadline": "2026-10-25"
+    }
+  },
+  "segmentation": {
+    "duration_seconds": 4.0,
+    "samples": 64000,
+    "train_long_utterance": "random_crop",
+    "evaluation_long_utterance": "center_crop",
+    "short_utterance": "repeat_then_trim"
+  },
+  "controls": {
+    "speaker_disjoint_required": true,
+    "report_metrics_by_attack_type": true,
+    "native_sample_rate_training_allowed": false,
+    "band_limit_ablation_required": true,
+    "amplitude_ablation_required": true
+  },
+  "demo_inference": {
+    "window_seconds": 4.0,
+    "hop_seconds": 2.0,
+    "include_final_window": true,
+    "file_score_aggregation": "mean_window_probability",
+    "report_max_window": true,
+    "threshold_source": "closed_dev"
+  }
+}

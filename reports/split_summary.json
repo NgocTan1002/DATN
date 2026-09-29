@@ -1,0 +1,160 @@
+{
+  "split_version": 1,
+  "generated_at_utc": "2026-09-21T23:14:44.968902+00:00",
+  "seed": 2026,
+  "ratios": {
+    "train": 0.7,
+    "dev": 0.15,
+    "test": 0.15
+  },
+  "metadata": {
+    "path": "data/metadata/vsasv_metadata.csv",
+    "sha256": "254887ac5a1e357cbe1a8f0ee4bde266c491c9c349505e61c5b3dd2b461e73fb",
+    "samples": 220963,
+    "speakers": 1141
+  },
+  "speaker_strata": {
+    "real_only": {
+      "speakers": 978,
+      "allocation": {
+        "train": 684,
+        "dev": 147,
+        "test": 147
+      }
+    },
+    "vc_adversarial": {
+      "speakers": 144,
+      "allocation": {
+        "train": 101,
+        "dev": 22,
+        "test": 21
+      }
+    },
+    "replay": {
+      "speakers": 19,
+      "allocation": {
+        "train": 13,
+        "dev": 3,
+        "test": 3
+      }
+    }
+  },
+  "splits": {
+    "closed_train": {
+      "path": "data/splits/closed_train.csv",
+      "sha256": "656f95dbc30bef010fdf04facfbd69fce0a088f7d5bc93d858e9241fee675252",
+      "samples": 150999,
+      "speakers": 798,
+      "bonafide": 67809,
+      "spoof": 83190,
+      "utt_type_counts": {
+        "adversarial_attack": 41335,
+        "bonafide": 67809,
+        "replay": 520,
+        "voice_conversion": 41335
+      }
+    },
+    "closed_dev": {
+      "path": "data/splits/closed_dev.csv",
+      "sha256": "d93c28c54a2619d901f4ef60b86316f68ca32c997890aa56e205196d35d91a32",
+      "samples": 39116,
+      "speakers": 172,
+      "bonafide": 14490,
+      "spoof": 24626,
+      "utt_type_counts": {
+        "adversarial_attack": 12253,
+        "bonafide": 14490,
+        "replay": 120,
+        "voice_conversion": 12253
+      }
+    },
+    "closed_test": {
+      "path": "data/splits/closed_test.csv",
+      "sha256": "304cf9e202d1470d1af8c24d0afae951a9c038129b8cd13344a69fc8e29c8abf",
+      "samples": 30848,
+      "speakers": 171,
+      "bonafide": 16006,
+      "spoof": 14842,
+      "utt_type_counts": {
+        "adversarial_attack": 7361,
+        "bonafide": 16006,
+        "replay": 120,
+        "voice_conversion": 7361
+      }
+    },
+    "open_train_vc": {
+      "path": "data/splits/open_train_vc.csv",
+      "sha256": "c653b2d66cb0acf90429bcedbae3ea361264880d90538420aad76f6a94fdcb62",
+      "samples": 108624,
+      "speakers": 785,
+      "bonafide": 67289,
+      "spoof": 41335,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 67289,
+        "replay": 0,
+        "voice_conversion": 41335
+      }
+    },
+    "open_dev_vc": {
+      "path": "data/splits/open_dev_vc.csv",
+      "sha256": "5a8eba6370e5f3f740b78d42287680862ee6052afddb5ccb1b1341b56492366f",
+      "samples": 26623,
+      "speakers": 169,
+      "bonafide": 14370,
+      "spoof": 12253,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 14370,
+        "replay": 0,
+        "voice_conversion": 12253
+      }
+    },
+    "open_seen_test_vc": {
+      "path": "data/splits/open_seen_test_vc.csv",
+      "sha256": "12386a559a9b0377021b9bbe004374e9dd56059e0264967cdee52d42f34b4cf9",
+      "samples": 23247,
+      "speakers": 168,
+      "bonafide": 15886,
+      "spoof": 7361,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 15886,
+        "replay": 0,
+        "voice_conversion": 7361
+      }
+    },
+    "open_unseen_test_adversarial": {
+      "path": "data/splits/open_unseen_test_adversarial.csv",
+      "sha256": "ce780006433703e35153d4684c9a62185c242897df8bc2438aa9da1695a97fd3",
+      "samples": 23247,
+      "speakers": 168,
+      "bonafide": 15886,
+      "spoof": 7361,
+      "utt_type_counts": {
+        "adversarial_attack": 7361,
+        "bonafide": 15886,
+        "replay": 0,
+        "voice_conversion": 0
+      }
+    },
+    "open_unseen_test_replay": {
+      "path": "data/splits/open_unseen_test_replay.csv",
+      "sha256": "3df5b9646b3e70d009bca393d3f9c107b7f0142dc37278e8936478a9b974b2f6",
+      "samples": 1520,
+      "speakers": 19,
+      "bonafide": 760,
+      "spoof": 760,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 760,
+        "replay": 760,
+        "voice_conversion": 0
+      }
+    }
+  },
+  "notes": [
+    "Replay speakers are excluded from open train/dev/seen/adversarial and reserved for open unseen replay.",
+    "Open seen VC and unseen adversarial reuse the same bonafide test rows for a comparable negative pool."
+  ]
+}

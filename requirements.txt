@@ -1,0 +1,17 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Data and numerical computing
+duckdb==1.5.5
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+
+# Audio and deep learning (CPU build for the current Windows machine)
+soundfile==0.14.0
+torch==2.11.0+cpu
+torchaudio==2.11.0+cpu
+
+# Progress and resource measurements
+psutil==7.2.2
+tqdm==4.70.1

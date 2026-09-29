@@ -48,3 +48,21 @@ lightning_logs/
 *.tmp
 *.temp
 ~$*
+
+# Generated DOCX review and rendering artifacts
+/_docx_qa_*/
+/_docx_render_*/
+/_docx_work/
+
+# Legacy dataset download/cache
+/vsasv_metadata/
+
+# Additional model and training artifacts
+*.safetensors
+/runs/
+/outputs/
+
+# Notebook and miscellaneous generated files
+.ipynb_checkpoints/
+*.log
+desktop.ini

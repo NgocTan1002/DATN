@@ -1,0 +1,460 @@
+{
+  "verification_version": 1,
+  "generated_at_utc": "2026-09-24T09:33:49.556874+00:00",
+  "technical_consistency_passed": true,
+  "scientific_status": "provisional_public_snapshot",
+  "scientific_equivalence_to_official_paper": false,
+  "scope": "VSASV Hugging Face public snapshot represented by the local metadata, five local Parquet shards, and the custom project splits.",
+  "warnings": [
+    "Số mẫu của snapshot công khai không khớp tổng số trong bài báo gốc.",
+    "Mọi speaker tấn công đều có số VC bằng đúng số AP; đây là cấu trúc cần lưu ý, không phải bằng chứng lỗi join.",
+    "Replay trong snapshot công khai rất nhỏ so với bài báo gốc.",
+    "Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
+    "Parquet cục bộ chỉ là một phần nhỏ và không phải mẫu ngẫu nhiên của 432 shard."
+  ],
+  "metadata": {
+    "path": "data/metadata/vsasv_metadata.csv",
+    "sha256": "254887ac5a1e357cbe1a8f0ee4bde266c491c9c349505e61c5b3dd2b461e73fb",
+    "size_bytes": 12032062,
+    "technical_passed": true,
+    "hard_issues": [],
+    "warnings": [
+      "Số mẫu của snapshot công khai không khớp tổng số trong bài báo gốc.",
+      "Mọi speaker tấn công đều có số VC bằng đúng số AP; đây là cấu trúc cần lưu ý, không phải bằng chứng lỗi join.",
+      "Replay trong snapshot công khai rất nhỏ so với bài báo gốc."
+    ],
+    "schema": {
+      "expected": [
+        "file",
+        "label",
+        "utt_type"
+      ],
+      "actual": [
+        "file",
+        "label",
+        "utt_type"
+      ],
+      "valid": true,
+      "malformed_rows": 0
+    },
+    "integrity": {
+      "rows": 220963,
+      "unique_rows": 220963,
+      "unique_files": 220963,
+      "missing_values": {
+        "file": 0,
+        "label": 0,
+        "utt_type": 0
+      },
+      "invalid_utt_types": {},
+      "speaker_pattern_mismatches": 0,
+      "label_prefix_mismatches": 0,
+      "embedded_speaker_mismatches": 0,
+      "path_pattern_mismatches": {}
+    },
+    "distribution": {
+      "utterance_types": {
+        "bonafide": 98305,
+        "voice_conversion": 60949,
+        "adversarial_attack": 60949,
+        "replay": 760
+      },
+      "speakers": 1141,
+      "samples_per_speaker": {
+        "minimum": 1,
+        "median": 64,
+        "maximum": 6720
+      },
+      "attack_speakers": 144,
+      "replay_speakers": 19,
+      "attack_replay_speaker_overlap": 0
+    },
+    "vc_ap_relationship": {
+      "vc_samples": 60949,
+      "ap_samples": 60949,
+      "attack_speakers": 144,
+      "speakers_with_equal_vc_ap_counts": 144,
+      "speakers_with_identical_vc_ap_numeric_index_sets": 1,
+      "numeric_index_overlap_per_speaker": {
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 2354
+      },
+      "path_overlap": 0
+    },
+    "official_paper_comparison": {
+      "bonafide": {
+        "public_snapshot": 98305,
+        "official_paper": 164374,
+        "difference": -66069,
+        "snapshot_as_percentage_of_paper": 59.8057
+      },
+      "voice_conversion": {
+        "public_snapshot": 60949,
+        "official_paper": 100564,
+        "difference": -39615,
+        "snapshot_as_percentage_of_paper": 60.6072
+      },
+      "adversarial_attack": {
+        "public_snapshot": 60949,
+        "official_paper": 16731,
+        "difference": 44218,
+        "snapshot_as_percentage_of_paper": 364.2878
+      },
+      "replay": {
+        "public_snapshot": 760,
+        "official_paper": 57571,
+        "difference": -56811,
+        "snapshot_as_percentage_of_paper": 1.3201
+      },
+      "total": {
+        "public_snapshot": 220963,
+        "official_paper": 339240,
+        "difference": -118277,
+        "snapshot_as_percentage_of_paper": 65.1347
+      }
+    }
+  },
+  "parquet": {
+    "directory": "data/raw/vsasv_parquet/data",
+    "available": true,
+    "expected_total_shards": 432,
+    "local_shards": 5,
+    "coverage_by_shard_count_percent": 1.1574,
+    "files": [
+      {
+        "name": "train-00000-of-00432.parquet",
+        "size_bytes": 78487614,
+        "sha256": "81a87ada92cad1ddb2be64f8625c89e6cec214b5ad2b506d025487d907f75ea6"
+      },
+      {
+        "name": "train-00001-of-00432.parquet",
+        "size_bytes": 78074698,
+        "sha256": "8feb70311373c9b62e4980a7ca7cdab29bc842ecd3eb763f34fd4c23e9bca83b"
+      },
+      {
+        "name": "train-00171-of-00432.parquet",
+        "size_bytes": 153161940,
+        "sha256": "cbc8a34d581e99f45099678d4961e12d1f2148a702ff6988d441554fc638fe39"
+      },
+      {
+        "name": "train-00250-of-00432.parquet",
+        "size_bytes": 183532701,
+        "sha256": "7f0b8d1397d1b074cdf58a0aea6a47ea9a8cf38eae826f513b94210c53d334f9"
+      },
+      {
+        "name": "train-00403-of-00432.parquet",
+        "size_bytes": 52554837,
+        "sha256": "48f670ad37c5de4556f48aea05690b563ebc2d154b6f6e5c1aae27b1c35f8b8c"
+      }
+    ],
+    "technical_passed": true,
+    "hard_issues": [],
+    "warnings": [
+      "Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
+      "Parquet cục bộ chỉ là một phần nhỏ và không phải mẫu ngẫu nhiên của 432 shard."
+    ],
+    "schema": {
+      "file": "VARCHAR",
+      "audio": "STRUCT(\"array\" DOUBLE[], sampling_rate BIGINT)",
+      "label": "VARCHAR",
+      "utt_type": "VARCHAR"
+    },
+    "rows": 2558,
+    "unique_files": 2558,
+    "metadata_exact_matches": 2558,
+    "files_missing_from_metadata": 0,
+    "label_or_type_mismatches": 0,
+    "utt_type_counts": {
+      "adversarial_attack": 813,
+      "bonafide": 1292,
+      "replay": 265,
+      "voice_conversion": 188
+    },
+    "missing_or_invalid_audio": {
+      "file": 0,
+      "label": 0,
+      "utt_type": 0,
+      "audio_array": 0,
+      "sampling_rate": 0,
+      "empty_audio_array": 0,
+      "nonpositive_sampling_rate": 0
+    },
+    "sampling_rates": [
+      {
+        "utt_type": "adversarial_attack",
+        "sampling_rate": 16000,
+        "samples": 813
+      },
+      {
+        "utt_type": "bonafide",
+        "sampling_rate": 16000,
+        "samples": 1292
+      },
+      {
+        "utt_type": "replay",
+        "sampling_rate": 16000,
+        "samples": 265
+      },
+      {
+        "utt_type": "voice_conversion",
+        "sampling_rate": 40000,
+        "samples": 188
+      }
+    ],
+    "duration_by_type": [
+      {
+        "utt_type": "adversarial_attack",
+        "minimum_seconds": 1.86,
+        "median_seconds": 4.04,
+        "maximum_seconds": 8.38,
+        "mean_seconds": 4.162681,
+        "total_hours": 0.940072
+      },
+      {
+        "utt_type": "bonafide",
+        "minimum_seconds": 0.84,
+        "median_seconds": 3.375,
+        "maximum_seconds": 35.24,
+        "mean_seconds": 4.459604,
+        "total_hours": 1.600502
+      },
+      {
+        "utt_type": "replay",
+        "minimum_seconds": 1.408,
+        "median_seconds": 3.072,
+        "maximum_seconds": 6.464,
+        "mean_seconds": 3.221253,
+        "total_hours": 0.23712
+      },
+      {
+        "utt_type": "voice_conversion",
+        "minimum_seconds": 2.08,
+        "median_seconds": 3.62,
+        "maximum_seconds": 8.04,
+        "mean_seconds": 3.743936,
+        "total_hours": 0.195517
+      }
+    ],
+    "shard_distribution": [
+      {
+        "shard": "train-00000-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00001-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00171-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 302
+      },
+      {
+        "shard": "train-00171-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 22
+      },
+      {
+        "shard": "train-00171-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 188
+      },
+      {
+        "shard": "train-00250-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00403-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 246
+      },
+      {
+        "shard": "train-00403-of-00432.parquet",
+        "utt_type": "replay",
+        "samples": 265
+      }
+    ],
+    "duplicate_audio_fingerprint_groups": 0,
+    "fingerprint_method": "DuckDB 64-bit hash(audio.array); useful as a duplicate screen, not a cryptographic identity proof."
+  },
+  "splits": {
+    "directory": "data/splits",
+    "available": true,
+    "technical_passed": true,
+    "files": [
+      {
+        "name": "closed_train.csv",
+        "size_bytes": 8067975,
+        "sha256": "656f95dbc30bef010fdf04facfbd69fce0a088f7d5bc93d858e9241fee675252"
+      },
+      {
+        "name": "closed_dev.csv",
+        "size_bytes": 2177177,
+        "sha256": "d93c28c54a2619d901f4ef60b86316f68ca32c997890aa56e205196d35d91a32"
+      },
+      {
+        "name": "closed_test.csv",
+        "size_bytes": 1565983,
+        "sha256": "304cf9e202d1470d1af8c24d0afae951a9c038129b8cd13344a69fc8e29c8abf"
+      },
+      {
+        "name": "open_train_vc.csv",
+        "size_bytes": 5371055,
+        "sha256": "c653b2d66cb0acf90429bcedbae3ea361264880d90538420aad76f6a94fdcb62"
+      },
+      {
+        "name": "open_dev_vc.csv",
+        "size_bytes": 1381105,
+        "sha256": "5a8eba6370e5f3f740b78d42287680862ee6052afddb5ccb1b1341b56492366f"
+      },
+      {
+        "name": "open_seen_test_vc.csv",
+        "size_bytes": 1082999,
+        "sha256": "12386a559a9b0377021b9bbe004374e9dd56059e0264967cdee52d42f34b4cf9"
+      },
+      {
+        "name": "open_unseen_test_adversarial.csv",
+        "size_bytes": 1031472,
+        "sha256": "ce780006433703e35153d4684c9a62185c242897df8bc2438aa9da1695a97fd3"
+      },
+      {
+        "name": "open_unseen_test_replay.csv",
+        "size_bytes": 75260,
+        "sha256": "3df5b9646b3e70d009bca393d3f9c107b7f0142dc37278e8936478a9b974b2f6"
+      }
+    ],
+    "hard_issues": [],
+    "summaries": {
+      "closed_train": {
+        "samples": 150999,
+        "speakers": 798,
+        "unique_files": 150999,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 41335,
+          "bonafide": 67809,
+          "replay": 520,
+          "voice_conversion": 41335
+        }
+      },
+      "closed_dev": {
+        "samples": 39116,
+        "speakers": 172,
+        "unique_files": 39116,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 12253,
+          "bonafide": 14490,
+          "replay": 120,
+          "voice_conversion": 12253
+        }
+      },
+      "closed_test": {
+        "samples": 30848,
+        "speakers": 171,
+        "unique_files": 30848,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 7361,
+          "bonafide": 16006,
+          "replay": 120,
+          "voice_conversion": 7361
+        }
+      },
+      "open_train_vc": {
+        "samples": 108624,
+        "speakers": 785,
+        "unique_files": 108624,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 0,
+          "bonafide": 67289,
+          "replay": 0,
+          "voice_conversion": 41335
+        }
+      },
+      "open_dev_vc": {
+        "samples": 26623,
+        "speakers": 169,
+        "unique_files": 26623,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 0,
+          "bonafide": 14370,
+          "replay": 0,
+          "voice_conversion": 12253
+        }
+      },
+      "open_seen_test_vc": {
+        "samples": 23247,
+        "speakers": 168,
+        "unique_files": 23247,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 0,
+          "bonafide": 15886,
+          "replay": 0,
+          "voice_conversion": 7361
+        }
+      },
+      "open_unseen_test_adversarial": {
+        "samples": 23247,
+        "speakers": 168,
+        "unique_files": 23247,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 7361,
+          "bonafide": 15886,
+          "replay": 0,
+          "voice_conversion": 0
+        }
+      },
+      "open_unseen_test_replay": {
+        "samples": 1520,
+        "speakers": 19,
+        "unique_files": 1520,
+        "duplicate_files": 0,
+        "duplicate_rows": 0,
+        "utt_type_counts": {
+          "adversarial_attack": 0,
+          "bonafide": 760,
+          "replay": 760,
+          "voice_conversion": 0
+        }
+      }
+    },
+    "issues": [],
+    "audio_hash_check": {
+      "enabled": false,
+      "reason": "Không cung cấp --audio-root; chưa kiểm tra tồn tại và hash audio."
+    }
+  },
+  "conclusion": {
+    "safe_to_use_for_pipeline_development": true,
+    "safe_to_claim_official_vsasv_reproduction": false,
+    "recommended_dataset_name": "VSASV-HF-public-snapshot-v1",
+    "required_training_controls": [
+      "Resample mọi waveform về một sample rate được khai báo thống nhất trong pipeline.",
+      "Giữ train/dev/test tách biệt speaker.",
+      "Báo cáo riêng VC, AP và replay; ghi rõ replay là tập con công khai hạn chế.",
+      "Không so sánh trực tiếp metric của custom split với metric trong bài báo gốc.",
+      "Chạy lại xác minh sau mỗi lần tải thêm shard."
+    ]
+  },
+  "sources": {
+    "official_paper": "https://www.isca-archive.org/interspeech_2024/hoang24b_interspeech.pdf",
+    "official_landing_page": "https://www.isca-archive.org/interspeech_2024/hoang24b_interspeech.html",
+    "hugging_face_dataset": "https://huggingface.co/datasets/hustep-lab/VSASV-Dataset"
+  }
+}

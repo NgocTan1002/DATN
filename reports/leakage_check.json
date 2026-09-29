@@ -1,0 +1,122 @@
+{
+  "check_version": 1,
+  "generated_at_utc": "2026-09-21T23:16:33.927402+00:00",
+  "passed": true,
+  "metadata": {
+    "path": "data/metadata/vsasv_metadata.csv",
+    "samples": 220963,
+    "speakers": 1141
+  },
+  "split_dir": "data/splits",
+  "splits": {
+    "closed_train": {
+      "samples": 150999,
+      "speakers": 798,
+      "unique_files": 150999,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 41335,
+        "bonafide": 67809,
+        "replay": 520,
+        "voice_conversion": 41335
+      }
+    },
+    "closed_dev": {
+      "samples": 39116,
+      "speakers": 172,
+      "unique_files": 39116,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 12253,
+        "bonafide": 14490,
+        "replay": 120,
+        "voice_conversion": 12253
+      }
+    },
+    "closed_test": {
+      "samples": 30848,
+      "speakers": 171,
+      "unique_files": 30848,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 7361,
+        "bonafide": 16006,
+        "replay": 120,
+        "voice_conversion": 7361
+      }
+    },
+    "open_train_vc": {
+      "samples": 108624,
+      "speakers": 785,
+      "unique_files": 108624,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 67289,
+        "replay": 0,
+        "voice_conversion": 41335
+      }
+    },
+    "open_dev_vc": {
+      "samples": 26623,
+      "speakers": 169,
+      "unique_files": 26623,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 14370,
+        "replay": 0,
+        "voice_conversion": 12253
+      }
+    },
+    "open_seen_test_vc": {
+      "samples": 23247,
+      "speakers": 168,
+      "unique_files": 23247,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 15886,
+        "replay": 0,
+        "voice_conversion": 7361
+      }
+    },
+    "open_unseen_test_adversarial": {
+      "samples": 23247,
+      "speakers": 168,
+      "unique_files": 23247,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 7361,
+        "bonafide": 15886,
+        "replay": 0,
+        "voice_conversion": 0
+      }
+    },
+    "open_unseen_test_replay": {
+      "samples": 1520,
+      "speakers": 19,
+      "unique_files": 1520,
+      "duplicate_files": 0,
+      "duplicate_rows": 0,
+      "utt_type_counts": {
+        "adversarial_attack": 0,
+        "bonafide": 760,
+        "replay": 760,
+        "voice_conversion": 0
+      }
+    }
+  },
+  "audio_check": {
+    "enabled": false,
+    "reason": "Không cung cấp --audio-root; chưa kiểm tra tồn tại và hash audio."
+  },
+  "issues": []
+}
