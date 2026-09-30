@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "status": "draft_interface_locked_implementation_pending",
+  "experiment_name": "B0_LFCC_LCNN_smoke",
+  "seed": 2026,
+  "input": {
+    "sample_rate_hz": 16000,
+    "samples": 64000,
+    "duration_seconds": 4.0,
+    "waveform_layout": "batch_samples",
+    "label_convention": {
+      "bonafide": 0,
+      "spoof": 1
+    },
+    "amplitude_policy": "explicit_runtime_choice_from_none_peak_rms_dbfs"
+  },
+  "lfcc": {
+    "implementation": "torchaudio.transforms.LFCC",
+    "sample_rate": 16000,
+    "n_filter": 80,
+    "n_lfcc": 60,
+    "f_min": 0.0,
+    "f_max": 8000.0,
+    "dct_type": 2,
+    "norm": "ortho",
+    "log_lf": false,
+    "spectrum": {
+      "n_fft": 512,
+      "win_length": 400,
+      "hop_length": 160,
+      "window_fn": "torch.hann_window",
+      "power": 2.0,
+      "center": true,
+      "pad_mode": "reflect"
+    },
+    "expected_output_layout": "batch_lfcc_frames",
+    "expected_output_shape_for_locked_input": [
+      "batch",
+      60,
+      401
+    ]
+  },
+  "lcnn_interface": {
+    "input_layout": "batch_channel_lfcc_frames",
+    "input_shape_for_locked_input": [
+      "batch",
+      1,
+      60,
+      401
+    ],
+    "output": "one_raw_spoof_logit_per_utterance",
+    "output_shape": [
+      "batch"
+    ]
+  },
+  "smoke_optimization": {
+    "loss": "torch.nn.BCEWithLogitsLoss",
+    "optimizer": "torch.optim.Adam",
+    "learning_rate": 0.001,
+    "batch_size": 8,
+    "steps": 1,
+    "requirements": [
+      "finite_lfcc",
+      "finite_logit",
+      "finite_loss",
+      "finite_gradients",
+      "optimizer_step_completes"
+    ]
+  },
+  "scope_note": "This file locks the B0 tensor interface only. The LCNN topology and scientific training budget remain pending."
+}
