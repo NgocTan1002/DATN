@@ -1,0 +1,1708 @@
+{
+  "generated_at_utc": "2026-09-30T00:25:33.702192+00:00",
+  "technical_passed": true,
+  "hard_issues": [],
+  "warnings": [
+    "Năm shard cục bộ không phải mẫu ngẫu nhiên của toàn bộ 432 shard.",
+    "Audit chỉ mô tả shortcut risk; không được dùng closed test để chọn policy."
+  ],
+  "protocol": {
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "version": 3,
+    "target_sample_rate": 16000,
+    "policies": [
+      "none",
+      "peak",
+      "rms_dbfs"
+    ],
+    "measurement_scope": "full_resampled_utterance",
+    "peak_target": 0.95,
+    "rms_target_dbfs": -25.0,
+    "minimum_input_rms_dbfs": -50.0
+  },
+  "source": {
+    "parquet_directory": "data/raw/vsasv_parquet/data",
+    "local_shards": [
+      "train-00000-of-00432.parquet",
+      "train-00001-of-00432.parquet",
+      "train-00171-of-00432.parquet",
+      "train-00250-of-00432.parquet",
+      "train-00403-of-00432.parquet"
+    ],
+    "closed_splits": {
+      "train": {
+        "path": "data/splits/closed_train.csv",
+        "rows": 150999,
+        "sha256": "656f95dbc30bef010fdf04facfbd69fce0a088f7d5bc93d858e9241fee675252"
+      },
+      "dev": {
+        "path": "data/splits/closed_dev.csv",
+        "rows": 39116,
+        "sha256": "d93c28c54a2619d901f4ef60b86316f68ca32c997890aa56e205196d35d91a32"
+      },
+      "test": {
+        "path": "data/splits/closed_test.csv",
+        "rows": 30848,
+        "sha256": "304cf9e202d1470d1af8c24d0afae951a9c038129b8cd13344a69fc8e29c8abf"
+      }
+    }
+  },
+  "summary": {
+    "expected_samples": 2558,
+    "processed_samples": 2558,
+    "policy_observations": 7674,
+    "ignored_local_files": 0,
+    "nonfinite_waveforms": 0,
+    "metadata_mismatches": 0
+  },
+  "sample_distribution": [
+    {
+      "split": "dev",
+      "binary_label": "bonafide",
+      "utt_type": "bonafide",
+      "samples": 128
+    },
+    {
+      "split": "dev",
+      "binary_label": "spoof",
+      "utt_type": "adversarial_attack",
+      "samples": 511
+    },
+    {
+      "split": "dev",
+      "binary_label": "spoof",
+      "utt_type": "replay",
+      "samples": 80
+    },
+    {
+      "split": "test",
+      "binary_label": "bonafide",
+      "utt_type": "bonafide",
+      "samples": 247
+    },
+    {
+      "split": "test",
+      "binary_label": "spoof",
+      "utt_type": "replay",
+      "samples": 40
+    },
+    {
+      "split": "train",
+      "binary_label": "bonafide",
+      "utt_type": "bonafide",
+      "samples": 917
+    },
+    {
+      "split": "train",
+      "binary_label": "spoof",
+      "utt_type": "adversarial_attack",
+      "samples": 302
+    },
+    {
+      "split": "train",
+      "binary_label": "spoof",
+      "utt_type": "replay",
+      "samples": 145
+    },
+    {
+      "split": "train",
+      "binary_label": "spoof",
+      "utt_type": "voice_conversion",
+      "samples": 188
+    }
+  ],
+  "aggregates": {
+    "by_policy": [
+      {
+        "policy": "none",
+        "samples": 2558,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6516626477241516,
+            "mean": 0.6647757914694983,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6516626477241516,
+            "mean": 0.6647757914694983,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -22.06948682879856,
+            "mean": -21.79965004552486,
+            "p95": -13.28965136875487,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -22.06948682879856,
+            "mean": -21.79965004552486,
+            "p95": -13.28965136875487,
+            "maximum": -7.500584870478747
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "policy": "peak",
+        "samples": 2558,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6516626477241516,
+            "mean": 0.6647757914694983,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000029452803,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -22.06948682879856,
+            "mean": -21.79965004552486,
+            "p95": -13.28965136875487,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -18.28237340137285,
+            "mean": -18.00464246140688,
+            "p95": -13.292288981409541,
+            "maximum": -7.946112912910016
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.4578095616956985,
+            "mean": 1.7159842951842945,
+            "p95": 3.5392251035090583,
+            "maximum": 12.431948881789136
+          }
+        }
+      },
+      {
+        "policy": "rms_dbfs",
+        "samples": 2558,
+        "near_silence": 0,
+        "peak_limited": 4,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6516626477241516,
+            "mean": 0.6647757914694983,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1333611160516739,
+            "median": 0.4383714497089386,
+            "mean": 0.4432875263949593,
+            "p95": 0.6538448244333268,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -22.06948682879856,
+            "mean": -21.79965004552486,
+            "p95": -13.28965136875487,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -25.00000000545662,
+            "mean": -25.001476045083134,
+            "p95": -24.999999658602153,
+            "maximum": -24.99999950664284
+          },
+          "applied_gain": {
+            "minimum": 0.1333611228788696,
+            "median": 0.7136320423422844,
+            "mean": 0.7982921478376517,
+            "p95": 1.6266203622864452,
+            "maximum": 4.324342854502899
+          }
+        }
+      }
+    ],
+    "by_split_and_policy": [
+      {
+        "split": "dev",
+        "policy": "none",
+        "samples": 719,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.17178869247436523,
+            "median": 0.6828519105911255,
+            "mean": 0.6995355907169603,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.17178869247436523,
+            "median": 0.6828519105911255,
+            "mean": 0.6995355907169603,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -33.1163594818803,
+            "median": -22.653625100844774,
+            "mean": -22.1390795128142,
+            "p95": -15.036850682393036,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -33.1163594818803,
+            "median": -22.653625100844774,
+            "mean": -22.1390795128142,
+            "p95": -15.036850682393036,
+            "maximum": -11.948939694275415
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "split": "dev",
+        "policy": "peak",
+        "samples": 719,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.17178869247436523,
+            "median": 0.6828519105911255,
+            "mean": 0.6995355907169603,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000025864602,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -33.1163594818803,
+            "median": -22.653625100844774,
+            "mean": -22.1390795128142,
+            "p95": -15.036850682393036,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -23.895825310817305,
+            "median": -19.22779760780221,
+            "mean": -19.09624510240982,
+            "p95": -15.111933479899633,
+            "maximum": -11.872411030547099
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.3912240491171972,
+            "mean": 1.492548175113919,
+            "p95": 2.378950656116185,
+            "maximum": 5.530049657615046
+          }
+        }
+      },
+      {
+        "split": "dev",
+        "policy": "rms_dbfs",
+        "samples": 719,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.17178869247436523,
+            "median": 0.6828519105911255,
+            "mean": 0.6995355907169603,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.20957724750041962,
+            "median": 0.48878008127212524,
+            "mean": 0.4924294983810112,
+            "p95": 0.6555045425891878,
+            "maximum": 0.8365942239761353
+          },
+          "input_rms_dbfs": {
+            "minimum": -33.1163594818803,
+            "median": -22.653625100844774,
+            "mean": -22.1390795128142,
+            "p95": -15.036850682393036,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.000000500549664,
+            "median": -25.000000014789112,
+            "mean": -25.000000011549425,
+            "p95": -24.999999678521846,
+            "maximum": -24.99999950664284
+          },
+          "applied_gain": {
+            "minimum": 0.22255993443842223,
+            "median": 0.7632753816128047,
+            "mean": 0.7796419444322815,
+            "p95": 1.284526077963675,
+            "maximum": 2.5457630229403567
+          }
+        }
+      },
+      {
+        "split": "test",
+        "policy": "none",
+        "samples": 287,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.12957763671875,
+            "median": 0.918914794921875,
+            "mean": 0.8045694703424434,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.12957763671875,
+            "median": 0.918914794921875,
+            "mean": 0.8045694703424434,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -17.376167050921264,
+            "mean": -17.262510270139323,
+            "p95": -8.919731849343393,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -17.376167050921264,
+            "mean": -17.262510270139323,
+            "p95": -8.919731849343393,
+            "maximum": -7.500584870478747
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "split": "test",
+        "policy": "peak",
+        "samples": 287,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.12957763671875,
+            "median": 0.918914794921875,
+            "mean": 0.8045694703424434,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000017860625,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -17.376167050921264,
+            "mean": -17.262510270139323,
+            "p95": -8.919731849343393,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.098713575305112,
+            "median": -16.26238458412366,
+            "mean": -15.355145051887783,
+            "p95": -9.35249803965565,
+            "maximum": -7.946112912910016
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.033828169107635,
+            "mean": 1.348279258971833,
+            "p95": 2.462960852115185,
+            "maximum": 7.331512011304757
+          }
+        }
+      },
+      {
+        "split": "test",
+        "policy": "rms_dbfs",
+        "samples": 287,
+        "near_silence": 0,
+        "peak_limited": 1,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.12957763671875,
+            "median": 0.918914794921875,
+            "mean": 0.8045694703424434,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1333611160516739,
+            "median": 0.3474104106426239,
+            "mean": 0.33873788856670833,
+            "p95": 0.5547286331653594,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -17.376167050921264,
+            "mean": -17.262510270139323,
+            "p95": -8.919731849343393,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.098713575305112,
+            "median": -24.999999980908342,
+            "mean": -25.000343938099444,
+            "p95": -24.99999964784979,
+            "maximum": -24.99999950973454
+          },
+          "applied_gain": {
+            "minimum": 0.1333611228788696,
+            "median": 0.41572711604849655,
+            "mean": 0.5070599226683873,
+            "p95": 1.0027655922729466,
+            "maximum": 4.324342854502899
+          }
+        }
+      },
+      {
+        "split": "train",
+        "policy": "none",
+        "samples": 1552,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.59307861328125,
+            "mean": 0.6228214863822171,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.59307861328125,
+            "mean": 0.6228214863822171,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.696891035504,
+            "median": -22.20744965564259,
+            "mean": -22.48142152010902,
+            "p95": -14.968087047861836,
+            "maximum": -8.72156102428265
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.696891035504,
+            "median": -22.20744965564259,
+            "mean": -22.48142152010902,
+            "p95": -14.968087047861836,
+            "maximum": -8.72156102428265
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "split": "train",
+        "policy": "peak",
+        "samples": 1552,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.59307861328125,
+            "mean": 0.6228214863822171,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000033258778,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.696891035504,
+            "median": -22.20744965564259,
+            "mean": -22.48142152010902,
+            "p95": -14.968087047861836,
+            "maximum": -8.72156102428265
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -17.979467776639503,
+            "mean": -17.98888437999636,
+            "p95": -14.247126601732688,
+            "maximum": -8.484053963658557
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.6018113264778355,
+            "mean": 1.8874932615010316,
+            "p95": 3.9567226401359843,
+            "maximum": 12.431948881789136
+          }
+        }
+      },
+      {
+        "split": "train",
+        "policy": "rms_dbfs",
+        "samples": 1552,
+        "near_silence": 0,
+        "peak_limited": 3,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.59307861328125,
+            "mean": 0.6228214863822171,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.14188167452812195,
+            "median": 0.42334751784801483,
+            "mean": 0.4398549672446607,
+            "p95": 0.6689959287643426,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.696891035504,
+            "median": -22.20744965564259,
+            "mean": -22.48142152010902,
+            "p95": -14.968087047861836,
+            "maximum": -8.72156102428265
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -25.00000000545662,
+            "mean": -25.002369204113457,
+            "p95": -24.999999658264247,
+            "maximum": -24.99999952047315
+          },
+          "applied_gain": {
+            "minimum": 0.15348928082763877,
+            "median": 0.7250575613459409,
+            "mean": 0.8607877308737598,
+            "p95": 1.8103148790192858,
+            "maximum": 4.313646496503005
+          }
+        }
+      }
+    ],
+    "by_label_and_policy": [
+      {
+        "binary_label": "bonafide",
+        "policy": "none",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "binary_label": "bonafide",
+        "policy": "peak",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000026572969,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -17.573179249407634,
+            "mean": -17.322265669753666,
+            "p95": -11.06959938436415,
+            "maximum": -7.946112912910016
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.430325307847822,
+            "mean": 1.7899969772049409,
+            "p95": 3.9516626740272907,
+            "maximum": 12.431948881789136
+          }
+        }
+      },
+      {
+        "binary_label": "bonafide",
+        "policy": "rms_dbfs",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 3,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1333611160516739,
+            "median": 0.4040011316537857,
+            "mean": 0.41410269295283514,
+            "p95": 0.6509345412254333,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -25.0000000039945,
+            "mean": -25.002806499597945,
+            "p95": -24.99999965514008,
+            "maximum": -24.99999950973454
+          },
+          "applied_gain": {
+            "minimum": 0.1333611228788696,
+            "median": 0.652631680901723,
+            "mean": 0.7808957459249866,
+            "p95": 1.7405287465646313,
+            "maximum": 4.324342854502899
+          }
+        }
+      },
+      {
+        "binary_label": "spoof",
+        "policy": "none",
+        "samples": 1266,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.6402521133422852,
+            "mean": 0.6717978015918679,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.6402521133422852,
+            "mean": 0.6717978015918679,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -22.543386159976745,
+            "mean": -22.30014114958329,
+            "p95": -14.610405958915994,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -22.543386159976745,
+            "mean": -22.30014114958329,
+            "p95": -14.610405958915994,
+            "maximum": -11.948939694275415
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "binary_label": "spoof",
+        "policy": "peak",
+        "samples": 1266,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.6402521133422852,
+            "mean": 0.6717978015918679,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000032391782,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -22.543386159976745,
+            "mean": -22.30014114958329,
+            "p95": -14.610405958915994,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.149718902277115,
+            "median": -18.902354342293577,
+            "mean": -18.701033310392628,
+            "p95": -14.868195351237219,
+            "maximum": -12.394202297909684
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.4837905379716978,
+            "mean": 1.6404516054760199,
+            "p95": 3.0814731945384075,
+            "maximum": 7.50571472703504
+          }
+        }
+      },
+      {
+        "binary_label": "spoof",
+        "policy": "rms_dbfs",
+        "samples": 1266,
+        "near_silence": 0,
+        "peak_limited": 1,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.6402521133422852,
+            "mean": 0.6717978015918679,
+            "p95": 0.99993896484375,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.22255313396453857,
+            "median": 0.4708052724599838,
+            "mean": 0.4730717324038252,
+            "p95": 0.6581397503614426,
+            "maximum": 0.949999988079071
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -22.543386159976745,
+            "mean": -22.30014114958329,
+            "p95": -14.610405958915994,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.149718902277115,
+            "median": -25.0000000072586,
+            "mean": -25.000118266857914,
+            "p95": -24.999999666819573,
+            "maximum": -24.99999950664284
+          },
+          "applied_gain": {
+            "minimum": 0.22255993443842223,
+            "median": 0.7536493350468757,
+            "mean": 0.8160458218275121,
+            "p95": 1.521580302510173,
+            "maximum": 3.607880977920913
+          }
+        }
+      }
+    ],
+    "by_utt_type_and_policy": [
+      {
+        "utt_type": "adversarial_attack",
+        "policy": "none",
+        "samples": 813,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.5929197072982788,
+            "mean": 0.6190541755375973,
+            "p95": 0.9691671848297119,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.5929197072982788,
+            "mean": 0.6190541755375973,
+            "p95": 0.9691671848297119,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.07874931779753,
+            "median": -23.362194220261706,
+            "mean": -23.674606426524768,
+            "p95": -19.94127200563421,
+            "maximum": -17.929839503975472
+          },
+          "output_rms_dbfs": {
+            "minimum": -36.07874931779753,
+            "median": -23.362194220261706,
+            "mean": -23.674606426524768,
+            "p95": -19.94127200563421,
+            "maximum": -17.929839503975472
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "utt_type": "adversarial_attack",
+        "policy": "peak",
+        "samples": 813,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.5929197072982788,
+            "mean": 0.6190541755375973,
+            "p95": 0.9691671848297119,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000014223002,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.07874931779753,
+            "median": -23.362194220261706,
+            "mean": -23.674606426524768,
+            "p95": -19.94127200563421,
+            "maximum": -17.929839503975472
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.149718902277115,
+            "median": -19.45811547443086,
+            "mean": -19.49692881061582,
+            "p95": -16.82374630504942,
+            "maximum": -14.632344842135044
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.6022405534955269,
+            "mean": 1.721130121779542,
+            "p95": 3.0287584723728997,
+            "maximum": 7.50571472703504
+          }
+        }
+      },
+      {
+        "utt_type": "adversarial_attack",
+        "policy": "rms_dbfs",
+        "samples": 813,
+        "near_silence": 0,
+        "peak_limited": 1,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.1265702247619629,
+            "median": 0.5929197072982788,
+            "mean": 0.6190541755375973,
+            "p95": 0.9691671848297119,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.2879657745361328,
+            "median": 0.5019140839576721,
+            "mean": 0.5129258538450848,
+            "p95": 0.6824171900749206,
+            "maximum": 0.949999988079071
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.07874931779753,
+            "median": -23.362194220261706,
+            "mean": -23.674606426524768,
+            "p95": -19.94127200563421,
+            "maximum": -17.929839503975472
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.149718902277115,
+            "median": -25.000000004387196,
+            "mean": -25.00018416330257,
+            "p95": -24.999999679167175,
+            "maximum": -24.99999950664284
+          },
+          "applied_gain": {
+            "minimum": 0.44309002709021367,
+            "median": 0.828151344007158,
+            "mean": 0.9050612636677979,
+            "p95": 1.5088613765209544,
+            "maximum": 3.580448784694037
+          }
+        }
+      },
+      {
+        "utt_type": "bonafide",
+        "policy": "none",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "utt_type": "bonafide",
+        "policy": "peak",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000026572969,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -17.573179249407634,
+            "mean": -17.322265669753666,
+            "p95": -11.06959938436415,
+            "maximum": -7.946112912910016
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.430325307847822,
+            "mean": 1.7899969772049409,
+            "p95": 3.9516626740272907,
+            "maximum": 12.431948881789136
+          }
+        }
+      },
+      {
+        "utt_type": "bonafide",
+        "policy": "rms_dbfs",
+        "samples": 1292,
+        "near_silence": 0,
+        "peak_limited": 3,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6641845703125,
+            "mean": 0.6578950911483529,
+            "p95": 1.0,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1333611160516739,
+            "median": 0.4040011316537857,
+            "mean": 0.41410269295283514,
+            "p95": 0.6509345412254333,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.29328661063994,
+            "mean": -21.30923074387008,
+            "p95": -10.872092146822869,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -25.0000000039945,
+            "mean": -25.002806499597945,
+            "p95": -24.99999965514008,
+            "maximum": -24.99999950973454
+          },
+          "applied_gain": {
+            "minimum": 0.1333611228788696,
+            "median": 0.652631680901723,
+            "mean": 0.7808957459249866,
+            "p95": 1.7405287465646313,
+            "maximum": 4.324342854502899
+          }
+        }
+      },
+      {
+        "utt_type": "replay",
+        "policy": "none",
+        "samples": 265,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.5836181640625,
+            "median": 0.99957275390625,
+            "mean": 0.9613360710863798,
+            "p95": 0.999969482421875,
+            "maximum": 0.999969482421875
+          },
+          "output_peak": {
+            "minimum": 0.5836181640625,
+            "median": 0.99957275390625,
+            "mean": 0.9613360710863798,
+            "p95": 0.999969482421875,
+            "maximum": 0.999969482421875
+          },
+          "input_rms_dbfs": {
+            "minimum": -23.7900803386565,
+            "median": -16.469257150290602,
+            "mean": -16.50630947303055,
+            "p95": -13.096784044774152,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -23.7900803386565,
+            "median": -16.469257150290602,
+            "mean": -16.50630947303055,
+            "p95": -13.096784044774152,
+            "maximum": -11.948939694275415
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "utt_type": "replay",
+        "policy": "peak",
+        "samples": 265,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.5836181640625,
+            "median": 0.99957275390625,
+            "mean": 0.9613360710863798,
+            "p95": 0.999969482421875,
+            "maximum": 0.999969482421875
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000074224652,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -23.7900803386565,
+            "median": -16.469257150290602,
+            "mean": -16.50630947303055,
+            "p95": -13.096784044774152,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -21.390168069536525,
+            "median": -16.517553844348406,
+            "mean": -16.56710309833651,
+            "p95": -13.538600119709754,
+            "maximum": -12.394202297909684
+          },
+          "applied_gain": {
+            "minimum": 0.9500289925840022,
+            "median": 0.9504060572754472,
+            "mean": 0.9988044936606361,
+            "p95": 1.2625571880276705,
+            "maximum": 1.6277766157707592
+          }
+        }
+      },
+      {
+        "utt_type": "replay",
+        "policy": "rms_dbfs",
+        "samples": 265,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.5836181640625,
+            "median": 0.99957275390625,
+            "mean": 0.9613360710863798,
+            "p95": 0.999969482421875,
+            "maximum": 0.999969482421875
+          },
+          "output_peak": {
+            "minimum": 0.22255313396453857,
+            "median": 0.35776782035827637,
+            "mean": 0.3687757263206086,
+            "p95": 0.5258150339126586,
+            "maximum": 0.6269486546516418
+          },
+          "input_rms_dbfs": {
+            "minimum": -23.7900803386565,
+            "median": -16.469257150290602,
+            "mean": -16.50630947303055,
+            "p95": -13.096784044774152,
+            "maximum": -11.948939694275415
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.00000047977679,
+            "median": -25.00000001109234,
+            "mean": -25.000000011092492,
+            "p95": -24.99999965627231,
+            "maximum": -24.999999531878338
+          },
+          "applied_gain": {
+            "minimum": 0.22255993443842223,
+            "median": 0.3745095162144173,
+            "mean": 0.3898293577996815,
+            "p95": 0.5854116502389286,
+            "maximum": 0.8699694796625513
+          }
+        }
+      },
+      {
+        "utt_type": "voice_conversion",
+        "policy": "none",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "utt_type": "voice_conversion",
+        "policy": "peak",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000051995541,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -24.259544377284143,
+            "median": -18.17986638339409,
+            "mean": -18.267142164187394,
+            "p95": -15.517235613561926,
+            "maximum": -14.386178203671742
+          },
+          "applied_gain": {
+            "minimum": 0.9594785677082518,
+            "median": 1.9650071222602805,
+            "mean": 2.196009322903217,
+            "p95": 3.865674052478838,
+            "maximum": 5.107975264785233
+          }
+        }
+      },
+      {
+        "utt_type": "voice_conversion",
+        "policy": "rms_dbfs",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.2799190878868103,
+            "median": 0.4332316815853119,
+            "mean": 0.4477368434692951,
+            "p95": 0.630424576997757,
+            "maximum": 0.872370183467865
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.00000040742229,
+            "median": -24.999999995933788,
+            "mean": -24.99999999009372,
+            "p95": -24.999999644423802,
+            "maximum": -24.99999957746995
+          },
+          "applied_gain": {
+            "minimum": 0.44495228741483517,
+            "median": 0.8819497787995517,
+            "mean": 1.031885230078696,
+            "p95": 1.883865450224771,
+            "maximum": 3.607880977920913
+          }
+        }
+      }
+    ],
+    "by_native_sample_rate_and_policy": [
+      {
+        "native_sample_rate": 16000,
+        "policy": "none",
+        "samples": 2370,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6771087646484375,
+            "mean": 0.6785002368411938,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6771087646484375,
+            "mean": 0.6785002368411938,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.90187962758459,
+            "mean": -21.58360892666577,
+            "p95": -13.022254675686156,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.90187962758459,
+            "mean": -21.58360892666577,
+            "p95": -13.022254675686156,
+            "maximum": -7.500584870478747
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "native_sample_rate": 16000,
+        "policy": "peak",
+        "samples": 2370,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6771087646484375,
+            "mean": 0.6785002368411938,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000027664603,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.90187962758459,
+            "mean": -21.58360892666577,
+            "p95": -13.022254675686156,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -18.306540263248436,
+            "mean": -17.98381970017366,
+            "p95": -13.181567664713164,
+            "maximum": -7.946112912910016
+          },
+          "applied_gain": {
+            "minimum": 0.95,
+            "median": 1.4030250012714183,
+            "mean": 1.6779063604960422,
+            "p95": 3.481864945578421,
+            "maximum": 12.431948881789136
+          }
+        }
+      },
+      {
+        "native_sample_rate": 16000,
+        "policy": "rms_dbfs",
+        "samples": 2370,
+        "near_silence": 0,
+        "peak_limited": 4,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.076416015625,
+            "median": 0.6771087646484375,
+            "mean": 0.6785002368411938,
+            "p95": 0.999969482421875,
+            "maximum": 1.0
+          },
+          "output_peak": {
+            "minimum": 0.1333611160516739,
+            "median": 0.4395928680896759,
+            "mean": 0.4429345847873748,
+            "p95": 0.6543369412422178,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -37.718402391637504,
+            "median": -21.90187962758459,
+            "mean": -21.58360892666577,
+            "p95": -13.022254675686156,
+            "maximum": -7.500584870478747
+          },
+          "output_rms_dbfs": {
+            "minimum": -27.511765111653787,
+            "median": -25.000000006722466,
+            "mean": -25.00159313298947,
+            "p95": -24.999999659290985,
+            "maximum": -24.99999950664284
+          },
+          "applied_gain": {
+            "minimum": 0.1333611228788696,
+            "median": 0.6999934763708762,
+            "mean": 0.7797624012295014,
+            "p95": 1.5776744962941764,
+            "maximum": 4.324342854502899
+          }
+        }
+      },
+      {
+        "native_sample_rate": 40000,
+        "policy": "none",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "applied_gain": {
+            "minimum": 1.0,
+            "median": 1.0,
+            "mean": 1.0,
+            "p95": 1.0,
+            "maximum": 1.0
+          }
+        }
+      },
+      {
+        "native_sample_rate": 40000,
+        "policy": "peak",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.9499999284744263,
+            "median": 0.949999988079071,
+            "mean": 0.9500000051995541,
+            "p95": 0.9500000476837158,
+            "maximum": 0.9500000476837158
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -24.259544377284143,
+            "median": -18.17986638339409,
+            "mean": -18.267142164187394,
+            "p95": -15.517235613561926,
+            "maximum": -14.386178203671742
+          },
+          "applied_gain": {
+            "minimum": 0.9594785677082518,
+            "median": 1.9650071222602805,
+            "mean": 2.196009322903217,
+            "p95": 3.865674052478838,
+            "maximum": 5.107975264785233
+          }
+        }
+      },
+      {
+        "native_sample_rate": 40000,
+        "policy": "rms_dbfs",
+        "samples": 188,
+        "near_silence": 0,
+        "peak_limited": 0,
+        "statistics": {
+          "input_peak": {
+            "minimum": 0.18598367273807526,
+            "median": 0.48345912992954254,
+            "mean": 0.4917601769433377,
+            "p95": 0.7815058529376984,
+            "maximum": 0.9901211261749268
+          },
+          "output_peak": {
+            "minimum": 0.2799190878868103,
+            "median": 0.4332316815853119,
+            "mean": 0.4477368434692951,
+            "p95": 0.630424576997757,
+            "maximum": 0.872370183467865
+          },
+          "input_rms_dbfs": {
+            "minimum": -36.14504403923408,
+            "median": -23.90886991795362,
+            "mean": -24.52314712901445,
+            "p95": -20.411475364095747,
+            "maximum": -17.9662688747469
+          },
+          "output_rms_dbfs": {
+            "minimum": -25.00000040742229,
+            "median": -24.999999995933788,
+            "mean": -24.99999999009372,
+            "p95": -24.999999644423802,
+            "maximum": -24.99999957746995
+          },
+          "applied_gain": {
+            "minimum": 0.44495228741483517,
+            "median": 0.8819497787995517,
+            "mean": 1.031885230078696,
+            "p95": 1.883865450224771,
+            "maximum": 3.607880977920913
+          }
+        }
+      }
+    ]
+  }
+}

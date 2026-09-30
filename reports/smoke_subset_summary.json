@@ -1,0 +1,123 @@
+{
+  "generated_at_utc": "2026-09-30T00:26:35.679448+00:00",
+  "technical_passed": true,
+  "purpose": "code_smoke_test_only_not_scientific_evaluation",
+  "seed": 2026,
+  "selection": {
+    "stable_order": "sha256(seed, split, purpose, file)",
+    "balanced_binary_labels": true,
+    "spoof_type_strategy": "deterministic_round_robin_across_available_types",
+    "per_class": {
+      "train": 128,
+      "dev": 64,
+      "test": 32
+    }
+  },
+  "source": {
+    "parquet_directory": "data/raw/vsasv_parquet/data",
+    "local_files": 2558,
+    "closed_splits": {
+      "train": {
+        "path": "data/splits/closed_train.csv",
+        "sha256": "656f95dbc30bef010fdf04facfbd69fce0a088f7d5bc93d858e9241fee675252",
+        "total_rows": 150999,
+        "local_candidates": 1552
+      },
+      "dev": {
+        "path": "data/splits/closed_dev.csv",
+        "sha256": "d93c28c54a2619d901f4ef60b86316f68ca32c997890aa56e205196d35d91a32",
+        "total_rows": 39116,
+        "local_candidates": 719
+      },
+      "test": {
+        "path": "data/splits/closed_test.csv",
+        "sha256": "304cf9e202d1470d1af8c24d0afae951a9c038129b8cd13344a69fc8e29c8abf",
+        "total_rows": 30848,
+        "local_candidates": 287
+      }
+    }
+  },
+  "checks": {
+    "balanced_within_each_partition": true,
+    "duplicate_files": 0,
+    "speaker_overlaps": {
+      "dev_vs_test": 0,
+      "dev_vs_train": 0,
+      "test_vs_train": 0
+    },
+    "total_samples": 448
+  },
+  "manifests": {
+    "train": {
+      "path": "data/splits/smoke_train.csv",
+      "sha256": "d7f60a692ef2c9572293d7dd65f69906cfecc0f8977d349b2a70acc99c43bf55",
+      "samples": 256,
+      "speakers": 24,
+      "bonafide": 128,
+      "spoof": 128,
+      "utt_type_counts": {
+        "bonafide": 128,
+        "voice_conversion": 43,
+        "adversarial_attack": 43,
+        "replay": 42
+      },
+      "sample_rate_counts": {
+        "16000": 213,
+        "40000": 43
+      },
+      "duration_seconds": {
+        "minimum": 2.04,
+        "mean": 4.0294130859375,
+        "maximum": 17.64
+      }
+    },
+    "dev": {
+      "path": "data/splits/smoke_dev.csv",
+      "sha256": "ff4173e686733726f6e30faf8aa3fa3cc7037e38dfb3719ad4a483e10ee53dd9",
+      "samples": 128,
+      "speakers": 4,
+      "bonafide": 64,
+      "spoof": 64,
+      "utt_type_counts": {
+        "bonafide": 64,
+        "voice_conversion": 0,
+        "adversarial_attack": 32,
+        "replay": 32
+      },
+      "sample_rate_counts": {
+        "16000": 128
+      },
+      "duration_seconds": {
+        "minimum": 1.40625,
+        "mean": 3.608091796875,
+        "maximum": 9.64
+      }
+    },
+    "test": {
+      "path": "data/splits/smoke_test.csv",
+      "sha256": "1c7f7179b00584cac8dd3da2a80aa68041f16324c6ee26d85be5fd0fd4174c00",
+      "samples": 64,
+      "speakers": 4,
+      "bonafide": 32,
+      "spoof": 32,
+      "utt_type_counts": {
+        "bonafide": 32,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 32
+      },
+      "sample_rate_counts": {
+        "16000": 64
+      },
+      "duration_seconds": {
+        "minimum": 0.84,
+        "mean": 3.74701171875,
+        "maximum": 20.84
+      }
+    }
+  },
+  "warnings": [
+    "Subset chỉ dùng để kiểm tra code và tốc độ, không dùng để báo cáo EER khoa học.",
+    "Phân bố kiểu spoof bị giới hạn bởi năm shard hiện có; test cục bộ chỉ có replay."
+  ]
+}

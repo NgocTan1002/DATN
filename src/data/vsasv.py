@@ -14,6 +14,12 @@ import torch
 import torchaudio
 from torch.utils.data import Dataset
 
+from .amplitude import (
+    AmplitudePolicy,
+    VALID_AMPLITUDE_POLICIES,
+    apply_amplitude_policy,
+)
+
 
 VALID_UTT_TYPES = frozenset(
     {"bonafide", "voice_conversion", "adversarial_attack", "replay"}
@@ -54,6 +60,10 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         target_sample_rate: int = 16_000,
         target_samples: int = 64_000,
         seed: int = 2026,
+        amplitude_policy: AmplitudePolicy = "none",
+        peak_target: float = 0.95,
+        rms_target_dbfs: float = -25.0,
+        minimum_input_rms_dbfs: float = -50.0,
     ) -> None:
         self.split_csv = Path(split_csv).resolve()
         self.parquet_dir = Path(parquet_dir).resolve()
@@ -61,6 +71,10 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         self.target_sample_rate = target_sample_rate
         self.target_samples = target_samples
         self.seed = seed
+        self.amplitude_policy = amplitude_policy
+        self.peak_target = peak_target
+        self.rms_target_dbfs = rms_target_dbfs
+        self.minimum_input_rms_dbfs = minimum_input_rms_dbfs
         self.epoch = 0
         self._connection: duckdb.DuckDBPyConnection | None = None
 
@@ -68,6 +82,18 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             raise ValueError("target_sample_rate phải lớn hơn 0.")
         if target_samples <= 0:
             raise ValueError("target_samples phải lớn hơn 0.")
+        if amplitude_policy not in VALID_AMPLITUDE_POLICIES:
+            raise ValueError(f"Chính sách biên độ không hợp lệ: {amplitude_policy}")
+        if not math.isfinite(peak_target) or not 0.0 < peak_target <= 1.0:
+            raise ValueError("peak_target phải hữu hạn và thuộc khoảng (0, 1].")
+        if not math.isfinite(rms_target_dbfs):
+            raise ValueError("rms_target_dbfs phải hữu hạn.")
+        if not math.isfinite(minimum_input_rms_dbfs):
+            raise ValueError("minimum_input_rms_dbfs phải hữu hạn.")
+        if minimum_input_rms_dbfs >= rms_target_dbfs:
+            raise ValueError(
+                "minimum_input_rms_dbfs phải nhỏ hơn rms_target_dbfs."
+            )
         if not self.split_csv.is_file():
             raise FileNotFoundError(f"Không tìm thấy split CSV: {self.split_csv}")
         if not self.parquet_dir.is_dir():
@@ -245,6 +271,14 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             waveform = torchaudio.functional.resample(
                 waveform, native_sample_rate, self.target_sample_rate
             )
+        amplitude_result = apply_amplitude_policy(
+            waveform,
+            self.amplitude_policy,
+            peak_target=self.peak_target,
+            rms_target_dbfs=self.rms_target_dbfs,
+            minimum_input_rms_dbfs=self.minimum_input_rms_dbfs,
+        )
+        waveform = amplitude_result.waveform
         waveform = self._fixed_length(waveform, index).contiguous()
 
         if waveform.shape != (self.target_samples,):
@@ -262,6 +296,16 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             "utt_type": record.utt_type,
             "native_sample_rate": native_sample_rate,
             "sample_rate": self.target_sample_rate,
+            "amplitude_policy": self.amplitude_policy,
+            "input_peak": amplitude_result.input_peak,
+            "output_peak": amplitude_result.output_peak,
+            "input_rms": amplitude_result.input_rms,
+            "output_rms": amplitude_result.output_rms,
+            "input_rms_dbfs": amplitude_result.input_rms_dbfs,
+            "output_rms_dbfs": amplitude_result.output_rms_dbfs,
+            "applied_gain": amplitude_result.applied_gain,
+            "near_silence": amplitude_result.near_silence,
+            "peak_limited": amplitude_result.peak_limited,
         }
 
     def __getstate__(self) -> dict[str, Any]:

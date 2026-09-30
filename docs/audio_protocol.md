@@ -17,6 +17,8 @@ Audio smoke test trên 5/432 shard đọc được 2.558 waveform, không phát 
 
 Năm shard được chọn theo vị trí và không đại diện ngẫu nhiên cho 432 shard. Các con số chỉ dùng để kiểm tra pipeline.
 
+Amplitude audit ngày 30/09/2026 đã xử lý đủ 2.558 waveform sau resample, tạo 7.674 observation cho ba policy và không phát hiện waveform NaN/Inf hoặc sai metadata. RMS đầu vào median cục bộ là -21,29 dBFS cho bonafide, -23,36 dBFS cho adversarial attack, -23,91 dBFS cho voice conversion và -16,47 dBFS cho replay. Chênh lệch này xác nhận amplitude là shortcut risk cần ablation; không được dùng số liệu audit hoặc closed test để chọn policy chiến thắng. Báo cáo đầy đủ nằm tại `reports/amplitude_audit.md`.
+
 ## Tiền xử lý bắt buộc
 
 - Chuyển waveform về một kênh.

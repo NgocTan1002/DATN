@@ -105,6 +105,109 @@ class VSASVParquetDatasetTests(unittest.TestCase):
         self.assertEqual(sample["native_sample_rate"], 40_000)
         self.assertEqual(sample["sample_rate"], 16_000)
 
+    def test_peak_policy_is_applied_before_fixed_length(self) -> None:
+        waveform = [0.1, -0.5, 0.25, 0.2]
+        self._write_parquet(
+            [("speaker1/real.wav", waveform, 16_000, "speaker1", "bonafide")]
+        )
+        self._write_split([("speaker1/real.wav", "speaker1", "bonafide")])
+        dataset = VSASVParquetDataset(
+            self.split_csv,
+            self.parquet_dir,
+            training=False,
+            target_samples=4,
+            amplitude_policy="peak",
+        )
+
+        sample = dataset[0]
+
+        self.assertEqual(sample["amplitude_policy"], "peak")
+        self.assertAlmostEqual(sample["input_peak"], 0.5, places=6)
+        self.assertAlmostEqual(sample["output_peak"], 0.95, places=5)
+        self.assertAlmostEqual(
+            float(sample["waveform"].abs().max().item()), 0.95, places=5
+        )
+        self.assertGreater(sample["applied_gain"], 1.0)
+        self.assertFalse(sample["near_silence"])
+        self.assertFalse(sample["peak_limited"])
+
+    def test_rms_policy_returns_audit_fields(self) -> None:
+        waveform = [0.1] * 100
+        self._write_parquet(
+            [("speaker1/real.wav", waveform, 16_000, "speaker1", "bonafide")]
+        )
+        self._write_split([("speaker1/real.wav", "speaker1", "bonafide")])
+        dataset = VSASVParquetDataset(
+            self.split_csv,
+            self.parquet_dir,
+            training=False,
+            target_samples=100,
+            amplitude_policy="rms_dbfs",
+        )
+
+        sample = dataset[0]
+
+        self.assertAlmostEqual(sample["output_rms_dbfs"], -25.0, places=3)
+        self.assertFalse(sample["peak_limited"])
+        for field in (
+            "input_peak",
+            "output_peak",
+            "input_rms",
+            "output_rms",
+            "input_rms_dbfs",
+            "output_rms_dbfs",
+            "applied_gain",
+            "near_silence",
+            "peak_limited",
+        ):
+            self.assertIn(field, sample)
+
+    def test_near_silence_is_not_amplified_by_dataset(self) -> None:
+        waveform = [1e-4] * 100
+        self._write_parquet(
+            [("speaker1/real.wav", waveform, 16_000, "speaker1", "bonafide")]
+        )
+        self._write_split([("speaker1/real.wav", "speaker1", "bonafide")])
+
+        for policy in ("peak", "rms_dbfs"):
+            with self.subTest(policy=policy):
+                dataset = VSASVParquetDataset(
+                    self.split_csv,
+                    self.parquet_dir,
+                    training=False,
+                    target_samples=100,
+                    amplitude_policy=policy,
+                )
+                sample = dataset[0]
+                self.assertTrue(sample["near_silence"])
+                self.assertEqual(sample["applied_gain"], 1.0)
+                self.assertTrue(
+                    torch.allclose(sample["waveform"], torch.full((100,), 1e-4))
+                )
+
+    def test_invalid_amplitude_configuration_is_rejected(self) -> None:
+        self._write_parquet(
+            [("speaker1/real.wav", [0.1], 16_000, "speaker1", "bonafide")]
+        )
+        self._write_split([("speaker1/real.wav", "speaker1", "bonafide")])
+
+        with self.assertRaisesRegex(ValueError, "Chính sách biên độ"):
+            VSASVParquetDataset(
+                self.split_csv,
+                self.parquet_dir,
+                training=False,
+                amplitude_policy="invalid",  # type: ignore[arg-type]
+            )
+
+        with self.assertRaisesRegex(ValueError, "minimum_input_rms_dbfs"):
+            VSASVParquetDataset(
+                self.split_csv,
+                self.parquet_dir,
+                training=False,
+                rms_target_dbfs=-50.0,
+                minimum_input_rms_dbfs=-25.0,
+            )
+
     def test_evaluation_center_crop_is_deterministic(self) -> None:
         waveform = [float(value) for value in range(10)]
         self._write_parquet(
