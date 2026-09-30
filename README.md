@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất các cổng trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Giao thức âm thanh phiên bản 3 bắt buộc mono 16 kHz, đoạn 4 giây và đã khóa quy tắc của ba policy biên độ ứng viên; policy chiến thắng vẫn phải chọn trên closed development. Giao thức chính sau khi thu hẹp đề tài là `closed_train/dev/test`. Bước tiếp theo là cài ba chính sách biên độ, tạo smoke subset cân bằng và triển khai LFCC + LCNN trước khi mở rộng số shard.
+Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Giao diện tensor LFCC của B0 đã được khóa và kiểm thử tại `configs/lfcc_lcnn.json`; policy biên độ chiến thắng vẫn chỉ được chọn trên closed development. Bước tiếp theo là cài LCNN tối thiểu và chạy một bước forward/loss/backward.
 
 ## Phạm vi phiên bản đầu
 
@@ -88,7 +88,7 @@ python -m unittest discover -s tests -v
 
 ## Dataset loader
 
-`VSASVParquetDataset` đọc lười waveform từ các shard Parquet, giao dữ liệu cục bộ với `closed_train/dev/test`, kiểm tra metadata và trả về waveform `float32` dài 64.000 mẫu. Audio 40 kHz được resample về 16 kHz; train dùng random crop xác định theo seed/epoch, còn development và test dùng center crop.
+`VSASVParquetDataset` đọc lười waveform từ các shard Parquet, giao dữ liệu cục bộ với `closed_train/dev/test`, kiểm tra metadata và trả về waveform `float32` dài 64.000 mẫu. Audio 40 kHz được resample về 16 kHz; policy biên độ được áp dụng sau resample và trước chia đoạn. Train dùng random crop xác định theo seed/epoch, còn development và test dùng center crop.
 
 Chạy kiểm tra trên các shard hiện có:
 
@@ -96,7 +96,26 @@ Chạy kiểm tra trên các shard hiện có:
 python scripts/smoke_test_dataset_loader.py
 ```
 
-Mỗi sample trả về `waveform`, nhãn nhị phân `label`, `file`, `speaker_id`, `utt_type`, sample rate gốc và sample rate đích.
+Mỗi sample trả về `waveform`, nhãn nhị phân `label`, `file`, `speaker_id`, `utt_type`, sample rate gốc/đích và các trường audit biên độ như peak, RMS, gain, `near_silence` và `peak_limited`. Smoke test chạy cả ba policy trên train/dev/test và bao gồm mẫu VC 40 kHz khi có.
+
+## Amplitude audit và smoke subset
+
+Chạy audit trên toàn bộ 2.558 waveform cục bộ sau resample 16 kHz, trước chia đoạn:
+
+```powershell
+python scripts/audit_amplitude.py
+```
+
+Kết quả được ghi tại `reports/amplitude_audit.json` và `reports/amplitude_audit.md`. Báo cáo tổng hợp theo split, nhãn nhị phân, `utt_type`, sample rate gốc và policy. Thống kê này chỉ dùng để phát hiện shortcut risk, không dùng để chọn policy.
+
+Tạo lại ba smoke manifest cân bằng, cố định bằng seed `2026`:
+
+```powershell
+python scripts/make_smoke_subset.py
+python scripts/smoke_test_dataset_loader.py
+```
+
+Đầu ra gồm `data/splits/smoke_train.csv` (256 mẫu), `smoke_dev.csv` (128 mẫu), `smoke_test.csv` (64 mẫu) và báo cáo `reports/smoke_subset_summary.*`. Các subset này chỉ dùng để kiểm tra code, không dùng để báo cáo EER khoa học.
 
 ## Tạo split và kiểm tra rò rỉ
 
