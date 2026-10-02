@@ -1,0 +1,153 @@
+{
+  "status": "ĐẠT",
+  "created_at": "2026-10-02T14:58:31+07:00",
+  "scope": "planning_projection_not_scientific_result",
+  "sources": {
+    "optimization_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\data_pipeline_optimization.json",
+    "smoke_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\b0_smoke_training.json",
+    "split_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\split_summary.json"
+  },
+  "measured_throughput": {
+    "training_samples_per_second": 0.8714616822001708,
+    "training_source_variant": "batch8_workers0",
+    "evaluation_samples_per_second": 1.6360510453396861,
+    "evaluation_source_examples": 128,
+    "evaluation_source_seconds": 78.23716769999919
+  },
+  "planning_buffer_percent": 20.0,
+  "standalone_projection": {
+    "20000": {
+      "train_only": {
+        "samples": 20000,
+        "seconds": 22949.947666667562,
+        "hours": 6.3749854629632114,
+        "days_24h": 0.2656243942901338,
+        "buffered_seconds": 27539.937200001074,
+        "buffered_hours": 7.649982555555853
+      },
+      "evaluation_only": {
+        "samples": 20000,
+        "seconds": 12224.557453124873,
+        "hours": 3.395710403645798,
+        "days_24h": 0.14148793348524158,
+        "buffered_seconds": 14669.468943749847,
+        "buffered_hours": 4.074852484374958
+      }
+    },
+    "40000": {
+      "train_only": {
+        "samples": 40000,
+        "seconds": 45899.895333335124,
+        "hours": 12.749970925926423,
+        "days_24h": 0.5312487885802676,
+        "buffered_seconds": 55079.87440000215,
+        "buffered_hours": 15.299965111111707
+      },
+      "evaluation_only": {
+        "samples": 40000,
+        "seconds": 24449.114906249746,
+        "hours": 6.791420807291596,
+        "days_24h": 0.28297586697048316,
+        "buffered_seconds": 29338.937887499695,
+        "buffered_hours": 8.149704968749916
+      }
+    }
+  },
+  "development_subset_projection": {
+    "split_basis": "closed_train:closed_dev",
+    "train_ratio": 0.794250848170844,
+    "dev_ratio": 0.20574915182915599,
+    "targets": {
+      "20000": {
+        "train_samples": 15885,
+        "dev_samples": 4115,
+        "train": {
+          "samples": 15885,
+          "seconds": 18227.995934250714,
+          "hours": 5.063332203958532,
+          "days_24h": 0.21097217516493882,
+          "buffered_seconds": 21873.595121100854,
+          "buffered_hours": 6.075998644750237
+        },
+        "dev": {
+          "samples": 4115,
+          "seconds": 2515.2026959804425,
+          "hours": 0.6986674155501229,
+          "days_24h": 0.029111142314588456,
+          "buffered_seconds": 3018.243235176531,
+          "buffered_hours": 0.8384008986601476
+        },
+        "epoch_plus_dev_seconds": 20743.198630231156,
+        "epoch_plus_dev_hours": 5.7619996195086545,
+        "epoch_plus_dev_buffered_hours": 6.914399543410385
+      },
+      "40000": {
+        "train_samples": 31770,
+        "dev_samples": 8230,
+        "train": {
+          "samples": 31770,
+          "seconds": 36455.99186850143,
+          "hours": 10.126664407917064,
+          "days_24h": 0.42194435032987765,
+          "buffered_seconds": 43747.19024220171,
+          "buffered_hours": 12.151997289500475
+        },
+        "dev": {
+          "samples": 8230,
+          "seconds": 5030.405391960885,
+          "hours": 1.3973348311002458,
+          "days_24h": 0.05822228462917691,
+          "buffered_seconds": 6036.486470353062,
+          "buffered_hours": 1.676801797320295
+        },
+        "epoch_plus_dev_seconds": 41486.39726046231,
+        "epoch_plus_dev_hours": 11.523999239017309,
+        "epoch_plus_dev_buffered_hours": 13.82879908682077
+      }
+    }
+  },
+  "full_closed_protocol_projection": {
+    "train": {
+      "samples": 150999,
+      "seconds": 173270.95738595678,
+      "hours": 48.1308214960991,
+      "days_24h": 2.005450895670796,
+      "buffered_seconds": 207925.14886314812,
+      "buffered_hours": 57.75698579531892
+    },
+    "dev": {
+      "samples": 39116,
+      "seconds": 23908.78946682163,
+      "hours": 6.641330407450452,
+      "days_24h": 0.27672210031043554,
+      "buffered_seconds": 28690.547360185952,
+      "buffered_hours": 7.969596488940542
+    },
+    "test": {
+      "samples": 30848,
+      "seconds": 18855.157415699803,
+      "hours": 5.2375437265832785,
+      "days_24h": 0.21823098860763662,
+      "buffered_seconds": 22626.188898839762,
+      "buffered_hours": 6.285052471899934
+    },
+    "one_epoch_dev_test_seconds": 216034.9042684782,
+    "one_epoch_dev_test_hours": 60.00969563013283,
+    "one_epoch_dev_test_days_24h": 2.500403984588868,
+    "one_epoch_dev_test_buffered_hours": 72.0116347561594
+  },
+  "recommended_dataloader": {
+    "batch_size": 8,
+    "num_workers": 0,
+    "status": "GIỮ CẤU HÌNH CHUẨN",
+    "reason": "Cấu hình 2 worker nhanh hơn 14,42% nhưng chưa vượt ngưỡng 15% và peak RSS cây tiến trình tăng từ 530,64 MiB lên 1.831,23 MiB.",
+    "revisit_when": "Đo lại sau khi thay cách lưu/đọc Parquet hoặc bổ sung cache; không suy rộng quyết định này sang máy khác."
+  },
+  "assumptions": [
+    "Thời gian tăng tuyến tính theo số mẫu và dùng cùng máy, đường đọc Parquet, LFCC và LCNN như benchmark ngày 02/10/2026.",
+    "Train dùng throughput end-to-end gồm DataLoader, LFCC, forward, loss, backward và optimizer.",
+    "Dev/test dùng throughput development của pilot B0; số đo này chỉ có một lần chạy 128 mẫu nên kém chắc chắn hơn benchmark train.",
+    "Ước lượng chưa gồm tải dữ liệu, tạo manifest, kiểm tra leakage, lưu checkpoint hoặc thời gian gián đoạn.",
+    "Biên dự phòng là ngân sách lập kế hoạch, không phải khoảng tin cậy thống kê."
+  ]
+}
