@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Giao diện tensor LFCC của B0 đã được khóa và kiểm thử tại `configs/lfcc_lcnn.json`; policy biên độ chiến thắng vẫn chỉ được chọn trên closed development. Bước tiếp theo là cài LCNN tối thiểu và chạy một bước forward/loss/backward.
+Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Baseline B0 tối thiểu đã chạy xuyên suốt từ waveform qua LFCC, LCNN, loss, backward, optimizer và checkpoint trên CPU. Pilot kỹ thuật một epoch đạt 32 bước train, checkpoint khôi phục chính xác và toàn bộ 49 kiểm thử đạt. Policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development trong ablation tuần 4.
 
 ## Phạm vi phiên bản đầu
 
@@ -116,6 +116,50 @@ python scripts/smoke_test_dataset_loader.py
 ```
 
 Đầu ra gồm `data/splits/smoke_train.csv` (256 mẫu), `smoke_dev.csv` (128 mẫu), `smoke_test.csv` (64 mẫu) và báo cáo `reports/smoke_subset_summary.*`. Các subset này chỉ dùng để kiểm tra code, không dùng để báo cáo EER khoa học.
+
+## Baseline B0 LFCC + LCNN
+
+LCNN tối thiểu dùng bốn block convolution với Max-Feature-Map, adaptive average pooling và một head sinh raw spoof logit. Mô hình nhận tensor `(batch, 1, 60, 401)`, có 498.113 tham số trainable và dùng `BCEWithLogitsLoss` theo quy ước `0 = bonafide`, `1 = spoof`.
+
+Chạy smoke pilot một bước theo cấu hình mặc định:
+
+```powershell
+python scripts/smoke_train_lfcc_lcnn.py
+```
+
+Chạy pilot kỹ thuật đủ một epoch trên smoke subset:
+
+```powershell
+python scripts/smoke_train_lfcc_lcnn.py --epochs 1 --max-steps 0
+```
+
+Script kiểm tra LFCC/logit/loss/gradient hữu hạn, xác nhận optimizer làm thay đổi tham số, đánh giá development loss, lưu rồi nạp checkpoint và ghi số liệu thời gian/RAM vào `reports/b0_smoke_training.*`. Checkpoint nằm trong `checkpoints/` và không được đưa vào Git. Kết quả smoke chỉ chứng minh pipeline hoạt động, không dùng để báo cáo EER hoặc chọn amplitude policy.
+
+## Benchmark hiệu năng pipeline
+
+Benchmark P0 trên 24 mẫu cố định, ba lần lặp, batch size 8 và `num_workers=0` xác định DataLoader chiếm 95,31% thời gian đường train. Riêng truy vấn đọc/decode từng waveform từ Parquet có trung vị 925,361 ms và chiếm 99,82% thời gian đọc/tiền xử lý; LFCC và LCNN không phải điểm nghẽn chính.
+
+Chạy lại benchmark chi tiết:
+
+```powershell
+python scripts/benchmark_data_pipeline.py
+```
+
+So sánh batch size và worker:
+
+```powershell
+python scripts/benchmark_dataloader_options.py
+```
+
+Trên cùng 16 mẫu và ba lần lặp, batch size 4 chỉ nhanh hơn 1,25%, batch size 16 chậm hơn 6,57%, còn hai worker nhanh hơn 14,42% nhưng peak RSS cây tiến trình tăng từ khoảng 531 MiB lên 1.831 MiB. Do mức tăng tốc không vượt ngưỡng chấp nhận 15% và chi phí bộ nhớ lớn, cấu hình kỹ thuật hiện giữ `batch_size=8`, `num_workers=0`. Báo cáo đầy đủ nằm tại `reports/data_pipeline_benchmark.*` và `reports/data_pipeline_optimization.*`.
+
+Dự báo lại thời gian từ các báo cáo đã đo:
+
+```powershell
+python scripts/estimate_runtime.py
+```
+
+Với cấu hình mặc định, development subset 20.000 mẫu cần khoảng 5,76 giờ cho một epoch train và một lượt development; mốc 40.000 mẫu cần 11,52 giờ. Ngân sách có dự phòng 20% lần lượt là 6,91 và 13,83 giờ. Báo cáo chi tiết và các giả định nằm tại `reports/runtime_projection.*`.
 
 ## Tạo split và kiểm tra rò rỉ
 

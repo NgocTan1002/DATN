@@ -103,3 +103,19 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Lý do:** biên độ có thể là shortcut giữa bonafide và spoof. Cần ba định nghĩa xác định, an toàn với đoạn gần im lặng và không gây clipping để chạy ablation công bằng.
 
 **Ảnh hưởng:** giao thức âm thanh tăng lên phiên bản 3. Đây mới là khóa quy tắc của ba ứng viên, chưa phải chọn policy chiến thắng. Việc lựa chọn vẫn phải dựa trên ba pilot B0 có cùng dữ liệu, seed và ngân sách, dùng development EER trước ngày 25/10/2026.
+
+## 2026-10-01 — D013: Dùng LCNN tối thiểu có Max-Feature-Map cho cổng kỹ thuật B0
+
+**Quyết định:** triển khai B0 smoke bằng bốn block convolution có Max-Feature-Map, ba tầng pooling, adaptive average pooling và head một logit. Cấu hình có 498.113 tham số trainable, nhận tensor `(batch, 1, 60, 401)` và dùng `BCEWithLogitsLoss`.
+
+**Lý do:** cần một kiến trúc LCNN đủ nhỏ để kiểm tra toàn bộ forward, backward, optimizer và checkpoint trên CPU, đồng thời giữ đúng đặc trưng Max-Feature-Map của họ Light CNN. Adaptive pooling loại bỏ phụ thuộc của classifier vào kích thước không gian trung gian.
+
+**Ảnh hưởng:** pipeline B0 đã vượt cổng kỹ thuật trên smoke subset. Kiến trúc và loss của lần chạy này là mốc triển khai có thể tái lập, chưa phải ngân sách huấn luyện hoặc kết luận khoa học cuối; mọi thay đổi kiến trúc dùng cho thí nghiệm chính phải được ghi phiên bản và so sánh công bằng.
+
+## 2026-10-02 — D014: Giữ DataLoader batch 8, không dùng worker phụ cho chặng B0 kế tiếp
+
+**Quyết định:** dùng `batch_size=8`, `num_workers=0` làm cấu hình kỹ thuật mặc định cho chặng B0 kế tiếp trên máy hiện tại. Đo lại quyết định này sau khi thay cách lưu/đọc Parquet hoặc bổ sung cache.
+
+**Lý do:** trên cùng 16 mẫu, seed `2026` và ba lần lặp, cấu hình hai worker nhanh hơn 14,42% nhưng chưa vượt ngưỡng chấp nhận 15%. Peak RSS cây tiến trình tăng từ 530,64 MiB lên 1.831,23 MiB, trong khi batch size 4 chỉ nhanh hơn 1,25% và batch size 16 chậm hơn 6,57%.
+
+**Ảnh hưởng:** dự báo thời gian 20.000, 40.000 và toàn bộ closed protocol dùng throughput end-to-end 0,871 mẫu/giây của cấu hình này. Đây là quyết định vận hành theo máy và layout dữ liệu hiện tại, không phải siêu tham số khoa học hoặc kết luận có thể suy rộng sang máy khác.
