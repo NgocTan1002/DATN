@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "status": "draft_interface_locked_implementation_pending",
+  "version": 2,
+  "status": "smoke_validation_passed",
   "experiment_name": "B0_LFCC_LCNN_smoke",
   "seed": 2026,
   "input": {
@@ -53,6 +53,32 @@
       "batch"
     ]
   },
+  "lcnn": {
+    "implementation": "src.models.lfcc_lcnn.LightCNNBaseline",
+    "family": "light_cnn_with_max_feature_map",
+    "channels": [
+      32,
+      64,
+      128,
+      128
+    ],
+    "kernels": [
+      5,
+      3,
+      3,
+      3
+    ],
+    "pool_after_blocks": [
+      1,
+      2,
+      3
+    ],
+    "spatial_pool": "adaptive_average_1x1",
+    "hidden_features": 64,
+    "dropout": 0.2,
+    "activation": "max_feature_map",
+    "output_activation": "none_raw_logit"
+  },
   "smoke_optimization": {
     "loss": "torch.nn.BCEWithLogitsLoss",
     "optimizer": "torch.optim.Adam",
@@ -67,5 +93,18 @@
       "optimizer_step_completes"
     ]
   },
-  "scope_note": "This file locks the B0 tensor interface only. The LCNN topology and scientific training budget remain pending."
+  "smoke_validation": {
+    "date": "2026-10-01",
+    "device": "cpu",
+    "amplitude_policy": "none",
+    "epochs": 1,
+    "optimizer_steps": 32,
+    "train_examples": 256,
+    "development_examples": 128,
+    "trainable_parameters": 498113,
+    "checkpoint_restore_max_abs_difference": 0.0,
+    "automated_tests_passed": 49,
+    "report": "reports/b0_smoke_training.md"
+  },
+  "scope_note": "This configuration defines the minimal B0 smoke topology. It is a technical pipeline check, not the final scientific training budget."
 }
