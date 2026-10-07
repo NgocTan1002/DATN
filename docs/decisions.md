@@ -119,3 +119,19 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Lý do:** trên cùng 16 mẫu, seed `2026` và ba lần lặp, cấu hình hai worker nhanh hơn 14,42% nhưng chưa vượt ngưỡng chấp nhận 15%. Peak RSS cây tiến trình tăng từ 530,64 MiB lên 1.831,23 MiB, trong khi batch size 4 chỉ nhanh hơn 1,25% và batch size 16 chậm hơn 6,57%.
 
 **Ảnh hưởng:** dự báo thời gian 20.000, 40.000 và toàn bộ closed protocol dùng throughput end-to-end 0,871 mẫu/giây của cấu hình này. Đây là quyết định vận hành theo máy và layout dữ liệu hiện tại, không phải siêu tham số khoa học hoặc kết luận có thể suy rộng sang máy khác.
+
+## 2026-10-02 — D015: Ghi nhận trạng thái bản phát hành công khai VSASV trên Hugging Face
+
+**Quyết định:** ghi nhận tác giả xác nhận phiên bản trên Hugging Face là phiên bản chính thức được phát hành duy nhất và phần dữ liệu đã mất không thể khôi phục. Nguồn xác nhận: email từ tác giả Vũ Hoàng, gửi lúc 16:38 Thứ Ba ngày 22/09/2026 theo thời gian hiển thị trong ảnh. Dữ liệu sử dụng trong đồ án vẫn được định danh là `VSASV-HF-public-snapshot-v1`; không tuyên bố tái lập số liệu của bài báo gốc.
+
+**Lý do:** xác nhận của tác giả làm rõ trạng thái phát hành hiện tại nhưng không xóa bỏ chênh lệch giữa số mẫu quan sát được trong snapshot và số liệu của bài báo. Định danh riêng giúp giới hạn đúng phạm vi dữ liệu thực sự được sử dụng và tránh so sánh metric trực tiếp không tương đương.
+
+**Ảnh hưởng:** mọi báo cáo phải ghi số shard và số mẫu thực tế, đồng thời nêu rõ kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1`. Cần cân nhắc cập nhật trạng thái `provisional_public_snapshot` trong báo cáo xác minh, nhưng chưa sửa báo cáo; việc thay đổi trạng thái này cần người dùng quyết định.
+
+## 2026-10-07 — D016: Khóa development manifest 20.000 mẫu phiên bản 1
+
+**Quyết định:** dùng `data/manifests/development_20k_v1.csv` làm development subset phiên bản 1, gồm 15.885 mẫu `closed_train` và 4.115 mẫu `closed_dev`. Quota giữa hai split và giữa bốn `utt_type` được phân bổ theo phân bố đầy đủ của closed train/dev bằng phương pháp phần dư lớn nhất; trong mỗi stratum, mẫu được xếp ổn định theo SHA-256 của `2026|file`. Manifest có SHA-256 `63df695e232a424c95ebd869f1d71cae715040ec30428177967cac26c6c5e673`.
+
+**Lý do:** 68 shard cục bộ đã cung cấp 34.782 audio khớp metadata, đủ mọi quota của mục tiêu 20.000 mẫu. Quy tắc này giữ nguyên split speaker-disjoint, giữ phân bố tham chiếu của dữ liệu phát hành và tái lập được mà không dùng `closed_test` để chọn quy mô hoặc phân bố.
+
+**Ảnh hưởng:** các pilot phát triển kế tiếp dùng đúng 20.000 hàng của manifest này, gồm 7.134 bonafide, 4.348 voice conversion, 4.348 adversarial attack và 55 replay trong train; 1.524 bonafide, 1.289 voice conversion, 1.289 adversarial attack và 13 replay trong development. Manifest dùng 66 shard và 184 speaker, không có file lặp hoặc speaker giao giữa hai split. Mọi thay đổi quy mô, quota, seed hoặc quy tắc chọn phải tạo phiên bản manifest mới và ghi quyết định mới; test vẫn chỉ dùng cho đánh giá sau khi khóa mô hình và threshold.

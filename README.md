@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Baseline B0 tối thiểu đã chạy xuyên suốt từ waveform qua LFCC, LCNN, loss, backward, optimizer và checkpoint trên CPU. Pilot kỹ thuật một epoch đạt 32 bước train, checkpoint khôi phục chính xác và toàn bộ 49 kiểm thử đạt. Policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development trong ablation tuần 4.
+Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Baseline B0 tối thiểu đã chạy xuyên suốt từ waveform qua LFCC, LCNN, loss, backward, optimizer và checkpoint trên CPU. Pilot kỹ thuật một epoch đạt 32 bước train, checkpoint khôi phục chính xác và toàn bộ 52 kiểm thử đạt ngày 04/10/2026. Policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development trong ablation tuần 4.
 
 ## Phạm vi phiên bản đầu
 
@@ -65,7 +65,7 @@ Hướng dẫn chi tiết nằm tại [docs/cai_dat_moi_truong.md](docs/cai_dat_
 
 ## Chạy audio smoke test
 
-Kiểm tra schema, duration, sample rate và waveform mẫu trong năm shard:
+Kiểm tra schema, duration, sample rate và waveform mẫu trong các shard cục bộ:
 
 ```powershell
 python scripts/audio_smoke_test.py
@@ -100,13 +100,21 @@ Mỗi sample trả về `waveform`, nhãn nhị phân `label`, `file`, `speaker_
 
 ## Amplitude audit và smoke subset
 
-Chạy audit trên toàn bộ 2.558 waveform cục bộ sau resample 16 kHz, trước chia đoạn:
+Chạy audit trên toàn bộ waveform cục bộ sau resample 16 kHz, trước chia đoạn:
 
 ```powershell
 python scripts/audit_amplitude.py
 ```
 
 Kết quả được ghi tại `reports/amplitude_audit.json` và `reports/amplitude_audit.md`. Báo cáo tổng hợp theo split, nhãn nhị phân, `utt_type`, sample rate gốc và policy. Thống kê này chỉ dùng để phát hiện shortcut risk, không dùng để chọn policy.
+
+Kiểm kê dung lượng, số mẫu và coverage metadata của các shard cục bộ:
+
+```powershell
+python scripts/audit_local_storage.py
+```
+
+Kết quả nằm tại `reports/local_storage_audit.*`. Số đo ngày 07/10/2026 ghi nhận 68 shard, 34.782 mẫu, 9,85 GiB, metadata coverage 100% và 98,05 GiB dung lượng đĩa còn trống. Các shard cục bộ không phải mẫu ngẫu nhiên của toàn bộ snapshot nên dự báo tuyến tính chỉ dùng để lập kế hoạch.
 
 Tạo lại ba smoke manifest cân bằng, cố định bằng seed `2026`:
 
@@ -116,6 +124,14 @@ python scripts/smoke_test_dataset_loader.py
 ```
 
 Đầu ra gồm `data/splits/smoke_train.csv` (256 mẫu), `smoke_dev.csv` (128 mẫu), `smoke_test.csv` (64 mẫu) và báo cáo `reports/smoke_subset_summary.*`. Các subset này chỉ dùng để kiểm tra code, không dùng để báo cáo EER khoa học.
+
+Tạo lại development manifest 20.000 mẫu từ `closed_train` và `closed_dev`:
+
+```powershell
+python scripts/make_development_manifest.py --target-total 20000 --seed 2026
+```
+
+Đầu ra là `data/manifests/development_20k_v1.csv` cùng báo cáo `reports/development_manifest_20k.*`. Script giữ speaker trong split gốc, phân bổ theo phân bố đầy đủ của closed train/dev, chọn ổn định bằng SHA-256 của `2026|file` và dừng nếu audio cục bộ không đủ bất kỳ quota nào. `closed_test` không tham gia chọn quy mô hoặc phân bố manifest.
 
 ## Baseline B0 LFCC + LCNN
 
