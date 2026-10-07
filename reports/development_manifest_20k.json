@@ -1,0 +1,216 @@
+{
+  "generated_at_utc": "2026-10-07T09:55:34.202322+00:00",
+  "status": "ĐẠT",
+  "technical_passed": true,
+  "manifest_version": "development-20k-v1",
+  "source_snapshot": "VSASV-HF-public-snapshot-v1",
+  "seed": 2026,
+  "target_total": 20000,
+  "selection": {
+    "partitions": [
+      "closed_train",
+      "closed_dev"
+    ],
+    "stable_order": "sha256(f'{seed}|{file}')",
+    "quota_basis": "full_closed_train_dev_distribution",
+    "allocation": "largest_remainder",
+    "split_quotas": {
+      "closed_train": 15885,
+      "closed_dev": 4115
+    },
+    "utt_type_quotas": {
+      "closed_train": {
+        "bonafide": 7134,
+        "voice_conversion": 4348,
+        "adversarial_attack": 4348,
+        "replay": 55
+      },
+      "closed_dev": {
+        "bonafide": 1524,
+        "voice_conversion": 1289,
+        "adversarial_attack": 1289,
+        "replay": 13
+      }
+    }
+  },
+  "source": {
+    "metadata": {
+      "path": "data/metadata/vsasv_metadata.csv",
+      "sha256": "254887ac5a1e357cbe1a8f0ee4bde266c491c9c349505e61c5b3dd2b461e73fb",
+      "samples": 220963
+    },
+    "closed_splits": {
+      "closed_train": {
+        "path": "data/splits/closed_train.csv",
+        "sha256": "656f95dbc30bef010fdf04facfbd69fce0a088f7d5bc93d858e9241fee675252",
+        "samples": 150999,
+        "speakers": 798,
+        "utt_type_counts": {
+          "bonafide": 67809,
+          "voice_conversion": 41335,
+          "adversarial_attack": 41335,
+          "replay": 520
+        }
+      },
+      "closed_dev": {
+        "path": "data/splits/closed_dev.csv",
+        "sha256": "d93c28c54a2619d901f4ef60b86316f68ca32c997890aa56e205196d35d91a32",
+        "samples": 39116,
+        "speakers": 172,
+        "utt_type_counts": {
+          "bonafide": 14490,
+          "voice_conversion": 12253,
+          "adversarial_attack": 12253,
+          "replay": 120
+        }
+      }
+    },
+    "parquet_directory": "data/raw/vsasv_parquet/data",
+    "local_shards": 68,
+    "local_samples": 34782,
+    "local_candidate_counts": {
+      "closed_train": {
+        "bonafide": 10562,
+        "voice_conversion": 7173,
+        "adversarial_attack": 4887,
+        "replay": 145
+      },
+      "closed_dev": {
+        "bonafide": 2097,
+        "voice_conversion": 2965,
+        "adversarial_attack": 1906,
+        "replay": 80
+      }
+    }
+  },
+  "shortfalls": [],
+  "manifest": {
+    "path": "data/manifests/development_20k_v1.csv",
+    "sha256": "63df695e232a424c95ebd869f1d71cae715040ec30428177967cac26c6c5e673",
+    "samples": 20000,
+    "speakers": 184,
+    "shards": 66,
+    "counts_by_split": {
+      "closed_dev": 4115,
+      "closed_train": 15885
+    },
+    "counts_by_binary_label": {
+      "closed_train": {
+        "0": 7134,
+        "1": 8751
+      },
+      "closed_dev": {
+        "0": 1524,
+        "1": 2591
+      }
+    },
+    "counts_by_utt_type": {
+      "closed_train": {
+        "adversarial_attack": 4348,
+        "bonafide": 7134,
+        "replay": 55,
+        "voice_conversion": 4348
+      },
+      "closed_dev": {
+        "adversarial_attack": 1289,
+        "bonafide": 1524,
+        "replay": 13,
+        "voice_conversion": 1289
+      }
+    },
+    "speakers_by_split": {
+      "closed_train": 153,
+      "closed_dev": 31
+    },
+    "counts_by_shard": {
+      "train-00000-of-00432.parquet": 267,
+      "train-00001-of-00432.parquet": 268,
+      "train-00002-of-00432.parquet": 209,
+      "train-00009-of-00432.parquet": 298,
+      "train-00018-of-00432.parquet": 166,
+      "train-00028-of-00432.parquet": 226,
+      "train-00037-of-00432.parquet": 335,
+      "train-00040-of-00432.parquet": 206,
+      "train-00046-of-00432.parquet": 364,
+      "train-00055-of-00432.parquet": 279,
+      "train-00064-of-00432.parquet": 130,
+      "train-00067-of-00432.parquet": 240,
+      "train-00073-of-00432.parquet": 58,
+      "train-00083-of-00432.parquet": 321,
+      "train-00085-of-00432.parquet": 359,
+      "train-00092-of-00432.parquet": 358,
+      "train-00101-of-00432.parquet": 176,
+      "train-00103-of-00432.parquet": 231,
+      "train-00110-of-00432.parquet": 360,
+      "train-00119-of-00432.parquet": 296,
+      "train-00128-of-00432.parquet": 181,
+      "train-00138-of-00432.parquet": 346,
+      "train-00139-of-00432.parquet": 335,
+      "train-00147-of-00432.parquet": 317,
+      "train-00148-of-00432.parquet": 351,
+      "train-00156-of-00432.parquet": 169,
+      "train-00157-of-00432.parquet": 270,
+      "train-00165-of-00432.parquet": 298,
+      "train-00166-of-00432.parquet": 277,
+      "train-00171-of-00432.parquet": 409,
+      "train-00174-of-00432.parquet": 303,
+      "train-00183-of-00432.parquet": 439,
+      "train-00202-of-00432.parquet": 326,
+      "train-00211-of-00432.parquet": 465,
+      "train-00220-of-00432.parquet": 445,
+      "train-00229-of-00432.parquet": 324,
+      "train-00238-of-00432.parquet": 461,
+      "train-00247-of-00432.parquet": 347,
+      "train-00248-of-00432.parquet": 350,
+      "train-00250-of-00432.parquet": 345,
+      "train-00257-of-00432.parquet": 298,
+      "train-00266-of-00432.parquet": 411,
+      "train-00274-of-00432.parquet": 215,
+      "train-00275-of-00432.parquet": 216,
+      "train-00276-of-00432.parquet": 257,
+      "train-00284-of-00432.parquet": 340,
+      "train-00292-of-00432.parquet": 234,
+      "train-00293-of-00432.parquet": 219,
+      "train-00294-of-00432.parquet": 227,
+      "train-00303-of-00432.parquet": 307,
+      "train-00312-of-00432.parquet": 451,
+      "train-00319-of-00432.parquet": 355,
+      "train-00328-of-00432.parquet": 323,
+      "train-00330-of-00432.parquet": 452,
+      "train-00339-of-00432.parquet": 316,
+      "train-00348-of-00432.parquet": 309,
+      "train-00355-of-00432.parquet": 304,
+      "train-00358-of-00432.parquet": 315,
+      "train-00367-of-00432.parquet": 394,
+      "train-00376-of-00432.parquet": 333,
+      "train-00385-of-00432.parquet": 282,
+      "train-00394-of-00432.parquet": 348,
+      "train-00403-of-00432.parquet": 203,
+      "train-00413-of-00432.parquet": 252,
+      "train-00422-of-00432.parquet": 325,
+      "train-00431-of-00432.parquet": 409
+    },
+    "columns": [
+      "manifest_version",
+      "shard",
+      "file",
+      "speaker_id",
+      "split",
+      "binary_label",
+      "utt_type",
+      "native_sample_rate",
+      "source_snapshot"
+    ]
+  },
+  "checks": {
+    "unique_files": true,
+    "speaker_overlap_train_dev": 0,
+    "metadata_exact": true,
+    "binary_labels_valid": true,
+    "shards_exist": true
+  },
+  "warnings": [
+    "Manifest chỉ dùng closed_train và closed_dev; closed_test không tham gia chọn quy mô hoặc phân bố.",
+    "Quy mô và quota phản ánh bản phát hành công khai hiện có, không được diễn giải là tái lập dữ liệu trong bài báo gốc."
+  ]
+}

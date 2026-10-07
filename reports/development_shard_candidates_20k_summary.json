@@ -1,0 +1,41 @@
+{
+  "status": "ĐÃ TẢI VÀ XÁC MINH",
+  "created_on": "2026-10-07",
+  "scope": "verified_shard_inventory_for_development_20k",
+  "dataset_name": "VSASV-HF-public-snapshot-v1",
+  "repository": "hustep-lab/VSASV-Dataset",
+  "revision": "92de668616780ed4f3d7f58a82262f82b56b4557",
+  "source_csv": "reports/development_shard_candidates_20k.csv",
+  "source_csv_sha256": "80fa2001d37d969ac3b007deb7ed80d7322e38895457b543bb8d743b582f41d6",
+  "selection_rule": [
+    "Giai đoạn 1: 48 chỉ số phân bố đều round(k*431/47), hợp với 6 shard cục bộ rồi loại trùng.",
+    "Giai đoạn 2: lấy 12 shard từ lưới midpoint, xếp ổn định theo SHA-256 của 2026|shard để tăng coverage mà không xem closed_test.",
+    "Giai đoạn 3: lấy 4 shard lân cận các shard chứa closed_dev voice_conversion để bù shortfall đã được báo cáo."
+  ],
+  "verified_shards": 68,
+  "verified_samples": 34782,
+  "verified_bytes": 10580529098,
+  "verified_gib": 9.853885600343347,
+  "preexisting_shards": 6,
+  "downloaded_shards": 62,
+  "downloaded_bytes": 9964212675,
+  "manifest_samples": 20000,
+  "manifest_shards_used": 66,
+  "manifest_report": "reports/development_manifest_20k.json",
+  "bandwidth_source": "reports/download_bandwidth_trial.json",
+  "bandwidth_bytes_per_second": 9873957.758455252,
+  "estimated_download_seconds_from_trial": 1009.1407031256,
+  "estimated_download_hours_from_trial": 0.2803168619793333,
+  "estimated_download_hours_with_20_percent_buffer": 0.3363802343752,
+  "checks": {
+    "size_and_sha256_match_source": true,
+    "parquet_readable": true,
+    "metadata_exact_matches": 34782,
+    "metadata_coverage_percent": 100.0
+  },
+  "warnings": [
+    "Dung lượng là tổng 68 shard phải lưu cục bộ; manifest 20.000 mẫu thực tế dùng 66 shard.",
+    "Thời gian trên là ETA suy ra từ phép tải thử một shard, không phải thời lượng đo của toàn bộ đợt tải.",
+    "Việc bù shortfall chỉ dùng closed_train và closed_dev; closed_test không tham gia lựa chọn."
+  ]
+}

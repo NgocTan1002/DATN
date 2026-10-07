@@ -1,0 +1,42 @@
+{
+  "status": "ĐẠT",
+  "source_url": "https://huggingface.co/datasets/hustep-lab/VSASV-Dataset/resolve/92de668616780ed4f3d7f58a82262f82b56b4557/data/train-00002-of-00432.parquet",
+  "repository": "hustep-lab/VSASV-Dataset",
+  "revision": "92de668616780ed4f3d7f58a82262f82b56b4557",
+  "shard": "train-00002-of-00432.parquet",
+  "started_at": "2026-10-07T11:58:27.9611305+07:00",
+  "finished_at": "2026-10-07T11:58:36.0110510+07:00",
+  "elapsed_seconds": 7.1404633,
+  "downloaded_bytes": 70504633,
+  "bytes_per_second": 9873957.758455252,
+  "mib_per_second": 9.416539915519001,
+  "megabits_per_second": 78.99166206764203,
+  "sha256": "a48e840f19e51a54c0e3d86a7658679b979dc8a147b5ca8bd76d1c069bcdf73e",
+  "source_checksum_or_etag": "a48e840f19e51a54c0e3d86a7658679b979dc8a147b5ca8bd76d1c069bcdf73e",
+  "checksum_status": "khớp SHA-256 nguồn",
+  "network_notes": "Wi-Fi; tình trạng gián đoạn không được ghi nhận trong lần đo.",
+  "projections": [
+    {
+      "target_samples": 20000,
+      "estimated_bytes": 4015090703.5830617,
+      "eta_hours": 0.11295399479124392
+    },
+    {
+      "target_samples": 40000,
+      "estimated_bytes": 8030181407.166123,
+      "eta_hours": 0.22590798958248784
+    }
+  ],
+  "candidate_plan_20000": {
+    "source_csv": "reports/development_shard_candidates_20k.csv",
+    "candidate_shards": 52,
+    "available_shards": 6,
+    "planned_shards": 46,
+    "planned_bytes": 7608382672,
+    "planned_gib": 7.085858538746834,
+    "eta_seconds": 770.5504578936244,
+    "eta_hours": 0.2140417938593401,
+    "eta_with_20_percent_buffer_hours": 0.25685015263120814,
+    "scope": "actual_shard_download_plan_not_verified_manifest_coverage"
+  }
+}

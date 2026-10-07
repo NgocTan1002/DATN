@@ -1,0 +1,958 @@
+{
+  "status": "ĐẠT",
+  "generated_at_utc": "2026-10-07T09:17:16.624575+00:00",
+  "scope": "local_storage_planning_not_scientific_result",
+  "dataset_name": "VSASV-HF-public-snapshot-v1",
+  "parquet_directory": "data/raw/vsasv_parquet/data",
+  "metadata_path": "data/metadata/vsasv_metadata.csv",
+  "metadata_sha256": "254887ac5a1e357cbe1a8f0ee4bde266c491c9c349505e61c5b3dd2b461e73fb",
+  "expected_shards": 432,
+  "local_shards": 68,
+  "shard_coverage_percent": 15.74074074074074,
+  "totals": {
+    "size_bytes": 10580529098,
+    "size_mib": 10090.378854751587,
+    "size_gib": 9.853885600343347,
+    "samples": 34782,
+    "unique_files": 34782,
+    "bytes_per_sample": 304195.5349893623,
+    "metadata_exact_matches": 34782,
+    "metadata_coverage_percent": 100.0
+  },
+  "disk": {
+    "total_bytes": 510996246528,
+    "used_bytes": 405714227200,
+    "free_bytes": 105282019328,
+    "free_gib": 98.05152130126953
+  },
+  "shards": [
+    {
+      "shard": "train-00000-of-00432.parquet",
+      "size_bytes": 78487614,
+      "size_mib": 74.85162162780762,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 153296.12109375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00001-of-00432.parquet",
+      "size_bytes": 78074698,
+      "size_mib": 74.45783424377441,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 152489.64453125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "size_bytes": 70504633,
+      "size_mib": 67.23845767974854,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 137704.361328125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00009-of-00432.parquet",
+      "size_bytes": 82930845,
+      "size_mib": 79.08901691436768,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 161974.306640625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00018-of-00432.parquet",
+      "size_bytes": 96544041,
+      "size_mib": 92.07157230377197,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 188562.580078125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00028-of-00432.parquet",
+      "size_bytes": 71899814,
+      "size_mib": 68.56900596618652,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 140429.32421875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00037-of-00432.parquet",
+      "size_bytes": 88693203,
+      "size_mib": 84.58442974090576,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 173228.912109375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00040-of-00432.parquet",
+      "size_bytes": 108244112,
+      "size_mib": 103.22962951660156,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 211414.28125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00046-of-00432.parquet",
+      "size_bytes": 82925619,
+      "size_mib": 79.08403301239014,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 161964.099609375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00055-of-00432.parquet",
+      "size_bytes": 92712962,
+      "size_mib": 88.41797065734863,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 181080.00390625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00064-of-00432.parquet",
+      "size_bytes": 85722979,
+      "size_mib": 81.75180339813232,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 167427.693359375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00067-of-00432.parquet",
+      "size_bytes": 120667397,
+      "size_mib": 115.07739734649658,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 235678.509765625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00073-of-00432.parquet",
+      "size_bytes": 76914393,
+      "size_mib": 73.35128116607666,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 150223.423828125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00083-of-00432.parquet",
+      "size_bytes": 138223700,
+      "size_mib": 131.82039260864258,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 269968.1640625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00085-of-00432.parquet",
+      "size_bytes": 104042680,
+      "size_mib": 99.22283172607422,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 203208.359375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00092-of-00432.parquet",
+      "size_bytes": 107123439,
+      "size_mib": 102.16087245941162,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 209225.466796875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00101-of-00432.parquet",
+      "size_bytes": 97613080,
+      "size_mib": 93.0910873413086,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 190650.546875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00103-of-00432.parquet",
+      "size_bytes": 111114172,
+      "size_mib": 105.96673202514648,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 217019.8671875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00110-of-00432.parquet",
+      "size_bytes": 131448566,
+      "size_mib": 125.35912132263184,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 256735.48046875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00119-of-00432.parquet",
+      "size_bytes": 123567859,
+      "size_mib": 117.84349346160889,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 241343.474609375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00128-of-00432.parquet",
+      "size_bytes": 119338375,
+      "size_mib": 113.80994319915771,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 233082.763671875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00138-of-00432.parquet",
+      "size_bytes": 173280222,
+      "size_mib": 165.25289726257324,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 338437.93359375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00139-of-00432.parquet",
+      "size_bytes": 166914292,
+      "size_mib": 159.1818733215332,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 326004.4765625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00147-of-00432.parquet",
+      "size_bytes": 191305063,
+      "size_mib": 182.4427251815796,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 373642.701171875,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00148-of-00432.parquet",
+      "size_bytes": 199113220,
+      "size_mib": 189.88916397094727,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 388893.0078125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00156-of-00432.parquet",
+      "size_bytes": 253323624,
+      "size_mib": 241.5882339477539,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 494772.703125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00157-of-00432.parquet",
+      "size_bytes": 192366954,
+      "size_mib": 183.45542335510254,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 375716.70703125,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00165-of-00432.parquet",
+      "size_bytes": 101009868,
+      "size_mib": 96.33051681518555,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 197284.8984375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00166-of-00432.parquet",
+      "size_bytes": 140742805,
+      "size_mib": 134.22279834747314,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 274888.291015625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 512
+      }
+    },
+    {
+      "shard": "train-00171-of-00432.parquet",
+      "size_bytes": 153161940,
+      "size_mib": 146.06660842895508,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 299144.4140625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 302,
+        "bonafide": 22,
+        "voice_conversion": 188
+      }
+    },
+    {
+      "shard": "train-00174-of-00432.parquet",
+      "size_bytes": 164367189,
+      "size_mib": 156.7527666091919,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 321029.666015625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 512
+      }
+    },
+    {
+      "shard": "train-00183-of-00432.parquet",
+      "size_bytes": 185245728,
+      "size_mib": 176.66409301757812,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 361808.0625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 512
+      }
+    },
+    {
+      "shard": "train-00193-of-00432.parquet",
+      "size_bytes": 145803906,
+      "size_mib": 139.04944038391113,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 284773.25390625,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 103,
+        "voice_conversion": 409
+      }
+    },
+    {
+      "shard": "train-00202-of-00432.parquet",
+      "size_bytes": 217254462,
+      "size_mib": 207.19000053405762,
+      "samples": 512,
+      "unique_files": 512,
+      "bytes_per_sample": 424325.12109375,
+      "metadata_exact_matches": 512,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 98,
+        "bonafide": 3,
+        "voice_conversion": 411
+      }
+    },
+    {
+      "shard": "train-00211-of-00432.parquet",
+      "size_bytes": 177077857,
+      "size_mib": 168.8746042251587,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 346532.0097847358,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00220-of-00432.parquet",
+      "size_bytes": 181144965,
+      "size_mib": 172.75330066680908,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 354491.1252446184,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 458,
+        "voice_conversion": 53
+      }
+    },
+    {
+      "shard": "train-00229-of-00432.parquet",
+      "size_bytes": 164766855,
+      "size_mib": 157.13391780853271,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 322440.02935420745,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00238-of-00432.parquet",
+      "size_bytes": 183581253,
+      "size_mib": 175.07672595977783,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 359258.8121330724,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00247-of-00432.parquet",
+      "size_bytes": 186550148,
+      "size_mib": 177.90808486938477,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 365068.78277886496,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00248-of-00432.parquet",
+      "size_bytes": 182761581,
+      "size_mib": 174.2950258255005,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 357654.75733855186,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00250-of-00432.parquet",
+      "size_bytes": 183532701,
+      "size_mib": 175.03042316436768,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 359163.79843444226,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00257-of-00432.parquet",
+      "size_bytes": 148829363,
+      "size_mib": 141.93474102020264,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 291251.1996086106,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00266-of-00432.parquet",
+      "size_bytes": 154643409,
+      "size_mib": 147.47944736480713,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 302628.98043052835,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 324,
+        "voice_conversion": 187
+      }
+    },
+    {
+      "shard": "train-00274-of-00432.parquet",
+      "size_bytes": 124947457,
+      "size_mib": 119.15918064117432,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 244515.57142857142,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00275-of-00432.parquet",
+      "size_bytes": 126096020,
+      "size_mib": 120.25453567504883,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 246763.24853228964,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00276-of-00432.parquet",
+      "size_bytes": 141103218,
+      "size_mib": 134.56651496887207,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 276131.54207436397,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 176,
+        "voice_conversion": 335
+      }
+    },
+    {
+      "shard": "train-00284-of-00432.parquet",
+      "size_bytes": 67738343,
+      "size_mib": 64.60031795501709,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 132560.35812133073,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 511
+      }
+    },
+    {
+      "shard": "train-00292-of-00432.parquet",
+      "size_bytes": 142132218,
+      "size_mib": 135.5478458404541,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 278145.240704501,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00293-of-00432.parquet",
+      "size_bytes": 135693326,
+      "size_mib": 129.40723991394043,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 265544.66927592957,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00294-of-00432.parquet",
+      "size_bytes": 138871406,
+      "size_mib": 132.4380931854248,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 271764.00391389435,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00303-of-00432.parquet",
+      "size_bytes": 222334246,
+      "size_mib": 212.03446006774902,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 435096.3718199609,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 106,
+        "bonafide": 21,
+        "voice_conversion": 384
+      }
+    },
+    {
+      "shard": "train-00312-of-00432.parquet",
+      "size_bytes": 184705763,
+      "size_mib": 176.14914226531982,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 361459.4187866928,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00319-of-00432.parquet",
+      "size_bytes": 164856179,
+      "size_mib": 157.2191038131714,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 322614.831702544,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 269,
+        "bonafide": 18,
+        "voice_conversion": 224
+      }
+    },
+    {
+      "shard": "train-00321-of-00432.parquet",
+      "size_bytes": 145671478,
+      "size_mib": 138.9231472015381,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 285071.385518591,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 204,
+        "voice_conversion": 307
+      }
+    },
+    {
+      "shard": "train-00328-of-00432.parquet",
+      "size_bytes": 172163135,
+      "size_mib": 164.18756008148193,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 336914.15851272014,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 33,
+        "voice_conversion": 478
+      }
+    },
+    {
+      "shard": "train-00330-of-00432.parquet",
+      "size_bytes": 157494261,
+      "size_mib": 150.19823169708252,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 308207.9471624266,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 511
+      }
+    },
+    {
+      "shard": "train-00339-of-00432.parquet",
+      "size_bytes": 103778852,
+      "size_mib": 98.97122573852539,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 203089.7299412916,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00348-of-00432.parquet",
+      "size_bytes": 135869353,
+      "size_mib": 129.57511234283447,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 265889.14481409005,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00355-of-00432.parquet",
+      "size_bytes": 142000610,
+      "size_mib": 135.4223346710205,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 277887.6908023483,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00358-of-00432.parquet",
+      "size_bytes": 174033359,
+      "size_mib": 165.9711446762085,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 340574.0880626223,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 37,
+        "voice_conversion": 474
+      }
+    },
+    {
+      "shard": "train-00367-of-00432.parquet",
+      "size_bytes": 146467232,
+      "size_mib": 139.68203735351562,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 286628.6340508806,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 314,
+        "voice_conversion": 197
+      }
+    },
+    {
+      "shard": "train-00376-of-00432.parquet",
+      "size_bytes": 112088208,
+      "size_mib": 106.89564514160156,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 219350.70058708414,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 144,
+        "voice_conversion": 367
+      }
+    },
+    {
+      "shard": "train-00385-of-00432.parquet",
+      "size_bytes": 116583350,
+      "size_mib": 111.18254661560059,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 228147.45596868885,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "voice_conversion": 511
+      }
+    },
+    {
+      "shard": "train-00394-of-00432.parquet",
+      "size_bytes": 46935555,
+      "size_mib": 44.76123332977295,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 91850.40117416829,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 511
+      }
+    },
+    {
+      "shard": "train-00403-of-00432.parquet",
+      "size_bytes": 52554837,
+      "size_mib": 50.120198249816895,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 102847.03913894325,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "bonafide": 246,
+        "replay": 265
+      }
+    },
+    {
+      "shard": "train-00413-of-00432.parquet",
+      "size_bytes": 751213811,
+      "size_mib": 716.4133176803589,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 1470085.7358121332,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 174,
+        "voice_conversion": 337
+      }
+    },
+    {
+      "shard": "train-00422-of-00432.parquet",
+      "size_bytes": 338769471,
+      "size_mib": 323.07574367523193,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 662953.9549902153,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 122,
+        "voice_conversion": 389
+      }
+    },
+    {
+      "shard": "train-00431-of-00432.parquet",
+      "size_bytes": 622855824,
+      "size_mib": 594.0016021728516,
+      "samples": 511,
+      "unique_files": 511,
+      "bytes_per_sample": 1218895.9373776908,
+      "metadata_exact_matches": 511,
+      "metadata_coverage_percent": 100.0,
+      "utt_type_counts": {
+        "adversarial_attack": 311,
+        "voice_conversion": 200
+      }
+    }
+  ],
+  "linear_sample_projections": [
+    {
+      "target_samples": 20000,
+      "estimated_bytes": 6083910699.787246,
+      "estimated_gib": 5.666083376656515
+    },
+    {
+      "target_samples": 40000,
+      "estimated_bytes": 12167821399.574492,
+      "estimated_gib": 11.33216675331303
+    },
+    {
+      "target_samples": 220963,
+      "estimated_bytes": 67215957997.85446,
+      "estimated_gib": 62.59973905780768
+    }
+  ],
+  "hard_issues": [],
+  "warnings": [
+    "68 shard hiện có không phải mẫu ngẫu nhiên của 432 shard; dự báo dung lượng theo byte/mẫu chỉ dùng để lập kế hoạch.",
+    "Dung lượng dự báo không bao gồm cache, file trung gian, checkpoint hoặc khoảng trống an toàn của hệ điều hành.",
+    "Chỉ có 68/432 shard, chưa đủ để mô tả toàn bộ snapshot."
+  ]
+}

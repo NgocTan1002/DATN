@@ -220,8 +220,11 @@ def run_smoke_test(parquet_dir: Path, samples_per_shard: int) -> dict[str, Any]:
     warnings: list[str] = []
     if schema != EXPECTED_COLUMNS:
         hard_issues.append("Schema Parquet không khớp schema đã khóa.")
+    shard_count = len(parquet_files)
     if overall[0] != overall[1]:
-        hard_issues.append("Có đường dẫn logic bị lặp trong năm shard.")
+        hard_issues.append(
+            f"Có đường dẫn logic bị lặp trong {shard_count} shard cục bộ."
+        )
     invalid_counts = overall[3:9]
     if any(invalid_counts):
         hard_issues.append("Có trường bắt buộc, waveform hoặc sample rate không hợp lệ.")
@@ -242,7 +245,7 @@ def run_smoke_test(parquet_dir: Path, samples_per_shard: int) -> dict[str, Any]:
         )
     if len(parquet_files) < 432:
         warnings.append(
-            "Năm shard chỉ là một phần nhỏ, không ngẫu nhiên của 432 shard; "
+            f"{shard_count} shard chỉ là một phần nhỏ, không ngẫu nhiên của 432 shard; "
             "không suy rộng phân bố cục bộ cho toàn bộ snapshot."
         )
 
@@ -279,16 +282,17 @@ def run_smoke_test(parquet_dir: Path, samples_per_shard: int) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     status = "ĐẠT" if report["technical_passed"] else "KHÔNG ĐẠT"
     summary = report["summary"]
+    local_shards = report["local_shards"]
     lines = [
         "# Báo cáo audio smoke test VSASV",
         "",
         f"- **Trạng thái kỹ thuật:** {status}",
         f"- **Shard cục bộ:** {report['local_shards']}/{report['expected_shards']}",
         f"- **Utterance:** {summary['utterances']:,}",
-        f"- **Speaker trong năm shard:** {summary['speakers']:,}",
+        f"- **Speaker trong {local_shards} shard:** {summary['speakers']:,}",
         f"- **Sample rate đích bắt buộc:** {report['required_target_sample_rate']:,} Hz",
         "",
-        "## Kiểm tra toàn bộ năm shard",
+        f"## Kiểm tra toàn bộ {local_shards} shard",
         "",
         f"- Đường dẫn duy nhất: {summary['unique_files']:,}/{summary['utterances']:,}",
         f"- Thiếu file/label/utt_type: {summary['missing_file'] + summary['missing_label'] + summary['missing_utt_type']:,}",
@@ -351,8 +355,8 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             (
                 "Có thể tiếp tục xây dựng pipeline và baseline. Mọi waveform phải được "
-                "resample về mono 16 kHz trong pipeline; kết quả trên năm shard chỉ dùng "
-                "cho smoke test, không đại diện toàn bộ snapshot."
+                f"resample về mono 16 kHz trong pipeline; kết quả trên {local_shards} "
+                "shard chỉ dùng cho smoke test, không đại diện toàn bộ snapshot."
                 if report["safe_to_continue_pipeline"]
                 else "Chưa được tiếp tục baseline cho đến khi xử lý hết hard issue."
             ),

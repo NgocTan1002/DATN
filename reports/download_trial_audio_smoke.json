@@ -1,0 +1,202 @@
+{
+  "generated_at_utc": "2026-10-07T06:24:56.147353+00:00",
+  "parquet_directory": "data/raw/vsasv_parquet/incoming/data",
+  "technical_passed": true,
+  "safe_to_continue_pipeline": true,
+  "required_target_sample_rate": 16000,
+  "hard_issues": [],
+  "warnings": [
+    "1 shard chỉ là một phần nhỏ, không ngẫu nhiên của 432 shard; không suy rộng phân bố cục bộ cho toàn bộ snapshot."
+  ],
+  "schema": {
+    "file": "VARCHAR",
+    "audio": "STRUCT(\"array\" DOUBLE[], sampling_rate BIGINT)",
+    "label": "VARCHAR",
+    "utt_type": "VARCHAR"
+  },
+  "local_shards": 1,
+  "expected_shards": 432,
+  "summary": {
+    "utterances": 512,
+    "unique_files": 512,
+    "speakers": 7,
+    "missing_file": 0,
+    "missing_label": 0,
+    "missing_utt_type": 0,
+    "missing_waveform": 0,
+    "invalid_sampling_rate": 0,
+    "empty_waveform": 0
+  },
+  "distribution": [
+    {
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "utterances": 512
+    }
+  ],
+  "duration_by_type": [
+    {
+      "utt_type": "bonafide",
+      "minimum_seconds": 0.84,
+      "median_seconds": 2.84,
+      "mean_seconds": 4.307936,
+      "p95_seconds": 12.44,
+      "maximum_seconds": 34.413,
+      "total_hours": 0.612684
+    }
+  ],
+  "shards": [
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "utterances": 512,
+      "total_hours": 0.612684
+    }
+  ],
+  "sampled_waveforms": [
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00026/00073.wav",
+      "label": "id00026",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 51840,
+      "duration_seconds": 3.24,
+      "finite_samples": 51840,
+      "nonfinite_samples": 0,
+      "minimum": -1.0,
+      "maximum": 0.98809814453125,
+      "peak_absolute": 1.0,
+      "rms": 0.2151633994657741,
+      "dc_offset": 0.0003304116519880884,
+      "clipped_fraction": 5.787037037037037e-05,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00026/00135.wav",
+      "label": "id00026",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 26240,
+      "duration_seconds": 1.64,
+      "finite_samples": 26240,
+      "nonfinite_samples": 0,
+      "minimum": -0.72564697265625,
+      "maximum": 0.75347900390625,
+      "peak_absolute": 0.75347900390625,
+      "rms": 0.12165779048282069,
+      "dc_offset": -4.57182163145484e-06,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00024/00049.wav",
+      "label": "id00024",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 39040,
+      "duration_seconds": 2.44,
+      "finite_samples": 39040,
+      "nonfinite_samples": 0,
+      "minimum": -0.4425048828125,
+      "maximum": 0.583709716796875,
+      "peak_absolute": 0.583709716796875,
+      "rms": 0.09623709045980158,
+      "dc_offset": 4.762117979956455e-06,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00024/00044.wav",
+      "label": "id00024",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 83840,
+      "duration_seconds": 5.24,
+      "finite_samples": 83840,
+      "nonfinite_samples": 0,
+      "minimum": -0.683563232421875,
+      "maximum": 0.598968505859375,
+      "peak_absolute": 0.683563232421875,
+      "rms": 0.10426680628329002,
+      "dc_offset": 1.95168356859047e-05,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00021/00042.wav",
+      "label": "id00021",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 39040,
+      "duration_seconds": 2.44,
+      "finite_samples": 39040,
+      "nonfinite_samples": 0,
+      "minimum": -0.25750732421875,
+      "maximum": 0.40960693359375,
+      "peak_absolute": 0.40960693359375,
+      "rms": 0.07179992571891274,
+      "dc_offset": -2.519185425805264e-05,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00024/00033.wav",
+      "label": "id00024",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 429172,
+      "duration_seconds": 26.82325,
+      "finite_samples": 429172,
+      "nonfinite_samples": 0,
+      "minimum": -0.564605712890625,
+      "maximum": 0.658233642578125,
+      "peak_absolute": 0.658233642578125,
+      "rms": 0.10063997095542315,
+      "dc_offset": 1.7741099499261076e-05,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00024/00018.wav",
+      "label": "id00024",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 39040,
+      "duration_seconds": 2.44,
+      "finite_samples": 39040,
+      "nonfinite_samples": 0,
+      "minimum": -0.61480712890625,
+      "maximum": 0.640380859375,
+      "peak_absolute": 0.640380859375,
+      "rms": 0.1246089712198609,
+      "dc_offset": 0.00011943051072417713,
+      "clipped_fraction": 0.0,
+      "silent": false
+    },
+    {
+      "shard": "train-00002-of-00432.parquet",
+      "file": "id00026/00062.wav",
+      "label": "id00026",
+      "utt_type": "bonafide",
+      "sampling_rate": 16000,
+      "samples": 109440,
+      "duration_seconds": 6.84,
+      "finite_samples": 109440,
+      "nonfinite_samples": 0,
+      "minimum": -0.656768798828125,
+      "maximum": 0.61944580078125,
+      "peak_absolute": 0.656768798828125,
+      "rms": 0.10401264171456856,
+      "dc_offset": -3.1563273647375276e-06,
+      "clipped_fraction": 0.0,
+      "silent": false
+    }
+  ],
+  "sample_rate_shortcut_risk": false
+}
