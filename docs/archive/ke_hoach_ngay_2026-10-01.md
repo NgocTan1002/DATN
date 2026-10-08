@@ -38,7 +38,7 @@ Các mục sau là trạng thái lúc 11:27 và đã được xử lý trong k�
 ### Trạng thái Git cần lưu ý
 
 - Nhánh `main` đang cùng mốc với `origin/main`.
-- Có hai tài liệu chưa được Git theo dõi: `docs/kien_thuc_can_nam_vung_de_bao_ve_do_an.md` và `docs/tong_ket_cong_viec_2026-09-30.md`.
+- Có hai tài liệu chưa được Git theo dõi: `docs/kien_thuc_can_nam_vung_de_bao_ve_do_an.md` và `docs/plans/daily/2026-09-30.md`.
 - Không gộp hai tài liệu này vào commit kỹ thuật trước khi rà soát nội dung và mục đích lưu trữ.
 
 ## 3. Thứ tự công việc

@@ -1,6 +1,6 @@
 # Hướng dẫn hoàn thành công việc tồn từ Thứ Hai 05/10/2026
 
-> Dùng cùng [kế hoạch ba ngày](ke_hoach_cong_viec_2026-10-05_den_2026-10-07.md). Thực hiện tuần tự; không đánh dấu một bước hoàn thành khi chưa có đầu ra và kiểm tra tương ứng.
+> Dùng cùng kế hoạch các ngày [05/10](../plans/daily/2026-10-05.md), [06/10](../plans/daily/2026-10-06.md) và [07/10](../plans/daily/2026-10-07.md). Thực hiện tuần tự; không đánh dấu một bước hoàn thành khi chưa có đầu ra và kiểm tra tương ứng.
 
 ## 1. Đích cần đạt
 
@@ -326,7 +326,7 @@ Script phải thực hiện đúng các bước sau:
 3. kiểm tra speaker, `utt_type` và nhãn khớp split/metadata;
 4. xếp ổn định bằng SHA-256 của `2026|file` trong từng split và stratum;
 5. chọn mục tiêu 15.885 train và 4.115 development nếu coverage cho phép;
-6. ghi đủ schema đã nêu trong `docs/chuan_bi_du_lieu_tuan_02_2026-10-04.md`;
+6. ghi đủ schema đã nêu trong `docs/guides/chuan_bi_du_lieu_vsasv.md`;
 7. sinh báo cáo số mẫu mục tiêu, đã ánh xạ shard, đã có audio, phân bố và checksum manifest;
 8. thất bại rõ ràng hoặc báo shortfall nếu audio chưa đủ, không lặp file và không chuyển speaker giữa split.
 

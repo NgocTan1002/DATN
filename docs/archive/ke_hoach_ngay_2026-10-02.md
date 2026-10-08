@@ -181,7 +181,7 @@ Tối ưu chỉ được đưa vào pipeline khi:
 - `scripts/benchmark_data_pipeline.py`: benchmark có thể chạy lại.
 - `reports/data_pipeline_benchmark.json`: số liệu có cấu trúc.
 - `reports/data_pipeline_benchmark.md`: bảng đọc nhanh và kết luận điểm nghẽn.
-- `docs/tong_ket_cong_viec_2026-10-02.md`: thay đổi, ý nghĩa, quyết định giữ/bỏ và việc tiếp theo.
+- `docs/plans/daily/2026-10-02.md`: thay đổi, ý nghĩa, quyết định giữ/bỏ và việc tiếp theo.
 - Cập nhật `README.md`, kế hoạch tuần hoặc decision log nếu benchmark dẫn đến thay đổi pipeline.
 
 ## 10. Mẫu chốt cuối ngày
@@ -236,4 +236,4 @@ Việc đầu tiên ngày 03/10:
 - **Cấu hình mặc định:** giữ `batch_size=8`, `num_workers=0`; đo lại sau khi thay layout/cache.
 - **Chuẩn bị commit:** ba nhóm độc lập gồm mô hình/kiểm thử, benchmark/dự báo và tài liệu/decision log; chưa stage hoặc tạo commit.
 - **Backlog tuần 02:** bắt đầu bằng ứng viên 20.000 mẫu, đo dung lượng và băng thông, kiểm tra coverage/leakage rồi mới quyết định mở rộng 40.000 mẫu.
-- **Minh chứng:** `scripts/estimate_runtime.py`, `reports/runtime_projection.json`, `reports/runtime_projection.md`, `docs/ke_hoach_commit_2026-10-02.md` và `docs/ke_hoach_tuan_02_2026-10-05_2026-10-11.md`.
+- **Minh chứng:** `scripts/estimate_runtime.py`, `reports/runtime_projection.json`, `reports/runtime_projection.md`, `docs/plans/daily/2026-10-02.md` và `docs/plans/weekly/2026-W41.md`.

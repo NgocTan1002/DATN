@@ -168,8 +168,8 @@ Các tài liệu sau đã được cập nhật:
 |---|---|---|
 | `README.md` | Trạng thái B0, lệnh chạy và giới hạn diễn giải | Người mới có thể tái chạy đúng quy trình |
 | `docs/decisions.md` | Thêm quyết định D013 về LCNN smoke | Ghi rõ lý do chọn topology và giới hạn khoa học |
-| `docs/ke_hoach_ngay_2026-10-01.md` | Đánh dấu toàn bộ P0/P1/P2 và ghi kết quả | Kế hoạch ngày có bằng chứng hoàn thành |
-| `docs/ke_hoach_tuan_01_2026-09-28_2026-10-04.md` | Hoàn tất checklist pipeline/checkpoint/pilot | Mục tiêu kỹ thuật tuần 01 hoàn thành sớm |
+| `docs/plans/daily/2026-10-01.md` | Đánh dấu toàn bộ P0/P1/P2 và ghi kết quả | Kế hoạch ngày có bằng chứng hoàn thành |
+| `docs/plans/weekly/2026-W40.md` | Hoàn tất checklist pipeline/checkpoint/pilot | Mục tiêu kỹ thuật tuần 01 hoàn thành sớm |
 | `reports/b0_smoke_training.json` | Kết quả có cấu trúc | Dùng cho kiểm tra tự động và tổng hợp sau này |
 | `reports/b0_smoke_training.md` | Báo cáo đọc nhanh | Dùng làm bằng chứng khi rà soát hoặc bảo vệ |
 

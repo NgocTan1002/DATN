@@ -48,14 +48,14 @@ Tệp:
 
 - `README.md`
 - `docs/decisions.md`
-- `docs/ke_hoach_tuan_01_2026-09-28_2026-10-04.md`
-- `docs/ke_hoach_tuan_02_2026-10-05_2026-10-11.md`
-- `docs/ke_hoach_ngay_2026-10-01.md`
-- `docs/ke_hoach_ngay_2026-10-02.md`
-- `docs/ke_hoach_commit_2026-10-02.md`
-- `docs/tong_ket_cong_viec_2026-09-30.md`
-- `docs/tong_ket_cong_viec_2026-10-01.md`
-- `docs/tong_ket_cong_viec_2026-10-02.md`
+- `docs/plans/weekly/2026-W40.md`
+- `docs/plans/weekly/2026-W41.md`
+- `docs/plans/daily/2026-10-01.md`
+- `docs/plans/daily/2026-10-02.md`
+- `docs/plans/daily/2026-10-02.md`
+- `docs/plans/daily/2026-09-30.md`
+- `docs/plans/daily/2026-10-01.md`
+- `docs/plans/daily/2026-10-02.md`
 - `docs/kien_thuc_can_nam_vung_de_bao_ve_do_an.md`
 
 Ý nghĩa: lưu lý do giữ cấu hình DataLoader, giới hạn diễn giải benchmark và backlog tuần 02 dựa trên số đo.

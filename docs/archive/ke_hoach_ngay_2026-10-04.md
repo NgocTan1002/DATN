@@ -35,7 +35,7 @@ Nếu một kiểm tra thất bại, dừng công việc mở rộng và xử l�
 
 ### 3.2. Chốt tài liệu tuần 01
 
-- [x] Tạo `docs/tong_ket_tuan_01_2026-09-28_2026-10-04.md`.
+- [x] Tạo `docs/plans/weekly/2026-W40.md`.
 - [x] Tổng hợp mục tiêu, đầu ra, kiểm thử, thay đổi kỹ thuật, quyết định và giới hạn diễn giải.
 - [x] Ghi rõ smoke subset chỉ chứng minh pipeline hoạt động, chưa phải kết quả khoa học.
 - [x] Đối chiếu README, kế hoạch tuần 01, decision log và báo cáo ngày 02/10 để loại số liệu mâu thuẫn.

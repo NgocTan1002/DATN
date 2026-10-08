@@ -12,7 +12,7 @@ Nếu nguồn tải hoặc ánh xạ file–shard chưa giải quyết được 
 
 | Hạng mục | Trạng thái | Bằng chứng hiện có |
 |---|---|---|
-| Hệ thống lại kế hoạch tuần 02 | Đã hoàn thành ngày 05/10 | `docs/ke_hoach_tuan_02_2026-10-05_2026-10-11.md` |
+| Hệ thống lại kế hoạch tuần 02 | Đã hoàn thành ngày 05/10 | `docs/plans/weekly/2026-W41.md` |
 | Kiểm kê dữ liệu cục bộ | Đã hoàn thành từ 04/10 | 5/432 shard, 2.558 mẫu, 520,53 MiB; `reports/local_storage_audit.*` |
 | Chọn và tải thử một shard mới | Chưa có bằng chứng hoàn thành | Chưa có `reports/download_bandwidth_trial.*`; thư mục dữ liệu vẫn có 5 shard |
 | Tính ETA từ băng thông thực đo | Chưa thực hiện | Chưa có số đo tốc độ tải |
@@ -51,7 +51,7 @@ Thực hiện theo bốn khối, chỉ chuyển sang khối sau khi đầu ra ph
 
 1. **Khối A — Nguồn và phép tải thử**
    - Hoàn thành các mục còn tồn của Thứ Hai.
-   - Tải một shard mới theo giao thức trong `docs/chuan_bi_du_lieu_tuan_02_2026-10-04.md`.
+   - Tải một shard mới theo giao thức trong `docs/guides/chuan_bi_du_lieu_vsasv.md`.
    - Sinh `reports/download_bandwidth_trial.json` và `reports/download_bandwidth_trial.md`.
 
 2. **Khối B — Xác minh và lập ngân sách**

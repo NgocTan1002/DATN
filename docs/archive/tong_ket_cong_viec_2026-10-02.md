@@ -12,8 +12,8 @@
 | So sánh batch size và worker | `scripts/benchmark_dataloader_options.py`, `reports/data_pipeline_optimization.*` | Có bằng chứng định lượng để giữ hoặc bỏ cấu hình |
 | Dự báo thời gian mở rộng | `scripts/estimate_runtime.py`, `reports/runtime_projection.*` | Chuyển throughput thực đo thành ngân sách 20.000, 40.000 và toàn bộ dữ liệu |
 | Khóa quyết định DataLoader | `docs/decisions.md` — D014 | Giữ một cấu hình vận hành rõ ràng và nêu điều kiện phải đo lại |
-| Chuẩn bị lịch sử Git | `docs/ke_hoach_commit_2026-10-02.md` | Tách mã mô hình, benchmark và tài liệu thành ba commit dễ xem xét |
-| Lập backlog tuần 02 | `docs/ke_hoach_tuan_02_2026-10-05_2026-10-11.md` | Ưu tiên manifest, dung lượng, băng thông và coverage trước khi tải lớn |
+| Chuẩn bị lịch sử Git | `docs/plans/daily/2026-10-02.md` | Tách mã mô hình, benchmark và tài liệu thành ba commit dễ xem xét |
+| Lập backlog tuần 02 | `docs/plans/weekly/2026-W41.md` | Ưu tiên manifest, dung lượng, băng thông và coverage trước khi tải lớn |
 
 ### 2.1. Chi tiết theo tệp
 
@@ -29,11 +29,11 @@
 | `reports/runtime_projection.json` | Tạo mới | Lưu dự báo cho 20.000, 40.000 và toàn bộ closed protocol cùng giả định, nguồn số liệu và cấu hình mặc định | Hỗ trợ dùng số liệu trong script hoặc báo cáo tiếp theo |
 | `reports/runtime_projection.md` | Tạo mới | Trình bày ngân sách thời gian train/dev/test, biên dự phòng và giới hạn suy rộng | Hỗ trợ chọn quy mô development subset phù hợp lịch và tài nguyên |
 | `docs/decisions.md` | Cập nhật | Thêm D014: giữ `batch_size=8`, `num_workers=0`, đồng thời ghi điều kiện phải benchmark lại | Ngăn cấu hình tạm thời bị hiểu thành siêu tham số khoa học hoặc áp dụng máy móc trên máy khác |
-| `docs/ke_hoach_ngay_2026-10-02.md` | Cập nhật | Đánh dấu hoàn thành P0/P1/P2 và ghi kết quả, số liệu, giả định, đầu ra của từng mức ưu tiên | Kế hoạch ngày trở thành nhật ký thực thi có minh chứng thay vì danh sách việc dự kiến |
-| `docs/ke_hoach_tuan_02_2026-10-05_2026-10-11.md` | Tạo mới | Lập backlog theo ngày, cổng hoàn thành, quy tắc chọn 20.000/40.000 mẫu và những việc không làm | Giữ tuần 02 tập trung vào dữ liệu, dung lượng, băng thông, manifest và leakage |
-| `docs/ke_hoach_commit_2026-10-02.md` | Tạo mới | Chia thay đổi thành ba commit: mô hình/kiểm thử, benchmark/dự báo, tài liệu/decision log | Giúp lịch sử Git dễ review và có thể hoàn nguyên theo từng mục đích |
+| `docs/plans/daily/2026-10-02.md` | Cập nhật | Đánh dấu hoàn thành P0/P1/P2 và ghi kết quả, số liệu, giả định, đầu ra của từng mức ưu tiên | Kế hoạch ngày trở thành nhật ký thực thi có minh chứng thay vì danh sách việc dự kiến |
+| `docs/plans/weekly/2026-W41.md` | Tạo mới | Lập backlog theo ngày, cổng hoàn thành, quy tắc chọn 20.000/40.000 mẫu và những việc không làm | Giữ tuần 02 tập trung vào dữ liệu, dung lượng, băng thông, manifest và leakage |
+| `docs/plans/daily/2026-10-02.md` | Tạo mới | Chia thay đổi thành ba commit: mô hình/kiểm thử, benchmark/dự báo, tài liệu/decision log | Giúp lịch sử Git dễ review và có thể hoàn nguyên theo từng mục đích |
 | `README.md` | Cập nhật | Bổ sung cách chạy hai benchmark, script dự báo, kết quả chính và cấu hình DataLoader được giữ | Người khác có thể tìm thấy quy trình chạy lại ngay từ tài liệu đầu dự án |
-| `docs/tong_ket_cong_viec_2026-10-02.md` | Tạo mới | Tổng hợp trạng thái, thay đổi, ý nghĩa, số đo, quyết định, kiểm thử và việc tiếp theo | Tạo điểm bàn giao cuối ngày duy nhất cho toàn bộ công việc 02/10 |
+| `docs/plans/daily/2026-10-02.md` | Tạo mới | Tổng hợp trạng thái, thay đổi, ý nghĩa, số đo, quyết định, kiểm thử và việc tiếp theo | Tạo điểm bàn giao cuối ngày duy nhất cho toàn bộ công việc 02/10 |
 
 ## 3. Kết quả P0 — Xác định điểm nghẽn
 
@@ -101,7 +101,7 @@ Dự báo giả định thời gian tăng tuyến tính trên cùng máy và lay
 2. `perf(data): benchmark B0 loading and project runtime`
 3. `docs(project): record B0 progress and plan week 2`
 
-Chưa tự động stage hoặc tạo commit. Danh sách tệp chi tiết nằm trong `docs/ke_hoach_commit_2026-10-02.md`.
+Chưa tự động stage hoặc tạo commit. Danh sách tệp chi tiết nằm trong `docs/plans/daily/2026-10-02.md`.
 
 ## 9. Việc đầu tiên của chặng tiếp theo
 
