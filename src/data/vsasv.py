@@ -7,7 +7,7 @@ import hashlib
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import duckdb
 import torch
@@ -24,6 +24,19 @@ from .amplitude import (
 VALID_UTT_TYPES = frozenset(
     {"bonafide", "voice_conversion", "adversarial_attack", "replay"}
 )
+VALID_MANIFEST_SPLITS = frozenset({"closed_train", "closed_dev"})
+ManifestSplit = Literal["closed_train", "closed_dev"]
+MANIFEST_COLUMNS = (
+    "manifest_version",
+    "shard",
+    "file",
+    "speaker_id",
+    "split",
+    "binary_label",
+    "utt_type",
+    "native_sample_rate",
+    "source_snapshot",
+)
 
 
 @dataclass(frozen=True)
@@ -34,6 +47,7 @@ class VSASVRecord:
     speaker_id: str
     utt_type: str
     shard: Path
+    native_sample_rate: int | None = None
 
     @property
     def binary_label(self) -> int:
@@ -64,6 +78,7 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         peak_target: float = 0.95,
         rms_target_dbfs: float = -25.0,
         minimum_input_rms_dbfs: float = -50.0,
+        manifest_split: ManifestSplit | None = None,
     ) -> None:
         self.split_csv = Path(split_csv).resolve()
         self.parquet_dir = Path(parquet_dir).resolve()
@@ -75,6 +90,9 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         self.peak_target = peak_target
         self.rms_target_dbfs = rms_target_dbfs
         self.minimum_input_rms_dbfs = minimum_input_rms_dbfs
+        self.manifest_split = manifest_split
+        self.manifest_version: str | None = None
+        self.source_snapshot: str | None = None
         self.epoch = 0
         self._connection: duckdb.DuckDBPyConnection | None = None
 
@@ -105,8 +123,13 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
                 f"Không tìm thấy shard Parquet trong {self.parquet_dir}"
             )
 
-        local_index = self._build_local_index()
-        self.records, self.total_split_rows = self._read_split(local_index)
+        if manifest_split is None:
+            local_index = self._build_local_index()
+            self.records, self.total_split_rows = self._read_split(local_index)
+        else:
+            if manifest_split not in VALID_MANIFEST_SPLITS:
+                raise ValueError(f"Split manifest không hợp lệ: {manifest_split}")
+            self.records, self.total_split_rows = self._read_manifest(manifest_split)
         if not self.records:
             raise ValueError(
                 f"Split {self.split_csv.name} không giao với audio Parquet cục bộ."
@@ -206,6 +229,124 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             raise ValueError(f"Split CSV rỗng: {self.split_csv}")
         return records, total_rows
 
+    def _read_manifest(
+        self, manifest_split: ManifestSplit
+    ) -> tuple[list[VSASVRecord], int]:
+        records: list[VSASVRecord] = []
+        seen_files: set[str] = set()
+        speaker_splits: dict[str, str] = {}
+        shard_paths: dict[str, Path] = {}
+        manifest_versions: set[str] = set()
+        source_snapshots: set[str] = set()
+        selected_rows = 0
+
+        with self.split_csv.open("r", encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            if tuple(reader.fieldnames or ()) != MANIFEST_COLUMNS:
+                raise ValueError(
+                    "Schema manifest không hợp lệ; cần đúng các cột "
+                    f"{list(MANIFEST_COLUMNS)}, nhận được {reader.fieldnames}."
+                )
+
+            total_rows = 0
+            for row in reader:
+                total_rows += 1
+                logical_file = row["file"]
+                speaker_id = row["speaker_id"]
+                split_name = row["split"]
+                utt_type = row["utt_type"]
+                shard_name = row["shard"]
+                manifest_version = row["manifest_version"]
+                source_snapshot = row["source_snapshot"]
+
+                if not logical_file or not speaker_id:
+                    raise ValueError(f"Manifest có file hoặc speaker rỗng ở dòng {total_rows + 1}.")
+                if logical_file in seen_files:
+                    raise ValueError(f"Manifest bị lặp file: {logical_file}")
+                seen_files.add(logical_file)
+                if split_name not in VALID_MANIFEST_SPLITS:
+                    raise ValueError(
+                        f"Split manifest không hợp lệ cho {logical_file}: {split_name}"
+                    )
+                if utt_type not in VALID_UTT_TYPES:
+                    raise ValueError(
+                        f"utt_type không hợp lệ cho {logical_file}: {utt_type}"
+                    )
+                expected_binary_label = 0 if utt_type == "bonafide" else 1
+                try:
+                    binary_label = int(row["binary_label"])
+                except ValueError as error:
+                    raise ValueError(
+                        f"binary_label không phải số nguyên cho {logical_file}."
+                    ) from error
+                if binary_label != expected_binary_label:
+                    raise ValueError(
+                        f"binary_label không khớp utt_type cho {logical_file}: "
+                        f"nhận {binary_label}, cần {expected_binary_label}."
+                    )
+                try:
+                    native_sample_rate = int(row["native_sample_rate"])
+                except ValueError as error:
+                    raise ValueError(
+                        f"native_sample_rate không phải số nguyên cho {logical_file}."
+                    ) from error
+                if native_sample_rate <= 0:
+                    raise ValueError(
+                        f"native_sample_rate không hợp lệ cho {logical_file}: "
+                        f"{native_sample_rate}"
+                    )
+                previous_split = speaker_splits.setdefault(speaker_id, split_name)
+                if previous_split != split_name:
+                    raise ValueError(
+                        f"Speaker {speaker_id} xuất hiện ở nhiều split manifest."
+                    )
+                if not manifest_version or not source_snapshot:
+                    raise ValueError(
+                        f"Thiếu phiên bản manifest hoặc source snapshot cho {logical_file}."
+                    )
+                manifest_versions.add(manifest_version)
+                source_snapshots.add(source_snapshot)
+                if Path(shard_name).name != shard_name:
+                    raise ValueError(
+                        f"Tên shard không hợp lệ cho {logical_file}: {shard_name}"
+                    )
+                shard_path = shard_paths.get(shard_name)
+                if shard_path is None:
+                    candidate = self.parquet_dir / shard_name
+                    if not candidate.is_file():
+                        raise FileNotFoundError(
+                            f"Không tìm thấy shard của manifest: {candidate}"
+                        )
+                    shard_path = candidate.resolve()
+                    shard_paths[shard_name] = shard_path
+
+                if split_name != manifest_split:
+                    continue
+                selected_rows += 1
+                records.append(
+                    VSASVRecord(
+                        file=logical_file,
+                        speaker_id=speaker_id,
+                        utt_type=utt_type,
+                        shard=shard_path,
+                        native_sample_rate=native_sample_rate,
+                    )
+                )
+
+        if total_rows == 0:
+            raise ValueError(f"Manifest CSV rỗng: {self.split_csv}")
+        if len(manifest_versions) != 1:
+            raise ValueError("Manifest phải có đúng một manifest_version.")
+        if len(source_snapshots) != 1:
+            raise ValueError("Manifest phải có đúng một source_snapshot.")
+        if selected_rows == 0:
+            raise ValueError(
+                f"Manifest không có hàng cho split {manifest_split}."
+            )
+        self.manifest_version = next(iter(manifest_versions))
+        self.source_snapshot = next(iter(source_snapshots))
+        return records, selected_rows
+
     def _get_connection(self) -> duckdb.DuckDBPyConnection:
         if self._connection is None:
             self._connection = duckdb.connect(database=":memory:")
@@ -213,7 +354,7 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
 
     def _load_audio(self, record: VSASVRecord) -> tuple[torch.Tensor, int]:
         rows = self._get_connection().execute(
-            "SELECT audio FROM read_parquet(?) WHERE file = ?",
+            "SELECT audio, label, utt_type FROM read_parquet(?) WHERE file = ?",
             [record.shard.as_posix(), record.file],
         ).fetchall()
         if len(rows) != 1:
@@ -221,7 +362,16 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
                 f"Cần đúng một waveform cho {record.file}, nhận được {len(rows)}."
             )
 
-        audio = rows[0][0]
+        audio, speaker_id, utt_type = rows[0]
+        if (str(speaker_id), str(utt_type)) != (
+            record.speaker_id,
+            record.utt_type,
+        ):
+            raise ValueError(
+                "Metadata manifest/split không khớp Parquet cho "
+                f"{record.file}: nguồn=({record.speaker_id}, {record.utt_type}), "
+                f"parquet=({speaker_id}, {utt_type})."
+            )
         if not isinstance(audio, dict) or not {"array", "sampling_rate"}.issubset(
             audio
         ):
@@ -233,6 +383,14 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             raise ValueError(f"Waveform phải là mono và không rỗng: {record.file}")
         if sample_rate <= 0:
             raise ValueError(f"Sample rate không hợp lệ cho {record.file}: {sample_rate}")
+        if (
+            record.native_sample_rate is not None
+            and sample_rate != record.native_sample_rate
+        ):
+            raise ValueError(
+                f"Sample rate manifest không khớp Parquet cho {record.file}: "
+                f"manifest={record.native_sample_rate}, parquet={sample_rate}."
+            )
         if not torch.isfinite(waveform).all():
             raise ValueError(f"Waveform chứa NaN hoặc Inf: {record.file}")
         return waveform, sample_rate
@@ -327,3 +485,36 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             self.close()
         except Exception:
             pass
+
+
+class VSASVManifestDataset(VSASVParquetDataset):
+    """Read one closed train/dev partition directly from a verified manifest."""
+
+    def __init__(
+        self,
+        manifest_csv: str | Path,
+        parquet_dir: str | Path,
+        *,
+        split: ManifestSplit,
+        training: bool,
+        target_sample_rate: int = 16_000,
+        target_samples: int = 64_000,
+        seed: int = 2026,
+        amplitude_policy: AmplitudePolicy = "none",
+        peak_target: float = 0.95,
+        rms_target_dbfs: float = -25.0,
+        minimum_input_rms_dbfs: float = -50.0,
+    ) -> None:
+        super().__init__(
+            manifest_csv,
+            parquet_dir,
+            training=training,
+            target_sample_rate=target_sample_rate,
+            target_samples=target_samples,
+            seed=seed,
+            amplitude_policy=amplitude_policy,
+            peak_target=peak_target,
+            rms_target_dbfs=rms_target_dbfs,
+            minimum_input_rms_dbfs=minimum_input_rms_dbfs,
+            manifest_split=split,
+        )

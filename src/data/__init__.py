@@ -1,7 +1,15 @@
 """Data loading and waveform preprocessing helpers."""
 
 from .segment import fixed_length_segment
-from .vsasv import VALID_UTT_TYPES, VSASVParquetDataset, VSASVRecord
+from .vsasv import (
+    MANIFEST_COLUMNS,
+    VALID_MANIFEST_SPLITS,
+    VALID_UTT_TYPES,
+    ManifestSplit,
+    VSASVManifestDataset,
+    VSASVParquetDataset,
+    VSASVRecord,
+)
 
 from .amplitude import (
     AmplitudePolicy,
@@ -19,6 +27,10 @@ from .smoke_subset import (
 
 __all__ = [
     "VALID_UTT_TYPES",
+    "VALID_MANIFEST_SPLITS",
+    "MANIFEST_COLUMNS",
+    "ManifestSplit",
+    "VSASVManifestDataset",
     "VSASVParquetDataset",
     "VSASVRecord",
     "fixed_length_segment",

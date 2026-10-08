@@ -90,6 +90,8 @@ python -m unittest discover -s tests -v
 
 `VSASVParquetDataset` đọc lười waveform từ các shard Parquet, giao dữ liệu cục bộ với `closed_train/dev/test`, kiểm tra metadata và trả về waveform `float32` dài 64.000 mẫu. Audio 40 kHz được resample về 16 kHz; policy biên độ được áp dụng sau resample và trước chia đoạn. Train dùng random crop xác định theo seed/epoch, còn development và test dùng center crop.
 
+`VSASVManifestDataset` đọc trực tiếp một partition `closed_train` hoặc `closed_dev` từ development manifest v1. Loader dùng cột `shard` để định vị waveform nên không cần quét toàn bộ các shard để dựng chỉ mục khi khởi tạo. Nó kiểm tra schema, phiên bản manifest, source snapshot, file trùng, speaker-disjoint, nhãn nhị phân, shard tồn tại và đối chiếu metadata/sample rate với Parquet khi waveform được đọc.
+
 Chạy kiểm tra trên các shard hiện có:
 
 ```powershell
@@ -97,6 +99,14 @@ python scripts/smoke_test_dataset_loader.py
 ```
 
 Mỗi sample trả về `waveform`, nhãn nhị phân `label`, `file`, `speaker_id`, `utt_type`, sample rate gốc/đích và các trường audit biên độ như peak, RMS, gain, `near_silence` và `peak_limited`. Smoke test chạy cả ba policy trên train/dev/test và bao gồm mẫu VC 40 kHz khi có.
+
+Kiểm tra riêng đường đọc manifest 20.000 mẫu trên train/development:
+
+```powershell
+python scripts/smoke_test_development_manifest_loader.py
+```
+
+Lệnh này xác nhận đúng số mẫu 15.885/4.115, coverage cục bộ 100%, waveform 64.000 mẫu, đủ hai nhãn và batch tái lập với seed `2026`. Đây là kiểm tra kỹ thuật, không phải phép đo EER hoặc benchmark tối ưu pipeline.
 
 ## Amplitude audit và smoke subset
 
