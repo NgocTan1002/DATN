@@ -18,15 +18,21 @@ import duckdb
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.data.content_hash import waveform_sha256
+
+
 DEFAULT_PARQUET_DIR = PROJECT_ROOT / "data" / "raw" / "vsasv_parquet" / "data"
 DEFAULT_METADATA = PROJECT_ROOT / "data" / "metadata" / "vsasv_metadata.csv"
 DEFAULT_SPLIT_DIR = PROJECT_ROOT / "data" / "splits"
-DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "manifests" / "development_20k_v1.csv"
-DEFAULT_JSON_REPORT = PROJECT_ROOT / "reports" / "development_manifest_20k.json"
-DEFAULT_MARKDOWN_REPORT = PROJECT_ROOT / "reports" / "development_manifest_20k.md"
+DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "manifests" / "development_20k_v2.csv"
+DEFAULT_JSON_REPORT = PROJECT_ROOT / "reports" / "development_manifest_20k_v2.json"
+DEFAULT_MARKDOWN_REPORT = PROJECT_ROOT / "reports" / "development_manifest_20k_v2.md"
 DEFAULT_TARGET_TOTAL = 20_000
 DEFAULT_SEED = 2026
-DEFAULT_MANIFEST_VERSION = "development-20k-v1"
+DEFAULT_MANIFEST_VERSION = "development-20k-v2"
 SOURCE_SNAPSHOT = "VSASV-HF-public-snapshot-v1"
 SPLIT_NAMES = ("closed_train", "closed_dev")
 UTT_TYPES = ("bonafide", "voice_conversion", "adversarial_attack", "replay")
@@ -79,6 +85,45 @@ def sha256_file(path: Path) -> str:
 def stable_key(file_name: str, seed: int) -> tuple[str, str]:
     digest = hashlib.sha256(f"{seed}|{file_name}".encode("utf-8")).hexdigest()
     return digest, file_name
+
+
+def choose_content_representatives(
+    rows: Iterable[dict[str, Any]],
+    *,
+    seed: int,
+) -> tuple[set[str], list[dict[str, Any]]]:
+    """Keep one deterministic file for every waveform content hash."""
+
+    groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        content_hash = str(row.get("content_sha256", ""))
+        if not content_hash:
+            raise ValueError(f"Thiếu content hash cho file: {row.get('file', '')}")
+        groups[content_hash].append(row)
+
+    eligible_files: set[str] = set()
+    duplicate_groups: list[dict[str, Any]] = []
+    for content_hash, members in sorted(groups.items()):
+        ordered = sorted(members, key=lambda row: stable_key(str(row["file"]), seed))
+        representative = ordered[0]
+        eligible_files.add(str(representative["file"]))
+        if len(ordered) <= 1:
+            continue
+        duplicate_groups.append(
+            {
+                "waveform_sha256": content_hash,
+                "representative_file": str(representative["file"]),
+                "representative_split": str(representative["split"]),
+                "representative_speaker_id": str(representative["speaker_id"]),
+                "files": [str(row["file"]) for row in ordered],
+                "splits": sorted({str(row["split"]) for row in ordered}),
+                "speaker_ids": sorted(
+                    {str(row["speaker_id"]) for row in ordered}
+                ),
+                "removed_files": [str(row["file"]) for row in ordered[1:]],
+            }
+        )
+    return eligible_files, duplicate_groups
 
 
 def allocate_largest_remainder(
@@ -141,34 +186,50 @@ def read_metadata(path: Path) -> dict[str, tuple[str, str]]:
 
 
 def build_local_index(parquet_dir: Path) -> dict[str, dict[str, Any]]:
+    """Index and hash every local waveform one shard at a time."""
+
     parquet_files = sorted(parquet_dir.glob("*.parquet"))
     if not parquet_files:
         raise FileNotFoundError(f"Không tìm thấy shard Parquet trong {parquet_dir}")
-    parquet_glob = (parquet_dir.resolve() / "*.parquet").as_posix()
     connection = duckdb.connect(database=":memory:")
+    connection.execute("SET threads = 1")
+    connection.execute("SET preserve_insertion_order = false")
+    connection.execute("SET memory_limit = '8GB'")
+    local_index: dict[str, dict[str, Any]] = {}
     try:
-        rows = connection.execute(
-            """
-            SELECT filename, file, label, utt_type, audio.sampling_rate
-            FROM read_parquet(?, filename = true)
-            ORDER BY file
-            """,
-            [parquet_glob],
-        ).fetchall()
+        for parquet_file in parquet_files:
+            cursor = connection.execute(
+                """
+                SELECT file, label, utt_type, audio.sampling_rate, audio.array
+                FROM read_parquet(?)
+                ORDER BY file
+                """,
+                [parquet_file.resolve().as_posix()],
+            )
+            while True:
+                rows = cursor.fetchmany(32)
+                if not rows:
+                    break
+                for file_name, speaker_id, utt_type, sample_rate, waveform in rows:
+                    logical_file = str(file_name)
+                    if logical_file in local_index:
+                        raise ValueError(
+                            f"Audio cục bộ có file logic bị lặp: {logical_file}"
+                        )
+                    rate = int(sample_rate or 0)
+                    if rate <= 0:
+                        raise ValueError(
+                            f"Audio có sample rate không hợp lệ: {logical_file}"
+                        )
+                    local_index[logical_file] = {
+                        "shard": parquet_file.name,
+                        "speaker_id": str(speaker_id),
+                        "utt_type": str(utt_type),
+                        "native_sample_rate": rate,
+                        "content_sha256": waveform_sha256(waveform or [], rate),
+                    }
     finally:
         connection.close()
-
-    local_index: dict[str, dict[str, Any]] = {}
-    for filename, file_name, speaker_id, utt_type, sample_rate in rows:
-        logical_file = str(file_name)
-        if logical_file in local_index:
-            raise ValueError(f"Audio cục bộ có file logic bị lặp: {logical_file}")
-        local_index[logical_file] = {
-            "shard": Path(str(filename)).name,
-            "speaker_id": str(speaker_id),
-            "utt_type": str(utt_type),
-            "native_sample_rate": int(sample_rate),
-        }
     return local_index
 
 
@@ -271,15 +332,66 @@ def generate_development_manifest(
         for split_name in SPLIT_NAMES
     }
 
-    candidates: dict[str, dict[str, list[dict[str, str]]]] = {
+    raw_candidates: dict[str, dict[str, list[dict[str, Any]]]] = {
         split_name: {utt_type: [] for utt_type in UTT_TYPES}
         for split_name in SPLIT_NAMES
     }
     for split_name in SPLIT_NAMES:
         for row in split_rows[split_name]:
             if row["file"] in local_index:
-                candidates[split_name][row["utt_type"]].append(row)
+                local = local_index[row["file"]]
+                raw_candidates[split_name][row["utt_type"]].append(
+                    {
+                        **row,
+                        "speaker_id": row["label"],
+                        "split": split_name,
+                        "content_sha256": local["content_sha256"],
+                    }
+                )
 
+    raw_candidate_counts = {
+        split_name: {
+            utt_type: len(raw_candidates[split_name][utt_type])
+            for utt_type in UTT_TYPES
+        }
+        for split_name in SPLIT_NAMES
+    }
+    raw_shortfalls: list[dict[str, Any]] = []
+    for split_name in SPLIT_NAMES:
+        for utt_type in UTT_TYPES:
+            available = raw_candidate_counts[split_name][utt_type]
+            required = quotas[split_name][utt_type]
+            if available < required:
+                raw_shortfalls.append(
+                    {
+                        "split": split_name,
+                        "utt_type": utt_type,
+                        "required": required,
+                        "available": available,
+                        "missing": required - available,
+                    }
+                )
+    all_candidate_rows = [
+        row
+        for split_name in SPLIT_NAMES
+        for utt_type in UTT_TYPES
+        for row in raw_candidates[split_name][utt_type]
+    ]
+    eligible_files, duplicate_groups = choose_content_representatives(
+        all_candidate_rows,
+        seed=seed,
+    )
+    candidates: dict[str, dict[str, list[dict[str, Any]]]] = {
+        split_name: {
+            utt_type: [
+                row
+                for row in raw_candidates[split_name][utt_type]
+                if row["file"] in eligible_files
+            ]
+            for utt_type in UTT_TYPES
+        }
+        for split_name in SPLIT_NAMES
+    }
     candidate_counts = {
         split_name: {
             utt_type: len(candidates[split_name][utt_type])
@@ -287,6 +399,18 @@ def generate_development_manifest(
         }
         for split_name in SPLIT_NAMES
     }
+    row_by_file = {str(row["file"]): row for row in all_candidate_rows}
+    removed_by_split = Counter()
+    removed_by_split_and_utt_type: dict[str, Counter[str]] = {
+        split_name: Counter() for split_name in SPLIT_NAMES
+    }
+    for group in duplicate_groups:
+        for file_name in group["removed_files"]:
+            removed = row_by_file[file_name]
+            split_name = str(removed["split"])
+            removed_by_split[split_name] += 1
+            removed_by_split_and_utt_type[split_name][str(removed["utt_type"])] += 1
+
     shortfalls: list[dict[str, Any]] = []
     for split_name in SPLIT_NAMES:
         for utt_type in UTT_TYPES:
@@ -305,7 +429,13 @@ def generate_development_manifest(
 
     report: dict[str, Any] = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "status": "KHÔNG ĐỦ AUDIO" if shortfalls else "ĐẠT",
+        "status": (
+            "KHÔNG ĐỦ AUDIO"
+            if raw_shortfalls
+            else "KHÔNG ĐỦ AUDIO SAU KHỬ TRÙNG"
+            if shortfalls
+            else "ĐẠT"
+        ),
         "technical_passed": not shortfalls,
         "manifest_version": manifest_version,
         "source_snapshot": SOURCE_SNAPSHOT,
@@ -316,6 +446,7 @@ def generate_development_manifest(
             "stable_order": "sha256(f'{seed}|{file}')",
             "quota_basis": "full_closed_train_dev_distribution",
             "allocation": "largest_remainder",
+            "content_uniqueness": "global_across_closed_train_and_closed_dev",
             "split_quotas": split_quotas,
             "utt_type_quotas": quotas,
         },
@@ -329,12 +460,46 @@ def generate_development_manifest(
             "parquet_directory": display_path(parquet_dir),
             "local_shards": len({item["shard"] for item in local_index.values()}),
             "local_samples": len(local_index),
-            "local_candidate_counts": candidate_counts,
+            "local_candidate_counts": raw_candidate_counts,
+            "deduplicated_candidate_counts": candidate_counts,
+        },
+        "deduplication": {
+            "method": (
+                "sha256(sample_rate_signed_int64_le || waveform_float64_le); "
+                "representative=min(sha256(f'{seed}|{file}'), file)"
+            ),
+            "indexed_local_files": len(local_index),
+            "candidate_files_before": len(all_candidate_rows),
+            "unique_candidate_content_hashes": len(
+                {str(row["content_sha256"]) for row in all_candidate_rows}
+            ),
+            "duplicate_groups": len(duplicate_groups),
+            "duplicate_files": sum(len(group["files"]) for group in duplicate_groups),
+            "removed_files": sum(
+                len(group["removed_files"]) for group in duplicate_groups
+            ),
+            "removed_by_split": {
+                split_name: removed_by_split[split_name]
+                for split_name in SPLIT_NAMES
+            },
+            "removed_by_split_and_utt_type": {
+                split_name: {
+                    utt_type: removed_by_split_and_utt_type[split_name][utt_type]
+                    for utt_type in UTT_TYPES
+                }
+                for split_name in SPLIT_NAMES
+            },
+            "groups": duplicate_groups,
+            "baseline_files_removed_by_split": None,
+            "replacement_files_by_split": None,
+            "selected_content_hashes": None,
         },
         "shortfalls": shortfalls,
+        "raw_shortfalls": raw_shortfalls,
         "manifest": None,
         "checks": {
             "unique_files": None,
+            "duplicate_content_hashes": None,
             "speaker_overlap_train_dev": len(overlap),
             "metadata_exact": True,
             "binary_labels_valid": None,
@@ -342,20 +507,41 @@ def generate_development_manifest(
         },
         "warnings": [
             "Manifest chỉ dùng closed_train và closed_dev; closed_test không tham gia chọn quy mô hoặc phân bố.",
+            "Khử trùng nội dung không chứng minh hoặc sửa quan hệ giữa các speaker ID có cùng waveform.",
+            "Duplicate đi qua closed_test phải được quyết định riêng trước đánh giá cuối.",
             "Quy mô và quota phản ánh bản phát hành công khai hiện có, không được diễn giải là tái lập dữ liệu trong bài báo gốc.",
         ],
     }
     if shortfalls:
         return report
 
+    baseline_files_by_split: dict[str, set[str]] = {
+        split_name: set() for split_name in SPLIT_NAMES
+    }
+    for split_name in SPLIT_NAMES:
+        for utt_type in UTT_TYPES:
+            ordered = sorted(
+                raw_candidates[split_name][utt_type],
+                key=lambda row: stable_key(str(row["file"]), seed),
+            )
+            baseline_files_by_split[split_name].update(
+                str(row["file"])
+                for row in ordered[: quotas[split_name][utt_type]]
+            )
+
     selected: list[dict[str, Any]] = []
+    selected_content_hashes: set[str] = set()
     for split_name in SPLIT_NAMES:
         for utt_type in UTT_TYPES:
             ordered = sorted(
                 candidates[split_name][utt_type],
-                key=lambda row: stable_key(row["file"], seed),
+                key=lambda row: stable_key(str(row["file"]), seed),
             )
-            for row in ordered[: quotas[split_name][utt_type]]:
+            selected_in_stratum = 0
+            for row in ordered:
+                content_hash = str(row["content_sha256"])
+                if content_hash in selected_content_hashes:
+                    continue
                 local = local_index[row["file"]]
                 selected.append(
                     {
@@ -370,11 +556,22 @@ def generate_development_manifest(
                         "source_snapshot": SOURCE_SNAPSHOT,
                     }
                 )
+                selected_content_hashes.add(content_hash)
+                selected_in_stratum += 1
+                if selected_in_stratum == quotas[split_name][utt_type]:
+                    break
+            if selected_in_stratum != quotas[split_name][utt_type]:
+                raise RuntimeError(
+                    "Không thể bù đủ quota sau khi loại content hash đã chọn: "
+                    f"{split_name}/{utt_type}."
+                )
 
     if len(selected) != target_total:
         raise RuntimeError("Số hàng đã chọn không khớp target-total.")
     if len({row["file"] for row in selected}) != len(selected):
         raise RuntimeError("Manifest có file bị lặp.")
+    if len(selected_content_hashes) != len(selected):
+        raise RuntimeError("Manifest có content hash bị lặp.")
     if any(row["binary_label"] not in (0, 1) for row in selected):
         raise RuntimeError("Manifest có binary_label không hợp lệ.")
     parquet_names = {path.name for path in parquet_dir.glob("*.parquet")}
@@ -399,6 +596,30 @@ def generate_development_manifest(
     if selected_overlap:
         raise RuntimeError("Manifest có speaker trùng giữa train và dev.")
 
+    selected_files_by_split = {
+        split_name: {
+            str(row["file"])
+            for row in selected
+            if row["split"] == split_name
+        }
+        for split_name in SPLIT_NAMES
+    }
+    report["deduplication"]["baseline_files_removed_by_split"] = {
+        split_name: len(
+            baseline_files_by_split[split_name] - selected_files_by_split[split_name]
+        )
+        for split_name in SPLIT_NAMES
+    }
+    report["deduplication"]["replacement_files_by_split"] = {
+        split_name: len(
+            selected_files_by_split[split_name] - baseline_files_by_split[split_name]
+        )
+        for split_name in SPLIT_NAMES
+    }
+    report["deduplication"]["selected_content_hashes"] = len(
+        selected_content_hashes
+    )
+
     report["manifest"] = {
         "path": display_path(output_path),
         "sha256": sha256_file(output_path),
@@ -414,6 +635,7 @@ def generate_development_manifest(
     }
     report["checks"] = {
         "unique_files": True,
+        "duplicate_content_hashes": 0,
         "speaker_overlap_train_dev": len(selected_overlap),
         "metadata_exact": True,
         "binary_labels_valid": True,
@@ -463,6 +685,31 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{counts['replay']:,} |"
         )
 
+    deduplication = report["deduplication"]
+    lines.extend(
+        [
+            "",
+            "## Khử trùng nội dung trước chọn quota",
+            "",
+            f"- File cục bộ đã băm: {deduplication['indexed_local_files']:,}",
+            f"- Nhóm content hash trùng: {deduplication['duplicate_groups']:,}",
+            f"- File thuộc nhóm trùng: {deduplication['duplicate_files']:,}",
+            f"- File bị loại khỏi pool ứng viên: {deduplication['removed_files']:,}",
+            "- Quy tắc đại diện: file có `SHA256(2026|file)` nhỏ nhất trong mỗi nhóm.",
+            "",
+            "| Split | Loại khỏi pool | Mất so với lựa chọn v1 | File bù |",
+            "|---|---:|---:|---:|",
+        ]
+    )
+    for split_name in SPLIT_NAMES:
+        baseline_removed = deduplication["baseline_files_removed_by_split"]
+        replacements = deduplication["replacement_files_by_split"]
+        lines.append(
+            f"| `{split_name}` | {deduplication['removed_by_split'][split_name]:,} | "
+            f"{0 if baseline_removed is None else baseline_removed[split_name]:,} | "
+            f"{0 if replacements is None else replacements[split_name]:,} |"
+        )
+
     if report["manifest"] is not None:
         manifest = report["manifest"]
         lines.extend(
@@ -477,6 +724,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- Số shard được dùng: {manifest['shards']:,}",
                 "- Speaker overlap train/dev: 0",
                 "- File lặp: 0",
+                "- Content hash lặp: 0",
                 "- Nhãn nhị phân, metadata và đường dẫn shard: ĐẠT",
             ]
         )

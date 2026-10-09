@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Kiểm tra nội dung mới phát hiện 91 nhóm waveform bonafide trùng; 30 nhóm đi qua closed split. Development manifest `development-20k-v1` có 15.885 mẫu train và 4.115 mẫu development, nhưng giữ 17 nhóm waveform trùng đi qua train/development nên chưa được dùng cho kết quả khoa học trước khi có phiên bản xử lý mới. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 08/10/2026 có 73/73 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development sau khi xử lý blocker dữ liệu.
+Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Snapshot nguồn có 91 nhóm/182 file waveform bonafide trùng, nhưng development manifest `development-20k-v2` đã khử trùng nội dung trước chọn quota và giữ đúng 15.885 mẫu train cùng 4.115 mẫu development. Audit độc lập đã băm lại 20.000/20.000 waveform và xác nhận 20.000 content hash duy nhất, không còn nhóm trùng trong cùng split hoặc đi qua train/development. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 09/10/2026 có 78/78 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development.
 
 ## Phạm vi phiên bản đầu
 
@@ -90,7 +90,7 @@ python -m unittest discover -s tests -v
 
 `VSASVParquetDataset` đọc lười waveform từ các shard Parquet, giao dữ liệu cục bộ với `closed_train/dev/test`, kiểm tra metadata và trả về waveform `float32` dài 64.000 mẫu. Audio 40 kHz được resample về 16 kHz; policy biên độ được áp dụng sau resample và trước chia đoạn. Train dùng random crop xác định theo seed/epoch, còn development và test dùng center crop.
 
-`VSASVManifestDataset` đọc trực tiếp một partition `closed_train` hoặc `closed_dev` từ development manifest v1. Loader dùng cột `shard` để định vị waveform nên không cần quét toàn bộ các shard để dựng chỉ mục khi khởi tạo. Nó kiểm tra schema, phiên bản manifest, source snapshot, file trùng, speaker-disjoint, nhãn nhị phân, shard tồn tại và đối chiếu metadata/sample rate với Parquet khi waveform được đọc.
+`VSASVManifestDataset` đọc trực tiếp một partition `closed_train` hoặc `closed_dev` từ development manifest v2. Loader dùng cột `shard` để định vị waveform nên không cần quét toàn bộ các shard để dựng chỉ mục khi khởi tạo. Nó kiểm tra schema, phiên bản manifest, source snapshot, file trùng, speaker-disjoint, nhãn nhị phân, shard tồn tại và đối chiếu metadata/sample rate với Parquet khi waveform được đọc.
 
 Chạy kiểm tra trên các shard hiện có:
 
@@ -139,9 +139,11 @@ Tạo lại development manifest 20.000 mẫu từ `closed_train` và `closed_de
 
 ```powershell
 python scripts/make_development_manifest.py --target-total 20000 --seed 2026
+python scripts/audit_development_manifest_content.py
+python scripts/smoke_test_development_manifest_loader.py
 ```
 
-Đầu ra là `data/manifests/development_20k_v1.csv` cùng báo cáo `reports/development_manifest_20k.*`. Script giữ speaker trong split gốc, phân bổ theo phân bố đầy đủ của closed train/dev, chọn ổn định bằng SHA-256 của `2026|file` và dừng nếu audio cục bộ không đủ bất kỳ quota nào. `closed_test` không tham gia chọn quy mô hoặc phân bố manifest.
+Đầu ra là `data/manifests/development_20k_v2.csv` cùng báo cáo `reports/development_manifest_20k_v2.*`. Script băm toàn bộ pool cục bộ, chỉ giữ một đại diện xác định cho mỗi content hash, giữ speaker trong split gốc, phân bổ theo phân bố đầy đủ của closed train/dev và dừng nếu audio sau khử trùng không đủ bất kỳ quota nào. Audit tiếp theo đọc và băm lại độc lập đúng 20.000 waveform, lưu hash từng dòng trong `reports/development_manifest_20k_v2_content_audit.json`. `closed_test` không tham gia chọn quy mô hoặc phân bố manifest; bốn nhóm duplicate `closed_train`–`closed_test` phải được xử lý bằng quyết định riêng trước đánh giá cuối. Manifest v1 được giữ để truy vết nhưng không dùng cho kết quả khoa học.
 
 ## Baseline B0 LFCC + LCNN
 

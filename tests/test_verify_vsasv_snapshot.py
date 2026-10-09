@@ -124,6 +124,14 @@ class VerifyVSASVSnapshotReportTests(unittest.TestCase):
         self.assertIn("hiện có 68/432 shard", markdown)
         self.assertIn("### Hard issue", markdown)
         self.assertIn("Waveform trùng qua train/development.", markdown)
+        self.assertIn("Trạng thái development manifest được báo riêng", markdown)
+        self.assertIn(
+            "development manifest không giữ nhiều file trong cùng nhóm", markdown
+        )
+        self.assertIn(
+            "chỉ khi manifest đó vượt audit content hash độc lập", markdown
+        )
+        self.assertNotIn("hoặc development manifest cho kết quả khoa học", markdown)
         self.assertNotIn("năm shard", markdown.casefold())
         self.assertNotIn("5/432", markdown)
         self.assertNotIn("2.558", markdown)

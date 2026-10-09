@@ -8,7 +8,6 @@ corpus size or protocol reported in the original VSASV paper.
 
 from __future__ import annotations
 
-import array
 import argparse
 import csv
 import hashlib
@@ -23,11 +22,17 @@ from typing import Any, Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.data.content_hash import waveform_sha256
+
+
 DEFAULT_METADATA = PROJECT_ROOT / "data" / "metadata" / "vsasv_metadata.csv"
 DEFAULT_PARQUET_DIR = PROJECT_ROOT / "data" / "raw" / "vsasv_parquet" / "data"
 DEFAULT_SPLIT_DIR = PROJECT_ROOT / "data" / "splits"
 DEFAULT_DEVELOPMENT_MANIFEST = (
-    PROJECT_ROOT / "data" / "manifests" / "development_20k_v1.csv"
+    PROJECT_ROOT / "data" / "manifests" / "development_20k_v2.csv"
 )
 DEFAULT_JSON_REPORT = PROJECT_ROOT / "reports" / "vsasv_snapshot_verification.json"
 DEFAULT_MARKDOWN_REPORT = PROJECT_ROOT / "reports" / "vsasv_snapshot_verification.md"
@@ -179,18 +184,6 @@ def summarize_duplicate_fingerprints(
             }
         )
     return sorted(groups, key=lambda item: item["fingerprint"])
-
-
-def waveform_sha256(values: Iterable[float], sampling_rate: int) -> str:
-    """Hash a waveform and its sample rate using a stable little-endian encoding."""
-
-    samples = array.array("d", values)
-    if sys.byteorder != "little":
-        samples.byteswap()
-    digest = hashlib.sha256()
-    digest.update(int(sampling_rate).to_bytes(8, "little", signed=True))
-    digest.update(samples.tobytes())
-    return digest.hexdigest()
 
 
 def confirm_duplicate_fingerprints(
@@ -908,6 +901,10 @@ def render_markdown(report: dict[str, Any]) -> str:
     metadata = report["metadata"]
     parquet = report["parquet"]
     splits = report["splits"]
+    manifest_duplicates = parquet.get("development_manifest_duplicates", {})
+    manifest_known_groups_clean = bool(manifest_duplicates.get("available")) and not (
+        manifest_duplicates.get("groups_with_multiple_members", 0)
+    )
     vc_ap = metadata["vc_ap_relationship"]
     local_shards = parquet["local_shards"]
     local_rows = parquet.get("rows", 0)
@@ -924,11 +921,17 @@ def render_markdown(report: dict[str, Any]) -> str:
         "nên chỉ được dùng như một giao thức tùy chỉnh, có phiên bản và giới hạn rõ ràng."
         if report["technical_consistency_passed"]
         else (
-            "Schema, metadata và định danh speaker/file của các split vẫn nhất quán, "
-            "nhưng kiểm tra nội dung waveform phát hiện hard issue. Chưa dùng snapshot "
-            "hoặc development manifest cho kết quả khoa học trước khi xử lý các mục dưới đây."
+            "Snapshot nguồn chưa vượt toàn bộ kiểm tra kỹ thuật; xem hard issue bên dưới. "
+            "Trạng thái development manifest được báo riêng và không được suy ra từ trạng "
+            "thái nguồn."
         )
     )
+    if manifest_known_groups_clean:
+        executive_summary += (
+            " Đối chiếu với các nhóm duplicate nguồn đã xác nhận cho thấy development "
+            "manifest không giữ nhiều file trong cùng nhóm; cổng độc lập băm lại toàn bộ "
+            "manifest vẫn phải được đọc từ báo cáo audit tương ứng."
+        )
     lines = [
         "# Báo cáo xác minh snapshot VSASV công khai",
         "",
@@ -1012,10 +1015,19 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"- Nhóm đi qua nhiều closed split: {parquet.get('duplicate_groups_crossing_closed_splits', 0):,}.",
             f"- Nhóm trộn nhãn nhị phân: {parquet.get('duplicate_groups_mixing_binary_labels', 0):,}.",
             (
-                "- Trong development manifest: "
-                f"{parquet.get('development_manifest_duplicates', {}).get('groups_with_multiple_members', 0):,} "
+                "- Development manifest đối chiếu: "
+                f"`{manifest_duplicates.get('path', '')}`"
+                + (
+                    f"; SHA-256 `{manifest_duplicates.get('sha256', '')}`."
+                    if manifest_duplicates.get("sha256")
+                    else "."
+                )
+            ),
+            (
+                "- Trong development manifest, khi đối chiếu các nhóm duplicate nguồn đã xác nhận: "
+                f"{manifest_duplicates.get('groups_with_multiple_members', 0):,} "
                 "nhóm giữ nhiều file; "
-                f"{parquet.get('development_manifest_duplicates', {}).get('groups_crossing_splits', 0):,} "
+                f"{manifest_duplicates.get('groups_crossing_splits', 0):,} "
                 "nhóm đi qua train/development."
             ),
             "",
@@ -1077,7 +1089,14 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## Quyết định sử dụng",
             "",
-            "Có thể tiếp tục phát triển pipeline và thử nghiệm baseline nếu áp dụng các điều kiện sau:",
+            (
+                "Không dùng trực tiếp snapshot nguồn cho kết quả khoa học. Có thể tiếp tục "
+                "phát triển pipeline và thử nghiệm baseline bằng development manifest chỉ "
+                "khi manifest đó vượt audit content hash độc lập, đồng thời áp dụng các điều "
+                "kiện sau:"
+                if not report["technical_consistency_passed"]
+                else "Có thể tiếp tục phát triển pipeline và thử nghiệm baseline nếu áp dụng các điều kiện sau:"
+            ),
             "",
         ]
     )

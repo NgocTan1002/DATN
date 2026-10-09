@@ -1,6 +1,6 @@
 {
   "verification_version": 1,
-  "generated_at_utc": "2026-10-08T05:16:46.144397+00:00",
+  "generated_at_utc": "2026-10-09T08:40:52.359107+00:00",
   "technical_consistency_passed": false,
   "scientific_status": "provisional_public_snapshot",
   "scientific_equivalence_to_official_paper": false,
@@ -465,8 +465,7 @@
     ],
     "technical_passed": false,
     "hard_issues": [
-      "Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256.",
-      "Development manifest có waveform trùng đi qua train và development."
+      "Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256."
     ],
     "warnings": [
       "Các loại audio trong 68 shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
@@ -4805,12 +4804,12 @@
     ],
     "fingerprint_method": "DuckDB 64-bit hash(audio.array); useful as a duplicate screen, not a cryptographic identity proof.",
     "development_manifest_duplicates": {
-      "path": "data/manifests/development_20k_v1.csv",
+      "path": "data/manifests/development_20k_v2.csv",
       "available": true,
-      "sha256": "63df695e232a424c95ebd869f1d71cae715040ec30428177967cac26c6c5e673",
-      "groups_with_multiple_members": 38,
-      "groups_crossing_splits": 17,
-      "files_in_duplicate_groups": 76
+      "sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+      "groups_with_multiple_members": 0,
+      "groups_crossing_splits": 0,
+      "files_in_duplicate_groups": 0
     }
   },
   "splits": {

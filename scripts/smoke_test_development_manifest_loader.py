@@ -20,13 +20,13 @@ if str(PROJECT_ROOT) not in sys.path:
 from src.data import ManifestSplit, VSASVManifestDataset  # noqa: E402
 
 
-DEFAULT_MANIFEST = PROJECT_ROOT / "data" / "manifests" / "development_20k_v1.csv"
+DEFAULT_MANIFEST = PROJECT_ROOT / "data" / "manifests" / "development_20k_v2.csv"
 DEFAULT_PARQUET_DIR = PROJECT_ROOT / "data" / "raw" / "vsasv_parquet" / "data"
 EXPECTED_COUNTS: dict[ManifestSplit, int] = {
     "closed_train": 15_885,
     "closed_dev": 4_115,
 }
-EXPECTED_MANIFEST_VERSION = "development-20k-v1"
+DEFAULT_EXPECTED_MANIFEST_VERSION = "development-20k-v2"
 EXPECTED_SOURCE_SNAPSHOT = "VSASV-HF-public-snapshot-v1"
 
 
@@ -35,6 +35,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--parquet-dir", type=Path, default=DEFAULT_PARQUET_DIR)
     parser.add_argument("--seed", type=int, default=2026)
+    parser.add_argument(
+        "--expected-manifest-version",
+        default=DEFAULT_EXPECTED_MANIFEST_VERSION,
+    )
     return parser.parse_args()
 
 
@@ -86,6 +90,7 @@ def smoke_split(
     parquet_dir: Path,
     split: ManifestSplit,
     seed: int,
+    expected_manifest_version: str,
 ) -> None:
     started = time.perf_counter()
     dataset = VSASVManifestDataset(
@@ -105,9 +110,10 @@ def smoke_split(
             )
         if dataset.total_split_rows != expected_count or dataset.local_coverage != 1.0:
             raise AssertionError(f"Coverage {split} không đạt 100%.")
-        if dataset.manifest_version != EXPECTED_MANIFEST_VERSION:
+        if dataset.manifest_version != expected_manifest_version:
             raise AssertionError(
-                f"manifest_version sai: {dataset.manifest_version}"
+                "manifest_version sai: "
+                f"nhận {dataset.manifest_version}, cần {expected_manifest_version}"
             )
         if dataset.source_snapshot != EXPECTED_SOURCE_SNAPSHOT:
             raise AssertionError(f"source_snapshot sai: {dataset.source_snapshot}")
@@ -154,8 +160,17 @@ def main() -> int:
         sys.stdout.reconfigure(encoding="utf-8")
     args = parse_args()
     for split in ("closed_train", "closed_dev"):
-        smoke_split(args.manifest, args.parquet_dir, split, args.seed)
-    print("[ĐẠT] Loader development manifest v1 tái lập trên train và development.")
+        smoke_split(
+            args.manifest,
+            args.parquet_dir,
+            split,
+            args.seed,
+            args.expected_manifest_version,
+        )
+    print(
+        "[ĐẠT] Loader development manifest "
+        f"{args.expected_manifest_version} tái lập trên train và development."
+    )
     return 0
 
 

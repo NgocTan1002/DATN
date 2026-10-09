@@ -317,27 +317,30 @@ Trước khi tải tiếp, mở CSV và ghi các số tổng vào kế hoạch. 
 
 ## 9. Tạo manifest ứng viên sau khi đủ audio
 
-Repository đã có `scripts/make_development_manifest.py`, kiểm thử đi kèm và manifest `development-20k-v1`. Không ghép CSV thủ công; khi cần tái sinh phải dùng script để giữ đúng quy tắc chọn đã khóa.
+Repository đã có `scripts/make_development_manifest.py`, kiểm thử đi kèm và manifest `development-20k-v2`. Manifest v1 chỉ được giữ để truy vết. Không ghép CSV thủ công; khi cần tái sinh phải dùng script để giữ đúng quy tắc D017.
 
 Script phải thực hiện đúng các bước sau:
 
-1. đọc toàn bộ Parquet cục bộ với tên shard và `audio.sampling_rate`;
+1. đọc tuần tự từng Parquet cục bộ với tên shard, `audio.sampling_rate` và waveform; tính SHA-256 trên sample rate cùng toàn bộ mẫu `float64`;
 2. giao theo `file` với `closed_train.csv` và `closed_dev.csv`; không đưa `closed_test.csv` vào tập chọn;
 3. kiểm tra speaker, `utt_type` và nhãn khớp split/metadata;
-4. xếp ổn định bằng SHA-256 của `2026|file` trong từng split và stratum;
-5. chọn mục tiêu 15.885 train và 4.115 development nếu coverage cho phép;
-6. ghi đủ schema đã nêu trong `docs/guides/chuan_bi_du_lieu_vsasv.md`;
-7. sinh báo cáo số mẫu mục tiêu, đã ánh xạ shard, đã có audio, phân bố và checksum manifest;
-8. thất bại rõ ràng hoặc báo shortfall nếu audio chưa đủ, không lặp file và không chuyển speaker giữa split.
+4. trong mỗi content hash, giữ file có khóa SHA-256 của `2026|file` nhỏ nhất và loại các file còn lại trước chọn quota;
+5. xếp ổn định trong từng split/stratum, đồng thời không chọn lại content hash đã xuất hiện ở split khác;
+6. chọn mục tiêu 15.885 train và 4.115 development nếu coverage sau khử trùng cho phép;
+7. ghi đủ schema đã nêu trong `docs/guides/chuan_bi_du_lieu_vsasv.md`;
+8. sinh báo cáo số mẫu, phân bố, checksum, file bị loại và file bù theo split;
+9. thất bại rõ ràng nếu audio sau khử trùng chưa đủ, không đổi quota và không chuyển speaker giữa split.
 
 Kiểm thử tối thiểu phải bao phủ tính xác định, schema, nhãn nhị phân, file duy nhất, speaker-disjoint và trường hợp thiếu audio. Sau khi script và test tồn tại, chạy:
 
 ```powershell
 python -m unittest discover -s tests -v
 python scripts\make_development_manifest.py --target-total 20000 --seed 2026
+python scripts\audit_development_manifest_content.py
+python scripts\smoke_test_development_manifest_loader.py
 ```
 
-Lệnh thứ hai tái sinh manifest theo giao diện đã triển khai. Nếu thay quy tắc lấy mẫu hoặc quy mô đã khóa, phải ghi một quyết định mới trong `docs/decisions.md` trước khi tạo phiên bản manifest mới.
+Lệnh thứ hai tái sinh manifest v2. Lệnh thứ ba phải băm lại đúng 20.000 waveform và chỉ đạt khi toàn manifest có 20.000 content hash duy nhất, gồm cả kiểm tra trong cùng split và đi qua train/development. Nếu thay quy tắc lấy mẫu hoặc quy mô đã khóa, phải ghi một quyết định mới trong `docs/decisions.md` trước khi tạo phiên bản manifest mới.
 
 ## 10. Kết thúc và bàn giao
 
@@ -360,7 +363,7 @@ Cập nhật `docs/current_state.md` bằng số shard, số mẫu, băng thông
 - Có `reports/download_bandwidth_trial.*` với số đo thật.
 - Có phương án shard, tổng byte và ETA cho ứng viên 20.000 train + development.
 - Có manifest ứng viên được tạo bằng script có kiểm thử, hoặc có báo cáo shortfall chính xác nếu audio chưa đủ.
-- Manifest không trùng file, không rò rỉ speaker và không dùng test để chọn quy mô/phân bố.
+- Manifest không trùng file/content hash, không rò rỉ speaker và không dùng test để chọn quy mô/phân bố.
 - `docs/current_state.md` phản ánh đúng số shard/mẫu thực tế và việc đầu tiên tiếp theo.
 
 Không chọn amplitude policy và chưa bắt đầu XLS-R trong chuỗi công việc này.

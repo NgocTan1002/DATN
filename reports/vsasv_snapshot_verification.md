@@ -3,17 +3,16 @@
 - **Nhất quán kỹ thuật:** KHÔNG ĐẠT
 - **Giá trị khoa học:** `provisional_public_snapshot`
 - **Tương đương bộ dữ liệu/giao thức bài báo gốc:** KHÔNG
-- **Thời điểm UTC:** `2026-10-08T05:16:46.144397+00:00`
+- **Thời điểm UTC:** `2026-10-09T08:40:52.359107+00:00`
 - **Tên phiên bản đề xuất:** `VSASV-HF-public-snapshot-v1`
 
 ## Kết luận điều hành
 
-Schema, metadata và định danh speaker/file của các split vẫn nhất quán, nhưng kiểm tra nội dung waveform phát hiện hard issue. Chưa dùng snapshot hoặc development manifest cho kết quả khoa học trước khi xử lý các mục dưới đây.
+Snapshot nguồn chưa vượt toàn bộ kiểm tra kỹ thuật; xem hard issue bên dưới. Trạng thái development manifest được báo riêng và không được suy ra từ trạng thái nguồn. Đối chiếu với các nhóm duplicate nguồn đã xác nhận cho thấy development manifest không giữ nhiều file trong cùng nhóm; cổng độc lập băm lại toàn bộ manifest vẫn phải được đọc từ báo cáo audit tương ứng.
 
 ### Hard issue
 
 - Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256.
-- Development manifest có waveform trùng đi qua train và development.
 
 ## Metadata công khai
 
@@ -54,7 +53,8 @@ Kết luận: sự bằng nhau về số lượng là cấu trúc thật của m
 - Nhóm đi qua nhiều speaker: 33.
 - Nhóm đi qua nhiều closed split: 30.
 - Nhóm trộn nhãn nhị phân: 0.
-- Trong development manifest: 38 nhóm giữ nhiều file; 17 nhóm đi qua train/development.
+- Development manifest đối chiếu: `data/manifests/development_20k_v2.csv`; SHA-256 `f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728`.
+- Trong development manifest, khi đối chiếu các nhóm duplicate nguồn đã xác nhận: 0 nhóm giữ nhiều file; 0 nhóm đi qua train/development.
 
 ### Phân bố theo loại
 
@@ -96,7 +96,7 @@ Cảnh báo: 68 shard cục bộ có thể không đại diện cho toàn bộ s
 
 ## Quyết định sử dụng
 
-Có thể tiếp tục phát triển pipeline và thử nghiệm baseline nếu áp dụng các điều kiện sau:
+Không dùng trực tiếp snapshot nguồn cho kết quả khoa học. Có thể tiếp tục phát triển pipeline và thử nghiệm baseline bằng development manifest chỉ khi manifest đó vượt audit content hash độc lập, đồng thời áp dụng các điều kiện sau:
 
 - Resample mọi waveform về một sample rate được khai báo thống nhất trong pipeline.
 - Giữ train/dev/test tách biệt speaker.
