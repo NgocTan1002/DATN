@@ -451,7 +451,7 @@ Kết quả detector chỉ là công cụ hỗ trợ sàng lọc. Nó không ph�
 ## 13. Tài liệu liên quan
 
 - [Lộ trình hoàn chỉnh](../lo_trinh_hoan_chinh_do_an_deepfake_tieng_viet.md)
-- [Đề cương chi tiết](../de_cuong_phat_hien_giong_noi_deepfake_tieng_viet.md)
+- [Đề cương chi tiết](../baocao/De_cuong_DATN_Nguyen_Ngoc_Tan_cap_nhat.docx)
 - [Giao thức chia dữ liệu](split_protocol.md)
 - [Nhật ký quyết định](decisions.md)
 - [Báo cáo tạo split](../reports/split_summary.md)

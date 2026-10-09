@@ -14,25 +14,27 @@
 
 **Thời gian thực hiện chính thức:** 14 tuần, từ 28/09/2026 đến 03/01/2027.
 
-**Cập nhật lộ trình:** 25/09/2026.
+**Cập nhật lộ trình:** 08/10/2026.
 
 Đề tài không xây dựng mô hình nhận diện VC, AP hay replay. Trường `utt_type` chỉ dùng để thống kê dữ liệu và phân tích lỗi của bộ phân loại thật/giả. AASIST, fine-tune toàn bộ XLS-R và các bộ dữ liệu ngoài miền đều là phần tùy chọn.
 
 ## 2. Trạng thái hiện tại
 
-Các công việc chuẩn bị trước giai đoạn huấn luyện đã hoàn thành:
+Các công việc chuẩn bị và đường găng dữ liệu của development subset đã hoàn thành:
 
 - Đề cương đã được gửi và được đánh giá hoàn thành.
 - Audit metadata 220.963 mẫu và 1.141 người nói.
-- Xác minh 5 shard Parquet gồm 2.558 waveform.
+- Xác minh 68 shard Parquet gồm 34.782 waveform; kích thước, SHA-256, schema và metadata coverage đều đạt.
 - Tạo tám file split theo người nói với seed `2026`.
 - Chạy leakage checker, không phát hiện trùng người nói hoặc file giữa các tập học.
 - Khóa giao thức âm thanh mono 16 kHz, đoạn 4 giây.
-- Hoàn thiện phép tính EER và kiểm thử tự động.
-- Chạy audio smoke test; không phát hiện waveform rỗng, không hữu hạn hoặc im lặng hoàn toàn.
-- Toàn bộ 18 kiểm thử hiện có đã đạt.
+- Hoàn thiện phép tính EER, tiền xử lý amplitude, dataset loader và kiểm thử tự động.
+- Tạo `development-20k-v1` gồm 15.885 train và 4.115 development, 184 speaker, dùng 66 shard; không lặp file path hoặc speaker. Kiểm tra nội dung sau đó phát hiện 17 nhóm waveform trùng đi qua train/development, nên manifest v1 chưa đạt cổng dữ liệu khoa học.
+- Loader manifest đọc trực tiếp shard, trả waveform 64.000 mẫu và tạo batch tái lập với seed `2026`.
+- Baseline B0 LFCC + LCNN đã chạy xuyên suốt forward, loss, backward, optimizer, development và checkpoint restore trên CPU.
+- Toàn bộ 73 kiểm thử tại lần kiểm chứng mới nhất ngày 08/10/2026 đã đạt.
 
-**Bước tiếp theo:** xây dựng bộ nạp dữ liệu cho `closed_train/dev/test`, sau đó chạy mô hình cơ sở LFCC + LCNN trên tập nhỏ trước khi mở rộng dữ liệu.
+**Bước tiếp theo:** chốt cách loại waveform trùng, tạo manifest v2 theo quyết định mới và chạy lại toàn bộ cổng coverage/leakage nội dung. Sau khi manifest đạt mới benchmark loader và tối ưu layout/cache trước các pilot amplitude policy.
 
 ## 3. Sản phẩm bắt buộc
 
@@ -422,16 +424,16 @@ Không được bỏ:
 8. **Chương trình minh họa:** luồng suy luận và hướng dẫn sử dụng.
 9. **Kết luận:** trả lời hai câu hỏi nghiên cứu và nêu hướng phát triển.
 
-## 16. Công việc ưu tiên từ 25/09 đến 04/10/2026
+## 16. Công việc ưu tiên từ 08/10 đến 11/10/2026
 
-1. Tên đề tài đã chốt; tiếp tục xác nhận phạm vi nhị phân và ba cấu hình B0/X0/X1 với giảng viên.
-2. Chuyển cấu hình thí nghiệm chính sang `closed_train/dev/test`.
-3. Đo dung lượng năm shard và kiểm tra dung lượng ổ đĩa để chuẩn bị quyết định tải dữ liệu.
-4. Xây dựng dataset loader đọc audio Parquet và trả waveform mono 16 kHz dài 4 giây.
-5. Cài đặt lựa chọn chính sách biên độ thống nhất: none, peak hoặc RMS.
-6. Tạo cấu hình `lfcc_lcnn` và một smoke subset cân bằng thật/giả.
-7. Cài LFCC, tạo LCNN nhỏ, chạy forward/backward và lưu checkpoint thử nghiệm.
-8. Ghi lại thời gian chạy, RAM/VRAM và lỗi phát sinh để chuẩn bị mở rộng dữ liệu.
+1. Chốt quyết định xử lý waveform trùng; không sửa split hoặc manifest khóa trước khi được xác nhận.
+2. Tạo manifest v2 bằng script, loại một phía của mỗi nhóm trùng đã xác nhận và chạy lại coverage, quota, speaker/file/content leakage.
+3. Benchmark A/B loader split cũ và loader manifest hợp lệ trên cùng mẫu, seed và ít nhất ba lần lặp; ghi riêng thời gian khởi tạo, throughput, RAM và cache.
+4. Thử một thay đổi nhỏ về layout/cache; chỉ giữ nếu waveform, nhãn, speaker và crop tương đương với pipeline hiện tại; sau đó đo lại `num_workers=0/2`.
+5. Hoàn thiện đề xuất coverage audio cho `closed_test` mà không dùng test để chọn quy mô, phân bố, mô hình, threshold hoặc amplitude policy.
+6. Chốt môi trường tính toán khả thi trước khi chạy pilot dài và trước khi triển khai XLS-R.
+7. Đặc tả quy tắc chọn threshold trên closed development và phạm vi báo cáo ROC-AUC, macro-F1 trước khi cài thêm metric.
+8. Chỉ chạy ba pilot `none`, `peak`, `rms_dbfs` trên cùng manifest đã vượt cổng nội dung; chưa chọn policy nếu chưa có closed development EER.
 
 ## 17. Definition of Done
 

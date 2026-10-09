@@ -8,6 +8,7 @@ corpus size or protocol reported in the original VSASV paper.
 
 from __future__ import annotations
 
+import array
 import argparse
 import csv
 import hashlib
@@ -25,6 +26,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_METADATA = PROJECT_ROOT / "data" / "metadata" / "vsasv_metadata.csv"
 DEFAULT_PARQUET_DIR = PROJECT_ROOT / "data" / "raw" / "vsasv_parquet" / "data"
 DEFAULT_SPLIT_DIR = PROJECT_ROOT / "data" / "splits"
+DEFAULT_DEVELOPMENT_MANIFEST = (
+    PROJECT_ROOT / "data" / "manifests" / "development_20k_v1.csv"
+)
 DEFAULT_JSON_REPORT = PROJECT_ROOT / "reports" / "vsasv_snapshot_verification.json"
 DEFAULT_MARKDOWN_REPORT = PROJECT_ROOT / "reports" / "vsasv_snapshot_verification.md"
 
@@ -70,6 +74,14 @@ PATH_PATTERNS = {
 }
 
 
+def configure_duckdb(connection: Any) -> None:
+    """Bound DuckDB memory use while scanning waveform-heavy Parquet shards."""
+
+    connection.execute("SET threads = 1")
+    connection.execute("SET preserve_insertion_order = false")
+    connection.execute("SET memory_limit = '8GB'")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Xác minh snapshot VSASV công khai, Parquet cục bộ và các split."
@@ -77,6 +89,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--metadata", type=Path, default=DEFAULT_METADATA)
     parser.add_argument("--parquet-dir", type=Path, default=DEFAULT_PARQUET_DIR)
     parser.add_argument("--split-dir", type=Path, default=DEFAULT_SPLIT_DIR)
+    parser.add_argument(
+        "--development-manifest",
+        type=Path,
+        default=DEFAULT_DEVELOPMENT_MANIFEST,
+    )
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON_REPORT)
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MARKDOWN_REPORT)
     return parser.parse_args()
@@ -111,7 +128,7 @@ def numbered_stem(file_path: str) -> str | None:
     return match.group(1) if match else None
 
 
-def quantiles(values: Iterable[int]) -> dict[str, float | int]:
+def quantiles(values: Iterable[int | float]) -> dict[str, float | int]:
     ordered = sorted(values)
     if not ordered:
         return {"minimum": 0, "median": 0, "maximum": 0}
@@ -120,6 +137,166 @@ def quantiles(values: Iterable[int]) -> dict[str, float | int]:
         "median": statistics.median(ordered),
         "maximum": ordered[-1],
     }
+
+
+def summarize_duplicate_fingerprints(
+    fingerprint_records: dict[int, list[dict[str, str]]],
+) -> list[dict[str, Any]]:
+    """Describe fingerprint groups that contain more than one logical file."""
+
+    groups: list[dict[str, Any]] = []
+    for fingerprint, records in fingerprint_records.items():
+        members_by_file = {record["file"]: record for record in records}
+        if len(members_by_file) <= 1:
+            continue
+        members = [members_by_file[name] for name in sorted(members_by_file)]
+        speakers = sorted({member["speaker_id"] for member in members})
+        utt_types = sorted({member["utt_type"] for member in members})
+        closed_splits = sorted(
+            {member["closed_split"] for member in members if member["closed_split"]}
+        )
+        binary_labels = sorted(
+            {0 if member["utt_type"] == "bonafide" else 1 for member in members}
+        )
+        groups.append(
+            {
+                "fingerprint": f"{fingerprint:016x}",
+                "files": len(members),
+                "speakers": speakers,
+                "utt_types": utt_types,
+                "sample_rates": sorted(
+                    {
+                        int(member["sampling_rate"])
+                        for member in members
+                        if member["sampling_rate"].lstrip("-").isdigit()
+                    }
+                ),
+                "closed_splits": closed_splits,
+                "crosses_speakers": len(speakers) > 1,
+                "crosses_closed_splits": len(closed_splits) > 1,
+                "mixes_binary_labels": len(binary_labels) > 1,
+                "members": members,
+            }
+        )
+    return sorted(groups, key=lambda item: item["fingerprint"])
+
+
+def waveform_sha256(values: Iterable[float], sampling_rate: int) -> str:
+    """Hash a waveform and its sample rate using a stable little-endian encoding."""
+
+    samples = array.array("d", values)
+    if sys.byteorder != "little":
+        samples.byteswap()
+    digest = hashlib.sha256()
+    digest.update(int(sampling_rate).to_bytes(8, "little", signed=True))
+    digest.update(samples.tobytes())
+    return digest.hexdigest()
+
+
+def confirm_duplicate_fingerprints(
+    connection: Any,
+    parquet_dir: Path,
+    duplicate_groups: list[dict[str, Any]],
+) -> None:
+    """Confirm 64-bit fingerprint candidates with waveform SHA-256."""
+
+    candidates_by_shard: dict[str, list[str]] = defaultdict(list)
+    for group in duplicate_groups:
+        for member in group["members"]:
+            candidates_by_shard[member["shard"]].append(member["file"])
+
+    sha_by_file: dict[str, str] = {}
+    for shard_name, file_names in sorted(candidates_by_shard.items()):
+        parquet_file = (parquet_dir / shard_name).resolve().as_posix()
+        rows = connection.execute(
+            """
+            SELECT file, audio.sampling_rate, audio.array
+            FROM read_parquet(?)
+            WHERE file IN (SELECT * FROM UNNEST(?))
+            """,
+            [parquet_file, sorted(set(file_names))],
+        ).fetchall()
+        for file_name, sampling_rate, waveform in rows:
+            sha_by_file[str(file_name)] = waveform_sha256(
+                waveform or [], int(sampling_rate or 0)
+            )
+
+    for group in duplicate_groups:
+        hashes = set()
+        for member in group["members"]:
+            member_sha = sha_by_file.get(member["file"], "")
+            member["waveform_sha256"] = member_sha
+            if member_sha:
+                hashes.add(member_sha)
+        recorded_hashes = {
+            member["waveform_sha256"] for member in group["members"]
+        }
+        group["cryptographically_confirmed"] = (
+            len(hashes) == 1 and len(hashes) == len(recorded_hashes)
+        )
+        group["waveform_sha256"] = next(iter(hashes)) if len(hashes) == 1 else ""
+
+
+def summarize_manifest_duplicate_groups(
+    duplicate_groups: list[dict[str, Any]],
+    manifest_membership: dict[str, str],
+) -> dict[str, int]:
+    """Count confirmed duplicate groups retained by a development manifest."""
+
+    groups_with_multiple_members = 0
+    groups_crossing_splits = 0
+    files_in_duplicate_groups = 0
+    for group in duplicate_groups:
+        if not group.get("cryptographically_confirmed", False):
+            continue
+        members = [
+            member
+            for member in group["members"]
+            if member["file"] in manifest_membership
+        ]
+        if len(members) <= 1:
+            continue
+        groups_with_multiple_members += 1
+        files_in_duplicate_groups += len(members)
+        manifest_splits = {
+            manifest_membership[member["file"]] for member in members
+        }
+        if len(manifest_splits) > 1:
+            groups_crossing_splits += 1
+    return {
+        "groups_with_multiple_members": groups_with_multiple_members,
+        "groups_crossing_splits": groups_crossing_splits,
+        "files_in_duplicate_groups": files_in_duplicate_groups,
+    }
+
+
+def verify_development_manifest_duplicates(
+    manifest_path: Path,
+    duplicate_groups: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Compare confirmed waveform duplicates with one development manifest."""
+
+    result: dict[str, Any] = {
+        "path": display_path(manifest_path),
+        "available": manifest_path.is_file(),
+        "sha256": "",
+        "groups_with_multiple_members": 0,
+        "groups_crossing_splits": 0,
+        "files_in_duplicate_groups": 0,
+    }
+    if not manifest_path.is_file():
+        return result
+
+    membership: dict[str, str] = {}
+    with manifest_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            file_name = (row.get("file") or "").strip()
+            split_name = (row.get("split") or "").strip()
+            if file_name:
+                membership[file_name] = split_name
+    result.update(summarize_manifest_duplicate_groups(duplicate_groups, membership))
+    result["sha256"] = sha256_file(manifest_path)
+    return result
 
 
 def verify_metadata(path: Path) -> tuple[dict[str, Any], list[dict[str, str]]]:
@@ -330,7 +507,7 @@ def verify_metadata(path: Path) -> tuple[dict[str, Any], list[dict[str, str]]]:
 
 
 def verify_parquet(
-    parquet_dir: Path, metadata_path: Path
+    parquet_dir: Path, metadata_path: Path, split_dir: Path | None = None
 ) -> dict[str, Any]:
     parquet_files = sorted(parquet_dir.glob("*.parquet")) if parquet_dir.is_dir() else []
     base: dict[str, Any] = {
@@ -363,133 +540,190 @@ def verify_parquet(
         )
         return base
 
-    parquet_glob = (parquet_dir / "*.parquet").resolve().as_posix()
-    metadata_csv = metadata_path.resolve().as_posix()
-    connection = duckdb.connect()
+    metadata_index: dict[str, tuple[str, str]] = {}
+    with metadata_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for raw_row in csv.DictReader(handle):
+            row = normalize_row(raw_row)
+            metadata_index[row["file"]] = (row["label"], row["utt_type"])
 
-    schema_rows = connection.execute(
-        "DESCRIBE SELECT * FROM read_parquet(?)", [parquet_glob]
-    ).fetchall()
-    schema = {row[0]: row[1] for row in schema_rows}
-    total_rows = connection.execute(
-        "SELECT COUNT(*) FROM read_parquet(?)", [parquet_glob]
-    ).fetchone()[0]
-    unique_files = connection.execute(
-        "SELECT COUNT(DISTINCT file) FROM read_parquet(?)", [parquet_glob]
-    ).fetchone()[0]
-    type_counts = dict(
-        connection.execute(
-            "SELECT utt_type, COUNT(*) FROM read_parquet(?) GROUP BY 1 ORDER BY 1",
-            [parquet_glob],
-        ).fetchall()
-    )
-    missing_values = connection.execute(
-        """
-        SELECT
-            SUM(file IS NULL OR file = '')::BIGINT,
-            SUM(label IS NULL OR label = '')::BIGINT,
-            SUM(utt_type IS NULL OR utt_type = '')::BIGINT,
-            SUM(audio.array IS NULL)::BIGINT,
-            SUM(audio.sampling_rate IS NULL)::BIGINT,
-            SUM(array_length(audio.array) = 0)::BIGINT,
-            SUM(audio.sampling_rate <= 0)::BIGINT
-        FROM read_parquet(?)
-        """,
-        [parquet_glob],
-    ).fetchone()
-    sample_rates = [
-        {"utt_type": row[0], "sampling_rate": row[1], "samples": row[2]}
-        for row in connection.execute(
-            """
-            SELECT utt_type, audio.sampling_rate, COUNT(*)
-            FROM read_parquet(?)
-            GROUP BY 1, 2 ORDER BY 1, 2
-            """,
-            [parquet_glob],
-        ).fetchall()
-    ]
-    durations = [
-        {
-            "utt_type": row[0],
-            "minimum_seconds": round(row[1], 6),
-            "median_seconds": round(row[2], 6),
-            "maximum_seconds": round(row[3], 6),
-            "mean_seconds": round(row[4], 6),
-            "total_hours": round(row[5], 6),
-        }
-        for row in connection.execute(
-            """
-            SELECT
+    closed_split_membership: dict[str, str] = {}
+    if split_dir is not None:
+        for split_name in ("closed_train", "closed_dev", "closed_test"):
+            split_path = split_dir / f"{split_name}.csv"
+            if not split_path.is_file():
+                continue
+            with split_path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for raw_row in csv.DictReader(handle):
+                    file_name = (raw_row.get("file") or "").strip()
+                    if file_name:
+                        closed_split_membership[file_name] = split_name
+
+    connection = duckdb.connect()
+    configure_duckdb(connection)
+    schema: dict[str, str] = {}
+    schema_mismatches: list[str] = []
+    total_rows = 0
+    file_counts: Counter[str] = Counter()
+    type_counts: Counter[str] = Counter()
+    missing_counts: Counter[str] = Counter()
+    sample_rate_counts: Counter[tuple[str, int]] = Counter()
+    durations_by_type: dict[str, list[float]] = defaultdict(list)
+    shard_distribution: list[dict[str, Any]] = []
+    fingerprint_records: dict[int, list[dict[str, str]]] = defaultdict(list)
+    metadata_exact_matches = 0
+    files_missing_from_metadata = 0
+    label_or_type_mismatches = 0
+
+    try:
+        for parquet_path in parquet_files:
+            parquet_file = parquet_path.resolve().as_posix()
+            current_schema = {
+                row[0]: row[1]
+                for row in connection.execute(
+                    "DESCRIBE SELECT * FROM read_parquet(?)", [parquet_file]
+                ).fetchall()
+            }
+            if not schema:
+                schema = current_schema
+            if current_schema != EXPECTED_PARQUET_COLUMNS:
+                schema_mismatches.append(parquet_path.name)
+
+            shard_type_counts: Counter[str] = Counter()
+            rows = connection.execute(
+                """
+                SELECT file, label, utt_type, audio.array IS NULL,
+                       audio.sampling_rate, array_length(audio.array),
+                       hash(audio.array)
+                FROM read_parquet(?)
+                """,
+                [parquet_file],
+            ).fetchall()
+            total_rows += len(rows)
+            for (
+                file_name,
+                label,
                 utt_type,
-                MIN(array_length(audio.array) * 1.0 / audio.sampling_rate),
-                MEDIAN(array_length(audio.array) * 1.0 / audio.sampling_rate),
-                MAX(array_length(audio.array) * 1.0 / audio.sampling_rate),
-                AVG(array_length(audio.array) * 1.0 / audio.sampling_rate),
-                SUM(array_length(audio.array) * 1.0 / audio.sampling_rate) / 3600.0
-            FROM read_parquet(?)
-            GROUP BY 1 ORDER BY 1
-            """,
-            [parquet_glob],
-        ).fetchall()
+                missing_audio,
+                sampling_rate,
+                sample_count,
+                audio_fingerprint,
+            ) in rows:
+                file_value = str(file_name or "")
+                label_value = str(label or "")
+                utt_type_value = str(utt_type or "")
+                file_counts[file_value] += 1
+                type_counts[utt_type_value] += 1
+                shard_type_counts[utt_type_value] += 1
+
+                if not file_value:
+                    missing_counts["file"] += 1
+                if not label_value:
+                    missing_counts["label"] += 1
+                if not utt_type_value:
+                    missing_counts["utt_type"] += 1
+                if missing_audio:
+                    missing_counts["audio_array"] += 1
+                if sampling_rate is None:
+                    missing_counts["sampling_rate"] += 1
+                elif sampling_rate <= 0:
+                    missing_counts["nonpositive_sampling_rate"] += 1
+                if sample_count == 0:
+                    missing_counts["empty_audio_array"] += 1
+
+                metadata_row = metadata_index.get(file_value)
+                if metadata_row is None:
+                    files_missing_from_metadata += 1
+                elif metadata_row == (label_value, utt_type_value):
+                    metadata_exact_matches += 1
+                else:
+                    label_or_type_mismatches += 1
+
+                if sampling_rate is not None:
+                    sample_rate_counts[(utt_type_value, int(sampling_rate))] += 1
+                if (
+                    sampling_rate is not None
+                    and sampling_rate > 0
+                    and sample_count is not None
+                ):
+                    durations_by_type[utt_type_value].append(
+                        sample_count / sampling_rate
+                    )
+                if audio_fingerprint is not None and file_value:
+                    fingerprint_records[int(audio_fingerprint)].append(
+                        {
+                            "file": file_value,
+                            "speaker_id": label_value,
+                            "utt_type": utt_type_value,
+                            "sampling_rate": str(sampling_rate),
+                            "shard": parquet_path.name,
+                            "closed_split": closed_split_membership.get(
+                                file_value, ""
+                            ),
+                        }
+                    )
+
+            for utt_type_value, count in sorted(shard_type_counts.items()):
+                shard_distribution.append(
+                    {
+                        "shard": parquet_path.name,
+                        "utt_type": utt_type_value,
+                        "samples": count,
+                    }
+                )
+    finally:
+        connection.close()
+
+    unique_files = len(file_counts)
+    missing_values = (
+        missing_counts["file"],
+        missing_counts["label"],
+        missing_counts["utt_type"],
+        missing_counts["audio_array"],
+        missing_counts["sampling_rate"],
+        missing_counts["empty_audio_array"],
+        missing_counts["nonpositive_sampling_rate"],
+    )
+    sample_rates = [
+        {"utt_type": key[0], "sampling_rate": key[1], "samples": count}
+        for key, count in sorted(sample_rate_counts.items())
     ]
-    shard_distribution = [
-        {
-            "shard": Path(row[0]).name,
-            "utt_type": row[1],
-            "samples": row[2],
-        }
-        for row in connection.execute(
-            """
-            SELECT filename, utt_type, COUNT(*)
-            FROM read_parquet(?, filename = true)
-            GROUP BY 1, 2 ORDER BY 1, 2
-            """,
-            [parquet_glob],
-        ).fetchall()
-    ]
-    match = connection.execute(
-        """
-        WITH parquet_rows AS (
-            SELECT file, label, utt_type FROM read_parquet(?)
-        ), metadata_rows AS (
-            SELECT * FROM read_csv(
-                ?, header = true,
-                columns = {'file': 'VARCHAR', 'label': 'VARCHAR', 'utt_type': 'VARCHAR'}
+    durations = []
+    for utt_type_value, values in sorted(durations_by_type.items()):
+        summary = quantiles(values)
+        durations.append(
+            {
+                "utt_type": utt_type_value,
+                "minimum_seconds": round(float(summary["minimum"]), 6),
+                "median_seconds": round(float(summary["median"]), 6),
+                "maximum_seconds": round(float(summary["maximum"]), 6),
+                "mean_seconds": round(sum(values) / len(values), 6),
+                "total_hours": round(sum(values) / 3600.0, 6),
+            }
+        )
+    duplicate_groups = summarize_duplicate_fingerprints(fingerprint_records)
+    if duplicate_groups:
+        confirmation_connection = duckdb.connect()
+        configure_duckdb(confirmation_connection)
+        try:
+            confirm_duplicate_fingerprints(
+                confirmation_connection, parquet_dir, duplicate_groups
             )
-        )
-        SELECT
-            (SELECT COUNT(*) FROM parquet_rows),
-            (SELECT COUNT(*) FROM parquet_rows JOIN metadata_rows USING(file, label, utt_type)),
-            (SELECT COUNT(*) FROM parquet_rows LEFT JOIN metadata_rows USING(file)
-                WHERE metadata_rows.file IS NULL),
-            (SELECT COUNT(*) FROM parquet_rows JOIN metadata_rows USING(file)
-                WHERE parquet_rows.label <> metadata_rows.label
-                   OR parquet_rows.utt_type <> metadata_rows.utt_type)
-        """,
-        [parquet_glob, metadata_csv],
-    ).fetchone()
-    duplicate_fingerprints = connection.execute(
-        """
-        SELECT COUNT(*) FROM (
-            SELECT hash(audio.array) AS audio_fingerprint
-            FROM read_parquet(?)
-            GROUP BY 1
-            HAVING COUNT(DISTINCT file) > 1
-        )
-        """,
-        [parquet_glob],
-    ).fetchone()[0]
-    connection.close()
+        finally:
+            confirmation_connection.close()
+    duplicate_fingerprints = len(duplicate_groups)
+    confirmed_duplicate_groups = sum(
+        item["cryptographically_confirmed"] for item in duplicate_groups
+    )
 
     base.update(
         {
             "schema": schema,
             "rows": total_rows,
             "unique_files": unique_files,
-            "metadata_exact_matches": match[1],
-            "files_missing_from_metadata": match[2],
-            "label_or_type_mismatches": match[3],
-            "utt_type_counts": type_counts,
+            "metadata_exact_matches": metadata_exact_matches,
+            "files_missing_from_metadata": files_missing_from_metadata,
+            "label_or_type_mismatches": label_or_type_mismatches,
+            "utt_type_counts": dict(type_counts),
             "missing_or_invalid_audio": {
                 "file": missing_values[0],
                 "label": missing_values[1],
@@ -503,6 +737,20 @@ def verify_parquet(
             "duration_by_type": durations,
             "shard_distribution": shard_distribution,
             "duplicate_audio_fingerprint_groups": duplicate_fingerprints,
+            "cryptographically_confirmed_duplicate_groups": confirmed_duplicate_groups,
+            "duplicate_audio_fingerprint_files": sum(
+                item["files"] for item in duplicate_groups
+            ),
+            "duplicate_groups_crossing_speakers": sum(
+                item["crosses_speakers"] for item in duplicate_groups
+            ),
+            "duplicate_groups_crossing_closed_splits": sum(
+                item["crosses_closed_splits"] for item in duplicate_groups
+            ),
+            "duplicate_groups_mixing_binary_labels": sum(
+                item["mixes_binary_labels"] for item in duplicate_groups
+            ),
+            "duplicate_audio_fingerprint_details": duplicate_groups,
             "fingerprint_method": (
                 "DuckDB 64-bit hash(audio.array); useful as a duplicate screen, "
                 "not a cryptographic identity proof."
@@ -510,19 +758,33 @@ def verify_parquet(
         }
     )
 
-    if schema != EXPECTED_PARQUET_COLUMNS:
-        base["hard_issues"].append("Schema Parquet không khớp dataset card cục bộ.")
+    if schema_mismatches:
+        base["hard_issues"].append(
+            "Schema Parquet không khớp dataset card cục bộ trong "
+            f"{len(schema_mismatches)} shard."
+        )
     if unique_files != total_rows:
         base["hard_issues"].append("Parquet cục bộ có đường dẫn logic bị lặp.")
-    if match[1] != total_rows or match[2] or match[3]:
+    if (
+        metadata_exact_matches != total_rows
+        or files_missing_from_metadata
+        or label_or_type_mismatches
+    ):
         base["hard_issues"].append("Parquet cục bộ không khớp metadata CSV.")
     if any(missing_values):
         base["hard_issues"].append("Parquet có trường bắt buộc hoặc audio không hợp lệ.")
-    if duplicate_fingerprints:
-        base["hard_issues"].append("Phát hiện fingerprint audio lặp giữa nhiều file.")
+    if confirmed_duplicate_groups:
+        base["hard_issues"].append(
+            "Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256."
+        )
+    elif duplicate_fingerprints:
+        base["warnings"].append(
+            "Có ứng viên fingerprint 64-bit trùng nhưng SHA-256 không xác nhận waveform trùng."
+        )
     if len({item["sampling_rate"] for item in sample_rates}) > 1:
         base["warnings"].append(
-            "Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện."
+            f"Các loại audio trong {len(parquet_files)} shard có sample rate không "
+            "đồng nhất; phải resample nhất quán trước huấn luyện."
         )
     if len(parquet_files) < 432:
         base["warnings"].append(
@@ -581,7 +843,21 @@ def verify_splits(split_dir: Path, metadata_path: Path) -> dict[str, Any]:
 
 def build_report(args: argparse.Namespace) -> dict[str, Any]:
     metadata, _ = verify_metadata(args.metadata.resolve())
-    parquet = verify_parquet(args.parquet_dir.resolve(), args.metadata.resolve())
+    parquet = verify_parquet(
+        args.parquet_dir.resolve(),
+        args.metadata.resolve(),
+        args.split_dir.resolve(),
+    )
+    manifest_duplicates = verify_development_manifest_duplicates(
+        args.development_manifest.resolve(),
+        parquet.get("duplicate_audio_fingerprint_details", []),
+    )
+    parquet["development_manifest_duplicates"] = manifest_duplicates
+    if manifest_duplicates["groups_crossing_splits"]:
+        parquet["hard_issues"].append(
+            "Development manifest có waveform trùng đi qua train và development."
+        )
+        parquet["technical_passed"] = False
     splits = verify_splits(args.split_dir.resolve(), args.metadata.resolve())
     technical_passed = all(
         section["technical_passed"] for section in (metadata, parquet, splits)
@@ -595,7 +871,8 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
         "scientific_equivalence_to_official_paper": False,
         "scope": (
             "VSASV Hugging Face public snapshot represented by the local metadata, "
-            "five local Parquet shards, and the custom project splits."
+            f"{parquet['local_shards']} local Parquet shards, and the custom "
+            "project splits."
         ),
         "warnings": warnings,
         "metadata": metadata,
@@ -632,7 +909,26 @@ def render_markdown(report: dict[str, Any]) -> str:
     parquet = report["parquet"]
     splits = report["splits"]
     vc_ap = metadata["vc_ap_relationship"]
+    local_shards = parquet["local_shards"]
+    local_rows = parquet.get("rows", 0)
     status = "ĐẠT" if report["technical_consistency_passed"] else "KHÔNG ĐẠT"
+    hard_issues = [
+        *metadata.get("hard_issues", []),
+        *parquet.get("hard_issues", []),
+        *splits.get("hard_issues", []),
+    ]
+    executive_summary = (
+        f"Metadata, {local_shards} Parquet cục bộ và tám split đã vượt các kiểm tra "
+        "kỹ thuật đã chạy. Không tìm thấy bằng chứng về lỗi join làm nhân đôi VC "
+        "thành AP. Snapshot công khai vẫn khác đáng kể so với thống kê bài báo gốc "
+        "nên chỉ được dùng như một giao thức tùy chỉnh, có phiên bản và giới hạn rõ ràng."
+        if report["technical_consistency_passed"]
+        else (
+            "Schema, metadata và định danh speaker/file của các split vẫn nhất quán, "
+            "nhưng kiểm tra nội dung waveform phát hiện hard issue. Chưa dùng snapshot "
+            "hoặc development manifest cho kết quả khoa học trước khi xử lý các mục dưới đây."
+        )
+    )
     lines = [
         "# Báo cáo xác minh snapshot VSASV công khai",
         "",
@@ -644,27 +940,30 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## Kết luận điều hành",
         "",
-        (
-            "Metadata, năm Parquet cục bộ và tám split hiện có nhất quán với nhau ở các "
-            "kiểm tra đã chạy. Không tìm thấy bằng chứng về lỗi join làm nhân đôi VC thành AP. "
-            "Tuy nhiên, snapshot công khai khác đáng kể so với thống kê bài báo gốc nên chỉ "
-            "được dùng như một giao thức tùy chỉnh, có phiên bản và có giới hạn rõ ràng."
-        ),
+        executive_summary,
         "",
-        "## Metadata công khai",
-        "",
-        f"- File: `{metadata['path']}`",
-        f"- SHA-256: `{metadata['sha256']}`",
-        f"- Tổng dòng: {metadata['integrity']['rows']:,}",
-        f"- File logic duy nhất: {metadata['integrity']['unique_files']:,}",
-        f"- Speaker: {metadata['distribution']['speakers']:,}",
-        "- Giá trị thiếu, dòng/file trùng, sai prefix speaker và sai quy tắc tên: 0",
-        "",
-        "### Đối chiếu với bài báo",
-        "",
-        "| Loại | Snapshot công khai | Bài báo | Chênh lệch | Snapshot/Bài báo |",
-        "|---|---:|---:|---:|---:|",
     ]
+    if hard_issues:
+        lines.extend(["### Hard issue", ""])
+        lines.extend(f"- {issue}" for issue in hard_issues)
+        lines.append("")
+    lines.extend(
+        [
+            "## Metadata công khai",
+            "",
+            f"- File: `{metadata['path']}`",
+            f"- SHA-256: `{metadata['sha256']}`",
+            f"- Tổng dòng: {metadata['integrity']['rows']:,}",
+            f"- File logic duy nhất: {metadata['integrity']['unique_files']:,}",
+            f"- Speaker: {metadata['distribution']['speakers']:,}",
+            "- Giá trị thiếu, dòng/file trùng, sai prefix speaker và sai quy tắc tên: 0",
+            "",
+            "### Đối chiếu với bài báo",
+            "",
+            "| Loại | Snapshot công khai | Bài báo | Chênh lệch | Snapshot/Bài báo |",
+            "|---|---:|---:|---:|---:|",
+        ]
+    )
     display_names = {
         "bonafide": "Bona fide",
         "voice_conversion": "VC",
@@ -701,13 +1000,24 @@ def render_markdown(report: dict[str, Any]) -> str:
                 "nhưng không chứng minh VC và AP là cùng file hoặc do script join sai."
             ),
             "",
-            "## Năm Parquet cục bộ",
+            f"## Parquet cục bộ ({local_shards} shard)",
             "",
-            f"- Shard: {parquet['local_shards']}/432 ({parquet['coverage_by_shard_count_percent']:.2f}% theo số shard).",
-            f"- Tổng hàng: {parquet.get('rows', 0):,}.",
-            f"- Khớp metadata chính xác: {parquet.get('metadata_exact_matches', 0):,}/{parquet.get('rows', 0):,}.",
+            f"- Shard: {local_shards}/432 ({parquet['coverage_by_shard_count_percent']:.2f}% theo số shard).",
+            f"- Tổng hàng: {local_rows:,}.",
+            f"- Khớp metadata chính xác: {parquet.get('metadata_exact_matches', 0):,}/{local_rows:,}.",
             f"- File/audio rỗng hoặc sample rate không hợp lệ: {sum(parquet.get('missing_or_invalid_audio', {}).values()):,}.",
             f"- Nhóm fingerprint audio lặp: {parquet.get('duplicate_audio_fingerprint_groups', 0):,}.",
+            f"- Nhóm waveform lặp đã xác nhận bằng SHA-256: {parquet.get('cryptographically_confirmed_duplicate_groups', 0):,}.",
+            f"- Nhóm đi qua nhiều speaker: {parquet.get('duplicate_groups_crossing_speakers', 0):,}.",
+            f"- Nhóm đi qua nhiều closed split: {parquet.get('duplicate_groups_crossing_closed_splits', 0):,}.",
+            f"- Nhóm trộn nhãn nhị phân: {parquet.get('duplicate_groups_mixing_binary_labels', 0):,}.",
+            (
+                "- Trong development manifest: "
+                f"{parquet.get('development_manifest_duplicates', {}).get('groups_with_multiple_members', 0):,} "
+                "nhóm giữ nhiều file; "
+                f"{parquet.get('development_manifest_duplicates', {}).get('groups_crossing_splits', 0):,} "
+                "nhóm đi qua train/development."
+            ),
             "",
             "### Phân bố theo loại",
             "",
@@ -735,16 +1045,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         [
             "",
             (
-                "Cảnh báo: 188 VC trong phần đã tải đều là 40 kHz, trong khi các mẫu cục bộ "
-                "còn lại là 16 kHz. Vì năm shard được chọn theo vị trí chứ không ngẫu nhiên, "
-                "không được suy rộng tỷ lệ này cho toàn bộ snapshot. Pipeline phải resample "
-                "mọi waveform về cùng một sample rate."
+                f"Cảnh báo: {local_shards} shard cục bộ có thể không đại diện cho toàn bộ "
+                "snapshot. Các sample rate quan sát được được liệt kê ở bảng trên; pipeline "
+                "phải resample mọi waveform về cùng một sample rate."
             ),
             "",
             "## Tám split",
             "",
             f"- Trạng thái kiểm tra schema, coverage, file và speaker leakage: {'ĐẠT' if splits['technical_passed'] else 'KHÔNG ĐẠT'}.",
-            "- Kiểm tra hash audio toàn bộ split: chưa thể chạy vì mới có 5/432 shard.",
+            (
+                f"- Kiểm tra fingerprint audio đã chạy trên toàn bộ {local_rows:,} file "
+                f"cục bộ; chưa bao phủ toàn bộ snapshot vì hiện có {local_shards}/432 shard."
+            ),
             "- Đây là custom speaker-disjoint protocol của đồ án, không phải official split của bài báo.",
             "",
             "## Cảnh báo và giới hạn",
@@ -755,7 +1067,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.append(f"- {warning}")
     lines.extend(
         [
-            "- Kiểm tra fingerprint audio chỉ bao phủ 2.558 file trong năm shard cục bộ.",
+            (
+                f"- Kiểm tra fingerprint audio chỉ bao phủ {local_rows:,} file trong "
+                f"{local_shards} shard cục bộ."
+            ),
             "- Metadata không có `generator_id`, `source_corpus`, `official_split` hoặc định danh câu nguồn.",
             "- Không thể tự chứng minh nguyên nhân tác giả tạo số VC/AP bằng nhau chỉ từ ba cột metadata.",
             "- Replay công khai quá nhỏ để đại diện đầy đủ cho replay trong bài báo.",

@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất các cổng dữ liệu trước baseline: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker đạt, audio smoke test trên năm shard đạt, metric EER đã có unit test và dataset loader đã tạo được batch cố định từ Parquet. Amplitude audit đã chạy đủ 2.558 mẫu cục bộ cho cả ba policy `none`, `peak`, `rms_dbfs`; smoke subset 448 mẫu đã cân bằng nhãn, tách biệt speaker và tái lập bằng seed `2026`. Baseline B0 tối thiểu đã chạy xuyên suốt từ waveform qua LFCC, LCNN, loss, backward, optimizer và checkpoint trên CPU. Pilot kỹ thuật một epoch đạt 32 bước train, checkpoint khôi phục chính xác và toàn bộ 52 kiểm thử đạt ngày 04/10/2026. Policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development trong ablation tuần 4.
+Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Kiểm tra nội dung mới phát hiện 91 nhóm waveform bonafide trùng; 30 nhóm đi qua closed split. Development manifest `development-20k-v1` có 15.885 mẫu train và 4.115 mẫu development, nhưng giữ 17 nhóm waveform trùng đi qua train/development nên chưa được dùng cho kết quả khoa học trước khi có phiên bản xử lý mới. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 08/10/2026 có 73/73 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development sau khi xử lý blocker dữ liệu.
 
 ## Phạm vi phiên bản đầu
 
@@ -248,5 +248,5 @@ docs/                    Nhật ký quyết định và thí nghiệm
 
 Tài liệu nền:
 
-- [Đề cương cập nhật](De_cuong_DATN_Nguyen_Ngoc_Tan_cap_nhat.docx)
+- [Đề cương cập nhật](baocao/De_cuong_DATN_Nguyen_Ngoc_Tan_cap_nhat.docx)
 - [Lộ trình hoàn chỉnh](lo_trinh_hoan_chinh_do_an_deepfake_tieng_viet.md)

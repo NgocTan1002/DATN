@@ -3,6 +3,8 @@ from __future__ import annotations
 import random
 import unittest
 
+import torch
+
 from src.data import fixed_length_segment
 
 
@@ -31,6 +33,34 @@ class FixedLengthSegmentTests(unittest.TestCase):
             list(range(20)), 5, training=True, rng=random.Random(2026)
         )
         self.assertEqual(first, second)
+
+    def test_tensor_short_waveform_is_repeated_then_trimmed(self) -> None:
+        waveform = torch.tensor([1.0, 2.0, 3.0])
+
+        segment = fixed_length_segment(waveform, 8, training=False)
+
+        self.assertIsInstance(segment, torch.Tensor)
+        self.assertTrue(
+            torch.equal(segment, torch.tensor([1.0, 2.0, 3.0, 1.0, 2.0, 3.0, 1.0, 2.0]))
+        )
+
+    def test_tensor_training_crop_uses_torch_generator(self) -> None:
+        waveform = torch.arange(20)
+
+        first = fixed_length_segment(
+            waveform,
+            5,
+            training=True,
+            rng=torch.Generator().manual_seed(2026),
+        )
+        second = fixed_length_segment(
+            waveform,
+            5,
+            training=True,
+            rng=torch.Generator().manual_seed(2026),
+        )
+
+        self.assertTrue(torch.equal(first, second))
 
     def test_invalid_input_is_rejected(self) -> None:
         with self.assertRaises(ValueError):

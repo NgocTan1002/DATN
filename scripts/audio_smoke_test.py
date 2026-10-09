@@ -7,7 +7,7 @@ import argparse
 import json
 import math
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -24,6 +24,31 @@ EXPECTED_COLUMNS = {
     "utt_type": "VARCHAR",
 }
 TARGET_SAMPLE_RATE = 16_000
+
+
+def configure_duckdb(connection: Any) -> None:
+    """Bound DuckDB memory use while scanning waveform-heavy Parquet shards."""
+
+    connection.execute("SET threads = 1")
+    connection.execute("SET preserve_insertion_order = false")
+    connection.execute("SET memory_limit = '8GB'")
+
+
+def percentile_cont(values: list[float], quantile: float) -> float:
+    """Return a linearly interpolated continuous percentile."""
+
+    if not values:
+        raise ValueError("Không thể tính phân vị từ danh sách rỗng.")
+    if not 0.0 <= quantile <= 1.0:
+        raise ValueError("quantile phải thuộc khoảng [0, 1].")
+    ordered = sorted(values)
+    position = (len(ordered) - 1) * quantile
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] + (ordered[upper] - ordered[lower]) * fraction
 
 
 def parse_args() -> argparse.Namespace:
@@ -102,124 +127,155 @@ def run_smoke_test(parquet_dir: Path, samples_per_shard: int) -> dict[str, Any]:
             "Thiếu DuckDB. Chạy: python -m pip install duckdb"
         ) from error
 
-    parquet_glob = (parquet_dir / "*.parquet").resolve().as_posix()
     connection = duckdb.connect()
-    schema_rows = connection.execute(
-        "DESCRIBE SELECT * FROM read_parquet(?)", [parquet_glob]
-    ).fetchall()
-    schema = {row[0]: row[1] for row in schema_rows}
+    configure_duckdb(connection)
+    schema: dict[str, str] = {}
+    schema_mismatches: list[str] = []
+    total_rows = 0
+    unique_files: set[str] = set()
+    speakers: set[str] = set()
+    missing_counts = Counter[str]()
+    distribution_counts: Counter[tuple[str, int]] = Counter()
+    durations_by_type: dict[str, list[float]] = defaultdict(list)
+    shard_rows: list[dict[str, Any]] = []
+    sample_checks: list[dict[str, Any]] = []
 
-    overall = connection.execute(
-        """
-        SELECT
-            COUNT(*)::BIGINT,
-            COUNT(DISTINCT file)::BIGINT,
-            COUNT(DISTINCT label)::BIGINT,
-            SUM(file IS NULL OR file = '')::BIGINT,
-            SUM(label IS NULL OR label = '')::BIGINT,
-            SUM(utt_type IS NULL OR utt_type = '')::BIGINT,
-            SUM(audio.array IS NULL)::BIGINT,
-            SUM(audio.sampling_rate IS NULL OR audio.sampling_rate <= 0)::BIGINT,
-            SUM(array_length(audio.array) = 0)::BIGINT
-        FROM read_parquet(?)
-        """,
-        [parquet_glob],
-    ).fetchone()
+    try:
+        for parquet_path in parquet_files:
+            parquet_file = parquet_path.resolve().as_posix()
+            current_schema = {
+                row[0]: row[1]
+                for row in connection.execute(
+                    "DESCRIBE SELECT * FROM read_parquet(?)", [parquet_file]
+                ).fetchall()
+            }
+            if not schema:
+                schema = current_schema
+            if current_schema != EXPECTED_COLUMNS:
+                schema_mismatches.append(parquet_path.name)
 
+            scalar_rows = connection.execute(
+                """
+                SELECT file, label, utt_type, audio.sampling_rate,
+                       audio.array IS NULL, array_length(audio.array)
+                FROM read_parquet(?)
+                """,
+                [parquet_file],
+            ).fetchall()
+            total_rows += len(scalar_rows)
+            shard_seconds = 0.0
+            for (
+                file_name,
+                label,
+                utt_type,
+                sampling_rate,
+                missing_waveform,
+                sample_count,
+            ) in scalar_rows:
+                if file_name is None or file_name == "":
+                    missing_counts["file"] += 1
+                else:
+                    unique_files.add(str(file_name))
+                if label is None or label == "":
+                    missing_counts["label"] += 1
+                else:
+                    speakers.add(str(label))
+                if utt_type is None or utt_type == "":
+                    missing_counts["utt_type"] += 1
+                if missing_waveform:
+                    missing_counts["waveform"] += 1
+                if sample_count == 0:
+                    missing_counts["empty_waveform"] += 1
+                if sampling_rate is None or sampling_rate <= 0:
+                    missing_counts["sampling_rate"] += 1
+                    continue
+                distribution_counts[(str(utt_type), int(sampling_rate))] += 1
+                if sample_count is not None:
+                    seconds = sample_count / sampling_rate
+                    durations_by_type[str(utt_type)].append(seconds)
+                    shard_seconds += seconds
+
+            shard_rows.append(
+                {
+                    "shard": parquet_path.name,
+                    "utterances": len(scalar_rows),
+                    "total_hours": round(shard_seconds / 3600.0, 6),
+                }
+            )
+
+            sampled_rows = connection.execute(
+                """
+                WITH ranked AS (
+                    SELECT file, label, utt_type,
+                           audio.sampling_rate AS sampling_rate,
+                           audio.array AS waveform,
+                           ROW_NUMBER() OVER (
+                               PARTITION BY utt_type ORDER BY hash(file)
+                           ) AS rank
+                    FROM read_parquet(?)
+                )
+                SELECT file, label, utt_type, sampling_rate, waveform
+                FROM ranked WHERE rank <= ? ORDER BY rank, utt_type
+                """,
+                [parquet_file, samples_per_shard],
+            ).fetchall()
+            for file_name, label, utt_type, sampling_rate, waveform in sampled_rows:
+                waveform_statistics = summarize_waveform(
+                    waveform or [], int(sampling_rate or 0)
+                )
+                sample_checks.append(
+                    {
+                        "shard": parquet_path.name,
+                        "file": file_name,
+                        "label": label,
+                        "utt_type": utt_type,
+                        "sampling_rate": sampling_rate,
+                        **waveform_statistics,
+                    }
+                )
+    finally:
+        connection.close()
+
+    overall = (
+        total_rows,
+        len(unique_files),
+        len(speakers),
+        missing_counts["file"],
+        missing_counts["label"],
+        missing_counts["utt_type"],
+        missing_counts["waveform"],
+        missing_counts["sampling_rate"],
+        missing_counts["empty_waveform"],
+    )
     distribution = [
         {
-            "utt_type": row[0],
-            "sampling_rate": row[1],
-            "utterances": row[2],
+            "utt_type": utt_type,
+            "sampling_rate": sampling_rate,
+            "utterances": count,
         }
-        for row in connection.execute(
-            """
-            SELECT utt_type, audio.sampling_rate, COUNT(*)::BIGINT
-            FROM read_parquet(?)
-            GROUP BY 1, 2 ORDER BY 1, 2
-            """,
-            [parquet_glob],
-        ).fetchall()
+        for (utt_type, sampling_rate), count in sorted(distribution_counts.items())
     ]
-
-    duration_by_type = [
-        {
-            "utt_type": row[0],
-            "minimum_seconds": round(row[1], 6),
-            "median_seconds": round(row[2], 6),
-            "mean_seconds": round(row[3], 6),
-            "p95_seconds": round(row[4], 6),
-            "maximum_seconds": round(row[5], 6),
-            "total_hours": round(row[6], 6),
-        }
-        for row in connection.execute(
-            """
-            WITH durations AS (
-                SELECT utt_type,
-                       array_length(audio.array) * 1.0 / audio.sampling_rate AS seconds
-                FROM read_parquet(?)
-            )
-            SELECT utt_type, MIN(seconds), MEDIAN(seconds), AVG(seconds),
-                   QUANTILE_CONT(seconds, 0.95), MAX(seconds), SUM(seconds) / 3600.0
-            FROM durations GROUP BY 1 ORDER BY 1
-            """,
-            [parquet_glob],
-        ).fetchall()
-    ]
-
-    shard_rows = [
-        {
-            "shard": Path(row[0]).name,
-            "utterances": row[1],
-            "total_hours": round(row[2], 6),
-        }
-        for row in connection.execute(
-            """
-            SELECT filename, COUNT(*)::BIGINT,
-                   SUM(array_length(audio.array) * 1.0 / audio.sampling_rate) / 3600.0
-            FROM read_parquet(?, filename = true)
-            GROUP BY 1 ORDER BY 1
-            """,
-            [parquet_glob],
-        ).fetchall()
-    ]
-
-    sampled_rows = connection.execute(
-        """
-        WITH ranked AS (
-            SELECT filename, file, label, utt_type,
-                   audio.sampling_rate AS sampling_rate,
-                   audio.array AS waveform,
-                   ROW_NUMBER() OVER (
-                       PARTITION BY filename, utt_type ORDER BY hash(file)
-                   ) AS rank
-            FROM read_parquet(?, filename = true)
-        )
-        SELECT filename, file, label, utt_type, sampling_rate, waveform
-        FROM ranked WHERE rank <= ? ORDER BY filename, rank
-        """,
-        [parquet_glob, samples_per_shard],
-    ).fetchall()
-    connection.close()
-
-    sample_checks = []
-    for filename, file_name, label, utt_type, sampling_rate, waveform in sampled_rows:
-        statistics = summarize_waveform(waveform or [], int(sampling_rate or 0))
-        sample_checks.append(
+    duration_by_type = []
+    for utt_type, values in sorted(durations_by_type.items()):
+        duration_by_type.append(
             {
-                "shard": Path(filename).name,
-                "file": file_name,
-                "label": label,
                 "utt_type": utt_type,
-                "sampling_rate": sampling_rate,
-                **statistics,
+                "minimum_seconds": round(min(values), 6),
+                "median_seconds": round(percentile_cont(values, 0.5), 6),
+                "mean_seconds": round(sum(values) / len(values), 6),
+                "p95_seconds": round(percentile_cont(values, 0.95), 6),
+                "maximum_seconds": round(max(values), 6),
+                "total_hours": round(sum(values) / 3600.0, 6),
             }
         )
 
     hard_issues: list[str] = []
     warnings: list[str] = []
-    if schema != EXPECTED_COLUMNS:
-        hard_issues.append("Schema Parquet không khớp schema đã khóa.")
+    if schema_mismatches:
+        hard_issues.append(
+            "Schema Parquet không khớp schema đã khóa trong "
+            f"{len(schema_mismatches)} shard."
+        )
     shard_count = len(parquet_files)
     if overall[0] != overall[1]:
         hard_issues.append(

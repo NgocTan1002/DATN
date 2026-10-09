@@ -224,6 +224,25 @@ class VSASVParquetDatasetTests(unittest.TestCase):
         self.assertTrue(torch.equal(dataset[0]["waveform"], torch.tensor([3, 4, 5, 6])))
         self.assertTrue(torch.equal(dataset[0]["waveform"], dataset[0]["waveform"]))
 
+    def test_short_waveform_is_repeated_then_trimmed(self) -> None:
+        self._write_parquet(
+            [("speaker1/real.wav", [1.0, 2.0, 3.0], 16_000, "speaker1", "bonafide")]
+        )
+        self._write_split([("speaker1/real.wav", "speaker1", "bonafide")])
+        dataset = VSASVParquetDataset(
+            self.split_csv,
+            self.parquet_dir,
+            training=False,
+            target_samples=8,
+        )
+
+        self.assertTrue(
+            torch.equal(
+                dataset[0]["waveform"],
+                torch.tensor([1.0, 2.0, 3.0, 1.0, 2.0, 3.0, 1.0, 2.0]),
+            )
+        )
+
     def test_training_crop_is_reproducible_and_changes_by_epoch(self) -> None:
         waveform = [float(value) for value in range(100)]
         self._write_parquet(

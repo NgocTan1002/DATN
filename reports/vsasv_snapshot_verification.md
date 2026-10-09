@@ -1,14 +1,19 @@
 # Báo cáo xác minh snapshot VSASV công khai
 
-- **Nhất quán kỹ thuật:** ĐẠT
+- **Nhất quán kỹ thuật:** KHÔNG ĐẠT
 - **Giá trị khoa học:** `provisional_public_snapshot`
 - **Tương đương bộ dữ liệu/giao thức bài báo gốc:** KHÔNG
-- **Thời điểm UTC:** `2026-09-24T09:33:49.556874+00:00`
+- **Thời điểm UTC:** `2026-10-08T05:16:46.144397+00:00`
 - **Tên phiên bản đề xuất:** `VSASV-HF-public-snapshot-v1`
 
 ## Kết luận điều hành
 
-Metadata, năm Parquet cục bộ và tám split hiện có nhất quán với nhau ở các kiểm tra đã chạy. Không tìm thấy bằng chứng về lỗi join làm nhân đôi VC thành AP. Tuy nhiên, snapshot công khai khác đáng kể so với thống kê bài báo gốc nên chỉ được dùng như một giao thức tùy chỉnh, có phiên bản và có giới hạn rõ ràng.
+Schema, metadata và định danh speaker/file của các split vẫn nhất quán, nhưng kiểm tra nội dung waveform phát hiện hard issue. Chưa dùng snapshot hoặc development manifest cho kết quả khoa học trước khi xử lý các mục dưới đây.
+
+### Hard issue
+
+- Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256.
+- Development manifest có waveform trùng đi qua train và development.
 
 ## Metadata công khai
 
@@ -38,38 +43,43 @@ Metadata, năm Parquet cục bộ và tám split hiện có nhất quán với n
 
 Kết luận: sự bằng nhau về số lượng là cấu trúc thật của metadata công khai, nhưng không chứng minh VC và AP là cùng file hoặc do script join sai.
 
-## Năm Parquet cục bộ
+## Parquet cục bộ (68 shard)
 
-- Shard: 5/432 (1.16% theo số shard).
-- Tổng hàng: 2,558.
-- Khớp metadata chính xác: 2,558/2,558.
+- Shard: 68/432 (15.74% theo số shard).
+- Tổng hàng: 34,782.
+- Khớp metadata chính xác: 34,782/34,782.
 - File/audio rỗng hoặc sample rate không hợp lệ: 0.
-- Nhóm fingerprint audio lặp: 0.
+- Nhóm fingerprint audio lặp: 91.
+- Nhóm waveform lặp đã xác nhận bằng SHA-256: 91.
+- Nhóm đi qua nhiều speaker: 33.
+- Nhóm đi qua nhiều closed split: 30.
+- Nhóm trộn nhãn nhị phân: 0.
+- Trong development manifest: 38 nhóm giữ nhiều file; 17 nhóm đi qua train/development.
 
 ### Phân bố theo loại
 
 | Loại | Số mẫu |
 |---|---:|
-| `bonafide` | 1,292 |
-| `voice_conversion` | 188 |
-| `adversarial_attack` | 813 |
+| `bonafide` | 16,324 |
+| `voice_conversion` | 11,073 |
+| `adversarial_attack` | 7,120 |
 | `replay` | 265 |
 
 ### Sample rate quan sát được
 
 | Loại | Sample rate | Số mẫu |
 |---|---:|---:|
-| `adversarial_attack` | 16,000 Hz | 813 |
-| `bonafide` | 16,000 Hz | 1,292 |
+| `adversarial_attack` | 16,000 Hz | 7,120 |
+| `bonafide` | 16,000 Hz | 16,324 |
 | `replay` | 16,000 Hz | 265 |
-| `voice_conversion` | 40,000 Hz | 188 |
+| `voice_conversion` | 40,000 Hz | 11,073 |
 
-Cảnh báo: 188 VC trong phần đã tải đều là 40 kHz, trong khi các mẫu cục bộ còn lại là 16 kHz. Vì năm shard được chọn theo vị trí chứ không ngẫu nhiên, không được suy rộng tỷ lệ này cho toàn bộ snapshot. Pipeline phải resample mọi waveform về cùng một sample rate.
+Cảnh báo: 68 shard cục bộ có thể không đại diện cho toàn bộ snapshot. Các sample rate quan sát được được liệt kê ở bảng trên; pipeline phải resample mọi waveform về cùng một sample rate.
 
 ## Tám split
 
 - Trạng thái kiểm tra schema, coverage, file và speaker leakage: ĐẠT.
-- Kiểm tra hash audio toàn bộ split: chưa thể chạy vì mới có 5/432 shard.
+- Kiểm tra fingerprint audio đã chạy trên toàn bộ 34,782 file cục bộ; chưa bao phủ toàn bộ snapshot vì hiện có 68/432 shard.
 - Đây là custom speaker-disjoint protocol của đồ án, không phải official split của bài báo.
 
 ## Cảnh báo và giới hạn
@@ -77,9 +87,9 @@ Cảnh báo: 188 VC trong phần đã tải đều là 40 kHz, trong khi các m�
 - Số mẫu của snapshot công khai không khớp tổng số trong bài báo gốc.
 - Mọi speaker tấn công đều có số VC bằng đúng số AP; đây là cấu trúc cần lưu ý, không phải bằng chứng lỗi join.
 - Replay trong snapshot công khai rất nhỏ so với bài báo gốc.
-- Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.
+- Các loại audio trong 68 shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.
 - Parquet cục bộ chỉ là một phần nhỏ và không phải mẫu ngẫu nhiên của 432 shard.
-- Kiểm tra fingerprint audio chỉ bao phủ 2.558 file trong năm shard cục bộ.
+- Kiểm tra fingerprint audio chỉ bao phủ 34,782 file trong 68 shard cục bộ.
 - Metadata không có `generator_id`, `source_corpus`, `official_split` hoặc định danh câu nguồn.
 - Không thể tự chứng minh nguyên nhân tác giả tạo số VC/AP bằng nhau chỉ từ ba cột metadata.
 - Replay công khai quá nhỏ để đại diện đầy đủ cho replay trong bài báo.

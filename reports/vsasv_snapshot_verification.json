@@ -1,15 +1,15 @@
 {
   "verification_version": 1,
-  "generated_at_utc": "2026-09-24T09:33:49.556874+00:00",
-  "technical_consistency_passed": true,
+  "generated_at_utc": "2026-10-08T05:16:46.144397+00:00",
+  "technical_consistency_passed": false,
   "scientific_status": "provisional_public_snapshot",
   "scientific_equivalence_to_official_paper": false,
-  "scope": "VSASV Hugging Face public snapshot represented by the local metadata, five local Parquet shards, and the custom project splits.",
+  "scope": "VSASV Hugging Face public snapshot represented by the local metadata, 68 local Parquet shards, and the custom project splits.",
   "warnings": [
     "Số mẫu của snapshot công khai không khớp tổng số trong bài báo gốc.",
     "Mọi speaker tấn công đều có số VC bằng đúng số AP; đây là cấu trúc cần lưu ý, không phải bằng chứng lỗi join.",
     "Replay trong snapshot công khai rất nhỏ so với bài báo gốc.",
-    "Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
+    "Các loại audio trong 68 shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
     "Parquet cục bộ chỉ là một phần nhỏ và không phải mẫu ngẫu nhiên của 432 shard."
   ],
   "metadata": {
@@ -119,8 +119,8 @@
     "directory": "data/raw/vsasv_parquet/data",
     "available": true,
     "expected_total_shards": 432,
-    "local_shards": 5,
-    "coverage_by_shard_count_percent": 1.1574,
+    "local_shards": 68,
+    "coverage_by_shard_count_percent": 15.7407,
     "files": [
       {
         "name": "train-00000-of-00432.parquet",
@@ -133,9 +133,194 @@
         "sha256": "8feb70311373c9b62e4980a7ca7cdab29bc842ecd3eb763f34fd4c23e9bca83b"
       },
       {
+        "name": "train-00002-of-00432.parquet",
+        "size_bytes": 70504633,
+        "sha256": "a48e840f19e51a54c0e3d86a7658679b979dc8a147b5ca8bd76d1c069bcdf73e"
+      },
+      {
+        "name": "train-00009-of-00432.parquet",
+        "size_bytes": 82930845,
+        "sha256": "a7a78248dd8afc830ce1396727a0e79e3a4d0d0c0dca9a7bd0a9a6c537b868fe"
+      },
+      {
+        "name": "train-00018-of-00432.parquet",
+        "size_bytes": 96544041,
+        "sha256": "23b7e8a9a9d24cd04177f9e7f7ee0716b31ca4e075a712657318b85de5d66e66"
+      },
+      {
+        "name": "train-00028-of-00432.parquet",
+        "size_bytes": 71899814,
+        "sha256": "46332f894300d94e55b7a678391a7cd5790685d6bf7b8deb4f7f7d8254621160"
+      },
+      {
+        "name": "train-00037-of-00432.parquet",
+        "size_bytes": 88693203,
+        "sha256": "7b60c71d9507ec7f0341df596eccc2803a071456e5885041f891c66f9849ef54"
+      },
+      {
+        "name": "train-00040-of-00432.parquet",
+        "size_bytes": 108244112,
+        "sha256": "74d8b70ff939b049ca346b696d8cec75997fe238838f10528e8a85637c587939"
+      },
+      {
+        "name": "train-00046-of-00432.parquet",
+        "size_bytes": 82925619,
+        "sha256": "6a93c6db4b89ec55b40a0467538802f4e0b18f2896f71bac62302a9b444e540f"
+      },
+      {
+        "name": "train-00055-of-00432.parquet",
+        "size_bytes": 92712962,
+        "sha256": "5a8df08180f685a257e57e1daa86e0bcba27febd3653607fd536bcc6ac0b2df2"
+      },
+      {
+        "name": "train-00064-of-00432.parquet",
+        "size_bytes": 85722979,
+        "sha256": "0d9f2ea36395cec6c3d57d6b2cd06298931cc7b5b30c6d2367c5ffabfcf44964"
+      },
+      {
+        "name": "train-00067-of-00432.parquet",
+        "size_bytes": 120667397,
+        "sha256": "d09b964cc7056d2a6e9c2eba88a624b22776708fc532e07c37c92b8a85de3059"
+      },
+      {
+        "name": "train-00073-of-00432.parquet",
+        "size_bytes": 76914393,
+        "sha256": "31e6d38b6b768a0ee6fb942a7985f32f67085c3b1d941760b35e0f2e145dac12"
+      },
+      {
+        "name": "train-00083-of-00432.parquet",
+        "size_bytes": 138223700,
+        "sha256": "69128cd29b9807b8d69a7049758c1b9ed500ac87d11636016a797f15b1d3a101"
+      },
+      {
+        "name": "train-00085-of-00432.parquet",
+        "size_bytes": 104042680,
+        "sha256": "4621e28442803e9a8e176d1e64b6569d8721c55049881bc665068b55275222e1"
+      },
+      {
+        "name": "train-00092-of-00432.parquet",
+        "size_bytes": 107123439,
+        "sha256": "f3764ee06a2494fe76325afda27e0b8497645a541673f1e7d97fa65be50369bd"
+      },
+      {
+        "name": "train-00101-of-00432.parquet",
+        "size_bytes": 97613080,
+        "sha256": "fb7c7aa9a7236b1ef44de1503cfaf5cb849300bdf24c17cda65cca525710fa3c"
+      },
+      {
+        "name": "train-00103-of-00432.parquet",
+        "size_bytes": 111114172,
+        "sha256": "6d88bf4497ae7e5f223ac375f17e39266186b80336cb901ec08ef4bd79454244"
+      },
+      {
+        "name": "train-00110-of-00432.parquet",
+        "size_bytes": 131448566,
+        "sha256": "8239bc4d7a4ea3387f50a07331cd72f645fa4ba95ed1b1fa61b3ca61d092c3cb"
+      },
+      {
+        "name": "train-00119-of-00432.parquet",
+        "size_bytes": 123567859,
+        "sha256": "12b21ddacc61dac32b0bf044316801af2150b737c22ed99f6bb274c546e0fce0"
+      },
+      {
+        "name": "train-00128-of-00432.parquet",
+        "size_bytes": 119338375,
+        "sha256": "ada9c4720f29d52c4f415e417de1ebfeab763fdd8b75dc8479edadde9a14bebd"
+      },
+      {
+        "name": "train-00138-of-00432.parquet",
+        "size_bytes": 173280222,
+        "sha256": "73669b35b9e9e8aeae73c257530d891b97b33d055ab0a7bd7af6a8e9bf0c50c7"
+      },
+      {
+        "name": "train-00139-of-00432.parquet",
+        "size_bytes": 166914292,
+        "sha256": "9f6f942273fdf2721d30525e376793d45901a350372746d4aace15b0355def65"
+      },
+      {
+        "name": "train-00147-of-00432.parquet",
+        "size_bytes": 191305063,
+        "sha256": "1468f3b7b72955d19d8ac75309c00d04f5088bdf9ba162aec2b5649b514e4f43"
+      },
+      {
+        "name": "train-00148-of-00432.parquet",
+        "size_bytes": 199113220,
+        "sha256": "c2520aea38f9e6a2479a4ef6b4d512b1c401c03f8a992eee85cd775307e55f70"
+      },
+      {
+        "name": "train-00156-of-00432.parquet",
+        "size_bytes": 253323624,
+        "sha256": "8e9162082c216fd4f627abbc3af022d9a6219ce30b1d2de614a627b2858f4f90"
+      },
+      {
+        "name": "train-00157-of-00432.parquet",
+        "size_bytes": 192366954,
+        "sha256": "7fbfdd02dc6bc8a37936f067f2c973678a8deb9d15692b2f41c8f96511885bfa"
+      },
+      {
+        "name": "train-00165-of-00432.parquet",
+        "size_bytes": 101009868,
+        "sha256": "1d29f661224d53ee2b9b42b8850b168a41b41152df54a25248b4403aebabda82"
+      },
+      {
+        "name": "train-00166-of-00432.parquet",
+        "size_bytes": 140742805,
+        "sha256": "ecf487d500d81c6457a092448321153090051a71ddcd0b4bca1452ca3dd3f8fa"
+      },
+      {
         "name": "train-00171-of-00432.parquet",
         "size_bytes": 153161940,
         "sha256": "cbc8a34d581e99f45099678d4961e12d1f2148a702ff6988d441554fc638fe39"
+      },
+      {
+        "name": "train-00174-of-00432.parquet",
+        "size_bytes": 164367189,
+        "sha256": "14e44916e00ec75ada7eea2844cb69438fcd014e10f92f764e415b8c68a62e49"
+      },
+      {
+        "name": "train-00183-of-00432.parquet",
+        "size_bytes": 185245728,
+        "sha256": "22e6b7c7a60f60c718c32795cb405e0aa07544ea98178bf334ad083a9259c406"
+      },
+      {
+        "name": "train-00193-of-00432.parquet",
+        "size_bytes": 145803906,
+        "sha256": "9097739cb0142a0dba05ceb8a7a5a7e0d2e245eff82b5297c05572bb0d584161"
+      },
+      {
+        "name": "train-00202-of-00432.parquet",
+        "size_bytes": 217254462,
+        "sha256": "6ef5d266ca0e5d43b45298a269ec83fd125979c4bf7626f1dad444c06f43107e"
+      },
+      {
+        "name": "train-00211-of-00432.parquet",
+        "size_bytes": 177077857,
+        "sha256": "3d651110f5c3cbe1b0ef695a733fc6dd1ee060726cc7877207794a3a1b4a02cf"
+      },
+      {
+        "name": "train-00220-of-00432.parquet",
+        "size_bytes": 181144965,
+        "sha256": "74dde0b3060047ee2d5c587d896f487c82d7337c69d58d96affdc6fe9fbccfff"
+      },
+      {
+        "name": "train-00229-of-00432.parquet",
+        "size_bytes": 164766855,
+        "sha256": "8c3ab0f181f0df8168547473ff826d51d0ad45d8e319655e23db852f68429406"
+      },
+      {
+        "name": "train-00238-of-00432.parquet",
+        "size_bytes": 183581253,
+        "sha256": "50dbe53832a0c0afbd77ef094625202e0b52b5c24b8dbbf3524b8459b4731c64"
+      },
+      {
+        "name": "train-00247-of-00432.parquet",
+        "size_bytes": 186550148,
+        "sha256": "be193e2ba5f208e83c12857daf94af34a0972d72e1b319010b557a5d46395cab"
+      },
+      {
+        "name": "train-00248-of-00432.parquet",
+        "size_bytes": 182761581,
+        "sha256": "a28ce16dc5dfdd04e4f1b458983a29dcd66785951e7ddeeb2f0cda02b1eeb547"
       },
       {
         "name": "train-00250-of-00432.parquet",
@@ -143,15 +328,148 @@
         "sha256": "7f0b8d1397d1b074cdf58a0aea6a47ea9a8cf38eae826f513b94210c53d334f9"
       },
       {
+        "name": "train-00257-of-00432.parquet",
+        "size_bytes": 148829363,
+        "sha256": "ca8f4e1d2573a1e8245408161a4089d8bba5c65989670bce4dcd49313a05b37f"
+      },
+      {
+        "name": "train-00266-of-00432.parquet",
+        "size_bytes": 154643409,
+        "sha256": "f2f6f1af8c4e1d2f498b5f52d6bff09d085efd9e18bd475161b33891ed1255ad"
+      },
+      {
+        "name": "train-00274-of-00432.parquet",
+        "size_bytes": 124947457,
+        "sha256": "dfe96912f9b7e9ef73dc0b657edcde758bde709c970773e77b0c1b35f15c82b8"
+      },
+      {
+        "name": "train-00275-of-00432.parquet",
+        "size_bytes": 126096020,
+        "sha256": "2439f2a9279b387fb7dd24454d853a3c612c5c26c5595cd68a5e85484f000be1"
+      },
+      {
+        "name": "train-00276-of-00432.parquet",
+        "size_bytes": 141103218,
+        "sha256": "210946adcccdadb3ce8b4c1a7b445e92186373964114a8d64aabc318506d40b9"
+      },
+      {
+        "name": "train-00284-of-00432.parquet",
+        "size_bytes": 67738343,
+        "sha256": "32956ab4091632eff4ffd8f53a7e4fc809244df5b0e057721ec88744d7b2f06d"
+      },
+      {
+        "name": "train-00292-of-00432.parquet",
+        "size_bytes": 142132218,
+        "sha256": "cc0b4796cb6118b8b28a42068b4e94b68d6ee31992cc49b86fd8a311de131391"
+      },
+      {
+        "name": "train-00293-of-00432.parquet",
+        "size_bytes": 135693326,
+        "sha256": "73eee10f51444ceeb01d7ab8388b923a0d0e266e173a841b6c3c12d39ab4d78a"
+      },
+      {
+        "name": "train-00294-of-00432.parquet",
+        "size_bytes": 138871406,
+        "sha256": "4f70db562f4cb1749e86f71b22ef9265fea2db5d0afc7209e8ca5300ecbe6eff"
+      },
+      {
+        "name": "train-00303-of-00432.parquet",
+        "size_bytes": 222334246,
+        "sha256": "2d9c53df8cd553ad5f3623c62964c5d0a31c2e6873270a4c0819c388c971be2d"
+      },
+      {
+        "name": "train-00312-of-00432.parquet",
+        "size_bytes": 184705763,
+        "sha256": "df29d6646052c47a1699206d08ce7f7e5e61b4d30b3c87e771a4a9396bfa1075"
+      },
+      {
+        "name": "train-00319-of-00432.parquet",
+        "size_bytes": 164856179,
+        "sha256": "590c9eba18b697cad1aa575cc9732227497f762e5dac83b8382a5c3954afbabd"
+      },
+      {
+        "name": "train-00321-of-00432.parquet",
+        "size_bytes": 145671478,
+        "sha256": "f0777e095538e687784dd8c1a2779128a7aad8c306af5c8adf77ab9e4f20aa3b"
+      },
+      {
+        "name": "train-00328-of-00432.parquet",
+        "size_bytes": 172163135,
+        "sha256": "05102f2f634ecaf8d1f98d8f885716ff66853012007c9f91b5edfbc803b9373c"
+      },
+      {
+        "name": "train-00330-of-00432.parquet",
+        "size_bytes": 157494261,
+        "sha256": "69d349c3ef7ab1a78038421f9b9422863c730dc5fc7fa1ea8c90f7ae7c724fdc"
+      },
+      {
+        "name": "train-00339-of-00432.parquet",
+        "size_bytes": 103778852,
+        "sha256": "c964546193a17c1f16f5b6e6183964c5306edb42a97aeae75614da72ead681fa"
+      },
+      {
+        "name": "train-00348-of-00432.parquet",
+        "size_bytes": 135869353,
+        "sha256": "c6c7854636cc0463473b29b549d60ec5bf6476e72d7762686452bb95a1ad8984"
+      },
+      {
+        "name": "train-00355-of-00432.parquet",
+        "size_bytes": 142000610,
+        "sha256": "c1ac936c5f7fc4413a5216f28a6c77dabf743bb44892f928c14f5e0da85a0def"
+      },
+      {
+        "name": "train-00358-of-00432.parquet",
+        "size_bytes": 174033359,
+        "sha256": "65409e1fb9d5a07fc39cd02070d75b7c6a275f28379fbf95a95846dffa59fd53"
+      },
+      {
+        "name": "train-00367-of-00432.parquet",
+        "size_bytes": 146467232,
+        "sha256": "cbae4c06ae1074481cd3a90b945c2715030f1f937b21db18da85337ba09f3e4a"
+      },
+      {
+        "name": "train-00376-of-00432.parquet",
+        "size_bytes": 112088208,
+        "sha256": "6b11d5dbf70151b9fa1402bae58a7e93b1a18da7cc0731151307fecffd0894b1"
+      },
+      {
+        "name": "train-00385-of-00432.parquet",
+        "size_bytes": 116583350,
+        "sha256": "db903cd2e4fdef1a10b2ac678b54dd8f8ea63bb57784bf182216cfcf64000965"
+      },
+      {
+        "name": "train-00394-of-00432.parquet",
+        "size_bytes": 46935555,
+        "sha256": "0a6d7e324ff2968bc245e03bb018fc3d6d9ebb1d200eeaea9023dfeacb618ea8"
+      },
+      {
         "name": "train-00403-of-00432.parquet",
         "size_bytes": 52554837,
         "sha256": "48f670ad37c5de4556f48aea05690b563ebc2d154b6f6e5c1aae27b1c35f8b8c"
+      },
+      {
+        "name": "train-00413-of-00432.parquet",
+        "size_bytes": 751213811,
+        "sha256": "9db6a50885d3457bbef9eee7b3840be66dc1fe1951fd5b43fbd1a9a8eb90cb7d"
+      },
+      {
+        "name": "train-00422-of-00432.parquet",
+        "size_bytes": 338769471,
+        "sha256": "9b2d26d4ed56512deddcd5a2e4ae7c84a4e2bbd1b7a70f626ffc299961f8972d"
+      },
+      {
+        "name": "train-00431-of-00432.parquet",
+        "size_bytes": 622855824,
+        "sha256": "836007c015aba6a697fdd5c8717fbda95e729573daa0f3d8c51b92c2b97544fa"
       }
     ],
-    "technical_passed": true,
-    "hard_issues": [],
+    "technical_passed": false,
+    "hard_issues": [
+      "Phát hiện waveform trùng giữa nhiều file và đã xác nhận bằng SHA-256.",
+      "Development manifest có waveform trùng đi qua train và development."
+    ],
     "warnings": [
-      "Các loại audio trong năm shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
+      "Các loại audio trong 68 shard có sample rate không đồng nhất; phải resample nhất quán trước huấn luyện.",
       "Parquet cục bộ chỉ là một phần nhỏ và không phải mẫu ngẫu nhiên của 432 shard."
     ],
     "schema": {
@@ -160,16 +478,16 @@
       "label": "VARCHAR",
       "utt_type": "VARCHAR"
     },
-    "rows": 2558,
-    "unique_files": 2558,
-    "metadata_exact_matches": 2558,
+    "rows": 34782,
+    "unique_files": 34782,
+    "metadata_exact_matches": 34782,
     "files_missing_from_metadata": 0,
     "label_or_type_mismatches": 0,
     "utt_type_counts": {
-      "adversarial_attack": 813,
-      "bonafide": 1292,
-      "replay": 265,
-      "voice_conversion": 188
+      "bonafide": 16324,
+      "voice_conversion": 11073,
+      "adversarial_attack": 7120,
+      "replay": 265
     },
     "missing_or_invalid_audio": {
       "file": 0,
@@ -184,12 +502,12 @@
       {
         "utt_type": "adversarial_attack",
         "sampling_rate": 16000,
-        "samples": 813
+        "samples": 7120
       },
       {
         "utt_type": "bonafide",
         "sampling_rate": 16000,
-        "samples": 1292
+        "samples": 16324
       },
       {
         "utt_type": "replay",
@@ -199,25 +517,25 @@
       {
         "utt_type": "voice_conversion",
         "sampling_rate": 40000,
-        "samples": 188
+        "samples": 11073
       }
     ],
     "duration_by_type": [
       {
         "utt_type": "adversarial_attack",
-        "minimum_seconds": 1.86,
-        "median_seconds": 4.04,
-        "maximum_seconds": 8.38,
-        "mean_seconds": 4.162681,
-        "total_hours": 0.940072
+        "minimum_seconds": 1.18,
+        "median_seconds": 4.12,
+        "maximum_seconds": 39.78,
+        "mean_seconds": 4.911152,
+        "total_hours": 9.713167
       },
       {
         "utt_type": "bonafide",
         "minimum_seconds": 0.84,
-        "median_seconds": 3.375,
-        "maximum_seconds": 35.24,
-        "mean_seconds": 4.459604,
-        "total_hours": 1.600502
+        "median_seconds": 4.510719,
+        "maximum_seconds": 39.959688,
+        "mean_seconds": 7.009224,
+        "total_hours": 31.782936
       },
       {
         "utt_type": "replay",
@@ -229,11 +547,11 @@
       },
       {
         "utt_type": "voice_conversion",
-        "minimum_seconds": 2.08,
-        "median_seconds": 3.62,
-        "maximum_seconds": 8.04,
-        "mean_seconds": 3.743936,
-        "total_hours": 0.195517
+        "minimum_seconds": 1.04,
+        "median_seconds": 3.96,
+        "maximum_seconds": 39.78,
+        "mean_seconds": 4.438071,
+        "total_hours": 13.650767
       }
     ],
     "shard_distribution": [
@@ -244,6 +562,141 @@
       },
       {
         "shard": "train-00001-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00002-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00009-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00018-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00028-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00037-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00040-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00046-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00055-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00064-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00067-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00073-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00083-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00085-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00092-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00101-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00103-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00110-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00119-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00128-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00138-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00139-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00147-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00148-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00156-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00157-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00165-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 512
+      },
+      {
+        "shard": "train-00166-of-00432.parquet",
         "utt_type": "bonafide",
         "samples": 512
       },
@@ -263,8 +716,248 @@
         "samples": 188
       },
       {
+        "shard": "train-00174-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 512
+      },
+      {
+        "shard": "train-00183-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 512
+      },
+      {
+        "shard": "train-00193-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 103
+      },
+      {
+        "shard": "train-00193-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 409
+      },
+      {
+        "shard": "train-00202-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 98
+      },
+      {
+        "shard": "train-00202-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 3
+      },
+      {
+        "shard": "train-00202-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 411
+      },
+      {
+        "shard": "train-00211-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00220-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 458
+      },
+      {
+        "shard": "train-00220-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 53
+      },
+      {
+        "shard": "train-00229-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00238-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00247-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00248-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
         "shard": "train-00250-of-00432.parquet",
         "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00257-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00266-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 324
+      },
+      {
+        "shard": "train-00266-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 187
+      },
+      {
+        "shard": "train-00274-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00275-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00276-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 176
+      },
+      {
+        "shard": "train-00276-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 335
+      },
+      {
+        "shard": "train-00284-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 511
+      },
+      {
+        "shard": "train-00292-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00293-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00294-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00303-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 106
+      },
+      {
+        "shard": "train-00303-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 21
+      },
+      {
+        "shard": "train-00303-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 384
+      },
+      {
+        "shard": "train-00312-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00319-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 269
+      },
+      {
+        "shard": "train-00319-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 18
+      },
+      {
+        "shard": "train-00319-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 224
+      },
+      {
+        "shard": "train-00321-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 204
+      },
+      {
+        "shard": "train-00321-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 307
+      },
+      {
+        "shard": "train-00328-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 33
+      },
+      {
+        "shard": "train-00328-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 478
+      },
+      {
+        "shard": "train-00330-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 511
+      },
+      {
+        "shard": "train-00339-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00348-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00355-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00358-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 37
+      },
+      {
+        "shard": "train-00358-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 474
+      },
+      {
+        "shard": "train-00367-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 314
+      },
+      {
+        "shard": "train-00367-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 197
+      },
+      {
+        "shard": "train-00376-of-00432.parquet",
+        "utt_type": "bonafide",
+        "samples": 144
+      },
+      {
+        "shard": "train-00376-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 367
+      },
+      {
+        "shard": "train-00385-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 511
+      },
+      {
+        "shard": "train-00394-of-00432.parquet",
+        "utt_type": "bonafide",
         "samples": 511
       },
       {
@@ -276,10 +969,3849 @@
         "shard": "train-00403-of-00432.parquet",
         "utt_type": "replay",
         "samples": 265
+      },
+      {
+        "shard": "train-00413-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 174
+      },
+      {
+        "shard": "train-00413-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 337
+      },
+      {
+        "shard": "train-00422-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 122
+      },
+      {
+        "shard": "train-00422-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 389
+      },
+      {
+        "shard": "train-00431-of-00432.parquet",
+        "utt_type": "adversarial_attack",
+        "samples": 311
+      },
+      {
+        "shard": "train-00431-of-00432.parquet",
+        "utt_type": "voice_conversion",
+        "samples": 200
       }
     ],
-    "duplicate_audio_fingerprint_groups": 0,
-    "fingerprint_method": "DuckDB 64-bit hash(audio.array); useful as a duplicate screen, not a cryptographic identity proof."
+    "duplicate_audio_fingerprint_groups": 91,
+    "cryptographically_confirmed_duplicate_groups": 91,
+    "duplicate_audio_fingerprint_files": 182,
+    "duplicate_groups_crossing_speakers": 33,
+    "duplicate_groups_crossing_closed_splits": 30,
+    "duplicate_groups_mixing_binary_labels": 0,
+    "duplicate_audio_fingerprint_details": [
+      {
+        "fingerprint": "0aee58330a58c074",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00046.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "a70f83373d79673c2699fb4e94169fe299913096b4320d75b72cdea92f3c6a10"
+          },
+          {
+            "file": "id00156/00061.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "a70f83373d79673c2699fb4e94169fe299913096b4320d75b72cdea92f3c6a10"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a70f83373d79673c2699fb4e94169fe299913096b4320d75b72cdea92f3c6a10"
+      },
+      {
+        "fingerprint": "0dad65164baf8b9c",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00010.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "eff197a42ea94f82c378fd2ab64d528a631cddf7c445a61c54e92c57c2b4648b"
+          },
+          {
+            "file": "id00737/00071.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "eff197a42ea94f82c378fd2ab64d528a631cddf7c445a61c54e92c57c2b4648b"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "eff197a42ea94f82c378fd2ab64d528a631cddf7c445a61c54e92c57c2b4648b"
+      },
+      {
+        "fingerprint": "139722730b6de14c",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00013.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "677fc18abe410a0be0ab3b0968e92b5d9fb827ab96d9a3014640d50c16710ede"
+          },
+          {
+            "file": "id00156/00016.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "677fc18abe410a0be0ab3b0968e92b5d9fb827ab96d9a3014640d50c16710ede"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "677fc18abe410a0be0ab3b0968e92b5d9fb827ab96d9a3014640d50c16710ede"
+      },
+      {
+        "fingerprint": "14f5d1b82e01b337",
+        "files": 2,
+        "speakers": [
+          "id00096",
+          "id00746"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00096/00005.wav",
+            "speaker_id": "id00096",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00018-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0c513e5cafb0d458dbf38c38dbe54068c0dcc74a8c1011130f04ab39e14c022a"
+          },
+          {
+            "file": "id00746/00002.wav",
+            "speaker_id": "id00746",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00148-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0c513e5cafb0d458dbf38c38dbe54068c0dcc74a8c1011130f04ab39e14c022a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "0c513e5cafb0d458dbf38c38dbe54068c0dcc74a8c1011130f04ab39e14c022a"
+      },
+      {
+        "fingerprint": "153ca7c37f59a155",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00017.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "cdf659b4a4493922df6fdd1b42f375d9f60a6d01576f6fdd3259d6f270a1a0c2"
+          },
+          {
+            "file": "id00737/00078.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "cdf659b4a4493922df6fdd1b42f375d9f60a6d01576f6fdd3259d6f270a1a0c2"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "cdf659b4a4493922df6fdd1b42f375d9f60a6d01576f6fdd3259d6f270a1a0c2"
+      },
+      {
+        "fingerprint": "1abfa325fe252b1c",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00023.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ce7ac70cd39c60c9dc9d3cf72f6ecc11db558a513b6a849647811177d6a893a1"
+          },
+          {
+            "file": "id00737/00084.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ce7ac70cd39c60c9dc9d3cf72f6ecc11db558a513b6a849647811177d6a893a1"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "ce7ac70cd39c60c9dc9d3cf72f6ecc11db558a513b6a849647811177d6a893a1"
+      },
+      {
+        "fingerprint": "1ac3cf8fd83dfb73",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00064.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "416caf97e001ac4427b53b20993f58d10a37f692d91430cadad7cf6b39e4dfb1"
+          },
+          {
+            "file": "id00156/00073.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "416caf97e001ac4427b53b20993f58d10a37f692d91430cadad7cf6b39e4dfb1"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "416caf97e001ac4427b53b20993f58d10a37f692d91430cadad7cf6b39e4dfb1"
+      },
+      {
+        "fingerprint": "1c965f25f12bcbc7",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00025.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "849ec1e322045d55871ccf046137950724b87dbff57ee3560363c24497d43c2f"
+          },
+          {
+            "file": "id00737/00086.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "849ec1e322045d55871ccf046137950724b87dbff57ee3560363c24497d43c2f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "849ec1e322045d55871ccf046137950724b87dbff57ee3560363c24497d43c2f"
+      },
+      {
+        "fingerprint": "1e8b86fc0bff5737",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00045.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "f9a5b05613d890347185d6c2b31f112cb19369a23952f535fd8d381d71d21cd6"
+          },
+          {
+            "file": "id00156/00060.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "f9a5b05613d890347185d6c2b31f112cb19369a23952f535fd8d381d71d21cd6"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "f9a5b05613d890347185d6c2b31f112cb19369a23952f535fd8d381d71d21cd6"
+      },
+      {
+        "fingerprint": "2063de5a11961140",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00036.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "a71341a528811dd769809cde859bd7edb00468ec41c2441c8c73dd212932ab0d"
+          },
+          {
+            "file": "id00344/00069.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "a71341a528811dd769809cde859bd7edb00468ec41c2441c8c73dd212932ab0d"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a71341a528811dd769809cde859bd7edb00468ec41c2441c8c73dd212932ab0d"
+      },
+      {
+        "fingerprint": "211c257e6279129b",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00024.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0a16a41e6cc4f0371cd956ec515c5593030fab73280a751abc9c5913f7a43dbc"
+          },
+          {
+            "file": "id00156/00023.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "0a16a41e6cc4f0371cd956ec515c5593030fab73280a751abc9c5913f7a43dbc"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "0a16a41e6cc4f0371cd956ec515c5593030fab73280a751abc9c5913f7a43dbc"
+      },
+      {
+        "fingerprint": "2ba403abf2507e46",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00008.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "39033ed179c246e475950d646f7a67000b54a922a84f6433c1274bea194867ba"
+          },
+          {
+            "file": "id00737/00069.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "39033ed179c246e475950d646f7a67000b54a922a84f6433c1274bea194867ba"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "39033ed179c246e475950d646f7a67000b54a922a84f6433c1274bea194867ba"
+      },
+      {
+        "fingerprint": "2ec90b2cab496154",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00018.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "08409d406ec924a0991372b503b0601356761b7e65d453a19af35bc1d7c5c0cc"
+          },
+          {
+            "file": "id00156/00018.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "08409d406ec924a0991372b503b0601356761b7e65d453a19af35bc1d7c5c0cc"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "08409d406ec924a0991372b503b0601356761b7e65d453a19af35bc1d7c5c0cc"
+      },
+      {
+        "fingerprint": "32c8aaa45c9a962c",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00045.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "3e12f37043b2b812f013dbd34318c9e26a421818aa9075b38ea592e1029d4227"
+          },
+          {
+            "file": "id00737/00106.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "3e12f37043b2b812f013dbd34318c9e26a421818aa9075b38ea592e1029d4227"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "3e12f37043b2b812f013dbd34318c9e26a421818aa9075b38ea592e1029d4227"
+      },
+      {
+        "fingerprint": "354257404a812b79",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00026.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "53f39760362adb6a2a063dd3ce0366a9c8c6f8e875e6cc37c4449ebbe5485adf"
+          },
+          {
+            "file": "id00737/00087.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "53f39760362adb6a2a063dd3ce0366a9c8c6f8e875e6cc37c4449ebbe5485adf"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "53f39760362adb6a2a063dd3ce0366a9c8c6f8e875e6cc37c4449ebbe5485adf"
+      },
+      {
+        "fingerprint": "36236472d699ce3f",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00000.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ed9786ad66bc364d27665084b69fccc296d01b8b7c29d93c9564651e7e13c5d4"
+          },
+          {
+            "file": "id00737/00061.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ed9786ad66bc364d27665084b69fccc296d01b8b7c29d93c9564651e7e13c5d4"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "ed9786ad66bc364d27665084b69fccc296d01b8b7c29d93c9564651e7e13c5d4"
+      },
+      {
+        "fingerprint": "38df3e7e61baf3e7",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00028.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "bd42dc2258a8211c306b694a04c3070dca9f3250e5bbf76706657666a8cbf4b5"
+          },
+          {
+            "file": "id00156/00049.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "bd42dc2258a8211c306b694a04c3070dca9f3250e5bbf76706657666a8cbf4b5"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "bd42dc2258a8211c306b694a04c3070dca9f3250e5bbf76706657666a8cbf4b5"
+      },
+      {
+        "fingerprint": "3b473c4ecd5d526e",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00043.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d2b7739d1fde4b20083bd1d25b49d9a2fa63968ce8eee8f1a91d2bd2059b6651"
+          },
+          {
+            "file": "id00737/00104.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d2b7739d1fde4b20083bd1d25b49d9a2fa63968ce8eee8f1a91d2bd2059b6651"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d2b7739d1fde4b20083bd1d25b49d9a2fa63968ce8eee8f1a91d2bd2059b6651"
+      },
+      {
+        "fingerprint": "3d32b065199bbe70",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00035.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "c904f598311c970f64785259fce39364e5a2519b3f9f507a6ba7426f37790c4d"
+          },
+          {
+            "file": "id00156/00054.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "c904f598311c970f64785259fce39364e5a2519b3f9f507a6ba7426f37790c4d"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "c904f598311c970f64785259fce39364e5a2519b3f9f507a6ba7426f37790c4d"
+      },
+      {
+        "fingerprint": "3d92bca0ecbfa928",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00001.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d879a20f1e8ff1878937ecaa3b19ebbf8d17fa7d8582efd4015d82351dcb8855"
+          },
+          {
+            "file": "id00737/00062.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d879a20f1e8ff1878937ecaa3b19ebbf8d17fa7d8582efd4015d82351dcb8855"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d879a20f1e8ff1878937ecaa3b19ebbf8d17fa7d8582efd4015d82351dcb8855"
+      },
+      {
+        "fingerprint": "46ddd97088554674",
+        "files": 2,
+        "speakers": [
+          "id00153",
+          "id00209"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00153/00039.wav",
+            "speaker_id": "id00153",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "75b4b55b614b7feaf882a65e81fb131bbc7fac3ba771492e54aac6fd1b2b142f"
+          },
+          {
+            "file": "id00209/00008.wav",
+            "speaker_id": "id00209",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00037-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "75b4b55b614b7feaf882a65e81fb131bbc7fac3ba771492e54aac6fd1b2b142f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "75b4b55b614b7feaf882a65e81fb131bbc7fac3ba771492e54aac6fd1b2b142f"
+      },
+      {
+        "fingerprint": "4760815809ba7aa9",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00002.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "3213b9530a43abc4807bd597b9f4b701a82a025562f83cb547496d110e17e09b"
+          },
+          {
+            "file": "id00737/00063.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "3213b9530a43abc4807bd597b9f4b701a82a025562f83cb547496d110e17e09b"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "3213b9530a43abc4807bd597b9f4b701a82a025562f83cb547496d110e17e09b"
+      },
+      {
+        "fingerprint": "4c5f8fdb4d91a154",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00014.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "260c22c809830e1b4dc52b220d5c009ac2a4cfe05d2adf4f2b7f9e03639ad9ed"
+          },
+          {
+            "file": "id00737/00075.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "260c22c809830e1b4dc52b220d5c009ac2a4cfe05d2adf4f2b7f9e03639ad9ed"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "260c22c809830e1b4dc52b220d5c009ac2a4cfe05d2adf4f2b7f9e03639ad9ed"
+      },
+      {
+        "fingerprint": "4e582a07b12efde8",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00013.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "188969d872efaad390cf18220215d96342a60f9bd3640fe5cf10762d01b6e2bd"
+          },
+          {
+            "file": "id00737/00074.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "188969d872efaad390cf18220215d96342a60f9bd3640fe5cf10762d01b6e2bd"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "188969d872efaad390cf18220215d96342a60f9bd3640fe5cf10762d01b6e2bd"
+      },
+      {
+        "fingerprint": "524289cded65b7d5",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00038.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "b95484d56a5f570e078e580cb308a43eefefad38f26039b9709ca780d37e9b2f"
+          },
+          {
+            "file": "id00344/00071.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "b95484d56a5f570e078e580cb308a43eefefad38f26039b9709ca780d37e9b2f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "b95484d56a5f570e078e580cb308a43eefefad38f26039b9709ca780d37e9b2f"
+      },
+      {
+        "fingerprint": "526e18ea8ed28d9c",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00039.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "d3d5c9212f2d430421e1e7b4abc92a431c436f260c7fcacb54dbc341c1b2e0cb"
+          },
+          {
+            "file": "id00344/00072.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "d3d5c9212f2d430421e1e7b4abc92a431c436f260c7fcacb54dbc341c1b2e0cb"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d3d5c9212f2d430421e1e7b4abc92a431c436f260c7fcacb54dbc341c1b2e0cb"
+      },
+      {
+        "fingerprint": "5800a5a0feed98f5",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00007.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "719735e924cad56759edd847628f40eb33a3e1cc2f2c4cdab32fcaf3d61056b1"
+          },
+          {
+            "file": "id00737/00068.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "719735e924cad56759edd847628f40eb33a3e1cc2f2c4cdab32fcaf3d61056b1"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "719735e924cad56759edd847628f40eb33a3e1cc2f2c4cdab32fcaf3d61056b1"
+      },
+      {
+        "fingerprint": "5a5b79e6b298297f",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00044.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "82cdddfe785227e2754ddecff1e07ba6480a01ffbdb68faeba4a3c63a04ca029"
+          },
+          {
+            "file": "id00737/00105.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "82cdddfe785227e2754ddecff1e07ba6480a01ffbdb68faeba4a3c63a04ca029"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "82cdddfe785227e2754ddecff1e07ba6480a01ffbdb68faeba4a3c63a04ca029"
+      },
+      {
+        "fingerprint": "5b3444303244b357",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00029.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "490da60ea8f2a9ff2548b7f54c384ddc051023134bdc9d573022ed89581ae881"
+          },
+          {
+            "file": "id00737/00090.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "490da60ea8f2a9ff2548b7f54c384ddc051023134bdc9d573022ed89581ae881"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "490da60ea8f2a9ff2548b7f54c384ddc051023134bdc9d573022ed89581ae881"
+      },
+      {
+        "fingerprint": "5e723879bb9c3989",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00032.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "05f1976ce870af4ac575c96b5bc312177cbcf8fb6e42cabe9334a0eaa61184f1"
+          },
+          {
+            "file": "id00156/00052.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "05f1976ce870af4ac575c96b5bc312177cbcf8fb6e42cabe9334a0eaa61184f1"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "05f1976ce870af4ac575c96b5bc312177cbcf8fb6e42cabe9334a0eaa61184f1"
+      },
+      {
+        "fingerprint": "63f4c4e88038897d",
+        "files": 2,
+        "speakers": [
+          "id00001",
+          "id00058"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00001/00017.wav",
+            "speaker_id": "id00001",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00000-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e521871da72682d15488d05aa60be53512b8ba90ae6f91749bd1cc2a1028dd2f"
+          },
+          {
+            "file": "id00058/00003.wav",
+            "speaker_id": "id00058",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00009-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "e521871da72682d15488d05aa60be53512b8ba90ae6f91749bd1cc2a1028dd2f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "e521871da72682d15488d05aa60be53512b8ba90ae6f91749bd1cc2a1028dd2f"
+      },
+      {
+        "fingerprint": "660ff4eaaf8a2027",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00003.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "daa9a61001164850c894da3abee68d754dd65166543ea8770f927e1498a296c0"
+          },
+          {
+            "file": "id00737/00064.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "daa9a61001164850c894da3abee68d754dd65166543ea8770f927e1498a296c0"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "daa9a61001164850c894da3abee68d754dd65166543ea8770f927e1498a296c0"
+      },
+      {
+        "fingerprint": "67e2c6e49d1c769a",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00021.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "4b3f2cf1b00b44f0bd9299016ec582542184dd196547d596962bb1d1a591fd7d"
+          },
+          {
+            "file": "id00156/00019.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "4b3f2cf1b00b44f0bd9299016ec582542184dd196547d596962bb1d1a591fd7d"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "4b3f2cf1b00b44f0bd9299016ec582542184dd196547d596962bb1d1a591fd7d"
+      },
+      {
+        "fingerprint": "67e573895276b854",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00028.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "154f5636f03514e23d960f1241cc76d92d47e29ca6175a654a0938670af58059"
+          },
+          {
+            "file": "id00737/00089.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "154f5636f03514e23d960f1241cc76d92d47e29ca6175a654a0938670af58059"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "154f5636f03514e23d960f1241cc76d92d47e29ca6175a654a0938670af58059"
+      },
+      {
+        "fingerprint": "6838affdd4bc551c",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00008.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1d9282c00aee0b7c08076d2248ccc24b0568a2a7774eef72842e6a4c708e4859"
+          },
+          {
+            "file": "id00156/00005.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "1d9282c00aee0b7c08076d2248ccc24b0568a2a7774eef72842e6a4c708e4859"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "1d9282c00aee0b7c08076d2248ccc24b0568a2a7774eef72842e6a4c708e4859"
+      },
+      {
+        "fingerprint": "6c88ce535474df5f",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00033.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "5765cc426258fc58be37187ccc972aac15f9759ca454ba54f79f55c6b66f3a19"
+          },
+          {
+            "file": "id00737/00094.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "5765cc426258fc58be37187ccc972aac15f9759ca454ba54f79f55c6b66f3a19"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "5765cc426258fc58be37187ccc972aac15f9759ca454ba54f79f55c6b66f3a19"
+      },
+      {
+        "fingerprint": "6d187487e300ccbb",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00042.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "077c16d2f1253ee604281fd218a204ec20392ccd4f2a4d41f7dc90995c5ef2b3"
+          },
+          {
+            "file": "id00344/00075.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "077c16d2f1253ee604281fd218a204ec20392ccd4f2a4d41f7dc90995c5ef2b3"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "077c16d2f1253ee604281fd218a204ec20392ccd4f2a4d41f7dc90995c5ef2b3"
+      },
+      {
+        "fingerprint": "6f522a3250866a8f",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00036.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "fc2a7ab942f99c80c78ada8e662df62db019fb7fa67b76bb51a61d1fc68a825e"
+          },
+          {
+            "file": "id00737/00097.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "fc2a7ab942f99c80c78ada8e662df62db019fb7fa67b76bb51a61d1fc68a825e"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "fc2a7ab942f99c80c78ada8e662df62db019fb7fa67b76bb51a61d1fc68a825e"
+      },
+      {
+        "fingerprint": "6ffdc00ae1ab098d",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00062.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "2076b1551a060171f9894b89d18503e4ec17dc79a239b03aa13504afa9763f8a"
+          },
+          {
+            "file": "id00156/00072.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "2076b1551a060171f9894b89d18503e4ec17dc79a239b03aa13504afa9763f8a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "2076b1551a060171f9894b89d18503e4ec17dc79a239b03aa13504afa9763f8a"
+      },
+      {
+        "fingerprint": "73812fc30625783d",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00004.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "643659685f8e9580ea43b8613d4baedbcef9bdade952549fed348ed8a694d3ea"
+          },
+          {
+            "file": "id00737/00065.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "643659685f8e9580ea43b8613d4baedbcef9bdade952549fed348ed8a694d3ea"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "643659685f8e9580ea43b8613d4baedbcef9bdade952549fed348ed8a694d3ea"
+      },
+      {
+        "fingerprint": "73c01d05c3e1e96e",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00031.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e22d961345e0ebd92045ef21440a69b226559f51398db07b2c43c39cf1b2b4ac"
+          },
+          {
+            "file": "id00737/00092.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e22d961345e0ebd92045ef21440a69b226559f51398db07b2c43c39cf1b2b4ac"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "e22d961345e0ebd92045ef21440a69b226559f51398db07b2c43c39cf1b2b4ac"
+      },
+      {
+        "fingerprint": "76b1d2620ec11c3e",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00006.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "c7bc6c263f28a4c8fbeec8f5f109977d3345634c205ffeb84970128b4156a490"
+          },
+          {
+            "file": "id00737/00067.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "c7bc6c263f28a4c8fbeec8f5f109977d3345634c205ffeb84970128b4156a490"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "c7bc6c263f28a4c8fbeec8f5f109977d3345634c205ffeb84970128b4156a490"
+      },
+      {
+        "fingerprint": "76d9c0488864cab0",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00011.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ea2c15cfcb5de55b039b3555e06909406ea1888ea87241db2fb2a80363d6466b"
+          },
+          {
+            "file": "id00737/00072.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "ea2c15cfcb5de55b039b3555e06909406ea1888ea87241db2fb2a80363d6466b"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "ea2c15cfcb5de55b039b3555e06909406ea1888ea87241db2fb2a80363d6466b"
+      },
+      {
+        "fingerprint": "7c8f45d76d4a6249",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00024.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "a033462a038ee2303099781b144eb81478ffa5c99c03f5e7f9bc23b897e510aa"
+          },
+          {
+            "file": "id00737/00085.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "a033462a038ee2303099781b144eb81478ffa5c99c03f5e7f9bc23b897e510aa"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a033462a038ee2303099781b144eb81478ffa5c99c03f5e7f9bc23b897e510aa"
+      },
+      {
+        "fingerprint": "7e46ab98afd7cf33",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00041.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "7f050983bd51f3118adbf398598420251dfc88dd3bba9b629e3ea1fc4d5a2ae0"
+          },
+          {
+            "file": "id00737/00102.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "7f050983bd51f3118adbf398598420251dfc88dd3bba9b629e3ea1fc4d5a2ae0"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "7f050983bd51f3118adbf398598420251dfc88dd3bba9b629e3ea1fc4d5a2ae0"
+      },
+      {
+        "fingerprint": "873f2f7c4b9ee366",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00039.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e3940b5d5d770da1d6081e92053e5d3fd713098c30d0b545457119db821d7edf"
+          },
+          {
+            "file": "id00737/00100.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e3940b5d5d770da1d6081e92053e5d3fd713098c30d0b545457119db821d7edf"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "e3940b5d5d770da1d6081e92053e5d3fd713098c30d0b545457119db821d7edf"
+      },
+      {
+        "fingerprint": "8865f81165910647",
+        "files": 2,
+        "speakers": [
+          "id00153",
+          "id00209"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00153/00045.wav",
+            "speaker_id": "id00153",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "1269ac7fd7582f32ee58d2b1164bb8e2b95f1ea38b0f5a04c6c3014b3e10007b"
+          },
+          {
+            "file": "id00209/00015.wav",
+            "speaker_id": "id00209",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00037-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1269ac7fd7582f32ee58d2b1164bb8e2b95f1ea38b0f5a04c6c3014b3e10007b"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "1269ac7fd7582f32ee58d2b1164bb8e2b95f1ea38b0f5a04c6c3014b3e10007b"
+      },
+      {
+        "fingerprint": "8ea6d8f305f4ac0e",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00045.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "045ff5a19f25c6dd75cf2f795f384a834f3b7ba12a298fcdd26d1baf1428cf32"
+          },
+          {
+            "file": "id00344/00078.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "045ff5a19f25c6dd75cf2f795f384a834f3b7ba12a298fcdd26d1baf1428cf32"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "045ff5a19f25c6dd75cf2f795f384a834f3b7ba12a298fcdd26d1baf1428cf32"
+      },
+      {
+        "fingerprint": "8ec609e5d77a756f",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00040.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "80593ad421110da687268d9e5c7a1831bd5bed7a4ca2b0bbe6c5fd715c4d41d8"
+          },
+          {
+            "file": "id00344/00073.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "80593ad421110da687268d9e5c7a1831bd5bed7a4ca2b0bbe6c5fd715c4d41d8"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "80593ad421110da687268d9e5c7a1831bd5bed7a4ca2b0bbe6c5fd715c4d41d8"
+      },
+      {
+        "fingerprint": "91794688ac3b0ded",
+        "files": 2,
+        "speakers": [
+          "id00153",
+          "id00209"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00153/00003.wav",
+            "speaker_id": "id00153",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "a2d4558448a959f2e9a0a82008b56a24f3ba2338f951fe557c8bd85b7ac3d46e"
+          },
+          {
+            "file": "id00209/00000.wav",
+            "speaker_id": "id00209",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00037-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "a2d4558448a959f2e9a0a82008b56a24f3ba2338f951fe557c8bd85b7ac3d46e"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a2d4558448a959f2e9a0a82008b56a24f3ba2338f951fe557c8bd85b7ac3d46e"
+      },
+      {
+        "fingerprint": "96be0098379dd2d2",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00040.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e03dc5117982a3e16c2cc7a5edd17357618a4a562489c9e66731e6247a651461"
+          },
+          {
+            "file": "id00737/00101.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "e03dc5117982a3e16c2cc7a5edd17357618a4a562489c9e66731e6247a651461"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "e03dc5117982a3e16c2cc7a5edd17357618a4a562489c9e66731e6247a651461"
+      },
+      {
+        "fingerprint": "976b31e18528ddbe",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00022.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d87953c7ce4a22446a8c37428d245ac4ec83078ff085d0150c1f67e7188f23cd"
+          },
+          {
+            "file": "id00156/00020.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "d87953c7ce4a22446a8c37428d245ac4ec83078ff085d0150c1f67e7188f23cd"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d87953c7ce4a22446a8c37428d245ac4ec83078ff085d0150c1f67e7188f23cd"
+      },
+      {
+        "fingerprint": "9a66349e4ca894cb",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00044.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "a311a371d341c14327e04475035b359317c072c4f36e33dccec16283e5e8ee9a"
+          },
+          {
+            "file": "id00344/00077.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "a311a371d341c14327e04475035b359317c072c4f36e33dccec16283e5e8ee9a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a311a371d341c14327e04475035b359317c072c4f36e33dccec16283e5e8ee9a"
+      },
+      {
+        "fingerprint": "9b46d28649b51ec8",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00005.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "bcff8a208899ef52402810e9b3633d10e44896c2d5a23db50729702d43f774e0"
+          },
+          {
+            "file": "id00156/00003.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "bcff8a208899ef52402810e9b3633d10e44896c2d5a23db50729702d43f774e0"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "bcff8a208899ef52402810e9b3633d10e44896c2d5a23db50729702d43f774e0"
+      },
+      {
+        "fingerprint": "9d10b1956d73770b",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00019.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "468786bdfe4589306f5baa1f60dc5904f2438e6c5f7464d8245c191ed3387b56"
+          },
+          {
+            "file": "id00737/00080.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "468786bdfe4589306f5baa1f60dc5904f2438e6c5f7464d8245c191ed3387b56"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "468786bdfe4589306f5baa1f60dc5904f2438e6c5f7464d8245c191ed3387b56"
+      },
+      {
+        "fingerprint": "a000666a0aff98bc",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00025.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d2d6805f8192961d655cc16eacefc7db3cb97d7a7cd97489d55d671e055e3e91"
+          },
+          {
+            "file": "id00156/00025.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "d2d6805f8192961d655cc16eacefc7db3cb97d7a7cd97489d55d671e055e3e91"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d2d6805f8192961d655cc16eacefc7db3cb97d7a7cd97489d55d671e055e3e91"
+      },
+      {
+        "fingerprint": "a0fece5d2a30f1cb",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00035.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0b0efe3caddaa6701901ac4bf398e0c7e7c1af3786b8a8f759352c27e7e9826f"
+          },
+          {
+            "file": "id00737/00096.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0b0efe3caddaa6701901ac4bf398e0c7e7c1af3786b8a8f759352c27e7e9826f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "0b0efe3caddaa6701901ac4bf398e0c7e7c1af3786b8a8f759352c27e7e9826f"
+      },
+      {
+        "fingerprint": "a645cec36a816312",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00020.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "f224a8ec0fe02c896680de5c6593d3ef615d8afdea6a4556034fe389fe64300c"
+          },
+          {
+            "file": "id00737/00081.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "f224a8ec0fe02c896680de5c6593d3ef615d8afdea6a4556034fe389fe64300c"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "f224a8ec0fe02c896680de5c6593d3ef615d8afdea6a4556034fe389fe64300c"
+      },
+      {
+        "fingerprint": "a6971bbbb2c0f2b0",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00032.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "dec614b86b0e8f5225c755cf5d4c254025454d26bd90598a10346c3142a29cef"
+          },
+          {
+            "file": "id00737/00093.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "dec614b86b0e8f5225c755cf5d4c254025454d26bd90598a10346c3142a29cef"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "dec614b86b0e8f5225c755cf5d4c254025454d26bd90598a10346c3142a29cef"
+      },
+      {
+        "fingerprint": "a9c6086df9490ff8",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00053.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "a5b4d77f5e4fd3c15edac586f2a5e6b04811ca6be21e589cc965f6ded822396e"
+          },
+          {
+            "file": "id00156/00062.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "a5b4d77f5e4fd3c15edac586f2a5e6b04811ca6be21e589cc965f6ded822396e"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "a5b4d77f5e4fd3c15edac586f2a5e6b04811ca6be21e589cc965f6ded822396e"
+      },
+      {
+        "fingerprint": "ac91dc1f36a30e20",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00027.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "8c89addd3a21f456b35d5c7aa9d89108684d281e9c3fe418739a9b70828b4cf5"
+          },
+          {
+            "file": "id00737/00088.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "8c89addd3a21f456b35d5c7aa9d89108684d281e9c3fe418739a9b70828b4cf5"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "8c89addd3a21f456b35d5c7aa9d89108684d281e9c3fe418739a9b70828b4cf5"
+      },
+      {
+        "fingerprint": "b0e26212a282b892",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00030.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "17a8ef9bc642f9992f9a89822469f6dfb867aa86f699f4a6c9f7509a56e3121f"
+          },
+          {
+            "file": "id00737/00091.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "17a8ef9bc642f9992f9a89822469f6dfb867aa86f699f4a6c9f7509a56e3121f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "17a8ef9bc642f9992f9a89822469f6dfb867aa86f699f4a6c9f7509a56e3121f"
+      },
+      {
+        "fingerprint": "b29d26566e762a1f",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00043.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "db7ad8aabae887ddeb960fb76b30fdceb535529ac2ebe3ae9147330f717eefe6"
+          },
+          {
+            "file": "id00156/00055.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "db7ad8aabae887ddeb960fb76b30fdceb535529ac2ebe3ae9147330f717eefe6"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "db7ad8aabae887ddeb960fb76b30fdceb535529ac2ebe3ae9147330f717eefe6"
+      },
+      {
+        "fingerprint": "b744d3c3e25c93a4",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00027.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "20f92ac7cf60781eaba1394e835e2a6a286a45a67f7c327721a5f08daa77a0cd"
+          },
+          {
+            "file": "id00156/00048.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "20f92ac7cf60781eaba1394e835e2a6a286a45a67f7c327721a5f08daa77a0cd"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "20f92ac7cf60781eaba1394e835e2a6a286a45a67f7c327721a5f08daa77a0cd"
+      },
+      {
+        "fingerprint": "b7c0768f0cf57931",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00018.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0b60c6c1430e1d6673d7085244d0501ab2194b744c642a1bfeca4fc8e88b76d5"
+          },
+          {
+            "file": "id00737/00079.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "0b60c6c1430e1d6673d7085244d0501ab2194b744c642a1bfeca4fc8e88b76d5"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "0b60c6c1430e1d6673d7085244d0501ab2194b744c642a1bfeca4fc8e88b76d5"
+      },
+      {
+        "fingerprint": "bb76a3c3dc79918e",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00007.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "dbbb54e3b2772e2f4e033313ed463f95eacda25287080d1bf357798b7add0857"
+          },
+          {
+            "file": "id00156/00004.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "dbbb54e3b2772e2f4e033313ed463f95eacda25287080d1bf357798b7add0857"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "dbbb54e3b2772e2f4e033313ed463f95eacda25287080d1bf357798b7add0857"
+      },
+      {
+        "fingerprint": "be6f4dbfe89fab30",
+        "files": 2,
+        "speakers": [
+          "id00001",
+          "id00058"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00001/00009.wav",
+            "speaker_id": "id00001",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00000-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "77c79b89e8320f4db4514f360c13badde0b7373a4537f165e1947a488f982963"
+          },
+          {
+            "file": "id00058/00000.wav",
+            "speaker_id": "id00058",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00009-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "77c79b89e8320f4db4514f360c13badde0b7373a4537f165e1947a488f982963"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "77c79b89e8320f4db4514f360c13badde0b7373a4537f165e1947a488f982963"
+      },
+      {
+        "fingerprint": "bed08e9a48e03e77",
+        "files": 2,
+        "speakers": [
+          "id00096",
+          "id00746"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00096/00003.wav",
+            "speaker_id": "id00096",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00018-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1ee8d711b3a095e494ec17c63c09b2ec11551e38ebbc1bcf4755f457d8ab184b"
+          },
+          {
+            "file": "id00746/00000.wav",
+            "speaker_id": "id00746",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00148-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1ee8d711b3a095e494ec17c63c09b2ec11551e38ebbc1bcf4755f457d8ab184b"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "1ee8d711b3a095e494ec17c63c09b2ec11551e38ebbc1bcf4755f457d8ab184b"
+      },
+      {
+        "fingerprint": "c2d0d161647e358b",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00035.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "2166c3ba283e282c0926d94a64d0c9d19b9195655dfd9bd51d2406313c5ed2f0"
+          },
+          {
+            "file": "id00344/00068.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "2166c3ba283e282c0926d94a64d0c9d19b9195655dfd9bd51d2406313c5ed2f0"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "2166c3ba283e282c0926d94a64d0c9d19b9195655dfd9bd51d2406313c5ed2f0"
+      },
+      {
+        "fingerprint": "c6ca23d0aee5c1fe",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00041.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "48431e909da73bd6dd38800f54fbca1e3eab2eb69c5f86330757126dbe0c4dea"
+          },
+          {
+            "file": "id00344/00074.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "48431e909da73bd6dd38800f54fbca1e3eab2eb69c5f86330757126dbe0c4dea"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "48431e909da73bd6dd38800f54fbca1e3eab2eb69c5f86330757126dbe0c4dea"
+      },
+      {
+        "fingerprint": "c8da6d75a0763e64",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00046.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "25caea0e6322b346cd61520ec8dc6f74960b85b7df048c27dbe3707a7518c549"
+          },
+          {
+            "file": "id00737/00107.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "25caea0e6322b346cd61520ec8dc6f74960b85b7df048c27dbe3707a7518c549"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "25caea0e6322b346cd61520ec8dc6f74960b85b7df048c27dbe3707a7518c549"
+      },
+      {
+        "fingerprint": "c9aec5fd0f07ce1e",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00016.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "506c52e361f12cdb5b110ec0d632fe3808a9cc8b84f8784700abc00260198e06"
+          },
+          {
+            "file": "id00737/00077.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "506c52e361f12cdb5b110ec0d632fe3808a9cc8b84f8784700abc00260198e06"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "506c52e361f12cdb5b110ec0d632fe3808a9cc8b84f8784700abc00260198e06"
+      },
+      {
+        "fingerprint": "cdb3d270cd70d181",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00037.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "222cd6819f69a9d7033d1fd3869da365bb4d90419f982c416f4b25c80dd8c78d"
+          },
+          {
+            "file": "id00737/00098.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "222cd6819f69a9d7033d1fd3869da365bb4d90419f982c416f4b25c80dd8c78d"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "222cd6819f69a9d7033d1fd3869da365bb4d90419f982c416f4b25c80dd8c78d"
+      },
+      {
+        "fingerprint": "d10792cc2ae023ec",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00034.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "504e2155ce5a6d0c73fae07fa044ebb125c1fabb78078a794b55e9cd1b17e8c2"
+          },
+          {
+            "file": "id00737/00095.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "504e2155ce5a6d0c73fae07fa044ebb125c1fabb78078a794b55e9cd1b17e8c2"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "504e2155ce5a6d0c73fae07fa044ebb125c1fabb78078a794b55e9cd1b17e8c2"
+      },
+      {
+        "fingerprint": "d1fd3a83a405417f",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00009.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "46e05c76a7d43a4d2a63f9801aa980d49711a30999bbe21f67e3009cf85c29c1"
+          },
+          {
+            "file": "id00156/00007.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "46e05c76a7d43a4d2a63f9801aa980d49711a30999bbe21f67e3009cf85c29c1"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "46e05c76a7d43a4d2a63f9801aa980d49711a30999bbe21f67e3009cf85c29c1"
+      },
+      {
+        "fingerprint": "d4bb411bfd8f010b",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00015.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "29692df34c5a608a4f9a364e860c38198e5552677e711d275f291b0bf5dc3372"
+          },
+          {
+            "file": "id00737/00076.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "29692df34c5a608a4f9a364e860c38198e5552677e711d275f291b0bf5dc3372"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "29692df34c5a608a4f9a364e860c38198e5552677e711d275f291b0bf5dc3372"
+      },
+      {
+        "fingerprint": "e01e2bba2815569c",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00009.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "9ea041b7f5c93a50d17a8880df1e3cc4cab3648cc62b7914d68c569588f35c07"
+          },
+          {
+            "file": "id00737/00070.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "9ea041b7f5c93a50d17a8880df1e3cc4cab3648cc62b7914d68c569588f35c07"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "9ea041b7f5c93a50d17a8880df1e3cc4cab3648cc62b7914d68c569588f35c07"
+      },
+      {
+        "fingerprint": "e6fa3842eb43c825",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00034.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "3d8b2694df853b75e8c24afdce9bde597019d00115b65b05560d22d2d40255e6"
+          },
+          {
+            "file": "id00156/00053.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "3d8b2694df853b75e8c24afdce9bde597019d00115b65b05560d22d2d40255e6"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "3d8b2694df853b75e8c24afdce9bde597019d00115b65b05560d22d2d40255e6"
+      },
+      {
+        "fingerprint": "e7498df74afc4a70",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00012.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d447989a3e37813fe9f325753ca6f4f1a99b2ef4bbd9fb7a9fd33546c132f84f"
+          },
+          {
+            "file": "id00737/00073.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "d447989a3e37813fe9f325753ca6f4f1a99b2ef4bbd9fb7a9fd33546c132f84f"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "d447989a3e37813fe9f325753ca6f4f1a99b2ef4bbd9fb7a9fd33546c132f84f"
+      },
+      {
+        "fingerprint": "e825254ec2cb8d0e",
+        "files": 2,
+        "speakers": [
+          "id00096",
+          "id00746"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00096/00004.wav",
+            "speaker_id": "id00096",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00018-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "2da555f02799ddd38b8e5eb43bd8ca8657dbfbf60fa3b29b7288e677b16fda3a"
+          },
+          {
+            "file": "id00746/00001.wav",
+            "speaker_id": "id00746",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00148-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "2da555f02799ddd38b8e5eb43bd8ca8657dbfbf60fa3b29b7288e677b16fda3a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "2da555f02799ddd38b8e5eb43bd8ca8657dbfbf60fa3b29b7288e677b16fda3a"
+      },
+      {
+        "fingerprint": "f09db84a8959d5c6",
+        "files": 2,
+        "speakers": [
+          "id00023",
+          "id00156"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00023/00054.wav",
+            "speaker_id": "id00023",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00002-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "8262c66399357536489e0c421127f0079014a91f90c50cd7cd8c217e8f27f8d0"
+          },
+          {
+            "file": "id00156/00063.wav",
+            "speaker_id": "id00156",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "8262c66399357536489e0c421127f0079014a91f90c50cd7cd8c217e8f27f8d0"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "8262c66399357536489e0c421127f0079014a91f90c50cd7cd8c217e8f27f8d0"
+      },
+      {
+        "fingerprint": "f0afe377a6301cb4",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00043.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "6e2c6c4ea9375def7178e38b81d178b0e05fb5143a12516fc5f927623855d927"
+          },
+          {
+            "file": "id00344/00076.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "6e2c6c4ea9375def7178e38b81d178b0e05fb5143a12516fc5f927623855d927"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "6e2c6c4ea9375def7178e38b81d178b0e05fb5143a12516fc5f927623855d927"
+      },
+      {
+        "fingerprint": "f2a72ce3fef1c441",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00038.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "20878f13a59264745580e1b8d4530ac004e13150e5c9da2906e6fa06e3cc3a0e"
+          },
+          {
+            "file": "id00737/00099.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "20878f13a59264745580e1b8d4530ac004e13150e5c9da2906e6fa06e3cc3a0e"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "20878f13a59264745580e1b8d4530ac004e13150e5c9da2906e6fa06e3cc3a0e"
+      },
+      {
+        "fingerprint": "f2ee0c3d2e6edd2e",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00022.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "eb2b6f764429c2c20f3c6efb05b87abbd96d8add4723e437ddac9ed5c535632e"
+          },
+          {
+            "file": "id00737/00083.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "eb2b6f764429c2c20f3c6efb05b87abbd96d8add4723e437ddac9ed5c535632e"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "eb2b6f764429c2c20f3c6efb05b87abbd96d8add4723e437ddac9ed5c535632e"
+      },
+      {
+        "fingerprint": "f3bbf3d799b17615",
+        "files": 2,
+        "speakers": [
+          "id00001",
+          "id00058"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00001/00015.wav",
+            "speaker_id": "id00001",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00000-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "474c5d2283853bf34ac5e7749deda1b02ea82d53822564f92349cd2bfafda02a"
+          },
+          {
+            "file": "id00058/00002.wav",
+            "speaker_id": "id00058",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00009-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "474c5d2283853bf34ac5e7749deda1b02ea82d53822564f92349cd2bfafda02a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "474c5d2283853bf34ac5e7749deda1b02ea82d53822564f92349cd2bfafda02a"
+      },
+      {
+        "fingerprint": "f491537624727e69",
+        "files": 2,
+        "speakers": [
+          "id00344"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00344/00037.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "96835905612e8937f35d73ce1f4c32e438b50f4784470594f615c56aed9313e5"
+          },
+          {
+            "file": "id00344/00070.wav",
+            "speaker_id": "id00344",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00064-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "96835905612e8937f35d73ce1f4c32e438b50f4784470594f615c56aed9313e5"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "96835905612e8937f35d73ce1f4c32e438b50f4784470594f615c56aed9313e5"
+      },
+      {
+        "fingerprint": "f529bf4fdcbb34c3",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00042.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1ed87fbeeb19b9a2d930878d5a9ead9343cc102fa872214c6318a083120eea6a"
+          },
+          {
+            "file": "id00737/00103.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "1ed87fbeeb19b9a2d930878d5a9ead9343cc102fa872214c6318a083120eea6a"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "1ed87fbeeb19b9a2d930878d5a9ead9343cc102fa872214c6318a083120eea6a"
+      },
+      {
+        "fingerprint": "fccfb1aa1d81131d",
+        "files": 2,
+        "speakers": [
+          "id00001",
+          "id00058"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_dev",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00001/00011.wav",
+            "speaker_id": "id00001",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00000-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "18552184e4abfe4702975b6e29998005ea282f622202fb25661e02afb0a225a5"
+          },
+          {
+            "file": "id00058/00001.wav",
+            "speaker_id": "id00058",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00009-of-00432.parquet",
+            "closed_split": "closed_dev",
+            "waveform_sha256": "18552184e4abfe4702975b6e29998005ea282f622202fb25661e02afb0a225a5"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "18552184e4abfe4702975b6e29998005ea282f622202fb25661e02afb0a225a5"
+      },
+      {
+        "fingerprint": "fce544d65dd2772d",
+        "files": 2,
+        "speakers": [
+          "id00153",
+          "id00209"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_test",
+          "closed_train"
+        ],
+        "crosses_speakers": true,
+        "crosses_closed_splits": true,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00153/00040.wav",
+            "speaker_id": "id00153",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00028-of-00432.parquet",
+            "closed_split": "closed_test",
+            "waveform_sha256": "96b679e7c3d0b6b80856c05ba1d9c0716b1850a03a6c579f5a8ebce7646ccf86"
+          },
+          {
+            "file": "id00209/00012.wav",
+            "speaker_id": "id00209",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00037-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "96b679e7c3d0b6b80856c05ba1d9c0716b1850a03a6c579f5a8ebce7646ccf86"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "96b679e7c3d0b6b80856c05ba1d9c0716b1850a03a6c579f5a8ebce7646ccf86"
+      },
+      {
+        "fingerprint": "fded541aa25b071d",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00005.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "4c3f89d42ea61b6fe07969d443418dd0442a706963f21ec2aa05536bfdbebf82"
+          },
+          {
+            "file": "id00737/00066.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "4c3f89d42ea61b6fe07969d443418dd0442a706963f21ec2aa05536bfdbebf82"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "4c3f89d42ea61b6fe07969d443418dd0442a706963f21ec2aa05536bfdbebf82"
+      },
+      {
+        "fingerprint": "fe54160f9dd06c2a",
+        "files": 2,
+        "speakers": [
+          "id00737"
+        ],
+        "utt_types": [
+          "bonafide"
+        ],
+        "sample_rates": [
+          16000
+        ],
+        "closed_splits": [
+          "closed_train"
+        ],
+        "crosses_speakers": false,
+        "crosses_closed_splits": false,
+        "mixes_binary_labels": false,
+        "members": [
+          {
+            "file": "id00737/00021.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "8e3dce07506699f0b93365e4610abcf32252b5e4b6fd0348699e4f95b5e5b254"
+          },
+          {
+            "file": "id00737/00082.wav",
+            "speaker_id": "id00737",
+            "utt_type": "bonafide",
+            "sampling_rate": "16000",
+            "shard": "train-00147-of-00432.parquet",
+            "closed_split": "closed_train",
+            "waveform_sha256": "8e3dce07506699f0b93365e4610abcf32252b5e4b6fd0348699e4f95b5e5b254"
+          }
+        ],
+        "cryptographically_confirmed": true,
+        "waveform_sha256": "8e3dce07506699f0b93365e4610abcf32252b5e4b6fd0348699e4f95b5e5b254"
+      }
+    ],
+    "fingerprint_method": "DuckDB 64-bit hash(audio.array); useful as a duplicate screen, not a cryptographic identity proof.",
+    "development_manifest_duplicates": {
+      "path": "data/manifests/development_20k_v1.csv",
+      "available": true,
+      "sha256": "63df695e232a424c95ebd869f1d71cae715040ec30428177967cac26c6c5e673",
+      "groups_with_multiple_members": 38,
+      "groups_crossing_splits": 17,
+      "files_in_duplicate_groups": 76
+    }
   },
   "splits": {
     "directory": "data/splits",
@@ -441,7 +4973,7 @@
     }
   },
   "conclusion": {
-    "safe_to_use_for_pipeline_development": true,
+    "safe_to_use_for_pipeline_development": false,
     "safe_to_claim_official_vsasv_reproduction": false,
     "recommended_dataset_name": "VSASV-HF-public-snapshot-v1",
     "required_training_controls": [

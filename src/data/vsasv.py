@@ -19,6 +19,7 @@ from .amplitude import (
     VALID_AMPLITUDE_POLICIES,
     apply_amplitude_policy,
 )
+from .segment import fixed_length_segment
 
 
 VALID_UTT_TYPES = frozenset(
@@ -399,26 +400,6 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         material = f"{self.seed}:{self.epoch}:{index}".encode("ascii")
         return int.from_bytes(hashlib.sha256(material).digest()[:8], "big")
 
-    def _fixed_length(self, waveform: torch.Tensor, index: int) -> torch.Tensor:
-        length = waveform.numel()
-        if length == self.target_samples:
-            return waveform
-        if length > self.target_samples:
-            maximum_start = length - self.target_samples
-            if self.training:
-                generator = torch.Generator().manual_seed(self._crop_seed(index))
-                start = int(
-                    torch.randint(
-                        maximum_start + 1, size=(1,), generator=generator
-                    ).item()
-                )
-            else:
-                start = maximum_start // 2
-            return waveform[start : start + self.target_samples]
-
-        repeats = math.ceil(self.target_samples / length)
-        return waveform.repeat(repeats)[: self.target_samples]
-
     def __len__(self) -> int:
         return len(self.records)
 
@@ -437,7 +418,17 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             minimum_input_rms_dbfs=self.minimum_input_rms_dbfs,
         )
         waveform = amplitude_result.waveform
-        waveform = self._fixed_length(waveform, index).contiguous()
+        crop_generator = (
+            torch.Generator().manual_seed(self._crop_seed(index))
+            if self.training
+            else None
+        )
+        waveform = fixed_length_segment(
+            waveform,
+            self.target_samples,
+            training=self.training,
+            rng=crop_generator,
+        ).contiguous()
 
         if waveform.shape != (self.target_samples,):
             raise RuntimeError(

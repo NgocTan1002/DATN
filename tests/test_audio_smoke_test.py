@@ -2,11 +2,35 @@ from __future__ import annotations
 
 import math
 import unittest
+from unittest.mock import MagicMock
 
-from scripts.audio_smoke_test import render_markdown, summarize_waveform
+from scripts.audio_smoke_test import (
+    configure_duckdb,
+    percentile_cont,
+    render_markdown,
+    summarize_waveform,
+)
 
 
 class WaveformSummaryTests(unittest.TestCase):
+    def test_continuous_percentile_interpolates_between_values(self) -> None:
+        self.assertEqual(percentile_cont([1.0, 2.0, 3.0, 4.0], 0.5), 2.5)
+        self.assertAlmostEqual(percentile_cont([1.0, 2.0, 3.0], 0.95), 2.9)
+
+    def test_duckdb_scan_is_configured_for_bounded_memory(self) -> None:
+        connection = MagicMock()
+
+        configure_duckdb(connection)
+
+        self.assertEqual(
+            [call.args[0] for call in connection.execute.call_args_list],
+            [
+                "SET threads = 1",
+                "SET preserve_insertion_order = false",
+                "SET memory_limit = '8GB'",
+            ],
+        )
+
     def test_regular_waveform(self) -> None:
         result = summarize_waveform([0.0, 0.5, -0.5, 1.0], sampling_rate=4)
         self.assertEqual(result["samples"], 4)

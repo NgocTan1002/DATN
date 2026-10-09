@@ -317,7 +317,7 @@ Trước khi tải tiếp, mở CSV và ghi các số tổng vào kế hoạch. 
 
 ## 9. Tạo manifest ứng viên sau khi đủ audio
 
-Hiện repository chưa có script tạo manifest 20.000 mẫu. Không ghép CSV thủ công. Cần triển khai `scripts/make_development_manifest.py` cùng kiểm thử trước khi sinh artifact chính thức.
+Repository đã có `scripts/make_development_manifest.py`, kiểm thử đi kèm và manifest `development-20k-v1`. Không ghép CSV thủ công; khi cần tái sinh phải dùng script để giữ đúng quy tắc chọn đã khóa.
 
 Script phải thực hiện đúng các bước sau:
 
@@ -337,7 +337,7 @@ python -m unittest discover -s tests -v
 python scripts\make_development_manifest.py --target-total 20000 --seed 2026
 ```
 
-Lệnh thứ hai là giao diện dự kiến; chỉ chạy sau khi script đã được triển khai đúng giao diện này. Khi chốt quy tắc lấy mẫu hoặc quy mô cuối, ghi một quyết định mới trong `docs/decisions.md`.
+Lệnh thứ hai tái sinh manifest theo giao diện đã triển khai. Nếu thay quy tắc lấy mẫu hoặc quy mô đã khóa, phải ghi một quyết định mới trong `docs/decisions.md` trước khi tạo phiên bản manifest mới.
 
 ## 10. Kết thúc và bàn giao
 
