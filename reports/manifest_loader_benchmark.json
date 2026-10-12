@@ -1,0 +1,594 @@
+{
+  "status": "ĐẠT",
+  "created_at": "2026-10-10T15:35:15+07:00",
+  "scope": "technical_manifest_loader_ab_benchmark_not_scientific_result",
+  "protocol": {
+    "seed": 2026,
+    "samples": 16,
+    "repeats": 3,
+    "batch_size": 8,
+    "workers": [
+      0,
+      2
+    ],
+    "amplitude_policy": "none",
+    "training": true,
+    "epoch": 0,
+    "manifest_version": "development-20k-v2",
+    "split_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\splits\\closed_train.csv",
+    "manifest_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\manifests\\development_20k_v2.csv",
+    "parquet_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\raw\\vsasv_parquet\\data"
+  },
+  "cache_protocol": {
+    "os_cache_flushed": false,
+    "claim": "warm_or_uncontrolled_os_cache",
+    "initialization_order": [
+      [
+        "legacy",
+        "manifest"
+      ],
+      [
+        "manifest",
+        "legacy"
+      ],
+      [
+        "legacy",
+        "manifest"
+      ]
+    ],
+    "run_order": [
+      [
+        "legacy_workers0",
+        "manifest_workers0",
+        "legacy_workers2",
+        "manifest_workers2"
+      ],
+      [
+        "manifest_workers2",
+        "legacy_workers2",
+        "manifest_workers0",
+        "legacy_workers0"
+      ],
+      [
+        "legacy_workers0",
+        "manifest_workers0",
+        "legacy_workers2",
+        "manifest_workers2"
+      ]
+    ]
+  },
+  "selection": {
+    "files": [
+      "id00452/00000.wav",
+      "id00689/00066.wav",
+      "id00027/00046.wav",
+      "id00686/00160.wav",
+      "id00636/00017.wav",
+      "id01009/voice_conversion/id01009_vc_00535.wav",
+      "id01026/bonafide/00002.wav",
+      "id00742/00159.wav",
+      "id01042/voice_conversion/id01042_vc_02320.wav",
+      "id01115/bonafide/00002.wav",
+      "id01037/adversarial_attack/17299.wav",
+      "id00565/00031.wav",
+      "id01037/adversarial_attack/17300.wav",
+      "id00009/00001.wav",
+      "id01080/adversarial_attack/33356.wav",
+      "id00565/00015.wav"
+    ],
+    "file_list_sha256": "7167059f160e12cfe6ac6973d78cff54a54b6b948de4afeb5571b158fa543b56",
+    "shards": 14,
+    "utt_type_counts": {
+      "adversarial_attack": 3,
+      "bonafide": 11,
+      "voice_conversion": 2
+    },
+    "native_sample_rate_counts": {
+      "16000": 14,
+      "40000": 2
+    }
+  },
+  "equivalence": {
+    "status": "ĐẠT",
+    "checked_files": 16,
+    "fields": [
+      "file",
+      "speaker_id",
+      "utt_type",
+      "label",
+      "waveform_sha256"
+    ],
+    "reference": [
+      {
+        "file": "id00452/00000.wav",
+        "speaker_id": "id00452",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "a7e13f67c7e5a467be4df9eb990c78f887c52481c90446ea4ae0fec30b1932fa"
+      },
+      {
+        "file": "id00689/00066.wav",
+        "speaker_id": "id00689",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "607866efda9226e00207ae7c2f0a457ae707936d7588165db36d8760f543f6e5"
+      },
+      {
+        "file": "id00027/00046.wav",
+        "speaker_id": "id00027",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "978f5ad13d87b7a12a604b59fce01d3417b8db852781dea502a5406ca1193eba"
+      },
+      {
+        "file": "id00686/00160.wav",
+        "speaker_id": "id00686",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "772d2562438ffc6af5717cb381f4295d84f7fdbd1c06cee8dacd66fe5bfe4fe8"
+      },
+      {
+        "file": "id00636/00017.wav",
+        "speaker_id": "id00636",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "f245f97d820a703e2a918528958dab76e759c4cf9b25b7f598337dc16eeb6202"
+      },
+      {
+        "file": "id01009/voice_conversion/id01009_vc_00535.wav",
+        "speaker_id": "id01009",
+        "utt_type": "voice_conversion",
+        "label": 1.0,
+        "waveform_sha256": "75934394030362ac0f4c6ce3cb484d0b188c0d7f2d37af2da6a8ec378037f1e2"
+      },
+      {
+        "file": "id01026/bonafide/00002.wav",
+        "speaker_id": "id01026",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "d7b32b8e1dd9facdaa038ffcd5c85566c5e270c4677f836d1e4c0089e109fc48"
+      },
+      {
+        "file": "id00742/00159.wav",
+        "speaker_id": "id00742",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "2362aa757d05bc96740c5f270b0c304fdbef20aad91b990fd3f723d0bdf4910a"
+      },
+      {
+        "file": "id01042/voice_conversion/id01042_vc_02320.wav",
+        "speaker_id": "id01042",
+        "utt_type": "voice_conversion",
+        "label": 1.0,
+        "waveform_sha256": "8763f31b668d6501a440e07fc4c6a213e44ee3a06d3a8b91121752d25eea1dbf"
+      },
+      {
+        "file": "id01115/bonafide/00002.wav",
+        "speaker_id": "id01115",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "ce01944336d1958ec7b9f572c94bd5e9b28c70fd05457c3a258a262e9f8f5f2e"
+      },
+      {
+        "file": "id01037/adversarial_attack/17299.wav",
+        "speaker_id": "id01037",
+        "utt_type": "adversarial_attack",
+        "label": 1.0,
+        "waveform_sha256": "1373f1bad17a925f92824ed82961f711c6743d02058dc23ad2b2ea5c0cab1018"
+      },
+      {
+        "file": "id00565/00031.wav",
+        "speaker_id": "id00565",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "c5e2360d44a7e97551c4b6bd36d1da52813cdca859f7aa18416d67b7114b14c8"
+      },
+      {
+        "file": "id01037/adversarial_attack/17300.wav",
+        "speaker_id": "id01037",
+        "utt_type": "adversarial_attack",
+        "label": 1.0,
+        "waveform_sha256": "8c7eadc629a85856a85131fbd0936b1d084740c9ded52b0d395a0b9a12e52156"
+      },
+      {
+        "file": "id00009/00001.wav",
+        "speaker_id": "id00009",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "e1b87ee3149818c7b46dcdb1ab513d830ab5b40b4319bb42cce9a12b06b76bec"
+      },
+      {
+        "file": "id01080/adversarial_attack/33356.wav",
+        "speaker_id": "id01080",
+        "utt_type": "adversarial_attack",
+        "label": 1.0,
+        "waveform_sha256": "2ed002faccaaa81177bee935a17a5f3fa75a63f346345c8b3f04419107288079"
+      },
+      {
+        "file": "id00565/00015.wav",
+        "speaker_id": "id00565",
+        "utt_type": "bonafide",
+        "label": 0.0,
+        "waveform_sha256": "f8a5deb6d2a388bc631754406bfd963553257576f5dddf50cd3ef7be9a89d32f"
+      }
+    ]
+  },
+  "initialization": {
+    "legacy": {
+      "available_records": 22767,
+      "declared_split_rows": 150999,
+      "local_coverage": 0.1507758329525361,
+      "timing_seconds": {
+        "count": 3,
+        "total_seconds": 4.244020199999795,
+        "mean_ms": 1414.6733999999317,
+        "median_ms": 1065.4664999965462,
+        "p95_ms": 2025.4111800044484,
+        "minimum_ms": 1046.4819999979227,
+        "maximum_ms": 2132.0717000053264,
+        "values_seconds": [
+          2.1320717000053264,
+          1.0464819999979227,
+          1.0654664999965462
+        ]
+      }
+    },
+    "manifest": {
+      "available_records": 15885,
+      "declared_split_rows": 15885,
+      "local_coverage": 1.0,
+      "timing_seconds": {
+        "count": 3,
+        "total_seconds": 2.1445171000013943,
+        "mean_ms": 714.839033333798,
+        "median_ms": 714.0862000014749,
+        "p95_ms": 809.1779499984115,
+        "minimum_ms": 610.6872000018484,
+        "maximum_ms": 819.743699998071,
+        "values_seconds": [
+          0.819743699998071,
+          0.7140862000014749,
+          0.6106872000018484
+        ]
+      },
+      "time_reduction_vs_legacy_percent": 32.979009663486394
+    }
+  },
+  "variants": {
+    "legacy_workers0": {
+      "loader": "legacy",
+      "num_workers": 0,
+      "samples_per_run": 16,
+      "repeats": 3,
+      "throughput_samples_per_second": 0.6313761850604096,
+      "run_seconds": {
+        "count": 3,
+        "total_seconds": 76.02440689999639,
+        "mean_ms": 25341.468966665463,
+        "median_ms": 25321.230400004424,
+        "p95_ms": 26867.097489997832,
+        "minimum_ms": 23664.31599999487,
+        "maximum_ms": 27038.8604999971,
+        "values_seconds": [
+          23.66431599999487,
+          25.321230400004424,
+          27.0388604999971
+        ]
+      },
+      "startup_seconds": {
+        "count": 3,
+        "total_seconds": 0.004626599999028258,
+        "mean_ms": 1.542199999676086,
+        "median_ms": 0.11829999857582152,
+        "p95_ms": 3.965889998653437,
+        "minimum_ms": 0.11490000179037452,
+        "maximum_ms": 4.393399998662062,
+        "values_seconds": [
+          0.004393399998662062,
+          0.00011490000179037452,
+          0.00011829999857582152
+        ]
+      },
+      "first_batch_seconds": {
+        "count": 3,
+        "total_seconds": 43.08367839999846,
+        "mean_ms": 14361.22613333282,
+        "median_ms": 14470.310900003824,
+        "p95_ms": 15087.299330001406,
+        "minimum_ms": 13457.5138999935,
+        "maximum_ms": 15155.853600001137,
+        "values_seconds": [
+          13.4575138999935,
+          14.470310900003824,
+          15.155853600001137
+        ]
+      },
+      "peak_rss_mib": 344.66015625,
+      "runs": [
+        {
+          "seconds": 23.66431599999487,
+          "startup_seconds": 0.004393399998662062,
+          "first_batch_seconds": 13.4575138999935,
+          "all_batch_wait_seconds": 23.650578299995686,
+          "peak_rss_mib": 329.58203125,
+          "repeat": 1.0
+        },
+        {
+          "seconds": 25.321230400004424,
+          "startup_seconds": 0.00011490000179037452,
+          "first_batch_seconds": 14.470310900003824,
+          "all_batch_wait_seconds": 25.314680000003136,
+          "peak_rss_mib": 344.66015625,
+          "repeat": 2.0
+        },
+        {
+          "seconds": 27.0388604999971,
+          "startup_seconds": 0.00011829999857582152,
+          "first_batch_seconds": 15.155853600001137,
+          "all_batch_wait_seconds": 27.028678999995464,
+          "peak_rss_mib": 343.83203125,
+          "repeat": 3.0
+        }
+      ]
+    },
+    "manifest_workers0": {
+      "loader": "manifest",
+      "num_workers": 0,
+      "samples_per_run": 16,
+      "repeats": 3,
+      "throughput_samples_per_second": 0.6448514903188635,
+      "run_seconds": {
+        "count": 3,
+        "total_seconds": 74.4357433000041,
+        "mean_ms": 24811.914433334703,
+        "median_ms": 25221.046200000274,
+        "p95_ms": 25478.92293000259,
+        "minimum_ms": 23707.121200000984,
+        "maximum_ms": 25507.57590000285,
+        "values_seconds": [
+          23.707121200000984,
+          25.221046200000274,
+          25.50757590000285
+        ]
+      },
+      "startup_seconds": {
+        "count": 3,
+        "total_seconds": 0.0005033999987062998,
+        "mean_ms": 0.1677999995687666,
+        "median_ms": 0.13310000213095918,
+        "p95_ms": 0.2537899978051427,
+        "minimum_ms": 0.10309999925084412,
+        "maximum_ms": 0.2671999973244965,
+        "values_seconds": [
+          0.0002671999973244965,
+          0.00010309999925084412,
+          0.00013310000213095918
+        ]
+      },
+      "first_batch_seconds": {
+        "count": 3,
+        "total_seconds": 43.45188179999968,
+        "mean_ms": 14483.960599999895,
+        "median_ms": 14483.74679999688,
+        "p95_ms": 14974.73568000496,
+        "minimum_ms": 13938.844999996945,
+        "maximum_ms": 15029.290000005858,
+        "values_seconds": [
+          13.938844999996945,
+          14.48374679999688,
+          15.029290000005858
+        ]
+      },
+      "peak_rss_mib": 345.6640625,
+      "runs": [
+        {
+          "seconds": 23.707121200000984,
+          "startup_seconds": 0.0002671999973244965,
+          "first_batch_seconds": 13.938844999996945,
+          "all_batch_wait_seconds": 23.69753459999629,
+          "peak_rss_mib": 342.01953125,
+          "repeat": 1.0
+        },
+        {
+          "seconds": 25.221046200000274,
+          "startup_seconds": 0.00010309999925084412,
+          "first_batch_seconds": 14.48374679999688,
+          "all_batch_wait_seconds": 25.214311000003363,
+          "peak_rss_mib": 330.0625,
+          "repeat": 2.0
+        },
+        {
+          "seconds": 25.50757590000285,
+          "startup_seconds": 0.00013310000213095918,
+          "first_batch_seconds": 15.029290000005858,
+          "all_batch_wait_seconds": 25.4997385000097,
+          "peak_rss_mib": 345.6640625,
+          "repeat": 3.0
+        }
+      ]
+    },
+    "legacy_workers2": {
+      "loader": "legacy",
+      "num_workers": 2,
+      "samples_per_run": 16,
+      "repeats": 3,
+      "throughput_samples_per_second": 0.5675031930537264,
+      "run_seconds": {
+        "count": 3,
+        "total_seconds": 84.581021900005,
+        "mean_ms": 28193.67396666833,
+        "median_ms": 28172.577200006344,
+        "p95_ms": 29741.539099998772,
+        "minimum_ms": 26492.576500000723,
+        "maximum_ms": 29915.86819999793,
+        "values_seconds": [
+          26.492576500000723,
+          28.172577200006344,
+          29.91586819999793
+        ]
+      },
+      "startup_seconds": {
+        "count": 3,
+        "total_seconds": 0.9859808999972302,
+        "mean_ms": 328.6602999990767,
+        "median_ms": 328.1760999961989,
+        "p95_ms": 351.23905000145896,
+        "minimum_ms": 304.00319999898784,
+        "maximum_ms": 353.8016000020434,
+        "values_seconds": [
+          0.3538016000020434,
+          0.30400319999898784,
+          0.3281760999961989
+        ]
+      },
+      "first_batch_seconds": {
+        "count": 3,
+        "total_seconds": 81.82298430000083,
+        "mean_ms": 27274.328100000275,
+        "median_ms": 27261.032500005967,
+        "p95_ms": 28801.722519999745,
+        "minimum_ms": 25589.0414999958,
+        "maximum_ms": 28972.910299999057,
+        "values_seconds": [
+          25.5890414999958,
+          27.261032500005967,
+          28.972910299999057
+        ]
+      },
+      "peak_rss_mib": 865.41015625,
+      "runs": [
+        {
+          "seconds": 26.492576500000723,
+          "startup_seconds": 0.3538016000020434,
+          "first_batch_seconds": 25.5890414999958,
+          "all_batch_wait_seconds": 25.58970899999258,
+          "peak_rss_mib": 861.75,
+          "repeat": 1.0
+        },
+        {
+          "seconds": 28.172577200006344,
+          "startup_seconds": 0.30400319999898784,
+          "first_batch_seconds": 27.261032500005967,
+          "all_batch_wait_seconds": 27.261810500007414,
+          "peak_rss_mib": 848.69140625,
+          "repeat": 2.0
+        },
+        {
+          "seconds": 29.91586819999793,
+          "startup_seconds": 0.3281760999961989,
+          "first_batch_seconds": 28.972910299999057,
+          "all_batch_wait_seconds": 28.97421580000082,
+          "peak_rss_mib": 865.41015625,
+          "repeat": 3.0
+        }
+      ]
+    },
+    "manifest_workers2": {
+      "loader": "manifest",
+      "num_workers": 2,
+      "samples_per_run": 16,
+      "repeats": 3,
+      "throughput_samples_per_second": 0.5931241709776646,
+      "run_seconds": {
+        "count": 3,
+        "total_seconds": 80.92740500000218,
+        "mean_ms": 26975.801666667394,
+        "median_ms": 26071.685299997625,
+        "p95_ms": 28726.322330001127,
+        "minimum_ms": 25834.437700003036,
+        "maximum_ms": 29021.28200000152,
+        "values_seconds": [
+          25.834437700003036,
+          29.02128200000152,
+          26.071685299997625
+        ]
+      },
+      "startup_seconds": {
+        "count": 3,
+        "total_seconds": 0.8315093999990495,
+        "mean_ms": 277.16979999968316,
+        "median_ms": 275.7512000025599,
+        "p95_ms": 286.4575099985814,
+        "minimum_ms": 268.11109999835026,
+        "maximum_ms": 287.6470999981393,
+        "values_seconds": [
+          0.26811109999835026,
+          0.2757512000025599,
+          0.2876470999981393
+        ]
+      },
+      "first_batch_seconds": {
+        "count": 3,
+        "total_seconds": 78.31418570000096,
+        "mean_ms": 26104.72856666699,
+        "median_ms": 25191.733399995428,
+        "p95_ms": 27857.444479998958,
+        "minimum_ms": 24968.817700006184,
+        "maximum_ms": 28153.63459999935,
+        "values_seconds": [
+          24.968817700006184,
+          28.15363459999935,
+          25.191733399995428
+        ]
+      },
+      "peak_rss_mib": 848.06640625,
+      "runs": [
+        {
+          "seconds": 25.834437700003036,
+          "startup_seconds": 0.26811109999835026,
+          "first_batch_seconds": 24.968817700006184,
+          "all_batch_wait_seconds": 24.969468400006008,
+          "peak_rss_mib": 846.83984375,
+          "repeat": 1.0
+        },
+        {
+          "seconds": 29.02128200000152,
+          "startup_seconds": 0.2757512000025599,
+          "first_batch_seconds": 28.15363459999935,
+          "all_batch_wait_seconds": 28.15443999999843,
+          "peak_rss_mib": 847.6171875,
+          "repeat": 2.0
+        },
+        {
+          "seconds": 26.071685299997625,
+          "startup_seconds": 0.2876470999981393,
+          "first_batch_seconds": 25.191733399995428,
+          "all_batch_wait_seconds": 25.192708499998844,
+          "peak_rss_mib": 848.06640625,
+          "repeat": 3.0
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "manifest_vs_legacy_by_worker": {
+      "0": {
+        "manifest_vs_legacy_throughput_percent": 2.1342751876465726,
+        "manifest_minus_legacy_peak_rss_mib": 1.00390625
+      },
+      "2": {
+        "manifest_vs_legacy_throughput_percent": 4.514684364341992,
+        "manifest_minus_legacy_peak_rss_mib": -17.34375
+      }
+    },
+    "manifest_worker_comparison": {
+      "workers2_vs_workers0_throughput_percent": -8.021586383497537,
+      "workers2_minus_workers0_peak_rss_mib": 502.40234375
+    }
+  },
+  "decision": {
+    "minimum_improvement_percent": 15.0,
+    "manifest_workers2_speed_threshold_met": false,
+    "status": "GIỮ D014",
+    "recommendation": "Giữ batch_size=8, num_workers=0 vì worker 2 chưa vượt ngưỡng cải thiện 15% trên loader manifest."
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "python": "3.12.14",
+    "pytorch": "2.11.0+cpu",
+    "duckdb": "1.5.5",
+    "logical_cpu_count": 16,
+    "torch_threads": 12
+  }
+}

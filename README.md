@@ -4,7 +4,7 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Snapshot nguồn có 91 nhóm/182 file waveform bonafide trùng, nhưng development manifest `development-20k-v2` đã khử trùng nội dung trước chọn quota và giữ đúng 15.885 mẫu train cùng 4.115 mẫu development. Audit độc lập đã băm lại 20.000/20.000 waveform và xác nhận 20.000 content hash duy nhất, không còn nhóm trùng trong cùng split hoặc đi qua train/development. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 09/10/2026 có 78/78 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development.
+Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Snapshot nguồn có 91 nhóm/182 file waveform bonafide trùng, nhưng development manifest `development-20k-v2` đã khử trùng nội dung trước chọn quota và giữ đúng 15.885 mẫu train cùng 4.115 mẫu development. Audit độc lập đã băm lại 20.000/20.000 waveform và xác nhận 20.000 content hash duy nhất, không còn nhóm trùng trong cùng split hoặc đi qua train/development. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Benchmark A/B ngày 10/10 giữ `batch_size=8`, `num_workers=0`; loader manifest và split cũ cho waveform tương đương trên cùng file, còn hai worker chậm hơn 8,02% và tăng peak RSS khoảng 502 MiB trên loader manifest. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 10/10/2026 có 86/86 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development.
 
 ## Phạm vi phiên bản đầu
 
@@ -180,6 +180,14 @@ python scripts/benchmark_dataloader_options.py
 ```
 
 Trên cùng 16 mẫu và ba lần lặp, batch size 4 chỉ nhanh hơn 1,25%, batch size 16 chậm hơn 6,57%, còn hai worker nhanh hơn 14,42% nhưng peak RSS cây tiến trình tăng từ khoảng 531 MiB lên 1.831 MiB. Do mức tăng tốc không vượt ngưỡng chấp nhận 15% và chi phí bộ nhớ lớn, cấu hình kỹ thuật hiện giữ `batch_size=8`, `num_workers=0`. Báo cáo đầy đủ nằm tại `reports/data_pipeline_benchmark.*` và `reports/data_pipeline_optimization.*`.
+
+So sánh trực tiếp loader split cũ và loader manifest v2 trên cùng danh sách file:
+
+```powershell
+python scripts/benchmark_manifest_loaders.py
+```
+
+Benchmark ngày 10/10 dùng 16 file thuộc 14 shard, seed `2026`, train mode, policy `none`, batch 8, worker 0/2 và ba lần lặp. File, speaker, `utt_type`, nhãn và checksum waveform sau tiền xử lý khớp giữa hai loader. Với worker 0, manifest đạt 0,645 mẫu/giây, nhanh hơn split cũ 2,13%; với worker 2, manifest đạt 0,593 mẫu/giây. Trên chính loader manifest, hai worker chậm hơn 8,02% và tăng peak RSS 502,40 MiB, nên D014 tiếp tục giữ worker 0. Manifest giảm trung vị thời gian khởi tạo 32,98% so với split cũ. Báo cáo nằm tại `reports/manifest_loader_benchmark.*`; đây là benchmark DataLoader kỹ thuật trên cache hệ điều hành không bị xóa, không phải throughput train end-to-end hoặc kết quả khoa học.
 
 Dự báo lại thời gian từ các báo cáo đã đo:
 
