@@ -7,7 +7,7 @@ import hashlib
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Iterable, Literal
 
 import duckdb
 import torch
@@ -38,6 +38,38 @@ MANIFEST_COLUMNS = (
     "native_sample_rate",
     "source_snapshot",
 )
+
+
+def configure_duckdb(connection: duckdb.DuckDBPyConnection) -> None:
+    """Bound DuckDB resource use for multi-shard scans and lazy reads."""
+
+    connection.execute("SET threads = 1")
+    connection.execute("SET preserve_insertion_order = false")
+    connection.execute("SET memory_limit = '8GB'")
+
+
+def build_local_audio_index(
+    rows: Iterable[tuple[Any, Any, Any, Any]],
+) -> dict[str, tuple[Path, str, str]]:
+    """Build an audio index while resolving each shard path only once."""
+
+    index: dict[str, tuple[Path, str, str]] = {}
+    resolved_shards: dict[str, Path] = {}
+    for logical_file, speaker_id, utt_type, shard_name in rows:
+        file_name = str(logical_file)
+        if file_name in index:
+            raise ValueError(f"Audio cục bộ bị lặp file: {file_name}")
+        shard_text = str(shard_name)
+        shard_path = resolved_shards.get(shard_text)
+        if shard_path is None:
+            shard_path = Path(shard_text).resolve()
+            resolved_shards[shard_text] = shard_path
+        index[file_name] = (
+            shard_path,
+            str(speaker_id),
+            str(utt_type),
+        )
+    return index
 
 
 @dataclass(frozen=True)
@@ -153,6 +185,7 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         parquet_glob = (self.parquet_dir / "*.parquet").as_posix()
         connection = duckdb.connect(database=":memory:")
         try:
+            configure_duckdb(connection)
             rows = connection.execute(
                 """
                 SELECT file, label, utt_type, filename
@@ -164,16 +197,7 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         finally:
             connection.close()
 
-        index: dict[str, tuple[Path, str, str]] = {}
-        for logical_file, speaker_id, utt_type, shard_name in rows:
-            if logical_file in index:
-                raise ValueError(f"Audio cục bộ bị lặp file: {logical_file}")
-            index[logical_file] = (
-                Path(shard_name).resolve(),
-                str(speaker_id),
-                str(utt_type),
-            )
-        return index
+        return build_local_audio_index(rows)
 
     def _read_split(
         self, local_index: dict[str, tuple[Path, str, str]]
@@ -351,6 +375,7 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
     def _get_connection(self) -> duckdb.DuckDBPyConnection:
         if self._connection is None:
             self._connection = duckdb.connect(database=":memory:")
+            configure_duckdb(self._connection)
         return self._connection
 
     def _load_audio(self, record: VSASVRecord) -> tuple[torch.Tensor, int]:

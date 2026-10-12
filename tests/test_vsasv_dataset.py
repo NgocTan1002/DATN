@@ -4,14 +4,48 @@ import csv
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import duckdb
 import torch
 
 from src.data import VSASVParquetDataset
+from src.data.vsasv import build_local_audio_index, configure_duckdb
 
 
 class VSASVParquetDatasetTests(unittest.TestCase):
+    def test_local_index_resolves_each_shard_only_once(self) -> None:
+        rows = [
+            ("a.wav", "s1", "bonafide", "one.parquet"),
+            ("b.wav", "s2", "voice_conversion", "one.parquet"),
+            ("c.wav", "s3", "replay", "two.parquet"),
+        ]
+
+        def fake_resolve(path: Path, strict: bool = False) -> Path:
+            del strict
+            return Path("resolved") / path.name
+
+        with patch.object(Path, "resolve", autospec=True, side_effect=fake_resolve) as resolve:
+            index = build_local_audio_index(rows)
+
+        self.assertEqual(resolve.call_count, 2)
+        self.assertIs(index["a.wav"][0], index["b.wav"][0])
+        self.assertEqual(index["c.wav"][0], Path("resolved") / "two.parquet")
+
+    def test_duckdb_is_configured_for_bounded_memory(self) -> None:
+        connection = MagicMock()
+
+        configure_duckdb(connection)
+
+        self.assertEqual(
+            [call.args[0] for call in connection.execute.call_args_list],
+            [
+                "SET threads = 1",
+                "SET preserve_insertion_order = false",
+                "SET memory_limit = '8GB'",
+            ],
+        )
+
     def setUp(self) -> None:
         self.temporary_directory = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary_directory.name)
