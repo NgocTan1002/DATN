@@ -430,48 +430,6 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
             raise ValueError(f"Waveform chứa NaN hoặc Inf: {record.file}")
         return waveform, sample_rate
 
-    def _load_audio_batch(
-        self, records: list[VSASVRecord]
-    ) -> dict[str, tuple[torch.Tensor, int]]:
-        """Load all requested records from one shard with one query."""
-
-        if not records:
-            return {}
-        shard = records[0].shard
-        if any(record.shard != shard for record in records):
-            raise ValueError("Một lượt đọc batch chỉ được chứa record của một shard.")
-
-        records_by_file: dict[str, VSASVRecord] = {}
-        for record in records:
-            previous = records_by_file.setdefault(record.file, record)
-            if previous != record:
-                raise ValueError(
-                    f"Cùng file có metadata không nhất quán trong batch: {record.file}"
-                )
-
-        requested_files = list(records_by_file)
-        rows = self._get_connection().execute(
-            """
-            SELECT file, audio, label, utt_type
-            FROM read_parquet(?)
-            WHERE file = ANY(?)
-            """,
-            [shard.as_posix(), requested_files],
-        ).fetchall()
-
-        rows_by_file: dict[str, list[tuple[Any, Any, Any]]] = {
-            file_name: [] for file_name in requested_files
-        }
-        for logical_file, audio, speaker_id, utt_type in rows:
-            file_name = str(logical_file)
-            if file_name in rows_by_file:
-                rows_by_file[file_name].append((audio, speaker_id, utt_type))
-
-        return {
-            file_name: self._audio_from_rows(record, rows_by_file[file_name])
-            for file_name, record in records_by_file.items()
-        }
-
     def _crop_seed(self, index: int) -> int:
         material = f"{self.seed}:{self.epoch}:{index}".encode("ascii")
         return int.from_bytes(hashlib.sha256(material).digest()[:8], "big")
@@ -543,45 +501,6 @@ class VSASVParquetDataset(Dataset[dict[str, Any]]):
         record = self.records[index]
         waveform, native_sample_rate = self._load_audio(record)
         return self._prepare_sample(index, record, waveform, native_sample_rate)
-
-    def __getitems__(self, indices: list[int]) -> list[dict[str, Any]]:
-        """Load one DataLoader batch with at most one query per shard."""
-
-        if not indices:
-            return []
-
-        grouped: dict[Path, list[tuple[int, int, VSASVRecord]]] = {}
-        for output_position, index in enumerate(indices):
-            try:
-                record = self.records[index]
-            except IndexError as error:
-                raise IndexError(f"Index dataset không hợp lệ: {index}") from error
-            grouped.setdefault(record.shard, []).append(
-                (output_position, index, record)
-            )
-
-        samples: list[dict[str, Any] | None] = [None] * len(indices)
-        for entries in grouped.values():
-            audio_by_file = self._load_audio_batch(
-                [record for _, _, record in entries]
-            )
-            for output_position, index, record in entries:
-                waveform, native_sample_rate = audio_by_file[record.file]
-                samples[output_position] = self._prepare_sample(
-                    index,
-                    record,
-                    waveform,
-                    native_sample_rate,
-                )
-
-        completed: list[dict[str, Any]] = []
-        for output_position, sample in enumerate(samples):
-            if sample is None:
-                raise RuntimeError(
-                    f"Thiếu sample đầu ra tại vị trí batch {output_position}."
-                )
-            completed.append(sample)
-        return completed
 
     def __getstate__(self) -> dict[str, Any]:
         """Drop process-local DuckDB state before DataLoader worker pickling."""

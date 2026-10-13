@@ -9,7 +9,12 @@ from unittest.mock import patch
 
 import duckdb
 import torch
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader
+
+from scripts.benchmark_batch_read import (
+    BatchReadCandidateView,
+    load_batch_candidate,
+)
 
 from src.data import (
     MANIFEST_COLUMNS,
@@ -204,7 +209,7 @@ class VSASVManifestDatasetTests(unittest.TestCase):
         dataset._connection = counting_connection  # type: ignore[assignment]
 
         try:
-            samples = dataset.__getitems__([1, 0])
+            samples = load_batch_candidate(dataset, [1, 0])
 
             self.assertEqual(counting_connection.parquet_query_count, 1)
             self.assertEqual(
@@ -221,7 +226,7 @@ class VSASVManifestDatasetTests(unittest.TestCase):
         dataset._connection = counting_connection  # type: ignore[assignment]
 
         try:
-            samples = dataset.__getitems__([2, 0, 1])
+            samples = load_batch_candidate(dataset, [2, 0, 1])
 
             self.assertEqual(counting_connection.parquet_query_count, 2)
             self.assertEqual(
@@ -241,13 +246,13 @@ class VSASVManifestDatasetTests(unittest.TestCase):
 
         try:
             epoch_zero_single = [dataset[index] for index in indices]
-            epoch_zero_batch = dataset.__getitems__(indices)
+            epoch_zero_batch = load_batch_candidate(dataset, indices)
             for actual, expected in zip(epoch_zero_batch, epoch_zero_single):
                 self._assert_samples_equal(actual, expected)
 
             dataset.set_epoch(1)
             epoch_one_single = [dataset[index] for index in indices]
-            epoch_one_batch = dataset.__getitems__(indices)
+            epoch_one_batch = load_batch_candidate(dataset, indices)
             for actual, expected in zip(epoch_one_batch, epoch_one_single):
                 self._assert_samples_equal(actual, expected)
 
@@ -269,32 +274,33 @@ class VSASVManifestDatasetTests(unittest.TestCase):
                 "_get_connection",
                 side_effect=AssertionError("Batch rỗng không được mở kết nối."),
             ):
-                self.assertEqual(dataset.__getitems__([]), [])
+                self.assertEqual(load_batch_candidate(dataset, []), [])
         finally:
             dataset.close()
 
-    def test_dataloader_uses_batch_getitems_through_subset(self) -> None:
+    def test_benchmark_candidate_view_uses_batch_getitems(self) -> None:
         dataset = self._make_batch_dataset(training=False)
-        original_getitems = dataset.__getitems__
-        batch_calls: list[list[int]] = []
         subset_indices = [2, 0, 1, 2, 0, 1, 2, 0]
+        view = BatchReadCandidateView(dataset, subset_indices)
+        original_getitems = view.__getitems__
+        batch_calls: list[list[int]] = []
 
         def tracking_getitems(indices: list[int]) -> list[dict[str, Any]]:
             batch_calls.append(list(indices))
             return original_getitems(indices)
 
-        dataset.__getitems__ = tracking_getitems  # type: ignore[method-assign]
+        view.__getitems__ = tracking_getitems  # type: ignore[method-assign]
 
         try:
             loader = DataLoader(
-                Subset(dataset, subset_indices),
+                view,
                 batch_size=8,
                 shuffle=False,
                 num_workers=0,
             )
             batch = next(iter(loader))
 
-            self.assertEqual(batch_calls, [subset_indices])
+            self.assertEqual(batch_calls, [list(range(8))])
             self.assertEqual(
                 batch["file"],
                 [
@@ -308,6 +314,13 @@ class VSASVManifestDatasetTests(unittest.TestCase):
                     "speaker1/first.wav",
                 ],
             )
+        finally:
+            dataset.close()
+
+    def test_production_dataset_does_not_expose_rejected_batch_hook(self) -> None:
+        dataset = self._make_batch_dataset(training=False)
+        try:
+            self.assertFalse(hasattr(dataset, "__getitems__"))
         finally:
             dataset.close()
 
@@ -398,7 +411,7 @@ class VSASVManifestDatasetTests(unittest.TestCase):
 
                 try:
                     with self.assertRaisesRegex(error_type, message):
-                        dataset.__getitems__([0])
+                        load_batch_candidate(dataset, [0])
                 finally:
                     dataset.close()
 

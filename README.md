@@ -189,6 +189,14 @@ python scripts/benchmark_manifest_loaders.py
 
 Benchmark ngày 10/10 dùng 16 file thuộc 14 shard, seed `2026`, train mode, policy `none`, batch 8, worker 0/2 và ba lần lặp. File, speaker, `utt_type`, nhãn và checksum waveform sau tiền xử lý khớp giữa hai loader. Với worker 0, manifest đạt 0,645 mẫu/giây, nhanh hơn split cũ 2,13%; với worker 2, manifest đạt 0,593 mẫu/giây. Trên chính loader manifest, hai worker chậm hơn 8,02% và tăng peak RSS 502,40 MiB, nên D014 tiếp tục giữ worker 0. Manifest giảm trung vị thời gian khởi tạo 32,98% so với split cũ. Báo cáo nằm tại `reports/manifest_loader_benchmark.*`; đây là benchmark DataLoader kỹ thuật trên cache hệ điều hành không bị xóa, không phải throughput train end-to-end hoặc kết quả khoa học.
 
+Đo lại ứng viên batch-read theo shard:
+
+```powershell
+python scripts/benchmark_batch_read.py
+```
+
+Benchmark P0.2 dùng 24 file cố định, ba lần lặp, seed `2026`, batch 8 và worker 0. Micro-benchmark xác nhận batch cùng shard giảm từ 8 xuống 1 truy vấn, nhưng cả ba batch theo thứ tự shuffle thực tế đều trải trên 8 shard nên ứng viên vẫn dùng 24 truy vấn mỗi lượt. Throughput B0 end-to-end giảm 0,93%, từ 0,638 xuống 0,632 mẫu/giây, không đạt cổng tăng 15%; vì vậy hook `__getitems__` đã được gỡ, D014 tiếp tục giữ nguyên và P1 artifact đóng gói được kích hoạt. Báo cáo đầy đủ nằm tại `reports/batch_read_benchmark.*`; `reports/runtime_projection.*` không được cập nhật từ workload nhỏ này.
+
 Dự báo lại thời gian từ các báo cáo đã đo:
 
 ```powershell
