@@ -163,6 +163,18 @@ python scripts/smoke_train_lfcc_lcnn.py --epochs 1 --max-steps 0
 
 Script kiểm tra LFCC/logit/loss/gradient hữu hạn, xác nhận optimizer làm thay đổi tham số, đánh giá development loss, lưu rồi nạp checkpoint và ghi số liệu thời gian/RAM vào `reports/b0_smoke_training.*`. Checkpoint nằm trong `checkpoints/` và không được đưa vào Git. Kết quả smoke chỉ chứng minh pipeline hoạt động, không dùng để báo cáo EER hoặc chọn amplitude policy.
 
+Tiếp tục kỹ thuật từ checkpoint trong một process mới:
+
+```powershell
+python scripts/smoke_train_lfcc_lcnn.py `
+  --resume-from checkpoints/b0_lfcc_lcnn_smoke.pt `
+  --checkpoint checkpoints/b0_lfcc_lcnn_resumed.pt
+```
+
+Đường resume kiểm tra cấu hình, seed, amplitude policy, batch size và learning rate trước khi nạp model/optimizer, rồi ghi số bước trước/sau cùng thời gian chờ DataLoader, thời gian model, throughput và peak VRAM. Đây mới là resume model/optimizer phục vụ smoke; training loop đầy đủ còn phải lưu sampler/RNG và batch cursor để tiếp tục chính xác giữa epoch.
+
+Kaggle là GPU chính theo D018. Không cài `requirements.txt` hoặc `requirements-lock.txt` trên Kaggle vì hai file khóa PyTorch CPU; dùng `requirements-kaggle.txt` và làm theo [hướng dẫn kiểm chứng Kaggle GPU](docs/guides/kaggle_gpu_smoke.md).
+
 ## Benchmark hiệu năng pipeline
 
 Benchmark P0 trên 24 mẫu cố định, ba lần lặp, batch size 8 và `num_workers=0` xác định DataLoader chiếm 95,31% thời gian đường train. Riêng truy vấn đọc/decode từng waveform từ Parquet có trung vị 925,361 ms và chiếm 99,82% thời gian đọc/tiền xử lý; LFCC và LCNN không phải điểm nghẽn chính.
@@ -196,6 +208,14 @@ python scripts/benchmark_batch_read.py
 ```
 
 Benchmark P0.2 dùng 24 file cố định, ba lần lặp, seed `2026`, batch 8 và worker 0. Micro-benchmark xác nhận batch cùng shard giảm từ 8 xuống 1 truy vấn, nhưng cả ba batch theo thứ tự shuffle thực tế đều trải trên 8 shard nên ứng viên vẫn dùng 24 truy vấn mỗi lượt. Throughput B0 end-to-end giảm 0,93%, từ 0,638 xuống 0,632 mẫu/giây, không đạt cổng tăng 15%; vì vậy hook `__getitems__` đã được gỡ, D014 tiếp tục giữ nguyên và P1 artifact đóng gói được kích hoạt. Báo cáo đầy đủ nằm tại `reports/batch_read_benchmark.*`; `reports/runtime_projection.*` không được cập nhật từ workload nhỏ này.
+
+Chạy lại proof-of-concept artifact đóng gói trên đúng 24 mẫu đối chứng:
+
+```powershell
+python scripts/benchmark_packed_artifact.py
+```
+
+Artifact lưu waveform `float32` sau decode/resample 16 kHz nhưng trước amplitude policy và crop, giữ `source_index` để random crop không đổi. PoC ngày 13/10 băm lại độc lập 24/24 waveform, khớp toàn bộ fingerprint và đạt 245,871 mẫu/giây loader-only cùng 19,853 mẫu/giây B0, lần lượt cải thiện 37.568,78% và 3.097,89% so với Parquet trên workload nhỏ. Artifact PoC nằm trong `data/processed/` và bị Git bỏ qua; báo cáo nằm tại `reports/packed_artifact_benchmark.*`. Không ngoại suy các số này lên 20.000 mẫu và chưa tạo artifact đầy đủ khi chưa có xác nhận.
 
 Dự báo lại thời gian từ các báo cáo đã đo:
 

@@ -7,12 +7,15 @@ import argparse
 import hashlib
 import json
 import math
+import platform
 import statistics
+import subprocess
 import sys
 import time
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 import psutil
 import torch
@@ -29,6 +32,15 @@ from src.models import (  # noqa: E402
     build_lfcc_transform,
     count_trainable_parameters,
 )
+
+
+@dataclass(frozen=True)
+class ResumeState:
+    """Validated training counters restored from one checkpoint."""
+
+    source_path: Path
+    steps: int
+    epochs_completed: int
 
 
 def parse_args() -> argparse.Namespace:
@@ -73,6 +85,14 @@ def parse_args() -> argparse.Namespace:
         default=PROJECT_ROOT / "checkpoints" / "b0_lfcc_lcnn_smoke.pt",
     )
     parser.add_argument(
+        "--resume-from",
+        type=Path,
+        help=(
+            "Nạp model/optimizer và bộ đếm từ checkpoint trước khi chạy thêm "
+            "các bước smoke."
+        ),
+    )
+    parser.add_argument(
         "--report-json",
         type=Path,
         default=PROJECT_ROOT / "reports" / "b0_smoke_training.json",
@@ -110,9 +130,105 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def current_git_commit() -> str | None:
+    """Return the checked-out commit when the script runs inside Git."""
+
+    completed = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=PROJECT_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip() if completed.returncode == 0 else None
+
+
+def device_details(device: torch.device) -> dict[str, Any]:
+    """Record the accelerator stack used by this process."""
+
+    details: dict[str, Any] = {
+        "device": str(device),
+        "pytorch": torch.__version__,
+        "pytorch_cuda": torch.version.cuda,
+        "cudnn": (
+            torch.backends.cudnn.version()
+            if torch.backends.cudnn.is_available()
+            else None
+        ),
+        "gpu_name": None,
+        "gpu_total_memory_mib": 0.0,
+    }
+    if device.type == "cuda":
+        properties = torch.cuda.get_device_properties(device)
+        details["gpu_name"] = properties.name
+        details["gpu_total_memory_mib"] = properties.total_memory / (1024**2)
+    return details
+
+
 def require_finite(name: str, value: torch.Tensor) -> None:
     if not torch.isfinite(value).all():
         raise RuntimeError(f"{name} chứa NaN hoặc Inf.")
+
+
+def load_resume_checkpoint(
+    checkpoint_path: str | Path,
+    *,
+    model: torch.nn.Module,
+    optimizer: torch.optim.Optimizer,
+    config: Mapping[str, Any],
+    seed: int,
+    amplitude_policy: str,
+    batch_size: int,
+    learning_rate: float,
+    device: torch.device,
+) -> ResumeState:
+    """Restore a compatible smoke checkpoint before additional steps."""
+
+    source_path = Path(checkpoint_path).resolve()
+    if not source_path.is_file():
+        raise FileNotFoundError(f"Không tìm thấy checkpoint resume: {source_path}")
+    restored = torch.load(source_path, map_location=device, weights_only=True)
+    if not isinstance(restored, dict):
+        raise ValueError("Checkpoint resume phải là một mapping.")
+    required = {
+        "model_state_dict",
+        "optimizer_state_dict",
+        "config",
+        "seed",
+        "steps",
+        "epochs_completed",
+        "amplitude_policy",
+        "batch_size",
+        "learning_rate",
+    }
+    missing = sorted(required.difference(restored))
+    if missing:
+        raise ValueError(f"Checkpoint resume thiếu trường bắt buộc: {missing}")
+    if restored["config"] != dict(config):
+        raise ValueError("Cấu hình checkpoint resume không khớp cấu hình hiện tại.")
+    if int(restored["seed"]) != seed:
+        raise ValueError("Seed checkpoint resume không khớp seed hiện tại.")
+    if str(restored["amplitude_policy"]) != amplitude_policy:
+        raise ValueError(
+            "Checkpoint resume có amplitude policy không khớp lần chạy hiện tại."
+        )
+    if int(restored["batch_size"]) != batch_size:
+        raise ValueError("Batch size checkpoint resume không khớp lần chạy hiện tại.")
+    if float(restored["learning_rate"]) != learning_rate:
+        raise ValueError(
+            "Learning rate checkpoint resume không khớp lần chạy hiện tại."
+        )
+    steps = int(restored["steps"])
+    epochs_completed = int(restored["epochs_completed"])
+    if steps < 0 or epochs_completed < 0:
+        raise ValueError("Bộ đếm trong checkpoint resume không được âm.")
+    model.load_state_dict(restored["model_state_dict"])
+    optimizer.load_state_dict(restored["optimizer_state_dict"])
+    return ResumeState(
+        source_path=source_path,
+        steps=steps,
+        epochs_completed=epochs_completed,
+    )
 
 
 def evaluate_development(
@@ -123,13 +239,23 @@ def evaluate_development(
     loss_function: torch.nn.Module,
     device: torch.device,
     process: psutil.Process,
-) -> tuple[float, int, float]:
+) -> tuple[float, int, float, float, float]:
     model.eval()
     total_loss = 0.0
     total_examples = 0
     peak_rss = rss_mib(process)
+    loader_seconds = 0.0
+    model_seconds = 0.0
+    iterator = iter(loader)
     with torch.no_grad():
-        for batch in loader:
+        while True:
+            loader_started = time.perf_counter()
+            try:
+                batch = next(iterator)
+            except StopIteration:
+                break
+            loader_seconds += time.perf_counter() - loader_started
+            model_started = time.perf_counter()
             waveforms = batch["waveform"].to(device)
             labels = batch["label"].to(device)
             features = lfcc(waveforms).unsqueeze(1)
@@ -140,9 +266,16 @@ def evaluate_development(
             total_loss += float(loss.item()) * batch_size
             total_examples += batch_size
             peak_rss = max(peak_rss, rss_mib(process))
+            model_seconds += time.perf_counter() - model_started
     if total_examples == 0:
         raise RuntimeError("Development loader không có mẫu.")
-    return total_loss / total_examples, total_examples, peak_rss
+    return (
+        total_loss / total_examples,
+        total_examples,
+        peak_rss,
+        loader_seconds,
+        model_seconds,
+    )
 
 
 def write_reports(report: dict[str, Any], json_path: Path, md_path: Path) -> None:
@@ -157,6 +290,7 @@ def write_reports(report: dict[str, Any], json_path: Path, md_path: Path) -> Non
     development = report["development"]
     checkpoint = report["checkpoint"]
     resources = report["resources"]
+    resume = report["resume"]
     markdown = f"""# Báo cáo smoke pilot B0 LFCC + LCNN
 
 ## Kết quả
@@ -200,12 +334,21 @@ def write_reports(report: dict[str, Any], json_path: Path, md_path: Path) -> Non
 - SHA-256: `{checkpoint['sha256']}`
 - Sai khác logit lớn nhất sau khôi phục: {checkpoint['restore_max_abs_difference']:.10f}
 - Thời gian train: {resources['training_seconds']:.3f} giây
+- Chờ DataLoader train: {resources['training_loader_seconds']:.3f} giây
+- Tính toán model train: {resources['training_model_seconds']:.3f} giây
+- Throughput train: {resources['training_throughput_samples_per_second']:.3f} mẫu/giây
 - Thời gian development: {resources['development_seconds']:.3f} giây
+- Chờ DataLoader development: {resources['development_loader_seconds']:.3f} giây
+- Tính toán model development: {resources['development_model_seconds']:.3f} giây
+- Throughput development: {resources['development_throughput_samples_per_second']:.3f} mẫu/giây
 - Tổng thời gian: {resources['total_seconds']:.3f} giây
 - RSS đầu: {resources['rss_start_mib']:.2f} MiB
 - RSS lớn nhất quan sát: {resources['rss_observed_peak_mib']:.2f} MiB
 - RSS cuối: {resources['rss_end_mib']:.2f} MiB
 - Peak VRAM: {resources['cuda_peak_allocated_mib']:.2f} MiB
+- Resume từ checkpoint: {resume['used']}
+- Bước trước/sau lần chạy: {resume['initial_steps']} → {train['steps']}
+- Nguồn resume: `{resume['source_path'] or 'không dùng'}`
 
 ## Phạm vi diễn giải
 
@@ -284,19 +427,49 @@ def main() -> None:
     loss_function = torch.nn.BCEWithLogitsLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
+    resume_state: ResumeState | None = None
+    if args.resume_from is not None:
+        resume_state = load_resume_checkpoint(
+            args.resume_from,
+            model=model,
+            optimizer=optimizer,
+            config=config,
+            seed=seed,
+            amplitude_policy=args.amplitude_policy,
+            batch_size=batch_size,
+            learning_rate=learning_rate,
+            device=device,
+        )
+
     losses: list[float] = []
     examples = 0
-    steps = 0
-    epochs_completed = 0
+    initial_steps = resume_state.steps if resume_state is not None else 0
+    initial_epochs_completed = (
+        resume_state.epochs_completed if resume_state is not None else 0
+    )
+    steps = initial_steps
+    steps_this_run = 0
+    epochs_completed = initial_epochs_completed
     parameters_changed = False
     last_features: torch.Tensor | None = None
     tensor_shapes: dict[str, list[int]] = {}
+    training_loader_seconds = 0.0
+    training_model_seconds = 0.0
     train_start = time.perf_counter()
     model.train()
-    for epoch in range(args.epochs):
+    for local_epoch in range(args.epochs):
+        epoch = initial_epochs_completed + local_epoch
         train_dataset.set_epoch(epoch)
         completed_epoch = True
-        for batch in train_loader:
+        train_iterator = iter(train_loader)
+        while True:
+            loader_started = time.perf_counter()
+            try:
+                batch = next(train_iterator)
+            except StopIteration:
+                break
+            training_loader_seconds += time.perf_counter() - loader_started
+            model_started = time.perf_counter()
             waveforms = batch["waveform"].to(device)
             labels = batch["label"].to(device)
             features = lfcc(waveforms)
@@ -308,7 +481,7 @@ def main() -> None:
             require_finite("Loss", loss)
 
             before = None
-            if steps == 0:
+            if steps_this_run == 0:
                 before = {
                     name: parameter.detach().clone()
                     for name, parameter in model.named_parameters()
@@ -344,21 +517,29 @@ def main() -> None:
             losses.append(float(loss.item()))
             examples += labels.shape[0]
             steps += 1
+            steps_this_run += 1
             last_features = model_inputs.detach()
             rss_peak = max(rss_peak, rss_mib(process))
-            if args.max_steps and steps >= args.max_steps:
+            training_model_seconds += time.perf_counter() - model_started
+            if args.max_steps and steps_this_run >= args.max_steps:
                 completed_epoch = False
                 break
         if completed_epoch:
             epochs_completed += 1
-        if args.max_steps and steps >= args.max_steps:
+        if args.max_steps and steps_this_run >= args.max_steps:
             break
     training_seconds = time.perf_counter() - train_start
     if not losses or last_features is None:
         raise RuntimeError("Không thực hiện được bước train nào.")
 
     dev_start = time.perf_counter()
-    dev_loss, dev_examples, dev_peak_rss = evaluate_development(
+    (
+        dev_loss,
+        dev_examples,
+        dev_peak_rss,
+        development_loader_seconds,
+        development_model_seconds,
+    ) = evaluate_development(
         model=model,
         lfcc=lfcc,
         loader=dev_loader,
@@ -376,8 +557,11 @@ def main() -> None:
         "config": config,
         "seed": seed,
         "steps": steps,
+        "steps_this_run": steps_this_run,
         "epochs_completed": epochs_completed,
         "amplitude_policy": args.amplitude_policy,
+        "batch_size": batch_size,
+        "learning_rate": learning_rate,
     }
     torch.save(checkpoint_data, args.checkpoint)
 
@@ -418,14 +602,23 @@ def main() -> None:
         "seed": seed,
         "amplitude_policy": args.amplitude_policy,
         "scope": "technical_smoke_pilot_not_scientific_result",
+        "environment": {
+            "git_commit": current_git_commit(),
+            "python": platform.python_version(),
+            **device_details(device),
+        },
         "model": {
             "name": "B0_LFCC_LCNN_smoke",
             "trainable_parameters": count_trainable_parameters(model),
+            "config": str(args.config.resolve()),
+            "config_sha256": sha256_file(args.config.resolve()),
         },
         "data": {
             "train_split": str(args.train_split.resolve()),
+            "train_split_sha256": sha256_file(args.train_split.resolve()),
             "train_available_examples": len(train_dataset),
             "development_split": str(args.dev_split.resolve()),
+            "development_split_sha256": sha256_file(args.dev_split.resolve()),
             "development_available_examples": len(dev_dataset),
         },
         "tensor_shapes": tensor_shapes,
@@ -434,6 +627,9 @@ def main() -> None:
             "epochs_completed": epochs_completed,
             "maximum_steps": args.max_steps,
             "steps": steps,
+            "initial_steps": initial_steps,
+            "steps_this_run": steps_this_run,
+            "initial_epochs_completed": initial_epochs_completed,
             "examples": examples,
             "batch_size": batch_size,
             "learning_rate": learning_rate,
@@ -456,6 +652,16 @@ def main() -> None:
             "sha256": sha256_file(checkpoint_path),
             "restore_max_abs_difference": restore_difference,
         },
+        "resume": {
+            "used": resume_state is not None,
+            "source_path": (
+                str(resume_state.source_path) if resume_state is not None else None
+            ),
+            "initial_steps": initial_steps,
+            "initial_epochs_completed": initial_epochs_completed,
+            "optimizer_state_restored": resume_state is not None,
+            "additional_steps_completed": steps_this_run,
+        },
         "resources": {
             "training_seconds": training_seconds,
             "development_seconds": development_seconds,
@@ -464,6 +670,16 @@ def main() -> None:
             "rss_observed_peak_mib": rss_peak,
             "rss_end_mib": rss_end,
             "cuda_peak_allocated_mib": cuda_peak,
+            "training_loader_seconds": training_loader_seconds,
+            "training_model_seconds": training_model_seconds,
+            "training_throughput_samples_per_second": (
+                examples / training_seconds
+            ),
+            "development_loader_seconds": development_loader_seconds,
+            "development_model_seconds": development_model_seconds,
+            "development_throughput_samples_per_second": (
+                dev_examples / development_seconds
+            ),
         },
     }
     write_reports(report, args.report_json, args.report_md)
