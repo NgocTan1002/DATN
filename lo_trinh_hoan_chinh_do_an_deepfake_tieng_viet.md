@@ -14,7 +14,7 @@
 
 **Thời gian thực hiện chính thức:** 14 tuần, từ 28/09/2026 đến 03/01/2027.
 
-**Cập nhật lộ trình:** 08/10/2026.
+**Cập nhật lộ trình:** 12/10/2026.
 
 Đề tài không xây dựng mô hình nhận diện VC, AP hay replay. Trường `utt_type` chỉ dùng để thống kê dữ liệu và phân tích lỗi của bộ phân loại thật/giả. AASIST, fine-tune toàn bộ XLS-R và các bộ dữ liệu ngoài miền đều là phần tùy chọn.
 
@@ -29,12 +29,14 @@ Các công việc chuẩn bị và đường găng dữ liệu của development
 - Chạy leakage checker, không phát hiện trùng người nói hoặc file giữa các tập học.
 - Khóa giao thức âm thanh mono 16 kHz, đoạn 4 giây.
 - Hoàn thiện phép tính EER, tiền xử lý amplitude, dataset loader và kiểm thử tự động.
-- Tạo `development-20k-v1` gồm 15.885 train và 4.115 development, 184 speaker, dùng 66 shard; không lặp file path hoặc speaker. Kiểm tra nội dung sau đó phát hiện 17 nhóm waveform trùng đi qua train/development, nên manifest v1 chưa đạt cổng dữ liệu khoa học.
-- Loader manifest đọc trực tiếp shard, trả waveform 64.000 mẫu và tạo batch tái lập với seed `2026`.
+- Khóa ứng viên `development-20k-v2` gồm 15.885 train và 4.115 development, 184 speaker, dùng 66 shard. Audit độc lập băm lại 20.000 waveform và xác nhận không còn content hash trùng trong hoặc đi qua train/development; v1 chỉ giữ để truy vết.
+- Loader manifest đọc trực tiếp shard, trả waveform 64.000 mẫu và tạo batch tái lập với seed `2026`. Ứng viên `Dataset.__getitems__` đã bị loại sau benchmark end-to-end vì throughput giảm 0,93%; bằng chứng được giữ tại `reports/batch_read_benchmark.*`.
 - Baseline B0 LFCC + LCNN đã chạy xuyên suốt forward, loss, backward, optimizer, development và checkpoint restore trên CPU.
-- Toàn bộ 73 kiểm thử tại lần kiểm chứng mới nhất ngày 08/10/2026 đã đạt.
+- Toàn bộ 97 kiểm thử tại lần kiểm chứng mới nhất ngày 12/10/2026 đã đạt sau khi gỡ hook batch-read không đạt cổng.
+- D018 đã chọn Kaggle làm GPU chính; Colab trả phí là phương án dự phòng có xác nhận chi phí riêng. Runtime Kaggle chưa được smoke hoặc benchmark trong dự án.
+- D019 đã khóa threshold tại điểm EER trên closed development, ngân sách bước bằng nhau và không early stopping cho ba pilot amplitude.
 
-**Bước tiếp theo:** chốt cách loại waveform trùng, tạo manifest v2 theo quyết định mới và chạy lại toàn bộ cổng coverage/leakage nội dung. Sau khi manifest đạt mới benchmark loader và tối ưu layout/cache trước các pilot amplitude policy.
+**Bước tiếp theo:** thiết kế proof-of-concept cho artifact dữ liệu đóng gói đúng manifest 20k, kiểm chứng Kaggle, khóa chính thức manifest v2 trước 18/10 và hoàn thiện training/evaluation loop trước ba pilot amplitude. Không tiếp tục tối ưu đường Parquet theo batch-read.
 
 ## 3. Sản phẩm bắt buộc
 
@@ -124,16 +126,7 @@ XLS-R fine-tune một phần sẽ đạt EER thấp hơn XLS-R đóng băng và 
 
 Ảnh chụp công khai không trùng hoàn toàn với dữ liệu được mô tả trong bài báo VSASV. Vì vậy, báo cáo phải ghi rõ tên `VSASV-HF-public-snapshot-v1` và không tuyên bố tái lập giao thức chính thức của bài báo.
 
-Năm shard cục bộ có 2.558 waveform:
-
-| Nhóm | Số mẫu | Sample rate quan sát được |
-|---|---:|---:|
-| Bonafide | 1.292 | 16 kHz |
-| Voice conversion | 188 | 40 kHz |
-| Adversarial attack | 813 | 16 kHz |
-| Replay | 265 | 16 kHz |
-
-Năm shard không phải mẫu ngẫu nhiên. Chúng chỉ được dùng để kiểm tra pipeline và chạy smoke test, không dùng để đưa ra kết luận khoa học cuối cùng. Việc chuẩn hóa toàn bộ audio về 16 kHz là bắt buộc để hạn chế mô hình học sample rate thay cho dấu hiệu giả mạo.
+Máy hiện có 68/432 shard với 34.782 waveform đã đạt kiểm tra kích thước, SHA-256, Parquet và metadata coverage; đây vẫn không phải toàn bộ snapshot. `development-20k-v2` dùng 66 shard và đúng 20.000 mẫu cho train/development. Audit amplitude lịch sử trên năm shard/2.558 waveform chỉ dùng để phát hiện shortcut risk, không đại diện cho quy mô thí nghiệm hiện hành hoặc kết quả khoa học cuối cùng. Việc chuẩn hóa toàn bộ audio về 16 kHz vẫn bắt buộc để hạn chế mô hình học sample rate thay cho dấu hiệu giả mạo.
 
 ## 7. Giao thức dữ liệu sau khi thu hẹp đề tài
 
@@ -159,22 +152,22 @@ Năm split `open_*` đã tạo vẫn được giữ để tái lập và có th�
 
 ### 7.3. Ba mức dữ liệu
 
-1. **Smoke test:** 2.558 mẫu hiện có, dùng để kiểm tra code và một vòng huấn luyện.
-2. **Development subset:** 20.000-40.000 mẫu từ nhiều người nói và nhiều shard, dùng để phát triển mô hình.
+1. **Smoke test:** manifest kỹ thuật 448 mẫu, gồm 256 train, 128 development và 64 test; chỉ dùng để kiểm tra code và vòng huấn luyện nhỏ.
+2. **Development subset:** `development-20k-v2` gồm 20.000 mẫu từ nhiều người nói và shard, dùng để phát triển mô hình. Chưa mở rộng lên 40.000 mẫu.
 3. **Final experiment:** dùng phần dữ liệu lớn nhất có thể truy cập, giữ nguyên split theo người nói và ghi chính xác số mẫu thực tế.
 
 Không bắt buộc tải đủ 432 shard trước khi viết code. Tuy nhiên, không dùng năm shard hiện tại làm kết quả cuối vì chúng không đại diện ngẫu nhiên cho toàn bộ snapshot.
 
 ### 7.4. Mốc khóa dữ liệu cuối tuần 3
 
-Chậm nhất ngày 18/10/2026 phải chốt phạm vi audio dùng cho thí nghiệm chính. Trước mốc này cần:
+Chậm nhất ngày 18/10/2026 phải chốt phạm vi audio dùng cho thí nghiệm chính. Ứng viên hiện hành là `development-20k-v2`; trước mốc này cần:
 
-1. Đo dung lượng 5 shard hiện có và ước lượng dung lượng phần dữ liệu dự kiến tải.
-2. Kiểm tra dung lượng ổ đĩa, băng thông tải và thời gian đọc dữ liệu.
-3. Chọn một trong ba phương án: toàn bộ snapshot truy cập được, một tập shard đại diện, hoặc development subset 20.000-40.000 mẫu.
-4. Lưu manifest cố định gồm tên shard, file, speaker, split, nhãn nhị phân và `utt_type`.
-5. Ghi số mẫu thực tế của train, development và test sau khi giao với audio đã có.
-6. Chạy lại kiểm tra coverage và speaker leakage trên manifest đã khóa.
+1. Đối chiếu checksum manifest, 20.000 hàng, 66 shard, 184 speaker và quota 15.885/4.115 với báo cáo hiện có.
+2. Xác nhận coverage cục bộ 100%, speaker/file leakage bằng 0 và content audit có 20.000 hash duy nhất.
+3. Xác nhận README, decision log, loader smoke và checkpoint cùng dùng `development-20k-v2` và `VSASV-HF-public-snapshot-v1`.
+4. Ghi dung lượng thực của 68 shard nguồn đang giữ và số shard manifest dùng; không gọi đây là toàn bộ corpus.
+5. Không tái sinh manifest hoặc băm lại toàn bộ waveform nếu artifact và code audit không đổi.
+6. Giữ riêng đề xuất xử lý bốn nhóm duplicate `closed_train`–`closed_test`; không dùng test metric để chọn quy tắc.
 
 Sau ngày 18/10, không thay đổi tập audio giữa các mô hình. Nếu buộc phải thay đổi, tạo phiên bản manifest mới và chạy lại toàn bộ baseline. Kết quả cuối phải ghi chính xác số shard, số mẫu và dung lượng đã sử dụng.
 
@@ -201,7 +194,7 @@ Quy tắc cắt và đệm:
 - Chính sách biên độ phải áp dụng giống nhau cho mọi nhãn và mọi split.
 - Không dùng sample rate gốc làm đầu vào huấn luyện chính.
 
-Tuần 3 chỉ triển khai ba cấu hình và kiểm tra phân bố peak/RMS; chưa thể chọn bằng EER vì B0 chưa được huấn luyện. Trong tuần 4, chạy ba pilot B0 ngắn trên cùng train subset, development subset, seed và số bước huấn luyện. So sánh development EER rồi khóa một chính sách trước ngày 25/10/2026 để dùng cho lần huấn luyện B0 đầy đủ, toàn bộ mô hình XLS-R, test và demo. Không dùng test để lựa chọn. Cấu hình RMS phải có ngưỡng năng lượng tối thiểu để không khuếch đại đoạn gần im lặng. Random gain augmentation chỉ là kiểm tra bổ sung và phải áp dụng độc lập với nhãn.
+Tuần 3 smoke kỹ thuật đủ ba cấu hình và khóa hợp đồng training/evaluation. Trong tuần 4, chạy ba pilot B0 trên cùng manifest v2, seed, batch, sampler, optimizer, learning rate và số optimizer step; chỉ amplitude policy được thay đổi. Ngân sách bước được chốt sau smoke Kaggle ở mức chung lớn nhất có thể hoàn thành cả ba run trước 25/10 với thời gian dự phòng. Mỗi run đánh giá toàn bộ development và không dùng early stopping. Chọn policy bằng development EER; nếu bằng nhau về mặt số học thì dùng development loss thấp hơn, nếu vẫn bằng nhau thì chọn `none`. Không dùng test để lựa chọn. Cấu hình RMS phải có ngưỡng năng lượng tối thiểu để không khuếch đại đoạn gần im lặng. Random gain augmentation chỉ là kiểm tra bổ sung và phải áp dụng độc lập với nhãn.
 
 ## 9. Các mô hình cần thực hiện
 
@@ -262,12 +255,15 @@ AASIST chỉ được thực hiện nếu giảng viên yêu cầu thêm mô hì
 - Lưu cấu hình, checkpoint tốt nhất, lịch sử loss, thời gian chạy và peak VRAM.
 - Chọn mô hình tốt nhất theo EER trên development.
 - Chỉ đánh giá test sau khi đã khóa cấu hình.
+- Ba pilot amplitude dùng ngân sách bước cố định và không early stopping. Early stopping chỉ dùng cho B0 đầy đủ sau khi policy đã khóa.
+- Checkpoint phải đủ model, optimizer, bước/epoch, seed và trạng thái cần thiết để tiếp tục run sau khi gián đoạn.
 
 ### 10.2. Chỉ số
 
 - **Chính:** EER.
 - **Bổ sung:** ROC-AUC và macro-F1.
 - Accuracy chỉ dùng tham khảo, không dùng làm kết luận chính.
+- Threshold nhị phân là threshold tại điểm EER trên `closed_dev`; đóng băng threshold này cho macro-F1 trên test và inference. EER và ROC-AUC được tính trực tiếp từ score.
 
 Quy ước hiện tại:
 
@@ -311,9 +307,9 @@ Chiến lược này phải được cài cùng module inference trước tuần
 | Tuần | Thời gian | Công việc chính | Đầu ra và cổng hoàn thành |
 |---:|---|---|---|
 | 1 | 28/09-04/10 | Xác nhận tên đề tài, phạm vi nhị phân và mô hình chính; khóa giao thức closed-set | **Đã hoàn thành:** đề cương được đánh giá hoàn thành; tài liệu dự án đã cập nhật thống nhất |
-| 2 | 05/10-11/10 | Hoàn thiện tập dữ liệu phát triển; đo dung lượng và băng thông; lập danh sách shard dự kiến | Development subset có thống kê; có ước lượng dung lượng và phương án tải audio |
-| 3 | 12/10-18/10 | Hoàn thiện dataset loader, khóa manifest audio; triển khai none/peak/RMS và thống kê biên độ | Chốt số shard, số mẫu và dung lượng; ba chính sách chạy đúng; chưa chọn bằng EER |
-| 4 | 19/10-25/10 | Cài LFCC + LCNN; chạy ba pilot B0 có cùng ngân sách để chọn chính sách biên độ | Khóa chính sách biên độ bằng development EER; loss giảm và checkpoint lưu được |
+| 2 | 05/10-11/10 | Hoàn thiện tập dữ liệu phát triển; đo dung lượng và băng thông; lập danh sách shard dự kiến | **Đã hoàn thành:** 68 shard/34.782 audio được kiểm chứng; manifest v2 có 20.000 mẫu sạch duplicate train/development |
+| 3 | 12/10-18/10 | Benchmark batch-read theo cổng 15%; smoke Kaggle; khóa manifest; smoke none/peak/RMS; đặc tả training/evaluation loop | Chốt đường dữ liệu và GPU; manifest v2 khóa; ba policy chạy đúng; chưa chọn bằng EER |
+| 4 | 19/10-25/10 | Hoàn thiện training loop, ROC-AUC, macro-F1, threshold/resume; chạy ba pilot B0 cùng ngân sách | Khóa chính sách biên độ bằng development EER; mỗi run có full-dev metric và checkpoint tiếp tục được |
 | 5 | 26/10-01/11 | Huấn luyện, đánh giá và sửa lỗi mô hình cơ sở | Có EER, ROC-AUC và macro-F1 của LFCC + LCNN |
 | 6 | 02/11-08/11 | Cài XLS-R đóng băng, pooling và classifier | Trích xuất embedding và chạy một epoch thành công |
 | 7 | 09/11-15/11 | Huấn luyện XLS-R đóng băng trên development subset | Có checkpoint và bảng so sánh ban đầu với LCNN |
@@ -342,11 +338,16 @@ Chiến lược này phải được cài cùng module inference trước tuần
 - Manifest khớp audio truy cập được và giữ speaker-disjoint.
 - Có thống kê dung lượng, nhãn và người nói cho từng split.
 
+**Trạng thái:** artifact v2 và audit đã đạt; còn đối chiếu hồ sơ và tuyên bố khóa trước 18/10.
+
 ### G2 Pipeline huấn luyện hoạt động
 
 - Dataset loader tạo batch ổn định.
 - Một batch chạy qua mô hình và loss hữu hạn.
 - Có thể lưu và nạp checkpoint.
+- Có ROC-AUC, macro-F1, threshold development và khả năng resume đủ cho run dài.
+
+**Trạng thái:** cổng smoke kỹ thuật đã đạt; training/evaluation loop khoa học còn thiếu.
 
 ### G3 Mô hình cơ sở hoàn thành
 
@@ -404,7 +405,7 @@ Không được bỏ:
 | Rủi ro | Cách xử lý |
 |---|---|
 | Không tải đủ VSASV | Dùng subset có kiểm soát, ghi đúng số shard và số mẫu; không tuyên bố dùng toàn bộ VSASV |
-| Năm shard hiện tại không đại diện | Mở rộng mẫu từ nhiều shard và người nói trước khi chạy kết quả cuối |
+| 68/432 shard hiện có không phải toàn bộ snapshot | Giới hạn tuyên bố trong `VSASV-HF-public-snapshot-v1`; ghi chính xác 66 shard/20.000 mẫu của manifest phát triển và coverage test thực tế |
 | GPU hết bộ nhớ | Đóng băng XLS-R, dùng mixed precision, batch nhỏ và gradient accumulation |
 | Fine-tune bị quá khớp | Giảm số tầng mở, learning rate và số epoch; chọn checkpoint theo development EER |
 | Kết quả cao bất thường | Kiểm tra rò rỉ, sample rate, duration, codec và cân bằng nhãn |
@@ -424,16 +425,16 @@ Không được bỏ:
 8. **Chương trình minh họa:** luồng suy luận và hướng dẫn sử dụng.
 9. **Kết luận:** trả lời hai câu hỏi nghiên cứu và nêu hướng phát triển.
 
-## 16. Công việc ưu tiên từ 08/10 đến 11/10/2026
+## 16. Công việc ưu tiên từ 12/10 đến 25/10/2026
 
-1. Chốt quyết định xử lý waveform trùng; không sửa split hoặc manifest khóa trước khi được xác nhận.
-2. Tạo manifest v2 bằng script, loại một phía của mỗi nhóm trùng đã xác nhận và chạy lại coverage, quota, speaker/file/content leakage.
-3. Benchmark A/B loader split cũ và loader manifest hợp lệ trên cùng mẫu, seed và ít nhất ba lần lặp; ghi riêng thời gian khởi tạo, throughput, RAM và cache.
-4. Thử một thay đổi nhỏ về layout/cache; chỉ giữ nếu waveform, nhãn, speaker và crop tương đương với pipeline hiện tại; sau đó đo lại `num_workers=0/2`.
-5. Hoàn thiện đề xuất coverage audio cho `closed_test` mà không dùng test để chọn quy mô, phân bố, mô hình, threshold hoặc amplitude policy.
-6. Chốt môi trường tính toán khả thi trước khi chạy pilot dài và trước khi triển khai XLS-R.
-7. Đặc tả quy tắc chọn threshold trên closed development và phạm vi báo cáo ROC-AUC, macro-F1 trước khi cài thêm metric.
-8. Chỉ chạy ba pilot `none`, `peak`, `rms_dbfs` trên cùng manifest đã vượt cổng nội dung; chưa chọn policy nếu chưa có closed development EER.
+1. P0.2 đã hoàn thành: batch-read đạt -0,93% end-to-end, không qua cổng +15%, nên hook `__getitems__` đã được gỡ và D014 giữ nguyên.
+2. Song song chuẩn bị Kaggle riêng tư, giữ runtime GPU, chạy smoke B0 và xác nhận checkpoint resume trước mọi run dài.
+3. Thực hiện proof-of-concept cho artifact dẫn xuất đúng manifest 20k, cache sau decode/resample nhưng trước amplitude/crop; đo waveform tương đương, dung lượng, thời gian tạo và throughput trước khi chấp nhận.
+4. Đối chiếu và khóa `development-20k-v2` trước 18/10; không tái sinh hoặc mở rộng 40.000 mẫu khi artifact hiện có vẫn khớp.
+5. Smoke kỹ thuật `none`, `peak`, `rms_dbfs` trên train/development và hoàn thiện training/evaluation loop có EER, ROC-AUC, macro-F1, threshold development, checkpoint/resume và log tài nguyên.
+6. Chốt ngân sách bước từ benchmark Kaggle rồi chạy ba pilot cùng ngân sách trong ngày 21–24/10; không early stopping và không dùng closed test.
+7. Khóa amplitude policy trước 25/10 theo D019; sau đó mới huấn luyện B0 đầy đủ với early stopping theo development EER.
+8. Chuẩn bị đề xuất coverage và duplicate cho `closed_test`, nhưng không sửa split/test manifest trước khi có xác nhận riêng.
 
 ## 17. Definition of Done
 
