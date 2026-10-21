@@ -1,0 +1,91 @@
+{
+  "report_version": 1,
+  "created_at": "2026-10-20T10:19:40.693743+07:00",
+  "status": "ready",
+  "scope": "operational_budget_not_scientific_result",
+  "repeat_count": 3,
+  "identity": {
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+    "sample_selection_sha256": "384952c550fe5df29589f5e1d40bb2be5d7a74e1075d5df97f272b17570c09a6",
+    "seed": 2026,
+    "run_mode": "technical_smoke",
+    "amplitude_policy": "none",
+    "batch_size": 8,
+    "optimizer_name": "Adam",
+    "learning_rate": 0.001,
+    "step_budget": 32
+  },
+  "sample_selection_sha256": "384952c550fe5df29589f5e1d40bb2be5d7a74e1075d5df97f272b17570c09a6",
+  "repeats": [
+    {
+      "repeat": 1,
+      "source": "reports/b0_benchmark_repeat_1.json",
+      "training_seconds": 387.9487527169991,
+      "training_step_seconds": 12.123398522406221,
+      "development_seconds": 197.91969676999997,
+      "development_sample_seconds": 1.5462476310156248,
+      "steps": 32,
+      "development_samples": 128,
+      "gpu_name": "Tesla T4"
+    },
+    {
+      "repeat": 2,
+      "source": "reports/b0_benchmark_repeat_2.json",
+      "training_seconds": 332.8218826470006,
+      "training_step_seconds": 10.40068383271877,
+      "development_seconds": 185.09697017799954,
+      "development_sample_seconds": 1.4460700795156214,
+      "steps": 32,
+      "development_samples": 128,
+      "gpu_name": "Tesla T4"
+    },
+    {
+      "repeat": 3,
+      "source": "reports/b0_benchmark_repeat_3.json",
+      "training_seconds": 335.6552771580009,
+      "training_step_seconds": 10.489227411187528,
+      "development_seconds": 185.73973110700103,
+      "development_sample_seconds": 1.4510916492734456,
+      "steps": 32,
+      "development_samples": 128,
+      "gpu_name": "Tesla T4"
+    }
+  ],
+  "measurement": {
+    "training_step_seconds": [
+      12.123398522406221,
+      10.40068383271877,
+      10.489227411187528
+    ],
+    "development_sample_seconds": [
+      1.5462476310156248,
+      1.4460700795156214,
+      1.4510916492734456
+    ],
+    "median_training_step_seconds": 10.489227411187528,
+    "median_development_sample_seconds": 1.4510916492734456,
+    "conservative_training_step_seconds": 12.123398522406221,
+    "conservative_development_sample_seconds": 1.5462476310156248,
+    "training_step_cv": 0.07197559401947652,
+    "development_sample_cv": 0.031115413998264993
+  },
+  "budget_policy": {
+    "full_development_samples": 4115,
+    "pilot_count": 3,
+    "reserve_run_equivalents": 1,
+    "run_equivalents": 4,
+    "total_gpu_hours": 20.0,
+    "step_multiple": 64,
+    "timing_basis": "maximum_of_three_repeats"
+  },
+  "recommendation": {
+    "step_budget": 896,
+    "unrounded_step_capacity": 959,
+    "projected_training_hours_per_run": 3.017379187798882,
+    "projected_development_hours_per_run": 1.7674469448970267,
+    "projected_hours_per_run": 4.784826132695908,
+    "projected_total_gpu_hours": 19.139304530783633,
+    "remaining_margin_hours": 0.8606954692163669
+  }
+}

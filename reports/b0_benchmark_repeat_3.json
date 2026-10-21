@@ -1,0 +1,1283 @@
+{
+  "report_version": 1,
+  "created_at": "2026-10-20T03:16:32.349009+00:00",
+  "status": "complete",
+  "run_mode": "technical_smoke",
+  "identity": {
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+    "sample_selection_sha256": "384952c550fe5df29589f5e1d40bb2be5d7a74e1075d5df97f272b17570c09a6",
+    "seed": 2026,
+    "run_mode": "technical_smoke",
+    "amplitude_policy": "none",
+    "batch_size": 8,
+    "optimizer_name": "Adam",
+    "learning_rate": 0.001,
+    "step_budget": 32
+  },
+  "inputs": {
+    "manifest": "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/development_20k_v2.csv",
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "parquet_dir": "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/data",
+    "model_config": "configs/lfcc_lcnn.json",
+    "model_config_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "train_sample_count": 256,
+    "development_sample_count": 128,
+    "train_limit": 256,
+    "development_limit": 128,
+    "limit_selection": "balanced_hash",
+    "sample_selection_sha256": "384952c550fe5df29589f5e1d40bb2be5d7a74e1075d5df97f272b17570c09a6",
+    "train_selection": {
+      "samples": 256,
+      "labels": {
+        "0": 128,
+        "1": 128
+      },
+      "utt_type_counts": {
+        "adversarial_attack": 43,
+        "bonafide": 128,
+        "replay": 42,
+        "voice_conversion": 43
+      },
+      "speakers": 90,
+      "shards": 55
+    },
+    "development_selection": {
+      "samples": 128,
+      "labels": {
+        "0": 64,
+        "1": 64
+      },
+      "utt_type_counts": {
+        "adversarial_attack": 25,
+        "bonafide": 64,
+        "replay": 13,
+        "voice_conversion": 26
+      },
+      "speakers": 25,
+      "shards": 29
+    }
+  },
+  "training": {
+    "global_step": 32,
+    "step_budget": 32,
+    "steps_this_run": 32,
+    "epoch": 0,
+    "batch_cursor": 32,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "last_train_loss": 1.049455165863037,
+    "trainable_parameters": 498113,
+    "num_workers": 0
+  },
+  "resume": {
+    "used": false,
+    "source": null,
+    "initial_global_step": 0
+  },
+  "development": {
+    "labels": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "scores": [
+      0.7986308336257935,
+      0.7487418055534363,
+      0.807378351688385,
+      0.8719330430030823,
+      0.8666313886642456,
+      0.7810297012329102,
+      0.729549765586853,
+      0.8313710689544678,
+      0.7308171391487122,
+      0.7934806942939758,
+      0.7651202082633972,
+      0.7907657623291016,
+      0.819593608379364,
+      0.8229026794433594,
+      0.7647039294242859,
+      0.728303849697113,
+      0.8080352544784546,
+      0.7774321436882019,
+      0.7268404960632324,
+      0.7359012365341187,
+      0.8547499179840088,
+      0.8231858015060425,
+      0.7273554801940918,
+      0.8149390816688538,
+      0.8051512837409973,
+      0.8602369427680969,
+      0.7736791372299194,
+      0.8160645365715027,
+      0.8027758002281189,
+      0.8442122340202332,
+      0.8126648664474487,
+      0.7217159271240234,
+      0.7615392208099365,
+      0.7093275189399719,
+      0.689253032207489,
+      0.8435734510421753,
+      0.8127972483634949,
+      0.861812174320221,
+      0.8227391242980957,
+      0.7631658315658569,
+      0.8076709508895874,
+      0.8171387314796448,
+      0.6738807559013367,
+      0.7477721571922302,
+      0.6924033164978027,
+      0.861221194267273,
+      0.8214169144630432,
+      0.7175959348678589,
+      0.8475049138069153,
+      0.7279666066169739,
+      0.8546093702316284,
+      0.8587367534637451,
+      0.7615753412246704,
+      0.818810760974884,
+      0.7622843384742737,
+      0.7838726043701172,
+      0.7076058983802795,
+      0.6752512454986572,
+      0.7099867463111877,
+      0.7493957877159119,
+      0.8528597950935364,
+      0.8429431915283203,
+      0.8216840028762817,
+      0.8595619797706604,
+      0.7160634994506836,
+      0.875355064868927,
+      0.6939451098442078,
+      0.8149561285972595,
+      0.8044492602348328,
+      0.78913813829422,
+      0.8406562805175781,
+      0.7358409762382507,
+      0.8432571887969971,
+      0.7989923357963562,
+      0.8627017140388489,
+      0.8489866852760315,
+      0.8322126865386963,
+      0.867773175239563,
+      0.8110346794128418,
+      0.7194833159446716,
+      0.8438504934310913,
+      0.7780138850212097,
+      0.8249767422676086,
+      0.8198328018188477,
+      0.751332700252533,
+      0.8177460432052612,
+      0.8210291862487793,
+      0.8113498687744141,
+      0.7614486813545227,
+      0.8129271268844604,
+      0.7730081677436829,
+      0.7320709824562073,
+      0.7390550374984741,
+      0.8134551048278809,
+      0.7918578386306763,
+      0.8442681431770325,
+      0.8290964365005493,
+      0.8498423099517822,
+      0.8202090859413147,
+      0.855485200881958,
+      0.7287390232086182,
+      0.812472403049469,
+      0.7519528269767761,
+      0.8100237846374512,
+      0.6934530138969421,
+      0.8764541745185852,
+      0.8314096331596375,
+      0.8144383430480957,
+      0.7436792254447937,
+      0.7058497667312622,
+      0.8124748468399048,
+      0.8172177076339722,
+      0.8620778322219849,
+      0.8430972099304199,
+      0.7452602386474609,
+      0.8188157081604004,
+      0.6975318789482117,
+      0.8665130734443665,
+      0.8810007572174072,
+      0.7607885003089905,
+      0.8153722882270813,
+      0.8610711693763733,
+      0.8795688152313232,
+      0.8604291677474976,
+      0.8613336086273193,
+      0.813179612159729,
+      0.8773437142372131,
+      0.815799355506897
+    ],
+    "loss": 0.8158036787062883,
+    "eer": 0.15625,
+    "eer_threshold": 0.8126648664474487,
+    "roc_auc": 0.8974609375,
+    "macro_f1": 0.84375,
+    "decision_threshold": 0.8126648664474487,
+    "threshold_source": "development_eer",
+    "sample_count": 128,
+    "utt_type_counts": {
+      "adversarial_attack": 25,
+      "bonafide": 64,
+      "replay": 13,
+      "voice_conversion": 26
+    },
+    "records": [
+      {
+        "file": "id00449/00093.wav",
+        "speaker_id": "id00449",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7986308336257935
+      },
+      {
+        "file": "id00684/00007.wav",
+        "speaker_id": "id00684",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7487418055534363
+      },
+      {
+        "file": "id01039/adversarial_attack/18492.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.807378351688385
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02846.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8719330430030823
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00029.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8666313886642456
+      },
+      {
+        "file": "id00248/00256.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7810297012329102
+      },
+      {
+        "file": "id00223/00015.wav",
+        "speaker_id": "id00223",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.729549765586853
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01294.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8313710689544678
+      },
+      {
+        "file": "id00248/00027.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7308171391487122
+      },
+      {
+        "file": "id00683/00063.wav",
+        "speaker_id": "id00683",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7934806942939758
+      },
+      {
+        "file": "id01130/bonafide/00012.wav",
+        "speaker_id": "id01130",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7651202082633972
+      },
+      {
+        "file": "id00744/00001.wav",
+        "speaker_id": "id00744",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7907657623291016
+      },
+      {
+        "file": "id01061/adversarial_attack/25603.wav",
+        "speaker_id": "id01061",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.819593608379364
+      },
+      {
+        "file": "id01039/adversarial_attack/18346.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8229026794433594
+      },
+      {
+        "file": "id00347/00002.wav",
+        "speaker_id": "id00347",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7647039294242859
+      },
+      {
+        "file": "id00743/00206.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.728303849697113
+      },
+      {
+        "file": "id01039/adversarial_attack/19104.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8080352544784546
+      },
+      {
+        "file": "id00156/00035.wav",
+        "speaker_id": "id00156",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7774321436882019
+      },
+      {
+        "file": "id00690/00030.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7268404960632324
+      },
+      {
+        "file": "id00347/00041.wav",
+        "speaker_id": "id00347",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7359012365341187
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01850.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8547499179840088
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00035.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8231858015060425
+      },
+      {
+        "file": "id00347/00027.wav",
+        "speaker_id": "id00347",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7273554801940918
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00013.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8149390816688538
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00009.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8051512837409973
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00027.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8602369427680969
+      },
+      {
+        "file": "id00248/00243.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7736791372299194
+      },
+      {
+        "file": "id00025/00027.wav",
+        "speaker_id": "id00025",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8160645365715027
+      },
+      {
+        "file": "id00058/00162.wav",
+        "speaker_id": "id00058",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8027758002281189
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02831.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8442122340202332
+      },
+      {
+        "file": "id01075/adversarial_attack/32202.wav",
+        "speaker_id": "id01075",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8126648664474487
+      },
+      {
+        "file": "id00743/00161.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7217159271240234
+      },
+      {
+        "file": "id00690/00073.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7615392208099365
+      },
+      {
+        "file": "id00058/00065.wav",
+        "speaker_id": "id00058",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7093275189399719
+      },
+      {
+        "file": "id00015/00040.wav",
+        "speaker_id": "id00015",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.689253032207489
+      },
+      {
+        "file": "id00248/00059.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8435734510421753
+      },
+      {
+        "file": "id01039/adversarial_attack/18313.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8127972483634949
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_00806.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.861812174320221
+      },
+      {
+        "file": "id01039/adversarial_attack/19139.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8227391242980957
+      },
+      {
+        "file": "id00635/00014.wav",
+        "speaker_id": "id00635",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7631658315658569
+      },
+      {
+        "file": "id00532/00022.wav",
+        "speaker_id": "id00532",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8076709508895874
+      },
+      {
+        "file": "id01061/adversarial_attack/25606.wav",
+        "speaker_id": "id01061",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8171387314796448
+      },
+      {
+        "file": "id00965/00014.wav",
+        "speaker_id": "id00965",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6738807559013367
+      },
+      {
+        "file": "id00025/00028.wav",
+        "speaker_id": "id00025",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7477721571922302
+      },
+      {
+        "file": "id00743/00110.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6924033164978027
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01841.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.861221194267273
+      },
+      {
+        "file": "id01039/adversarial_attack/19944.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8214169144630432
+      },
+      {
+        "file": "id00347/00060.wav",
+        "speaker_id": "id00347",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7175959348678589
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_01757.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8475049138069153
+      },
+      {
+        "file": "id00684/00027.wav",
+        "speaker_id": "id00684",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7279666066169739
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_00622.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8546093702316284
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_00744.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8587367534637451
+      },
+      {
+        "file": "id00223/00056.wav",
+        "speaker_id": "id00223",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7615753412246704
+      },
+      {
+        "file": "id00248/00155.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.818810760974884
+      },
+      {
+        "file": "id00743/00202.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7622843384742737
+      },
+      {
+        "file": "id00223/00060.wav",
+        "speaker_id": "id00223",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7838726043701172
+      },
+      {
+        "file": "id00058/00048.wav",
+        "speaker_id": "id00058",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7076058983802795
+      },
+      {
+        "file": "id00490/00001.wav",
+        "speaker_id": "id00490",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6752512454986572
+      },
+      {
+        "file": "id00690/00120.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7099867463111877
+      },
+      {
+        "file": "id00690/00118.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7493957877159119
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02706.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8528597950935364
+      },
+      {
+        "file": "id00248/00153.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8429431915283203
+      },
+      {
+        "file": "id01039/adversarial_attack/18490.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8216840028762817
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02223.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8595619797706604
+      },
+      {
+        "file": "id00743/00084.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7160634994506836
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00016.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.875355064868927
+      },
+      {
+        "file": "id00690/00098.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6939451098442078
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00011.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8149561285972595
+      },
+      {
+        "file": "id00025/00037.wav",
+        "speaker_id": "id00025",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8044492602348328
+      },
+      {
+        "file": "id00532/00069.wav",
+        "speaker_id": "id00532",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.78913813829422
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01226.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8406562805175781
+      },
+      {
+        "file": "id00381/00005.wav",
+        "speaker_id": "id00381",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7358409762382507
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02246.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8432571887969971
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00015.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.7989923357963562
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02280.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8627017140388489
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02606.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8489866852760315
+      },
+      {
+        "file": "id00449/00091.wav",
+        "speaker_id": "id00449",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8322126865386963
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00017.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.867773175239563
+      },
+      {
+        "file": "id01039/adversarial_attack/19227.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8110346794128418
+      },
+      {
+        "file": "id00743/00136.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7194833159446716
+      },
+      {
+        "file": "id00248/00079.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8438504934310913
+      },
+      {
+        "file": "id00743/00048.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7780138850212097
+      },
+      {
+        "file": "id00248/00048.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8249767422676086
+      },
+      {
+        "file": "id01039/adversarial_attack/18468.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8198328018188477
+      },
+      {
+        "file": "id00635/00004.wav",
+        "speaker_id": "id00635",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.751332700252533
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00033.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8177460432052612
+      },
+      {
+        "file": "id00740/00017.wav",
+        "speaker_id": "id00740",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8210291862487793
+      },
+      {
+        "file": "id00740/00072.wav",
+        "speaker_id": "id00740",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8113498687744141
+      },
+      {
+        "file": "id00690/00075.wav",
+        "speaker_id": "id00690",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7614486813545227
+      },
+      {
+        "file": "id01039/adversarial_attack/20075.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8129271268844604
+      },
+      {
+        "file": "id00015/00044.wav",
+        "speaker_id": "id00015",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7730081677436829
+      },
+      {
+        "file": "id00965/adversarial_attack/58392.wav",
+        "speaker_id": "id00965",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.7320709824562073
+      },
+      {
+        "file": "id00248/00198.wav",
+        "speaker_id": "id00248",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7390550374984741
+      },
+      {
+        "file": "id01039/adversarial_attack/19842.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8134551048278809
+      },
+      {
+        "file": "id00156/00071.wav",
+        "speaker_id": "id00156",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7918578386306763
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02961.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8442681431770325
+      },
+      {
+        "file": "id01061/adversarial_attack/25685.wav",
+        "speaker_id": "id01061",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8290964365005493
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01848.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8498423099517822
+      },
+      {
+        "file": "id00740/00087.wav",
+        "speaker_id": "id00740",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8202090859413147
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_00600.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.855485200881958
+      },
+      {
+        "file": "id01130/bonafide/00022.wav",
+        "speaker_id": "id01130",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7287390232086182
+      },
+      {
+        "file": "id01075/adversarial_attack/32184.wav",
+        "speaker_id": "id01075",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.812472403049469
+      },
+      {
+        "file": "id00965/adversarial_attack/58427.wav",
+        "speaker_id": "id00965",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.7519528269767761
+      },
+      {
+        "file": "id01130/replay/id01130_replay_00026.wav",
+        "speaker_id": "id01130",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8100237846374512
+      },
+      {
+        "file": "id00223/00029.wav",
+        "speaker_id": "id00223",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6934530138969421
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01726.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8764541745185852
+      },
+      {
+        "file": "id00058/00103.wav",
+        "speaker_id": "id00058",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8314096331596375
+      },
+      {
+        "file": "id01039/adversarial_attack/18375.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8144383430480957
+      },
+      {
+        "file": "id00684/00083.wav",
+        "speaker_id": "id00684",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7436792254447937
+      },
+      {
+        "file": "id00965/adversarial_attack/58421.wav",
+        "speaker_id": "id00965",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.7058497667312622
+      },
+      {
+        "file": "id00532/00010.wav",
+        "speaker_id": "id00532",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.8124748468399048
+      },
+      {
+        "file": "id01039/adversarial_attack/20093.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8172177076339722
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01071.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8620778322219849
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01400.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8430972099304199
+      },
+      {
+        "file": "id00743/00103.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7452602386474609
+      },
+      {
+        "file": "id01061/adversarial_attack/25608.wav",
+        "speaker_id": "id01061",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8188157081604004
+      },
+      {
+        "file": "id00743/00101.wav",
+        "speaker_id": "id00743",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.6975318789482117
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02210.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8665130734443665
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_01777.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8810007572174072
+      },
+      {
+        "file": "id00156/00016.wav",
+        "speaker_id": "id00156",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 0.7607885003089905
+      },
+      {
+        "file": "id01039/adversarial_attack/20165.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.8153722882270813
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02121.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8610711693763733
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00018.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8795688152313232
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_02187.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8604291677474976
+      },
+      {
+        "file": "id01070/voice_conversion/id01070_vc_00618.wav",
+        "speaker_id": "id01070",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 0.8613336086273193
+      },
+      {
+        "file": "id01075/adversarial_attack/32197.wav",
+        "speaker_id": "id01075",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.813179612159729
+      },
+      {
+        "file": "id01126/replay/id01126_replay_00020.wav",
+        "speaker_id": "id01126",
+        "utt_type": "replay",
+        "label": 1,
+        "score": 0.8773437142372131
+      },
+      {
+        "file": "id01039/adversarial_attack/18766.wav",
+        "speaker_id": "id01039",
+        "utt_type": "adversarial_attack",
+        "label": 1,
+        "score": 0.815799355506897
+      }
+    ]
+  },
+  "checkpoint": {
+    "path": "/kaggle/working/checkpoints/b0_benchmark_repeat_3.pt",
+    "sha256": "cda3394fe20ffc2fc7175f95b6b988b3c40cda0bf0a625b0cb08f723ffbbf233"
+  },
+  "environment": {
+    "device": "cuda",
+    "git_commit": null,
+    "python": "3.13.15",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "resources": {
+    "elapsed_seconds": 523.714114764,
+    "process_id": 68,
+    "rss_start_mib": 524.47265625,
+    "rss_observed_peak_mib": 1987.28125,
+    "rss_end_mib": 1580.5703125,
+    "cuda_peak_allocated_mib": 288.89453125,
+    "training_loader_seconds": 334.735878093001,
+    "training_model_seconds": 0.9193990649998796,
+    "training_throughput_samples_per_second": 0.7626872491550154,
+    "development_loader_seconds": 185.61397040600104,
+    "development_model_seconds": 0.12576070099999015,
+    "development_throughput_samples_per_second": 0.6891363481422383
+  }
+}

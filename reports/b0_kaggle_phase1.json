@@ -1,0 +1,105 @@
+{
+  "status": "ĐẠT",
+  "created_at": "2026-10-13T08:23:52+00:00",
+  "device": "cuda",
+  "seed": 2026,
+  "amplitude_policy": "none",
+  "scope": "technical_smoke_pilot_not_scientific_result",
+  "environment": {
+    "git_commit": "87cc5efbb621f7d9be1b403bb2d6023e72460420",
+    "python": "3.13.15",
+    "device": "cuda",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "model": {
+    "name": "B0_LFCC_LCNN_smoke",
+    "trainable_parameters": 498113,
+    "config": "/kaggle/working/DoAnTTNT/configs/lfcc_lcnn.json",
+    "config_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0"
+  },
+  "data": {
+    "train_split": "/kaggle/working/DoAnTTNT/data/splits/smoke_train.csv",
+    "train_split_sha256": "d7f60a692ef2c9572293d7dd65f69906cfecc0f8977d349b2a70acc99c43bf55",
+    "train_available_examples": 256,
+    "development_split": "/kaggle/working/DoAnTTNT/data/splits/smoke_dev.csv",
+    "development_split_sha256": "ff4173e686733726f6e30faf8aa3fa3cc7037e38dfb3719ad4a483e10ee53dd9",
+    "development_available_examples": 128
+  },
+  "tensor_shapes": {
+    "waveform": [
+      8,
+      64000
+    ],
+    "lfcc": [
+      8,
+      60,
+      401
+    ],
+    "lcnn_input": [
+      8,
+      1,
+      60,
+      401
+    ],
+    "logit": [
+      8
+    ]
+  },
+  "training": {
+    "epochs_requested": 1,
+    "epochs_completed": 0,
+    "maximum_steps": 1,
+    "steps": 1,
+    "initial_steps": 0,
+    "steps_this_run": 1,
+    "initial_epochs_completed": 0,
+    "examples": 8,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "first_loss": 0.6849560737609863,
+    "last_loss": 0.6849560737609863,
+    "mean_loss": 0.6849560737609863,
+    "minimum_loss": 0.6849560737609863,
+    "maximum_loss": 0.6849560737609863,
+    "finite_gradients": true,
+    "parameters_changed": true
+  },
+  "development": {
+    "examples": 128,
+    "mean_loss": 3.0537550896406174,
+    "finite": true
+  },
+  "checkpoint": {
+    "path": "/kaggle/working/checkpoints/b0_kaggle_phase1.pt",
+    "size_bytes": 5996153,
+    "sha256": "b6f4671ed3e14ad1225bbde942f7bfdf10699939dd8d72e9435e099b13c9f80e",
+    "restore_max_abs_difference": 0.0
+  },
+  "resume": {
+    "used": false,
+    "source_path": null,
+    "initial_steps": 0,
+    "initial_epochs_completed": 0,
+    "optimizer_state_restored": false,
+    "additional_steps_completed": 1
+  },
+  "resources": {
+    "training_seconds": 13.660602772000061,
+    "development_seconds": 90.99046704900002,
+    "total_seconds": 112.52996588400003,
+    "rss_start_mib": 562.953125,
+    "rss_observed_peak_mib": 1957.21484375,
+    "rss_end_mib": 1571.29296875,
+    "cuda_peak_allocated_mib": 286.4560546875,
+    "training_loader_seconds": 11.403377293999938,
+    "training_model_seconds": 2.249194639999928,
+    "training_throughput_samples_per_second": 0.5856256955511131,
+    "development_loader_seconds": 90.86752326599981,
+    "development_model_seconds": 0.12253528799988089,
+    "development_throughput_samples_per_second": 1.4067407735259747
+  }
+}

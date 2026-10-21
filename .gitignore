@@ -21,6 +21,8 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+.kaggle/
+kaggle.json
 
 # Large or generated data
 data/raw/**
@@ -66,3 +68,10 @@ lightning_logs/
 .ipynb_checkpoints/
 *.log
 desktop.ini
+
+# Local Kaggle downloads and exported notebook artifacts
+/kaggle/
+/kaggle_raw/
+/kaggle_download/
+/kaggle_downloads/
+/kaggle_outputs/
