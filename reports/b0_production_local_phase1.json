@@ -1,0 +1,114 @@
+{
+  "report_version": 1,
+  "created_at": "2026-10-19T17:08:32.030513+07:00",
+  "status": "interrupted",
+  "run_mode": "technical_smoke",
+  "identity": {
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+    "seed": 2026,
+    "run_mode": "technical_smoke",
+    "amplitude_policy": "none",
+    "batch_size": 2,
+    "optimizer_name": "Adam",
+    "learning_rate": 0.001,
+    "step_budget": 2
+  },
+  "inputs": {
+    "manifest": "data/manifests/development_20k_v2.csv",
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "parquet_dir": "data/raw/vsasv_parquet/data",
+    "model_config": "configs/lfcc_lcnn.json",
+    "model_config_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "train_sample_count": 4,
+    "development_sample_count": 2,
+    "train_limit": 4,
+    "development_limit": 2
+  },
+  "training": {
+    "global_step": 1,
+    "step_budget": 2,
+    "steps_this_run": 1,
+    "epoch": 0,
+    "batch_cursor": 1,
+    "batch_size": 2,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "last_train_loss": 1.0980134010314941,
+    "trainable_parameters": 498113,
+    "num_workers": 0
+  },
+  "resume": {
+    "used": false,
+    "source": null,
+    "initial_global_step": 0
+  },
+  "development": {
+    "labels": [
+      0,
+      1
+    ],
+    "scores": [
+      3.718656444107182e-05,
+      1.9037359379581176e-05
+    ],
+    "loss": 5.434572219848633,
+    "eer": 1.0,
+    "eer_threshold": 3.718656444107182e-05,
+    "roc_auc": 0.0,
+    "macro_f1": 0.0,
+    "decision_threshold": 3.718656444107182e-05,
+    "threshold_source": "development_eer",
+    "sample_count": 2,
+    "utt_type_counts": {
+      "bonafide": 1,
+      "voice_conversion": 1
+    },
+    "records": [
+      {
+        "file": "id00532/00013.wav",
+        "speaker_id": "id00532",
+        "utt_type": "bonafide",
+        "label": 0,
+        "score": 3.718656444107182e-05
+      },
+      {
+        "file": "id01061/voice_conversion/id01061_vc_01649.wav",
+        "speaker_id": "id01061",
+        "utt_type": "voice_conversion",
+        "label": 1,
+        "score": 1.9037359379581176e-05
+      }
+    ]
+  },
+  "checkpoint": {
+    "path": "checkpoints/b0_production_local_phase1.pt",
+    "sha256": "07e776172bf27e1a3ee0e0904e156813afaf2f66df2db10a6b16e17e790ddb47"
+  },
+  "environment": {
+    "device": "cpu",
+    "git_commit": "87cc5efbb621f7d9be1b403bb2d6023e72460420",
+    "python": "3.12.14",
+    "pytorch": "2.11.0+cpu",
+    "pytorch_cuda": null,
+    "cudnn": null,
+    "gpu_name": null,
+    "gpu_total_memory_mib": 0.0
+  },
+  "resources": {
+    "elapsed_seconds": 7.98290040000029,
+    "process_id": 13184,
+    "rss_start_mib": 211.3671875,
+    "rss_observed_peak_mib": 399.5546875,
+    "rss_end_mib": 399.56640625,
+    "cuda_peak_allocated_mib": 0.0,
+    "training_loader_seconds": 2.6434872999998333,
+    "training_model_seconds": 0.12450139999964449,
+    "training_throughput_samples_per_second": 0.7225463023025988,
+    "development_loader_seconds": 2.5476409000002604,
+    "development_model_seconds": 0.0227457000000868,
+    "development_throughput_samples_per_second": 0.7780930697350079
+  }
+}
