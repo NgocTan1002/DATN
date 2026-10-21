@@ -7,7 +7,7 @@ import argparse
 import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence, cast
 
 import torch
 from torch.utils.data import DataLoader, Subset
@@ -17,7 +17,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.data import ManifestSplit, VSASVManifestDataset  # noqa: E402
+from src.data import (  # noqa: E402
+    AmplitudePolicy,
+    VALID_AMPLITUDE_POLICIES,
+    ManifestSplit,
+    VSASVManifestDataset,
+)
 
 
 DEFAULT_MANIFEST = PROJECT_ROOT / "data" / "manifests" / "development_20k_v2.csv"
@@ -30,16 +35,30 @@ DEFAULT_EXPECTED_MANIFEST_VERSION = "development-20k-v2"
 EXPECTED_SOURCE_SNAPSHOT = "VSASV-HF-public-snapshot-v1"
 
 
-def parse_args() -> argparse.Namespace:
+def amplitude_policy_argument(value: str) -> AmplitudePolicy:
+    if value not in VALID_AMPLITUDE_POLICIES:
+        raise argparse.ArgumentTypeError(
+            f"Chính sách biên độ không hợp lệ: {value}"
+        )
+    return cast(AmplitudePolicy, value)
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--parquet-dir", type=Path, default=DEFAULT_PARQUET_DIR)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument(
+        "--amplitude-policy",
+        type=amplitude_policy_argument,
+        metavar="{none,peak,rms_dbfs}",
+        default="none",
+    )
+    parser.add_argument(
         "--expected-manifest-version",
         default=DEFAULT_EXPECTED_MANIFEST_VERSION,
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def select_representative_indices(dataset: VSASVManifestDataset) -> list[int]:
@@ -91,6 +110,8 @@ def smoke_split(
     split: ManifestSplit,
     seed: int,
     expected_manifest_version: str,
+    amplitude_policy: AmplitudePolicy,
+    expected_count: int,
 ) -> None:
     started = time.perf_counter()
     dataset = VSASVManifestDataset(
@@ -99,11 +120,11 @@ def smoke_split(
         split=split,
         training=split == "closed_train",
         seed=seed,
+        amplitude_policy=amplitude_policy,
     )
     initialization_seconds = time.perf_counter() - started
 
     try:
-        expected_count = EXPECTED_COUNTS[split]
         if len(dataset) != expected_count:
             raise AssertionError(
                 f"Số mẫu {split} sai: nhận {len(dataset)}, cần {expected_count}."
@@ -136,6 +157,10 @@ def smoke_split(
             raise AssertionError(f"Batch {split} không có đủ hai nhãn nhị phân.")
         if not torch.all(first["sample_rate"] == 16_000):
             raise AssertionError(f"Sample rate đích của {split} không phải 16 kHz.")
+        if set(first["amplitude_policy"]) != {amplitude_policy}:
+            raise AssertionError(
+                f"Batch {split} trả sai policy: {first['amplitude_policy']}"
+            )
 
         details = ", ".join(
             f"{file_name} ({utt_type}, {int(sample_rate)} Hz)"
@@ -146,7 +171,8 @@ def smoke_split(
             )
         )
         print(
-            f"[ĐẠT] {split}: {len(dataset):,} mẫu, coverage=100%, "
+            f"[ĐẠT] {split}: policy={amplitude_policy}, "
+            f"{len(dataset):,} mẫu, coverage=100%, "
             f"khởi tạo={initialization_seconds:.3f}s, "
             f"đọc 2 batch={batch_seconds:.3f}s"
         )
@@ -166,10 +192,13 @@ def main() -> int:
             split,
             args.seed,
             args.expected_manifest_version,
+            args.amplitude_policy,
+            EXPECTED_COUNTS[split],
         )
     print(
         "[ĐẠT] Loader development manifest "
-        f"{args.expected_manifest_version} tái lập trên train và development."
+        f"{args.expected_manifest_version} với policy={args.amplitude_policy} "
+        "tái lập trên train và development."
     )
     return 0
 

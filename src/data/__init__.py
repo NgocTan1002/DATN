@@ -24,6 +24,16 @@ from .smoke_subset import (
     summarize_smoke_rows,
     validate_smoke_partitions,
 )
+from .packed import (
+    PACKED_FORMAT_VERSION,
+    PACKED_PREPROCESSING_STAGE,
+    PackedArtifactSummary,
+    PackedArtifactVerification,
+    PackedManifestDataset,
+    PackedRecord,
+    build_packed_artifact,
+    verify_packed_artifact,
+)
 
 __all__ = [
     "VALID_UTT_TYPES",
@@ -44,4 +54,12 @@ __all__ = [
     "select_smoke_rows",
     "summarize_smoke_rows",
     "validate_smoke_partitions",
+    "PACKED_FORMAT_VERSION",
+    "PACKED_PREPROCESSING_STAGE",
+    "PackedArtifactSummary",
+    "PackedArtifactVerification",
+    "PackedManifestDataset",
+    "PackedRecord",
+    "build_packed_artifact",
+    "verify_packed_artifact",
 ]
