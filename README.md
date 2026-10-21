@@ -4,7 +4,11 @@ Dự án xây dựng bộ phân loại nhị phân cho tiếng nói tiếng Vi�
 
 ## Trạng thái
 
-Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Snapshot nguồn có 91 nhóm/182 file waveform bonafide trùng, nhưng development manifest `development-20k-v2` đã khử trùng nội dung trước chọn quota và giữ đúng 15.885 mẫu train cùng 4.115 mẫu development. Audit độc lập đã băm lại 20.000/20.000 waveform và xác nhận 20.000 content hash duy nhất, không còn nhóm trùng trong cùng split hoặc đi qua train/development. Loader manifest đã tạo batch waveform 64.000 mẫu tái lập trực tiếp từ cột `shard`. Benchmark A/B ngày 10/10 giữ `batch_size=8`, `num_workers=0`; loader manifest và split cũ cho waveform tương đương trên cùng file, còn hai worker chậm hơn 8,02% và tăng peak RSS khoảng 502 MiB trên loader manifest. Baseline B0 tối thiểu đã chạy xuyên suốt trên CPU. Lần kiểm chứng ngày 10/10/2026 có 86/86 unit test đạt; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development.
+Dự án đã hoàn tất đường găng dữ liệu cho development subset: metadata audit đạt, tám split theo speaker được khóa với seed `2026`, leakage checker theo speaker/file path đạt và 68 shard cục bộ chứa 34.782 mẫu đã được đối chiếu kích thước, SHA-256, Parquet và metadata. Snapshot nguồn có 91 nhóm/182 file waveform bonafide trùng, nhưng development manifest `development-20k-v2` đã khử trùng nội dung trước chọn quota và giữ đúng 15.885 mẫu train cùng 4.115 mẫu development. Audit độc lập đã băm lại 20.000/20.000 waveform và xác nhận 20.000 content hash duy nhất, không còn nhóm trùng trong cùng split hoặc đi qua train/development. Hồ sơ manifest v2 được khóa lại ngày 15/10/2026 với đúng SHA-256 `f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728`; loader manifest đã smoke thành công cả ba policy `none`, `peak`, `rms_dbfs` trên train/development. Benchmark A/B ngày 10/10 giữ `batch_size=8`, `num_workers=0`; I/O Parquet vẫn là nút thắt. Ngày 19/10/2026, entrypoint B0 production đã tích hợp metric, report và exact resume, đồng thời vượt smoke CPU/Kaggle CUDA. Ngày 20/10/2026, benchmark Kaggle ba lần đã khóa ngân sách chung 896 optimizer step cho ba pilot. Cổng gần nhất đạt 147/147 unit test; policy biên độ chiến thắng vẫn chỉ được chọn bằng closed development EER sau ba pilot.
+
+Phân tích từ đầu đến cuối về các hạng mục đã hoàn thành, ý nghĩa của chúng, phần còn thiếu và đường găng tới khi bảo vệ nằm tại [docs/phan_tich_tong_the_tien_do_du_an.md](docs/phan_tich_tong_the_tien_do_du_an.md).
+
+Bản báo cáo tiến độ có văn phong ngắn gọn, dễ trình bày với giảng viên nằm tại [docs/bao_cao_tien_do_do_an_2026-10-20.md](docs/bao_cao_tien_do_do_an_2026-10-20.md).
 
 ## Phạm vi phiên bản đầu
 
@@ -78,9 +82,11 @@ python scripts/audio_smoke_test.py
 
 Giao thức tiền xử lý được khóa tại `configs/audio.json` và [docs/audio_protocol.md](docs/audio_protocol.md).
 
-## Metric EER
+## Metric và evaluation contract
 
-Metric EER nằm trong `src/metrics/eer.py`. Quy ước nhãn là `1 = spoof`, `0 = bonafide`; score cao hơn biểu thị bằng chứng spoof mạnh hơn. Chạy toàn bộ kiểm thử bằng:
+Metric EER, ROC-AUC và macro-F1 nằm trong `src/metrics/`. Quy ước nhãn là `1 = spoof`, `0 = bonafide`; score cao hơn biểu thị bằng chứng spoof mạnh hơn. `evaluate_development_scores` khóa decision threshold tại điểm EER trên development. `evaluate_scores_at_threshold` tiếp tục tính EER và ROC-AUC trực tiếp từ score nhưng dùng threshold development đã cung cấp để tính macro-F1; không được tính lại threshold từ test.
+
+Chạy toàn bộ kiểm thử bằng:
 
 ```powershell
 python -m unittest discover -s tests -v
@@ -103,10 +109,12 @@ Mỗi sample trả về `waveform`, nhãn nhị phân `label`, `file`, `speaker_
 Kiểm tra riêng đường đọc manifest 20.000 mẫu trên train/development:
 
 ```powershell
-python scripts/smoke_test_development_manifest_loader.py
+python scripts/smoke_test_development_manifest_loader.py --amplitude-policy none
+python scripts/smoke_test_development_manifest_loader.py --amplitude-policy peak
+python scripts/smoke_test_development_manifest_loader.py --amplitude-policy rms_dbfs
 ```
 
-Lệnh này xác nhận đúng số mẫu 15.885/4.115, coverage cục bộ 100%, waveform 64.000 mẫu, đủ hai nhãn và batch tái lập với seed `2026`. Đây là kiểm tra kỹ thuật, không phải phép đo EER hoặc benchmark tối ưu pipeline.
+Mỗi lệnh xác nhận đúng số mẫu 15.885/4.115, coverage cục bộ 100%, waveform 64.000 mẫu, đủ hai nhãn, policy trả về đúng yêu cầu và batch tái lập với seed `2026`. Đây là kiểm tra kỹ thuật, không phải phép đo EER, căn cứ chọn policy hoặc benchmark tối ưu pipeline.
 
 ## Amplitude audit và smoke subset
 
@@ -171,9 +179,28 @@ python scripts/smoke_train_lfcc_lcnn.py `
   --checkpoint checkpoints/b0_lfcc_lcnn_resumed.pt
 ```
 
-Đường resume kiểm tra cấu hình, seed, amplitude policy, batch size và learning rate trước khi nạp model/optimizer, rồi ghi số bước trước/sau cùng thời gian chờ DataLoader, thời gian model, throughput và peak VRAM. Đây mới là resume model/optimizer phục vụ smoke; training loop đầy đủ còn phải lưu sampler/RNG và batch cursor để tiếp tục chính xác giữa epoch.
+Đường resume của smoke script kiểm tra cấu hình, seed, amplitude policy, batch size và learning rate trước khi nạp model/optimizer, rồi ghi số bước trước/sau cùng thời gian chờ DataLoader, thời gian model, throughput và peak VRAM.
 
-Kaggle là GPU chính theo D018. Không cài `requirements.txt` hoặc `requirements-lock.txt` trên Kaggle vì hai file khóa PyTorch CPU; dùng `requirements-kaggle.txt` và làm theo [hướng dẫn kiểm chứng Kaggle GPU](docs/guides/kaggle_gpu_smoke.md).
+Entry point production là `scripts/train_b0.py`. Script dùng chung một đường train → full development → EER/ROC-AUC/macro-F1 → report → checkpoint cho ba chế độ `technical_smoke`, `pilot` và `full_training`. `ResumableBatchSampler` lưu epoch và cursor của batch kế tiếp; checkpoint lưu model, optimizer, global step, epoch, batch cursor, Python/NumPy/PyTorch/CUDA RNG cùng checksum manifest/config, run mode và step budget. Checkpoint không tương thích bị từ chối trước khi resume. DataLoader dùng generator riêng để việc tạo iterator không làm lệch RNG của dropout; workload fixture và smoke dữ liệu thật đều xác nhận chạy liên tục với chạy ngắt–resume cho tham số cuối giống từng tensor.
+
+Ví dụ smoke production hai bước trên manifest v2:
+
+```powershell
+python scripts/train_b0.py --run-mode technical_smoke `
+  --manifest data/manifests/development_20k_v2.csv `
+  --parquet-dir data/raw/vsasv_parquet/data `
+  --amplitude-policy none --step-budget 2 --batch-size 2 `
+  --train-limit 4 --development-limit 2 --device cpu `
+  --checkpoint checkpoints/b0_production_local.pt `
+  --report-json reports/b0_production_local.json `
+  --report-md reports/b0_production_local.md
+```
+
+`--train-limit` và `--development-limit` chỉ hợp lệ trong `technical_smoke`. Chế độ pilot/full luôn đọc toàn bộ development đã khóa, không early stopping và giữ `num_workers=0` để resume đúng cursor. Kết quả smoke chỉ xác nhận pipeline hoạt động, không dùng để chọn amplitude policy.
+
+Kaggle là GPU chính theo D018. Không cài `requirements.txt` hoặc `requirements-lock.txt` trên Kaggle vì hai file khóa PyTorch CPU; dùng `requirements-kaggle.txt` và làm theo [hướng dẫn kiểm chứng Kaggle GPU](docs/guides/kaggle_gpu_smoke.md). Quy trình đóng gói source, cập nhật private dataset, gửi kernel, theo dõi và tải output hoàn toàn bằng CLI nằm tại [hướng dẫn Kaggle CLI](docs/guides/kaggle_cli_workflow.md).
+
+Benchmark đại diện ngày 20/10/2026 đã khóa ngân sách ba pilot theo D020: batch 8, worker 0, Adam, learning rate 0,001 và 896 optimizer step, sau đó đánh giá đủ 4.115 mẫu development. Báo cáo timing và phép chiếu nằm tại `reports/b0_benchmark_summary.*`. Ba profile CLI sẵn sàng là `b0-pilot-none`, `b0-pilot-peak` và `b0-pilot-rms-dbfs`; mỗi profile tạo một private kernel run riêng và không dùng `closed_test`.
 
 ## Benchmark hiệu năng pipeline
 

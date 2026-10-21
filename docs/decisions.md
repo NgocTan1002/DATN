@@ -165,3 +165,13 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Lý do:** ngân sách cố định giữ so sánh ba policy công bằng, trong khi throughput Kaggle chưa được đo nên chưa thể khóa an toàn số epoch hoặc số bước. Tách pilot khỏi early stopping tránh mỗi policy nhận lượng tối ưu khác nhau. Dùng threshold tại development EER thống nhất với EER là metric chính và cung cấp một quy tắc cố định cho macro-F1 cùng demo.
 
 **Ảnh hưởng:** trước ba pilot phải có training/evaluation loop thu đủ score/label, EER, ROC-AUC, macro-F1, development loss và checkpoint có thể tiếp tục. D019 không thay đổi manifest, split, seed, kiến trúc B0 hoặc ba công thức amplitude trong `configs/audio.json`; policy chiến thắng vẫn phải được ghi bằng một quyết định riêng sau khi có kết quả thực chạy.
+
+## 2026-10-20 — D020: Khóa ngân sách vận hành cho ba pilot B0
+
+**Quyết định:** ba pilot `none`, `peak` và `rms_dbfs` cùng dùng `batch_size=8`, `num_workers=0`, optimizer Adam, learning rate `0.001` và `step_budget=896`. Mỗi run dùng toàn bộ 15.885 mẫu train làm nguồn batch, đánh giá đủ 4.115 mẫu development sau khi hoàn thành đúng 896 optimizer step và không early stopping. Ba profile Kaggle chỉ được khác amplitude policy cùng tên checkpoint/report.
+
+**Bằng chứng:** Kaggle kernel riêng tư version 8 chạy ba process độc lập trên Tesla T4 với source bundle SHA-256 `1624687b9f19fae76f0d829e2161f3caa13da11391ab81f7fe76ac08539d0f9e`. Mỗi repeat dùng cùng technical subset xác định gồm 256 train cân bằng 128/128, 90 speaker, 55 shard và 128 development cân bằng 64/64, 25 speaker, 29 shard; selection SHA-256 là `384952c550fe5df29589f5e1d40bb2be5d7a74e1075d5df97f272b17570c09a6`. Cả ba repeat hoàn thành 32/32 step với cùng identity. Thời gian xấu nhất là 12,123399 giây mỗi optimizer step và 1,546248 giây mỗi development sample; CV tương ứng là 7,20% và 3,11%.
+
+**Quy tắc ngân sách:** dành tối đa 20 GPU-giờ cho bốn run-equivalent gồm ba pilot và một lượt dự phòng. Dùng thời gian lớn nhất trong ba repeat, chiếu đủ 4.115 development sample, rồi làm tròn số step xuống bội số 64. Kết quả là 896 step, dự kiến 4,785 giờ mỗi run và 19,139 GPU-giờ cho bốn run-equivalent, còn 0,861 giờ biên dự phòng.
+
+**Ảnh hưởng và giới hạn:** D020 khóa cấu hình vận hành để so sánh công bằng ba policy; không chọn amplitude policy và không phải kết quả khoa học. Benchmark không dùng `closed_test`, không thay metadata, split, seed, manifest hoặc `configs/audio.json`. Báo cáo gốc và phép tính nằm tại `reports/b0_benchmark_repeat_{1,2,3}.*` và `reports/b0_benchmark_summary.*`.
