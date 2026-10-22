@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-22T02:49:15+00:00",
+  "status": "complete",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "scripts/verify_gpu_runtime.py",
+        "--require-cuda",
+        "--output",
+        "/kaggle/working/reports/kaggle_runtime.json"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 11.562509251000051
+    },
+    {
+      "command": [
+        "python",
+        "scripts/train_b0.py",
+        "--run-mode",
+        "pilot",
+        "--device",
+        "cuda",
+        "--manifest",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/development_20k_v2.csv",
+        "--parquet-dir",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/data",
+        "--config",
+        "/kaggle/working/DoAnTTNT/configs/lfcc_lcnn.json",
+        "--audio-config",
+        "/kaggle/working/DoAnTTNT/configs/audio.json",
+        "--amplitude-policy",
+        "none",
+        "--step-budget",
+        "896",
+        "--batch-size",
+        "8",
+        "--learning-rate",
+        "0.001",
+        "--checkpoint",
+        "/kaggle/working/checkpoints/b0_pilot_none.pt",
+        "--report-json",
+        "/kaggle/working/reports/b0_pilot_none.json",
+        "--report-md",
+        "/kaggle/working/reports/b0_pilot_none.md"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 17309.477937915
+    }
+  ],
+  "profile": "b0-pilot-none",
+  "source_dataset_slug": "doantnnt-project-source",
+  "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+  "source_layout": "directory",
+  "data_dataset_slug": "vsasv-development-v2-2026-10-13",
+  "data_root": "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+  "finished_at": "2026-10-22T07:38:03+00:00"
+}

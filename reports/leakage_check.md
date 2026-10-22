@@ -3,7 +3,7 @@
 - **Trạng thái:** ĐẠT
 - **Metadata:** `data/metadata/vsasv_metadata.csv`
 - **Thư mục split:** `data/splits`
-- **Thời điểm UTC:** `2026-10-19T01:44:54.940152+00:00`
+- **Thời điểm UTC:** `2026-10-22T08:00:09.084985+00:00`
 
 ## Tóm tắt split
 
