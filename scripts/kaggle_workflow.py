@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import binascii
 import hashlib
 import json
 import os
@@ -34,6 +35,10 @@ SOURCE_PATTERNS = (
 )
 RUN_CONFIG_ASSIGNMENT = (
     'EMBEDDED_RUN_CONFIG_B64 = "__KAGGLE_RUN_CONFIG_B64__"'
+)
+EMBEDDED_RUN_CONFIG_PATTERN = re.compile(
+    r'^EMBEDDED_RUN_CONFIG_B64 = "([A-Za-z0-9+/=]+)"$',
+    re.MULTILINE,
 )
 
 
@@ -395,6 +400,84 @@ def required_dataset_sources(
     return sources
 
 
+def read_json_object(path: Path, description: str) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise WorkflowError(f"Không thể đọc {description}: {path}") from exc
+    if not isinstance(value, dict):
+        raise WorkflowError(f"{description} phải là một JSON object: {path}")
+    return value
+
+
+def verify_prepared_kernel(
+    kernel_dir: Path,
+    *,
+    expected_kernel_ref: str | None = None,
+) -> dict[str, Any]:
+    """Kiểm tra artifact kernel trước khi gửi để tránh runner/config lệch phiên."""
+
+    runner_path = kernel_dir / "runner.py"
+    run_config_path = kernel_dir / "run-config.json"
+    metadata_path = kernel_dir / "kernel-metadata.json"
+    try:
+        runner_source = runner_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise WorkflowError(f"Không thể đọc runner kernel: {runner_path}") from exc
+    run_config = read_json_object(run_config_path, "run-config kernel")
+    metadata = read_json_object(metadata_path, "kernel-metadata")
+
+    matches = EMBEDDED_RUN_CONFIG_PATTERN.findall(runner_source)
+    if len(matches) != 1:
+        raise WorkflowError(
+            "Runner kernel phải chứa đúng một cấu hình run được nhúng hợp lệ."
+        )
+    try:
+        embedded_value = json.loads(
+            base64.b64decode(matches[0].encode("ascii"), validate=True).decode(
+                "utf-8"
+            )
+        )
+    except (
+        binascii.Error,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+    ) as exc:
+        raise WorkflowError("Cấu hình run nhúng trong runner không hợp lệ.") from exc
+    if embedded_value != run_config:
+        embedded_profile = (
+            embedded_value.get("profile")
+            if isinstance(embedded_value, dict)
+            else None
+        )
+        raise WorkflowError(
+            "Cấu hình nhúng trong runner không khớp run-config.json "
+            f"(runner={embedded_profile!r}, run-config={run_config.get('profile')!r})."
+        )
+    if metadata.get("code_file") != "runner.py":
+        raise WorkflowError("kernel-metadata phải trỏ code_file tới runner.py.")
+    if metadata.get("is_private") is not True:
+        raise WorkflowError("Kernel chuẩn bị gửi phải ở chế độ private.")
+    if (
+        expected_kernel_ref is not None
+        and metadata.get("id") != expected_kernel_ref
+    ):
+        raise WorkflowError(
+            "Kernel ref trong metadata không khớp cấu hình workflow "
+            f"({metadata.get('id')!r} != {expected_kernel_ref!r})."
+        )
+    profile = run_config.get("profile")
+    if not isinstance(profile, str) or not profile:
+        raise WorkflowError("run-config kernel thiếu profile hợp lệ.")
+    return {
+        "profile": profile,
+        "runner_sha256": sha256_file(runner_path),
+        "run_config_sha256": sha256_file(run_config_path),
+        "kernel_metadata_sha256": sha256_file(metadata_path),
+        "dataset_sources": metadata.get("dataset_sources", []),
+    }
+
+
 def prepare_kernel(config: WorkflowConfig, profile: str) -> Path:
     source_manifest_path = (
         config.workspace_dir / "source_dataset" / "source_manifest.json"
@@ -453,16 +536,31 @@ def prepare_kernel(config: WorkflowConfig, profile: str) -> Path:
         "model_sources": [],
     }
     write_json(kernel_dir / "kernel-metadata.json", metadata)
+    verify_prepared_kernel(
+        kernel_dir,
+        expected_kernel_ref=config.kernel_ref,
+    )
     return kernel_dir
 
 
-def push_kernel(config: WorkflowConfig, profile: str) -> None:
-    kernel_dir = prepare_kernel(config, profile)
+def push_prepared_kernel(config: WorkflowConfig, kernel_dir: Path) -> None:
+    summary = verify_prepared_kernel(
+        kernel_dir,
+        expected_kernel_ref=config.kernel_ref,
+    )
     completed = run_process(
         ["kaggle", "kernels", "push", "--path", str(kernel_dir)]
     )
     require_success(completed, "push-kernel")
-    print(f"Đã gửi kernel riêng tư: {config.kernel_ref} (profile={profile}).")
+    print(
+        "Đã gửi kernel riêng tư: "
+        f"{config.kernel_ref} (profile={summary['profile']})."
+    )
+
+
+def push_kernel(config: WorkflowConfig, profile: str) -> None:
+    kernel_dir = prepare_kernel(config, profile)
+    push_prepared_kernel(config, kernel_dir)
 
 
 def read_dataset_files(dataset_ref: str) -> list[dict[str, Any]]:
@@ -599,6 +697,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     push_parser.add_argument("--profile")
 
+    verify_prepared_parser = subparsers.add_parser(
+        "verify-prepared-kernel",
+        help="Kiểm tra runner/run-config/metadata của kernel đã chuẩn bị.",
+    )
+    verify_prepared_parser.add_argument("--kernel-dir", type=Path, required=True)
+
+    push_prepared_parser = subparsers.add_parser(
+        "push-prepared-kernel",
+        help="Kiểm tra rồi gửi nguyên thư mục kernel đã chuẩn bị.",
+    )
+    push_prepared_parser.add_argument("--kernel-dir", type=Path, required=True)
+
     deploy_parser = subparsers.add_parser(
         "deploy", help="Publish source rồi gửi kernel trong một lệnh."
     )
@@ -658,6 +768,18 @@ def main() -> int:
             print(f"Đã chuẩn bị kernel tại: {path}")
         elif args.action == "push-kernel":
             push_kernel(config, profile)
+        elif args.action == "verify-prepared-kernel":
+            summary = verify_prepared_kernel(
+                args.kernel_dir.resolve(),
+                expected_kernel_ref=config.kernel_ref,
+            )
+            print(
+                "Kernel đã chuẩn bị hợp lệ: "
+                f"profile={summary['profile']}, "
+                f"runner_sha256={summary['runner_sha256']}."
+            )
+        elif args.action == "push-prepared-kernel":
+            push_prepared_kernel(config, args.kernel_dir.resolve())
         elif args.action == "deploy":
             publish_source(config, args.message)
             push_kernel(config, profile)

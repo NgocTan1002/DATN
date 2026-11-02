@@ -55,6 +55,103 @@ class KaggleWorkflowTests(unittest.TestCase):
         path.write_text(json.dumps(payload), encoding="utf-8")
         return path
 
+    def write_prepared_kernel(
+        self,
+        root: Path,
+        *,
+        embedded_profile: str,
+        run_config_profile: str,
+    ) -> Path:
+        kernel_dir = root / "kernel"
+        kernel_dir.mkdir()
+        embedded_config = {
+            "schema_version": 1,
+            "profile": embedded_profile,
+            "commands": [["python", "script.py"]],
+        }
+        run_config = {
+            "schema_version": 1,
+            "profile": run_config_profile,
+            "commands": [["python", "script.py"]],
+        }
+        encoded = base64.b64encode(
+            json.dumps(embedded_config).encode("utf-8")
+        ).decode("ascii")
+        runner = kaggle_workflow.RUNNER_TEMPLATE_PATH.read_text(encoding="utf-8")
+        runner = runner.replace(
+            kaggle_workflow.RUN_CONFIG_ASSIGNMENT,
+            f'EMBEDDED_RUN_CONFIG_B64 = "{encoded}"',
+        )
+        (kernel_dir / "runner.py").write_text(runner, encoding="utf-8")
+        (kernel_dir / "run-config.json").write_text(
+            json.dumps(run_config), encoding="utf-8"
+        )
+        (kernel_dir / "kernel-metadata.json").write_text(
+            json.dumps(
+                {
+                    "id": "owner/project-runner",
+                    "code_file": "runner.py",
+                    "is_private": True,
+                }
+            ),
+            encoding="utf-8",
+        )
+        return kernel_dir
+
+    def test_verify_prepared_kernel_rejects_embedded_run_config_mismatch(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
+            kernel_dir = self.write_prepared_kernel(
+                Path(temporary),
+                embedded_profile="b0-full-resume-session-10",
+                run_config_profile="b0-full-resume-session-11",
+            )
+            with self.assertRaisesRegex(
+                kaggle_workflow.WorkflowError,
+                "Cấu hình nhúng trong runner không khớp run-config.json",
+            ):
+                kaggle_workflow.verify_prepared_kernel(
+                    kernel_dir,
+                    expected_kernel_ref="owner/project-runner",
+                )
+
+    def test_verify_prepared_kernel_accepts_matching_run_config(self) -> None:
+        with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
+            kernel_dir = self.write_prepared_kernel(
+                Path(temporary),
+                embedded_profile="b0-full-resume-session-11",
+                run_config_profile="b0-full-resume-session-11",
+            )
+            summary = kaggle_workflow.verify_prepared_kernel(
+                kernel_dir,
+                expected_kernel_ref="owner/project-runner",
+            )
+            self.assertEqual(summary["profile"], "b0-full-resume-session-11")
+            self.assertEqual(len(summary["runner_sha256"]), 64)
+
+    def test_push_prepared_kernel_stops_before_kaggle_on_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
+            root = Path(temporary)
+            config = kaggle_workflow.load_config(
+                self.write_config(
+                    root,
+                    config_payload(root.relative_to(PROJECT_ROOT).as_posix()),
+                )
+            )
+            kernel_dir = self.write_prepared_kernel(
+                root,
+                embedded_profile="b0-full-resume-session-10",
+                run_config_profile="b0-full-resume-session-11",
+            )
+            with mock.patch.object(kaggle_workflow, "run_process") as run:
+                with self.assertRaisesRegex(
+                    kaggle_workflow.WorkflowError,
+                    "Cấu hình nhúng trong runner không khớp run-config.json",
+                ):
+                    kaggle_workflow.push_prepared_kernel(config, kernel_dir)
+            run.assert_not_called()
+
     def test_load_config_rejects_mixed_owners(self) -> None:
         with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
             root = Path(temporary)
