@@ -203,7 +203,56 @@ class IoTests(unittest.TestCase):
             for row in rows:
                 writer.writerow({**{c: "0" for c in columns}, **row})
         if done:
-            (chunk / f"shard-{index:05d}.done.json").write_text("{}", encoding="utf-8")
+            index_path = chunk / f"shard-{index:05d}.index.csv"
+            marker = {
+                "chunk_format_version": 1,
+                "shard": f"train-{index:05d}-of-00004.parquet",
+                "shard_index": index,
+                "records": len(rows),
+                "index_sha256": hashlib.sha256(index_path.read_bytes()).hexdigest(),
+            }
+            (chunk / f"shard-{index:05d}.done.json").write_text(
+                json.dumps(marker), encoding="utf-8"
+            )
+
+    def _row(self, **overrides: str) -> dict[str, str]:
+        row = {"file": "a.wav", "split": "closed_dev", "speaker_id": "id1",
+               "utt_type": "bonafide", "binary_label": "0",
+               "native_sample_rate": "16000", "content_sha256": "HA"}
+        row.update(overrides)
+        return row
+
+    def test_tampered_index_is_rejected(self) -> None:
+        self._write_chunk(1, [self._row()])
+        index_path = self.root / "chunks" / "shard-00001.index.csv"
+        index_path.write_text(
+            index_path.read_text(encoding="utf-8").replace("HA", "HX"), encoding="utf-8"
+        )
+        with self.assertRaisesRegex(ValueError, "checksum"):
+            load_chunk_records(self.root / "chunks", [1], GEOMETRY)
+
+    def test_marker_record_count_mismatch_is_rejected(self) -> None:
+        self._write_chunk(1, [self._row()])
+        marker_path = self.root / "chunks" / "shard-00001.done.json"
+        marker = json.loads(marker_path.read_text(encoding="utf-8"))
+        marker["records"] = 5
+        marker_path.write_text(json.dumps(marker), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "số dòng"):
+            load_chunk_records(self.root / "chunks", [1], GEOMETRY)
+
+    def test_marker_for_other_shard_is_rejected(self) -> None:
+        self._write_chunk(1, [self._row()])
+        marker_path = self.root / "chunks" / "shard-00001.done.json"
+        marker = json.loads(marker_path.read_text(encoding="utf-8"))
+        marker["shard_index"] = 2
+        marker_path.write_text(json.dumps(marker), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "shard"):
+            load_chunk_records(self.root / "chunks", [1], GEOMETRY)
+
+    def test_label_inconsistent_with_utt_type_is_rejected(self) -> None:
+        self._write_chunk(1, [self._row(binary_label="1")])
+        with self.assertRaisesRegex(ValueError, "Nhãn nhị phân"):
+            load_chunk_records(self.root / "chunks", [1], GEOMETRY)
 
     def test_load_chunk_records_reads_all_requested_shards(self) -> None:
         row = {"file": "a.wav", "split": "closed_dev", "speaker_id": "id1",

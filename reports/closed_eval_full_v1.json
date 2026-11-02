@@ -1,0 +1,126 @@
+{
+  "generated_at_utc": "2026-11-02T13:07:10.055316+00:00",
+  "decision": "D025",
+  "scope": "evaluation_manifest_construction_not_scientific_result",
+  "source_snapshot": "VSASV-HF-public-snapshot-v1",
+  "seed": 2026,
+  "max_loss_fraction": 0.05,
+  "status": "ĐẠT",
+  "stop_reasons": [],
+  "chunk_shards": 265,
+  "ledger_rows": 69964,
+  "stats": {
+    "closed_dev": {
+      "original_rows": 39116,
+      "original_by_utt_type": {
+        "adversarial_attack": 12253,
+        "bonafide": 14490,
+        "replay": 120,
+        "voice_conversion": 12253
+      },
+      "kept_rows": 38777,
+      "kept_by_utt_type": {
+        "adversarial_attack": 12253,
+        "bonafide": 14151,
+        "replay": 120,
+        "voice_conversion": 12253
+      },
+      "dropped": {
+        "internal_duplicate": {
+          "bonafide": 301
+        },
+        "train_overlap": {
+          "bonafide": 38
+        }
+      },
+      "loss_fraction_by_utt_type": {
+        "adversarial_attack": 0.0,
+        "bonafide": 0.02339544513457557,
+        "replay": 0.0,
+        "voice_conversion": 0.0
+      },
+      "speakers_original_by_utt_type": {
+        "adversarial_attack": 22,
+        "bonafide": 172,
+        "replay": 3,
+        "voice_conversion": 22
+      },
+      "speakers_kept_by_utt_type": {
+        "adversarial_attack": 22,
+        "bonafide": 172,
+        "replay": 3,
+        "voice_conversion": 22
+      }
+    },
+    "closed_test": {
+      "original_rows": 30848,
+      "original_by_utt_type": {
+        "adversarial_attack": 7361,
+        "bonafide": 16006,
+        "replay": 120,
+        "voice_conversion": 7361
+      },
+      "kept_rows": 30698,
+      "kept_by_utt_type": {
+        "adversarial_attack": 7361,
+        "bonafide": 15856,
+        "replay": 120,
+        "voice_conversion": 7361
+      },
+      "dropped": {
+        "dev_overlap": {
+          "bonafide": 41
+        },
+        "internal_duplicate": {
+          "bonafide": 106
+        },
+        "train_overlap": {
+          "bonafide": 3
+        }
+      },
+      "loss_fraction_by_utt_type": {
+        "adversarial_attack": 0.0,
+        "bonafide": 0.009371485692865176,
+        "replay": 0.0,
+        "voice_conversion": 0.0
+      },
+      "speakers_original_by_utt_type": {
+        "adversarial_attack": 21,
+        "bonafide": 171,
+        "replay": 3,
+        "voice_conversion": 21
+      },
+      "speakers_kept_by_utt_type": {
+        "adversarial_attack": 21,
+        "bonafide": 171,
+        "replay": 3,
+        "voice_conversion": 21
+      }
+    },
+    "checks": {
+      "unique_hashes_dev": true,
+      "unique_hashes_test": true,
+      "dev_test_hash_overlap": 0,
+      "train_dev_hash_overlap": 0,
+      "train_test_hash_overlap": 0,
+      "speaker_disjoint": true
+    },
+    "audit_crosscheck": {
+      "compared": 4115,
+      "mismatched": 0
+    }
+  },
+  "manifests": {
+    "closed_dev": {
+      "path": "data/manifests/closed_dev_full_v1.csv",
+      "rows": 38777,
+      "sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360"
+    },
+    "closed_test": {
+      "path": "data/manifests/closed_test_full_v1.csv",
+      "rows": 30698,
+      "sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266"
+    }
+  },
+  "ledger_sha256": "6676ae932d80e3d8a4768ec21b4f339d1e51fd37319a7d1a088f6ef0160ea65a"
+}

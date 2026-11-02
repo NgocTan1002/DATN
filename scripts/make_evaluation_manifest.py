@@ -89,7 +89,11 @@ class ManifestBuild:
 def load_chunk_records(
     chunk_dir: Path, shard_indices: Sequence[int], geometry: ShardGeometry
 ) -> list[EvalRecord]:
-    """Đọc chỉ mục của các chunk đã hoàn tất (có done marker)."""
+    """Đọc chỉ mục của các chunk đã hoàn tất, đối chiếu với done marker.
+
+    Chỉ mục phải đúng checksum, số dòng và shard ghi trong marker; nhãn nhị phân
+    phải khớp `utt_type`. Băm lại waveform là việc của `verify_chunk`.
+    """
 
     records: list[EvalRecord] = []
     for index in shard_indices:
@@ -97,20 +101,36 @@ def load_chunk_records(
         if not paths.done.is_file() or not paths.index.is_file():
             raise ValueError(f"Chunk shard {index} chưa hoàn tất; thiếu done marker.")
         shard = shard_filename(geometry, index)
+        marker = json.loads(paths.done.read_text(encoding="utf-8"))
+        if marker.get("shard_index") != index or marker.get("shard") != shard:
+            raise ValueError(f"Done marker của chunk {index} ghi shard khác.")
+        if _sha256_file(paths.index) != marker.get("index_sha256"):
+            raise ValueError(f"Chỉ mục chunk {index} sai checksum so với done marker.")
         with paths.index.open("r", encoding="utf-8", newline="") as handle:
-            for row in csv.DictReader(handle):
-                records.append(
-                    EvalRecord(
-                        file=row["file"],
-                        split=row["split"],
-                        speaker_id=row["speaker_id"],
-                        utt_type=row["utt_type"],
-                        binary_label=int(row["binary_label"]),
-                        native_sample_rate=int(row["native_sample_rate"]),
-                        content_sha256=row["content_sha256"],
-                        shard=shard,
-                    )
+            rows = list(csv.DictReader(handle))
+        if len(rows) != marker.get("records"):
+            raise ValueError(
+                f"Chỉ mục chunk {index} có {len(rows)} dòng, done marker ghi "
+                f"{marker.get('records')} số dòng."
+            )
+        for row in rows:
+            expected_label = 0 if row["utt_type"] == "bonafide" else 1
+            if int(row["binary_label"]) != expected_label:
+                raise ValueError(
+                    f"Nhãn nhị phân của {row['file']} không khớp utt_type {row['utt_type']}."
                 )
+            records.append(
+                EvalRecord(
+                    file=row["file"],
+                    split=row["split"],
+                    speaker_id=row["speaker_id"],
+                    utt_type=row["utt_type"],
+                    binary_label=int(row["binary_label"]),
+                    native_sample_rate=int(row["native_sample_rate"]),
+                    content_sha256=row["content_sha256"],
+                    shard=shard,
+                )
+            )
     return records
 
 
