@@ -1,0 +1,52 @@
+{
+  "generated_at_utc": "2026-11-02T13:28:25.458114+00:00",
+  "decision": "D027",
+  "scope": "lfcc_batch_dependence_measurement_not_scientific_result",
+  "source_report": "reports/b0_peak_full_session_10.json",
+  "checkpoint": {
+    "generation": "g-4174b60757a44324a9b864a4931e7a18",
+    "sha256": "050bbfff587bb48dc513e74065f0c395b5c1b5f5a1d2ddde8ae28ebdc37776d7"
+  },
+  "batch_size": 8,
+  "reconstruction_max_abs_difference": 1.138448715209961e-05,
+  "comparison": {
+    "samples": 4115,
+    "threshold": 0.0070081922846535845,
+    "max_abs_score_difference": 0.9461077041924,
+    "median_abs_score_difference": 1.1920928955078125e-07,
+    "changed_scores": 896,
+    "changed_scores_by_utt_type": {
+      "bonafide": 233,
+      "replay": 7,
+      "voice_conversion": 656
+    },
+    "decisions_changed": 31,
+    "decisions_changed_by_utt_type": {
+      "bonafide": 20,
+      "voice_conversion": 11
+    },
+    "eer_batched": 0.08333333333333333,
+    "eer_per_sample": 0.08398950131233596,
+    "eer_difference": {
+      "definition": "EER(per_sample) - EER(batched); âm nghĩa là chấm riêng tốt hơn",
+      "estimate": 0.0006561679790026281,
+      "ci_low": -0.00436439702107995,
+      "ci_high": 0.0163404365147229,
+      "confidence": 0.95,
+      "fraction_per_sample_lower": 0.3663663663663664,
+      "resamples_requested": 1000,
+      "resamples_valid": 999,
+      "seed": 2026
+    },
+    "eer_by_utt_type_batched": {
+      "adversarial_attack": 0.03346456692913386,
+      "replay": 0.07692307692307693,
+      "voice_conversion": 0.11947245927075252
+    },
+    "eer_by_utt_type_per_sample": {
+      "adversarial_attack": 0.03740157480314961,
+      "replay": 0.07692307692307693,
+      "voice_conversion": 0.12139107611548557
+    }
+  }
+}
