@@ -175,3 +175,75 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Quy tắc ngân sách:** dành tối đa 20 GPU-giờ cho bốn run-equivalent gồm ba pilot và một lượt dự phòng. Dùng thời gian lớn nhất trong ba repeat, chiếu đủ 4.115 development sample, rồi làm tròn số step xuống bội số 64. Kết quả là 896 step, dự kiến 4,785 giờ mỗi run và 19,139 GPU-giờ cho bốn run-equivalent, còn 0,861 giờ biên dự phòng.
 
 **Ảnh hưởng và giới hạn:** D020 khóa cấu hình vận hành để so sánh công bằng ba policy; không chọn amplitude policy và không phải kết quả khoa học. Benchmark không dùng `closed_test`, không thay metadata, split, seed, manifest hoặc `configs/audio.json`. Báo cáo gốc và phép tính nằm tại `reports/b0_benchmark_repeat_{1,2,3}.*` và `reports/b0_benchmark_summary.*`.
+
+## 2026-10-22 — D021: Chuẩn bị kỹ thuật XLS-R trong lúc chờ pilot B0
+
+**Quyết định:** theo yêu cầu của người dùng, triển khai khung X0/X1 và kiểm thử CPU song song với thời gian chờ pilot. Dùng giao diện Wav2Vec2Model → mean/std pooling → classifier một logit. X0 chỉ học classifier; X1 chỉ mở các block Transformer cuối, giữ feature encoder và các phần ngoài block đóng băng. Kiểm chứng bằng backbone thu nhỏ khởi tạo ngẫu nhiên và waveform tổng hợp; không dùng test, pretrained checkpoint hoặc quota GPU. Transformers `4.57.6` là dependency tùy chọn cho cổng kỹ thuật CPU, chưa xác nhận stack XLS-R CUDA.
+
+**Lý do:** phát hiện sớm lỗi shape, gradient, freeze/unfreeze và lưu/nạp trọng số mà không phải đợi chọn amplitude policy. Tách dependency và entrypoint để các pilot B0 tiếp tục dùng source và cấu hình đã khóa.
+
+**Giới hạn:** mean/std pooling dùng phương sai tổng thể cộng epsilon `1e-8` trước căn bậc hai. Phần đóng băng giữ eval ngay cả khi huấn luyện head; dropout chỉ bật trong block mở/head, không bật LayerDrop hoặc SpecAugment của backbone. Đây là thiết kế kỹ thuật ban đầu; chưa khóa checkpoint XLS-R, số tầng mở, head, learning rate hoặc ngân sách thí nghiệm chính. Không tự zero-mean/unit-variance normalize waveform vì sẽ thêm biến đổi ngoài giao thức biên độ hiện hành. Khác biệt với processor pretrained phải được giải quyết và ghi rõ trước run khoa học; nếu cần đổi cấu hình âm thanh thì xin xác nhận theo quy định hiện hành.
+
+**Ảnh hưởng:** không đổi D019/D020, metadata, split, seed `2026`, manifest hoặc `configs/audio.json`; không publish lại source Kaggle. Smoke chỉ chứng minh luồng tính toán và khôi phục `state_dict`, chưa chứng minh exact resume huấn luyện hoặc hiệu năng pretrained. Hướng dẫn tại `docs/guides/xlsr_technical_smoke.md`, bằng chứng tại `reports/xlsr_cpu_smoke.json`.
+
+## 2026-10-23 — D022: Chọn amplitude policy peak theo ba pilot B0
+
+**Quyết định:** chọn `peak` cho chặng B0 đầy đủ kế tiếp theo tiêu chí development EER của D019. Ba pilot `none` (kernel v9), `peak` (v10) và `rms_dbfs` (v12) đều hoàn thành đúng D020: nguồn train 15.885 mẫu, đủ 4.115 development, manifest 20.000 mẫu/66 shard, seed `2026`, batch 8, worker 0, Adam, learning rate `0.001`, 896 optimizer step, không early stopping và không dùng test. Cả ba dùng source SHA-256 `12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db`.
+
+**Bằng chứng:** development EER lần lượt `0,10039370078740158`, `0,09120734908136482`, `0,11548556430446194` cho `none`, `peak`, `rms_dbfs`. `peak` có EER thấp nhất nên không cần tie-break; loss của `peak` là `0,32683539048814975`. Báo cáo tổng hợp và kiểm chứng tại `reports/b0_pilot_amplitude_comparison.{json,md}`; ba report gốc cùng workflow/runtime được giữ trong `reports/`. Metric được tính lại từ score, metadata development khớp manifest và checkpoint/checksum/identity/progress/sampler/optimizer/RNG đều đạt kiểm chứng. Version 11 lỗi mount source trước runner; version 12 chạy lại cùng source/cấu hình và hoàn thành, không resume.
+
+**Giới hạn:** mỗi pilot có 7.168 lượt mẫu train, chưa đủ một epoch và mới một seed; không tuyên bố ý nghĩa thống kê hoặc hiệu năng baseline cuối. `none` có ROC-AUC cao hơn `peak`, nên không khẳng định `peak` tốt hơn mọi metric. Replay development chỉ có 13 mẫu và rủi ro shortcut sample rate/utt_type vẫn tồn tại. Kết quả áp dụng `VSASV-HF-public-snapshot-v1`, không so trực tiếp với protocol bài báo gốc.
+
+**Ảnh hưởng:** D022 chọn một ứng viên đã định nghĩa ở D012; không sửa `configs/audio.json`, metadata, split, seed, manifest hoặc công thức policy. Các run mới thuộc chặng B0 đầy đủ phải truyền `--amplitude-policy peak` rõ ràng và có ngân sách/early stopping riêng được đặc tả trước khi chạy. Không sửa hoặc chạy lại ba pilot để tối ưu kết quả. Threshold `0,2584670518678943` của pilot `peak` chỉ gắn với checkpoint pilot tương ứng; full training phải chọn checkpoint bằng development EER, xác định threshold trên development của chính checkpoint đó rồi đóng băng trước test/inference. D022 chưa khóa normalization hoặc cấu hình khoa học XLS-R và không cho phép tự tạo packed artifact/evaluation manifest đang chờ xác nhận.
+
+## 2026-10-23 — D023: Khóa đặc tả B0 đầy đủ có ngân sách giới hạn trên manifest 20k
+
+**Quyết định:** khóa lượt `b0-peak-development-20k-v2-full-v1` trong `configs/b0_full_training.json`: khởi tạo mới seed 2026, giữ LFCC/LCNN/audio của pilot, policy peak theo D022; toàn bộ 15.885 train/4.115 development của manifest 20.000 mẫu/66 shard, đường Parquet (pool cục bộ 68 shard). Adam, learning rate cố định 0,001, batch 8, worker 0, float32, không scheduler/AMP/clipping/class weighting. `drop_last=false`, 1.986 bước/epoch, tối đa 3 epoch/5.958 bước/47.655 lượt mẫu train. Không warm-start hoặc resume từ checkpoint pilot.
+
+**Chọn checkpoint và dừng:** full development sau mỗi epoch hoàn chỉnh, trước epoch kế tiếp. Cải thiện khi EER giảm nghiêm ngặt (min_delta 0); hòa giữ best sớm nhất, không tie-break bằng loss. Patience 1 lần đánh giá không cải thiện; lần đầu tạo best, dừng sớm nhất sau epoch 2, trần epoch 3. Chỉ xuất threshold development của chính checkpoint best; threshold pilot không áp dụng cho trọng số mới. Đây là lượt B0 có ngân sách giới hạn, không tuyên bố ngân sách tối ưu, hội tụ hoặc dùng toàn bộ closed train của metadata.
+
+**Lý do và tài nguyên:** giữ cấu hình đã kiểm chứng để cô lập việc huấn luyện thêm sau chọn policy. Dự toán dùng maximum seconds/step và seconds/development sample trên benchmark khóa và ba pilot thực chạy. Báo cáo `reports/b0_full_training_budget.{json,md}` tính 8,764 giờ/epoch, tối đa 26,291 giờ; cộng 20% dự phòng là 31,550 giờ. Trần 3 epoch là lựa chọn vận hành để giới hạn chi phí Parquet; patience 1 có thể dừng sớm và cần được báo đúng như một giới hạn thiết kế, không suy diễn là được dữ liệu xác nhận tối ưu. Đây là phép chiếu, không phải thời gian thực chạy hoặc cam kết đủ quota trong một tuần.
+
+**Chia phiên và resume:** tối đa 512 optimizer step/invocation; checkpoint sau mỗi 64 bước hoàn thành, biên epoch và điểm chủ động dừng. Phải giữ controller early stopping/history/best/latest/RNG và trạng thái evaluation pending trong transaction generation, commit pointer nguyên tử. Checkpoint full training dự kiến version 4; không làm thay version 3 hoặc source/identity của ba pilot. Quota thiếu thì chờ rồi resume nguyên identity; không reset patience hoặc giảm trần giữa run. Không tự dùng tài nguyên trả phí/monitor tự động.
+
+**Cổng và ảnh hưởng:** đây là đặc tả, `ready_for_training=false`. Runner hiện chưa đáp ứng lịch đánh giá, early stopping và transaction best/latest; cần triển khai cùng kiểm thử fault/resume CPU và smoke CUDA trước run dài. Hướng dẫn chi tiết `docs/guides/b0_full_training.md`, script dự toán `scripts/estimate_b0_full_training_budget.py`. D023 không sửa metadata/split/seed/manifest/configs/audio.json, không dùng test và không cho phép packed artifact hoặc evaluation manifest đang chờ xác nhận. Không publish source hoặc gửi kernel mới trong phiên đặc tả.
+
+**Kiểm chứng triển khai D023 ngày 24/10:** runner riêng/checkpoint v4 đã qua 10 test mới, toàn suite 172/172, real-audio CPU và CUDA v13 continuous/partial/resume khớp model/optimizer/sampler/RNG/controller/best; đối chiếu lại checkpoint tải về cũng đạt. Readiness đã mở sau các cổng. Người dùng đã xác nhận cụ thể upload source mới, cập nhật readiness và gửi phiên đầu nếu đạt; private kernel v14 b0-full-first-session đã gửi, quan sát RUNNING. Không đổi ngân sách/quy tắc khoa học của D023 hoặc báo phiên đang chạy là kết quả hoàn thành.
+
+## 2026-10-30 — D024: So sánh ghép cặp normalization waveform cho XLS-R bằng development
+
+**Quyết định:** theo xác nhận của người dùng, chuẩn bị một pilot X0 ghép cặp để chọn đúng một chế độ normalization waveform trước thí nghiệm XLS-R chính. Cả hai nhánh dùng cùng `development-20k-v2`, đúng 15.885 train/4.115 development, 66 shard được tham chiếu từ pool cục bộ 68 shard, seed `2026`, cùng file/thứ tự sampler, cùng khởi tạo classifier, cùng checkpoint pretrained bất biến và cùng endpoint huấn luyện. Không dùng `closed_test` để chọn normalization, checkpoint, threshold hoặc ngân sách.
+
+**Hai nhánh:** pipeline chung vẫn resample mono 16 kHz, áp dụng policy `peak` theo D022 rồi tạo đoạn 4 giây/64.000 mẫu. Nhánh `pipeline_only` truyền nguyên đoạn này vào encoder. Nhánh `processor_zero_mean_unit_variance` chuẩn hóa riêng từng đoạn sau bước cố định độ dài theo `(x - mean) / sqrt(population_variance + 1e-7)`, tương ứng hành vi processor của ứng viên đã ghim. Phép biến đổi mới là lựa chọn riêng của XLS-R trong pilot, không sửa `configs/audio.json`, công thức `peak`, dữ liệu nguồn hoặc kết quả B0.
+
+**Mô hình và tiêu chí:** dùng X0, đóng băng toàn backbone để cô lập normalization và giảm chi phí; mean/std pooling, head 128 chiều, ReLU, dropout 0,2 và một spoof logit giống nhau giữa hai nhánh. Adam chỉ học classifier với learning rate `0,001`; đây là hằng số pilot, không tuyên bố tối ưu cho X0/X1 cuối. Chọn EER development thấp hơn tại cùng endpoint; nếu EER bằng nhau chính xác thì giữ `pipeline_only` vì ít biến đổi hơn. Mỗi nhánh tự xác định threshold trên development của chính nó; không dùng lại threshold giữa hai nhánh hoặc từ B0.
+
+**Cổng trước khi chạy:** `configs/xlsr_normalization_pilot.json` phải giữ `ready_for_gpu_smoke=false` và `ready_for_pilot_training=false` cho đến khi (1) tải/băm đúng trọng số ở revision `1a640f32ac3e39899438a2931f9924c02f080a54`, (2) load offline đạt, (3) smoke CUDA đo VRAM/runtime, (4) khóa một batch size và một step budget chung từ bằng chứng đó, và (5) entrypoint/controller/history/best tích hợp exact-resume đã kiểm thử. Không ngoại suy ngân sách B0 sang XLS-R và không chạy hai nhánh với ngân sách khác nhau.
+
+**Giới hạn và ảnh hưởng:** D024 chỉ khóa thiết kế so sánh và thứ tự preprocessing; chưa chọn normalization thắng, chưa tải trọng số, chưa cho phép upload/gửi Kaggle XLS-R và chưa tạo metric khoa học. Kết quả pilot sau này chỉ là lựa chọn vận hành bằng một development subset/một seed, không chứng minh ý nghĩa thống kê. D024 không đổi metadata, split, manifest, seed, `configs/audio.json`, D022/D023, packed artifact hoặc evaluation manifest đang chờ xác nhận.
+
+## 2026-11-02 — D025: Mở rộng và khóa tập đánh giá (dev-full, test-full) trước khi có metric mới
+
+**Quyết định:**
+
+1. **Train giữ nguyên.** Mọi mô hình (B0, X0, X1) huấn luyện trên đúng 15.885 mẫu `closed_train` của `development-20k-v2`, seed `2026`, policy `peak` theo D022.
+2. **Dev-full thay dev cũ cho việc chọn mô hình.** Từ nay, chọn checkpoint, early stopping của mô hình mới, threshold và pilot XLS-R dùng toàn bộ `closed_dev` (39.116 dòng gốc, 172 speaker) sau khử trùng nội dung. Dev 4.115 mẫu của manifest v2 chỉ còn là lịch sử.
+3. **Test-full.** Đánh giá cuối dùng toàn bộ `closed_test` (30.848 dòng gốc, 171 speaker) sau khử trùng. Test chỉ được đọc qua entrypoint đánh giá có cổng khóa (nhiệm vụ T10), mỗi mô hình đúng một lần.
+4. **Quy tắc khử trùng.** Dùng đúng hàm băm của D017 (sample rate mã hóa signed int64 little-endian nối với toàn bộ mẫu `float64`), theo thứ tự ưu tiên giữ mẫu: train manifest luôn được giữ; dev-full loại mọi mẫu có hash trùng train manifest, trong nội bộ dev mỗi nhóm trùng chỉ giữ file có `SHA256("2026|file")` nhỏ nhất; test-full loại mọi mẫu có hash trùng train manifest hoặc dev-full, trong nội bộ test áp cùng quy tắc đại diện. Không bù mẫu. Split gốc, nhãn, speaker và metadata không đổi. Trùng với train được tính theo train manifest 15.885 mẫu, không theo toàn bộ `closed_train`, vì chỉ phần này được dùng để huấn luyện.
+5. **Điều kiện dừng khai báo trước.** Nếu một cặp (split, `utt_type`) mất hơn 5% số dòng gốc, hoặc một nhóm hash trộn hai nhãn nhị phân, thì dừng và báo cáo; không tự điều chỉnh quy tắc hay quota, cần quyết định mới.
+6. **Xử lý B0.** Huấn luyện theo D023 giữ nguyên, không train lại. Sau khi chuỗi D023 dừng hợp lệ, chấm các checkpoint cuối epoch đã lưu (tối đa 3) trên dev-full và chọn lại bằng quy tắc của D023: EER giảm nghiêm ngặt, hòa giữ checkpoint sớm nhất. Threshold lấy tại EER dev-full của checkpoint được chọn.
+7. **Phạm vi hiệu lực.** D019 (nghĩa của "development"), D023 (chọn best cho registry) và D024 (pilot normalization dùng dev-full) được sửa theo D025. D022 (chọn `peak`) giữ nguyên, không chạy lại hoặc chấm lại ba pilot.
+8. **Không thay đổi:** metadata, `data/splits/*`, seed `2026`, `configs/audio.json`, manifest v2 và ba công thức amplitude.
+
+**Lý do:** phân tích ngày 02/11 cho thấy dev cũ chỉ có 31 speaker, trong đó VC đến từ 3 speaker; ở epoch 2, 192/214 lỗi VC đến từ một speaker (`id01070`) và CI bootstrap theo speaker của dev EER rộng (khoảng 2–16%). Test cục bộ chỉ phủ 4.967/30.848 mẫu với 4 speaker VC/AP. Dev-full có 22 speaker VC/AP và test-full có 21; độ phủ speaker này quyết định có kết luận so sánh được giữa B0, X0 và X1 hay không.
+
+**Số liệu tham chiếu** (từ `reports/vsasv_snapshot_verification.json`, trước khử trùng):
+
+| Split | Bonafide | Voice conversion | Adversarial attack | Replay | Speaker |
+|---|---:|---:|---:|---:|---:|
+| `closed_dev` | 14.490 | 12.253 | 12.253 | 120 | 172 |
+| `closed_test` | 16.006 | 7.361 | 7.361 | 120 | 171 |
+
+**Giới hạn và rủi ro:** (a) đổi dev sau khi B0 đã chạy có thể bị xem là chọn hậu nghiệm; giảm thiểu bằng cách ghi D025 trước khi chấm dev-full lần đầu và báo cáo cả kết quả dev cũ. (b) Early stopping của B0 dùng dev cũ, vốn là tập con của dev-full, nên có thể hơi thiên lợi cho B0 trên dev-full; dev-full không phải test nhưng phải nêu trong báo cáo. (c) Kết luận chỉ áp dụng cho mô hình huấn luyện trên 15.885 mẫu (khoảng 10,5% `closed_train`) và `VSASV-HF-public-snapshot-v1`. (d) Replay chỉ có 120 mẫu/3 speaker mỗi split, báo cáo riêng và không kết luận. (e) D025 không giải quyết quan hệ giữa hai speaker ID khi cùng waveform, như D017 đã ghi.
+
+**Điều kiện kích hoạt và ảnh hưởng:** D025 chỉ khóa giao thức. Nó không cho phép tải shard, sinh packed artifact hoặc upload lên Kaggle; mỗi việc cần xác nhận riêng. Bốn nhóm trùng train–test đã biết được xử lý bằng quy tắc ở mục 4. Yêu cầu xác nhận evaluation manifest content-disjoint trước đây trong `docs/current_state.md` được xem là đã có quyết định. Không đổi dữ liệu, split, seed hoặc cấu hình âm thanh.
