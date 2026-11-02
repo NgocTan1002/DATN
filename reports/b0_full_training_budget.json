@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-10-24T16:31:59.433692+07:00",
+  "scope": "projection_not_measurement_not_training_result",
+  "experiment_id": "b0-peak-development-20k-v2-full-v1",
+  "plan_sha256": "a40f5cd28e4a262c213ec6576748cf61351a6e3a2ea0514d9aad4f799d70fe2c",
+  "manifest_samples": 20000,
+  "manifest_shards": 66,
+  "local_source_shards": 68,
+  "sources": [
+    {
+      "path": "reports\\b0_benchmark_summary.json",
+      "sha256": "44f3e9b947de362c49a428181e7c913cf51718a0a85179dcc6a536fbcc581eb4"
+    },
+    {
+      "path": "reports\\b0_pilot_none.json",
+      "sha256": "ac80b2d3d63541407653601036eb8782340047d7e69d748da9b27205bb99b3cb"
+    },
+    {
+      "path": "reports\\b0_pilot_peak.json",
+      "sha256": "a9e0abb7fb743bb36552fafd1a76aba0f91f2305dc58ef094bfc1638fd66c902"
+    },
+    {
+      "path": "reports\\b0_pilot_rms_dbfs.json",
+      "sha256": "d0e5332073405767855903d4ab6aa95ce9d801ff02ec90805b192daa5d4d13c3"
+    }
+  ],
+  "measurements": [
+    {
+      "source": "b0_benchmark_summary.json",
+      "training_step_seconds": 12.123398522406221,
+      "development_sample_seconds": 1.5462476310156248
+    },
+    {
+      "source": "b0_pilot_none.json",
+      "training_step_seconds": 12.2406331288839,
+      "development_sample_seconds": 1.5355973530223541
+    },
+    {
+      "source": "b0_pilot_peak.json",
+      "training_step_seconds": 12.626591585553566,
+      "development_sample_seconds": 1.573059479274361
+    },
+    {
+      "source": "b0_pilot_rms_dbfs.json",
+      "training_step_seconds": 12.343281349037962,
+      "development_sample_seconds": 1.5388100486787377
+    }
+  ],
+  "reserve_fraction": 0.2,
+  "projection": {
+    "conservative_training_step_seconds": 12.626591585553566,
+    "conservative_development_sample_seconds": 1.573059479274361,
+    "steps_per_epoch": 1986,
+    "tail_batch_samples": 5,
+    "max_optimizer_steps": 5958,
+    "max_train_sample_exposures": 47655,
+    "max_development_evaluations": 3,
+    "sessions_per_epoch_upper_bound": 4,
+    "sessions_upper_bound": 12,
+    "projected_training_hours_per_epoch": 6.965669691363717,
+    "projected_development_hours_per_epoch": 1.7980943770038877,
+    "projected_hours_per_epoch": 8.763764068367605,
+    "projected_hours_max_epochs": 26.291292205102813,
+    "projected_hours_max_epochs_with_reserve": 31.549550646123375,
+    "projected_worst_session_hours_with_reserve": 4.312651549672474,
+    "includes_startup_checkpoint_resume_as_measured_cost": false
+  },
+  "ready_for_training": true
+}

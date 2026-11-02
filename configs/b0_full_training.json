@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "b0-peak-development-20k-v2-full-v1",
+  "status": "implemented_cpu_cuda_validated",
+  "decision": "D023",
+  "implementation": {
+    "ready_for_training": true,
+    "current_entrypoint": "scripts/train_b0_full.py",
+    "missing": []
+  },
+  "data": {
+    "snapshot": "VSASV-HF-public-snapshot-v1",
+    "manifest": "data/manifests/development_20k_v2.csv",
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+    "manifest_samples": 20000,
+    "manifest_shards": 66,
+    "local_source_shards": 68,
+    "train_split": "closed_train",
+    "development_split": "closed_dev",
+    "train_samples": 15885,
+    "development_samples": 4115,
+    "backend": "parquet",
+    "use_test": false
+  },
+  "model": {
+    "config": "configs/lfcc_lcnn.json",
+    "config_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "amplitude_policy": "peak",
+    "initialization": "fresh_seeded_no_pilot_weights",
+    "precision": "float32",
+    "amp": false
+  },
+  "training": {
+    "seed": 2026,
+    "batch_size": 8,
+    "num_workers": 0,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "BCEWithLogitsLoss",
+    "scheduler": null,
+    "gradient_clipping": null,
+    "shuffle": true,
+    "drop_last": false,
+    "max_epochs": 3,
+    "steps_per_epoch": 1986,
+    "max_optimizer_steps": 5958,
+    "max_train_sample_exposures": 47655
+  },
+  "evaluation": {
+    "schedule": "after_each_completed_epoch_before_next_epoch",
+    "full_development": true,
+    "partial_epoch_evaluation": false,
+    "threshold_source": "development_eer_of_selected_checkpoint",
+    "selection_metric": "eer",
+    "mode": "min",
+    "strict_improvement": true,
+    "equal_eer_action": "keep_earliest_checkpoint",
+    "patience": 1,
+    "minimum_completed_epochs": 1,
+    "min_delta": 0.0,
+    "allow_loss_tie_break": false,
+    "nonfinite_action": "fail_without_committing_evaluation"
+  },
+  "sessions": {
+    "max_optimizer_steps_per_invocation": 512,
+    "checkpoint_every_completed_steps": 64,
+    "quota_shortage_action": "pause_and_resume_same_identity",
+    "auto_monitor": false
+  },
+  "checkpoint_contract": {
+    "planned_full_training_checkpoint_version": 4,
+    "pilot_checkpoint_version": 3,
+    "pilot_checkpoint_resume_allowed": false,
+    "authoritative_commit": "atomic_LATEST_json_to_immutable_generation",
+    "preserve_latest_and_best": true,
+    "preserve_pending_evaluation": true,
+    "preserve_evaluation_history_and_patience": true,
+    "freeze_all_semantic_plan_fields_in_identity": true
+  },
+  "outputs": {
+    "root": "checkpoints/b0_peak_full_v1",
+    "report_json": "reports/b0_peak_full_v1.json",
+    "report_md": "reports/b0_peak_full_v1.md",
+    "budget_json": "reports/b0_full_training_budget.json",
+    "budget_md": "reports/b0_full_training_budget.md"
+  },
+  "budget": {
+    "timing_basis": "maximum_of_locked_benchmark_and_three_pilot_measurements",
+    "reserve_fraction": 0.2,
+    "kind": "projection_not_measurement",
+    "quota_must_be_checked_before_each_session": true
+  }
+}

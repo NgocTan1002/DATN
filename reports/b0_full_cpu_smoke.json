@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "mode": "technical_smoke",
+  "checks": {
+    "model_equal": true,
+    "optimizer_equal": true,
+    "sampler_equal": true,
+    "rng_equal": true,
+    "controller_losses_batches_best_history_equal": true
+  },
+  "global_step": 4,
+  "epochs": 2,
+  "stop_reason": "early_stopped",
+  "cuda_rng_states": 0,
+  "max_model_difference": 0.0,
+  "train_samples": 4,
+  "development_samples": 2,
+  "source_tree_sha256": "aad7ff744cf32b56ff23e7faa6627be43a4afeadebcd00bb658ad2f79c2c031d",
+  "scope": "technical_smoke_not_scientific_result"
+}

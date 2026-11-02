@@ -1,0 +1,140 @@
+{
+  "report_version": 1,
+  "run_mode": "technical_smoke",
+  "experiment_id": "b0-peak-development-20k-v2-full-v1",
+  "status": "early_stopped",
+  "plan_sha256": "6f571116c2560406e6fc8c6b4a592233025cf764e9d39c25d101580762a97ef6",
+  "source_tree_sha256": "661d31fe12ea50bb8174dae56b2afbc1d9baf983fe17f9040034048004352b79",
+  "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+  "source_manifest_samples": 20000,
+  "source_manifest_shards": 66,
+  "train_samples": 4,
+  "development_samples": 2,
+  "used_shards": 6,
+  "steps_this_invocation": 3,
+  "controller": {
+    "global_step": 4,
+    "completed_epochs": 2,
+    "last_evaluated_step": 4,
+    "needs_evaluation": false,
+    "best": {
+      "generation": "g-4b9cf846ecae46c384e92be2994b95bc",
+      "epoch": 1,
+      "global_step": 2,
+      "development": {
+        "labels": [
+          0,
+          1
+        ],
+        "scores": [
+          0.0746242105960846,
+          0.04662473872303963
+        ],
+        "loss": 1.571589708328247,
+        "eer": 1.0,
+        "eer_threshold": 0.0746242105960846,
+        "roc_auc": 0.0,
+        "macro_f1": 0.0,
+        "decision_threshold": 0.0746242105960846,
+        "threshold_source": "development_eer",
+        "sample_count": 2,
+        "utt_type_counts": {
+          "bonafide": 1,
+          "voice_conversion": 1
+        },
+        "records": [
+          {
+            "file": "id00532/00013.wav",
+            "speaker_id": "id00532",
+            "utt_type": "bonafide",
+            "label": 0,
+            "score": 0.0746242105960846
+          },
+          {
+            "file": "id01061/voice_conversion/id01061_vc_01649.wav",
+            "speaker_id": "id01061",
+            "utt_type": "voice_conversion",
+            "label": 1,
+            "score": 0.04662473872303963
+          }
+        ],
+        "timing": {
+          "loader_seconds": 3.402943741999934,
+          "model_seconds": 0.0033367429999771048,
+          "throughput_samples_per_second": 0.587150708465528,
+          "rss_observed_peak_mib": 1757.0390625
+        }
+      }
+    },
+    "bad_evaluations": 1,
+    "stop_reason": "early_stopped",
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 2,
+        "eer": 1.0,
+        "loss": 1.571589708328247
+      },
+      {
+        "epoch": 2,
+        "global_step": 4,
+        "eer": 1.0,
+        "loss": 0.8438233137130737
+      }
+    ],
+    "losses": [
+      0.868169367313385,
+      4.647493839263916,
+      0.09637629985809326,
+      1.7707849740982056
+    ],
+    "batch_trace": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "checkpoints": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-af962b63d96e48629a0f4cd7a00e337d",
+      "checkpoint_sha256": "f9571c73bc0a18d70a59114df195312ff67d367c2e8e513d79b80ce521d9c29e",
+      "state_sha256": "b2bf18cc5d8e236e83f4495f49cd3d9d69e4b36738e5d28a27df3bec6716a5a1"
+    },
+    "best": {
+      "generation": "g-4b9cf846ecae46c384e92be2994b95bc",
+      "checkpoint_sha256": "5612cf4f22680e47b78ae5fdd3bfdcf5faf5d75288deb1fd3b8f243073d84f73",
+      "state_sha256": "efaafbcb76e88156f770fb30ee9704d6573655aa6db579444b1863622e856e60"
+    }
+  },
+  "environment": {
+    "device": "cuda",
+    "git_commit": null,
+    "python": "3.13.15",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "resources": {
+    "training_loader_seconds": 9.936686436000059,
+    "training_model_seconds": 0.6544041270000207,
+    "elapsed_seconds": 17.728324360999977,
+    "rss_mib": 1506.76953125,
+    "cuda_peak_allocated_mib": 73.81884765625
+  }
+}

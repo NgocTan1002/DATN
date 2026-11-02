@@ -1,0 +1,140 @@
+{
+  "report_version": 1,
+  "run_mode": "technical_smoke",
+  "experiment_id": "b0-peak-development-20k-v2-full-v1",
+  "status": "early_stopped",
+  "plan_sha256": "3710828d4a3abedb05fac9eefb52ecaed69f90bab7ffebddc89f279b6f7f8eb4",
+  "source_tree_sha256": "aad7ff744cf32b56ff23e7faa6627be43a4afeadebcd00bb658ad2f79c2c031d",
+  "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+  "source_manifest_samples": 20000,
+  "source_manifest_shards": 66,
+  "train_samples": 4,
+  "development_samples": 2,
+  "used_shards": 6,
+  "steps_this_invocation": 3,
+  "controller": {
+    "global_step": 4,
+    "completed_epochs": 2,
+    "last_evaluated_step": 4,
+    "needs_evaluation": false,
+    "best": {
+      "generation": "g-0143af78f20f4ea898d2493349b8c10e",
+      "epoch": 1,
+      "global_step": 2,
+      "development": {
+        "labels": [
+          0,
+          1
+        ],
+        "scores": [
+          0.0618009939789772,
+          0.04429097846150398
+        ],
+        "loss": 1.5903836488723755,
+        "eer": 1.0,
+        "eer_threshold": 0.0618009939789772,
+        "roc_auc": 0.0,
+        "macro_f1": 0.0,
+        "decision_threshold": 0.0618009939789772,
+        "threshold_source": "development_eer",
+        "sample_count": 2,
+        "utt_type_counts": {
+          "bonafide": 1,
+          "voice_conversion": 1
+        },
+        "records": [
+          {
+            "file": "id00532/00013.wav",
+            "speaker_id": "id00532",
+            "utt_type": "bonafide",
+            "label": 0,
+            "score": 0.0618009939789772
+          },
+          {
+            "file": "id01061/voice_conversion/id01061_vc_01649.wav",
+            "speaker_id": "id01061",
+            "utt_type": "voice_conversion",
+            "label": 1,
+            "score": 0.04429097846150398
+          }
+        ],
+        "timing": {
+          "loader_seconds": 2.8025863000002573,
+          "model_seconds": 0.10358900000574067,
+          "throughput_samples_per_second": 0.6881897317054041,
+          "rss_observed_peak_mib": 374.93359375
+        }
+      }
+    },
+    "bad_evaluations": 1,
+    "stop_reason": "early_stopped",
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 2,
+        "eer": 1.0,
+        "loss": 1.5903836488723755
+      },
+      {
+        "epoch": 2,
+        "global_step": 4,
+        "eer": 1.0,
+        "loss": 0.8144634366035461
+      }
+    ],
+    "losses": [
+      1.1038665771484375,
+      3.600480556488037,
+      0.10048055648803711,
+      0.5042179226875305
+    ],
+    "batch_trace": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "checkpoints": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-6e27cf2849964ca5974d926052eb72cc",
+      "checkpoint_sha256": "629b165230dfa250d643f3456cb5a9aa6ceb7a0546e5a9bd0fde121be863fcca",
+      "state_sha256": "a75a1903d53a27862668416caa5ce958139423faafae17f5dcdbdae3d1b6edac"
+    },
+    "best": {
+      "generation": "g-0143af78f20f4ea898d2493349b8c10e",
+      "checkpoint_sha256": "e1bdcf3f209632bcd205153b7f056b9dd0adad9ad4fe308ad3d029cd4f132864",
+      "state_sha256": "6e6a331cf244b2c42649e84f93b2c7916a1cb410bee364eca88e680e8a31458c"
+    }
+  },
+  "environment": {
+    "device": "cpu",
+    "git_commit": "30c339ddc0e0e7acdea722fb0f25bc0599d7ebd0",
+    "python": "3.12.14",
+    "pytorch": "2.11.0+cpu",
+    "pytorch_cuda": null,
+    "cudnn": null,
+    "gpu_name": null,
+    "gpu_total_memory_mib": 0.0
+  },
+  "resources": {
+    "training_loader_seconds": 9.417102100007469,
+    "training_model_seconds": 1.1109109000026365,
+    "elapsed_seconds": 16.965485500004434,
+    "rss_mib": 364.70703125,
+    "cuda_peak_allocated_mib": 0.0
+  }
+}

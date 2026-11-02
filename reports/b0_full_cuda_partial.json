@@ -1,0 +1,60 @@
+{
+  "report_version": 1,
+  "run_mode": "technical_smoke",
+  "experiment_id": "b0-peak-development-20k-v2-full-v1",
+  "status": "paused",
+  "plan_sha256": "6f571116c2560406e6fc8c6b4a592233025cf764e9d39c25d101580762a97ef6",
+  "source_tree_sha256": "661d31fe12ea50bb8174dae56b2afbc1d9baf983fe17f9040034048004352b79",
+  "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+  "source_manifest_samples": 20000,
+  "source_manifest_shards": 66,
+  "train_samples": 4,
+  "development_samples": 2,
+  "used_shards": 6,
+  "steps_this_invocation": 1,
+  "controller": {
+    "global_step": 1,
+    "completed_epochs": 0,
+    "last_evaluated_step": 0,
+    "needs_evaluation": false,
+    "best": null,
+    "bad_evaluations": 0,
+    "stop_reason": null,
+    "history": [],
+    "losses": [
+      0.868169367313385
+    ],
+    "batch_trace": [
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "checkpoints": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-72e00a11caf94164952bf8f3c1702842",
+      "checkpoint_sha256": "0e7fdc47bfa0e438d24223624190d45abac5f124a5ae4f625bf2516565e9cab1",
+      "state_sha256": "2ca9e1f706c8bbfcbd519dc6a50375585e546e80087002b5017cb3ac158b4602"
+    },
+    "best": null
+  },
+  "environment": {
+    "device": "cuda",
+    "git_commit": null,
+    "python": "3.13.15",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "resources": {
+    "training_loader_seconds": 3.765267781000034,
+    "training_model_seconds": 0.616189243000008,
+    "elapsed_seconds": 4.527190029999929,
+    "rss_mib": 1842.80078125,
+    "cuda_peak_allocated_mib": 70.46142578125
+  }
+}
