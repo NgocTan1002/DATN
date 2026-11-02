@@ -1,0 +1,3 @@
+# Dependency tùy chọn cho chuẩn bị kỹ thuật XLS-R; cài sau môi trường CPU/CUDA.
+# Không thay requirements B0 hoặc cài đè torch/torchaudio.
+transformers==4.57.6

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "decision": "D024",
+  "status": "specification_ready_pretrained_weights_and_cuda_budget_pending",
+  "ready_for_gpu_smoke": false,
+  "ready_for_pilot_training": false,
+  "objective": "Chọn một chế độ normalization waveform cho XLS-R bằng development EER, không dùng test.",
+  "pretrained": {
+    "model_id": "facebook/wav2vec2-xls-r-300m",
+    "revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+    "config_sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+    "preprocessor_config_sha256": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335",
+    "weights_downloaded": false,
+    "weights_sha256": null
+  },
+  "data": {
+    "manifest": "data/manifests/development_20k_v2.csv",
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+    "train_split": "closed_train",
+    "development_split": "closed_dev",
+    "train_samples": 15885,
+    "development_samples": 4115,
+    "referenced_shards": 66,
+    "local_pool_shards": 68,
+    "use_test": false
+  },
+  "audio": {
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "sample_rate_hz": 16000,
+    "samples": 64000,
+    "amplitude_policy": "peak",
+    "shared_order": [
+      "resample_16khz",
+      "amplitude_peak",
+      "fixed_length_4_seconds",
+      "xlsr_waveform_normalization"
+    ]
+  },
+  "comparison": {
+    "paired": true,
+    "same_files_and_order": true,
+    "same_initial_classifier_state": true,
+    "same_sampler_seed": true,
+    "arms": [
+      {
+        "id": "pipeline_only",
+        "waveform_normalization": "pipeline_only",
+        "description": "Giữ nguyên đoạn waveform sau pipeline peak/4 giây."
+      },
+      {
+        "id": "processor_zero_mean_unit_variance",
+        "waveform_normalization": "processor_zero_mean_unit_variance",
+        "epsilon": 1e-7,
+        "description": "Chuẩn hóa từng đoạn 4 giây theo (x - mean) / sqrt(population_variance + 1e-7)."
+      }
+    ],
+    "selection": {
+      "primary_metric": "development_eer",
+      "direction": "lower_is_better",
+      "tie_policy": "prefer_pipeline_only",
+      "full_development_at_common_endpoint": true,
+      "test_set_used": false,
+      "threshold_reused_between_arms": false
+    }
+  },
+  "model": {
+    "mode": "X0",
+    "num_unfrozen_layers": 0,
+    "pooling": "mean_population_std_epsilon_1e-8",
+    "classifier_hidden_features": 128,
+    "classifier_dropout": 0.2,
+    "output_logits": 1,
+    "label_zero": "bonafide",
+    "label_one": "spoof"
+  },
+  "training": {
+    "seed": 2026,
+    "optimizer": "Adam",
+    "classifier_learning_rate": 0.001,
+    "encoder_learning_rate": null,
+    "batch_size": null,
+    "num_workers": 0,
+    "max_optimizer_steps": null,
+    "evaluation_interval": "common_endpoint_only",
+    "exact_resume_required": true,
+    "scheduler": null,
+    "automatic_mixed_precision": false,
+    "gradient_clipping": null,
+    "class_weighting": null
+  },
+  "readiness_blockers": [
+    "download_and_verify_pinned_pretrained_weights",
+    "offline_pretrained_load_smoke",
+    "cuda_vram_and_runtime_smoke",
+    "lock_one_common_batch_size",
+    "lock_one_common_optimizer_step_budget",
+    "integrate_entrypoint_controller_history_best"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "scope": "technical_only_tiny_random_encoder_synthetic_audio_not_scientific_results",
+  "seed": 2026,
+  "dataset_samples": 0,
+  "dataset_shards": 0,
+  "synthetic_waveforms_per_mode": 2,
+  "input": {
+    "sample_rate_hz": 16000,
+    "samples": 64000
+  },
+  "device": "cpu",
+  "python": "3.12.14",
+  "torch": "2.11.0+cpu",
+  "transformers": "4.57.6",
+  "config_sha256": "4817ce51967314c257899b175ac6ef1922b1c11207fb23b84e58bb27c1a9888d",
+  "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+  "results": {
+    "X0": {
+      "passed": true,
+      "unfrozen_transformer_layers": 0,
+      "total_parameters": 7249,
+      "trainable_parameters": 273,
+      "loss": 0.7194961905479431,
+      "gradients_valid": true,
+      "frozen_parameters_unchanged": true,
+      "classifier_updated": true,
+      "opened_layers_updated": true,
+      "state_dict_restore_max_difference": 0.0
+    },
+    "X1": {
+      "passed": true,
+      "unfrozen_transformer_layers": 1,
+      "total_parameters": 7249,
+      "trainable_parameters": 2497,
+      "loss": 0.677960991859436,
+      "gradients_valid": true,
+      "frozen_parameters_unchanged": true,
+      "classifier_updated": true,
+      "opened_layers_updated": true,
+      "state_dict_restore_max_difference": 0.0
+    }
+  }
+}

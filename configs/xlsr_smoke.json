@@ -1,0 +1,26 @@
+{
+  "status": "technical_only_random_weights_not_scientific_configuration",
+  "seed": 2026,
+  "input": {"sample_rate_hz": 16000, "samples": 64000},
+  "backbone": {
+    "hidden_size": 16,
+    "num_hidden_layers": 2,
+    "num_attention_heads": 2,
+    "intermediate_size": 32,
+    "conv_dim": [8, 8, 8, 8, 8, 8, 8],
+    "conv_stride": [5, 2, 2, 2, 2, 2, 2],
+    "conv_kernel": [10, 3, 3, 3, 3, 2, 2],
+    "conv_bias": true,
+    "feat_extract_norm": "layer",
+    "do_stable_layer_norm": true,
+    "num_conv_pos_embeddings": 8,
+    "num_conv_pos_embedding_groups": 2,
+    "hidden_dropout": 0.1,
+    "attention_dropout": 0.1,
+    "feat_proj_dropout": 0.1,
+    "apply_spec_augment": false,
+    "layerdrop": 0.0
+  },
+  "classifier": {"hidden_features": 8, "dropout": 0.2},
+  "x1_unfrozen_layers": 1
+}

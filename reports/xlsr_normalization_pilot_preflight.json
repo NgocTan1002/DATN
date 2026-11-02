@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-30",
+  "decision": "D024",
+  "scientific_status": "specification_and_cpu_preflight_only",
+  "configuration": {
+    "path": "configs/xlsr_normalization_pilot.json",
+    "sha256": "18148e4b272b3c6335cbcb5d60852b159d6b4f1f8a3f4f243679d89f4a7b505a",
+    "ready_for_gpu_smoke": false,
+    "ready_for_pilot_training": false
+  },
+  "locked_inputs_verified": {
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+    "seed": 2026,
+    "train_samples": 15885,
+    "development_samples": 4115,
+    "referenced_shards": 66,
+    "test_set_used": false
+  },
+  "paired_comparison": {
+    "mode": "X0",
+    "amplitude_policy": "peak",
+    "sample_rate_hz": 16000,
+    "samples": 64000,
+    "arms": [
+      "pipeline_only",
+      "processor_zero_mean_unit_variance"
+    ],
+    "processor_epsilon": 1e-7,
+    "selection_metric": "development_eer",
+    "tie_policy": "prefer_pipeline_only"
+  },
+  "source_sha256": {
+    "src/data/xlsr.py": "11bb6effcfa40c1eb02d58150133f095e4bb5cf24258ae61d6b73cda43522b15",
+    "src/data/__init__.py": "70c78501d1603ee13fcff2b1e9f8b7c6df26ca749536e94d53510cc8501198c2",
+    "tests/test_xlsr_normalization.py": "391fba2aac36f5acff66799c3e4c412d7a484172afaea5b07a867585fa2ca3a7"
+  },
+  "verification": {
+    "new_tests_run": 5,
+    "new_tests_passed": 5,
+    "new_tests_elapsed_seconds": 0.048,
+    "xlsr_related_tests_run": 21,
+    "xlsr_related_tests_passed": 21,
+    "xlsr_related_elapsed_seconds": 16.347,
+    "full_suite_tests_run": 188,
+    "full_suite_tests_passed": 188,
+    "full_suite_elapsed_seconds": 191.255,
+    "full_suite_temp_directory_inside_workspace": true,
+    "full_suite_python_io_encoding": "utf-8",
+    "compileall_passed": true,
+    "json_parse_passed": true,
+    "git_diff_check_passed": true
+  },
+  "data_usage": {
+    "real_audio_samples_read_by_new_tests": 0,
+    "real_data_shards_read_by_new_tests": 0,
+    "test_set_used": false
+  },
+  "not_performed": [
+    "pretrained_weights_download",
+    "pretrained_weights_hash_verification",
+    "offline_pretrained_load",
+    "cuda_smoke",
+    "vsasv_training",
+    "kaggle_upload_or_kernel_submit",
+    "audio_config_change"
+  ],
+  "readiness_blockers": [
+    "verified_pretrained_weights",
+    "offline_pretrained_load",
+    "cuda_vram_and_runtime_smoke",
+    "common_batch_size",
+    "common_optimizer_step_budget",
+    "entrypoint_controller_history_best_integration"
+  ]
+}

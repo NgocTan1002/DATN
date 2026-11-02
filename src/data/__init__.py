@@ -18,6 +18,12 @@ from .amplitude import (
     apply_amplitude_policy,
 )
 from .audit_summary import build_amplitude_summaries, summarize_observations
+from .xlsr import (
+    XLSR_PROCESSOR_NORMALIZATION_EPSILON,
+    VALID_XLSR_WAVEFORM_NORMALIZATIONS,
+    XLSRWaveformNormalization,
+    apply_xlsr_waveform_normalization,
+)
 from .smoke_subset import (
     SmokeRow,
     select_smoke_rows,
@@ -50,6 +56,10 @@ __all__ = [
     "apply_amplitude_policy",
     "build_amplitude_summaries",
     "summarize_observations",
+    "XLSR_PROCESSOR_NORMALIZATION_EPSILON",
+    "VALID_XLSR_WAVEFORM_NORMALIZATIONS",
+    "XLSRWaveformNormalization",
+    "apply_xlsr_waveform_normalization",
     "SmokeRow",
     "select_smoke_rows",
     "summarize_smoke_rows",

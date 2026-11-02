@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-30",
+  "scientific_status": "technical_preflight_only",
+  "pretrained_candidate": {
+    "model_id": "facebook/wav2vec2-xls-r-300m",
+    "revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+    "config_sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+    "preprocessor_config_sha256": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335",
+    "weights_downloaded": false,
+    "weights_sha256": null
+  },
+  "checkpoint_contract": {
+    "atomic_file_replace": true,
+    "stored_model_parameters": "trainable_only",
+    "stores_optimizer": true,
+    "stores_progress": true,
+    "stores_sampler": true,
+    "stores_rng": [
+      "python",
+      "numpy",
+      "pytorch_cpu",
+      "pytorch_cuda_if_available"
+    ],
+    "identity_validated_before_restore": true,
+    "frozen_backbone_source": "pinned_pretrained_revision_and_weights_sha256"
+  },
+  "verification": {
+    "focused_command": ".\\.venv\\Scripts\\python.exe -m unittest tests.test_xlsr_checkpoint -v",
+    "focused_tests_run": 4,
+    "focused_tests_passed": 4,
+    "focused_elapsed_seconds": 4.501,
+    "xlsr_model_tests_run": 12,
+    "xlsr_model_tests_passed": 12,
+    "xlsr_model_elapsed_seconds": 29.073,
+    "full_suite_command": ".\\.venv\\Scripts\\python.exe -m unittest discover -s tests -v",
+    "full_suite_tests_run": 183,
+    "full_suite_tests_passed": 183,
+    "full_suite_elapsed_seconds": 186.276,
+    "full_suite_temp_directory_inside_workspace": true,
+    "compileall_passed": true,
+    "candidate_json_parse_passed": true
+  },
+  "data_usage": {
+    "real_audio_samples": 0,
+    "real_data_shards": 0,
+    "test_set_used": false
+  },
+  "not_performed": [
+    "pretrained_weights_download",
+    "pretrained_offline_load",
+    "cuda_smoke",
+    "vsasv_training",
+    "scientific_hyperparameter_selection",
+    "audio_protocol_change"
+  ],
+  "unresolved_gate": [
+    "waveform_normalization",
+    "x1_unfrozen_layers",
+    "classifier_head_and_dropout",
+    "optimizer_and_learning_rates",
+    "training_budget_and_stopping",
+    "entrypoint_controller_history_best_integration"
+  ]
+}
