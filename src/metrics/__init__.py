@@ -1,5 +1,14 @@
 """Evaluation metrics used by the project."""
 
+from .bootstrap import (
+    Interval,
+    PairedBootstrapResult,
+    SpeakerBootstrapResult,
+    confusion_at_threshold,
+    paired_speaker_bootstrap,
+    per_utt_type_eer,
+    speaker_bootstrap,
+)
 from .classification import macro_f1_at_threshold, roc_auc_score
 from .eer import EERResult, equal_error_rate, rates_at_threshold
 from .evaluation import (
@@ -9,6 +18,13 @@ from .evaluation import (
 )
 
 __all__ = [
+    "Interval",
+    "PairedBootstrapResult",
+    "SpeakerBootstrapResult",
+    "confusion_at_threshold",
+    "paired_speaker_bootstrap",
+    "per_utt_type_eer",
+    "speaker_bootstrap",
     "BinaryEvaluationResult",
     "EERResult",
     "equal_error_rate",
