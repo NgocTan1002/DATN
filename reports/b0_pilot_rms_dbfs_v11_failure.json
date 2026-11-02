@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-23T16:50:10.779438+07:00",
+  "profile": "b0-pilot-rms-dbfs",
+  "failed_kernel_version": 11,
+  "observed_status": "ERROR",
+  "log_path": "kaggle_outputs/b0-pilot-rms-dbfs-v11-error/doanttnt-kaggle-cli-runner.log",
+  "log_bytes": 2,
+  "log_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "log_json": [],
+  "downloaded_files": [
+    "kaggle_outputs/b0-pilot-rms-dbfs-v11-error/doanttnt-kaggle-cli-runner.log"
+  ],
+  "checkpoint_available_in_download": false,
+  "workflow_report_available_in_download": false,
+  "metrics_available": false,
+  "root_cause": "ERRORED_MOUNTING_DATASET for source dataset 12694400/version 20990149 before runner execution; underlying Kaggle mount/storage cause unknown",
+  "quota_observed": {
+    "gpu_used_hours": 10.28,
+    "gpu_remaining_hours": 19.72,
+    "gpu_total_hours": 30
+  },
+  "remote_source_profile_verified": "b0-pilot-rms-dbfs",
+  "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+  "cli_warning_is_not_evidence_of_kernel_failure_cause": true,
+  "cli_version_suffix_note": "Kaggle 2.2.4 status/output ignore parsed version; pull with /11 returned 403. Latest source pull matches rms_dbfs; file listing contains stale peak filenames. Do not accept these as v11 training output.",
+  "retry_kernel_version": 12,
+  "retry_submission": "success",
+  "retry_changes": "none: same source/profile/seed/budget, no source republish, fresh run because no checkpoint available",
+  "user_reported_mount_error": {
+    "reported_at": "2026-10-23T16:55:34.426057+07:00",
+    "version": 11,
+    "error_code": "ERRORED_MOUNTING_DATASET",
+    "dataset_id": 12694400,
+    "dataset_version_id": 20990149,
+    "dataset_ref": "ngctnnguyn1111/doantnnt-project-source",
+    "retry_attempts": 30,
+    "internal_error": "dataset loading failed 3 load attempts0",
+    "source": "user pasted Kaggle UI message",
+    "version_confirmed_by_user": true
+  },
+  "diagnostic_update": "User confirms mount error belongs to kernel version 11: source dataset mount failed before runner execution. Underlying storage/mount cause remains unknown. No mount error confirmed for version 12.",
+  "latest_api_observation": {
+    "checked_at": "2026-10-23T16:55:34.426057+07:00",
+    "kernel_status": "RUNNING",
+    "source_dataset_status": "ready",
+    "retry_kernel_version": 12
+  }
+}

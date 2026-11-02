@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-23T09:51:33+00:00",
+  "status": "complete",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "scripts/verify_gpu_runtime.py",
+        "--require-cuda",
+        "--output",
+        "/kaggle/working/reports/kaggle_runtime.json"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 10.183775985000011
+    },
+    {
+      "command": [
+        "python",
+        "scripts/train_b0.py",
+        "--run-mode",
+        "pilot",
+        "--device",
+        "cuda",
+        "--manifest",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/development_20k_v2.csv",
+        "--parquet-dir",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/data",
+        "--config",
+        "/kaggle/working/DoAnTTNT/configs/lfcc_lcnn.json",
+        "--audio-config",
+        "/kaggle/working/DoAnTTNT/configs/audio.json",
+        "--amplitude-policy",
+        "rms_dbfs",
+        "--step-budget",
+        "896",
+        "--batch-size",
+        "8",
+        "--learning-rate",
+        "0.001",
+        "--checkpoint",
+        "/kaggle/working/checkpoints/b0_pilot_rms_dbfs.pt",
+        "--report-json",
+        "/kaggle/working/reports/b0_pilot_rms_dbfs.json",
+        "--report-md",
+        "/kaggle/working/reports/b0_pilot_rms_dbfs.md"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 17414.165588427
+    }
+  ],
+  "profile": "b0-pilot-rms-dbfs",
+  "source_dataset_slug": "doantnnt-project-source",
+  "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+  "source_layout": "directory",
+  "data_dataset_slug": "vsasv-development-v2-2026-10-13",
+  "data_root": "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+  "finished_at": "2026-10-23T14:41:57+00:00"
+}

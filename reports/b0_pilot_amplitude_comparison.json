@@ -1,0 +1,306 @@
+{
+  "generated_at": "2026-10-23T23:13:12.473275+07:00",
+  "scope": "VSASV-HF-public-snapshot-v1 / development-20k-v2",
+  "samples": 20000,
+  "manifest_shards": 66,
+  "local_source_shards": 68,
+  "train_samples": 15885,
+  "development_samples": 4115,
+  "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+  "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+  "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+  "validation": {
+    "all_three_workflows_complete": true,
+    "same_source_config_environment_selection": true,
+    "identities_differ_only_amplitude_policy": true,
+    "commands_differ_only_policy_and_outputs": true,
+    "all_development_metadata_match_manifest_in_order": true,
+    "all_metrics_recomputed_within_1e-12": true,
+    "all_checkpoint_hashes_identity_progress_sampler_optimizer_rng_verified": true,
+    "existing_content_audit_matches_manifest": true,
+    "waveforms_rehashed_this_session": false,
+    "gpu_resume_executed_this_session": false,
+    "test_used": false
+  },
+  "ranking": [
+    "peak",
+    "none",
+    "rms_dbfs"
+  ],
+  "selected_policy": "peak",
+  "selection_rule": "D019: minimum development EER, then loss if numerically tied, then none if still tied",
+  "tie_break_used": false,
+  "pilots": {
+    "none": {
+      "kernel_version": 9,
+      "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+      "identity": {
+        "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+        "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+        "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+        "seed": 2026,
+        "run_mode": "pilot",
+        "amplitude_policy": "none",
+        "batch_size": 8,
+        "optimizer_name": "Adam",
+        "learning_rate": 0.001,
+        "step_budget": 896
+      },
+      "development": {
+        "loss": 0.4010838995147881,
+        "eer": 0.10039370078740158,
+        "eer_threshold": 0.1785407012372505,
+        "roc_auc": 0.9714960731220832,
+        "macro_f1": 0.8936144303846794,
+        "sample_count": 4115,
+        "utt_type_counts": {
+          "adversarial_attack": 1289,
+          "bonafide": 1524,
+          "replay": 13,
+          "voice_conversion": 1289
+        }
+      },
+      "confusion_matrix": {
+        "tn": 1371,
+        "fp": 153,
+        "fn": 261,
+        "tp": 2330
+      },
+      "fpr": 0.10039370078740158,
+      "fnr": 0.10073330760324199,
+      "by_utt_type": {
+        "bonafide": {
+          "correct": 1371,
+          "samples": 1524,
+          "accuracy": 0.8996062992125984
+        },
+        "voice_conversion": {
+          "correct": 1030,
+          "samples": 1289,
+          "accuracy": 0.7990690457719162
+        },
+        "adversarial_attack": {
+          "correct": 1289,
+          "samples": 1289,
+          "accuracy": 1.0
+        },
+        "replay": {
+          "correct": 11,
+          "samples": 13,
+          "accuracy": 0.8461538461538461
+        }
+      },
+      "elapsed_hours": 4.807175969308056,
+      "resources": {
+        "elapsed_seconds": 17305.833489509,
+        "process_id": 25,
+        "rss_start_mib": 523.76953125,
+        "rss_observed_peak_mib": 2146.6328125,
+        "rss_end_mib": 1925.4375,
+        "cuda_peak_allocated_mib": 288.89453125,
+        "training_loader_seconds": 10955.606176243999,
+        "training_model_seconds": 12.00110723597652,
+        "training_throughput_samples_per_second": 0.6535609650061818,
+        "development_loader_seconds": 6315.026739846009,
+        "development_model_seconds": 3.9563678409776912,
+        "development_throughput_samples_per_second": 0.6512123754523317
+      },
+      "environment": {
+        "device": "cuda",
+        "git_commit": null,
+        "python": "3.13.15",
+        "pytorch": "2.11.0+cu128",
+        "pytorch_cuda": "12.8",
+        "cudnn": 91900,
+        "gpu_name": "Tesla T4",
+        "gpu_total_memory_mib": 14911.6875
+      },
+      "checkpoint_sha256": "891742a0dec521655769c952211d047a1256db628c8cb9b71125bb8777c32cf1",
+      "checkpoint_cuda_rng_count": 2,
+      "recomputed_metric_max_abs_error": 0.0
+    },
+    "peak": {
+      "kernel_version": 10,
+      "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+      "identity": {
+        "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+        "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+        "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+        "seed": 2026,
+        "run_mode": "pilot",
+        "amplitude_policy": "peak",
+        "batch_size": 8,
+        "optimizer_name": "Adam",
+        "learning_rate": 0.001,
+        "step_budget": 896
+      },
+      "development": {
+        "loss": 0.32683539048814975,
+        "eer": 0.09120734908136482,
+        "eer_threshold": 0.2584670518678943,
+        "roc_auc": 0.9700659764113816,
+        "macro_f1": 0.9032628197208699,
+        "sample_count": 4115,
+        "utt_type_counts": {
+          "adversarial_attack": 1289,
+          "bonafide": 1524,
+          "replay": 13,
+          "voice_conversion": 1289
+        }
+      },
+      "confusion_matrix": {
+        "tn": 1385,
+        "fp": 139,
+        "fn": 237,
+        "tp": 2354
+      },
+      "fpr": 0.09120734908136482,
+      "fnr": 0.09147047472018525,
+      "by_utt_type": {
+        "bonafide": {
+          "correct": 1385,
+          "samples": 1524,
+          "accuracy": 0.9087926509186351
+        },
+        "voice_conversion": {
+          "correct": 1059,
+          "samples": 1289,
+          "accuracy": 0.821567106283941
+        },
+        "adversarial_attack": {
+          "correct": 1284,
+          "samples": 1289,
+          "accuracy": 0.9961210240496509
+        },
+        "replay": {
+          "correct": 11,
+          "samples": 13,
+          "accuracy": 0.8461538461538461
+        }
+      },
+      "elapsed_hours": 4.9463423887688895,
+      "resources": {
+        "elapsed_seconds": 17806.832599568002,
+        "process_id": 24,
+        "rss_start_mib": 523.7578125,
+        "rss_observed_peak_mib": 2136.6640625,
+        "rss_end_mib": 2072.48046875,
+        "cuda_peak_allocated_mib": 288.89453125,
+        "training_loader_seconds": 11301.256350628011,
+        "training_model_seconds": 12.1697100279832,
+        "training_throughput_samples_per_second": 0.6335834928844156,
+        "development_loader_seconds": 6469.120535988017,
+        "development_model_seconds": 4.019221225978981,
+        "development_throughput_samples_per_second": 0.6357038708169455
+      },
+      "environment": {
+        "device": "cuda",
+        "git_commit": null,
+        "python": "3.13.15",
+        "pytorch": "2.11.0+cu128",
+        "pytorch_cuda": "12.8",
+        "cudnn": 91900,
+        "gpu_name": "Tesla T4",
+        "gpu_total_memory_mib": 14911.6875
+      },
+      "checkpoint_sha256": "d2a408ca853e7b98e7dae0425e25c9bc4ec85f59ad24f4f3a70603ed4d33bb8a",
+      "checkpoint_cuda_rng_count": 2,
+      "recomputed_metric_max_abs_error": 0.0
+    },
+    "rms_dbfs": {
+      "kernel_version": 12,
+      "source_bundle_sha256": "12d91121abac99367724d63f336951a36cd2a47075e79ed4c6d670b3c3d060db",
+      "identity": {
+        "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+        "config_sha256": "7e3af167f64883bda3f6b2dd27c791699aa33310c7d7f3dddef3675e52d3a80f",
+        "sample_selection_sha256": "498f677c201de65af6f7f5a320820c90d8c854fe19911b301943b16e16684bf5",
+        "seed": 2026,
+        "run_mode": "pilot",
+        "amplitude_policy": "rms_dbfs",
+        "batch_size": 8,
+        "optimizer_name": "Adam",
+        "learning_rate": 0.001,
+        "step_budget": 896
+      },
+      "development": {
+        "loss": 0.3769300012404545,
+        "eer": 0.11548556430446194,
+        "eer_threshold": 0.19868370288313217,
+        "roc_auc": 0.9569410973377459,
+        "macro_f1": 0.8779143025394702,
+        "sample_count": 4115,
+        "utt_type_counts": {
+          "adversarial_attack": 1289,
+          "bonafide": 1524,
+          "replay": 13,
+          "voice_conversion": 1289
+        }
+      },
+      "confusion_matrix": {
+        "tn": 1348,
+        "fp": 176,
+        "fn": 300,
+        "tp": 2291
+      },
+      "fpr": 0.11548556430446194,
+      "fnr": 0.11578541103820919,
+      "by_utt_type": {
+        "bonafide": {
+          "correct": 1348,
+          "samples": 1524,
+          "accuracy": 0.884514435695538
+        },
+        "voice_conversion": {
+          "correct": 991,
+          "samples": 1289,
+          "accuracy": 0.7688130333591932
+        },
+        "adversarial_attack": {
+          "correct": 1289,
+          "samples": 1289,
+          "accuracy": 1.0
+        },
+        "replay": {
+          "correct": 11,
+          "samples": 13,
+          "accuracy": 0.8461538461538461
+        }
+      },
+      "elapsed_hours": 4.836294197792777,
+      "resources": {
+        "elapsed_seconds": 17410.659112054,
+        "process_id": 24,
+        "rss_start_mib": 523.9765625,
+        "rss_observed_peak_mib": 2187.01953125,
+        "rss_end_mib": 1995.984375,
+        "cuda_peak_allocated_mib": 288.89453125,
+        "training_loader_seconds": 11047.818242391997,
+        "training_model_seconds": 11.761846346016796,
+        "training_throughput_samples_per_second": 0.648125872997582,
+        "development_loader_seconds": 6328.189585824028,
+        "development_model_seconds": 4.013764488978268,
+        "development_throughput_samples_per_second": 0.6498527877814587
+      },
+      "environment": {
+        "device": "cuda",
+        "git_commit": null,
+        "python": "3.13.15",
+        "pytorch": "2.11.0+cu128",
+        "pytorch_cuda": "12.8",
+        "cudnn": 91900,
+        "gpu_name": "Tesla T4",
+        "gpu_total_memory_mib": 14911.6875
+      },
+      "checkpoint_sha256": "563d81d2aab4b5f446e2d4575b7ddc23ea8e6694d49c876335b811c507c55112",
+      "checkpoint_cuda_rng_count": 2,
+      "recomputed_metric_max_abs_error": 0.0
+    }
+  },
+  "limits": [
+    "Single seed and 896 steps (7168 train exposures), below one epoch; no statistical significance claim.",
+    "Thresholds fitted on development; no test evaluation.",
+    "Replay development has only 13 samples; source sample-rate/amplitude shortcuts remain possible.",
+    "Existing content audit reused on immutable manifest; raw Kaggle waveforms not reread.",
+    "Selected pilot threshold is not the final threshold for a newly trained model; refit on closed_dev after full training."
+  ]
+}
