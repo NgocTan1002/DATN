@@ -144,6 +144,23 @@ def build_lfcc_transform(lfcc_config: Mapping[str, Any]) -> torchaudio.transform
     )
 
 
+def lfcc_features(lfcc: torch.nn.Module, waveform: torch.Tensor) -> torch.Tensor:
+    """Tính LFCC độc lập cho từng mẫu: `(batch, samples)` -> `(batch, n_lfcc, frames)`.
+
+    Với `log_lf=false`, torchaudio đổi sang dB bằng `amplitude_to_DB` có `top_db`.
+    Hàm đó coi chiều thứ ba từ cuối là kênh, nên đầu vào `(batch, samples)` khiến cả
+    batch dùng chung một mức cắt và đặc trưng của một mẫu phụ thuộc mẫu khác. Thêm
+    chiều kênh đơn để mức cắt được tính riêng cho từng mẫu.
+    """
+
+    if waveform.ndim != 2:
+        raise ValueError(
+            "LFCC cần waveform dạng (batch, samples), nhận "
+            f"{tuple(waveform.shape)}."
+        )
+    return lfcc(waveform.unsqueeze(1)).squeeze(1)
+
+
 def build_lcnn_from_config(config: Mapping[str, Any]) -> LightCNNBaseline:
     """Build the B0 LCNN while enforcing the locked tensor interface."""
 

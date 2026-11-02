@@ -41,6 +41,7 @@ from src.models import (  # noqa: E402
     build_lcnn_from_config,
     build_lfcc_transform,
     count_trainable_parameters,
+    lfcc_features,
 )
 from src.training import (  # noqa: E402
     ResumableBatchSampler,
@@ -300,7 +301,7 @@ def _build_dataset(
 
 
 def _model_input(lfcc: torch.nn.Module, waveform: torch.Tensor) -> torch.Tensor:
-    features = lfcc(waveform)
+    features = lfcc_features(lfcc, waveform)
     if features.ndim != 3:
         raise RuntimeError(f"LFCC trả tensor sai số chiều: {tuple(features.shape)}")
     if not torch.isfinite(features).all():

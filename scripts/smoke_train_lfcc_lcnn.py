@@ -31,6 +31,7 @@ from src.models import (  # noqa: E402
     build_lcnn_from_config,
     build_lfcc_transform,
     count_trainable_parameters,
+    lfcc_features,
 )
 
 
@@ -258,7 +259,7 @@ def evaluate_development(
             model_started = time.perf_counter()
             waveforms = batch["waveform"].to(device)
             labels = batch["label"].to(device)
-            features = lfcc(waveforms).unsqueeze(1)
+            features = lfcc_features(lfcc, waveforms).unsqueeze(1)
             logits = model(features)
             loss = loss_function(logits, labels)
             require_finite("Development loss", loss)
@@ -472,7 +473,7 @@ def main() -> None:
             model_started = time.perf_counter()
             waveforms = batch["waveform"].to(device)
             labels = batch["label"].to(device)
-            features = lfcc(waveforms)
+            features = lfcc_features(lfcc, waveforms)
             require_finite("LFCC", features)
             model_inputs = features.unsqueeze(1)
             logits = model(model_inputs)

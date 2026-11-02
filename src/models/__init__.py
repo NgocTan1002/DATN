@@ -6,6 +6,7 @@ from .lfcc_lcnn import (
     build_lcnn_from_config,
     build_lfcc_transform,
     count_trainable_parameters,
+    lfcc_features,
 )
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
     "build_lcnn_from_config",
     "build_lfcc_transform",
     "count_trainable_parameters",
+    "lfcc_features",
 ]
