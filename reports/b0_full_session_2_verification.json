@@ -1,0 +1,204 @@
+{
+  "checked_at": "2026-10-25T16:19:06.170542+07:00",
+  "passed": true,
+  "kernel_version": 15,
+  "profile": "b0-full-resume-session-2",
+  "kernel_status": "COMPLETE",
+  "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "plan_sha256": "a40f5cd28e4a262c213ec6576748cf61351a6e3a2ea0514d9aad4f799d70fe2c",
+  "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+  "manifest_samples": 20000,
+  "manifest_shards": 66,
+  "local_source_shards": 68,
+  "train_samples": 15885,
+  "development_samples": 4115,
+  "status": "paused",
+  "input_global_step": 512,
+  "global_step": 1024,
+  "steps_this_invocation": 512,
+  "sampler_epoch": 0,
+  "batch_cursor": 1024,
+  "train_sample_exposures": 8192,
+  "completed_epochs": 0,
+  "development_evaluations": 0,
+  "best_available": false,
+  "checkpoint_pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-9de1bc836e934c1ab892bdf6683afaec",
+      "checkpoint_sha256": "40812f8331d4b4d615ce91c6af4b72c863a4e17cb946041c42f8e94686c620ca",
+      "state_sha256": "6b9c1eb4953b5de327d596221491ad2a18c86a2f8c1c5f6b3c5b5f08bd67c8bb"
+    },
+    "best": null
+  },
+  "generations_verified": [
+    {
+      "generation": "g-3107266d521c49f4bd4fc318a1e8920d",
+      "global_step": 0,
+      "checkpoint_sha256": "a75b8c4139948bc487159d353a64d0ef25c581412c852096c8181076de32f0ce",
+      "state_sha256": "dc9ff7a90a1076bcbf4f42f717f872df26c2a4e9940014e554698d80bc00ef01",
+      "validated": true
+    },
+    {
+      "generation": "g-3676ed67d0ab4d518b499767b5a4db25",
+      "global_step": 320,
+      "checkpoint_sha256": "f3deeb39bf1fcf1a87d62a395ab3d6c87c35c2e9e3cd78b920e5b9042ee0d585",
+      "state_sha256": "f7f06c7f482aaf041096fe80cfdf11fc8e7c025c3fcfb40f007cc8d7ebe82e20",
+      "validated": true
+    },
+    {
+      "generation": "g-37206e6b4a184e9893e4da2decccb139",
+      "global_step": 512,
+      "checkpoint_sha256": "71464c4f3ebabfc6f3634c7963ced14d8056dc5ad056e6284ee1883fe46c6872",
+      "state_sha256": "033c731d9f046c35655e9ba46ec139d1c4db6a8809d25126bcad65042b37a48e",
+      "validated": true
+    },
+    {
+      "generation": "g-4be113704fb04d6c987f19fd839d5fb1",
+      "global_step": 704,
+      "checkpoint_sha256": "58f36776afc6019c8e6eeadbef8a99272542b310d1cda7a61965943228f1af01",
+      "state_sha256": "524006a2f91964c392abddec6bb8c34c55511c8f3d0dd74d0d6f15de7a6b7acc",
+      "validated": true
+    },
+    {
+      "generation": "g-5c5b4cc98fb64b67ade1112e8a4a5a20",
+      "global_step": 512,
+      "checkpoint_sha256": "71464c4f3ebabfc6f3634c7963ced14d8056dc5ad056e6284ee1883fe46c6872",
+      "state_sha256": "033c731d9f046c35655e9ba46ec139d1c4db6a8809d25126bcad65042b37a48e",
+      "validated": true
+    },
+    {
+      "generation": "g-66b1366cd605483fa1db1703d3c4f3d2",
+      "global_step": 896,
+      "checkpoint_sha256": "04e75dd0bfbabd43230e3139ed4fb6820572d04e3b73824ff59d577ff2d8fddf",
+      "state_sha256": "c7bacc3b7b8938826edcd168c444ac01951067ee978760c2a14ebb6259797255",
+      "validated": true
+    },
+    {
+      "generation": "g-67c44e2faffd418da8367b05c0a550dd",
+      "global_step": 1024,
+      "checkpoint_sha256": "40812f8331d4b4d615ce91c6af4b72c863a4e17cb946041c42f8e94686c620ca",
+      "state_sha256": "6b9c1eb4953b5de327d596221491ad2a18c86a2f8c1c5f6b3c5b5f08bd67c8bb",
+      "validated": true
+    },
+    {
+      "generation": "g-76612ad03a5741839569b6ad39fb3b87",
+      "global_step": 640,
+      "checkpoint_sha256": "ea25e6c07a4cd4d877075a8d6d468abe2d2474facb9432367edef9da76c9a2ff",
+      "state_sha256": "65cf4a05910f446f3b6d57f48f9c1263d787ec36314d1613aa1c5e92ababe47c",
+      "validated": true
+    },
+    {
+      "generation": "g-87ecce2931e1461aa7d87d08a985e881",
+      "global_step": 64,
+      "checkpoint_sha256": "5f9e64bf2803bd21cfb4be1b6222dd4276792bc1596aa8de0484f54d832dcda3",
+      "state_sha256": "3e0abaf20b444825851e5a49646dc1d68a00e7efa70778479cfe141cf6f2b56a",
+      "validated": true
+    },
+    {
+      "generation": "g-90eaf25b3ee64129803d29d26eb65435",
+      "global_step": 192,
+      "checkpoint_sha256": "8a70d6423b4fe6da4eedbee0cc35c617b9059d7f08443602df72eeea344b31b0",
+      "state_sha256": "efd8fc839ccfdf1c0a566ddeb5c3e496136fa759d0d6eaf6303b3805afc7622c",
+      "validated": true
+    },
+    {
+      "generation": "g-955dcae0cea4471a90cec1b105ee131f",
+      "global_step": 960,
+      "checkpoint_sha256": "c22957fac30a30f71f600e77fee9f28a81409460a57a535d048d0defa1676265",
+      "state_sha256": "69f1d90a57c9b3b86678d0fd6da29ae5dbafafc8142a2280dfce48d391cdb507",
+      "validated": true
+    },
+    {
+      "generation": "g-9de1bc836e934c1ab892bdf6683afaec",
+      "global_step": 1024,
+      "checkpoint_sha256": "40812f8331d4b4d615ce91c6af4b72c863a4e17cb946041c42f8e94686c620ca",
+      "state_sha256": "6b9c1eb4953b5de327d596221491ad2a18c86a2f8c1c5f6b3c5b5f08bd67c8bb",
+      "validated": true
+    },
+    {
+      "generation": "g-a5524818e06c47cbb321764a0aae8db6",
+      "global_step": 384,
+      "checkpoint_sha256": "b9884e27b0b47557d98b89685086b3a1d08153e8fb3e6eae1665a4553427eefc",
+      "state_sha256": "94986791b8d9bf86f0ad2dbe9c839c31df6ea7a5a7dba1f4afe92c4541afd78c",
+      "validated": true
+    },
+    {
+      "generation": "g-a69731ead4d74da18c0d9fad6b76883f",
+      "global_step": 832,
+      "checkpoint_sha256": "ff9f26633f31e1850eec104ab6be87565e261d19471f23e15900af6d9e423710",
+      "state_sha256": "475b79ae57cf85c38a5f181bfebd69659f79c027c37d49bd8439a2b9bad8e6d1",
+      "validated": true
+    },
+    {
+      "generation": "g-c7152515000541d9ad5dcdccaf1ebca0",
+      "global_step": 448,
+      "checkpoint_sha256": "b4fa9804ece6edf9e48d89c3c3edec1f63db3c71d229b2c1acbb9b1dc7d1ae19",
+      "state_sha256": "5189c8642f05af64c8203392305674044992d932c6b68fd639300406ecfc55e9",
+      "validated": true
+    },
+    {
+      "generation": "g-d2e94281d0ef472a99c2b67a72b6b332",
+      "global_step": 256,
+      "checkpoint_sha256": "1eed4f8c9c52897af278b9bc6486c86faea12f85d587b5240721ecf6d9965410",
+      "state_sha256": "01be4e811297066c56ff9105779d6964416cf54bff86f8aa40787dcdfd2c808c",
+      "validated": true
+    },
+    {
+      "generation": "g-e24e18b73b8c4ed1809e9facd1db86ea",
+      "global_step": 768,
+      "checkpoint_sha256": "cb4c3837df6c8acd8ac39fd29e2f4adbda5080e6207a2344bfef8f11578b4eed",
+      "state_sha256": "3bb50205aa43639a025a1fb7297cde7006afbba3b5f9d571342ea0e2b911df07",
+      "validated": true
+    },
+    {
+      "generation": "g-e40dd309f2f24e00a03254db2c965809",
+      "global_step": 576,
+      "checkpoint_sha256": "bcc6119ddf1f4fc1fbf8dfbfc2249ee646866d9af68eefede099eda3b4d7205a",
+      "state_sha256": "c5501123561b9366d561c3fedbd3c0205c6dbe824a7c265e723764aaabd38652",
+      "validated": true
+    },
+    {
+      "generation": "g-e896f7453b714470a889a389ffa17dd3",
+      "global_step": 128,
+      "checkpoint_sha256": "357112553a08e36570164ad4bd0732153411c3bc97e1d318c4cc4005de5dc486",
+      "state_sha256": "26b9efe733d16e7fedcaada8c625cb0439daf9632aba17c51ba3b57c7eb531eb",
+      "validated": true
+    }
+  ],
+  "training_elapsed_hours": 1.746377922049722,
+  "workflow_started_at": "2026-10-25T06:56:59+00:00",
+  "workflow_finished_at": "2026-10-25T08:42:24+00:00",
+  "environment": {
+    "device": "cuda",
+    "git_commit": null,
+    "python": "3.13.15",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "cuda_rng_states": 2,
+  "gpu_resume_verified_from_completed_output": true,
+  "continuous_1024_step_gpu_control_executed": false,
+  "new_training_or_gpu_resume_executed_during_verification": false,
+  "checks": {
+    "workflow_profile_source_and_three_successful_commands": true,
+    "commands_match_submitted_profile_including_resume": true,
+    "bootstrap_restored_original_step_and_pointer": true,
+    "identity_and_frozen_plan_source_manifest": true,
+    "report_scope_progress_and_checkpoint_pointer": true,
+    "no_premature_development_best_or_threshold": true,
+    "sampler_and_complete_batch_trace_match_seed_2026": true,
+    "loss_and_batch_prefix_from_v14_preserved": true,
+    "model_optimizer_finite_adam_advanced_without_reset": true,
+    "rng_structure_and_cuda_runtime": true,
+    "all_19_generation_payloads_and_state_consistent": true,
+    "all_10_imported_generations_preserved_byte_for_byte": true
+  },
+  "test_used": false,
+  "next_expected_global_step": 1536,
+  "next_action": "prepare checkpoint from verified v15 and resume same D023 identity/source; no session 3 sent"
+}

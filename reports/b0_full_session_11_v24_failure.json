@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-11-01T22:05:52.4571187+07:00",
+  "kernel_version": 24,
+  "observed_status": "ERROR",
+  "download": {
+    "folder": "kaggle_outputs/b0-full-session-11-v24-error",
+    "file_count": 3,
+    "total_bytes": 53174,
+    "files": [
+      {
+        "path": "doanttnt-kaggle-cli-runner.log",
+        "bytes": 31468,
+        "sha256": "072156e0414ac8aab1f79cfb87f205bf6a670cf5a5942f771131276b091511ba"
+      },
+      {
+        "path": "reports/kaggle_cli_workflow.json",
+        "bytes": 21080,
+        "sha256": "9fe1edac7031e7e742dde2327903c4b9921c8a8e5ed9411069a06f68787a7702"
+      },
+      {
+        "path": "reports/kaggle_runtime.json",
+        "bytes": 626,
+        "sha256": "dd63235d22db25d1597311f7abdc36e993356c2569c0134b697d3dd0918b997f"
+      }
+    ]
+  },
+  "workflow": {
+    "started_at": "2026-11-01T14:43:05+00:00",
+    "finished_at": "2026-11-01T14:43:27+00:00",
+    "status": "failed",
+    "reported_profile": "b0-full-resume-session-10",
+    "command_count": 2,
+    "return_codes": [
+      0,
+      1
+    ],
+    "elapsed_seconds": [
+      11.065471738000014,
+      2.6941793230000144
+    ],
+    "failure_command": "restore checkpoint",
+    "failure_message": "Checksum manifest checkpoint đầu vào không khớp.",
+    "training_command_started": false,
+    "resume_report_created": false,
+    "checkpoint_output_created": false
+  },
+  "runtime": {
+    "cuda_available": true,
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "device_count": 2,
+    "device_name": "Tesla T4"
+  },
+  "expected_session_11": {
+    "profile": "b0-full-resume-session-11",
+    "manifest_sha256": "189c5472cd2faf5cbc588f01284792f640f7c3b3deb2e8ff5beabfced34fe831",
+    "expected_step": 5120,
+    "resume_report": "/kaggle/working/reports/b0_full_session_11_resume_input.json"
+  },
+  "actual_embedded_session_10": {
+    "profile": "b0-full-resume-session-10",
+    "manifest_sha256": "f7b8ccbdf7b03402324699a92f86b2018d67e393e0237adc66f25c48e15ebde1",
+    "expected_step": 4608,
+    "resume_report": "/kaggle/working/reports/b0_full_session_10_resume_input.json"
+  },
+  "root_cause": {
+    "summary": "runner.py của bộ kernel phiên 11 vẫn nhúng run config phiên 10 và load_run_config ưu tiên cấu hình nhúng hơn run-config.json đi kèm.",
+    "local_runner_sha256": "d57b493bbbe6794a20bc501fecb66d00146ea84c1192f16d42d5ead734481e12",
+    "remote_v24_runner_sha256": "d57b493bbbe6794a20bc501fecb66d00146ea84c1192f16d42d5ead734481e12",
+    "remote_source_matches_local_runner": true,
+    "kaggle_cache_or_wrong_source_disproved": true,
+    "checkpoint_dataset_mount_failure_disproved": true,
+    "safety_check_stopped_before_training": true
+  },
+  "checkpoint_dataset": {
+    "version": 10,
+    "status_before_submission": "ready",
+    "remote_file_count": 192,
+    "remote_bytes": 710702335,
+    "remote_manifest_sha256": "189c5472cd2faf5cbc588f01284792f640f7c3b3deb2e8ff5beabfced34fe831",
+    "remote_manifest_byte_equal": true,
+    "requires_reupload": false
+  },
+  "scientific_effect": {
+    "new_optimizer_steps": 0,
+    "new_checkpoint": false,
+    "new_development_evaluation": false,
+    "latest_verified_global_step_remains": 5120,
+    "latest_verified_kernel_version_remains": 23,
+    "test_set_used": false
+  },
+  "fix": {
+    "implemented_at": "2026-11-02T10:38:00.3784277+07:00",
+    "pre_push_verifier_added": true,
+    "workflow_tests_passed": 12,
+    "full_test_suite_passed": 191,
+    "full_test_suite_total": 191,
+    "full_test_suite_seconds": 152.672,
+    "fixed_runner_sha256": "abab4fe7b3d52a5dc1ac9902572e54d54c12f86c3b5cc04e20fbeb1c7d083030",
+    "embedded_profile": "b0-full-resume-session-11",
+    "embedded_manifest_sha256": "189c5472cd2faf5cbc588f01284792f640f7c3b3deb2e8ff5beabfced34fe831",
+    "embedded_expected_step": 5120
+  },
+  "next_action": "Theo dõi version 25; khi COMPLETE, tải output và kiểm chứng exact-resume 5.120 -> 5.632. Không cần upload lại checkpoint dataset version 10.",
+  "rerun_submitted": true,
+  "retry_kernel_version": 25,
+  "retry_status_after_push": "RUNNING"
+}

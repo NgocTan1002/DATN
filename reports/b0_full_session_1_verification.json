@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-10-25T13:17:23.386474+07:00",
+  "passed": true,
+  "kernel_version": 14,
+  "profile": "b0-full-first-session",
+  "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "plan_sha256": "a40f5cd28e4a262c213ec6576748cf61351a6e3a2ea0514d9aad4f799d70fe2c",
+  "manifest_samples": 20000,
+  "manifest_shards": 66,
+  "local_source_shards": 68,
+  "train_samples": 15885,
+  "development_samples": 4115,
+  "status": "paused",
+  "global_step": 512,
+  "max_optimizer_steps": 5958,
+  "sampler_epoch": 0,
+  "batch_cursor": 512,
+  "completed_epochs": 0,
+  "development_evaluations": 0,
+  "best_available": false,
+  "train_sample_exposures": 4096,
+  "cuda_rng_states": 2,
+  "checkpoint_pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-5c5b4cc98fb64b67ade1112e8a4a5a20",
+      "checkpoint_sha256": "71464c4f3ebabfc6f3634c7963ced14d8056dc5ad056e6284ee1883fe46c6872",
+      "state_sha256": "033c731d9f046c35655e9ba46ec139d1c4db6a8809d25126bcad65042b37a48e"
+    },
+    "best": null
+  },
+  "generations_verified": [
+    {
+      "generation": "g-3107266d521c49f4bd4fc318a1e8920d",
+      "global_step": 0,
+      "checkpoint_sha256": "a75b8c4139948bc487159d353a64d0ef25c581412c852096c8181076de32f0ce",
+      "state_sha256": "dc9ff7a90a1076bcbf4f42f717f872df26c2a4e9940014e554698d80bc00ef01"
+    },
+    {
+      "generation": "g-3676ed67d0ab4d518b499767b5a4db25",
+      "global_step": 320,
+      "checkpoint_sha256": "f3deeb39bf1fcf1a87d62a395ab3d6c87c35c2e9e3cd78b920e5b9042ee0d585",
+      "state_sha256": "f7f06c7f482aaf041096fe80cfdf11fc8e7c025c3fcfb40f007cc8d7ebe82e20"
+    },
+    {
+      "generation": "g-37206e6b4a184e9893e4da2decccb139",
+      "global_step": 512,
+      "checkpoint_sha256": "71464c4f3ebabfc6f3634c7963ced14d8056dc5ad056e6284ee1883fe46c6872",
+      "state_sha256": "033c731d9f046c35655e9ba46ec139d1c4db6a8809d25126bcad65042b37a48e"
+    },
+    {
+      "generation": "g-5c5b4cc98fb64b67ade1112e8a4a5a20",
+      "global_step": 512,
+      "checkpoint_sha256": "71464c4f3ebabfc6f3634c7963ced14d8056dc5ad056e6284ee1883fe46c6872",
+      "state_sha256": "033c731d9f046c35655e9ba46ec139d1c4db6a8809d25126bcad65042b37a48e"
+    },
+    {
+      "generation": "g-87ecce2931e1461aa7d87d08a985e881",
+      "global_step": 64,
+      "checkpoint_sha256": "5f9e64bf2803bd21cfb4be1b6222dd4276792bc1596aa8de0484f54d832dcda3",
+      "state_sha256": "3e0abaf20b444825851e5a49646dc1d68a00e7efa70778479cfe141cf6f2b56a"
+    },
+    {
+      "generation": "g-90eaf25b3ee64129803d29d26eb65435",
+      "global_step": 192,
+      "checkpoint_sha256": "8a70d6423b4fe6da4eedbee0cc35c617b9059d7f08443602df72eeea344b31b0",
+      "state_sha256": "efd8fc839ccfdf1c0a566ddeb5c3e496136fa759d0d6eaf6303b3805afc7622c"
+    },
+    {
+      "generation": "g-a5524818e06c47cbb321764a0aae8db6",
+      "global_step": 384,
+      "checkpoint_sha256": "b9884e27b0b47557d98b89685086b3a1d08153e8fb3e6eae1665a4553427eefc",
+      "state_sha256": "94986791b8d9bf86f0ad2dbe9c839c31df6ea7a5a7dba1f4afe92c4541afd78c"
+    },
+    {
+      "generation": "g-c7152515000541d9ad5dcdccaf1ebca0",
+      "global_step": 448,
+      "checkpoint_sha256": "b4fa9804ece6edf9e48d89c3c3edec1f63db3c71d229b2c1acbb9b1dc7d1ae19",
+      "state_sha256": "5189c8642f05af64c8203392305674044992d932c6b68fd639300406ecfc55e9"
+    },
+    {
+      "generation": "g-d2e94281d0ef472a99c2b67a72b6b332",
+      "global_step": 256,
+      "checkpoint_sha256": "1eed4f8c9c52897af278b9bc6486c86faea12f85d587b5240721ecf6d9965410",
+      "state_sha256": "01be4e811297066c56ff9105779d6964416cf54bff86f8aa40787dcdfd2c808c"
+    },
+    {
+      "generation": "g-e896f7453b714470a889a389ffa17dd3",
+      "global_step": 128,
+      "checkpoint_sha256": "357112553a08e36570164ad4bd0732153411c3bc97e1d318c4cc4005de5dc486",
+      "state_sha256": "26b9efe733d16e7fedcaada8c625cb0439daf9632aba17c51ba3b57c7eb531eb"
+    }
+  ],
+  "training_elapsed_hours": 1.9560937686944444,
+  "environment": {
+    "device": "cuda",
+    "git_commit": null,
+    "python": "3.13.15",
+    "pytorch": "2.11.0+cu128",
+    "pytorch_cuda": "12.8",
+    "cudnn": 91900,
+    "gpu_name": "Tesla T4",
+    "gpu_total_memory_mib": 14911.6875
+  },
+  "checks": {
+    "workflow_and_all_return_codes": true,
+    "source_tree_and_bundle": true,
+    "plan_manifest_and_semantic_identity": true,
+    "report_controller_and_pointer": true,
+    "all_generations_payload_state_hashes": true,
+    "sampler_trace_matches_seed_2026": true,
+    "model_optimizer_finite_and_step_consistent": true,
+    "rng_structure_and_two_cuda_states": true
+  },
+  "gpu_resume_executed_this_session": false,
+  "next_expected_global_step": 1024,
+  "next_action": "prepare private checkpoint input and resume same source/identity; do not rerun first-session",
+  "test_used": false
+}
