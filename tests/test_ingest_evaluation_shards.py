@@ -178,6 +178,47 @@ class IngestDriverTests(unittest.TestCase):
         self.assertFalse(chunk_paths(self.chunks, 1).done.exists())
         self.assertFalse(list(self.download.rglob("*.parquet")))
 
+    def _wanted_with_missing_file(self) -> dict:
+        wanted = {index: dict(records) for index, records in self.wanted.items()}
+        template = next(iter(wanted[1].values()))
+        wanted[1]["id99999/99999.wav"] = type(template)(
+            file="id99999/99999.wav",
+            split=template.split,
+            speaker_id="id99999",
+            utt_type=template.utt_type,
+        )
+        return wanted
+
+    def test_failed_ingest_keeps_verified_download(self) -> None:
+        summary = self._run(
+            shard_indices=[1], wanted_by_shard=self._wanted_with_missing_file()
+        )
+        self.assertEqual(summary["failed"], 1)
+        self.assertEqual(self.downloads, [1])
+        self.assertFalse(chunk_paths(self.chunks, 1).done.exists())
+        kept = self.download / shard_filename(GEOMETRY, 1)
+        self.assertTrue(kept.is_file())
+        self.assertEqual(
+            hashlib.sha256(kept.read_bytes()).hexdigest(), self.tree[1].sha256
+        )
+
+    def test_rerun_reuses_intact_download_then_deletes_it(self) -> None:
+        self._run(shard_indices=[1], wanted_by_shard=self._wanted_with_missing_file())
+        self.downloads.clear()
+        summary = self._run(shard_indices=[1])
+        self.assertEqual(summary["failed"], 0)
+        self.assertEqual(self.downloads, [])
+        self.assertTrue(chunk_paths(self.chunks, 1).done.is_file())
+        self.assertFalse(list(self.download.rglob("*.parquet")))
+
+    def test_corrupt_leftover_download_is_replaced(self) -> None:
+        self.download.mkdir()
+        (self.download / shard_filename(GEOMETRY, 1)).write_bytes(b"hong")
+        summary = self._run(shard_indices=[1])
+        self.assertEqual(summary["failed"], 0)
+        self.assertEqual(self.downloads, [1])
+        self.assertFalse(list(self.download.rglob("*.parquet")))
+
     def test_low_disk_stops_before_download(self) -> None:
         summary = self._run(free_bytes_fn=lambda _path: 1)
         self.assertEqual(self.downloads, [])

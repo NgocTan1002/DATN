@@ -3,8 +3,10 @@
 
 Mặc định chỉ in kế hoạch (dry-run). Phải truyền `--execute` thì script mới tải shard.
 Mỗi shard tải về được kiểm kích thước/SHA-256 theo tree Hugging Face, nạp thành chunk
-bằng `src.data.eval_ingest` rồi xóa; shard đã có sẵn trong thư mục cục bộ chỉ được
-nạp, không bao giờ bị xóa. Có thể ngắt và chạy lại: shard đã có done marker được bỏ qua.
+bằng `src.data.eval_ingest` và chỉ xóa sau khi chunk qua kiểm tra; nếu nạp lỗi, bản tải
+đúng SHA-256 được giữ lại để chẩn đoán và dùng lại ở lần chạy sau. Shard đã có sẵn trong
+thư mục cục bộ chỉ được nạp, không bao giờ bị xóa. Có thể ngắt và chạy lại: shard đã có
+done marker được bỏ qua.
 """
 
 from __future__ import annotations
@@ -124,6 +126,11 @@ def _intact(path: Path, entry: TreeEntry) -> bool:
     )
 
 
+def _download_candidates(download_dir: Path, filename: str) -> tuple[Path, ...]:
+    # hf_hub_download với local_dir giữ tiền tố "data/" của repo.
+    return (download_dir / "data" / filename, download_dir / filename)
+
+
 def _cleanup_download(path: Path, download_dir: Path) -> None:
     path.unlink(missing_ok=True)
     metadata_dir = download_dir / ".cache" / "huggingface" / "download" / "data"
@@ -241,8 +248,18 @@ def run_ingest(
                     expected_sha256=entry.sha256,
                 )
             else:
-                downloaded: Path | None = None
+                # Bản tải còn nguyên từ lần chạy lỗi trước được dùng lại, không tải lại.
+                downloaded: Path | None = next(
+                    (
+                        path
+                        for path in _download_candidates(download_dir, name)
+                        if _intact(path, entry)
+                    ),
+                    None,
+                )
                 for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+                    if downloaded is not None:
+                        break
                     try:
                         candidate = downloader(name, download_dir)
                     except OSError as exc:
@@ -256,18 +273,18 @@ def run_ingest(
                     _cleanup_download(candidate, download_dir)
                 if downloaded is None:
                     raise ValueError(error or "tải shard thất bại")
-                try:
-                    process_shard(
-                        shard_path=downloaded,
-                        shard_index=index,
-                        wanted=wanted,
-                        chunk_dir=chunk_dir,
-                        delete_after=True,
-                        expected_size=entry.size,
-                        expected_sha256=entry.sha256,
-                    )
-                finally:
-                    _cleanup_download(downloaded, download_dir)
+                # Chỉ dọn sau khi chunk đã qua verify_chunk; nếu nạp lỗi thì giữ bản tải
+                # đã đúng SHA-256 để chẩn đoán và để lần chạy sau dùng lại.
+                process_shard(
+                    shard_path=downloaded,
+                    shard_index=index,
+                    wanted=wanted,
+                    chunk_dir=chunk_dir,
+                    delete_after=True,
+                    expected_size=entry.size,
+                    expected_sha256=entry.sha256,
+                )
+                _cleanup_download(downloaded, download_dir)
         except (OSError, ValueError, RuntimeError) as exc:
             error = str(exc)
         elapsed = round(time.perf_counter() - started, 2)
