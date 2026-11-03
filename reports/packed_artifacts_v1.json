@@ -1,0 +1,65 @@
+{
+  "report_version": 1,
+  "task": "T07",
+  "generated_at": "2026-11-02T21:23:09+0700",
+  "train_chunks": {
+    "ingested": 0,
+    "already_done": 57
+  },
+  "artifacts": [
+    {
+      "name": "train",
+      "split": "closed_train",
+      "artifact_dir": "data/processed/packed/train_development_20k_v2",
+      "manifest": "development_20k_v2.csv",
+      "manifest_version": "development-20k-v2",
+      "source_manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+      "artifact_count": 15885,
+      "total_samples": 1448195221,
+      "waveform_bytes": 5792780884,
+      "chunk_shard_count": 57,
+      "index_sha256": "b71825930d9a344484ecbc78102876b1ee5a873e2b2c7d724906cf5766094332",
+      "waveforms_sha256": "e09517c8e367bfb4e24563f92d90d2f7ee0ad7d5c7a58dc78862db742ab6614d",
+      "metadata_sha256": "9ce34ceb9883a56347de4aedf8d1a39fa7e8eae753dc006919bf634d376250a9",
+      "build_seconds": 39.544,
+      "verify_seconds": 25.815,
+      "verified_rows": 15885
+    },
+    {
+      "name": "dev-full",
+      "split": "closed_dev",
+      "artifact_dir": "data/processed/packed/closed_dev_full_v1",
+      "manifest": "closed_dev_full_v1.csv",
+      "manifest_version": "closed-dev-full-v1",
+      "source_manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+      "artifact_count": 38777,
+      "total_samples": 3363502846,
+      "waveform_bytes": 13454011384,
+      "chunk_shard_count": 186,
+      "index_sha256": "364f1993332ec889dd7301357a1aa6145d14c65c56bfa3db334668b93f01b8d6",
+      "waveforms_sha256": "579e5e85a020aeab70c8ad912023f5ee4efaef19f8e61af4fd2c923ee692f648",
+      "metadata_sha256": "5537af3384c6ffd83093a5e4175676ddbef1b5a5b5607c5daa87285e6de13f14",
+      "build_seconds": 102.379,
+      "verify_seconds": 62.543,
+      "verified_rows": 38777
+    },
+    {
+      "name": "test-full",
+      "split": "closed_test",
+      "artifact_dir": "data/processed/packed/closed_test_full_v1",
+      "manifest": "closed_test_full_v1.csv",
+      "manifest_version": "closed-test-full-v1",
+      "source_manifest_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+      "artifact_count": 30698,
+      "total_samples": 3060286845,
+      "waveform_bytes": 12241147380,
+      "chunk_shard_count": 162,
+      "index_sha256": "8f862032b6af42e1d35ff7d9e862308afb781308d13f24178a4bb1409237c78a",
+      "waveforms_sha256": "556bb99de8c39ed8f8568ae36d170907f4ac2959b9c4ab2f1a8d4e48423b32b2",
+      "metadata_sha256": "7e16da487f4d066f9694acd62b099ab4b70cc9158429b21c6e85c5fd1185ee9b",
+      "build_seconds": 161.43,
+      "verify_seconds": 63.255,
+      "verified_rows": 30698
+    }
+  ]
+}

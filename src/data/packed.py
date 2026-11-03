@@ -6,11 +6,12 @@ import csv
 import hashlib
 import json
 import math
+import re
 import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Sequence, cast
+from typing import Any, Literal, Sequence, cast
 
 import numpy as np
 import torch
@@ -22,8 +23,9 @@ from .amplitude import (
     VALID_AMPLITUDE_POLICIES,
     apply_amplitude_policy,
 )
+from .eval_ingest import CHUNK_FORMAT_VERSION, chunk_paths
 from .segment import fixed_length_segment
-from .vsasv import ManifestSplit, VSASVManifestDataset
+from .vsasv import MANIFEST_COLUMNS, ManifestSplit, VSASVManifestDataset
 
 
 PACKED_FORMAT_VERSION = "vsasv-packed-v1"
@@ -42,6 +44,11 @@ PACKED_INDEX_COLUMNS = (
     "native_sample_rate",
     "shard",
 )
+PackedSplit = Literal["closed_train", "closed_dev", "closed_test"]
+PACKED_SPLITS = frozenset({"closed_train", "closed_dev", "closed_test"})
+# closed_test chỉ được mở qua cờ tường minh (D025: test đọc qua entrypoint có cổng).
+TEST_SPLIT = "closed_test"
+_SHARD_NAME = re.compile(r"^train-(\d{5})-of-\d{5}\.parquet$")
 
 
 @dataclass(frozen=True)
@@ -75,7 +82,7 @@ class PackedRecord:
     waveform_sha256: str
     file: str
     speaker_id: str
-    split: ManifestSplit
+    split: PackedSplit
     binary_label: int
     utt_type: str
     native_sample_rate: int
@@ -262,6 +269,7 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
         peak_target: float = 0.95,
         rms_target_dbfs: float = -25.0,
         minimum_input_rms_dbfs: float = -50.0,
+        allow_test: bool = False,
     ) -> None:
         self.artifact_dir = Path(artifact_dir).resolve()
         self.training = training
@@ -307,6 +315,15 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
             raise ValueError("Artifact không nằm ở bước tiền xử lý đã khóa.")
         if metadata.get("dtype") != "float32-le":
             raise ValueError("Artifact phải dùng dtype float32 little-endian.")
+        split_text = metadata.get("split")
+        if split_text not in PACKED_SPLITS:
+            raise ValueError(f"Split artifact không hợp lệ trong metadata: {split_text}")
+        if split_text == TEST_SPLIT and not allow_test:
+            raise ValueError(
+                "Artifact closed_test chỉ được mở với allow_test=True "
+                "(D025: test đọc qua entrypoint đánh giá có cổng)."
+            )
+        self.split = cast(PackedSplit, split_text)
 
         try:
             self.target_sample_rate = int(metadata["target_sample_rate"])
@@ -340,7 +357,7 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
         if _sha256_file(index_path) != metadata.get("index_sha256"):
             raise ValueError("Checksum chỉ mục artifact không khớp metadata.")
 
-        self.records = self._read_index(index_path)
+        self.records = self._read_index(index_path, self.split)
         if len(self.records) != expected_count:
             raise ValueError(
                 "Số hàng chỉ mục không khớp metadata: "
@@ -360,10 +377,10 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
         if len(self.waveforms_sha256) != 64:
             raise ValueError("Checksum waveform tổng trong metadata không hợp lệ.")
         self._data_path = data_path
-        self._waveforms = np.memmap(self._data_path, dtype="<f4", mode="c")
+        self._waveforms = np.memmap(self._data_path, dtype="<f4", mode="r")
 
     @staticmethod
-    def _read_index(index_path: Path) -> list[PackedRecord]:
+    def _read_index(index_path: Path, expected_split: PackedSplit) -> list[PackedRecord]:
         records: list[PackedRecord] = []
         seen_files: set[str] = set()
         seen_source_indices: set[int] = set()
@@ -406,9 +423,12 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
                 ):
                     raise ValueError("waveform_sha256 trong chỉ mục không hợp lệ.")
                 split_text = row["split"]
-                if split_text not in {"closed_train", "closed_dev"}:
-                    raise ValueError(f"Split artifact không hợp lệ: {split_text}")
-                split = cast(ManifestSplit, split_text)
+                if split_text != expected_split:
+                    raise ValueError(
+                        f"Split của {row['file']} trong chỉ mục ({split_text}) khác "
+                        f"split ghi trong metadata ({expected_split})."
+                    )
+                split = cast(PackedSplit, split_text)
                 record = PackedRecord(
                     source_index=source_index,
                     offset_samples=offset_samples,
@@ -448,7 +468,7 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
         record = self.records[index]
         start = record.offset_samples
         stop = start + record.num_samples
-        waveform = torch.from_numpy(np.asarray(self._waveforms[start:stop]))
+        waveform = torch.from_numpy(np.array(self._waveforms[start:stop], dtype="<f4"))
         if waveform.shape != (record.num_samples,):
             raise RuntimeError(f"Không đọc đủ waveform cho {record.file}.")
         amplitude_result = apply_amplitude_policy(
@@ -515,7 +535,7 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
         """Restore the memory map after DataLoader worker unpickling."""
 
         self.__dict__.update(state)
-        self._waveforms = np.memmap(self._data_path, dtype="<f4", mode="c")
+        self._waveforms = np.memmap(self._data_path, dtype="<f4", mode="r")
 
     def __del__(self) -> None:
         try:
@@ -526,6 +546,8 @@ class PackedManifestDataset(Dataset[dict[str, Any]]):
 
 def verify_packed_artifact(
     artifact_dir: str | Path,
+    *,
+    allow_test: bool = False,
 ) -> PackedArtifactVerification:
     """Hash every stored waveform and compare row and whole-file checksums."""
 
@@ -533,6 +555,7 @@ def verify_packed_artifact(
         artifact_dir,
         training=False,
         target_samples=1,
+        allow_test=allow_test,
     )
     total_digest = hashlib.sha256()
     total_samples = 0
@@ -560,3 +583,240 @@ def verify_packed_artifact(
         )
     finally:
         dataset.close()
+
+
+def _read_manifest_split(
+    manifest_path: Path, split: PackedSplit
+) -> tuple[list[dict[str, str]], str, str]:
+    """Đọc các dòng của một split theo đúng thứ tự manifest (= source_index)."""
+
+    selected: list[dict[str, str]] = []
+    seen_files: set[str] = set()
+    versions: set[str] = set()
+    snapshots: set[str] = set()
+    with manifest_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if tuple(reader.fieldnames or ()) != MANIFEST_COLUMNS:
+            raise ValueError(
+                "Schema manifest không hợp lệ; cần đúng các cột "
+                f"{list(MANIFEST_COLUMNS)}, nhận được {reader.fieldnames}."
+            )
+        for row in reader:
+            if row["file"] in seen_files:
+                raise ValueError(f"Manifest bị lặp file: {row['file']}")
+            seen_files.add(row["file"])
+            versions.add(row["manifest_version"])
+            snapshots.add(row["source_snapshot"])
+            if row["split"] == split:
+                selected.append(row)
+    if len(versions) != 1 or len(snapshots) != 1:
+        raise ValueError("Manifest phải có đúng một manifest_version và source_snapshot.")
+    if not selected:
+        raise ValueError(f"Manifest không có hàng cho split {split}.")
+    return selected, next(iter(versions)), next(iter(snapshots))
+
+
+@dataclass
+class _ChunkSource:
+    shard: str
+    marker: dict[str, Any]
+    rows: dict[str, dict[str, str]]
+    waveforms_path: Path
+    total_samples: int
+
+    def read(self, start: int, count: int) -> np.ndarray:
+        # Đọc theo offset thay vì memmap: hàng trăm chunk mở cùng lúc làm hết
+        # paging file trên Windows.
+        data = np.fromfile(self.waveforms_path, dtype="<f4", count=count, offset=start * 4)
+        if data.size != count:
+            raise ValueError(f"Không đọc đủ {count} mẫu từ chunk {self.shard}.")
+        return data
+
+    def close(self) -> None:
+        return None
+
+
+def _open_chunk(chunk_dir: Path, shard: str, target_sample_rate: int) -> _ChunkSource:
+    """Mở chunk của một shard sau khi đối chiếu chỉ mục với done marker."""
+
+    match = _SHARD_NAME.match(shard)
+    if match is None:
+        raise ValueError(f"Tên shard không hợp lệ: {shard}")
+    shard_index = int(match.group(1))
+    paths = chunk_paths(chunk_dir, shard_index)
+    if not (paths.done.is_file() and paths.index.is_file() and paths.waveforms.is_file()):
+        raise ValueError(f"Chunk shard {shard} chưa hoàn tất; thiếu tệp hoặc done marker.")
+    marker = json.loads(paths.done.read_text(encoding="utf-8"))
+    if marker.get("shard") != shard or marker.get("shard_index") != shard_index:
+        raise ValueError(f"Done marker của chunk {shard} ghi shard khác.")
+    if marker.get("chunk_format_version") != CHUNK_FORMAT_VERSION:
+        raise ValueError(f"Chunk {shard} có phiên bản định dạng không hỗ trợ.")
+    if int(marker.get("target_sample_rate", -1)) != target_sample_rate:
+        raise ValueError(f"Chunk {shard} có sample rate đích khác {target_sample_rate}.")
+    if _sha256_file(paths.index) != marker.get("index_sha256"):
+        raise ValueError(f"Chỉ mục chunk {shard} không khớp checksum trong done marker.")
+    if paths.waveforms.stat().st_size != int(marker["total_samples"]) * 4:
+        raise ValueError(f"Waveform chunk {shard} sai kích thước so với done marker.")
+    with paths.index.open("r", encoding="utf-8", newline="") as handle:
+        rows = {row["file"]: row for row in csv.DictReader(handle)}
+    if len(rows) != int(marker["records"]):
+        raise ValueError(f"Chỉ mục chunk {shard} có số dòng khác done marker.")
+    return _ChunkSource(
+        shard=shard,
+        marker=marker,
+        rows=rows,
+        waveforms_path=paths.waveforms,
+        total_samples=int(marker["total_samples"]),
+    )
+
+
+def assemble_packed_from_chunks(
+    manifest_csv: str | Path,
+    chunk_dir: str | Path,
+    output_dir: str | Path,
+    *,
+    split: PackedSplit,
+    target_sample_rate: int = 16_000,
+    crop_seed: int = 2026,
+) -> PackedArtifactSummary:
+    """Lắp packed artifact cho một split từ các chunk từng shard (`eval_ingest`).
+
+    Chunk lưu waveform float32 sau resample, trước amplitude/crop — cùng giai đoạn với
+    `build_packed_artifact`. Thứ tự dòng và `source_index` theo đúng manifest, nên crop
+    train trùng đường Parquet. Mỗi dòng phải khớp metadata manifest và checksum waveform
+    ghi lúc nạp; lỗi bất kỳ làm hủy toàn bộ thư mục staging.
+    """
+
+    manifest_path = Path(manifest_csv).resolve()
+    chunk_root = Path(chunk_dir).resolve()
+    target = Path(output_dir).resolve()
+    if split not in PACKED_SPLITS:
+        raise ValueError(f"Split không hợp lệ: {split}")
+    if target.exists():
+        raise FileExistsError(f"Thư mục artifact đã tồn tại; không ghi đè dữ liệu: {target}")
+    if target_sample_rate <= 0:
+        raise ValueError("target_sample_rate phải lớn hơn 0.")
+    if crop_seed < 0:
+        raise ValueError("crop_seed không được âm.")
+    rows, manifest_version, source_snapshot = _read_manifest_split(manifest_path, split)
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f".{target.name}.building-", dir=target.parent))
+    chunks: dict[str, _ChunkSource] = {}
+    try:
+        for shard in sorted({row["shard"] for row in rows}):
+            chunks[shard] = _open_chunk(chunk_root, shard, target_sample_rate)
+        data_path = staging / "waveforms.f32"
+        index_path = staging / "index.csv"
+        index_rows: list[dict[str, str | int]] = []
+        offset_samples = 0
+        data_digest = hashlib.sha256()
+        with data_path.open("wb") as data_handle:
+            for source_index, row in enumerate(rows):
+                file_name = row["file"]
+                chunk = chunks[row["shard"]]
+                chunk_row = chunk.rows.get(file_name)
+                if chunk_row is None:
+                    raise ValueError(f"Không tìm thấy {file_name} trong chunk {chunk.shard}.")
+                for field in (
+                    "split", "speaker_id", "utt_type", "binary_label", "native_sample_rate"
+                ):
+                    if str(chunk_row[field]) != str(row[field]):
+                        raise ValueError(
+                            f"Metadata chunk không khớp manifest cho {file_name}: trường "
+                            f"{field} chunk={chunk_row[field]}, manifest={row[field]}."
+                        )
+                binary_label = 0 if row["utt_type"] == "bonafide" else 1
+                if int(row["binary_label"]) != binary_label:
+                    raise ValueError(f"binary_label không khớp utt_type cho {file_name}.")
+                start = int(chunk_row["offset_samples"])
+                count = int(chunk_row["num_samples"])
+                if count <= 0 or start < 0 or start + count > chunk.total_samples:
+                    raise ValueError(f"Offset/độ dài chunk không hợp lệ cho {file_name}.")
+                waveform = chunk.read(start, count)
+                waveform_bytes = waveform.tobytes(order="C")
+                waveform_sha256 = hashlib.sha256(waveform_bytes).hexdigest()
+                if waveform_sha256 != chunk_row["waveform_sha256"]:
+                    raise ValueError(f"Waveform chunk sai checksum cho {file_name}.")
+                if not np.isfinite(waveform).all():
+                    raise ValueError(f"Waveform chunk chứa NaN hoặc Inf: {file_name}.")
+                data_handle.write(waveform_bytes)
+                data_digest.update(waveform_bytes)
+                index_rows.append(
+                    {
+                        "artifact_index": source_index,
+                        "source_index": source_index,
+                        "offset_samples": offset_samples,
+                        "num_samples": count,
+                        "waveform_sha256": waveform_sha256,
+                        "file": file_name,
+                        "speaker_id": row["speaker_id"],
+                        "split": split,
+                        "binary_label": binary_label,
+                        "utt_type": row["utt_type"],
+                        "native_sample_rate": int(row["native_sample_rate"]),
+                        "shard": row["shard"],
+                    }
+                )
+                offset_samples += count
+
+        with index_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=PACKED_INDEX_COLUMNS)
+            writer.writeheader()
+            writer.writerows(index_rows)
+
+        chunk_markers = [
+            {
+                "shard": shard,
+                "index_sha256": chunks[shard].marker["index_sha256"],
+                "waveforms_sha256": chunks[shard].marker["waveforms_sha256"],
+            }
+            for shard in sorted(chunks)
+        ]
+        source_manifest_sha256 = _sha256_file(manifest_path)
+        index_sha256 = _sha256_file(index_path)
+        waveforms_sha256 = data_digest.hexdigest()
+        metadata = {
+            "format_version": PACKED_FORMAT_VERSION,
+            "preprocessing_stage": PACKED_PREPROCESSING_STAGE,
+            "dtype": "float32-le",
+            "target_sample_rate": target_sample_rate,
+            "crop_seed": crop_seed,
+            "split": split,
+            "artifact_count": len(index_rows),
+            "total_samples": offset_samples,
+            "manifest_version": manifest_version,
+            "source_snapshot": source_snapshot,
+            "source_manifest": manifest_path.name,
+            "source_manifest_sha256": source_manifest_sha256,
+            "index_file": index_path.name,
+            "index_sha256": index_sha256,
+            "waveforms_file": data_path.name,
+            "waveforms_sha256": waveforms_sha256,
+            "assembled_from": "shard_chunks",
+            "chunk_format_version": CHUNK_FORMAT_VERSION,
+            "chunk_shard_count": len(chunk_markers),
+            "chunk_markers_sha256": hashlib.sha256(
+                json.dumps(chunk_markers, sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest(),
+        }
+        (staging / "metadata.json").write_text(
+            json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        for chunk in chunks.values():
+            chunk.close()
+        chunks.clear()
+        staging.replace(target)
+        return PackedArtifactSummary(
+            artifact_dir=target,
+            artifact_count=len(index_rows),
+            total_samples=offset_samples,
+            source_manifest_sha256=source_manifest_sha256,
+            index_sha256=index_sha256,
+            waveforms_sha256=waveforms_sha256,
+        )
+    except Exception:
+        for chunk in chunks.values():
+            chunk.close()
+        shutil.rmtree(staging, ignore_errors=True)
+        raise

@@ -1,0 +1,43 @@
+{
+  "report_version": 1,
+  "task": "T08",
+  "generated_at": "2026-11-03T07:31:50+0700",
+  "status": "ĐẠT",
+  "amplitude_policy": "peak",
+  "train_checks": [
+    [
+      2026,
+      0
+    ],
+    [
+      2027,
+      1
+    ],
+    [
+      2028,
+      2
+    ]
+  ],
+  "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+  "seconds": 450.616,
+  "artifacts": {
+    "test-full": {
+      "split": "closed_test",
+      "artifact_rows": 30698,
+      "manifest_rows": 30698,
+      "manifest_sha256_matches": true,
+      "metadata_mismatches": 0,
+      "local_rows": 4915,
+      "local_shards": 28,
+      "missing_local_shards": 134,
+      "raw_mismatches": 0,
+      "raw_max_abs_diff": 0.0,
+      "eval_item_mismatches": 0,
+      "train_item_mismatches": {},
+      "examples": [],
+      "local_coverage": 0.16010815036810216,
+      "passed": true,
+      "seconds": 450.552
+    }
+  }
+}

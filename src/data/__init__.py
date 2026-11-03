@@ -33,10 +33,13 @@ from .smoke_subset import (
 from .packed import (
     PACKED_FORMAT_VERSION,
     PACKED_PREPROCESSING_STAGE,
+    PACKED_SPLITS,
     PackedArtifactSummary,
     PackedArtifactVerification,
     PackedManifestDataset,
     PackedRecord,
+    PackedSplit,
+    assemble_packed_from_chunks,
     build_packed_artifact,
     verify_packed_artifact,
 )
@@ -66,6 +69,9 @@ __all__ = [
     "validate_smoke_partitions",
     "PACKED_FORMAT_VERSION",
     "PACKED_PREPROCESSING_STAGE",
+    "PACKED_SPLITS",
+    "PackedSplit",
+    "assemble_packed_from_chunks",
     "PackedArtifactSummary",
     "PackedArtifactVerification",
     "PackedManifestDataset",

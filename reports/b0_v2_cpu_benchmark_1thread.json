@@ -1,0 +1,38 @@
+{
+  "report_version": 1,
+  "task": "D027-benchmark",
+  "generated_at": "2026-11-03T07:40:53+0700",
+  "device": "cpu",
+  "environment": {
+    "device": "cpu",
+    "git_commit": "86189ee7430fc4c1491658fc82b598deeb5d98a8",
+    "python": "3.12.14",
+    "pytorch": "2.11.0+cpu",
+    "pytorch_cuda": null,
+    "cudnn": null,
+    "gpu_name": null,
+    "gpu_total_memory_mib": 0.0
+  },
+  "measured": {
+    "threads": 1,
+    "train_steps_measured": 60,
+    "seconds_per_step_mean": 1.0745294133331602,
+    "seconds_per_step_median": 1.0207938000003196,
+    "seconds_per_step_cv": 0.17689541636214182,
+    "loader_seconds_per_step_mean": 0.05331194166640974,
+    "model_seconds_per_step_mean": 1.0212174716667506,
+    "dev_samples_measured": 512,
+    "seconds_per_dev_sample": 0.04671224726559586,
+    "dev_loader_seconds_per_sample": 0.006491578515621654,
+    "dev_model_seconds_per_sample": 0.04022066874997421,
+    "rss_observed_peak_mib": 911.11328125
+  },
+  "projection": {
+    "train_hours_max_epochs": 1.7783461790663802,
+    "dev_full_hours_max_epochs": 1.5094673435150092,
+    "hours_per_seed_max": 3.2878135225813896,
+    "hours_per_seed_one_epoch": 1.0959378408604632,
+    "hours_three_seeds_max": 9.863440567744169
+  },
+  "note": "Phép chiếu theo số epoch tối đa; không phải thời gian thực chạy."
+}

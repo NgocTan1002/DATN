@@ -286,4 +286,6 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 
 **Giới hạn:** B0 v2 không tương đương với các số liệu B0 đã báo trước đây (dev EER 8,33%); phải trình bày như một mô hình mới. Lựa chọn `peak` dựa trên các pilot mang lỗi này. Kết quả vẫn chỉ áp dụng cho `VSASV-HF-public-snapshot-v1` và 15.885 mẫu train.
 
+**Kiểm chứng cổng ngày 03/11:** packed artifact train/dev-full/test-full đã lắp và qua kiểm parity với Parquet (0 lệch; train phủ 100%, dev-full 18,14%, test-full 16,01% do chỉ 68 shard còn Parquet), runner nhận seed huấn luyện, dev-full và packed (mục 9). Benchmark CPU 1 luồng chiếu 3,29 giờ/seed và 9,86 giờ cho ba seed theo số epoch tối đa, nên điều kiện của mục 3 được xem là đáp ứng để chạy đủ ba seed; đây là phép chiếu từ 60 bước, chưa phải thời gian thực chạy. Cổng `ready_for_training` vẫn đóng cho tới khi người dùng xác nhận. Chi tiết trong `docs/current_state.md` và `reports/`.
+
 **Không thay đổi:** metadata, split, seed dữ liệu `2026`, `configs/audio.json`, `configs/lfcc_lcnn.json`, kiến trúc LCNN, D025 (trừ mục 6), D026 (trừ các điểm ở mục 8). Source khóa trên Kaggle của chuỗi D023 không đổi. Không dùng test.

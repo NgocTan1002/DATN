@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "b0-v2-peak-train20k-v2-devfull-v1",
+  "status": "implemented_pending_gates",
+  "decision": "D027",
+  "implementation": {
+    "ready_for_training": false,
+    "current_entrypoint": "scripts/train_b0_full.py",
+    "missing": [
+      "packed_artifact_checksums_locked",
+      "packed_parity_T08_passed",
+      "cpu_benchmark_on_real_data",
+      "user_confirmation"
+    ]
+  },
+  "data": {
+    "snapshot": "VSASV-HF-public-snapshot-v1",
+    "backend": "packed",
+    "data_seed": 2026,
+    "train_manifest": "data/manifests/development_20k_v2.csv",
+    "train_manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "development_manifest": "data/manifests/closed_dev_full_v1.csv",
+    "development_manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+    "train_artifact": "data/processed/packed/train_development_20k_v2",
+    "train_artifact_waveforms_sha256": "e09517c8e367bfb4e24563f92d90d2f7ee0ad7d5c7a58dc78862db742ab6614d",
+    "development_artifact": "data/processed/packed/closed_dev_full_v1",
+    "development_artifact_waveforms_sha256": "579e5e85a020aeab70c8ad912023f5ee4efaef19f8e61af4fd2c923ee692f648",
+    "sample_selection_sha256": "696af9bf85c40528a678fd91743196379bbe3676925003b31e825d88ec30005e",
+    "train_split": "closed_train",
+    "development_split": "closed_dev",
+    "train_samples": 15885,
+    "development_samples": 38777,
+    "use_test": false
+  },
+  "model": {
+    "config": "configs/lfcc_lcnn.json",
+    "config_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "amplitude_policy": "peak",
+    "lfcc_features": "per_sample",
+    "initialization": "fresh_seeded_no_pilot_weights",
+    "precision": "float32",
+    "amp": false
+  },
+  "training": {
+    "training_seeds": [2026, 2027, 2028],
+    "training_seed_scope": ["model_initialization", "sampler", "random_crop"],
+    "batch_size": 8,
+    "num_workers": 0,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "BCEWithLogitsLoss",
+    "scheduler": null,
+    "gradient_clipping": null,
+    "shuffle": true,
+    "drop_last": false,
+    "max_epochs": 3,
+    "steps_per_epoch": 1986,
+    "max_optimizer_steps": 5958,
+    "max_train_sample_exposures": 47655
+  },
+  "evaluation": {
+    "schedule": "after_each_completed_epoch_before_next_epoch",
+    "full_development": true,
+    "partial_epoch_evaluation": false,
+    "threshold_source": "development_eer_of_selected_checkpoint",
+    "selection_metric": "eer",
+    "mode": "min",
+    "strict_improvement": true,
+    "equal_eer_action": "keep_earliest_checkpoint",
+    "patience": 1,
+    "minimum_completed_epochs": 1,
+    "min_delta": 0.0,
+    "allow_loss_tie_break": false,
+    "nonfinite_action": "fail_without_committing_evaluation"
+  },
+  "sessions": {
+    "max_optimizer_steps_per_invocation": 512,
+    "checkpoint_every_completed_steps": 64,
+    "quota_shortage_action": "pause_and_resume_same_identity",
+    "auto_monitor": false
+  },
+  "checkpoint_contract": {
+    "planned_full_training_checkpoint_version": 4,
+    "authoritative_commit": "atomic_LATEST_json_to_immutable_generation",
+    "preserve_latest_and_best": true,
+    "preserve_pending_evaluation": true,
+    "preserve_evaluation_history_and_patience": true,
+    "freeze_all_semantic_plan_fields_in_identity": true,
+    "identity_includes": ["training_seed", "data_seed", "backend", "device", "artifact_checksums"]
+  },
+  "outputs": {
+    "root_template": "checkpoints/b0_v2_seed{training_seed}",
+    "report_json_template": "reports/b0_v2_seed{training_seed}.json",
+    "report_md_template": "reports/b0_v2_seed{training_seed}.md"
+  }
+}
