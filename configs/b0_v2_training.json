@@ -1,17 +1,12 @@
 {
   "schema_version": 1,
   "experiment_id": "b0-v2-peak-train20k-v2-devfull-v1",
-  "status": "implemented_pending_gates",
+  "status": "ready_cpu",
   "decision": "D027",
   "implementation": {
-    "ready_for_training": false,
+    "ready_for_training": true,
     "current_entrypoint": "scripts/train_b0_full.py",
-    "missing": [
-      "packed_artifact_checksums_locked",
-      "packed_parity_T08_passed",
-      "cpu_benchmark_on_real_data",
-      "user_confirmation"
-    ]
+    "missing": []
   },
   "data": {
     "snapshot": "VSASV-HF-public-snapshot-v1",
@@ -55,10 +50,10 @@
     "gradient_clipping": null,
     "shuffle": true,
     "drop_last": false,
-    "max_epochs": 3,
+    "max_epochs": 10,
     "steps_per_epoch": 1986,
-    "max_optimizer_steps": 5958,
-    "max_train_sample_exposures": 47655
+    "max_optimizer_steps": 19860,
+    "max_train_sample_exposures": 158850
   },
   "evaluation": {
     "schedule": "after_each_completed_epoch_before_next_epoch",
@@ -69,7 +64,7 @@
     "mode": "min",
     "strict_improvement": true,
     "equal_eer_action": "keep_earliest_checkpoint",
-    "patience": 1,
+    "patience": 2,
     "minimum_completed_epochs": 1,
     "min_delta": 0.0,
     "allow_loss_tie_break": false,

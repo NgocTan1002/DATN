@@ -104,6 +104,81 @@ class GenerationStore:
         return payload
 
 
+def extended_identity(
+    previous: dict[str, Any], current: dict[str, Any], *, max_epochs: int,
+    patience: int, source_transition: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Chỉ nới trần/ngưỡng patience đã duyệt; mọi identity khác phải giữ nguyên."""
+    old, new = copy.deepcopy(previous), copy.deepcopy(current)
+    history = old.pop("extension_history", [])
+    if "extension_history" in new:
+        raise ValueError("Identity yêu cầu nối dài không được tự điền lịch sử chuyển đổi.")
+    old_training, new_training = old["plan"]["training"], new["plan"]["training"]
+    old_cap = old_training["max_epochs"]
+    old_patience = old["plan"]["evaluation"]["patience"]
+    if max_epochs <= old_cap or new_training["max_epochs"] != max_epochs:
+        raise ValueError("Trần epoch nối dài phải lớn hơn trần cũ và khớp identity.")
+    if patience < old_patience or new["plan"]["evaluation"]["patience"] != patience:
+        raise ValueError("Patience nối dài không được giảm và phải khớp identity.")
+    for identity in (old, new):
+        training = identity["plan"]["training"]
+        samples = identity["plan"]["data"]["train_samples"]
+        if (
+            training["steps_per_epoch"] != math.ceil(samples / training["batch_size"])
+            or training["max_optimizer_steps"] != training["max_epochs"] * training["steps_per_epoch"]
+            or training["max_train_sample_exposures"] != training["max_epochs"] * samples
+        ):
+            raise ValueError("Ngân sách bước/lượt mẫu của identity nối dài không hợp lệ.")
+    # Chỉ bỏ bốn trường thay đổi có chủ đích sau khi kiểm tra giá trị dẫn xuất.
+    for identity in (old, new):
+        for key in ("max_epochs", "max_optimizer_steps", "max_train_sample_exposures"):
+            identity["plan"]["training"].pop(key)
+        identity["plan"]["evaluation"].pop("patience")
+    if old.get("source_tree_sha256") != new.get("source_tree_sha256"):
+        if (
+            source_transition is None
+            or source_transition.get("old_source_tree_sha256") != old.get("source_tree_sha256")
+            or source_transition.get("new_source_tree_sha256") != new.get("source_tree_sha256")
+        ):
+            raise ValueError("Identity source khác nhưng chưa có chuyển nguồn được kiểm chứng.")
+        old_files = source_transition.get("old_source_files", [])
+        new_files = source_transition.get("new_source_files", [])
+        old_inventory = {item["path"]: item["sha256"] for item in old_files}
+        new_inventory = {item["path"]: item["sha256"] for item in new_files}
+        changed = sorted(path for path in old_inventory.keys() | new_inventory.keys()
+                         if old_inventory.get(path) != new_inventory.get(path))
+        allowed = {"scripts/train_b0_full.py", "src/training/full_training.py",
+                   "configs/b0_v2_training.json", "configs/xlsr_pretrained_candidate.json",
+                   "scripts/benchmark_xlsr_cuda.py"}
+        if (
+            hashlib.sha256(json.dumps(old_files, sort_keys=True).encode()).hexdigest() != old["source_tree_sha256"]
+            or hashlib.sha256(json.dumps(new_files, sort_keys=True).encode()).hexdigest() != new["source_tree_sha256"]
+            or current.get("source_files") != new_files
+            or changed != source_transition.get("changed_files")
+            or not set(changed) <= allowed or not old_inventory.keys() <= new_inventory.keys()
+        ):
+            raise ValueError("Bằng chứng chuyển source không khớp inventory/hash/danh sách thay đổi.")
+        for identity in (old, new):
+            identity.pop("source_tree_sha256", None)
+            identity.pop("source_files", None)
+    elif old.get("source_files") != new.get("source_files"):
+        # Checkpoint cũ chưa có inventory: chỉ được bổ sung inventory đúng cùng hash.
+        if "source_files" in old or "source_files" not in new:
+            raise ValueError("Identity inventory source không khớp.")
+        files = new.pop("source_files")
+        if hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest() != new["source_tree_sha256"]:
+            raise ValueError("Identity inventory source sai checksum.")
+    if old != new:
+        raise ValueError("Identity ngoài trần epoch/patience/chuyển nguồn không được thay đổi.")
+    result = copy.deepcopy(current)
+    result["extension_history"] = history + [{
+        "old_max_epochs": old_cap, "new_max_epochs": max_epochs,
+        "old_patience": old_patience, "new_patience": patience,
+        "source_transition": copy.deepcopy(source_transition),
+    }]
+    return result
+
+
 def run_training(
     *,
     model: torch.nn.Module,
@@ -120,11 +195,15 @@ def run_training(
     checkpoint_interval: int,
     resume: bool,
     fault: Callable[[str], None] | None = None,
+    extend_max_epochs: bool = False,
+    source_transition: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Huấn luyện batch đã commit; evaluation pending có ưu tiên trước bước mới."""
     fault = fault or (lambda _stage: None)
     if min(max_epochs, patience, development_samples, session_steps, checkpoint_interval) <= 0:
         raise ValueError("Giới hạn epoch/phiên/checkpoint/patience phải lớn hơn 0.")
+    if extend_max_epochs and not resume:
+        raise ValueError("Nối dài cần --resume từ checkpoint đã chạm trần.")
     steps_per_epoch = math.ceil(sampler.dataset_size / sampler.batch_size)
     state: dict[str, Any] = {
         "global_step": 0, "completed_epochs": 0, "last_evaluated_step": 0,
@@ -133,8 +212,27 @@ def run_training(
     }
     if resume:
         payload = store.load()
-        if payload["identity"] != identity:
-            raise ValueError("Identity checkpoint full training không khớp.")
+        previous_identity = payload["identity"]
+        if extend_max_epochs:
+            state = payload["controller"]
+            old_cap = previous_identity["plan"]["training"]["max_epochs"]
+            if (
+                state["stop_reason"] != "max_epochs" or state["bad_evaluations"] != 0
+                or state["completed_epochs"] != old_cap
+                or state["global_step"] != old_cap * steps_per_epoch
+                or state["last_evaluated_step"] != state["global_step"]
+                or state["needs_evaluation"]
+            ):
+                raise ValueError("Chỉ nối dài khi đã chạm trần max_epochs, đánh giá xong và bộ đếm patience bằng 0.")
+            identity = extended_identity(previous_identity, identity, max_epochs=max_epochs,
+                                         patience=patience, source_transition=source_transition)
+        else:
+            expected = copy.deepcopy(previous_identity)
+            audit = expected.pop("extension_history", None)
+            if identity != previous_identity and identity != expected:
+                raise ValueError("Identity checkpoint full training không khớp.")
+            if audit is not None:
+                identity = previous_identity
         sampler.load_state_dict(payload["sampler"])
         state = payload["controller"]
         if (
@@ -148,6 +246,8 @@ def run_training(
         model.load_state_dict(payload["model"])
         optimizer.load_state_dict(payload["optimizer"])
         _restore_rng_state(payload["rng"])
+        if extend_max_epochs:
+            state["stop_reason"] = None
     elif (store.root / "LATEST.json").exists():
         raise ValueError("Thư mục run đã có checkpoint; cần yêu cầu resume rõ ràng.")
 
@@ -161,7 +261,7 @@ def run_training(
         }
         state = store.commit(payload, new_best=new_best)["controller"]
 
-    if not resume:
+    if not resume or extend_max_epochs:
         commit()
     performed = 0
     iterator = iter(sampler)

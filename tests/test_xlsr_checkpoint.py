@@ -256,7 +256,11 @@ class XLSRCheckpointTests(unittest.TestCase):
             candidate["source"]["revision"],
             "1a640f32ac3e39899438a2931f9924c02f080a54",
         )
-        self.assertFalse(candidate["source"]["weights_downloaded"])
+        self.assertTrue(candidate["source"]["weights_downloaded"])
+        self.assertEqual(
+            candidate["source"]["weights_sha256"],
+            "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+        )
         self.assertFalse(candidate["project_protocol"]["use_test"])
         self.assertTrue(
             all(
