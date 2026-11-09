@@ -1,0 +1,650 @@
+{
+  "report_version": 1,
+  "evaluation_scope": "dev-full, không phải test",
+  "use_test": false,
+  "inputs": [
+    {
+      "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\manifests\\closed_dev_full_v1.csv",
+      "sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+      "bytes": 5849209
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\b0_v2_ext_seed2026.json",
+      "sha256": "57823a906e5060c9622f765ec880ae75316813ed66c8a67418d2d9bb1c1dfb7b",
+      "bytes": 12505833
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\b0_v2_ext_seed2027.json",
+      "sha256": "959d60d0581148e8acfee5a380602e5245ccf23b1c90df2202730e59f58630a6",
+      "bytes": 12458802
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\reports\\b0_v2_ext_seed2028.json",
+      "sha256": "7d5dea6e456ef5ced93eef0eaee7f37371826d6bb49d75c78144773c6f1d4d5e",
+      "bytes": 12444863
+    }
+  ],
+  "data": {
+    "training_samples": 15885,
+    "training_shards": 57,
+    "training_shards_source": "Khai báo D027/D028; không đọc lại train.",
+    "development_samples": 38777,
+    "development_shards": 186,
+    "development_speakers": 172
+  },
+  "bootstrap_parameters": {
+    "n_resamples": 1000,
+    "seed": 2026,
+    "confidence": 0.95,
+    "unit": "speaker_id",
+    "method": "percentile; lấy cụm speaker có hoàn lại",
+    "interpretation": "CI có điều kiện trên checkpoint đã chọn bằng chính dev-full; không phải CI test hoặc CI qua seed."
+  },
+  "score_quantile_method": "numpy.quantile(method=linear)",
+  "loss_note": "Loss lấy nguyên report/history; không tính lại BCE từ sigmoid score đã bão hòa.",
+  "per_attack_note": "EER mỗi nhóm dùng bonafide chung và threshold EER riêng của nhóm; confusion dùng threshold tổng của chính seed.",
+  "seeds": [
+    {
+      "training_seed": 2026,
+      "status": "early_stopped",
+      "global_step": 9930,
+      "completed_epochs": 5,
+      "bad_evaluations": 2,
+      "best": {
+        "epoch": 3,
+        "global_step": 5958,
+        "eer": 0.08225567097731609,
+        "roc_auc": 0.9730241624798139,
+        "macro_f1": 0.9123479297683871,
+        "eer_threshold": 0.009960237331333013,
+        "decision_threshold": 0.009960237331333013,
+        "loss": 0.6893779441142974
+      },
+      "per_attack_eer": {
+        "adversarial_attack": {
+          "eer": 0.02678255953642852,
+          "threshold": 0.28682965862819243,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        },
+        "replay": {
+          "eer": 0.055119779520881915,
+          "threshold": 0.03966651161043149,
+          "bonafide_samples": 14151,
+          "spoof_samples": 120,
+          "interpretation": "không đủ để kết luận"
+        },
+        "voice_conversion": {
+          "eer": 0.11507385946298866,
+          "threshold": 0.002764370982404222,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        }
+      },
+      "speaker_bootstrap": {
+        "eer": {
+          "estimate": 0.08225567097731609,
+          "ci_low": 0.04960647164882647,
+          "ci_high": 0.12725626887084404
+        },
+        "roc_auc": {
+          "estimate": 0.9730241624798139,
+          "ci_low": 0.9482956370002416,
+          "ci_high": 0.9887086250356754
+        },
+        "confidence": 0.95,
+        "seed": 2026,
+        "requested_resamples": 1000,
+        "valid_resamples": 1000,
+        "speakers": 172,
+        "samples": 38777
+      },
+      "confusion": {
+        "tn": 12987,
+        "fp": 1164,
+        "fn": 2026,
+        "tp": 22600,
+        "fpr": 0.08225567097731609,
+        "fnr": 0.08227077073012264
+      },
+      "errors_by_utt_type": {
+        "bonafide": {
+          "samples": 14151,
+          "errors": 1164,
+          "error_rate": 0.08225567097731609,
+          "definition": "bonafide bị nhận thành spoof"
+        },
+        "voice_conversion": {
+          "samples": 12253,
+          "errors": 2014,
+          "error_rate": 0.16436790989961642,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "adversarial_attack": {
+          "samples": 12253,
+          "errors": 9,
+          "error_rate": 0.000734513996572268,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "replay": {
+          "samples": 120,
+          "errors": 3,
+          "error_rate": 0.025,
+          "definition": "spoof bị nhận thành bonafide"
+        }
+      },
+      "score_percentiles": {
+        "bonafide": {
+          "1": 3.5074438970553764e-15,
+          "5": 1.7353986628797224e-12,
+          "25": 2.0505653175462157e-08,
+          "50": 2.5207341423083562e-06,
+          "75": 0.00013366197526920587,
+          "95": 0.053693247959017754,
+          "99": 0.9242538511753082
+        },
+        "spoof": {
+          "1": 2.3547675027657533e-05,
+          "5": 0.0016394195554312319,
+          "25": 0.5000773966312408,
+          "50": 0.9903550148010254,
+          "75": 0.9998063743114471,
+          "95": 0.9999958276748657,
+          "99": 0.9999997615814209
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 1986,
+          "eer": 0.13914211009822627,
+          "loss": 0.47712795488556786
+        },
+        {
+          "epoch": 2,
+          "global_step": 3972,
+          "eer": 0.10811956752172991,
+          "loss": 0.3593190676867779
+        },
+        {
+          "epoch": 3,
+          "global_step": 5958,
+          "eer": 0.08225567097731609,
+          "loss": 0.6893779441142974
+        },
+        {
+          "epoch": 4,
+          "global_step": 7944,
+          "eer": 0.11382278892227726,
+          "loss": 1.9420914087004166
+        },
+        {
+          "epoch": 5,
+          "global_step": 9930,
+          "eer": 0.08978315601396898,
+          "loss": 1.3692066539191161
+        }
+      ],
+      "source_tree_sha256": "a21615f281895bdf7718d29487d6f8aba5c3fc1dba346ec0341642e61c928c64"
+    },
+    {
+      "training_seed": 2027,
+      "status": "early_stopped",
+      "global_step": 9930,
+      "completed_epochs": 5,
+      "bad_evaluations": 2,
+      "best": {
+        "epoch": 3,
+        "global_step": 5958,
+        "eer": 0.08263623812230976,
+        "roc_auc": 0.9732836561222585,
+        "macro_f1": 0.9119680460242928,
+        "eer_threshold": 0.1459155204853916,
+        "decision_threshold": 0.1459155204853916,
+        "loss": 0.43658096842418265
+      },
+      "per_attack_eer": {
+        "adversarial_attack": {
+          "eer": 0.025157232704402517,
+          "threshold": 0.8223336230284013,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        },
+        "replay": {
+          "eer": 0.11235955056179775,
+          "threshold": 0.04579145406906524,
+          "bonafide_samples": 14151,
+          "spoof_samples": 120,
+          "interpretation": "không đủ để kết luận"
+        },
+        "voice_conversion": {
+          "eer": 0.11165288672178644,
+          "threshold": 0.046983684461771,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        }
+      },
+      "speaker_bootstrap": {
+        "eer": {
+          "estimate": 0.08263623812230976,
+          "ci_low": 0.050465277156845026,
+          "ci_high": 0.12474721722126084
+        },
+        "roc_auc": {
+          "estimate": 0.9732836561222585,
+          "ci_low": 0.950596917099627,
+          "ci_high": 0.9887708432701053
+        },
+        "confidence": 0.95,
+        "seed": 2026,
+        "requested_resamples": 1000,
+        "valid_resamples": 1000,
+        "speakers": 172,
+        "samples": 38777
+      },
+      "confusion": {
+        "tn": 12982,
+        "fp": 1169,
+        "fn": 2035,
+        "tp": 22591,
+        "fpr": 0.08260900289732175,
+        "fnr": 0.08263623812230976
+      },
+      "errors_by_utt_type": {
+        "bonafide": {
+          "samples": 14151,
+          "errors": 1169,
+          "error_rate": 0.08260900289732175,
+          "definition": "bonafide bị nhận thành spoof"
+        },
+        "voice_conversion": {
+          "samples": 12253,
+          "errors": 2000,
+          "error_rate": 0.16322533257161512,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "adversarial_attack": {
+          "samples": 12253,
+          "errors": 17,
+          "error_rate": 0.0013874153268587284,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "replay": {
+          "samples": 120,
+          "errors": 18,
+          "error_rate": 0.15,
+          "definition": "spoof bị nhận thành bonafide"
+        }
+      },
+      "score_percentiles": {
+        "bonafide": {
+          "1": 5.65254698768724e-17,
+          "5": 4.1652036095359e-13,
+          "25": 7.127217482860715e-09,
+          "50": 1.5471638334929594e-06,
+          "75": 0.0005571236833930016,
+          "95": 0.45109817385673523,
+          "99": 0.9655908048152924
+        },
+        "spoof": {
+          "1": 1.7888501588458894e-05,
+          "5": 0.02765998151153326,
+          "25": 0.8646219819784164,
+          "50": 0.9991788864135742,
+          "75": 0.9999585151672363,
+          "95": 0.9999998807907104,
+          "99": 1.0
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 1986,
+          "eer": 0.13030881209808495,
+          "loss": 0.34115359024789776
+        },
+        {
+          "epoch": 2,
+          "global_step": 3972,
+          "eer": 0.10671647851863884,
+          "loss": 0.7012340141485536
+        },
+        {
+          "epoch": 3,
+          "global_step": 5958,
+          "eer": 0.08263623812230976,
+          "loss": 0.43658096842418265
+        },
+        {
+          "epoch": 4,
+          "global_step": 7944,
+          "eer": 0.09908227077073012,
+          "loss": 1.263852328491927
+        },
+        {
+          "epoch": 5,
+          "global_step": 9930,
+          "eer": 0.10274892233764399,
+          "loss": 1.209972718584326
+        }
+      ],
+      "source_tree_sha256": "a21615f281895bdf7718d29487d6f8aba5c3fc1dba346ec0341642e61c928c64"
+    },
+    {
+      "training_seed": 2028,
+      "status": "early_stopped",
+      "global_step": 9930,
+      "completed_epochs": 5,
+      "bad_evaluations": 2,
+      "best": {
+        "epoch": 3,
+        "global_step": 5958,
+        "eer": 0.0792876828492686,
+        "roc_auc": 0.9762978273407029,
+        "macro_f1": 0.9154720447172219,
+        "eer_threshold": 0.0002550354915883199,
+        "decision_threshold": 0.0002550354915883199,
+        "loss": 1.167141847156356
+      },
+      "per_attack_eer": {
+        "adversarial_attack": {
+          "eer": 0.016893821921162164,
+          "threshold": 0.18740849065569523,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        },
+        "replay": {
+          "eer": 0.10833333333333334,
+          "threshold": 4.48113174570608e-05,
+          "bonafide_samples": 14151,
+          "spoof_samples": 120,
+          "interpretation": "không đủ để kết luận"
+        },
+        "voice_conversion": {
+          "eer": 0.11474740879784542,
+          "threshold": 3.1978274070100596e-05,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253,
+          "interpretation": "mô tả trên dev-full"
+        }
+      },
+      "speaker_bootstrap": {
+        "eer": {
+          "estimate": 0.0792876828492686,
+          "ci_low": 0.05319104183284905,
+          "ci_high": 0.11423531421844774
+        },
+        "roc_auc": {
+          "estimate": 0.9762978273407029,
+          "ci_low": 0.9551296531912765,
+          "ci_high": 0.9886518733955599
+        },
+        "confidence": 0.95,
+        "seed": 2026,
+        "requested_resamples": 1000,
+        "valid_resamples": 1000,
+        "speakers": 172,
+        "samples": 38777
+      },
+      "confusion": {
+        "tn": 13029,
+        "fp": 1122,
+        "fn": 1953,
+        "tp": 22673,
+        "fpr": 0.0792876828492686,
+        "fnr": 0.0793064241046049
+      },
+      "errors_by_utt_type": {
+        "bonafide": {
+          "samples": 14151,
+          "errors": 1122,
+          "error_rate": 0.0792876828492686,
+          "definition": "bonafide bị nhận thành spoof"
+        },
+        "voice_conversion": {
+          "samples": 12253,
+          "errors": 1932,
+          "error_rate": 0.1576756712641802,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "adversarial_attack": {
+          "samples": 12253,
+          "errors": 4,
+          "error_rate": 0.00032645066514323026,
+          "definition": "spoof bị nhận thành bonafide"
+        },
+        "replay": {
+          "samples": 120,
+          "errors": 17,
+          "error_rate": 0.14166666666666666,
+          "definition": "spoof bị nhận thành bonafide"
+        }
+      },
+      "score_percentiles": {
+        "bonafide": {
+          "1": 5.83664143743732e-29,
+          "5": 2.1083568291758084e-23,
+          "25": 1.2380850832329165e-15,
+          "50": 2.0078978410498216e-11,
+          "75": 8.327464229296311e-08,
+          "95": 0.0018639204208739102,
+          "99": 0.6781485974788666
+        },
+        "spoof": {
+          "1": 3.9681342933750585e-10,
+          "5": 1.3626814961753553e-05,
+          "25": 0.5960983037948608,
+          "50": 0.99992436170578,
+          "75": 0.9999991655349731,
+          "95": 1.0,
+          "99": 1.0
+        }
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 1986,
+          "eer": 0.13956793632745879,
+          "loss": 0.42213124354538495
+        },
+        {
+          "epoch": 2,
+          "global_step": 3972,
+          "eer": 0.13343620563631933,
+          "loss": 0.6210542415214736
+        },
+        {
+          "epoch": 3,
+          "global_step": 5958,
+          "eer": 0.0792876828492686,
+          "loss": 1.167141847156356
+        },
+        {
+          "epoch": 4,
+          "global_step": 7944,
+          "eer": 0.08202712580199789,
+          "loss": 0.3716923070388585
+        },
+        {
+          "epoch": 5,
+          "global_step": 9930,
+          "eer": 0.1000974579712499,
+          "loss": 1.4198248408187606
+        }
+      ],
+      "source_tree_sha256": "a21615f281895bdf7718d29487d6f8aba5c3fc1dba346ec0341642e61c928c64"
+    }
+  ],
+  "aggregate": {
+    "eer": {
+      "n": 3,
+      "mean": 0.08139319731629815,
+      "sample_std": 0.0018333306346961019,
+      "ddof": 1
+    },
+    "roc_auc": {
+      "n": 3,
+      "mean": 0.9742018819809252,
+      "sample_std": 0.0018197731866905343,
+      "ddof": 1
+    },
+    "macro_f1": {
+      "n": 3,
+      "mean": 0.9132626735033006,
+      "sample_std": 0.0019227763222576819,
+      "ddof": 1
+    }
+  },
+  "per_attack_aggregate": {
+    "voice_conversion": {
+      "n": 3,
+      "mean": 0.11382471832754018,
+      "sample_std": 0.0018879305871790533,
+      "ddof": 1
+    },
+    "adversarial_attack": {
+      "n": 3,
+      "mean": 0.022944538053997734,
+      "sample_std": 0.00530271591902144,
+      "ddof": 1
+    },
+    "replay": {
+      "n": 3,
+      "mean": 0.09193755447200433,
+      "sample_std": 0.031948615315163804,
+      "ddof": 1
+    }
+  },
+  "technical_checks": {
+    "torch_version": "2.11.0+cpu",
+    "torchaudio_version": "2.11.0+cpu",
+    "resample_defaults": {
+      "lowpass_filter_width": 6,
+      "rolloff": 0.99,
+      "resampling_method": "sinc_interp_hann",
+      "beta": null
+    },
+    "lfcc_recipe": {
+      "sample_rate": 16000,
+      "n_filter": 80,
+      "n_lfcc": 60,
+      "f_min": 0.0,
+      "f_max": 8000.0,
+      "dct_type": 2,
+      "norm": "ortho",
+      "log_lf": false,
+      "spectrum": {
+        "n_fft": 512,
+        "win_length": 400,
+        "hop_length": 160,
+        "power": 2.0,
+        "center": true,
+        "pad_mode": "reflect"
+      }
+    },
+    "waveform_shape": [
+      1,
+      64000
+    ],
+    "lfcc_shape": [
+      1,
+      60,
+      401
+    ],
+    "logit_shape": [
+      1
+    ],
+    "module_shapes": {
+      "feature_extractor.0": [
+        1,
+        64,
+        60,
+        401
+      ],
+      "feature_extractor.1": [
+        1,
+        32,
+        60,
+        401
+      ],
+      "feature_extractor.2": [
+        1,
+        32,
+        30,
+        200
+      ],
+      "feature_extractor.3": [
+        1,
+        128,
+        30,
+        200
+      ],
+      "feature_extractor.4": [
+        1,
+        64,
+        30,
+        200
+      ],
+      "feature_extractor.5": [
+        1,
+        64,
+        15,
+        100
+      ],
+      "feature_extractor.6": [
+        1,
+        256,
+        15,
+        100
+      ],
+      "feature_extractor.7": [
+        1,
+        128,
+        15,
+        100
+      ],
+      "feature_extractor.8": [
+        1,
+        128,
+        7,
+        50
+      ],
+      "feature_extractor.9": [
+        1,
+        256,
+        7,
+        50
+      ],
+      "feature_extractor.10": [
+        1,
+        128,
+        7,
+        50
+      ],
+      "feature_extractor": [
+        1,
+        128,
+        7,
+        50
+      ],
+      "spatial_pool": [
+        1,
+        128,
+        1,
+        1
+      ],
+      "classifier": [
+        1,
+        1
+      ]
+    },
+    "trainable_parameters": 498113,
+    "finite_forward": true,
+    "evidence": "Forward tổng hợp CPU; không audio thật/huấn luyện; tham số LFCC khai báo tường minh, không đọc thêm cấu hình."
+  }
+}

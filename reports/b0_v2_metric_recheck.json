@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-03T15:26:34.880590+07:00",
+  "scope": "B0 v2 D027, dev-full; không đọc/chấm test, không inference/training",
+  "data": {
+    "train_samples": 15885,
+    "train_shards": 57,
+    "development_samples": 38777,
+    "development_shards": 186,
+    "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360"
+  },
+  "tolerance_absolute": 1e-12,
+  "script": ".cache/recheck_b0_v2_metrics.py",
+  "script_sha256": "aea9acfff3eff171faf789a0f941c164cb380ccdfcf01232a603c5730612eab0",
+  "command": ".venv/Scripts/python.exe .cache/recheck_b0_v2_metrics.py",
+  "metric_source_sha256": {
+    "src/metrics/__init__.py": "56b9b31079b19b4004870f23847b13b0e3da2cd4ddc432796725b8305ea601b2",
+    "src/metrics/bootstrap.py": "3ae4ba0d293f911d9502be078b7d46ab1a3d036a39ff072ceddad51df7f749f4",
+    "src/metrics/classification.py": "45c5e29304f8dfdba1f56284c85416a44eaa3dd5a67eef2d5326e0318c110fed",
+    "src/metrics/eer.py": "625725c36b8df9fe07eae5d0352925ac5b6b5b1a9b9670fcb48a65a5ba15b577",
+    "src/metrics/evaluation.py": "c39ea70df08f057fbf62f3f19f3cde71db0a6b10cde2e9400d5ef669b25c8950"
+  },
+  "seeds": [
+    {
+      "training_seed": 2026,
+      "input_report": "reports/b0_v2_seed2026.json",
+      "input_report_sha256": "09ef7ceba47313c77ee8e0416fbcf72267a7c42dbc4c95c5c9b8ff2a5a1bad87",
+      "selected_best_epoch": 3,
+      "epochs": [
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.13914211009822627,
+            "eer_threshold": 0.2637275701449133,
+            "decision_threshold": 0.2637275701449133,
+            "roc_auc": 0.9358371501244226,
+            "macro_f1": 0.8528907973556765
+          },
+          "recomputed": {
+            "eer": 0.13914211009822627,
+            "eer_threshold": 0.2637275701449133,
+            "decision_threshold": 0.2637275701449133,
+            "roc_auc": 0.9358371501244226,
+            "macro_f1": 0.8528907973556765
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12182,
+            "fp": 1969,
+            "fn": 3427,
+            "tp": 21199
+          },
+          "loss": {
+            "stored": 0.47712795488556786,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 0
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 1,
+          "global_step": 1986,
+          "generation": "g-ca594ed097124d89a053f96d7a830101",
+          "input_state": "checkpoints/b0_v2_seed2026/g-ca594ed097124d89a053f96d7a830101/state.json",
+          "input_state_sha256": "0090b0ae4f7ed24eea6a68ad978021cbf5ab50bfd803985a81d1afbf268741c2"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.10811956752172991,
+            "eer_threshold": 0.9267653926641526,
+            "decision_threshold": 0.9267653926641526,
+            "roc_auc": 0.9536817765720627,
+            "macro_f1": 0.8852061991872656
+          },
+          "recomputed": {
+            "eer": 0.10811956752172991,
+            "eer_threshold": 0.9267653926641526,
+            "decision_threshold": 0.9267653926641526,
+            "roc_auc": 0.9536817765720627,
+            "macro_f1": 0.8852061991872656
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12621,
+            "fp": 1530,
+            "fn": 2663,
+            "tp": 21963
+          },
+          "loss": {
+            "stored": 0.3593190676867779,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 342
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 2,
+          "global_step": 3972,
+          "generation": "g-cb2d498590584600aac587513a75f986",
+          "input_state": "checkpoints/b0_v2_seed2026/g-cb2d498590584600aac587513a75f986/state.json",
+          "input_state_sha256": "962d5b8cff7132debc4a33e2945e73722cc228aa875612b734ac9d1773a28673"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.08225567097731609,
+            "eer_threshold": 0.009960237331333013,
+            "decision_threshold": 0.009960237331333013,
+            "roc_auc": 0.9730241624798139,
+            "macro_f1": 0.9123479297683871
+          },
+          "recomputed": {
+            "eer": 0.08225567097731609,
+            "eer_threshold": 0.009960237331333013,
+            "decision_threshold": 0.009960237331333013,
+            "roc_auc": 0.9730241624798139,
+            "macro_f1": 0.9123479297683871
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12987,
+            "fp": 1164,
+            "fn": 2026,
+            "tp": 22600
+          },
+          "loss": {
+            "stored": 0.6893779441142974,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 106
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 3,
+          "global_step": 5958,
+          "generation": "g-951dc37b31054c3ab33a74816a20423c",
+          "input_state": "checkpoints/b0_v2_seed2026/g-951dc37b31054c3ab33a74816a20423c/state.json",
+          "input_state_sha256": "e255413d24971f875076091b63e3fece1304bbee5329421f5d173b3ca734aaca"
+        }
+      ]
+    },
+    {
+      "training_seed": 2027,
+      "input_report": "reports/b0_v2_seed2027.json",
+      "input_report_sha256": "b97a50bd54506b324801b0ff6eeb205c3dc55db12c31ea62bb095474afede915",
+      "selected_best_epoch": 3,
+      "epochs": [
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.13030881209808495,
+            "eer_threshold": 0.769631967204391,
+            "decision_threshold": 0.769631967204391,
+            "roc_auc": 0.942741589573992,
+            "macro_f1": 0.8620784139184857
+          },
+          "recomputed": {
+            "eer": 0.13030881209808495,
+            "eer_threshold": 0.769631967204391,
+            "decision_threshold": 0.769631967204391,
+            "roc_auc": 0.942741589573992,
+            "macro_f1": 0.8620784139184857
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12307,
+            "fp": 1844,
+            "fn": 3209,
+            "tp": 21417
+          },
+          "loss": {
+            "stored": 0.34115359024789776,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 1394
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 1,
+          "global_step": 1986,
+          "generation": "g-9aff549177df4dfebd211146186156e3",
+          "input_state": "checkpoints/b0_v2_seed2027/g-9aff549177df4dfebd211146186156e3/state.json",
+          "input_state_sha256": "2e8ca5d96be6ebd710a420ae67b9d5bc67f0a37b05fff6cd3228f8dada2f2e84"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.10671647851863884,
+            "eer_threshold": 0.045099299724167555,
+            "decision_threshold": 0.045099299724167555,
+            "roc_auc": 0.9546238898073185,
+            "macro_f1": 0.886689522172085
+          },
+          "recomputed": {
+            "eer": 0.10671647851863884,
+            "eer_threshold": 0.045099299724167555,
+            "decision_threshold": 0.045099299724167555,
+            "roc_auc": 0.9546238898073185,
+            "macro_f1": 0.886689522172085
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12641,
+            "fp": 1510,
+            "fn": 2628,
+            "tp": 21998
+          },
+          "loss": {
+            "stored": 0.7012340141485536,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 85
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 2,
+          "global_step": 3972,
+          "generation": "g-85450fdf94ba447d9804d4a699404344",
+          "input_state": "checkpoints/b0_v2_seed2027/g-85450fdf94ba447d9804d4a699404344/state.json",
+          "input_state_sha256": "90e4c61a731c5bbc0fc199c63808d5acbe7e0ba68bb83ed31522a88ff98dc5b5"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.08263623812230976,
+            "eer_threshold": 0.1459155204853916,
+            "decision_threshold": 0.1459155204853916,
+            "roc_auc": 0.9732836561222585,
+            "macro_f1": 0.9119680460242928
+          },
+          "recomputed": {
+            "eer": 0.08263623812230976,
+            "eer_threshold": 0.1459155204853916,
+            "decision_threshold": 0.1459155204853916,
+            "roc_auc": 0.9732836561222585,
+            "macro_f1": 0.9119680460242928
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12982,
+            "fp": 1169,
+            "fn": 2035,
+            "tp": 22591
+          },
+          "loss": {
+            "stored": 0.43658096842418265,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 1150
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 3,
+          "global_step": 5958,
+          "generation": "g-1f9266acc9704954850fdafaa2be1b61",
+          "input_state": "checkpoints/b0_v2_seed2027/g-1f9266acc9704954850fdafaa2be1b61/state.json",
+          "input_state_sha256": "b9b693240e8640c29437d53cc7efacb5c70511b282a83142fcfea3429a2de25e"
+        }
+      ]
+    },
+    {
+      "training_seed": 2028,
+      "input_report": "reports/b0_v2_seed2028.json",
+      "input_report_sha256": "5ea5e4c3b67da7a968b1a034d6c6d6346dd0875ec93b09c294853470aece16c8",
+      "selected_best_epoch": 3,
+      "epochs": [
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.13956793632745879,
+            "eer_threshold": 0.2419526508420011,
+            "decision_threshold": 0.2419526508420011,
+            "roc_auc": 0.9300614774584135,
+            "macro_f1": 0.8524620760107151
+          },
+          "recomputed": {
+            "eer": 0.13956793632745879,
+            "eer_threshold": 0.2419526508420011,
+            "decision_threshold": 0.2419526508420011,
+            "roc_auc": 0.9300614774584135,
+            "macro_f1": 0.8524620760107151
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12176,
+            "fp": 1975,
+            "fn": 3437,
+            "tp": 21189
+          },
+          "loss": {
+            "stored": 0.42213124354538495,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 0
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 1,
+          "global_step": 1986,
+          "generation": "g-f8b210511b534954a168ea7a056bb39e",
+          "input_state": "checkpoints/b0_v2_seed2028/g-f8b210511b534954a168ea7a056bb39e/state.json",
+          "input_state_sha256": "20fa5f655e92777e00e4cd370a44af88f9f0a479de027b16337d8d3c874434a3"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.13343620563631933,
+            "eer_threshold": 0.12305466297396422,
+            "decision_threshold": 0.12305466297396422,
+            "roc_auc": 0.9532514106604014,
+            "macro_f1": 0.8588353562512463
+          },
+          "recomputed": {
+            "eer": 0.13343620563631933,
+            "eer_threshold": 0.12305466297396422,
+            "decision_threshold": 0.12305466297396422,
+            "roc_auc": 0.9532514106604014,
+            "macro_f1": 0.8588353562512463
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 12263,
+            "fp": 1888,
+            "fn": 3286,
+            "tp": 21340
+          },
+          "loss": {
+            "stored": 0.6210542415214736,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 0,
+            "scores_equal_one": 379
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 2,
+          "global_step": 3972,
+          "generation": "g-134691ac90c44c79a741397d2123dec4",
+          "input_state": "checkpoints/b0_v2_seed2028/g-134691ac90c44c79a741397d2123dec4/state.json",
+          "input_state_sha256": "1b2efb705108f729c6d5575982543b0e3e180da0b793473e6c0e560ecd12cb61"
+        },
+        {
+          "sample_count": 38777,
+          "speaker_count": 172,
+          "stored": {
+            "eer": 0.0792876828492686,
+            "eer_threshold": 0.0002550354915883199,
+            "decision_threshold": 0.0002550354915883199,
+            "roc_auc": 0.9762978273407029,
+            "macro_f1": 0.9154720447172219
+          },
+          "recomputed": {
+            "eer": 0.0792876828492686,
+            "eer_threshold": 0.0002550354915883199,
+            "decision_threshold": 0.0002550354915883199,
+            "roc_auc": 0.9762978273407029,
+            "macro_f1": 0.9154720447172219
+          },
+          "absolute_differences": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "decision_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1": 0.0
+          },
+          "numpy_and_confusion_crosscheck": {
+            "eer": 0.0,
+            "eer_threshold": 0.0,
+            "roc_auc": 0.0,
+            "macro_f1_from_confusion": 0.0
+          },
+          "confusion": {
+            "tn": 13029,
+            "fp": 1122,
+            "fn": 1953,
+            "tp": 22673
+          },
+          "loss": {
+            "stored": 1.167141847156356,
+            "recomputed": null,
+            "reason": "Loss gốc tính BCEWithLogitsLoss trên logits float32; chỉ lưu sigmoid probability, không đủ tái lập chính xác logits/loss. Không clip score hoặc báo loss khớp.",
+            "scores_equal_zero": 6,
+            "scores_equal_one": 2580
+          },
+          "passed": true,
+          "history_eer_absolute_difference": 0.0,
+          "epoch": 3,
+          "global_step": 5958,
+          "generation": "g-86bc3dc8b0cd4dbf91b4f84e4bc62c4b",
+          "input_state": "checkpoints/b0_v2_seed2028/g-86bc3dc8b0cd4dbf91b4f84e4bc62c4b/state.json",
+          "input_state_sha256": "1df9472d620c652ea093ebe4bc17c8cd66ec161e3da7b0f401b484189c7fca63"
+        }
+      ]
+    }
+  ],
+  "inputs_unchanged": true,
+  "passed": true,
+  "max_absolute_difference": 0.0
+}
