@@ -1,0 +1,1437 @@
+{
+  "executed": true,
+  "shards": [
+    {
+      "shard": 0,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 1,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 2,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 3,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 4,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 6,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 7,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 8,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 9,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 10,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 11,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 13,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 14,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 15,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 17,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 18,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 19,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 20,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 21,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 22,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 23,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 24,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 25,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 26,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 27,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 28,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 29,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 30,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 31,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 32,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 33,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 34,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 35,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 36,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 37,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 38,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 39,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 40,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 42,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 43,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 44,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 45,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 46,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 47,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 48,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 49,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 50,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 52,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 53,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 54,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 55,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 56,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 58,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 59,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 60,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 62,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 63,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 64,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 65,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 66,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 67,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 69,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 70,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 71,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 72,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 73,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 74,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 75,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 76,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 77,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 78,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 79,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 80,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 81,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 82,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 83,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 84,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 85,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 86,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 87,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 89,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 90,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 91,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 92,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 93,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 94,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 95,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 96,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 97,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 99,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 100,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 101,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 102,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 103,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 104,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 105,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 106,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 107,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 108,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 109,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 111,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 112,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 113,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 114,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 115,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 116,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 117,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 118,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 119,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 120,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 121,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 122,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 124,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 125,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 126,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 127,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 128,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 129,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 130,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 132,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 133,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 134,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 135,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 136,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 137,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 138,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 139,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 140,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 142,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 143,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 144,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 145,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 146,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 147,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 148,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 149,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 150,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 151,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 152,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 153,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 154,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 155,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 156,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 157,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 158,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 159,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 160,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 161,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 162,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 163,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 164,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 165,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 166,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 168,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 169,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 170,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 172,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 185,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 187,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 188,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 189,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 190,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 191,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 192,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 193,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 194,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 195,
+      "action": "skip_done",
+      "status": "already_done"
+    },
+    {
+      "shard": 196,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 49.44
+    },
+    {
+      "shard": 197,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 54.12
+    },
+    {
+      "shard": 198,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 58.4
+    },
+    {
+      "shard": 199,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 54.29
+    },
+    {
+      "shard": 200,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 47.65
+    },
+    {
+      "shard": 214,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 33.72
+    },
+    {
+      "shard": 225,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 24.42
+    },
+    {
+      "shard": 226,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 99.46
+    },
+    {
+      "shard": 227,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 39.16
+    },
+    {
+      "shard": 239,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 142.47
+    },
+    {
+      "shard": 240,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 104.48
+    },
+    {
+      "shard": 241,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 91.19
+    },
+    {
+      "shard": 242,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 104.46
+    },
+    {
+      "shard": 243,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 112.9
+    },
+    {
+      "shard": 244,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 99.35
+    },
+    {
+      "shard": 245,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 67.15
+    },
+    {
+      "shard": 246,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 53.16
+    },
+    {
+      "shard": 247,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 31.21
+    },
+    {
+      "shard": 248,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 33.05
+    },
+    {
+      "shard": 249,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 51.96
+    },
+    {
+      "shard": 250,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 35.3
+    },
+    {
+      "shard": 251,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 44.07
+    },
+    {
+      "shard": 252,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 31.73
+    },
+    {
+      "shard": 264,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 26.46
+    },
+    {
+      "shard": 267,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 71.64
+    },
+    {
+      "shard": 268,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 51.95
+    },
+    {
+      "shard": 269,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 40.08
+    },
+    {
+      "shard": 270,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 37.57
+    },
+    {
+      "shard": 271,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 95.73
+    },
+    {
+      "shard": 272,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 86.89
+    },
+    {
+      "shard": 273,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 82.29
+    },
+    {
+      "shard": 274,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 77.45
+    },
+    {
+      "shard": 275,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 62.56
+    },
+    {
+      "shard": 276,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 52.14
+    },
+    {
+      "shard": 277,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 53.05
+    },
+    {
+      "shard": 278,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 57.04
+    },
+    {
+      "shard": 279,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 47.17
+    },
+    {
+      "shard": 280,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 52.61
+    },
+    {
+      "shard": 281,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 49.33
+    },
+    {
+      "shard": 282,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 43.35
+    },
+    {
+      "shard": 283,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 34.72
+    },
+    {
+      "shard": 290,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 21.81
+    },
+    {
+      "shard": 291,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 92.73
+    },
+    {
+      "shard": 292,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 73.52
+    },
+    {
+      "shard": 293,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 65.53
+    },
+    {
+      "shard": 294,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 64.61
+    },
+    {
+      "shard": 295,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 87.42
+    },
+    {
+      "shard": 296,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 74.68
+    },
+    {
+      "shard": 297,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 44.6
+    },
+    {
+      "shard": 298,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 46.97
+    },
+    {
+      "shard": 299,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 43.71
+    },
+    {
+      "shard": 300,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 45.75
+    },
+    {
+      "shard": 301,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 44.02
+    },
+    {
+      "shard": 302,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 39.31
+    },
+    {
+      "shard": 303,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 17.83
+    },
+    {
+      "shard": 304,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 21.51
+    },
+    {
+      "shard": 316,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 22.28
+    },
+    {
+      "shard": 317,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 18.59
+    },
+    {
+      "shard": 319,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 8.75
+    },
+    {
+      "shard": 320,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 66.65
+    },
+    {
+      "shard": 321,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 41.67
+    },
+    {
+      "shard": 322,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 42.38
+    },
+    {
+      "shard": 323,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 25.28
+    },
+    {
+      "shard": 370,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 41.56
+    },
+    {
+      "shard": 371,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 59.73
+    },
+    {
+      "shard": 372,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 37.06
+    },
+    {
+      "shard": 373,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 48.11
+    },
+    {
+      "shard": 374,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 41.13
+    },
+    {
+      "shard": 375,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 42.77
+    },
+    {
+      "shard": 396,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 28.47
+    },
+    {
+      "shard": 398,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 29.78
+    },
+    {
+      "shard": 399,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 59.88
+    },
+    {
+      "shard": 400,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 52.84
+    },
+    {
+      "shard": 401,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 35.1
+    },
+    {
+      "shard": 402,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 22.32
+    },
+    {
+      "shard": 403,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 10.09
+    },
+    {
+      "shard": 404,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 12.11
+    },
+    {
+      "shard": 405,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 49.96
+    },
+    {
+      "shard": 406,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 76.67
+    },
+    {
+      "shard": 407,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 144.07
+    },
+    {
+      "shard": 408,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 70.1
+    },
+    {
+      "shard": 409,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 59.69
+    },
+    {
+      "shard": 410,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 95.09
+    },
+    {
+      "shard": 411,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 64.47
+    },
+    {
+      "shard": 412,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 78.41
+    },
+    {
+      "shard": 413,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 44.16
+    },
+    {
+      "shard": 414,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 104.93
+    },
+    {
+      "shard": 415,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 60.64
+    },
+    {
+      "shard": 416,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 69.15
+    },
+    {
+      "shard": 417,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 68.54
+    },
+    {
+      "shard": 418,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 39.89
+    },
+    {
+      "shard": 419,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 54.36
+    },
+    {
+      "shard": 420,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 57.13
+    },
+    {
+      "shard": 421,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 200.34
+    },
+    {
+      "shard": 422,
+      "action": "ingest_local",
+      "status": "ingested",
+      "seconds": 31.85
+    },
+    {
+      "shard": 426,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 45.86
+    },
+    {
+      "shard": 427,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 143.39
+    },
+    {
+      "shard": 429,
+      "action": "download_ingest_delete",
+      "status": "ingested",
+      "seconds": 165.56
+    }
+  ],
+  "ingested": 98,
+  "skipped": 167,
+  "failed": 0,
+  "stopped_reason": null,
+  "action_counts": {
+    "skip_done": 167,
+    "download_ingest_delete": 83,
+    "ingest_local": 15
+  }
+}

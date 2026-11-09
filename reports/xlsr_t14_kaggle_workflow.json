@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-03T13:31:30+00:00",
+  "status": "failed",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-c",
+        "from pathlib import Path; import subprocess; w=list(Path('/kaggle/input').rglob('pytorch_model.bin')); assert len(w)==1, 'Khong xac dinh duoc trong so'; a=['python', 'scripts/benchmark_xlsr_cuda.py', '--weights', 'WEIGHTS_TOKEN', '--train-artifact', '/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed/train_development_20k_v2', '--dev-artifact', '/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed/closed_dev_full_v1', '--report-json', '/kaggle/working/reports/xlsr_t14_cuda_benchmark.json', '--report-md', '/kaggle/working/reports/xlsr_t14_cuda_benchmark.md']; a[a.index('WEIGHTS_TOKEN')]=str(w[0].parent); raise SystemExit(subprocess.call(a))"
+      ],
+      "return_code": 1,
+      "elapsed_seconds": 24.880922131000034
+    }
+  ],
+  "profile": "xlsr-t14-benchmark",
+  "source_dataset_slug": "doanttnt-t14-source",
+  "source_bundle_sha256": "4bca92b024552720a82c8edb94d44f8e109584f265597d8e4449c990130e4a7c",
+  "source_layout": "directory",
+  "data_dataset_slug": "doanttnt-t14-packed",
+  "data_root": "/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed",
+  "error": "Lệnh Kaggle thất bại với mã 1: python -c from pathlib import Path; import subprocess; w=list(Path('/kaggle/input').rglob('pytorch_model.bin')); assert len(w)==1, 'Khong xac dinh duoc trong so'; a=['python', 'scripts/benchmark_xlsr_cuda.py', '--weights', 'WEIGHTS_TOKEN', '--train-artifact', '/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed/train_development_20k_v2', '--dev-artifact', '/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed/closed_dev_full_v1', '--report-json', '/kaggle/working/reports/xlsr_t14_cuda_benchmark.json', '--report-md', '/kaggle/working/reports/xlsr_t14_cuda_benchmark.md']; a[a.index('WEIGHTS_TOKEN')]=str(w[0].parent); raise SystemExit(subprocess.call(a))",
+  "finished_at": "2026-11-03T13:32:09+00:00"
+}

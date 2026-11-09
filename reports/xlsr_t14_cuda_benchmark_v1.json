@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "technical_smoke": false,
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "transformers": "5.20.2"
+  },
+  "results": [],
+  "protocol": {
+    "seed": 2026,
+    "normalization": "processor_zero_mean_unit_variance",
+    "amplitude_policy": "peak",
+    "samples": 64000,
+    "sample_rate": 16000,
+    "precision": "float32",
+    "amp": false,
+    "num_workers": 0,
+    "encoder_lr_placeholder": 1e-05,
+    "classifier_lr_placeholder": 0.001,
+    "classifier_hidden_features_technical": 128,
+    "classifier_dropout_technical": 0.2,
+    "compute_timing_includes": "H2D, forward, kiểm loss hữu hạn, backward, Adam step; đồng bộ CUDA",
+    "loader_timing_includes": "packed I/O, peak, crop, collate và processor normalization trên CPU",
+    "warmup_excluded_from_timing_but_included_in_peak_vram": true
+  },
+  "error": "Transformers thiếu hoặc khác 4.57.6; dừng và hỏi người dùng, không cài thêm."
+}

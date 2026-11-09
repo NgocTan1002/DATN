@@ -1,0 +1,95 @@
+{
+  "status": "prepared_not_submitted",
+  "datasets": {
+    "source": {
+      "ref": "ngctnnguyn1111/doanttnt-t14-source",
+      "inventory": {
+        "project_source.zip": {
+          "bytes": 249655,
+          "sha256": "4bca92b024552720a82c8edb94d44f8e109584f265597d8e4449c990130e4a7c"
+        },
+        "source_manifest.json": {
+          "bytes": 12258,
+          "sha256": "907befccf7b47dda67a89504774775e72a7386635457bfc31793aee874d52df8"
+        }
+      },
+      "status": "download_verified",
+      "private": true
+    },
+    "weights": {
+      "ref": "ngctnnguyn1111/doanttnt-t14-weights",
+      "inventory": {
+        "config.json": {
+          "bytes": 1568,
+          "sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac"
+        },
+        "preprocessor_config.json": {
+          "bytes": 212,
+          "sha256": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335"
+        },
+        "pytorch_model.bin": {
+          "bytes": 1269737156,
+          "sha256": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0"
+        }
+      },
+      "status": "download_verified",
+      "private": true
+    },
+    "packed": {
+      "ref": "ngctnnguyn1111/doanttnt-t14-packed",
+      "inventory": {
+        "closed_dev_full_v1/index.csv": {
+          "bytes": 7684400,
+          "sha256": "364f1993332ec889dd7301357a1aa6145d14c65c56bfa3db334668b93f01b8d6"
+        },
+        "closed_dev_full_v1/metadata.json": {
+          "bytes": 957,
+          "sha256": "5537af3384c6ffd83093a5e4175676ddbef1b5a5b5607c5daa87285e6de13f14"
+        },
+        "closed_dev_full_v1/waveforms.f32": {
+          "bytes": 13454011384,
+          "sha256": "579e5e85a020aeab70c8ad912023f5ee4efaef19f8e61af4fd2c923ee692f648"
+        },
+        "train_development_20k_v2/index.csv": {
+          "bytes": 3121751,
+          "sha256": "b71825930d9a344484ecbc78102876b1ee5a873e2b2c7d724906cf5766094332"
+        },
+        "train_development_20k_v2/metadata.json": {
+          "bytes": 958,
+          "sha256": "9ce34ceb9883a56347de4aedf8d1a39fa7e8eae753dc006919bf634d376250a9"
+        },
+        "train_development_20k_v2/waveforms.f32": {
+          "bytes": 5792780884,
+          "sha256": "e09517c8e367bfb4e24563f92d90d2f7ee0ad7d5c7a58dc78862db742ab6614d"
+        }
+      },
+      "status": "download_verified",
+      "private": true
+    }
+  },
+  "use_test": false,
+  "quota_before": "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)\n[\n  {\n    \"resource\": \"GPU\",\n    \"used\": \"5.58h\",\n    \"remaining\": \"24.42h\",\n    \"total\": \"30.00h\",\n    \"refreshAt\": \"2026-11-07T00:00:00\"\n  },\n  {\n    \"resource\": \"TPU\",\n    \"used\": \"0.00h\",\n    \"remaining\": \"20.00h\",\n    \"total\": \"20.00h\",\n    \"refreshAt\": \"2026-11-07T00:00:00\"\n  }\n]\n",
+  "previous_errors": [
+    "Lệnh lỗi mã 1"
+  ],
+  "g3_submitted": true,
+  "kernel_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\workflow\\kernel",
+  "g2_completed_at": "2026-11-03T20:30:50.273849+07:00",
+  "resume_command": {
+    "args": [
+      ".venv/Scripts/python.exe",
+      ".cache/t14_g2.py"
+    ],
+    "exit_code": 0,
+    "log": "logs/xlsr_t14_g2.log",
+    "uploaded_again": false
+  },
+  "pause_history": [
+    {
+      "paused_at": "2026-11-03T17:56:00.766013+07:00",
+      "pause_reason": "Người dùng báo Kaggle New dataset in progress / Transmogrifying data và yêu cầu tạm dừng. Chỉ dừng theo dõi cục bộ, không hủy xử lý server.",
+      "resume_at": "G2: kiểm inventory dataset packed đã submitted, tải ngược từng tệp và kiểm SHA-256; không upload lại. Sau đó chuẩn bị/verify kernel, kiểm quota và gửi G3 đúng một lần."
+    }
+  ],
+  "kernel_version": 1
+}

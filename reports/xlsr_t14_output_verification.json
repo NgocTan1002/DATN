@@ -1,0 +1,151 @@
+{
+  "status": "verified",
+  "kernel_version": 2,
+  "benchmark_status": "complete",
+  "configurations": [
+    {
+      "unfrozen_layers": 0,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 0,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 1,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 1,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 2,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 2,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 4,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 4,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 8,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 8,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 12,
+      "batch_size": 8,
+      "status": "verified",
+      "train_samples": 280,
+      "train_shards": 56,
+      "dev_samples": 512,
+      "dev_shards": 160
+    },
+    {
+      "unfrozen_layers": 12,
+      "batch_size": 16,
+      "status": "verified",
+      "train_samples": 560,
+      "train_shards": 57,
+      "dev_samples": 512,
+      "dev_shards": 160
+    }
+  ],
+  "oom_count": 0,
+  "source_files_unchanged": 71,
+  "output_files_verified": 5,
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "transformers": "4.57.6",
+    "device": "cuda:0",
+    "gpu": "Tesla T4",
+    "cuda_device_count_used": 1
+  },
+  "base_torch_cuda_numpy_unchanged": true,
+  "quota_before": {
+    "resource": "GPU",
+    "used": "5.59h",
+    "remaining": "24.41h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "quota_after": {
+    "resource": "GPU",
+    "used": "5.91h",
+    "remaining": "24.09h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "quota_gpu_used_delta_hours": 0.3200000000000003,
+  "quota_note": "API làm tròn 0,01 giờ; hiệu quota không phải utilization đo được, bao gồm job khác nếu có.",
+  "workflow_started_at": "2026-11-03T13:48:27+00:00",
+  "workflow_finished_at": "2026-11-03T14:07:12+00:00",
+  "workflow_command_seconds": 1119.394258942,
+  "benchmark_command_seconds": 1075.0774750709534,
+  "benchmark_exit_code": 0,
+  "use_test": false,
+  "D028_written": false
+}

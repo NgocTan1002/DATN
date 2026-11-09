@@ -1,0 +1,1090 @@
+{
+  "status": "output_downloaded",
+  "commands": [
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "create",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-deps",
+        "--dir-mode",
+        "zip",
+        "--keep-tabular",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 27.167285680770874
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "files",
+        "-d",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "--page-size",
+        "200",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.6398539543151855
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "offline_manifest.json",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.195014953613281
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "t14_offline_bootstrap.py",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.080000400543213
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/certifi-2026.10.23-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.377490997314453
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.656660795211792
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/colorama-0.4.6-py2.py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.45230507850647
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/filelock-4.2.7-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.029911756515503
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/fsspec-2026.9.0-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.685170650482178
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/hf_xet-1.8.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.485594987869263
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/huggingface_hub-0.36.2-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.309437990188599
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/idna-3.20-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.391791343688965
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.249953508377075
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/packaging-26.3-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.662677526473999
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.055469751358032
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/regex-2026.9.29-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.092922687530518
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/requests-2.34.2-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.086394309997559
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.828258514404297
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.720534801483154
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/tqdm-4.70.1-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.155869960784912
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/transformers-4.57.6-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.190274715423584
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/typing_extensions-4.16.0-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.217338800430298
+    },
+    {
+      "args": [
+        "kaggle",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "-f",
+        "wheels/urllib3-2.8.0-py3-none-any.whl",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\offline-download",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.124313116073608
+    },
+    {
+      "args": [
+        "kaggle",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.108077049255371
+    },
+    {
+      "args": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\workflow\\kernel"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5244708061218262
+    },
+    {
+      "args": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\workflow\\kernel"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.6196043491363525
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.874612808227539
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.1435470581054688
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.7776577472686768
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.2736880779266357
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.264486789703369
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6325857639312744
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.59665846824646
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.2802531719207764
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6141910552978516
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.3089449405670166
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8194787502288818
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.641211986541748
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.3367269039154053
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.874722957611084
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8372163772583008
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9232685565948486
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.74151349067688
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8704750537872314
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.7885236740112305
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8343162536621094
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.2602851390838623
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.304900884628296
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.3102223873138428
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.707340955734253
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.471618890762329
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.605315923690796
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.753401517868042
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6853954792022705
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.7020254135131836
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8724181652069092
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8696560859680176
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6286890506744385
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8812901973724365
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.914595603942871
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.784663200378418
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.4083783626556396
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.6129608154296875
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.0855000019073486
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.954899549484253
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.972917079925537
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8244783878326416
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.094170331954956
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8683445453643799
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.6043033599853516
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.997023105621338
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9043967723846436
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.5553343296051025
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.6966328620910645
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9391517639160156
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.561067819595337
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.5115599632263184
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.644735097885132
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9478614330291748
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "output",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-t14-v2",
+        "--page-size",
+        "200",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.224079132080078
+    },
+    {
+      "args": [
+        "kaggle",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.8953309059143066
+    }
+  ],
+  "use_test": false,
+  "authorized": "Người dùng xác nhận có: bộ cài offline + private upload + gửi lại kernel đúng một lần sau lỗi version 1.",
+  "offline_dataset": {
+    "ref": "ngctnnguyn1111/doanttnt-t14-offline-deps",
+    "inventory": {
+      "offline_manifest.json": {
+        "bytes": 45133,
+        "sha256": "02a89177086942190f1d0f919740462f292b27fa892c3cdd943a903766b69912"
+      },
+      "t14_offline_bootstrap.py": {
+        "bytes": 6204,
+        "sha256": "ac21850852625a30c8246a49ae08e65956282be19126c51d334e01f47a0df391"
+      },
+      "wheels/certifi-2026.10.23-py3-none-any.whl": {
+        "bytes": 135082,
+        "sha256": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1"
+      },
+      "wheels/charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+        "bytes": 254660,
+        "sha256": "7218e8f32b0956cfcd048fd42d9d5779809745ca1d86113ca56f66e7ae1549c4"
+      },
+      "wheels/colorama-0.4.6-py2.py3-none-any.whl": {
+        "bytes": 25335,
+        "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
+      },
+      "wheels/filelock-4.2.7-py3-none-any.whl": {
+        "bytes": 164345,
+        "sha256": "d08972bbca2b8767ee552aff877b091dd111ffb1d22de7de885766ea7d719d5e"
+      },
+      "wheels/fsspec-2026.9.0-py3-none-any.whl": {
+        "bytes": 221738,
+        "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f"
+      },
+      "wheels/hf_xet-1.8.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl": {
+        "bytes": 4292483,
+        "sha256": "29dab7c904cd1914a0439c6e1306c12c7497c8bd32290fbe563ebf51ca4b6d6d"
+      },
+      "wheels/huggingface_hub-0.36.2-py3-none-any.whl": {
+        "bytes": 566395,
+        "sha256": "48f0c8eac16145dfce371e9d2d7772854a4f591bcb56c9cf548accf531d54270"
+      },
+      "wheels/idna-3.20-py3-none-any.whl": {
+        "bytes": 69583,
+        "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+      },
+      "wheels/numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+        "bytes": 16718044,
+        "sha256": "6ffa07666f8da0eef81d149934a626d0d95fbd6838432a33e66245423a9062c0"
+      },
+      "wheels/packaging-26.3-py3-none-any.whl": {
+        "bytes": 129956,
+        "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+      },
+      "wheels/pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+        "bytes": 801626,
+        "sha256": "0f29edc409a6392443abf94b9cf89ce99889a1dd5376d94316ae5145dfedd5d6"
+      },
+      "wheels/regex-2026.9.29-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": {
+        "bytes": 807902,
+        "sha256": "d49c18f1ea294cf4adde2e5ac256e98c82ea9d708462ce4bf799dffa7cfe8a2c"
+      },
+      "wheels/requests-2.34.2-py3-none-any.whl": {
+        "bytes": 73075,
+        "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+      },
+      "wheels/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+        "bytes": 516040,
+        "sha256": "fd6f3f93c9a0a7cc2788ee63fb763353d4bd2e89b0751bc78fcf7dda00bea774"
+      },
+      "wheels/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+        "bytes": 3274982,
+        "sha256": "369cc9fc8cc10cb24143873a0d95438bb8ee257bb80c71989e3ee290e8d72c67"
+      },
+      "wheels/tqdm-4.70.1-py3-none-any.whl": {
+        "bytes": 80199,
+        "sha256": "c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73"
+      },
+      "wheels/transformers-4.57.6-py3-none-any.whl": {
+        "bytes": 11993498,
+        "sha256": "4c9e9de11333ddfe5114bc872c9f370509198acf0b87a832a0ab9458e2bd0550"
+      },
+      "wheels/typing_extensions-4.16.0-py3-none-any.whl": {
+        "bytes": 45571,
+        "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+      },
+      "wheels/urllib3-2.8.0-py3-none-any.whl": {
+        "bytes": 135717,
+        "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+      }
+    },
+    "private": true
+  },
+  "dataset_submitted": true,
+  "download_verified": true,
+  "download_verified_at": "2026-11-03T20:47:57.769143+07:00",
+  "source_bundle_sha256": "4bca92b024552720a82c8edb94d44f8e109584f265597d8e4449c990130e4a7c",
+  "quota_before": {
+    "resource": "GPU",
+    "used": "5.59h",
+    "remaining": "24.41h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "version": 2,
+  "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark",
+  "remote_status": "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)\nngctnnguyn1111/doanttnt-xlsr-t14-benchmark/2 has status \"KernelWorkerStatus.COMPLETE\"\n",
+  "output_files": [
+    {
+      "path": "doanttnt-xlsr-t14-benchmark.log",
+      "bytes": 8672,
+      "sha256": "4b0ae9632b61ba989fadbadfde09c7d7d3a2a64dee6f587e508b640924274bb2"
+    },
+    {
+      "path": "reports\\kaggle_cli_workflow.json",
+      "bytes": 988,
+      "sha256": "a04bb1a896c7ca2e5fdae57573bc9ea0f170cee7b0e1febca04c3c43796bac87"
+    },
+    {
+      "path": "reports\\xlsr_t14_cuda_benchmark.json",
+      "bytes": 179607,
+      "sha256": "dea3b25968e57c52f4f6dad503a8a68a88690abb424c0868ee0d1f4ac8e22767"
+    },
+    {
+      "path": "reports\\xlsr_t14_cuda_benchmark.md",
+      "bytes": 3007,
+      "sha256": "ea188b12d9a46739e6ae3da108a2039bf3d9deb9286fcc105b5365876c179b3a"
+    },
+    {
+      "path": "reports\\xlsr_t14_offline_environment.json",
+      "bytes": 56117,
+      "sha256": "8e7ceef2bac17b519ece180f83933795c77582829d7ce50a19272bc39fe2a9e0"
+    }
+  ],
+  "bad_output_files": [],
+  "quota_after": {
+    "resource": "GPU",
+    "used": "5.91h",
+    "remaining": "24.09h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "quota_gpu_used_delta_hours": 0.3200000000000003,
+  "quota_precision_note": "API làm tròn 0,01 giờ; hiệu quota không phải utilization đo được, bao gồm job khác nếu có.",
+  "orchestrator_exit_code": 0,
+  "benchmark_status": "complete",
+  "benchmark_exit_code": 0,
+  "output_verification": "reports/xlsr_t14_output_verification.json",
+  "verification_exit_code": 0,
+  "rerun_submission_count": 1
+}

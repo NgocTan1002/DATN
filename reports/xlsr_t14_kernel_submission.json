@@ -1,0 +1,166 @@
+{
+  "status": "output_downloaded",
+  "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark",
+  "commands": [
+    {
+      "args": [
+        "kaggle",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.1886119842529297
+    },
+    {
+      "args": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\workflow\\kernel"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.782522439956665
+    },
+    {
+      "args": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\workflow\\kernel"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.877647161483765
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9688043594360352
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.82824969291687
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.8773982524871826
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9275078773498535
+    },
+    {
+      "args": [
+        "kaggle",
+        "kernels",
+        "output",
+        "ngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-t14-v1",
+        "--page-size",
+        "200",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.398469924926758
+    },
+    {
+      "args": [
+        "kaggle",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.055225133895874
+    }
+  ],
+  "use_test": false,
+  "quota_before": {
+    "resource": "GPU",
+    "used": "5.58h",
+    "remaining": "24.42h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "version": 1,
+  "remote_status": "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)\nngctnnguyn1111/doanttnt-xlsr-t14-benchmark/1 has status \"KernelWorkerStatus.ERROR\"\n",
+  "output_files": [
+    {
+      "path": "doanttnt-xlsr-t14-benchmark.log",
+      "bytes": 1833,
+      "sha256": "0e27ae41283a24e1b6404a3bcb06464d4bf6ccd0d9cccb1aeaa88ce91deaf323"
+    },
+    {
+      "path": "reports\\kaggle_cli_workflow.json",
+      "bytes": 2025,
+      "sha256": "cd1ecdbcbd3c147310e3f6d19ed4e3bbd41c5d4f4238d6b5817017f4e42a4603"
+    },
+    {
+      "path": "reports\\xlsr_t14_cuda_benchmark.json",
+      "bytes": 1021,
+      "sha256": "f06662b6a0d30f793aeb9ab380e9f7d22d51c41ad76e8865fa0c6b610048d3c8"
+    },
+    {
+      "path": "reports\\xlsr_t14_cuda_benchmark.md",
+      "bytes": 693,
+      "sha256": "bb9382c8377103e8928ecc0bc9b5d8140303fa6fd4412eb14c930bdd412d2cf2"
+    }
+  ],
+  "bad_output_files": [],
+  "quota_after": {
+    "resource": "GPU",
+    "used": "5.59h",
+    "remaining": "24.41h",
+    "total": "30.00h",
+    "refreshAt": "2026-11-07T00:00:00"
+  },
+  "quota_gpu_used_delta_hours": 0.009999999999999787,
+  "quota_precision_note": "API làm tròn 0,01 giờ; hiệu quota gồm mọi run khác nếu có, không phải đo utilization GPU.",
+  "benchmark_status": "blocked_transformers_version",
+  "benchmark_exit_code": 1,
+  "benchmark_configurations_completed": 0,
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "transformers": "5.20.2"
+  },
+  "workflow_status": "failed",
+  "started_at": "2026-11-03T13:31:30+00:00",
+  "finished_at": "2026-11-03T13:32:09+00:00",
+  "benchmark_command_elapsed_seconds": 24.880922131000034,
+  "stop_reason": "Transformers thiếu hoặc khác 4.57.6; dừng và hỏi người dùng, không cài thêm.",
+  "submitted_once": true,
+  "rerun_authorized": false,
+  "orchestrator_exit_code": 0
+}

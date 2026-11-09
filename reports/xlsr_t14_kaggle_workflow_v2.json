@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-03T13:48:27+00:00",
+  "status": "complete",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-c",
+        "from pathlib import Path; import subprocess,sys; b=list(Path('/kaggle/input').rglob('t14_offline_bootstrap.py')); assert len(b)==1, 'Khong xac dinh duoc bo cai offline'; raise SystemExit(subprocess.call([sys.executable,str(b[0]),'--data-root','/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed','--working-root','/kaggle/working']))"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 1119.394258942
+    }
+  ],
+  "profile": "xlsr-t14-offline-benchmark",
+  "source_dataset_slug": "doanttnt-t14-source",
+  "source_bundle_sha256": "4bca92b024552720a82c8edb94d44f8e109584f265597d8e4449c990130e4a7c",
+  "source_layout": "directory",
+  "data_dataset_slug": "doanttnt-t14-packed",
+  "data_root": "/kaggle/input/datasets/ngctnnguyn1111/doanttnt-t14-packed",
+  "finished_at": "2026-11-03T14:07:12+00:00"
+}
