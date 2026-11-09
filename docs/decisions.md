@@ -309,3 +309,78 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Giới hạn:** chi phí chiếu từ 30 bước đo và 512 mẫu dev, chưa gồm checkpoint, khởi động và biến thiên Kaggle; hệ số an toàn 25% là ước tính, không phải số đo. Lưới tầng, learning rate và trần 10 epoch là lựa chọn có lý do, không phải tối ưu; EER vẫn có thể còn giảm sau epoch 10. Learning rate cố định có thể bất lợi cho XLS-R so với lịch có warmup. B0 và XLS-R vẫn khác batch (8 và 16). Seed bổ sung của X0/X1 chỉ đo dao động khởi tạo, sampler và crop. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1` và 15.885 mẫu train.
 
 **Không thay đổi:** metadata, split, seed dữ liệu `2026`, `configs/audio.json`, D022, D025, D026 (trừ mục 7), D027 (trừ mục 2). Không dùng test; cổng `ready_for_training` của B0 nối dài và XLS-R vẫn đóng cho tới khi người dùng xác nhận.
+
+## 2026-11-06 — D030: Đăng ký trước tiêu chí nâng trần epoch cho XLS-R
+
+**Xác nhận:** người dùng đồng ý ngày 06/11/2026, nguyên văn "việc nhỏ, bạn tự ghi giúp tôi", cho đề xuất ghi tiêu chí trong cuộc trò chuyện. Mục này được ghi trong khi T18 (X1-L2/L4/L8 seed 2026) đang chạy, **trước khi có kết quả X1 nào**.
+
+**Bối cảnh:** X0 seed 2026 chạy hết trần 10 epoch của D028 (`max_epochs`, bước 9.930); EER dev-full giảm đều từ 8,80% (epoch 1) xuống 4,90% (epoch 8) và 4,20% (epoch 10, best). Nguồn: `kaggle_outputs/xlsr-d028-x0-seed2026-s1/reports/xlsr_X0_seed2026.json`, report T17 `reports/xlsr_t17_x0_seed2026_session1.json` trong worktree XLS-R. Số đo thật: khoảng 0,72 GPU-giờ mỗi epoch với X0 (0,766 giây/bước train, 1.826 giây/lượt dev-full). Quyết định D029 (LayerDrop/SpecAugment) hiện chỉ có trong `docs/decisions.md` của nhánh `feat/xlsr-runner-d028`, chưa merge.
+
+**Quyết định:**
+
+1. **Thời điểm quyết định.** Xét việc nâng trần một lần, ngay sau khi xong ba run X1-L2/L4/L8 LR `1e-5` seed 2026 và trước khi chạy LR `3e-5` (D028 mục 5b). Không xét lại sau khi đã chạy seed 2027/2028.
+2. **Run dùng để xét.** Cấu hình X1 thắng ở bước chọn mức tầng theo luật D028 (EER dev-full thấp nhất, hòa chọn ít tầng hơn). X0 chỉ là mốc tham chiếu, không quyết định việc nâng trần.
+3. **Giữ trần 10** nếu run đó có best ở epoch 8 trở về trước hoặc dừng sớm do patience.
+4. **Xem xét nâng trần** chỉ khi đồng thời: best ở epoch 9 hoặc 10, và EER epoch 10 thấp hơn EER epoch 8 ít nhất **0,3 điểm phần trăm** (lớn hơn độ lệch chuẩn theo seed khoảng 0,18 điểm % đã đo ở B0 v2, `reports/b0_v2_summary.json`).
+5. **Nếu nâng:** trần mới đề xuất 15 epoch, patience giữ 2, luật chọn best giữ nguyên D028. Áp dụng cho **mọi run XLS-R trong tập so sánh** (X0 và mọi X1 đã/sẽ chạy), nối dài từ checkpoint cuối theo cơ chế có kiểm soát như B0 (D028 mục 3), không chạy lại từ đầu và không nâng riêng cho cấu hình đang thắng. B0 v2 không đổi vì đã dừng do patience ở epoch 5, không do trần. Trước khi chạy phải có: chế độ nối dài trong runner XLS-R kèm test exact-resume, tính lại quota còn đủ phần dự phòng 20% của D026, và người dùng xác nhận mức trần cụ thể trong một mục quyết định mới.
+
+**Lý do:** đăng ký tiêu chí trước khi thấy kết quả X1 để việc nâng hay giữ trần là áp dụng quy tắc, không phải chọn hậu nghiệm. Ngưỡng 0,3 điểm % tránh nâng trần vì dao động nhỏ hơn mức nhiễu giữa seed.
+
+**Không được làm:** dùng test-full để quyết định trần; đổi patience, luật chọn best hoặc lưới cấu hình cùng lúc với việc nâng trần; nâng trần riêng cho một cấu hình.
+
+**Giới hạn:** ngưỡng 0,3 điểm % và mức 15 epoch là lựa chọn có lý do, không phải tối ưu. Nếu giữ trần 10 thì X0 và có thể cả X1 được báo cáo là chưa hội tụ ở trần; kết luận so sánh với B0 phải nêu giới hạn này.
+
+**Không thay đổi:** D025, D026, D027, D028, D029; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở thêm cổng nào.
+
+## 2026-11-09 — D031: Kết quả band-limit ablation T19b và cách diễn giải
+
+**Xác nhận:** người dùng đồng ý ngày 09/11/2026, nguyên văn "được hãy thực hiện", cho đề xuất ghi D031 và cập nhật báo cáo trong cuộc trò chuyện. Mục này được ghi sau khi T19b hoàn tất và đã được Claude kiểm độc lập; T20 (X1-L8-lr3e-5 seed 2026) chưa có kết quả.
+
+**Bối cảnh:** D007 yêu cầu báo cáo chính có band-limit ablation vì toàn bộ VC có sample rate gốc 40 kHz, còn bonafide, nhiễu đối kháng (AP) và replay ở 16 kHz. Kiểm tra ngày 08/11/2026 xác nhận tỉ lệ này là 100% ở cả `closed_train` (`data/manifests/development_20k_v2.csv`) và dev-full (`data/manifests/closed_dev_full_v1.csv`). Mọi waveform đều được resample về 16 kHz, nhưng bộ lọc chống aliasing khi hạ từ 40 kHz có thể để lại dấu vết ở dải sát 8 kHz, trùng hoàn toàn với nhãn VC. T19b là phép thử lúc chấm: không train, không đọc test, chỉ dùng dev-full và threshold cố định của từng checkpoint. B0 v2 ba seed được chấm trên đủ 38.777 mẫu/186 shard; XLS-R X1-L8-lr1e-5 seed 2026 được chấm trên tập con phân tầng 3.120 mẫu/169 shard (1.000 bonafide, 1.000 VC, 1.000 AP, 120 replay; SHA-256 danh sách `869d8f87…`). Có bốn điều kiện: `original`; `roundtrip_40k` (16→40→16 kHz bằng `torchaudio.functional.resample`, chỉ áp cho bonafide); `lowpass_7k` và `lowpass_4k` (FIR Hann 513 tap, pha tuyến tính, có bù trễ, áp lại `peak`). Ngưỡng chỉ báo được khai báo trước khi chạy. Chỉ báo mạnh khi có một trong hai điều kiện: `roundtrip_40k` làm FPR bonafide tăng ≥ 10 điểm %; hoặc `lowpass_7k` làm EER VC tăng ≥ 3 lần trong khi EER AP tăng < 1,5 lần. `lowpass_4k` chỉ dùng để đo độ bền. Nguồn: `reports/shortcut_probe_dev.json`.
+
+**Kết quả (dev-full, không phải test):**
+
+- XLS-R X1-L8-lr1e-5 seed 2026: chỉ báo **yếu**. Round-trip làm FPR bonafide tăng 0,5 điểm %; `lowpass_7k` làm EER VC tăng ×1,23 và EER AP tăng ×2,0. Với `lowpass_4k`, EER tổng trên tập con là 2,30%, so với 1,46% ở `original`.
+- B0 v2: chỉ báo **mạnh** ở seed 2027 và 2028; seed 2026 yếu nhưng sát ngưỡng. Round-trip làm FPR bonafide tăng lần lượt 7,67 / 11,71 / 10,45 điểm % (seed 2026/2027/2028). `lowpass_7k` làm EER AP tăng mạnh hơn EER VC (AP ×11,34 / ×5,89 / ×2,29; VC ×1,39 / ×1,82 / ×1,77). Với `lowpass_4k`, EER tổng là 38,97–51,54%.
+- Claude kiểm độc lập ngày 09/11/2026 bằng cách chạy lại 376 test, tính lại toàn bộ metric từ các khối score, và chấm lại mẫu bằng bộ lọc tự viết. Mọi kết quả khớp report.
+
+**Quyết định:**
+
+1. T19b là band-limit ablation phiên bản đầu theo D007, áp dụng cho B0 v2 và XLS-R X1-L8-lr1e-5 seed 2026.
+2. Giữ giao thức âm thanh (D007, `configs/audio.json`) và giao thức huấn luyện D028. Không thêm lọc băng tần khi train; không train lại B0 hay XLS-R vì lý do này.
+3. Cách diễn giải: ở mức phép thử này phát hiện được, EER dev-full của XLS-R L8 không được giải thích bởi dấu vết resample 40→16 kHz. B0 v2 phụ thuộc một phần vào đặc trưng dải cao. Phụ thuộc này thể hiện rõ nhất qua phản ứng với round-trip, và qua mức suy giảm của AP và replay khi lọc thông thấp. Báo cáo phải nêu điều này khi trình bày kết quả B0 và khi so sánh B0 với XLS-R.
+4. Chạy lại phép thử với cùng đặc tả (tập con, bốn điều kiện, bộ lọc, ngưỡng chỉ báo) cho cấu hình X1 cuối cùng, sau khi chọn theo D028 mục 5, và trước khi chấm test-full. Nếu cấu hình đó chạm chỉ báo mạnh, phải dừng và lập quyết định mới trước khi chấm test. Chạy thêm cho X0 seed 2026 là tùy chọn.
+5. Báo cáo phải cập nhật chương phương pháp/B0 (mục 4.2, 9.3, 10 của `baocao/phuong_phap_du_lieu_va_b0.md`) và thêm mục band-limit ablation. Số liệu lấy từ `reports/shortcut_probe_dev.json` và từ report phân tích phổ do script trong repo sinh ra.
+
+**Lý do:** phép thử được đăng ký trước, có kiểm tái tạo score gốc, và cho kết quả khác biệt rõ giữa hai họ mô hình. Mô hình chính không cần đổi giao thức. Mô hình cơ sở cần được diễn giải kèm giới hạn. Train lại toàn bộ với dữ liệu đã lọc băng tần sẽ tốn khoảng một ngày GPU và đổi giao thức đã khóa, trong khi không có chỉ báo nào đòi hỏi việc đó cho XLS-R.
+
+**Giới hạn:** với XLS-R, phép thử mới làm trên một cấu hình, một seed và tập con 3.120 mẫu; ở mức 1.000 bonafide, mỗi mẫu tương ứng 0,1 điểm %. Đây là phép thử lúc chấm, không phải train lại trên dữ liệu lọc băng tần. Round-trip chỉ mô phỏng dấu vết của resampler torchaudio. Ngưỡng chỉ báo là lựa chọn có lý do, không phải kiểm định thống kê. Kết quả chỉ đúng trên dev-full của `VSASV-HF-public-snapshot-v1`.
+
+**Không được làm:** dùng test-full để đánh giá shortcut; đổi ngưỡng chỉ báo hoặc đặc tả phép thử sau khi đã thấy kết quả; tuyên bố XLS-R "không có shortcut" một cách tuyệt đối.
+
+**Không thay đổi:** D007, D025, D026, D027, D028, D029, D030; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở thêm cổng nào.
+
+## 2026-11-09 — D032: Đăng ký trước giao thức chấm test-full
+
+**Xác nhận:** người dùng đồng ý ngày 09/11/2026, nguyên văn "Ghi D032", cho bản nháp giao thức chấm test-full do Claude trình bày trong cuộc trò chuyện. Mục này được ghi **trước khi đọc bất kỳ dữ liệu test nào**, khi T21 (seed 2027/2028 của X1 cuối và X0) và T22 (phép thử shortcut cho X1 cuối) đang chạy.
+
+**Bối cảnh:** D025 mục 3 quy định test-full chỉ được đọc qua entrypoint có cổng khóa, mỗi mô hình đúng một lần. D026 mục 7 đặt mốc 06/12 cho registry đầy đủ và khoảng 13/12 cho lần chấm test cùng ablation shortcut. Theo D028 mục 5b, cấu hình X1 cuối là X1-L8-lr3e-5: EER dev-full seed 2026 là 0,8162%, so với 0,8833% của X1-L8-lr1e-5. Nguồn: `kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2026/reports/xlsr_X1-L8-lr3e-5_seed2026.json`, đã được Claude kiểm độc lập. Test-full gồm `data/manifests/closed_test_full_v1.csv` (30.698 dòng, SHA-256 `0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266`, theo `reports/closed_eval_full_v1.json`) và packed artifact `data/processed/packed/closed_test_full_v1`.
+
+**Quyết định:**
+
+1. **Mô hình và checkpoint.** Chấm B0 v2, X0 và X1 cuối (X1-L8-lr3e-5), mỗi loại đủ ba seed 2026, 2027, 2028, tổng 9 mục. Mỗi mục dùng checkpoint best trên dev-full và `decision_threshold` lấy từ dev-full của chính checkpoint đó. Toàn bộ được khóa trong registry `reports/model_registry_v1.json` (SHA-256 checkpoint, generation, threshold, EER dev-full, source/identity) trước khi chấm. Hạn đăng ký: 06/12/2026.
+2. **Dữ liệu và tiền xử lý.** Dùng toàn bộ test-full nêu trên, cùng pipeline âm thanh hiện hành (`configs/audio.json`, `peak`, center crop 4 giây). Không lọc, không bù mẫu, không đổi nhãn.
+3. **Metric chính.** EER test-full cho từng mô hình và từng seed; báo cáo thêm trung bình ± SD mẫu qua ba seed.
+4. **So sánh chính.** So X1 cuối với B0 v2, và X1 cuối với X0. Với từng seed, tính CI 95% của hiệu EER bằng bootstrap ghép cặp theo người nói (`paired_speaker_bootstrap` trong `src/metrics/bootstrap.py`, 1.000 lần lặp, seed 2026). Mỗi hệ thống được báo cáo kèm CI bootstrap theo người nói của riêng nó.
+5. **Metric phụ.** ROC-AUC; macro-F1; FPR và FNR tại threshold dev; EER theo kiểu tấn công (bonafide chung so với từng kiểu); ma trận nhầm lẫn. Replay (khoảng 120 mẫu) chỉ được mô tả, không dùng để kết luận.
+6. **Band-limit ablation trên test.** Áp đúng bốn điều kiện và đặc tả bộ lọc của T19b/D031 (`original`, `roundtrip_40k` chỉ cho bonafide, `lowpass_7k`, `lowpass_4k`) cho B0 v2 và X1 cuối, cả ba seed, trên toàn bộ test-full. X0 chỉ chấm `original`. Threshold giữ nguyên từ dev. Kết quả chỉ để báo cáo và đối chiếu với dev; không được dùng để đổi mô hình, threshold hay giao thức.
+7. **Luật một lần.** Test chỉ được đọc qua entrypoint có khóa. Mỗi mô hình-seed tạo một file khóa trước khi mở dữ liệu và bị từ chối nếu khóa đã tồn tại. Nếu phát hiện lỗi sau khi chấm, phải ghi nhận lỗi và lập quyết định mới nêu rõ lần chấm lại cùng lý do; không chấm lại âm thầm.
+8. **Điều kiện trước khi chấm:** registry đủ 9 mục và khớp `configs/test_evaluation.json`; entrypoint và bootstrap đã được thử trên dev-full và được Claude kiểm; T22 cho X1 cuối có chỉ báo yếu theo D031 (nếu chỉ báo mạnh thì dừng và lập quyết định mới); đã kiểm dataset Kaggle có test-full chưa (upload mới cần người dùng xác nhận riêng); người dùng mở cổng chấm test trong cuộc trò chuyện.
+
+**Lý do:** đăng ký trước mô hình, threshold, metric và phép so sánh để kết quả test là phép áp dụng quy tắc, không phải lựa chọn sau khi thấy số. Báo cáo đủ ba seed và CI theo người nói tránh việc chỉ chọn seed tốt nhất hoặc coi chênh lệch nhỏ là có ý nghĩa.
+
+**Không được làm:** dùng test để chọn checkpoint, threshold, hiệu chuẩn score, seed hoặc cấu hình; bỏ seed hay chỉ báo cáo seed tốt nhất; thêm mô hình hay điều kiện sau khi đã thấy kết quả test mà không ghi rõ là phân tích hậu nghiệm; đọc test ngoài entrypoint có khóa.
+
+**Giới hạn:** bootstrap 1.000 lần lặp và CI 95% là lựa chọn quy ước; các so sánh trên nhiều seed và nhiều cặp không hiệu chỉnh đa so sánh, nên phải diễn giải thận trọng. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1`, mô hình huấn luyện trên 15.885 mẫu, và không phải tái lập official VSASV.
+
+**Không thay đổi:** D007, D025, D026, D027, D028, D029, D030, D031; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở cổng test.
