@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "decision": "D032",
+  "test_gate_open": false,
+  "registry_path": "reports/model_registry_v1.json",
+  "registry_sha256": null,
+  "required_models": [
+    {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2026, "source_report": "reports/b0_v2_ext_seed2026.json"},
+    {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2027, "source_report": "reports/b0_v2_ext_seed2027.json"},
+    {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2028, "source_report": "reports/b0_v2_ext_seed2028.json"},
+    {"family": "X0", "run_id": "X0", "training_seed": 2026, "source_report": "kaggle_outputs/xlsr-d028-x0-seed2026-s1/reports/xlsr_X0_seed2026.json"},
+    {"family": "X0", "run_id": "X0", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X0-seed2027/reports/xlsr_X0_seed2027.json"},
+    {"family": "X0", "run_id": "X0", "training_seed": 2028, "source_report": "kaggle_outputs/xlsr-d028-X0-seed2028/reports/xlsr_X0_seed2028.json"},
+    {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2026, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2026/reports/xlsr_X1-L8-lr3e-5_seed2026.json"},
+    {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2027/reports/xlsr_X1-L8-lr3e-5_seed2027.json"},
+    {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2028, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2028/reports/xlsr_X1-L8-lr3e-5_seed2028.json"}
+  ],
+  "claude_verified": ["B0-v2-seed2026", "B0-v2-seed2027", "B0-v2-seed2028", "X0-seed2026", "X1-L8-lr3e-5-seed2026"],
+  "bootstrap": {"n_resamples": 1000, "seed": 2026, "confidence": 0.95},
+  "conditions_by_family": {
+    "B0-v2": ["original", "roundtrip_40k", "lowpass_7k", "lowpass_4k"],
+    "X0": ["original"],
+    "X1": ["original", "roundtrip_40k", "lowpass_7k", "lowpass_4k"]
+  },
+  "pipeline": {"amplitude_policy": "peak", "sample_rate": 16000, "segment_samples": 64000, "evaluation_crop": "center", "xlsr_normalization": "processor_zero_mean_unit_variance"},
+  "dev": {"manifest": "data/manifests/closed_dev_full_v1.csv", "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360", "artifact": "data/processed/packed/closed_dev_full_v1", "samples": 38777, "shards": 186},
+  "test": {"manifest": "data/manifests/closed_test_full_v1.csv", "manifest_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266", "artifact": "data/processed/packed/closed_test_full_v1", "samples": 30698},
+  "t22_report": "reports/shortcut_probe_dev_x1_final.json",
+  "locks_dir": ".cache/test_once",
+  "pre_test_checks": {"entrypoint_dev_claude_verified": true, "bootstrap_dev_claude_verified": true, "t22_claude_verified": false, "test_dataset_inventory_checked": false}
+}
