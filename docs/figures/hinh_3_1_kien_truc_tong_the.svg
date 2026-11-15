@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.4cm" height="11.94cm" viewBox="0 0 454 352.0" font-family="Times New Roman, Times, serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 1 L10 5 L0 9 Z" fill="#000"/></marker></defs>
+<rect width="454" height="352.0" fill="#FFFFFF"/>
+<rect x="10" y="10.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="64.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="118.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="172.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="226.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="280.0" width="338" height="40" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75" stroke-dasharray="4 3"/>
+<rect x="362" y="10" width="82" height="256.0" rx="3" fill="#E6E6E6" stroke="#000" stroke-width="0.75"/>
+<rect x="10" y="332.0" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<rect x="150" y="332.0" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75" stroke-dasharray="4 3"/>
+<rect x="296" y="332.0" width="22" height="12" rx="3" fill="#E6E6E6" stroke="#000" stroke-width="0.75"/>
+<path d="M179.0 50.0 L179.0 64.0" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M179.0 104.0 L179.0 118.0" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M179.0 158.0 L179.0 172.0" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M179.0 212.0 L179.0 226.0" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M179.0 266.0 L179.0 280.0" fill="none" stroke="#000" stroke-width="0.75" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<text x="18" y="30.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">1. Dữ liệu</text>
+<text x="112" y="24.0" font-size="10" text-anchor="start" dominant-baseline="central">metadata → split theo người nói (seed 2026)</text>
+<text x="112" y="38.0" font-size="10" text-anchor="start" dominant-baseline="central">→ manifest khử trùng → Parquet hoặc packed</text>
+<text x="18" y="84.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">2. Tiền xử lý</text>
+<text x="112" y="78.0" font-size="10" text-anchor="start" dominant-baseline="central">resample 16 kHz → chính sách biên độ peak</text>
+<text x="112" y="92.0" font-size="10" text-anchor="start" dominant-baseline="central">→ đoạn cố định 4 giây (64.000 mẫu)</text>
+<text x="18" y="138.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">3. Mô hình</text>
+<text x="112" y="132.0" font-size="10" text-anchor="start" dominant-baseline="central">B0: LFCC 60 × 401 → LCNN</text>
+<text x="112" y="146.0" font-size="10" text-anchor="start" dominant-baseline="central">X0, X1: XLS-R 300M → pooling → MLP</text>
+<text x="18" y="192.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">4. Huấn luyện</text>
+<text x="112" y="186.0" font-size="10" text-anchor="start" dominant-baseline="central">sampler tiếp tục được, controller epoch và</text>
+<text x="112" y="200.0" font-size="10" text-anchor="start" dominant-baseline="central">early stopping, kho checkpoint theo generation</text>
+<text x="18" y="246.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">5. Đánh giá</text>
+<text x="112" y="240.0" font-size="10" text-anchor="start" dominant-baseline="central">EER, ROC-AUC, macro-F1, ngưỡng tại EER dev,</text>
+<text x="112" y="254.0" font-size="10" text-anchor="start" dominant-baseline="central">khoảng tin cậy bootstrap theo người nói</text>
+<text x="18" y="300.0" font-size="10.5" font-weight="bold" text-anchor="start" dominant-baseline="central">7. Đăng ký, demo</text>
+<text x="112" y="294.0" font-size="10" text-anchor="start" dominant-baseline="central">registry mô hình, cổng đánh giá test,</text>
+<text x="112" y="308.0" font-size="10" text-anchor="start" dominant-baseline="central">suy luận cửa sổ trượt, chương trình minh họa</text>
+<text x="403.0" y="38.0" font-size="10.5" font-weight="bold" text-anchor="middle" dominant-baseline="central">6. Vận hành</text>
+<text x="403.0" y="63.0" font-size="9.5" text-anchor="middle" dominant-baseline="central">script CLI</text>
+<text x="403.0" y="75.5" font-size="9.5" text-anchor="middle" dominant-baseline="central">cục bộ</text>
+<text x="403.0" y="100.5" font-size="9.5" text-anchor="middle" dominant-baseline="central">đóng gói mã</text>
+<text x="403.0" y="113.0" font-size="9.5" text-anchor="middle" dominant-baseline="central">nguồn có</text>
+<text x="403.0" y="125.5" font-size="9.5" text-anchor="middle" dominant-baseline="central">SHA-256</text>
+<text x="403.0" y="150.5" font-size="9.5" text-anchor="middle" dominant-baseline="central">phiên GPU</text>
+<text x="403.0" y="163.0" font-size="9.5" text-anchor="middle" dominant-baseline="central">Kaggle</text>
+<text x="403.0" y="188.0" font-size="9.5" text-anchor="middle" dominant-baseline="central">chuyển</text>
+<text x="403.0" y="200.5" font-size="9.5" text-anchor="middle" dominant-baseline="central">checkpoint</text>
+<text x="403.0" y="213.0" font-size="9.5" text-anchor="middle" dominant-baseline="central">giữa các phiên</text>
+<text x="38" y="338.0" font-size="9.5" text-anchor="start" dominant-baseline="central">Đã triển khai</text>
+<text x="178" y="338.0" font-size="9.5" text-anchor="start" dominant-baseline="central">Chưa triển khai</text>
+<text x="324" y="338.0" font-size="9.5" text-anchor="start" dominant-baseline="central">Hạ tầng dùng chung</text>
+</svg>

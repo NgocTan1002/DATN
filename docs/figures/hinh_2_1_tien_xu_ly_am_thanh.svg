@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.4cm" height="14.99cm" viewBox="0 0 454 442" font-family="Times New Roman, Times, serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 1 L10 5 L0 9 Z" fill="#000"/></marker></defs>
+<rect width="454" height="442" fill="#FFFFFF"/>
+<rect x="102" y="10" width="250" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="227.0" y="22.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Đọc dạng sóng từ Parquet</text>
+<text x="227.0" y="35.5" font-size="10" text-anchor="middle" dominant-baseline="central">float32, tần số lấy mẫu gốc</text>
+<rect x="102" y="66" width="250" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="227.0" y="78.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Kiểm tra đầu vào</text>
+<text x="227.0" y="91.5" font-size="10" text-anchor="middle" dominant-baseline="central">1 kênh, giá trị hữu hạn, khớp metadata</text>
+<rect x="102" y="122" width="250" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="227.0" y="134.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Resample về 16 kHz</text>
+<text x="227.0" y="147.5" font-size="10" text-anchor="middle" dominant-baseline="central">chỉ khi tần số lấy mẫu khác 16 kHz</text>
+<rect x="102" y="194" width="250" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="227.0" y="206.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Chính sách biên độ peak</text>
+<text x="227.0" y="219.5" font-size="10" text-anchor="middle" dominant-baseline="central">đỉnh về 0,95; không khuếch đại đoạn &lt; −50 dBFS</text>
+<rect x="20" y="256" width="200" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="120.0" y="268.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Huấn luyện: cắt ngẫu nhiên</text>
+<text x="120.0" y="281.5" font-size="10" text-anchor="middle" dominant-baseline="central">vị trí cắt theo seed và epoch</text>
+<rect x="234" y="256" width="200" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="334.0" y="268.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Đánh giá: cắt đoạn giữa</text>
+<text x="334.0" y="281.5" font-size="10" text-anchor="middle" dominant-baseline="central">tập development và test</text>
+<rect x="102" y="318" width="250" height="38" rx="3" fill="#FFFFFF" stroke="#000" stroke-width="0.75"/>
+<text x="227.0" y="330.5" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Đoạn cố định 4 giây (64.000 mẫu)</text>
+<text x="227.0" y="343.5" font-size="10" text-anchor="middle" dominant-baseline="central">tệp ngắn hơn: lặp lại rồi cắt</text>
+<rect x="20" y="380" width="200" height="52" rx="3" fill="#E6E6E6" stroke="#000" stroke-width="0.75"/>
+<text x="120.0" y="393.0" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Nhánh B0</text>
+<text x="120.0" y="406.0" font-size="10" text-anchor="middle" dominant-baseline="central">LFCC 60 × 401, tính riêng từng mẫu</text>
+<text x="120.0" y="419.0" font-size="10" text-anchor="middle" dominant-baseline="central">→ LCNN</text>
+<rect x="234" y="380" width="200" height="52" rx="3" fill="#E6E6E6" stroke="#000" stroke-width="0.75"/>
+<text x="334.0" y="393.0" font-size="11" font-weight="bold" text-anchor="middle" dominant-baseline="central">Nhánh X0/X1</text>
+<text x="334.0" y="406.0" font-size="10" text-anchor="middle" dominant-baseline="central">chuẩn hóa: trung bình 0, phương sai 1</text>
+<text x="334.0" y="419.0" font-size="10" text-anchor="middle" dominant-baseline="central">→ XLS-R 300M</text>
+<line x1="10" y1="177" x2="444" y2="177" stroke="#000" stroke-width="0.75" stroke-dasharray="4 3"/>
+<text x="444" y="173" font-size="9.5" font-style="italic" text-anchor="end">Ranh giới lưu packed artifact (float32)</text>
+<path d="M227 48 L227 66" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M227 104 L227 122" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M227 160 L227 194" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M227 232 L227 244 L120 244 L120 256" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M227 244 L334 244 L334 256" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M120 294 L120 306 L227 306 L227 318" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M334 294 L334 306 L227 306" fill="none" stroke="#000" stroke-width="0.75"/>
+<path d="M227 356 L227 368 L120 368 L120 380" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+<path d="M227 368 L334 368 L334 380" fill="none" stroke="#000" stroke-width="0.75" marker-end="url(#a)"/>
+</svg>

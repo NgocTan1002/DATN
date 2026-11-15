@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="94.545mm" viewBox="0 0 1100 650" role="img" aria-labelledby="title desc">
+<title id="title">B0 v2 — EER dev-full theo epoch</title><desc id="desc">Ba seed; khoanh epoch best, dấu chéo ở điểm dừng.</desc>
+<style>text{font-family:"Times New Roman",serif;fill:#172b4d;font-size:27px}.small{font-size:25px}.title{font-size:32px}</style>
+<rect width="1100" height="650" fill="white"/>
+<text x="550.00" y="40.00" text-anchor="middle" font-weight="bold" class="title">B0 v2 — EER dev-full theo epoch</text>
+<text x="550.00" y="72.00" text-anchor="middle" class="small">dev-full, không phải test</text>
+<path d="M 110 480.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="486.00" text-anchor="end" class="small">0,0</text>
+<path d="M 110 408.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="414.00" text-anchor="end" class="small">2,8</text>
+<path d="M 110 336.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="342.00" text-anchor="end" class="small">5,6</text>
+<path d="M 110 264.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="270.00" text-anchor="end" class="small">8,4</text>
+<path d="M 110 192.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="198.00" text-anchor="end" class="small">11,2</text>
+<path d="M 110 120.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="126.00" text-anchor="end" class="small">14,0</text>
+<path d="M 110 110 V 480 H 1020" stroke="#334e68" fill="none"/>
+<text transform="translate(32 300) rotate(-90)" text-anchor="middle">EER (%)</text>
+<text x="160.00" y="510.00" text-anchor="middle">1</text>
+<text x="360.00" y="510.00" text-anchor="middle">2</text>
+<text x="560.00" y="510.00" text-anchor="middle">3</text>
+<text x="760.00" y="510.00" text-anchor="middle">4</text>
+<text x="960.00" y="510.00" text-anchor="middle">5</text>
+<polyline points="160.00,122.21 360.00,201.98 560.00,268.49 760.00,187.31 960.00,249.13" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-dasharray="none"/>
+<circle cx="160.00" cy="122.21" r="4" fill="#1d4ed8"/>
+<circle cx="360.00" cy="201.98" r="4" fill="#1d4ed8"/>
+<circle cx="560.00" cy="268.49" r="4" fill="#1d4ed8"/>
+<circle cx="560.00" cy="268.49" r="10" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+<circle cx="760.00" cy="187.31" r="4" fill="#1d4ed8"/>
+<circle cx="960.00" cy="249.13" r="4" fill="#1d4ed8"/>
+<path d="M 953.00 242.13 l 14 14 m -14 0 l 14 -14" stroke="#1d4ed8" stroke-width="2"/>
+<path d="M 180 562 h 40" stroke="#1d4ed8" stroke-width="3"/>
+<text x="230.00" y="568.00" >Seed 2026</text>
+<polyline points="160.00,144.92 360.00,205.59 560.00,267.51 760.00,225.22 960.00,215.79" fill="none" stroke="#b45309" stroke-width="3" stroke-dasharray="9 4"/>
+<circle cx="160.00" cy="144.92" r="4" fill="#b45309"/>
+<circle cx="360.00" cy="205.59" r="4" fill="#b45309"/>
+<circle cx="560.00" cy="267.51" r="4" fill="#b45309"/>
+<circle cx="560.00" cy="267.51" r="10" fill="none" stroke="#b45309" stroke-width="2"/>
+<circle cx="760.00" cy="225.22" r="4" fill="#b45309"/>
+<circle cx="960.00" cy="215.79" r="4" fill="#b45309"/>
+<path d="M 953.00 208.79 l 14 14 m -14 0 l 14 -14" stroke="#b45309" stroke-width="2"/>
+<path d="M 470 562 h 40" stroke="#b45309" stroke-width="3"/>
+<text x="520.00" y="568.00" >Seed 2027</text>
+<polyline points="160.00,121.11 360.00,136.88 560.00,276.12 760.00,269.07 960.00,222.61" fill="none" stroke="#047857" stroke-width="3" stroke-dasharray="3 4"/>
+<circle cx="160.00" cy="121.11" r="4" fill="#047857"/>
+<circle cx="360.00" cy="136.88" r="4" fill="#047857"/>
+<circle cx="560.00" cy="276.12" r="4" fill="#047857"/>
+<circle cx="560.00" cy="276.12" r="10" fill="none" stroke="#047857" stroke-width="2"/>
+<circle cx="760.00" cy="269.07" r="4" fill="#047857"/>
+<circle cx="960.00" cy="222.61" r="4" fill="#047857"/>
+<path d="M 953.00 215.61 l 14 14 m -14 0 l 14 -14" stroke="#047857" stroke-width="2"/>
+<path d="M 760 562 h 40" stroke="#047857" stroke-width="3"/>
+<text x="810.00" y="568.00" >Seed 2028</text>
+<text x="560.00" y="540.00" text-anchor="middle">Epoch</text>
+<text x="550.00" y="605.00" text-anchor="middle" class="small">Vòng tròn: best theo EER; dấu ×: kết thúc dừng sớm.</text>
+<text x="550.00" y="632.00" text-anchor="middle" class="small">Nguồn: reports/b0_v2_dev_analysis.json · Không dùng tập test.</text>
+</svg>

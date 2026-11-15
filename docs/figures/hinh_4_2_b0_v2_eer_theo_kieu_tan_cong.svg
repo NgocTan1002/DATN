@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="94.545mm" viewBox="0 0 1100 650" role="img" aria-labelledby="title desc">
+<title id="title">B0 v2 — EER theo kiểu tấn công</title><desc id="desc">Trung bình ba seed và độ lệch chuẩn mẫu; replay ít mẫu.</desc>
+<style>text{font-family:"Times New Roman",serif;fill:#172b4d;font-size:27px}.small{font-size:25px}.title{font-size:32px}</style>
+<rect width="1100" height="650" fill="white"/>
+<text x="550.00" y="40.00" text-anchor="middle" font-weight="bold" class="title">B0 v2 — EER theo kiểu tấn công</text>
+<text x="550.00" y="72.00" text-anchor="middle" class="small">dev-full, không phải test</text>
+<path d="M 110 480.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="486.00" text-anchor="end" class="small">0,0</text>
+<path d="M 110 408.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="414.00" text-anchor="end" class="small">2,8</text>
+<path d="M 110 336.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="342.00" text-anchor="end" class="small">5,6</text>
+<path d="M 110 264.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="270.00" text-anchor="end" class="small">8,4</text>
+<path d="M 110 192.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="198.00" text-anchor="end" class="small">11,2</text>
+<path d="M 110 120.00 H 1020" stroke="#d9e2ec" fill="none"/>
+<text x="96.00" y="126.00" text-anchor="end" class="small">14,0</text>
+<path d="M 110 110 V 480 H 1020" stroke="#334e68" fill="none"/>
+<text transform="translate(32 300) rotate(-90)" text-anchor="middle">EER (%)</text>
+<rect x="205" y="187.31" width="130" height="292.69" fill="#356d99"/>
+<path d="M 270 182.45 V 192.16 M 256 182.45 H 284 M 256 192.16 H 284" stroke="#172b4d" stroke-width="2" fill="none"/>
+<text x="270.00" y="168.45" text-anchor="middle">11,38 ± 0,19</text>
+<text x="270.00" y="512.00" text-anchor="middle">Chuyển đổi giọng nói</text>
+<text x="270.00" y="537.00" text-anchor="middle" class="small">12.253 mẫu spoof</text>
+<rect x="500" y="421.00" width="130" height="59.00" fill="#356d99"/>
+<path d="M 565 407.36 V 434.64 M 551 407.36 H 579 M 551 434.64 H 579" stroke="#172b4d" stroke-width="2" fill="none"/>
+<text x="565.00" y="393.36" text-anchor="middle">2,29 ± 0,53</text>
+<text x="565.00" y="512.00" text-anchor="middle">Nhiễu đối kháng</text>
+<text x="565.00" y="537.00" text-anchor="middle" class="small">12.253 mẫu spoof</text>
+<rect x="795" y="243.59" width="130" height="236.41" fill="#d97706"/>
+<path d="M 860 161.44 V 325.74 M 846 161.44 H 874 M 846 325.74 H 874" stroke="#172b4d" stroke-width="2" fill="none"/>
+<text x="860.00" y="147.44" text-anchor="middle">9,19 ± 3,19</text>
+<text x="860.00" y="512.00" text-anchor="middle">Phát lại*</text>
+<text x="860.00" y="537.00" text-anchor="middle" class="small">120 mẫu spoof</text>
+<text x="550.00" y="572.00" text-anchor="middle" class="small">Thanh: trung bình 3 seed; vạch: ± độ lệch chuẩn mẫu (n−1).</text>
+<text x="550.00" y="605.00" text-anchor="middle" class="small">* Replay chỉ 120 mẫu spoof: không đủ để kết luận.</text>
+<text x="550.00" y="632.00" text-anchor="middle" class="small">Nguồn: reports/b0_v2_dev_analysis.json · Bonafide chung cho từng nhóm.</text>
+</svg>

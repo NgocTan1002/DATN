@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="110mm" viewBox="0 0 1100 760" role="img">
+<title>EER tổng theo điều kiện band-limit</title>
+<rect width="1100" height="760" fill="white"/>
+<style>text{font-family:"Times New Roman",serif;font-size:25px;fill:#172b4d}</style>
+<text x="550.00" y="36.00" text-anchor="middle" font-weight="bold">EER tổng theo điều kiện band-limit</text>
+<text x="550.00" y="70.00" text-anchor="middle">dev-full, không phải test</text>
+<path d="M110 480.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="487.00" text-anchor="end">0</text>
+<path d="M110 408.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="415.00" text-anchor="end">12</text>
+<path d="M110 336.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="343.00" text-anchor="end">24</text>
+<path d="M110 264.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="271.00" text-anchor="end">36</text>
+<path d="M110 192.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="199.00" text-anchor="end">48</text>
+<path d="M110 120.0 H1040" stroke="#d9e2ec"/>
+<text x="96.00" y="127.00" text-anchor="end">60</text>
+<text transform="translate(30 300) rotate(-90)" text-anchor="middle">EER (%)</text>
+<g class="data-series" aria-label="B0-v2-seed2026">
+<g class="data-point" transform="translate(92.00 430.65)"><g fill="#1d4ed8" stroke="#1d4ed8"><circle cx="0" cy="0" r="7"/></g></g>
+<g class="data-point" transform="translate(402.00 410.00)"><g fill="#1d4ed8" stroke="#1d4ed8"><circle cx="0" cy="0" r="7"/></g></g>
+<g class="data-point" transform="translate(712.00 332.84)"><g fill="#1d4ed8" stroke="#1d4ed8"><circle cx="0" cy="0" r="7"/></g></g>
+<g class="data-point" transform="translate(1022.00 170.77)"><g fill="#1d4ed8" stroke="#1d4ed8"><circle cx="0" cy="0" r="7"/></g></g>
+</g>
+<g transform="translate(145 582)"><g fill="#1d4ed8" stroke="#1d4ed8"><circle cx="0" cy="0" r="7"/></g></g>
+<text x="195.00" y="590.00" >B0-v2-seed2026</text>
+<g class="data-series" aria-label="B0-v2-seed2027">
+<g class="data-point" transform="translate(104.00 430.42)"><g fill="#b45309" stroke="#b45309"><rect x="-7" y="-7" width="14" height="14"/></g></g>
+<g class="data-point" transform="translate(414.00 397.14)"><g fill="#b45309" stroke="#b45309"><rect x="-7" y="-7" width="14" height="14"/></g></g>
+<g class="data-point" transform="translate(724.00 375.87)"><g fill="#b45309" stroke="#b45309"><rect x="-7" y="-7" width="14" height="14"/></g></g>
+<g class="data-point" transform="translate(1034.00 246.20)"><g fill="#b45309" stroke="#b45309"><rect x="-7" y="-7" width="14" height="14"/></g></g>
+</g>
+<g transform="translate(145 611)"><g fill="#b45309" stroke="#b45309"><rect x="-7" y="-7" width="14" height="14"/></g></g>
+<text x="195.00" y="619.00" >B0-v2-seed2027</text>
+<g class="data-series" aria-label="B0-v2-seed2028">
+<g class="data-point" transform="translate(116.00 432.43)"><g fill="#047857" stroke="#047857"><polygon points="0,-9 8,7 -8,7"/></g></g>
+<g class="data-point" transform="translate(426.00 405.76)"><g fill="#047857" stroke="#047857"><polygon points="0,-9 8,7 -8,7"/></g></g>
+<g class="data-point" transform="translate(736.00 393.55)"><g fill="#047857" stroke="#047857"><polygon points="0,-9 8,7 -8,7"/></g></g>
+<g class="data-point" transform="translate(1046.00 175.40)"><g fill="#047857" stroke="#047857"><polygon points="0,-9 8,7 -8,7"/></g></g>
+</g>
+<g transform="translate(145 640)"><g fill="#047857" stroke="#047857"><polygon points="0,-9 8,7 -8,7"/></g></g>
+<text x="195.00" y="648.00" >B0-v2-seed2028</text>
+<g class="data-series" aria-label="X1-L8-lr1e-5-seed2026">
+<g class="data-point" transform="translate(128.00 471.23)"><g fill="#9333ea" stroke="#9333ea"><polygon points="0,-9 9,0 0,9 -9,0"/></g></g>
+<g class="data-point" transform="translate(438.00 468.68)"><g fill="#9333ea" stroke="#9333ea"><polygon points="0,-9 9,0 0,9 -9,0"/></g></g>
+<g class="data-point" transform="translate(748.00 468.40)"><g fill="#9333ea" stroke="#9333ea"><polygon points="0,-9 9,0 0,9 -9,0"/></g></g>
+<g class="data-point" transform="translate(1058.00 466.20)"><g fill="#9333ea" stroke="#9333ea"><polygon points="0,-9 9,0 0,9 -9,0"/></g></g>
+</g>
+<g transform="translate(145 669)"><g fill="#9333ea" stroke="#9333ea"><polygon points="0,-9 9,0 0,9 -9,0"/></g></g>
+<text x="195.00" y="677.00" >X1-L8-lr1e-5-seed2026</text>
+<text x="110.00" y="520.00" text-anchor="middle">Gốc</text>
+<text x="420.00" y="520.00" text-anchor="middle">Round-trip</text>
+<text x="730.00" y="520.00" text-anchor="middle">Lọc 7 kHz</text>
+<text x="1040.00" y="520.00" text-anchor="middle">Lọc 4 kHz</text>
+<text x="550.00" y="553.00" text-anchor="middle">B0: 38.777 mẫu/186 shard; XLS-R: tập con 3.120 mẫu/169 shard</text>
+</svg>
