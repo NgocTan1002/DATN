@@ -9,13 +9,13 @@
     {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2027, "source_report": "reports/b0_v2_ext_seed2027.json"},
     {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2028, "source_report": "reports/b0_v2_ext_seed2028.json"},
     {"family": "X0", "run_id": "X0", "training_seed": 2026, "source_report": "kaggle_outputs/xlsr-d028-x0-seed2026-s1/reports/xlsr_X0_seed2026.json"},
-    {"family": "X0", "run_id": "X0", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X0-seed2027/reports/xlsr_X0_seed2027.json"},
-    {"family": "X0", "run_id": "X0", "training_seed": 2028, "source_report": "kaggle_outputs/xlsr-d028-X0-seed2028/reports/xlsr_X0_seed2028.json"},
+    {"family": "X0", "run_id": "X0", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X0-pair-seed2027-2028-v1/reports/xlsr_X0_seed2027.json"},
+    {"family": "X0", "run_id": "X0", "training_seed": 2028, "source_report": "kaggle_outputs/xlsr-d028-X0-pair-seed2027-2028-v1/reports/xlsr_X0_seed2028.json"},
     {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2026, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2026/reports/xlsr_X1-L8-lr3e-5_seed2026.json"},
-    {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2027/reports/xlsr_X1-L8-lr3e-5_seed2027.json"},
+    {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2027, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2027-resume1/reports/xlsr_X1-L8-lr3e-5_seed2027.json"},
     {"family": "X1", "run_id": "X1-L8-lr3e-5", "training_seed": 2028, "source_report": "kaggle_outputs/xlsr-d028-X1-L8-lr3e-5-seed2028/reports/xlsr_X1-L8-lr3e-5_seed2028.json"}
   ],
-  "claude_verified": ["B0-v2-seed2026", "B0-v2-seed2027", "B0-v2-seed2028", "X0-seed2026", "X1-L8-lr3e-5-seed2026"],
+  "claude_verified": ["B0-v2-seed2026", "B0-v2-seed2027", "B0-v2-seed2028", "X0-seed2026", "X1-L8-lr3e-5-seed2026", "X1-L8-lr3e-5-seed2027", "X1-L8-lr3e-5-seed2028", "X0-seed2027", "X0-seed2028"],
   "bootstrap": {"n_resamples": 1000, "seed": 2026, "confidence": 0.95},
   "conditions_by_family": {
     "B0-v2": ["original", "roundtrip_40k", "lowpass_7k", "lowpass_4k"],

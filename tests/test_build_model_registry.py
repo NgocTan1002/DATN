@@ -41,12 +41,12 @@ class RegistryTests(unittest.TestCase):
         report_path.write_text(json.dumps(report), encoding="utf-8")
         return report_path, path
 
-    def test_real_config_gate_closed_and_exact_five_verified(self) -> None:
+    def test_real_config_gate_closed_and_exact_verified_set(self) -> None:
         registry.validate_config(self.config)
         self.assertFalse(self.config["test_gate_open"])
         self.assertEqual(self.config["decision"], "D032")
         self.assertEqual(set(self.config["claude_verified"]), {
-            "B0-v2-seed2026", "B0-v2-seed2027", "B0-v2-seed2028", "X0-seed2026", "X1-L8-lr3e-5-seed2026"})
+            "B0-v2-seed2026", "B0-v2-seed2027", "B0-v2-seed2028", "X0-seed2026", "X1-L8-lr3e-5-seed2026", "X1-L8-lr3e-5-seed2027", "X1-L8-lr3e-5-seed2028", "X0-seed2027", "X0-seed2028"})
 
     def test_hash_recomputed_and_best_threshold_retained(self) -> None:
         report, checkpoint = self.create(self.config["required_models"][0])
@@ -73,6 +73,7 @@ class RegistryTests(unittest.TestCase):
         self.assertTrue(all(x["status"] == "missing" for x in value["entries"]))
 
     def test_nine_present_not_complete_until_all_claude_verified(self) -> None:
+        self.config["claude_verified"] = []
         for i, spec in enumerate(self.config["required_models"], 1):
             self.create(spec, i)
         value = registry.build_registry(self.config, self.root)
