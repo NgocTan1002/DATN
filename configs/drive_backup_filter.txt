@@ -1,0 +1,17 @@
+- kaggle.json
+- .env
+- .env.*
+- .git/**
+- .cache/**
+- .venv/**
+- .kilo/**
+- .xlsr-offline-env/**
+- __pycache__/**
+- /.kaggle/tmp/**
++ /checkpoints/**
++ /kaggle_outputs/**
++ /.kaggle/**
++ /kaggle_raw/**
++ /data/processed/**
++ /data/raw/**
+- *
