@@ -310,6 +310,18 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 
 **Không thay đổi:** metadata, split, seed dữ liệu `2026`, `configs/audio.json`, D022, D025, D026 (trừ mục 7), D027 (trừ mục 2). Không dùng test; cổng `ready_for_training` của B0 nối dài và XLS-R vẫn đóng cho tới khi người dùng xác nhận.
 
+## 2026-11-05 — D029: Ghi riêng cấu hình và trạng thái hiệu lực LayerDrop/SpecAugment XLS-R
+
+**Xác nhận:** người dùng trả lời nguyên văn "đồng ý" ngày 05/11/2026 cho đề xuất D029 và tiếp tục T15 từ bước 6.
+
+**Quyết định:** giữ hành vi wrapper đã dùng trong T14: config pretrained `layerdrop=0.1`, `apply_spec_augment=true` không đổi; backbone và encoder luôn eval, chỉ các block mở và classifier ở train. Do đó effective LayerDrop bằng 0 và effective SpecAugment tắt. Identity/report ghi riêng configured/effective, không sửa config pretrained hoặc trọng số. Điều kiện dừng bước 5 T15 đã được giải quyết theo cách diễn giải này, cho phép tiếp tục công việc cục bộ bước 6–12.
+
+**Bằng chứng:** `reports/xlsr_t15_eol_normalization.json`, source T14 trong bundle khớp HEAD, probe mode nhỏ exit 0; Transformers 4.57.6 kiểm cờ training ở encoder cho LayerDrop và backbone cho masking.
+
+**Phạm vi:** không mở ready_for_training, không chạy huấn luyện khoa học, test-full, upload/push/chạy Kaggle, commit hoặc merge. D025/D026/D028 giữ nguyên. Quyết định được ghi trong worktree XLS-R; không sửa docs/decisions.md ở thư mục chính.
+
+**Ghi chú chép sang main (11/11/2026):** mục trên được chép nguyên văn từ docs/decisions.md của worktree XLS-R (nhánh feat/xlsr-runner-d028) theo xác nhận nguyên văn "Viết prompt D029" của người dùng ngày 11/11/2026, để thư mục chính chứa quyết định mà D030–D032 đã tham chiếu. Câu cuối của mục Phạm vi phản ánh thời điểm 05/11; nội dung quyết định không đổi.
+
 ## 2026-11-06 — D030: Đăng ký trước tiêu chí nâng trần epoch cho XLS-R
 
 **Xác nhận:** người dùng đồng ý ngày 06/11/2026, nguyên văn "việc nhỏ, bạn tự ghi giúp tôi", cho đề xuất ghi tiêu chí trong cuộc trò chuyện. Mục này được ghi trong khi T18 (X1-L2/L4/L8 seed 2026) đang chạy, **trước khi có kết quả X1 nào**.
@@ -384,3 +396,105 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Giới hạn:** bootstrap 1.000 lần lặp và CI 95% là lựa chọn quy ước; các so sánh trên nhiều seed và nhiều cặp không hiệu chỉnh đa so sánh, nên phải diễn giải thận trọng. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1`, mô hình huấn luyện trên 15.885 mẫu, và không phải tái lập official VSASV.
 
 **Không thay đổi:** D007, D025, D026, D027, D028, D029, D030, D031; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở cổng test.
+
+## 2026-11-10 — D033: Chạy 2 GPU song song trên Kaggle và dùng Colab Google AI Pro làm môi trường GPU bổ sung
+
+**Xác nhận:** người dùng ngày 10/11/2026, nguyên văn "được, có thể chạy 2 gpu song song"; người dùng cho biết đã đăng ký gói Google AI Pro có 200 đơn vị điện toán để chạy GPU Colab. Nội dung mục này được người dùng duyệt ngày 10/11/2026, nguyên văn "Duyệt D033".
+
+**Bối cảnh:** D026 cấm chạy 2 GPU song song khi chưa ghi quyết định; D018 coi Colab trả phí là dự phòng cần xác nhận riêng trước khi phát sinh chi phí. Kernel Kaggle `NvidiaTeslaT4` cấp 2 GPU nhưng mỗi run D028 chỉ dùng một (`gpus_per_run = 1`); quota Kaggle tính theo thời gian phiên, không theo số GPU. Runner `scripts/train_xlsr.py` đã đặt `torch.backends.cuda.matmul.allow_tf32 = False` và `torch.backends.cudnn.allow_tf32 = False`; identity mỗi run ghi `device = cuda:0`.
+
+**Quyết định:**
+
+1. **Kaggle 2 GPU song song.** Một kernel được chạy tối đa 2 run D028 độc lập, mỗi run là một tiến trình riêng chỉ thấy một GPU qua `CUDA_VISIBLE_DEVICES` và dùng `--device cuda:0`. Mỗi run giữ nguyên cấu hình, identity, checkpoint, report và quy tắc dừng của D028/D029; không dùng DataParallel/DDP, không đổi `gpus_per_run`. Hai run dùng chung hạn giờ phiên; một run lỗi không được làm dừng hay sửa run còn lại.
+2. **Colab là môi trường GPU bổ sung.** Dùng Colab theo gói Google AI Pro với ngân sách 200 đơn vị điện toán. Vượt 200 đơn vị hoặc mua thêm cần xác nhận riêng. GPU mặc định là L4 nếu phép đo tốc độ cho thấy chi phí mỗi run thấp hơn T4 Colab; dùng A100 hoặc H100 cần xác nhận riêng.
+3. **Quy tắc phần cứng.** Mọi run giữ float32, không AMP, TF32 tắt. Report ghi tên GPU, driver, phiên bản CUDA, torch, transformers và numpy. Một run chỉ chạy trên một loại GPU: resume trên loại GPU khác bị từ chối. Ba seed của cùng một mô hình ở cùng quy mô dữ liệu chạy trên cùng một loại GPU.
+4. **Kiểm tương đương trước khi dùng Colab cho run khoa học.** Chấm lại checkpoint best X1-L8-lr3e-5 seed 2026 (generation `g-eb35f3c2379f4a47bd22744c9be1dd8f`) trên toàn bộ dev-full bằng Colab, so với 38.777 score đã lưu trong report Kaggle. Đạt khi đồng thời: |ΔEER| ≤ 0,02 điểm %; số mẫu đổi quyết định tại threshold đã khóa ≤ 10; max |Δ score| ≤ 0,05 theo đơn vị score đã lưu. Không đạt thì không dùng Colab cho run khoa học và lập quyết định mới.
+5. **Registry v1 (D032) giữ trên Kaggle T4.** X0 seed 2027/2028 chạy trên Kaggle T4 (được phép theo mục 1). Chín lượt chấm test của D032 chạy cùng một môi trường. Colab không được dùng cho registry v1, ngoại trừ phép kiểm ở mục 4 vốn chỉ dùng dev-full.
+
+**Lý do:** chạy 2 run trên 2 GPU sẵn có giảm gần một nửa quota Kaggle cho mỗi cặp run mà không đổi thuật toán. Colab thêm năng lực tính toán cho các giai đoạn sau. Ghi phần cứng, tắt TF32 và đăng ký trước ngưỡng tương đương giữ cho kết quả từ hai môi trường so sánh được.
+
+**Giới hạn:** chạy song song có thể chậm hơn do hai tiến trình dùng chung CPU của kernel. Giá đơn vị Colab theo loại GPU không được Google công bố chính thức và có thể thay đổi. Gói Google AI Pro có thể không có chạy nền và không đảm bảo loại GPU được cấp. Khác phần cứng vẫn gây sai khác số học nhỏ, cùng cỡ với tính không tất định của GPU; ngưỡng ở mục 4 là lựa chọn quy ước.
+
+**Không thay đổi:** D025, D028, D029, D030, D031, D032; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. D033 không quyết định việc mở rộng tập train; việc đó cần quyết định riêng và phải ghi trước khi mở cổng test của D032.
+
+## 2026-11-13 — D034: Sửa tiêu chí tái tạo logit của T22 cho score lưu dạng float32
+
+**Xác nhận:** người dùng duyệt ngày 13/11/2026, nguyên văn "Duyệt D034", cho bản nháp do Claude trình bày trong cuộc trò chuyện.
+
+**Bối cảnh:** T22 (phép thử shortcut cho X1 cuối X1-L8-lr3e-5 seed 2026, D031/D032 mục 8) dừng ở `blocked_reproduction`: trên tập con 3.120 mẫu/169 shard, sai khác tối đa giữa `raw_logit` chấm lại trên CPU và `stable_logit(score lưu)` là 0,0689, vượt ngưỡng 0,05 (`reports/shortcut_probe_dev_x1_final.json`, mục `reproduction.full_subset`). Score dev-full trong report Kaggle được lưu dạng float32; gần p = 1, hai giá trị float32 liền kề (ví dụ 0,99999905 và 0,99999917) ứng với logit chênh khoảng 0,134, nên logit suy ngược từ score lưu có sai số lượng tử vượt 0,05. Claude đối chiếu từng mẫu (`.cache/claude-check-t22/analyze.log`): với score lưu ≤ 0,999, sai khác tối đa 0,000365; 0 mẫu đổi quyết định tại threshold; sai khác xác suất tối đa 2,3e-5.
+
+**Quyết định:** một mẫu đạt điều kiện tái tạo khi |`raw_logit` − `stable_logit(score lưu)`| ≤ 0,05 + g, trong đó g là khoảng cách logit từ score lưu tới giá trị float32 liền kề, lấy giá trị lớn hơn trong hai phía. Giữ điều kiện 0 mẫu đổi quyết định ngoài biên 0,05. Áp dụng cho cả 200 mẫu đầu và toàn tập con. T22 tiếp tục từ giai đoạn đang dừng, dùng đúng bộ lọc, khối dữ liệu và ngưỡng chỉ báo của T19b/D031; không chấm lại các khối đã có.
+
+**Lý do:** sai khác quan sát được nằm trong độ phân giải của score đã lưu, không phải do mô hình chấm lệch; tiêu chí cũ không thể đạt ở vùng score bão hòa dù mô hình tái tạo đúng.
+
+**Thời điểm:** quyết định được ghi khi chưa có chỉ báo shortcut nào của X1 cuối (các điều kiện round-trip và lọc thông thấp chưa chạy), nên không phải chọn tiêu chí sau khi thấy kết quả chỉ báo.
+
+**Không thay đổi:** ngưỡng chỉ báo shortcut, bộ lọc, tập con, checkpoint, threshold; D031, D032, D033; metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở cổng test.
+
+## 2026-11-13 — D035: Biến thể X1 lọc thông thấp 7 kHz để đo mức phụ thuộc vào dải cao (X1R)
+
+**Xác nhận:** người dùng duyệt ngày 13/11/2026, nguyên văn "duyệt nguyên văn", cho bản nháp do Claude trình bày trong cuộc trò chuyện.
+
+**Bối cảnh:** 100% mẫu VC có sample rate gốc 40 kHz; bonafide, AP và replay ở 16 kHz (D007, D031). Hạ VC từ 40 kHz xuống 16 kHz để lại dấu vết bộ lọc chống răng cưa sát 8 kHz. Phép đo phổ R2 cho thấy trung vị công suất dải 7,95–8 kHz là −59,02 dB với bonafide, −69,99 dB với VC, và −66,12 dB với bonafide sau round-trip 16→40→16 kHz (`reports/highband_spectrum_dev.json`). Theo D031, B0 v2 có chỉ báo shortcut mạnh ở 2/3 seed; X1-L8-lr1e-5 có chỉ báo yếu. Chỉ báo của X1 cuối đang chờ T22 chạy tiếp theo D034. Phép thử lúc chấm (T19b, T22, D032 mục 6) chỉ đo được mô hình đã học nhạy với dải cao đến đâu, không cho biết mô hình còn tốt bao nhiêu nếu không được dùng dải cao ngay từ đầu.
+
+**Quyết định:**
+
+1. **Mô hình.** Thêm biến thể X1R (`run_id` = `X1-L8-lr3e-5-lp7k`). Cấu hình giống hệt X1 cuối theo D028/D029: mở 8 tầng, lr encoder 3e-5, lr classifier 1e-3, batch 16, Adam, float32, trần 10 epoch, patience 2, chọn best theo EER dev-full. Chỉ khác ở bước đầu vào ở mục 2.
+2. **Đầu vào.** Mọi mẫu train và dev-full của X1R, và test-full khi được phép chấm, đi qua đúng bộ lọc `lowpass_7k` của T19b. Bộ lọc là FIR pha tuyến tính, windowed-sinc 513 tap, cửa sổ Hann đối xứng, cắt 7.000 Hz, bù trễ 256 mẫu, biên zero-extension, peak lại sau khi lọc. SHA-256 hệ số float32 là `973b82a36db8dab4f802de2102c5feed2bfb8cf6bb5846472c07d9984ab4c977`. Bộ lọc áp lên đoạn 4 giây sau khi resample 16 kHz, crop và peak, trước chuẩn hóa processor của XLS-R, theo đúng thứ tự `apply_condition` của T19b. Tham số bộ lọc nằm trong identity của X1R. Không sửa `configs/audio.json`; 9 mô hình của registry v1 giữ nguyên pipeline.
+3. **Seed và dữ liệu.** Seed huấn luyện 2026, 2027, 2028; seed dữ liệu 2026. Dùng cùng 15.885 mẫu train và 38.777 mẫu dev-full. Threshold lấy tại EER dev-full đã lọc của chính checkpoint best.
+4. **Vị trí trong giao thức.** X1R không thuộc registry v1 của D032; registry v1 vẫn đúng 9 mục. X1R có registry phụ riêng (`reports/model_registry_x1r_draft.json`) với cùng các trường như D032 mục 1. Phải đăng ký đủ trước khi người dùng mở cổng test, và được chấm test-full đúng một lần qua entrypoint có khóa (D032 mục 7).
+5. **So sánh và metric**, trên test-full, sau khi cổng mở: (a) EER X1R so với EER X1 cuối ở điều kiện `original`; hiệu số đo cái giá của việc bỏ dải trên 7 kHz, gồm cả thông tin hợp lệ lẫn dấu vết resample. (b) EER X1R so với EER X1 cuối ở điều kiện `lowpass_7k` (đã có trong D032 mục 6); phép này tách hiệu ứng "được huấn luyện quen với đầu vào bị lọc" khỏi hiệu ứng "bị lọc lúc chấm". Với từng seed, tính CI 95% của hiệu EER bằng `paired_speaker_bootstrap` (1.000 lần lặp, seed 2026). Báo cáo thêm trung bình ± SD mẫu qua ba seed, EER theo kiểu tấn công và FPR bonafide. Replay chỉ mô tả.
+6. **Kiểm tính hợp lệ trên dev.** Chấm X1R trên tập con T19b (3.120 mẫu) với điều kiện `roundtrip_40k`. Kỳ vọng FPR bonafide tăng không quá 0,5 điểm %, vì vùng chứa dấu vết đã bị lọc. Đây chỉ là kiểm tính hợp lệ của pipeline, không dùng để chọn mô hình.
+7. **Thứ tự và điều kiện chạy.** Ưu tiên 1 là X0 seed 2027/2028 cho registry v1 (mốc 06/12). X1R chạy sau đó trên Kaggle T4, được dùng chế độ cặp của D033. Nếu T22 cho X1 cuối chỉ báo yếu: X1R chạy khi còn quota, mục tiêu đủ 3 seed trước khi mở cổng test. Nếu T22 cho chỉ báo mạnh: X1R là bắt buộc, cổng test không mở cho tới khi X1R đủ 3 seed và đã đăng ký; đây là quyết định mới mà D032 mục 8 yêu cầu. Nếu tới lúc người dùng mở cổng test mà X1R chưa đủ 3 seed: báo cáo mọi seed đã hoàn tất và ghi rõ là chưa đủ; không bỏ seed, không chọn seed theo test.
+8. **Ngân sách.** Theo D028, mỗi run X1 tám tầng tốn tối đa 10,5 GPU-giờ cho 10 epoch. Ba seed tối đa 31,5 giờ, khoảng 39 giờ khi cộng hệ số an toàn 25%. Ba seed X1 cuối thực tế dừng sớm ở epoch 4–8, run seed 2028 tốn khoảng 7,5 GPU-giờ. Đọc quota qua API trước và sau mỗi phiên.
+
+**Lý do:** phép thử lúc chấm chỉ cho chỉ báo. Huấn luyện một mô hình ngay từ đầu không thấy dải trên 7 kHz cho biết trực tiếp hiệu năng còn lại khi lối tắt resample bị loại khỏi đầu vào. Dùng lại đúng bộ lọc của T19b giúp kết quả so được với ablation đã có và tránh thêm một tham số tự chọn. Lọc đồng loạt mọi lớp đơn giản và tất định hơn tăng cường round-trip ngẫu nhiên, vốn cần chọn thêm xác suất áp dụng.
+
+**Giới hạn:** lọc 7 kHz bỏ cả thông tin hợp lệ ở dải cao, nên hiệu ở mục 5(a) không phải thuần do shortcut. Chỉ một cấu hình, không tinh chỉnh lại siêu tham số cho đầu vào đã lọc. Không loại trừ được các lối tắt khác như codec, khoảng lặng, độ dài hay đặc trưng vocoder dưới 7 kHz. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1` và 15.885 mẫu train. Phương án tăng cường round-trip không được thử.
+
+**Không thay đổi:** D007 và `configs/audio.json`, D025, D028, D029, D031, D032 (registry v1 vẫn 9 mục), D033, D034; metadata, split, seed dữ liệu `2026`. Không mở cổng test.
+
+## 2026-11-13 — Ghi chú đính chính D034
+
+**Xác nhận:** người dùng duyệt ngày 13/11/2026, nguyên văn "Duyệt đính chính", cho nội dung do Claude trình bày trong cuộc trò chuyện.
+
+**Đính chính:** ví dụ trong phần Bối cảnh của D034 ("0,99999905 và 0,99999917 … chênh khoảng 0,134") gọi hai giá trị này là float32 liền kề; thực ra chúng cách nhau hai bước float32 (2 × 2⁻²⁴). Hai giá trị float32 liền kề trong vùng này ứng với logit chênh khoảng 0,074, cũng là bước lượng tử lớn nhất đo được khi chạy T22 theo D034 (`max_float32_gap_logit` = 0,0741 trong `reports/shortcut_probe_dev_x1_final.json`). Phần Quyết định và cách tính g của D034 không đổi; kết quả T22 không bị ảnh hưởng.
+
+## 2026-11-15 — D036: Thí nghiệm mở rộng train ×2 cho X1 cuối và B0 v2 (scale2)
+
+**Xác nhận:** người dùng duyệt ngày 15/11/2026, nguyên văn "duyệt, bạn có thể thực hiện thay đổi luôn mà không cần tạo prompt yêu cầu codex thực hiện", cho bản nháp do Claude trình bày trong cuộc trò chuyện kèm các sửa đổi về quota Kaggle 45 giờ (mục 6, Bối cảnh, Lý do).
+
+**Bối cảnh:** D025 mục 1 khóa train của mọi mô hình ở 15.885 mẫu `closed_train` (khoảng 10,5% của 150.999 mẫu), gồm 153 trên 798 người nói và 57 shard. Registry v1 của D032 (9 mục, complete=true) và kết quả chính của đồ án giữ nguyên ở quy mô này. Ở quy mô hiện tại, EER dev-full trung bình của B0 v2 là 8,139320% và của X1 cuối khoảng 0,77% (ba seed). Ít dữ liệu có thể bất lợi cho B0 (học từ đầu) hơn so với XLS-R (đã pretrain), nên khoảng cách giữa hai mô hình có thể phụ thuộc vào quy mô train. Pool Parquet cục bộ (68 shard) chỉ có 10.562 bonafide, 7.173 VC, 4.887 AP và 145 replay thuộc closed_train (`reports/development_manifest_20k_v2.md`), không đủ cho ×2. Từ 15/11/2026, quota GPU Kaggle của tài khoản là 45 giờ mỗi tuần (đọc qua API: total 45,00h, refresh 21/11/2026 00:00 UTC).
+
+**Quyết định:**
+
+1. **Câu hỏi.** Đo mức cải thiện EER khi gấp đôi dữ liệu train, cho từng mô hình. Đây là thí nghiệm bổ sung về quy mô, không thay registry v1 và không đổi kết luận chính ở quy mô ×1.
+2. **Dữ liệu ×2 (`development-scale2-v1`).** Train gồm 31.770 mẫu `closed_train`. **Chứa trọn 15.885 mẫu hiện tại** và thêm 15.885 mẫu mới, để hai mức lồng nhau. Quota tổng theo phân bố closed_train, chia theo phương pháp phần dư lớn nhất: bonafide 14.267, VC 8.697, AP 8.697, replay 109. Phần thêm của mỗi loại bằng quota tổng trừ số mẫu loại đó đã có.
+   - **Ứng viên:** mẫu `closed_train` có trong pool cục bộ, chưa thuộc train hiện tại.
+   - **Loại khỏi ứng viên** mọi mẫu có content hash (hàm băm của D017) trùng với train hiện tại, dev-full hoặc test-full. Trong nội bộ ứng viên, mỗi nhóm trùng chỉ giữ file có `SHA256("2026|file")` nhỏ nhất.
+   - **Chọn:** trong từng `utt_type`, xếp ứng viên theo `SHA256("2026|file")` tăng dần rồi lấy đủ phần thêm.
+   - **Không đổi** dev-full, test-full, split, metadata hay seed dữ liệu.
+3. **Tải thêm shard.** Chỉ tải shard train của `VSASV-HF-public-snapshot-v1` (cùng revision với D015) chưa có trên máy, theo thứ tự `SHA256("2026|shard")` tăng dần, cho tới khi đủ mọi quota sau khi khử trùng.
+   - Trần 120 shard hoặc 10 GB. Chạm trần mà chưa đủ thì dừng và lập quyết định mới.
+   - Mỗi shard kiểm kích thước, SHA-256, đọc được và khớp metadata như D016.
+   - Không xem hay dùng `closed_test` để chọn shard.
+4. **Mô hình.** **X1 cuối** (X1-L8-lr3e-5) và **B0 v2**, mỗi mô hình ba seed huấn luyện 2026, 2027, 2028. Cấu hình y hệt D028/D029 (X1) và D027/D028 (B0); chỉ khác dữ liệu train và số bước mỗi epoch, tính lại theo 31.770 mẫu. Trần 10 epoch, patience 2, chọn best và threshold theo EER dev-full. Không chạy X0 và X1R ở ×2.
+5. **Cấu hình và identity.** Dùng file cấu hình riêng cho scale2. Không sửa `configs/xlsr_training.json` hay cấu hình B0 hiện hành, để identity của mọi run ×1 giữ nguyên byte. Identity của run scale2 ghi manifest, artifact và SHA mới.
+6. **Nơi chạy.** B0 ×2 chạy trên CPU máy cục bộ như B0 v2. X1 ×2 chạy trên Kaggle T4 (D033 mục 1, được dùng chế độ cặp), cùng loại GPU với registry v1, sau X1R. Mỗi run có thể cần một phiên resume vì có thể vượt hạn phiên 11 giờ; mỗi lần resume cần người dùng xác nhận. Colab chỉ là phương án dự phòng khi quota Kaggle không đủ để xong trước khi mở cổng test, và khi đó áp dụng phép kiểm tương đương của D033 mục 4, ba seed trên cùng một loại GPU, ngân sách tối đa 180 trong 200 đơn vị điện toán.
+7. **Registry phụ.** `reports/model_registry_scale2_draft.json`, 6 mục, cùng các trường như D032 mục 1. Phải đăng ký trước khi mở cổng test. Mỗi mục chấm test-full đúng một lần qua entrypoint có khóa (D032 mục 7), cùng pipeline và điều kiện `original`.
+8. **So sánh và metric**, trên test-full sau khi mở cổng: với từng mô hình và từng seed, hiệu EER ×1 trừ ×2 kèm CI 95% bằng `paired_speaker_bootstrap` (1.000 lần, seed 2026). Báo cáo trung bình ± SD mẫu của các hiệu qua ba seed, và mô tả chênh lệch giữa mức cải thiện của B0 và của X1. Metric phụ như D032 mục 5; replay chỉ mô tả.
+9. **Thứ tự và điều kiện.** X1R (D035) giữ ưu tiên trên Kaggle. Cổng test chỉ mở khi người dùng quyết định. Nếu khi đó scale2 chưa đủ ba seed của một mô hình, báo cáo mọi seed đã hoàn tất kèm ghi chú chưa đủ; không bỏ seed, không chọn seed theo test. Tải shard, đóng gói, upload dataset và dùng Colab, mỗi bước cần người dùng xác nhận riêng (D025, D033).
+
+**Lý do:** gấp đôi dữ liệu tốn ít hơn nhiều so với toàn bộ closed_train: X1 tối đa khoảng 14 GPU-giờ mỗi run (theo số đo T14 trong D028), so với khoảng 45 giờ ở ×10. Mức này vẫn đủ để thấy xu hướng. Tập lồng nhau và cách chọn mẫu giống D016/D017 giúp so ×1 với ×2 sạch. Thêm người nói và shard mới cũng tăng độ đa dạng của train. Chạy X1 ×2 trên Kaggle T4 giữ cùng phần cứng với registry v1, nên so sánh ×1 với ×2 không lẫn yếu tố phần cứng.
+
+**Giới hạn:** chỉ hai điểm quy mô, chưa đủ để vẽ một đường cong học đầy đủ. Mẫu mới lấy từ một số shard, không phải mẫu ngẫu nhiên đều trên toàn bộ closed_train. Train ×2 vẫn chỉ khoảng 21% closed_train. Không tinh chỉnh lại siêu tham số cho dữ liệu lớn hơn; trần 10 epoch có thể bất lợi cho mô hình còn đang cải thiện. Ở ×2 một epoch X1 khoảng 1,3 giờ gồm đánh giá dev, nên 10 epoch có thể vượt hạn phiên 11 giờ và cần resume. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1`.
+
+**Không thay đổi:** D025 (kết quả chính ở 15.885 mẫu), D028, D029, D032 (registry v1 vẫn 9 mục), D033, D035; dev-full, test-full, split, metadata, seed dữ liệu `2026`, `configs/audio.json`. Không mở cổng test.
+
+## 2026-11-15 — Ghi chú đính chính D033
+
+**Xác nhận:** người dùng ngày 15/11/2026 cho biết gói Colab của mình có tính năng chạy nền, và yêu cầu nguyên văn "có hãy thực hiện giúp tôi" cho đề xuất ghi chú này do Claude trình bày trong cuộc trò chuyện.
+
+**Đính chính:** phần Giới hạn của D033 ghi "Gói Google AI Pro có thể không có chạy nền". Theo người dùng, gói Colab đang dùng có chạy nền. Giới hạn còn lại: thời gian tối đa mỗi phiên và việc cấp loại GPU không được bảo đảm; đơn vị điện toán vẫn bị trừ khi chạy nền. Từ 15/11/2026, quota GPU Kaggle của tài khoản là 45 giờ mỗi tuần (D036).
+
+**Không thay đổi:** các mục Quyết định 1–5 của D033, gồm phép kiểm tương đương bắt buộc ở mục 4 trước khi dùng Colab cho run khoa học, quy tắc một loại GPU cho ba seed ở mục 3 và việc giữ registry v1 trên Kaggle T4 ở mục 5.
