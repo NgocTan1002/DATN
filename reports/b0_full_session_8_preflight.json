@@ -1,0 +1,162 @@
+{
+  "checked_at": "2026-10-30T15:17:42.8667406+07:00",
+  "status": "kernel_running",
+  "profile": "b0-full-resume-session-8",
+  "kernel_ref": "ngctnnguyn1111/doanttnt-kaggle-cli-runner",
+  "checkpoint_dataset_ref": "ngctnnguyn1111/doantnnt-b0-full-resume",
+  "input": {
+    "kaggle_version": 20,
+    "output_directory": "kaggle_outputs/b0-full-session-7-v20",
+    "verification_report": "reports/b0_full_session_7_verification.json",
+    "global_step": 3584,
+    "epoch_zero_based": 1,
+    "batch_cursor": 1598,
+    "train_sample_exposures": 28669,
+    "generations": 66,
+    "latest_generation": "g-e1fbbfcb17644703a8f530c4c7ce0300",
+    "best_generation": "g-c7418c4439ac45e9b051fa77b768709d",
+    "best_global_step": 1986
+  },
+  "locked_training_source": {
+    "file_count": 56,
+    "bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+    "tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+    "unchanged_from_session_7": true,
+    "current_workspace_not_published": true,
+    "current_workspace_source_file_count": 60,
+    "current_workspace_tree_sha256": "8e720589049c28658ca8eff53dc914920c0d6033dd7e0d0e5cab725e5fb97b5d"
+  },
+  "checkpoint_payload": {
+    "generation_count": 66,
+    "checkpoint_pointer_state_files": 133,
+    "checkpoint_pointer_state_bytes": 465837119,
+    "manifest_sha256": "ec65e82c8e326f0a2d212fc618d194c2315614bcd1f7dcaf50580218ff8db67f",
+    "manifest_bytes": 34764,
+    "upload_file_count": 134,
+    "upload_bytes": 465871883,
+    "local_file_count_including_dataset_metadata": 135,
+    "local_bytes_including_dataset_metadata": 465872132,
+    "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+    "contains_audio": false,
+    "contains_logs": false,
+    "contains_credentials": false
+  },
+  "restore_check": {
+    "passed": true,
+    "restored_global_step": 3584,
+    "files_verified": 133,
+    "training_resumed": false,
+    "model_optimizer_sampler_rng_controller_history_best_preserved": true
+  },
+  "kernel": {
+    "directory": ".kaggle/resume/session-8-kernel",
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "resume_flag_present": true,
+    "expected_input_step": 3584,
+    "dataset_sources": [
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+      "ngctnnguyn1111/doantnnt-project-source",
+      "ngctnnguyn1111/doantnnt-b0-full-resume"
+    ],
+    "files_sha256": {
+      "runner.py": "db3ac30e10ae4eb29bf408d82d1cd0ae81c88bcf25fd1ef5c9425ebe33108855",
+      "run-config.json": "620aed3090913f5ce54af697481e4193fda1022cdeff766f26287246e5b754b5",
+      "kernel-metadata.json": "cc32b27803caf429ff53d07bfa5ea09814c2c1d54f8736780fbd5c232d69352a"
+    },
+    "embedded_run_config_matches": true,
+    "embedded_bootstrap_matches_source": true
+  },
+  "remote_preflight": {
+    "kernel_status": "KernelWorkerStatus.COMPLETE",
+    "dataset_statuses": {
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13": "ready",
+      "ngctnnguyn1111/doantnnt-project-source": "ready",
+      "ngctnnguyn1111/doantnnt-b0-full-resume": "ready"
+    },
+    "dataset_private": {
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13": true,
+      "ngctnnguyn1111/doantnnt-project-source": true,
+      "ngctnnguyn1111/doantnnt-b0-full-resume": true
+    },
+    "dataset_ids": {
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13": 12552706,
+      "ngctnnguyn1111/doantnnt-project-source": 12694400,
+      "ngctnnguyn1111/doantnnt-b0-full-resume": 12838409
+    },
+    "checkpoint_dataset_current_version": 7,
+    "kaggle_cli_version": "2.2.4",
+    "kaggle_cli_latest_warning": "2.2.5",
+    "warning_blocks_run": false
+  },
+  "quota": {
+    "resource": "GPU",
+    "used_hours": 14.51,
+    "remaining_hours": 15.49,
+    "total_hours": 30.0,
+    "refresh_at": "2026-10-31T00:00:00",
+    "source": "kaggle quota --format json"
+  },
+  "remote_dataset": {
+    "version": 7,
+    "status": "ready",
+    "private": true,
+    "files": 134,
+    "bytes": 465871883,
+    "missing_files": 0,
+    "extra_files": 0,
+    "size_mismatches": 0,
+    "downloaded_manifest_sha256": "ec65e82c8e326f0a2d212fc618d194c2315614bcd1f7dcaf50580218ff8db67f",
+    "source_manifest_file_count": 56,
+    "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+    "inventory_matches": true
+  },
+  "kernel_send": {
+    "kernel_version": 21,
+    "sent_once": true,
+    "status_observed": "KernelWorkerStatus.RUNNING",
+    "status_checked_at": "2026-10-30T15:56:49.7455396+07:00"
+  },
+  "quota_after_send": {
+    "resource": "GPU",
+    "used_hours": 14.52,
+    "remaining_hours": 15.48,
+    "total_hours": 30.0,
+    "refresh_at": "2026-10-31T00:00:00",
+    "source": "kaggle quota --format json"
+  },
+  "expected_control_flow": {
+    "steps_to_epoch_2_boundary": 388,
+    "epoch_2_evaluation_step": 3972,
+    "development_samples": 4115,
+    "early_stop_if_eer_not_strictly_lower_than_epoch_1": true,
+    "epoch_1_eer": 0.08595800524934383,
+    "early_stop_outcome_step": 3972,
+    "improved_eer_outcome_max_step": 4096,
+    "improved_eer_outcome_epoch_zero_based": 2,
+    "improved_eer_outcome_batch_cursor": 124
+  },
+  "checks": {
+    "version_20_verified": true,
+    "payload_manifest_and_all_entries_verified": true,
+    "local_restore_verified": true,
+    "locked_source_and_identity_preserved": true,
+    "kernel_private_gpu_offline_and_three_datasets": true,
+    "kernel_complete_before_next_send": true,
+    "three_datasets_private_ready": true,
+    "gpu_quota_checked": true,
+    "test_used": false,
+    "payload_uploaded": true,
+    "remote_inventory_and_manifest_match": true,
+    "remote_locked_source_manifest_matches": true,
+    "kernel_sent": true,
+    "initial_kernel_status_running": true
+  },
+  "approval": {
+    "required": true,
+    "approved_by_user": true,
+    "uploaded": true,
+    "private_destination": "ngctnnguyn1111/doantnnt-b0-full-resume"
+  }
+}

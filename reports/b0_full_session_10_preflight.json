@@ -1,0 +1,107 @@
+{
+  "checked_at": "2026-11-01T07:25:55.8968891+07:00",
+  "passed": true,
+  "input": {
+    "source_output": "kaggle_outputs/b0-full-session-9-v22/checkpoints/b0_peak_full_v1",
+    "global_step": 4608,
+    "generation_count": 86,
+    "latest_generation": "g-a4e2c835d3914007a0b01936dbadaa15"
+  },
+  "payload": {
+    "folder": ".kaggle/resume/session-10-dataset",
+    "dataset_ref": "ngctnnguyn1111/doantnnt-b0-full-resume",
+    "checkpoint_file_count": 173,
+    "checkpoint_bytes": 633815604,
+    "upload_file_count": 174,
+    "upload_bytes": 633860608,
+    "local_file_count": 175,
+    "local_bytes": 633860857,
+    "manifest_sha256": "f7b8ccbdf7b03402324699a92f86b2018d67e393e0237adc66f25c48e15ebde1",
+    "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+    "contains_audio_log_or_credentials": false
+  },
+  "restore_check": {
+    "passed": true,
+    "restored_global_step": 4608,
+    "files_verified": 173,
+    "report": "reports/b0_full_session_10_transfer_check.json",
+    "focused_tests_passed": 7,
+    "focused_tests_total": 7,
+    "focused_tests_seconds": 11.395,
+    "focused_tests_note": "Lượt hợp lệ dùng TEMP/TMP trong workspace; lượt đầu bị Windows chặn thư mục tạm mặc định trước khi chạy logic sản phẩm."
+  },
+  "kernel": {
+    "folder": ".kaggle/resume/session-10-kernel",
+    "profile": "b0-full-resume-session-10",
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "dataset_sources": [
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+      "ngctnnguyn1111/doantnnt-project-source",
+      "ngctnnguyn1111/doantnnt-b0-full-resume"
+    ],
+    "expected_input_step": 4608,
+    "runner_sha256": "d57b493bbbe6794a20bc501fecb66d00146ea84c1192f16d42d5ead734481e12",
+    "run_config_sha256": "991d42c6e842423844a8dc7e9f68ccdf72d985d60e695d32ba01ff113eae370c",
+    "kernel_metadata_sha256": "cc32b27803caf429ff53d07bfa5ea09814c2c1d54f8736780fbd5c232d69352a",
+    "embedded_run_config_matches": true,
+    "embedded_bootstrap_matches_source": true
+  },
+  "source": {
+    "locked_source_files": 56,
+    "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+    "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+    "workspace_d024_not_published": true
+  },
+  "remote_preflight": {
+    "latest_kernel_status": "COMPLETE",
+    "data_dataset_status": "ready",
+    "source_dataset_status": "ready",
+    "checkpoint_dataset_status": "ready",
+    "gpu_used_hours": 1.87,
+    "gpu_remaining_hours": 28.13,
+    "gpu_total_hours": 30.0,
+    "quota_refresh_at": "2026-11-07T00:00:00",
+    "kaggle_cli_version": "2.2.4",
+    "kaggle_cli_latest_warning": "2.2.5",
+    "warning_blocks_run": false
+  },
+  "expected_progress": {
+    "input_global_step": 4608,
+    "maximum_steps_this_invocation": 512,
+    "maximum_output_global_step": 5120,
+    "expected_sampler_epoch_zero_based": 2,
+    "expected_sampler_batch_cursor": 1148,
+    "expected_train_exposures": 40954,
+    "development_evaluation_expected": false,
+    "remaining_steps_after_success": 838
+  },
+  "approval": {
+    "granted": true,
+    "upload_started": true,
+    "upload_completed": true,
+    "kernel_sent": true
+  },
+  "remote_result": {
+    "observed_at": "2026-11-01T07:44:12+07:00",
+    "checkpoint_dataset_version": 9,
+    "checkpoint_dataset_private": true,
+    "checkpoint_dataset_status": "ready",
+    "remote_file_count": 174,
+    "remote_bytes": 633860608,
+    "missing_file_count": 0,
+    "extra_file_count": 0,
+    "size_mismatch_count": 0,
+    "remote_manifest_sha256": "f7b8ccbdf7b03402324699a92f86b2018d67e393e0237adc66f25c48e15ebde1",
+    "remote_manifest_byte_equal": true,
+    "kernel_version": 23,
+    "kernel_status_after_push": "RUNNING",
+    "kernel_pushed_once": true,
+    "gpu_used_hours_after_push": 1.87,
+    "gpu_remaining_hours_after_push": 28.13,
+    "gpu_total_hours": 30.0,
+    "quota_refresh_at": "2026-11-07T00:00:00"
+  },
+  "next_action": "Theo dõi duy nhất private kernel version 23. Khi COMPLETE, tải output vào kaggle_outputs/b0-full-session-10-v23 rồi kiểm chứng exact-resume 4.608 -> 5.120; nếu ERROR/CANCELLED thì giữ output/log và không tự gửi lại."
+}

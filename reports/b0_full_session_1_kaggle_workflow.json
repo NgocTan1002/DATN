@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-24T09:33:41+00:00",
+  "status": "complete",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "scripts/verify_gpu_runtime.py",
+        "--require-cuda",
+        "--output",
+        "/kaggle/working/reports/kaggle_runtime.json"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 11.628008417999979
+    },
+    {
+      "command": [
+        "python",
+        "scripts/train_b0_full.py",
+        "--manifest",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/development_20k_v2.csv",
+        "--parquet-dir",
+        "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13/data",
+        "--device",
+        "cuda",
+        "--run-root",
+        "/kaggle/working/checkpoints/b0_peak_full_v1",
+        "--report-json",
+        "/kaggle/working/reports/b0_peak_full_session_1.json",
+        "--report-md",
+        "/kaggle/working/reports/b0_peak_full_session_1.md"
+      ],
+      "return_code": 0,
+      "elapsed_seconds": 7056.243580544
+    }
+  ],
+  "profile": "b0-full-first-session",
+  "source_dataset_slug": "doantnnt-project-source",
+  "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+  "source_layout": "directory",
+  "data_dataset_slug": "vsasv-development-v2-2026-10-13",
+  "data_root": "/kaggle/input/datasets/ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+  "finished_at": "2026-10-24T11:31:40+00:00"
+}

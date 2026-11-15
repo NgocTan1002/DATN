@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "restored_global_step": 1024,
+  "manifest_sha256": "76b604d3ff793f3ccec4f47e21ae916510172ccea14c76f74002ee16ce67ae97",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+  "files_verified": 39,
+  "pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-9de1bc836e934c1ab892bdf6683afaec",
+      "checkpoint_sha256": "40812f8331d4b4d615ce91c6af4b72c863a4e17cb946041c42f8e94686c620ca",
+      "state_sha256": "6b9c1eb4953b5de327d596221491ad2a18c86a2f8c1c5f6b3c5b5f08bd67c8bb"
+    },
+    "best": null
+  },
+  "run_root": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.cache\\b0-session-3-embedded-check",
+  "training_resumed": false
+}

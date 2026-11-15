@@ -1,0 +1,125 @@
+{
+  "checked_at": "2026-10-31T21:34:04.2860696+07:00",
+  "passed": true,
+  "input": {
+    "canonical_output_folder": "kaggle_outputs/b0-full-session-8-v21",
+    "global_step": 4096,
+    "generations": 77,
+    "checkpoint_files": 155,
+    "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+    "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+    "latest_generation": "g-7568c302b08644449b1e1f9f9c866591",
+    "best_generation": "g-4174b60757a44324a9b864a4931e7a18",
+    "best_epoch": 2,
+    "best_global_step": 3972,
+    "best_eer": 0.08333333333333333
+  },
+  "payload": {
+    "local_folder": ".kaggle/resume/session-9-dataset",
+    "checkpoint_and_pointer_files": 155,
+    "checkpoint_and_pointer_bytes": 557794957,
+    "upload_file_count": 156,
+    "upload_total_bytes": 557835353,
+    "local_file_count_including_dataset_metadata": 157,
+    "local_total_bytes_including_dataset_metadata": 557835602,
+    "manifest_bytes": 40396,
+    "manifest_sha256": "cc9ebf87f898162980f2c24de5c4b80bf04dafa0c5d34af3cbdb345b0ed997d8",
+    "contains_audio": false,
+    "contains_logs": false,
+    "contains_credentials": false,
+    "invalid_filenames": []
+  },
+  "restore_check": {
+    "passed": true,
+    "restored_global_step": 4096,
+    "files_verified": 155,
+    "model_optimizer_sampler_rng_controller_history_best_preserved": true,
+    "report": "reports/b0_full_session_9_transfer_check.json"
+  },
+  "source": {
+    "locked_source_files": 56,
+    "source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+    "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+    "current_workspace_source_published": false,
+    "bootstrap_embedded_source_exact_match": true,
+    "bootstrap_source_sha256": "833d8c6139f14f840b7162ff335dae35bef9ceb97914a7b27fadc54577cd1234"
+  },
+  "kernel": {
+    "folder": ".kaggle/resume/session-9-kernel",
+    "profile": "b0-full-resume-session-9",
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "dataset_sources": [
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+      "ngctnnguyn1111/doantnnt-project-source",
+      "ngctnnguyn1111/doantnnt-b0-full-resume"
+    ],
+    "expected_input_step": 4096,
+    "runner_sha256": "28935500b3df90ba51dfb555466fa0a9e31110a771f7959907353e8990c97e27",
+    "run_config_sha256": "b686fba943feb4e8d456ae1fd4d0bb1401cf8ffdebebbcac1e1d5a9bffed3d55",
+    "kernel_metadata_sha256": "cc32b27803caf429ff53d07bfa5ea09814c2c1d54f8736780fbd5c232d69352a"
+  },
+  "remote_preflight": {
+    "latest_kernel_status": "COMPLETE",
+    "data_dataset_status": "ready",
+    "source_dataset_status": "ready",
+    "checkpoint_dataset_status": "ready",
+    "checkpoint_dataset_current_version": 8,
+    "checkpoint_dataset_private": true,
+    "remote_inventory_files": 156,
+    "remote_inventory_bytes": 557835353,
+    "remote_inventory_missing": [],
+    "remote_inventory_extra": [],
+    "remote_inventory_size_mismatch": [],
+    "remote_manifest_sha256": "cc9ebf87f898162980f2c24de5c4b80bf04dafa0c5d34af3cbdb345b0ed997d8",
+    "remote_source_files": 56,
+    "remote_source_bundle_sha256": "68e07cfe4ac8884e21ea15a1f750ebb0aace03d4ac4a5dd42f3b0473030c92a1",
+    "quota": {
+      "gpu_used_hours": 0.0,
+      "gpu_remaining_hours": 30.0,
+      "gpu_total_hours": 30.0,
+      "refresh_at": "2026-11-07T00:00:00",
+      "source": "kaggle quota --format json"
+    }
+  },
+  "expected_progress": {
+    "max_steps_this_invocation": 512,
+    "expected_global_step_if_full_session": 4608,
+    "expected_sampler_epoch": 2,
+    "expected_batch_cursor": 636,
+    "next_full_development_step": 5958,
+    "remaining_steps_after_session_if_full": 1350,
+    "test_used": false
+  },
+  "approval": {
+    "required": true,
+    "approved_by_user": true,
+    "uploaded": true,
+    "kernel_sent": true,
+    "private_destination": "ngctnnguyn1111/doantnnt-b0-full-resume"
+  },
+  "submission": {
+    "kernel_version": 22,
+    "kernel_ref": "ngctnnguyn1111/doanttnt-kaggle-cli-runner",
+    "status_after_send": "QUEUED",
+    "sent_at": "2026-10-31T21:33:00+07:00",
+    "quota_after_send_gpu_used_hours": 0.0,
+    "quota_after_send_gpu_remaining_hours": 30.0,
+    "quota_refresh_at": "2026-11-07T00:00:00"
+  },
+  "checks": {
+    "version_21_output_verified": true,
+    "strict_epoch_2_improvement_confirmed": true,
+    "payload_manifest_and_inventory": true,
+    "restore_from_flat_payload": true,
+    "locked_source_preserved": true,
+    "kernel_profile_locked": true,
+    "remote_datasets_ready": true,
+    "gpu_quota_sufficient": true,
+    "no_upload_or_submission_before_specific_approval": true,
+    "remote_inventory_and_manifest_verified": true,
+    "kernel_version_22_sent_once": true
+  },
+  "next_action": "Theo dõi version 22; không gửi kernel khác khi QUEUED/RUNNING. Khi COMPLETE, tải output vào kaggle_outputs/b0-full-session-9-v22 và kiểm chứng trước phiên tiếp theo."
+}

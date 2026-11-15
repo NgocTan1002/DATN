@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "restored_global_step": 2048,
+  "manifest_sha256": "31bac0c9f339264b9484e653a648908b73be72c166bd675cb0632ae7ff7a48c1",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+  "files_verified": 79,
+  "pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-f0940a29982742ebb7cf7aa4a252bb26",
+      "checkpoint_sha256": "9879e998beaa0f49a2466ed85be77d76d59655433312e085f389e40e46d722ca",
+      "state_sha256": "812e01c0ac2566a3aa37a584a6b97ba93fe9d53f1f08e527b81a32e07d3982bf"
+    },
+    "best": {
+      "generation": "g-c7418c4439ac45e9b051fa77b768709d",
+      "checkpoint_sha256": "760b3434d2402d9ee567acece672608fa3322381248a6fc8ed51d482cd5a4bfe",
+      "state_sha256": "d11e72849767bc22f3b77b35a2536e938235545969e931015f7b24d40d72b76f"
+    }
+  },
+  "run_root": ".cache\\b0-session-5-transfer-check",
+  "training_resumed": false
+}

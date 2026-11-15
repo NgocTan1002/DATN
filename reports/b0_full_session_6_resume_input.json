@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "restored_global_step": 2560,
+  "manifest_sha256": "906bd9622f38d09c95db19369db03694e51e3d712c9104f6945d7ce988604612",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+  "files_verified": 97,
+  "pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-2d1394dcd5d34ed5bd7fe2bdc26af49f",
+      "checkpoint_sha256": "25220c5a8058716b69dd5ca35ec340fbfa4d87f75c60f9e5dbc62495b4549f66",
+      "state_sha256": "796a1f388241e34cc88b7b67401741d77b6f3024eb97d533f169e0da8c295919"
+    },
+    "best": {
+      "generation": "g-c7418c4439ac45e9b051fa77b768709d",
+      "checkpoint_sha256": "760b3434d2402d9ee567acece672608fa3322381248a6fc8ed51d482cd5a4bfe",
+      "state_sha256": "d11e72849767bc22f3b77b35a2536e938235545969e931015f7b24d40d72b76f"
+    }
+  },
+  "run_root": "/kaggle/working/checkpoints/b0_peak_full_v1",
+  "training_resumed": false
+}

@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "restored_global_step": 4096,
+  "manifest_sha256": "cc9ebf87f898162980f2c24de5c4b80bf04dafa0c5d34af3cbdb345b0ed997d8",
+  "source_tree_sha256": "a46681120d36511e5d1bc7d5290e5488eecf136bf1ad55a93052afdb0e788925",
+  "identity_sha256": "c6bd98ff2fee63af52d0d1d059f6cf788acc8462b140dd26672905b4d1c3e735",
+  "files_verified": 155,
+  "pointer": {
+    "checkpoint_version": 4,
+    "latest": {
+      "generation": "g-7568c302b08644449b1e1f9f9c866591",
+      "checkpoint_sha256": "7038d36e1ce621c931e7d8665a08fdb54d56f9a462b786cbed3c70fa52d1e6de",
+      "state_sha256": "fc9ebce379e00ef4a192ca1421e629f0ee2dd7bc8b8a1e3619b409e19e28f222"
+    },
+    "best": {
+      "generation": "g-4174b60757a44324a9b864a4931e7a18",
+      "checkpoint_sha256": "050bbfff587bb48dc513e74065f0c395b5c1b5f5a1d2ddde8ae28ebdc37776d7",
+      "state_sha256": "50a4130f584d00329baf130ee05fc14f2562a6372bc7f745bb3d57c26e2a1d8c"
+    }
+  },
+  "run_root": ".kaggle\\resume\\session-9-restore-check",
+  "training_resumed": false
+}
