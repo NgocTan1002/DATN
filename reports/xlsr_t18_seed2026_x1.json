@@ -1,0 +1,3227 @@
+{
+  "task": "T18",
+  "status": "completed_pending_claude_review",
+  "authorization": {
+    "date": "2026-11-06",
+    "quote": "Mở cổng, chạy"
+  },
+  "source_dataset_ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+  "source_dataset_version": 2,
+  "bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+  "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+  "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+  "monitor_interval_seconds": 1800,
+  "x0_verification": {
+    "passed": true,
+    "run_id": "X0",
+    "checked_utc": "2026-11-06T13:07:49.180485+00:00",
+    "evaluation_scope": "dev-full, không phải test",
+    "use_test": false,
+    "checks": {
+      "a_controller_checkpoint": true,
+      "b_status_loss_batch_trace": true,
+      "c_best_patience": true,
+      "d_identity_modes": true,
+      "e_trainable_only": true,
+      "f_manifest_metrics": true,
+      "g_summary_timing": true
+    },
+    "status": "max_epochs",
+    "global_step": 9930,
+    "completed_epochs": 10,
+    "bad_evaluations": 0,
+    "best": {
+      "epoch": 10,
+      "global_step": 9930,
+      "generation": "g-abed3ebec5414723ba47db431882f748",
+      "eer": 0.04198814261349793,
+      "roc_auc": 0.9929541603471963,
+      "macro_f1": 0.9550028487595204,
+      "decision_threshold": 0.3805544692138009
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 993,
+        "eer": 0.08797964808140768,
+        "loss": 0.38862046268476436
+      },
+      {
+        "epoch": 2,
+        "global_step": 1986,
+        "eer": 0.07858101900925729,
+        "loss": 0.2111019528926051
+      },
+      {
+        "epoch": 3,
+        "global_step": 2979,
+        "eer": 0.07285704190516572,
+        "loss": 0.18190248308164733
+      },
+      {
+        "epoch": 4,
+        "global_step": 3972,
+        "eer": 0.0661089904978478,
+        "loss": 0.18066256657120275
+      },
+      {
+        "epoch": 5,
+        "global_step": 4965,
+        "eer": 0.062398417072998376,
+        "loss": 0.18192316425692384
+      },
+      {
+        "epoch": 6,
+        "global_step": 5958,
+        "eer": 0.05398911737686383,
+        "loss": 0.12665299718752734
+      },
+      {
+        "epoch": 7,
+        "global_step": 6951,
+        "eer": 0.05095046286481521,
+        "loss": 0.14490378400505582
+      },
+      {
+        "epoch": 8,
+        "global_step": 7944,
+        "eer": 0.04904247049678468,
+        "loss": 0.18223748218347618
+      },
+      {
+        "epoch": 9,
+        "global_step": 8937,
+        "eer": 0.04522648576072363,
+        "loss": 0.19891467353665881
+      },
+      {
+        "epoch": 10,
+        "global_step": 9930,
+        "eer": 0.04198814261349793,
+        "loss": 0.12023125115355347
+      }
+    ],
+    "per_attack_eer": {
+      "adversarial_attack": {
+        "eer": 0.014118991267444708,
+        "threshold": 0.7423734397661693,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      },
+      "replay": {
+        "eer": 0.10833333333333334,
+        "threshold": 0.08494128845632076,
+        "bonafide_samples": 14151,
+        "spoof_samples": 120
+      },
+      "voice_conversion": {
+        "eer": 0.05427178291286835,
+        "threshold": 0.27858128748835714,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      }
+    },
+    "metric_max_abs_difference": 0.0,
+    "timing": {
+      "rehash_train_seconds": 55.25868247900007,
+      "rehash_dev_seconds": 120.08800326700009,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "backbone_load_seconds": 12.947210362999954,
+      "model_build_seconds": 0.48645711100004974,
+      "train_steps_this_invocation": 9930,
+      "train_loader_seconds": 321.96757492902316,
+      "train_model_seconds": 7286.90609548184,
+      "train_seconds": 7608.873670410863,
+      "mean_step_seconds": 0.7662511249154947,
+      "evaluations_this_invocation": [
+        {
+          "loader_seconds": 76.78437327000074,
+          "model_seconds": 1751.8028120389888,
+          "total_seconds": 1828.808834684,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.20341900398807
+        },
+        {
+          "loader_seconds": 74.44803037102065,
+          "model_seconds": 1751.97427909802,
+          "total_seconds": 1826.6295471570002,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.22871605813737
+        },
+        {
+          "loader_seconds": 74.9444966650417,
+          "model_seconds": 1751.3998646229948,
+          "total_seconds": 1826.5518339260007,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.229619263885056
+        },
+        {
+          "loader_seconds": 74.65056534203904,
+          "model_seconds": 1751.7500273589721,
+          "total_seconds": 1826.6039672080005,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.229013347250852
+        },
+        {
+          "loader_seconds": 74.6196500390015,
+          "model_seconds": 1750.1857806669595,
+          "total_seconds": 1825.0288495450004,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.247335355639738
+        },
+        {
+          "loader_seconds": 74.55098758894565,
+          "model_seconds": 1751.461321626026,
+          "total_seconds": 1826.224002518,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.233430261859567
+        },
+        {
+          "loader_seconds": 74.68978464705287,
+          "model_seconds": 1751.2168973370026,
+          "total_seconds": 1826.121081846999,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.234626983649772
+        },
+        {
+          "loader_seconds": 74.4030842059874,
+          "model_seconds": 1752.0723573810465,
+          "total_seconds": 1826.6896123779989,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.228018015342954
+        },
+        {
+          "loader_seconds": 74.76899220790438,
+          "model_seconds": 1749.9832275119588,
+          "total_seconds": 1824.966300344,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.24806359037461
+        },
+        {
+          "loader_seconds": 74.07531071706762,
+          "model_seconds": 1751.9175898350259,
+          "total_seconds": 1826.2081339680008,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.23361476643136
+        }
+      ],
+      "wall_seconds": 27381.811832519,
+      "deadline_unix": 1793977649.0031776,
+      "seconds_left_at_exit": 12180.682601213455,
+      "deadline_overrun_seconds": 0.0,
+      "estimates": {
+        "train_step_seconds": 1.0876132930513596,
+        "dev_full_seconds": 3015.0,
+        "max_session_hours": 11.0
+      }
+    },
+    "workflow_seconds": 27451.0,
+    "step_estimate_seconds": 1.0876132930513596,
+    "trainable_checkpoint": {
+      "parameter_count": 262401,
+      "tensor_count": 4,
+      "names": [
+        "classifier.0.bias",
+        "classifier.0.weight",
+        "classifier.3.bias",
+        "classifier.3.weight"
+      ],
+      "shapes_verified_with_meta_model": true
+    },
+    "remaining_generations": [
+      "g-abed3ebec5414723ba47db431882f748"
+    ],
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-x0-seed2026-s1",
+    "output_bytes": 303484147,
+    "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+    "report_sha256": "37831bf02df59ae3707593843098d904d86c624dfd803e75ca34e2f77be22e07",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+  },
+  "selection_performed": false,
+  "runs": {
+    "X1-L2-lr1e-5": {
+      "profile": "X1-L2-lr1e-5-seed2026",
+      "stage": "verified",
+      "push_attempts": 1,
+      "quota_before": {
+        "observed_utc": "2026-11-06T13:12:58.894787+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "13.56h",
+          "remaining": "16.44h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "13.56h",
+            "remaining": "16.44h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 16.44
+      },
+      "kernel_version": 3,
+      "push_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L2-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T13:13:01.985495+00:00",
+        "ended_utc": "2026-11-06T13:13:06.008381+00:00",
+        "seconds": 4.022255500000028,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0003-push-X1-L2-lr1e-5.log"
+      },
+      "last_poll_unix": 1794005201.8455546,
+      "next_poll_unix": 1794007004.074186,
+      "last_status_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T22:46:41.845554+00:00",
+        "ended_utc": "2026-11-06T22:46:44.071580+00:00",
+        "seconds": 2.225812900000051,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0013-status-X1-L2-lr1e-5.log"
+      },
+      "last_status_text": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+      "kernel_status": "COMPLETE",
+      "quota_after": {
+        "observed_utc": "2026-11-06T22:46:48.660598+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "21.33h",
+          "remaining": "8.67h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 8.67
+      },
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+      "download_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-06T22:46:48.664207+00:00",
+        "ended_utc": "2026-11-06T22:49:30.913047+00:00",
+        "seconds": 162.25028899999995,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0016-download-X1-L2-lr1e-5.log"
+      },
+      "verification_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+          "X1-L2-lr1e-5"
+        ],
+        "started_utc": "2026-11-06T22:49:30.942885+00:00",
+        "ended_utc": "2026-11-06T22:51:17.477490+00:00",
+        "seconds": 106.5337624,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0017-verify-X1-L2-lr1e-5.log"
+      },
+      "verification": {
+        "passed": true,
+        "run_id": "X1-L2-lr1e-5",
+        "checked_utc": "2026-11-06T22:51:15.218865+00:00",
+        "evaluation_scope": "dev-full, không phải test",
+        "use_test": false,
+        "checks": {
+          "a_controller_checkpoint": true,
+          "b_status_loss_batch_trace": true,
+          "c_best_patience": true,
+          "d_identity_modes": true,
+          "e_trainable_only": true,
+          "f_manifest_metrics": true,
+          "g_summary_timing": true
+        },
+        "status": "max_epochs",
+        "global_step": 9930,
+        "completed_epochs": 10,
+        "bad_evaluations": 1,
+        "best": {
+          "epoch": 9,
+          "global_step": 8937,
+          "generation": "g-33af25ab11cc4156a673ec0e6314518e",
+          "eer": 0.024567530252578577,
+          "roc_auc": 0.9969555934061383,
+          "macro_f1": 0.973617857969003,
+          "decision_threshold": 0.039493986972485365
+        },
+        "history": [
+          {
+            "epoch": 1,
+            "global_step": 993,
+            "eer": 0.0820436718253127,
+            "loss": 0.23444352777003202
+          },
+          {
+            "epoch": 2,
+            "global_step": 1986,
+            "eer": 0.05327702428327784,
+            "loss": 0.26215740550507366
+          },
+          {
+            "epoch": 3,
+            "global_step": 2979,
+            "eer": 0.03967351579631284,
+            "loss": 0.1908710456904601
+          },
+          {
+            "epoch": 4,
+            "global_step": 3972,
+            "eer": 0.037170517984594725,
+            "loss": 0.17541710753107348
+          },
+          {
+            "epoch": 5,
+            "global_step": 4965,
+            "eer": 0.032223871104515585,
+            "loss": 0.13080090793646748
+          },
+          {
+            "epoch": 6,
+            "global_step": 5958,
+            "eer": 0.030739877040491838,
+            "loss": 0.09560068083378974
+          },
+          {
+            "epoch": 7,
+            "global_step": 6951,
+            "eer": 0.03138958824007147,
+            "loss": 0.09757982595472849
+          },
+          {
+            "epoch": 8,
+            "global_step": 7944,
+            "eer": 0.028871923982782426,
+            "loss": 0.10666443651222121
+          },
+          {
+            "epoch": 9,
+            "global_step": 8937,
+            "eer": 0.024567530252578577,
+            "loss": 0.14478135027819833
+          },
+          {
+            "epoch": 10,
+            "global_step": 9930,
+            "eer": 0.025704539917160724,
+            "loss": 0.11138608667056792
+          }
+        ],
+        "per_attack_eer": {
+          "adversarial_attack": {
+            "eer": 0.009963960144159423,
+            "threshold": 0.5037256860874557,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          },
+          "replay": {
+            "eer": 0.060561091088968975,
+            "threshold": 0.0018452580844511973,
+            "bonafide_samples": 14151,
+            "spoof_samples": 120
+          },
+          "voice_conversion": {
+            "eer": 0.0356647351668979,
+            "threshold": 0.011369868127528375,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          }
+        },
+        "metric_max_abs_difference": 0.0,
+        "timing": {
+          "rehash_train_seconds": 45.854166196999984,
+          "rehash_dev_seconds": 105.78229193499999,
+          "rehash_performed": {
+            "train": true,
+            "dev": true
+          },
+          "backbone_load_seconds": 13.475879807000013,
+          "model_build_seconds": 0.47947479100002965,
+          "train_steps_this_invocation": 9930,
+          "train_loader_seconds": 409.91085899598534,
+          "train_model_seconds": 7956.812805248002,
+          "train_seconds": 8366.723664243988,
+          "mean_step_seconds": 0.8425703589369574,
+          "evaluations_this_invocation": [
+            {
+              "loader_seconds": 71.5860130310034,
+              "model_seconds": 1654.315977421001,
+              "total_seconds": 1726.095060688,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.46515900725883
+            },
+            {
+              "loader_seconds": 73.29471155999863,
+              "model_seconds": 1654.3345946869908,
+              "total_seconds": 1727.8312941909994,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.44258460323585
+            },
+            {
+              "loader_seconds": 72.1528029619758,
+              "model_seconds": 1654.4735691009755,
+              "total_seconds": 1726.8227742959998,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.45569179258063
+            },
+            {
+              "loader_seconds": 73.50451905793307,
+              "model_seconds": 1653.4967939329617,
+              "total_seconds": 1727.2271865700004,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.45043402599804
+            },
+            {
+              "loader_seconds": 69.76677762096915,
+              "model_seconds": 1654.5188225060338,
+              "total_seconds": 1724.4779099780008,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.486225990853477
+            },
+            {
+              "loader_seconds": 73.32623310303825,
+              "model_seconds": 1654.2242613080398,
+              "total_seconds": 1727.7832467049975,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.443208703377827
+            },
+            {
+              "loader_seconds": 88.62690793006914,
+              "model_seconds": 1653.131766305909,
+              "total_seconds": 1741.9714496859997,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.260410758735325
+            },
+            {
+              "loader_seconds": 87.91141135901125,
+              "model_seconds": 1654.9457233990433,
+              "total_seconds": 1743.098307237,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.246020112007194
+            },
+            {
+              "loader_seconds": 84.42644588399344,
+              "model_seconds": 1655.5521983028848,
+              "total_seconds": 1740.2124632369996,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.282911322144095
+            },
+            {
+              "loader_seconds": 84.96287281100376,
+              "model_seconds": 1655.5448746239344,
+              "total_seconds": 1740.7422796819992,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.276129242453873
+            }
+          ],
+          "wall_seconds": 27920.549202509,
+          "deadline_unix": 1794010423.731142,
+          "seconds_left_at_exit": 11647.26766872406,
+          "deadline_overrun_seconds": 0.0,
+          "estimates": {
+            "train_step_seconds": 1.2688821752265864,
+            "dev_full_seconds": 3015.0,
+            "max_session_hours": 11.0
+          }
+        },
+        "workflow_seconds": 27976.0,
+        "step_estimate_seconds": 1.2688821752265864,
+        "trainable_checkpoint": {
+          "parameter_count": 25454849,
+          "tensor_count": 36,
+          "names": [
+            "backbone.encoder.layers.22.attention.k_proj.bias",
+            "backbone.encoder.layers.22.attention.k_proj.weight",
+            "backbone.encoder.layers.22.attention.out_proj.bias",
+            "backbone.encoder.layers.22.attention.out_proj.weight",
+            "backbone.encoder.layers.22.attention.q_proj.bias",
+            "backbone.encoder.layers.22.attention.q_proj.weight",
+            "backbone.encoder.layers.22.attention.v_proj.bias",
+            "backbone.encoder.layers.22.attention.v_proj.weight",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.22.final_layer_norm.bias",
+            "backbone.encoder.layers.22.final_layer_norm.weight",
+            "backbone.encoder.layers.22.layer_norm.bias",
+            "backbone.encoder.layers.22.layer_norm.weight",
+            "backbone.encoder.layers.23.attention.k_proj.bias",
+            "backbone.encoder.layers.23.attention.k_proj.weight",
+            "backbone.encoder.layers.23.attention.out_proj.bias",
+            "backbone.encoder.layers.23.attention.out_proj.weight",
+            "backbone.encoder.layers.23.attention.q_proj.bias",
+            "backbone.encoder.layers.23.attention.q_proj.weight",
+            "backbone.encoder.layers.23.attention.v_proj.bias",
+            "backbone.encoder.layers.23.attention.v_proj.weight",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.23.final_layer_norm.bias",
+            "backbone.encoder.layers.23.final_layer_norm.weight",
+            "backbone.encoder.layers.23.layer_norm.bias",
+            "backbone.encoder.layers.23.layer_norm.weight",
+            "classifier.0.bias",
+            "classifier.0.weight",
+            "classifier.3.bias",
+            "classifier.3.weight"
+          ],
+          "shapes_verified_with_meta_model": true
+        },
+        "remaining_generations": [
+          "g-02138c9a2d034d6a9d6d2e8b4b0901c9",
+          "g-33af25ab11cc4156a673ec0e6314518e"
+        ],
+        "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+        "output_bytes": 1066603705,
+        "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+        "report_sha256": "3bfdac011b17372ec922449c8bb5944686f23136a1971d7d2baac3b5501e3887",
+        "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+      }
+    },
+    "X1-L4-lr1e-5": {
+      "profile": "X1-L4-lr1e-5-seed2026",
+      "stage": "verified",
+      "push_attempts": 1,
+      "quota_before": {
+        "observed_utc": "2026-11-06T23:17:31.375335+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "21.33h",
+          "remaining": "8.67h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 8.67
+      },
+      "kernel_version": 4,
+      "push_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L4-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T23:17:35.328568+00:00",
+        "ended_utc": "2026-11-06T23:17:39.808518+00:00",
+        "seconds": 4.480188300000009,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0021-push-X1-L4-lr1e-5.log"
+      },
+      "last_poll_unix": 1794032292.8876183,
+      "next_poll_unix": 1794034095.3557014,
+      "last_status_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T06:18:12.890299+00:00",
+        "ended_utc": "2026-11-07T06:18:15.352542+00:00",
+        "seconds": 2.4625751999992644,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0035-status-X1-L4-lr1e-5.log"
+      },
+      "last_status_text": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+      "kernel_status": "COMPLETE",
+      "quota_after": {
+        "observed_utc": "2026-11-07T06:18:20.587911+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "0.00h",
+          "remaining": "30.00h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 30.0
+      },
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+      "download_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-07T06:18:20.600421+00:00",
+        "ended_utc": "2026-11-07T06:22:02.846950+00:00",
+        "seconds": 222.246543199999,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0038-download-X1-L4-lr1e-5.log"
+      },
+      "verification_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+          "X1-L4-lr1e-5"
+        ],
+        "started_utc": "2026-11-07T06:22:02.895221+00:00",
+        "ended_utc": "2026-11-07T06:23:35.276898+00:00",
+        "seconds": 92.38181629999963,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0039-verify-X1-L4-lr1e-5.log"
+      },
+      "verification": {
+        "passed": true,
+        "run_id": "X1-L4-lr1e-5",
+        "checked_utc": "2026-11-07T06:23:33.927377+00:00",
+        "evaluation_scope": "dev-full, không phải test",
+        "use_test": false,
+        "checks": {
+          "a_controller_checkpoint": true,
+          "b_status_loss_batch_trace": true,
+          "c_best_patience": true,
+          "d_identity_modes": true,
+          "e_trainable_only": true,
+          "f_manifest_metrics": true,
+          "g_summary_timing": true
+        },
+        "status": "early_stopped",
+        "global_step": 6951,
+        "completed_epochs": 7,
+        "bad_evaluations": 2,
+        "best": {
+          "epoch": 5,
+          "global_step": 4965,
+          "generation": "g-727dbe07dea84fed967de4cf0bfca223",
+          "eer": 0.010811956752172992,
+          "roc_auc": 0.9993563249710833,
+          "macro_f1": 0.9883361190849158,
+          "decision_threshold": 0.009543210261900003
+        },
+        "history": [
+          {
+            "epoch": 1,
+            "global_step": 993,
+            "eer": 0.021835912656349373,
+            "loss": 0.08742191345936413
+          },
+          {
+            "epoch": 2,
+            "global_step": 1986,
+            "eer": 0.015593275399983756,
+            "loss": 0.054980907968243085
+          },
+          {
+            "epoch": 3,
+            "global_step": 2979,
+            "eer": 0.014253228295297652,
+            "loss": 0.10183044111407899
+          },
+          {
+            "epoch": 4,
+            "global_step": 3972,
+            "eer": 0.01335986355884025,
+            "loss": 0.09020232477139993
+          },
+          {
+            "epoch": 5,
+            "global_step": 4965,
+            "eer": 0.010811956752172992,
+            "loss": 0.07969468882815428
+          },
+          {
+            "epoch": 6,
+            "global_step": 5958,
+            "eer": 0.012578616352201259,
+            "loss": 0.12371864189396194
+          },
+          {
+            "epoch": 7,
+            "global_step": 6951,
+            "eer": 0.013278648582798667,
+            "loss": 0.05309487549400763
+          }
+        ],
+        "per_attack_eer": {
+          "adversarial_attack": {
+            "eer": 0.0034626528160554026,
+            "threshold": 0.5491860987912487,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          },
+          "replay": {
+            "eer": 0.037170517984594725,
+            "threshold": 0.000144845891855896,
+            "bonafide_samples": 14151,
+            "spoof_samples": 120
+          },
+          "voice_conversion": {
+            "eer": 0.01575860363225214,
+            "threshold": 0.0019725463441780727,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          }
+        },
+        "metric_max_abs_difference": 0.0,
+        "timing": {
+          "rehash_train_seconds": 46.857978850999984,
+          "rehash_dev_seconds": 107.82305216200001,
+          "rehash_performed": {
+            "train": true,
+            "dev": true
+          },
+          "backbone_load_seconds": 11.860197556000003,
+          "model_build_seconds": 0.5001345290000359,
+          "train_steps_this_invocation": 6951,
+          "train_loader_seconds": 2256.8264753921167,
+          "train_model_seconds": 6852.136080155958,
+          "train_seconds": 9108.962555548074,
+          "mean_step_seconds": 1.3104535398572974,
+          "evaluations_this_invocation": [
+            {
+              "loader_seconds": 100.67144064299464,
+              "model_seconds": 1781.7462291829938,
+              "total_seconds": 1882.620176933,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.597357063904465
+            },
+            {
+              "loader_seconds": 70.4251692090138,
+              "model_seconds": 1785.2010106980097,
+              "total_seconds": 1855.8146620549996,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.894866708866854
+            },
+            {
+              "loader_seconds": 70.5237912250177,
+              "model_seconds": 1786.7716717830808,
+              "total_seconds": 1857.4930502609986,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.875986585549484
+            },
+            {
+              "loader_seconds": 72.13630156202453,
+              "model_seconds": 1785.4596312020585,
+              "total_seconds": 1857.7873837199986,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.872679155756597
+            },
+            {
+              "loader_seconds": 71.21724392802935,
+              "model_seconds": 1783.3710178410165,
+              "total_seconds": 1854.7727585309985,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.906604230435125
+            },
+            {
+              "loader_seconds": 69.81102202010516,
+              "model_seconds": 1783.0617469150566,
+              "total_seconds": 1853.051784690997,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.92602069750911
+            },
+            {
+              "loader_seconds": 72.43922491004196,
+              "model_seconds": 1783.0819947600794,
+              "total_seconds": 1855.7033470089991,
+              "samples": 38777,
+              "throughput_samples_per_second": 20.896120095111275
+            }
+          ],
+          "wall_seconds": 23781.645665345997,
+          "deadline_unix": 1794046692.4651687,
+          "seconds_left_at_exit": 15791.336460351944,
+          "deadline_overrun_seconds": 0.0,
+          "estimates": {
+            "train_step_seconds": 1.404833836858006,
+            "dev_full_seconds": 3015.0,
+            "max_session_hours": 11.0
+          }
+        },
+        "workflow_seconds": 23824.0,
+        "step_estimate_seconds": 1.404833836858006,
+        "trainable_checkpoint": {
+          "parameter_count": 50647297,
+          "tensor_count": 68,
+          "names": [
+            "backbone.encoder.layers.20.attention.k_proj.bias",
+            "backbone.encoder.layers.20.attention.k_proj.weight",
+            "backbone.encoder.layers.20.attention.out_proj.bias",
+            "backbone.encoder.layers.20.attention.out_proj.weight",
+            "backbone.encoder.layers.20.attention.q_proj.bias",
+            "backbone.encoder.layers.20.attention.q_proj.weight",
+            "backbone.encoder.layers.20.attention.v_proj.bias",
+            "backbone.encoder.layers.20.attention.v_proj.weight",
+            "backbone.encoder.layers.20.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.20.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.20.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.20.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.20.final_layer_norm.bias",
+            "backbone.encoder.layers.20.final_layer_norm.weight",
+            "backbone.encoder.layers.20.layer_norm.bias",
+            "backbone.encoder.layers.20.layer_norm.weight",
+            "backbone.encoder.layers.21.attention.k_proj.bias",
+            "backbone.encoder.layers.21.attention.k_proj.weight",
+            "backbone.encoder.layers.21.attention.out_proj.bias",
+            "backbone.encoder.layers.21.attention.out_proj.weight",
+            "backbone.encoder.layers.21.attention.q_proj.bias",
+            "backbone.encoder.layers.21.attention.q_proj.weight",
+            "backbone.encoder.layers.21.attention.v_proj.bias",
+            "backbone.encoder.layers.21.attention.v_proj.weight",
+            "backbone.encoder.layers.21.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.21.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.21.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.21.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.21.final_layer_norm.bias",
+            "backbone.encoder.layers.21.final_layer_norm.weight",
+            "backbone.encoder.layers.21.layer_norm.bias",
+            "backbone.encoder.layers.21.layer_norm.weight",
+            "backbone.encoder.layers.22.attention.k_proj.bias",
+            "backbone.encoder.layers.22.attention.k_proj.weight",
+            "backbone.encoder.layers.22.attention.out_proj.bias",
+            "backbone.encoder.layers.22.attention.out_proj.weight",
+            "backbone.encoder.layers.22.attention.q_proj.bias",
+            "backbone.encoder.layers.22.attention.q_proj.weight",
+            "backbone.encoder.layers.22.attention.v_proj.bias",
+            "backbone.encoder.layers.22.attention.v_proj.weight",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.22.final_layer_norm.bias",
+            "backbone.encoder.layers.22.final_layer_norm.weight",
+            "backbone.encoder.layers.22.layer_norm.bias",
+            "backbone.encoder.layers.22.layer_norm.weight",
+            "backbone.encoder.layers.23.attention.k_proj.bias",
+            "backbone.encoder.layers.23.attention.k_proj.weight",
+            "backbone.encoder.layers.23.attention.out_proj.bias",
+            "backbone.encoder.layers.23.attention.out_proj.weight",
+            "backbone.encoder.layers.23.attention.q_proj.bias",
+            "backbone.encoder.layers.23.attention.q_proj.weight",
+            "backbone.encoder.layers.23.attention.v_proj.bias",
+            "backbone.encoder.layers.23.attention.v_proj.weight",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.23.final_layer_norm.bias",
+            "backbone.encoder.layers.23.final_layer_norm.weight",
+            "backbone.encoder.layers.23.layer_norm.bias",
+            "backbone.encoder.layers.23.layer_norm.weight",
+            "classifier.0.bias",
+            "classifier.0.weight",
+            "classifier.3.bias",
+            "classifier.3.weight"
+          ],
+          "shapes_verified_with_meta_model": true
+        },
+        "remaining_generations": [
+          "g-727dbe07dea84fed967de4cf0bfca223",
+          "g-b59a66bed5a9439bb5b38aa30151cfc1"
+        ],
+        "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+        "output_bytes": 1527598238,
+        "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+        "report_sha256": "93c7e062e981fd78c3f22cf8040e3aaabafaddf901d91b05b674465801f04292",
+        "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+      }
+    },
+    "X1-L8-lr1e-5": {
+      "profile": "X1-L8-lr1e-5-seed2026",
+      "stage": "verified",
+      "push_attempts": 1,
+      "quota_before": {
+        "observed_utc": "2026-11-07T06:23:37.873989+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "0.00h",
+          "remaining": "30.00h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 30.0
+      },
+      "kernel_version": 5,
+      "push_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-07T06:23:41.130032+00:00",
+        "ended_utc": "2026-11-07T06:23:45.303431+00:00",
+        "seconds": 4.173148299996683,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0042-push-X1-L8-lr1e-5.log"
+      },
+      "last_poll_unix": 1794047319.2982059,
+      "next_poll_unix": 1794049121.2577531,
+      "last_status_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T10:28:39.301216+00:00",
+        "ended_utc": "2026-11-07T10:28:41.252982+00:00",
+        "seconds": 1.9512957999977516,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0048-status-X1-L8-lr1e-5.log"
+      },
+      "last_status_text": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+      "kernel_status": "COMPLETE",
+      "quota_after": {
+        "observed_utc": "2026-11-07T10:28:45.647551+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "3.88h",
+          "remaining": "26.12h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "3.88h",
+            "remaining": "26.12h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 26.12
+      },
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+      "download_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-07T10:28:45.658721+00:00",
+        "ended_utc": "2026-11-07T10:34:28.839428+00:00",
+        "seconds": 343.18141040000046,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0051-download-X1-L8-lr1e-5.log"
+      },
+      "verification_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+          "X1-L8-lr1e-5"
+        ],
+        "started_utc": "2026-11-07T10:34:28.887514+00:00",
+        "ended_utc": "2026-11-07T10:36:09.553537+00:00",
+        "seconds": 100.66570769999817,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0052-verify-X1-L8-lr1e-5.log"
+      },
+      "verification": {
+        "passed": true,
+        "run_id": "X1-L8-lr1e-5",
+        "checked_utc": "2026-11-07T10:36:08.026778+00:00",
+        "evaluation_scope": "dev-full, không phải test",
+        "use_test": false,
+        "checks": {
+          "a_controller_checkpoint": true,
+          "b_status_loss_batch_trace": true,
+          "c_best_patience": true,
+          "d_identity_modes": true,
+          "e_trainable_only": true,
+          "f_manifest_metrics": true,
+          "g_summary_timing": true
+        },
+        "status": "early_stopped",
+        "global_step": 3972,
+        "completed_epochs": 4,
+        "bad_evaluations": 2,
+        "best": {
+          "epoch": 2,
+          "global_step": 1986,
+          "generation": "g-ce724d6e82c8457d8ce3e3d7d2154349",
+          "eer": 0.008833298000141333,
+          "roc_auc": 0.9993901272398376,
+          "macro_f1": 0.9904715246705977,
+          "decision_threshold": 7.74885248054705e-05
+        },
+        "history": [
+          {
+            "epoch": 1,
+            "global_step": 993,
+            "eer": 0.012578616352201259,
+            "loss": 0.1118836970868912
+          },
+          {
+            "epoch": 2,
+            "global_step": 1986,
+            "eer": 0.008833298000141333,
+            "loss": 0.1275321024124879
+          },
+          {
+            "epoch": 3,
+            "global_step": 2979,
+            "eer": 0.011613741573946236,
+            "loss": 0.19872134428108362
+          },
+          {
+            "epoch": 4,
+            "global_step": 3972,
+            "eer": 0.012385283846341265,
+            "loss": 0.12314044439090573
+          }
+        ],
+        "per_attack_eer": {
+          "adversarial_attack": {
+            "eer": 0.0018770913245735737,
+            "threshold": 0.0031188483423174357,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          },
+          "replay": {
+            "eer": 0.05,
+            "threshold": 8.450733821518952e-06,
+            "bonafide_samples": 14151,
+            "spoof_samples": 120
+          },
+          "voice_conversion": {
+            "eer": 0.012719949120203519,
+            "threshold": 4.497523119691445e-05,
+            "bonafide_samples": 14151,
+            "spoof_samples": 12253
+          }
+        },
+        "metric_max_abs_difference": 0.0,
+        "timing": {
+          "rehash_train_seconds": 46.902892502000014,
+          "rehash_dev_seconds": 107.33023471399997,
+          "rehash_performed": {
+            "train": true,
+            "dev": true
+          },
+          "backbone_load_seconds": 13.18879953299998,
+          "model_build_seconds": 0.48827561599995306,
+          "train_steps_this_invocation": 3972,
+          "train_loader_seconds": 1520.1968612700048,
+          "train_model_seconds": 4322.429722606998,
+          "train_seconds": 5842.626583877003,
+          "mean_step_seconds": 1.4709533192036766,
+          "evaluations_this_invocation": [
+            {
+              "loader_seconds": 103.28660062501058,
+              "model_seconds": 1593.069340174996,
+              "total_seconds": 1696.5560365719998,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.856303690593926
+            },
+            {
+              "loader_seconds": 103.57762022800216,
+              "model_seconds": 1592.3438670189653,
+              "total_seconds": 1696.1194834400003,
+              "samples": 38777,
+              "throughput_samples_per_second": 22.862186525535378
+            },
+            {
+              "loader_seconds": 82.98069870199834,
+              "model_seconds": 1592.329427516026,
+              "total_seconds": 1675.4961397320003,
+              "samples": 38777,
+              "throughput_samples_per_second": 23.143592563694284
+            },
+            {
+              "loader_seconds": 74.83485855396611,
+              "model_seconds": 1592.0984045979967,
+              "total_seconds": 1667.1190782680005,
+              "samples": 38777,
+              "throughput_samples_per_second": 23.259886174589347
+            }
+          ],
+          "wall_seconds": 13919.733340030001,
+          "deadline_unix": 1794072257.69784,
+          "seconds_left_at_exit": 25651.361677885056,
+          "deadline_overrun_seconds": 0.0,
+          "estimates": {
+            "train_step_seconds": 1.7673716012084593,
+            "dev_full_seconds": 3015.0,
+            "max_session_hours": 11.0
+          }
+        },
+        "workflow_seconds": 13964.0,
+        "step_estimate_seconds": 1.7673716012084593,
+        "trainable_checkpoint": {
+          "parameter_count": 101032193,
+          "tensor_count": 132,
+          "names": [
+            "backbone.encoder.layers.16.attention.k_proj.bias",
+            "backbone.encoder.layers.16.attention.k_proj.weight",
+            "backbone.encoder.layers.16.attention.out_proj.bias",
+            "backbone.encoder.layers.16.attention.out_proj.weight",
+            "backbone.encoder.layers.16.attention.q_proj.bias",
+            "backbone.encoder.layers.16.attention.q_proj.weight",
+            "backbone.encoder.layers.16.attention.v_proj.bias",
+            "backbone.encoder.layers.16.attention.v_proj.weight",
+            "backbone.encoder.layers.16.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.16.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.16.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.16.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.16.final_layer_norm.bias",
+            "backbone.encoder.layers.16.final_layer_norm.weight",
+            "backbone.encoder.layers.16.layer_norm.bias",
+            "backbone.encoder.layers.16.layer_norm.weight",
+            "backbone.encoder.layers.17.attention.k_proj.bias",
+            "backbone.encoder.layers.17.attention.k_proj.weight",
+            "backbone.encoder.layers.17.attention.out_proj.bias",
+            "backbone.encoder.layers.17.attention.out_proj.weight",
+            "backbone.encoder.layers.17.attention.q_proj.bias",
+            "backbone.encoder.layers.17.attention.q_proj.weight",
+            "backbone.encoder.layers.17.attention.v_proj.bias",
+            "backbone.encoder.layers.17.attention.v_proj.weight",
+            "backbone.encoder.layers.17.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.17.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.17.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.17.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.17.final_layer_norm.bias",
+            "backbone.encoder.layers.17.final_layer_norm.weight",
+            "backbone.encoder.layers.17.layer_norm.bias",
+            "backbone.encoder.layers.17.layer_norm.weight",
+            "backbone.encoder.layers.18.attention.k_proj.bias",
+            "backbone.encoder.layers.18.attention.k_proj.weight",
+            "backbone.encoder.layers.18.attention.out_proj.bias",
+            "backbone.encoder.layers.18.attention.out_proj.weight",
+            "backbone.encoder.layers.18.attention.q_proj.bias",
+            "backbone.encoder.layers.18.attention.q_proj.weight",
+            "backbone.encoder.layers.18.attention.v_proj.bias",
+            "backbone.encoder.layers.18.attention.v_proj.weight",
+            "backbone.encoder.layers.18.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.18.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.18.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.18.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.18.final_layer_norm.bias",
+            "backbone.encoder.layers.18.final_layer_norm.weight",
+            "backbone.encoder.layers.18.layer_norm.bias",
+            "backbone.encoder.layers.18.layer_norm.weight",
+            "backbone.encoder.layers.19.attention.k_proj.bias",
+            "backbone.encoder.layers.19.attention.k_proj.weight",
+            "backbone.encoder.layers.19.attention.out_proj.bias",
+            "backbone.encoder.layers.19.attention.out_proj.weight",
+            "backbone.encoder.layers.19.attention.q_proj.bias",
+            "backbone.encoder.layers.19.attention.q_proj.weight",
+            "backbone.encoder.layers.19.attention.v_proj.bias",
+            "backbone.encoder.layers.19.attention.v_proj.weight",
+            "backbone.encoder.layers.19.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.19.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.19.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.19.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.19.final_layer_norm.bias",
+            "backbone.encoder.layers.19.final_layer_norm.weight",
+            "backbone.encoder.layers.19.layer_norm.bias",
+            "backbone.encoder.layers.19.layer_norm.weight",
+            "backbone.encoder.layers.20.attention.k_proj.bias",
+            "backbone.encoder.layers.20.attention.k_proj.weight",
+            "backbone.encoder.layers.20.attention.out_proj.bias",
+            "backbone.encoder.layers.20.attention.out_proj.weight",
+            "backbone.encoder.layers.20.attention.q_proj.bias",
+            "backbone.encoder.layers.20.attention.q_proj.weight",
+            "backbone.encoder.layers.20.attention.v_proj.bias",
+            "backbone.encoder.layers.20.attention.v_proj.weight",
+            "backbone.encoder.layers.20.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.20.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.20.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.20.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.20.final_layer_norm.bias",
+            "backbone.encoder.layers.20.final_layer_norm.weight",
+            "backbone.encoder.layers.20.layer_norm.bias",
+            "backbone.encoder.layers.20.layer_norm.weight",
+            "backbone.encoder.layers.21.attention.k_proj.bias",
+            "backbone.encoder.layers.21.attention.k_proj.weight",
+            "backbone.encoder.layers.21.attention.out_proj.bias",
+            "backbone.encoder.layers.21.attention.out_proj.weight",
+            "backbone.encoder.layers.21.attention.q_proj.bias",
+            "backbone.encoder.layers.21.attention.q_proj.weight",
+            "backbone.encoder.layers.21.attention.v_proj.bias",
+            "backbone.encoder.layers.21.attention.v_proj.weight",
+            "backbone.encoder.layers.21.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.21.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.21.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.21.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.21.final_layer_norm.bias",
+            "backbone.encoder.layers.21.final_layer_norm.weight",
+            "backbone.encoder.layers.21.layer_norm.bias",
+            "backbone.encoder.layers.21.layer_norm.weight",
+            "backbone.encoder.layers.22.attention.k_proj.bias",
+            "backbone.encoder.layers.22.attention.k_proj.weight",
+            "backbone.encoder.layers.22.attention.out_proj.bias",
+            "backbone.encoder.layers.22.attention.out_proj.weight",
+            "backbone.encoder.layers.22.attention.q_proj.bias",
+            "backbone.encoder.layers.22.attention.q_proj.weight",
+            "backbone.encoder.layers.22.attention.v_proj.bias",
+            "backbone.encoder.layers.22.attention.v_proj.weight",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.22.final_layer_norm.bias",
+            "backbone.encoder.layers.22.final_layer_norm.weight",
+            "backbone.encoder.layers.22.layer_norm.bias",
+            "backbone.encoder.layers.22.layer_norm.weight",
+            "backbone.encoder.layers.23.attention.k_proj.bias",
+            "backbone.encoder.layers.23.attention.k_proj.weight",
+            "backbone.encoder.layers.23.attention.out_proj.bias",
+            "backbone.encoder.layers.23.attention.out_proj.weight",
+            "backbone.encoder.layers.23.attention.q_proj.bias",
+            "backbone.encoder.layers.23.attention.q_proj.weight",
+            "backbone.encoder.layers.23.attention.v_proj.bias",
+            "backbone.encoder.layers.23.attention.v_proj.weight",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+            "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+            "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+            "backbone.encoder.layers.23.final_layer_norm.bias",
+            "backbone.encoder.layers.23.final_layer_norm.weight",
+            "backbone.encoder.layers.23.layer_norm.bias",
+            "backbone.encoder.layers.23.layer_norm.weight",
+            "classifier.0.bias",
+            "classifier.0.weight",
+            "classifier.3.bias",
+            "classifier.3.weight"
+          ],
+          "shapes_verified_with_meta_model": true
+        },
+        "remaining_generations": [
+          "g-6886d33bae1b4e1e90c22b6bf0bb6c68",
+          "g-ce724d6e82c8457d8ce3e3d7d2154349"
+        ],
+        "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+        "output_bytes": 2607305766,
+        "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+        "report_sha256": "22b00c4baf1e39430124ff96830ddfc43a6d305aa01446735506fc880f428e3f",
+        "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+      }
+    }
+  },
+  "updated_utc": "2026-11-07T10:36:10.257828+00:00",
+  "summary_seed2026": [
+    {
+      "run_id": "X0",
+      "best": {
+        "epoch": 10,
+        "global_step": 9930,
+        "generation": "g-abed3ebec5414723ba47db431882f748",
+        "eer": 0.04198814261349793,
+        "roc_auc": 0.9929541603471963,
+        "macro_f1": 0.9550028487595204,
+        "decision_threshold": 0.3805544692138009
+      },
+      "runner_status": "max_epochs",
+      "workflow_seconds": 27451.0,
+      "runner_wall_seconds": 27381.811832519,
+      "quota_used_hours": 7.63,
+      "quota_source": "T17 before24.07h-after16.44h",
+      "eer_percent": 4.198814261349793,
+      "completed_epochs": 10,
+      "global_step": 9930,
+      "mean_step_seconds": 0.7662511249154947,
+      "dev_seconds_min_max": [
+        1824.966300344,
+        1828.808834684
+      ],
+      "deadline_overrun_seconds": 0.0
+    },
+    {
+      "run_id": "X1-L2-lr1e-5",
+      "kernel_version": 3,
+      "best": {
+        "epoch": 9,
+        "global_step": 8937,
+        "generation": "g-33af25ab11cc4156a673ec0e6314518e",
+        "eer": 0.024567530252578577,
+        "roc_auc": 0.9969555934061383,
+        "macro_f1": 0.973617857969003,
+        "decision_threshold": 0.039493986972485365
+      },
+      "runner_status": "max_epochs",
+      "workflow_seconds": 27976.0,
+      "runner_wall_seconds": 27920.549202509,
+      "quota_before": {
+        "observed_utc": "2026-11-06T13:12:58.894787+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "13.56h",
+          "remaining": "16.44h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "13.56h",
+            "remaining": "16.44h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 16.44
+      },
+      "quota_after": {
+        "observed_utc": "2026-11-06T22:46:48.660598+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "21.33h",
+          "remaining": "8.67h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 8.67
+      },
+      "quota_used_hours": 7.770000000000001,
+      "quota_note": "API difference within same quota period",
+      "eer_percent": 2.4567530252578575,
+      "completed_epochs": 10,
+      "global_step": 9930,
+      "mean_step_seconds": 0.8425703589369574,
+      "dev_seconds_min_max": [
+        1724.4779099780008,
+        1743.098307237
+      ],
+      "deadline_overrun_seconds": 0.0
+    },
+    {
+      "run_id": "X1-L4-lr1e-5",
+      "kernel_version": 4,
+      "best": {
+        "epoch": 5,
+        "global_step": 4965,
+        "generation": "g-727dbe07dea84fed967de4cf0bfca223",
+        "eer": 0.010811956752172992,
+        "roc_auc": 0.9993563249710833,
+        "macro_f1": 0.9883361190849158,
+        "decision_threshold": 0.009543210261900003
+      },
+      "runner_status": "early_stopped",
+      "workflow_seconds": 23824.0,
+      "runner_wall_seconds": 23781.645665345997,
+      "quota_before": {
+        "observed_utc": "2026-11-06T23:17:31.375335+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "21.33h",
+          "remaining": "8.67h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          }
+        ],
+        "remaining_hours": 8.67
+      },
+      "quota_after": {
+        "observed_utc": "2026-11-07T06:18:20.587911+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "0.00h",
+          "remaining": "30.00h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 30.0
+      },
+      "quota_used_hours": null,
+      "quota_note": "Quota refreshed during run; no consumption inferred from remaining difference.",
+      "eer_percent": 1.081195675217299,
+      "completed_epochs": 7,
+      "global_step": 6951,
+      "mean_step_seconds": 1.3104535398572974,
+      "dev_seconds_min_max": [
+        1853.051784690997,
+        1882.620176933
+      ],
+      "deadline_overrun_seconds": 0.0
+    },
+    {
+      "run_id": "X1-L8-lr1e-5",
+      "kernel_version": 5,
+      "best": {
+        "epoch": 2,
+        "global_step": 1986,
+        "generation": "g-ce724d6e82c8457d8ce3e3d7d2154349",
+        "eer": 0.008833298000141333,
+        "roc_auc": 0.9993901272398376,
+        "macro_f1": 0.9904715246705977,
+        "decision_threshold": 7.74885248054705e-05
+      },
+      "runner_status": "early_stopped",
+      "workflow_seconds": 13964.0,
+      "runner_wall_seconds": 13919.733340030001,
+      "quota_before": {
+        "observed_utc": "2026-11-07T06:23:37.873989+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "0.00h",
+          "remaining": "30.00h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 30.0
+      },
+      "quota_after": {
+        "observed_utc": "2026-11-07T10:28:45.647551+00:00",
+        "gpu": {
+          "resource": "GPU",
+          "used": "3.88h",
+          "remaining": "26.12h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "3.88h",
+            "remaining": "26.12h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 26.12
+      },
+      "quota_used_hours": 3.879999999999999,
+      "quota_note": "API difference within same quota period",
+      "eer_percent": 0.8833298000141333,
+      "completed_epochs": 4,
+      "global_step": 3972,
+      "mean_step_seconds": 1.4709533192036766,
+      "dev_seconds_min_max": [
+        1667.1190782680005,
+        1696.5560365719998
+      ],
+      "deadline_overrun_seconds": 0.0
+    }
+  ],
+  "command_records": [
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0001-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0002-verify-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0003-push-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0004-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0005-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0006-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0007-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0008-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0009-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0010-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0011-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0012-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0013-status-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0014-logs-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0015-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0016-download-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0017-verify-X1-L2-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0018-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0019-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0020-verify-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0021-push-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0022-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0023-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0024-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0025-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0026-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0027-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0028-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0029-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0030-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0031-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0032-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0033-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0034-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0035-status-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0036-logs-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0037-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0038-download-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0039-verify-X1-L4-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0040-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0041-verify-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0042-push-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0043-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0044-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0045-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0046-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0047-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0048-status-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0049-logs-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0050-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0051-download-X1-L8-lr1e-5.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0052-verify-X1-L8-lr1e-5.json"
+  ],
+  "current_run": null,
+  "message": "Đủ ba run; dừng chờ Claude. Không chọn tầng/LR hoặc chạy seed khác.",
+  "quota_gate_override": {
+    "date": "2026-11-07",
+    "recorded_utc": "2026-11-06T23:17:13.803792+00:00",
+    "user_quote": "quota phải đến thứ 2 mới làm mới cứ tiếp tục gửi đi",
+    "user_authorized": true,
+    "policy": "continue_with_available_quota_no_11_5h_gate",
+    "scope": "Bỏ ngưỡng quota>=11,5h và chờ refresh cho L4/L8 đang pending; vẫn đọc và ghi quota trước/sau.",
+    "unchanged_constraints": "Tuần tự L2→L4→L8, mỗi profile tối đa một push; dừng nếu ERROR/paused/verifier/timing không đạt; không sửa source/config/profile hoặc publish dataset."
+  },
+  "final_handoff": {
+    "finalized_utc": "2026-11-07T12:02:43.809994+00:00",
+    "status": "completed_pending_claude_review",
+    "all_three_runs_verified_a_to_g": true,
+    "seed2026_summary": [
+      {
+        "run_id": "X0",
+        "best": {
+          "epoch": 10,
+          "global_step": 9930,
+          "generation": "g-abed3ebec5414723ba47db431882f748",
+          "eer": 0.04198814261349793,
+          "roc_auc": 0.9929541603471963,
+          "macro_f1": 0.9550028487595204,
+          "decision_threshold": 0.3805544692138009
+        },
+        "runner_status": "max_epochs",
+        "workflow_seconds": 27451.0,
+        "runner_wall_seconds": 27381.811832519,
+        "quota_used_hours": 7.63,
+        "quota_source": "T17 before24.07h-after16.44h",
+        "eer_percent": 4.198814261349793,
+        "completed_epochs": 10,
+        "global_step": 9930,
+        "mean_step_seconds": 0.7662511249154947,
+        "dev_seconds_min_max": [
+          1824.966300344,
+          1828.808834684
+        ],
+        "deadline_overrun_seconds": 0.0
+      },
+      {
+        "run_id": "X1-L2-lr1e-5",
+        "kernel_version": 3,
+        "best": {
+          "epoch": 9,
+          "global_step": 8937,
+          "generation": "g-33af25ab11cc4156a673ec0e6314518e",
+          "eer": 0.024567530252578577,
+          "roc_auc": 0.9969555934061383,
+          "macro_f1": 0.973617857969003,
+          "decision_threshold": 0.039493986972485365
+        },
+        "runner_status": "max_epochs",
+        "workflow_seconds": 27976.0,
+        "runner_wall_seconds": 27920.549202509,
+        "quota_before": {
+          "observed_utc": "2026-11-06T13:12:58.894787+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "13.56h",
+            "remaining": "16.44h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "13.56h",
+              "remaining": "16.44h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            }
+          ],
+          "remaining_hours": 16.44
+        },
+        "quota_after": {
+          "observed_utc": "2026-11-06T22:46:48.660598+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "21.33h",
+              "remaining": "8.67h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            }
+          ],
+          "remaining_hours": 8.67
+        },
+        "quota_used_hours": 7.770000000000001,
+        "quota_note": "API difference within same quota period",
+        "eer_percent": 2.4567530252578575,
+        "completed_epochs": 10,
+        "global_step": 9930,
+        "mean_step_seconds": 0.8425703589369574,
+        "dev_seconds_min_max": [
+          1724.4779099780008,
+          1743.098307237
+        ],
+        "deadline_overrun_seconds": 0.0
+      },
+      {
+        "run_id": "X1-L4-lr1e-5",
+        "kernel_version": 4,
+        "best": {
+          "epoch": 5,
+          "global_step": 4965,
+          "generation": "g-727dbe07dea84fed967de4cf0bfca223",
+          "eer": 0.010811956752172992,
+          "roc_auc": 0.9993563249710833,
+          "macro_f1": 0.9883361190849158,
+          "decision_threshold": 0.009543210261900003
+        },
+        "runner_status": "early_stopped",
+        "workflow_seconds": 23824.0,
+        "runner_wall_seconds": 23781.645665345997,
+        "quota_before": {
+          "observed_utc": "2026-11-06T23:17:31.375335+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "21.33h",
+            "remaining": "8.67h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-07T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "21.33h",
+              "remaining": "8.67h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-07T00:00:00"
+            }
+          ],
+          "remaining_hours": 8.67
+        },
+        "quota_after": {
+          "observed_utc": "2026-11-07T06:18:20.587911+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "0.00h",
+              "remaining": "30.00h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            }
+          ],
+          "remaining_hours": 30.0
+        },
+        "quota_used_hours": null,
+        "quota_note": "Quota refreshed during run; no consumption inferred from remaining difference.",
+        "eer_percent": 1.081195675217299,
+        "completed_epochs": 7,
+        "global_step": 6951,
+        "mean_step_seconds": 1.3104535398572974,
+        "dev_seconds_min_max": [
+          1853.051784690997,
+          1882.620176933
+        ],
+        "deadline_overrun_seconds": 0.0
+      },
+      {
+        "run_id": "X1-L8-lr1e-5",
+        "kernel_version": 5,
+        "best": {
+          "epoch": 2,
+          "global_step": 1986,
+          "generation": "g-ce724d6e82c8457d8ce3e3d7d2154349",
+          "eer": 0.008833298000141333,
+          "roc_auc": 0.9993901272398376,
+          "macro_f1": 0.9904715246705977,
+          "decision_threshold": 7.74885248054705e-05
+        },
+        "runner_status": "early_stopped",
+        "workflow_seconds": 13964.0,
+        "runner_wall_seconds": 13919.733340030001,
+        "quota_before": {
+          "observed_utc": "2026-11-07T06:23:37.873989+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "0.00h",
+            "remaining": "30.00h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "0.00h",
+              "remaining": "30.00h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            }
+          ],
+          "remaining_hours": 30.0
+        },
+        "quota_after": {
+          "observed_utc": "2026-11-07T10:28:45.647551+00:00",
+          "gpu": {
+            "resource": "GPU",
+            "used": "3.88h",
+            "remaining": "26.12h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          "all_resources": [
+            {
+              "resource": "GPU",
+              "used": "3.88h",
+              "remaining": "26.12h",
+              "total": "30.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            },
+            {
+              "resource": "TPU",
+              "used": "0.00h",
+              "remaining": "20.00h",
+              "total": "20.00h",
+              "refreshAt": "2026-11-14T00:00:00"
+            }
+          ],
+          "remaining_hours": 26.12
+        },
+        "quota_used_hours": 3.879999999999999,
+        "quota_note": "API difference within same quota period",
+        "eer_percent": 0.8833298000141333,
+        "completed_epochs": 4,
+        "global_step": 3972,
+        "mean_step_seconds": 1.4709533192036766,
+        "dev_seconds_min_max": [
+          1667.1190782680005,
+          1696.5560365719998
+        ],
+        "deadline_overrun_seconds": 0.0
+      }
+    ],
+    "data_scope": {
+      "train_samples": 15885,
+      "train_shards": 57,
+      "dev_samples": 38777,
+      "dev_shards": 186,
+      "use_test": false
+    },
+    "source_dataset": {
+      "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+      "version": 2,
+      "bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+    },
+    "preflight_execution": {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        ".kaggle/xlsr-d028/preflight.py"
+      ],
+      "started_utc": "2026-11-06T13:02:42.593282+00:00",
+      "ended_utc": "2026-11-06T13:03:00.350364+00:00",
+      "exit_code": 0,
+      "seconds": 17.75649700000031
+    },
+    "x0_verifier_trial": {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        ".cache/t18/verify_run.py",
+        "C:/Users/Admin/Documents/DoAnTTNT/kaggle_outputs/xlsr-d028-x0-seed2026-s1",
+        "X0"
+      ],
+      "started_utc": "2026-11-06T13:06:58.704147+00:00",
+      "ended_utc": "2026-11-06T13:07:50.698534+00:00",
+      "seconds": 51.9943360000002,
+      "exit_code": 0
+    },
+    "commands": [
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T13:12:56.103403+00:00",
+        "ended_utc": "2026-11-06T13:12:58.894787+00:00",
+        "seconds": 2.7919090999998843,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0001-quota.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L2-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T13:13:01.759904+00:00",
+        "ended_utc": "2026-11-06T13:13:01.953392+00:00",
+        "seconds": 0.19337750000022425,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0002-verify-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L2-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T13:13:01.985495+00:00",
+        "ended_utc": "2026-11-06T13:13:06.008381+00:00",
+        "seconds": 4.022255500000028,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0003-push-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T13:43:06.011035+00:00",
+        "ended_utc": "2026-11-06T13:43:08.229098+00:00",
+        "seconds": 2.2172114000004512,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0004-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T14:13:08.236933+00:00",
+        "ended_utc": "2026-11-06T14:13:10.089219+00:00",
+        "seconds": 1.8525700000000143,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0005-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T14:43:10.096435+00:00",
+        "ended_utc": "2026-11-06T14:43:12.314105+00:00",
+        "seconds": 2.217777500000011,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0006-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T15:13:12.319941+00:00",
+        "ended_utc": "2026-11-06T15:13:15.542565+00:00",
+        "seconds": 3.2225053000001935,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0007-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T15:43:15.548119+00:00",
+        "ended_utc": "2026-11-06T15:43:17.693116+00:00",
+        "seconds": 2.1438780000007682,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0008-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T16:13:17.697213+00:00",
+        "ended_utc": "2026-11-06T16:13:20.087199+00:00",
+        "seconds": 2.390744700000141,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0009-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T16:43:20.093021+00:00",
+        "ended_utc": "2026-11-06T16:43:23.098385+00:00",
+        "seconds": 3.0052187999990565,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0010-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T17:13:23.103619+00:00",
+        "ended_utc": "2026-11-06T17:13:25.367017+00:00",
+        "seconds": 2.2631734000024153,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0011-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T17:43:25.374089+00:00",
+        "ended_utc": "2026-11-06T17:43:28.311333+00:00",
+        "seconds": 2.9374685999973735,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0012-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T22:46:41.845554+00:00",
+        "ended_utc": "2026-11-06T22:46:44.071580+00:00",
+        "seconds": 2.225812900000051,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0013-status-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T22:46:44.099236+00:00",
+        "ended_utc": "2026-11-06T22:46:46.841890+00:00",
+        "seconds": 2.743293299999891,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0014-logs-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T22:46:46.844204+00:00",
+        "ended_utc": "2026-11-06T22:46:48.660598+00:00",
+        "seconds": 1.8167055000000119,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0015-quota.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-06T22:46:48.664207+00:00",
+        "ended_utc": "2026-11-06T22:49:30.913047+00:00",
+        "seconds": 162.25028899999995,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0016-download-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+          "X1-L2-lr1e-5"
+        ],
+        "started_utc": "2026-11-06T22:49:30.942885+00:00",
+        "ended_utc": "2026-11-06T22:51:17.477490+00:00",
+        "seconds": 106.5337624,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0017-verify-X1-L2-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T22:51:18.018886+00:00",
+        "ended_utc": "2026-11-06T22:51:22.304277+00:00",
+        "seconds": 4.285537200000022,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0018-quota.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T23:17:28.936384+00:00",
+        "ended_utc": "2026-11-06T23:17:31.375335+00:00",
+        "seconds": 2.438890800000081,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0019-quota.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L4-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T23:17:35.019187+00:00",
+        "ended_utc": "2026-11-06T23:17:35.288203+00:00",
+        "seconds": 0.268705399999817,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0020-verify-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L4-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-06T23:17:35.328568+00:00",
+        "ended_utc": "2026-11-06T23:17:39.808518+00:00",
+        "seconds": 4.480188300000009,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0021-push-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-06T23:47:39.813368+00:00",
+        "ended_utc": "2026-11-06T23:47:42.169102+00:00",
+        "seconds": 2.355484100000467,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0022-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T00:17:42.187602+00:00",
+        "ended_utc": "2026-11-07T00:17:45.564416+00:00",
+        "seconds": 3.377452199999425,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0023-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T00:47:45.568938+00:00",
+        "ended_utc": "2026-11-07T00:47:48.239100+00:00",
+        "seconds": 2.6707634000003964,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0024-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T01:17:48.258353+00:00",
+        "ended_utc": "2026-11-07T01:17:51.378346+00:00",
+        "seconds": 3.1197143999997934,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0025-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T01:47:51.383427+00:00",
+        "ended_utc": "2026-11-07T01:47:53.636992+00:00",
+        "seconds": 2.254480200001126,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0026-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T02:17:53.657002+00:00",
+        "ended_utc": "2026-11-07T02:17:56.959284+00:00",
+        "seconds": 3.302639599998656,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0027-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T02:47:56.967901+00:00",
+        "ended_utc": "2026-11-07T02:47:59.024136+00:00",
+        "seconds": 2.057042899999942,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0028-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T03:17:59.029279+00:00",
+        "ended_utc": "2026-11-07T03:18:01.562319+00:00",
+        "seconds": 2.5325884000012593,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0029-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T03:48:01.566845+00:00",
+        "ended_utc": "2026-11-07T03:48:03.521735+00:00",
+        "seconds": 1.9557975999996415,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0030-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T04:18:03.528996+00:00",
+        "ended_utc": "2026-11-07T04:18:05.306906+00:00",
+        "seconds": 1.7730271000000357,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0031-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T04:48:05.328849+00:00",
+        "ended_utc": "2026-11-07T04:48:07.857607+00:00",
+        "seconds": 2.5284217999978864,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0032-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T05:18:07.863537+00:00",
+        "ended_utc": "2026-11-07T05:18:10.702311+00:00",
+        "seconds": 2.8393624999989697,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0033-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T05:48:10.708334+00:00",
+        "ended_utc": "2026-11-07T05:48:12.885908+00:00",
+        "seconds": 2.177165299999615,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0034-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T06:18:12.890299+00:00",
+        "ended_utc": "2026-11-07T06:18:15.352542+00:00",
+        "seconds": 2.4625751999992644,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0035-status-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T06:18:15.399496+00:00",
+        "ended_utc": "2026-11-07T06:18:18.033817+00:00",
+        "seconds": 2.63466519999929,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0036-logs-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-07T06:18:18.039350+00:00",
+        "ended_utc": "2026-11-07T06:18:20.587911+00:00",
+        "seconds": 2.5493307999968238,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0037-quota.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-07T06:18:20.600421+00:00",
+        "ended_utc": "2026-11-07T06:22:02.846950+00:00",
+        "seconds": 222.246543199999,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0038-download-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+          "X1-L4-lr1e-5"
+        ],
+        "started_utc": "2026-11-07T06:22:02.895221+00:00",
+        "ended_utc": "2026-11-07T06:23:35.276898+00:00",
+        "seconds": 92.38181629999963,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0039-verify-X1-L4-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-07T06:23:35.718770+00:00",
+        "ended_utc": "2026-11-07T06:23:37.873989+00:00",
+        "seconds": 2.1551756000008027,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0040-quota.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-07T06:23:40.839712+00:00",
+        "ended_utc": "2026-11-07T06:23:41.093286+00:00",
+        "seconds": 0.2526651000007405,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0041-verify-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr1e-5-seed2026"
+        ],
+        "started_utc": "2026-11-07T06:23:41.130032+00:00",
+        "ended_utc": "2026-11-07T06:23:45.303431+00:00",
+        "seconds": 4.173148299996683,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0042-push-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T06:53:45.307752+00:00",
+        "ended_utc": "2026-11-07T06:53:46.983003+00:00",
+        "seconds": 1.6804965999981505,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0043-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T07:23:46.992194+00:00",
+        "ended_utc": "2026-11-07T07:23:48.589685+00:00",
+        "seconds": 1.6044866000011098,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0044-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T07:53:48.597155+00:00",
+        "ended_utc": "2026-11-07T07:53:50.197978+00:00",
+        "seconds": 1.6029476999974577,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0045-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T09:28:32.574342+00:00",
+        "ended_utc": "2026-11-07T09:28:36.663979+00:00",
+        "seconds": 4.089682199999515,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0046-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T09:58:36.672479+00:00",
+        "ended_utc": "2026-11-07T09:58:39.293646+00:00",
+        "seconds": 2.6205816000001505,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0047-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T10:28:39.301216+00:00",
+        "ended_utc": "2026-11-07T10:28:41.252982+00:00",
+        "seconds": 1.9512957999977516,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0048-status-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-07T10:28:41.315586+00:00",
+        "ended_utc": "2026-11-07T10:28:44.009417+00:00",
+        "seconds": 2.6941342999998596,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0049-logs-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-07T10:28:44.015661+00:00",
+        "ended_utc": "2026-11-07T10:28:45.647551+00:00",
+        "seconds": 1.6317161999977543,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0050-quota.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-07T10:28:45.658721+00:00",
+        "ended_utc": "2026-11-07T10:34:28.839428+00:00",
+        "seconds": 343.18141040000046,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0051-download-X1-L8-lr1e-5.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+          "X1-L8-lr1e-5"
+        ],
+        "started_utc": "2026-11-07T10:34:28.887514+00:00",
+        "ended_utc": "2026-11-07T10:36:09.553537+00:00",
+        "seconds": 100.66570769999817,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0052-verify-X1-L8-lr1e-5.log"
+      }
+    ],
+    "readonly_source_status_commands": [
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T13:12:50.962743+00:00",
+        "ended_utc": "2026-11-06T13:12:56.100890+00:00",
+        "seconds": 5.137896600000204,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T13:12:59.041975+00:00",
+        "ended_utc": "2026-11-06T13:13:01.721345+00:00",
+        "seconds": 2.6788501000000906,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T22:46:39.028764+00:00",
+        "ended_utc": "2026-11-06T22:46:41.844548+00:00",
+        "seconds": 2.81526359999998,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T23:17:25.427062+00:00",
+        "ended_utc": "2026-11-06T23:17:28.932797+00:00",
+        "seconds": 3.5054847999999765,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-06T23:17:31.601973+00:00",
+        "ended_utc": "2026-11-06T23:17:34.983293+00:00",
+        "seconds": 3.381340200000068,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-07T06:23:38.003040+00:00",
+        "ended_utc": "2026-11-07T06:23:40.832167+00:00",
+        "seconds": 2.8288463999997475,
+        "exit_code": 0,
+        "stdout": "{\"status\": \"ready\", \"current_version_number\": 2}",
+        "stderr": ""
+      }
+    ],
+    "command_directory": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands",
+    "kernel_log_elapsed": {
+      "X1-L2-lr1e-5": {
+        "final_log_elapsed_seconds": 27983.633871442,
+        "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0014-logs-X1-L2-lr1e-5.log"
+      },
+      "X1-L4-lr1e-5": {
+        "final_log_elapsed_seconds": 23828.66328139,
+        "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0036-logs-X1-L4-lr1e-5.log"
+      },
+      "X1-L8-lr1e-5": {
+        "final_log_elapsed_seconds": 13970.53894049,
+        "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0049-logs-X1-L8-lr1e-5.log"
+      }
+    },
+    "scope": {
+      "code_config_test_profile_and_main_protected_sha256_unchanged": true,
+      "worktree_protected_files": 246,
+      "main_protected_files": 156,
+      "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+      "only_new_worktree_status": "?? reports/xlsr_t18_seed2026_x1.json",
+      "strict_main_git_status_matches_baseline": false,
+      "strict_scope_script_exit_code": 1,
+      "external_main_decision_change": {
+        "observed_utc": "2026-11-07T06:26:40.788619+00:00",
+        "path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\decisions.md",
+        "sha256": "e4dc77022dde25e7d6db3795a77a4debad869a76ddfa52870d67e26822e99e54",
+        "mtime_utc": "2026-11-06T13:07:10.287196+00:00",
+        "main_status_difference": [
+          " M docs/decisions.md"
+        ],
+        "scope_audit_raw_passed": false,
+        "cause": "Main Git status đã khác baseline vì thêm D030. Không có lệnh T18 nào ghi file này; thời điểm sửa trên filesystem là 2026-11-06T13:07:10Z, trước khi gửi L2.",
+        "content": "D030 đăng ký tiêu chí xem xét nâng trần sau khi đủ ba run X1. Văn bản giữ nguyên D028/D029 và không mở thêm cổng.",
+        "handling": "Đã đọc diff và giữ nguyên; không áp dụng nâng trần hoặc chọn tầng trong T18. Không mâu thuẫn việc chạy lưới đã được giao.",
+        "protected_worktree_files_unchanged": 246,
+        "protected_main_files_unchanged": 156,
+        "t18_worktree_numstat_unchanged": true,
+        "actor": "Không suy đoán người hoặc agent đã ghi file."
+      },
+      "note": "Kiểm nghiêm ngặt Git status chính exit1 vì D030 phát sinh ngoài T18. Giữ kết quả này, không đổi thành đạt tuyệt đối; 402 file code/config/test/profile/B0/R1 được bảo vệ vẫn khớp SHA. Không hoàn tác D030.",
+      "poll_intervals_at_least_1800_seconds": true,
+      "minimum_poll_response_to_next_start_seconds": 1800.004097
+    },
+    "additional_data_sanity": {
+      "passed": true,
+      "started_utc": "2026-11-07T12:01:22.636138+00:00",
+      "ended_utc": "2026-11-07T12:01:24.119547+00:00",
+      "seconds": 1.4842523999977857,
+      "use_test": false,
+      "train_dev_intersections": {
+        "speaker_id": 0,
+        "file": 0,
+        "waveform_sha256": 0
+      },
+      "artifacts": {
+        "train": {
+          "samples": 15885,
+          "shards": 57,
+          "speakers": 153,
+          "split": "closed_train",
+          "target_sample_rate": 16000,
+          "checked_waveforms": 32,
+          "selected_indices": [
+            0,
+            1019,
+            2038,
+            3057,
+            4076,
+            5095,
+            6114,
+            7133,
+            7134,
+            7755,
+            8376,
+            8997,
+            9618,
+            10239,
+            10860,
+            11481,
+            11482,
+            12103,
+            12724,
+            13345,
+            13966,
+            14587,
+            15208,
+            15829,
+            15830,
+            15838,
+            15845,
+            15853,
+            15861,
+            15869,
+            15876,
+            15884
+          ],
+          "artifact_utt_type_counts": {
+            "bonafide": 7134,
+            "voice_conversion": 4348,
+            "adversarial_attack": 4348,
+            "replay": 55
+          },
+          "sampled_utt_type_counts": {
+            "bonafide": 8,
+            "voice_conversion": 8,
+            "adversarial_attack": 8,
+            "replay": 8
+          },
+          "cropped_samples": 64000,
+          "duration_seconds": 4.0,
+          "amplitude_policy": "peak",
+          "preprocessor_normalization": "processor_zero_mean_unit_variance",
+          "prepared_peak_range": [
+            0.6253219246864319,
+            0.9500000476837158
+          ],
+          "prepared_rms_range": [
+            0.08429751545190811,
+            0.2319995015859604
+          ],
+          "normalized_abs_mean_max": 1.2397766369076635e-08,
+          "normalized_variance_range": [
+            0.9999859929084778,
+            0.9999980330467224
+          ],
+          "sampled_waveform_sha256_matches_index": true,
+          "metadata_index_verified_by_existing_loader": true
+        },
+        "dev_full": {
+          "samples": 38777,
+          "shards": 186,
+          "speakers": 172,
+          "split": "closed_dev",
+          "target_sample_rate": 16000,
+          "checked_waveforms": 32,
+          "selected_indices": [
+            0,
+            2021,
+            4043,
+            6064,
+            7316,
+            7555,
+            8564,
+            10585,
+            12627,
+            16246,
+            16483,
+            18769,
+            20519,
+            22130,
+            23880,
+            25772,
+            28756,
+            30674,
+            32425,
+            33625,
+            35376,
+            38232,
+            38536,
+            38577,
+            38594,
+            38611,
+            38668,
+            38685,
+            38736,
+            38742,
+            38759,
+            38776
+          ],
+          "artifact_utt_type_counts": {
+            "bonafide": 14151,
+            "adversarial_attack": 12253,
+            "voice_conversion": 12253,
+            "replay": 120
+          },
+          "sampled_utt_type_counts": {
+            "bonafide": 8,
+            "adversarial_attack": 8,
+            "voice_conversion": 8,
+            "replay": 8
+          },
+          "cropped_samples": 64000,
+          "duration_seconds": 4.0,
+          "amplitude_policy": "peak",
+          "preprocessor_normalization": "processor_zero_mean_unit_variance",
+          "prepared_peak_range": [
+            0.7538328170776367,
+            0.9500000476837158
+          ],
+          "prepared_rms_range": [
+            0.06900350004434586,
+            0.25669053196907043
+          ],
+          "normalized_abs_mean_max": 1.5854835666573308e-08,
+          "normalized_variance_range": [
+            0.9999788999557495,
+            0.9999986290931702
+          ],
+          "sampled_waveform_sha256_matches_index": true,
+          "metadata_index_verified_by_existing_loader": true
+        }
+      },
+      "scope_limit": "Speaker/file/waveform-hash intersections trên toàn index train/dev; checksum waveform, biên độ, 16kHz/4 giây và normalization chỉ kiểm 32 mẫu phân tầng mỗi artifact. GPU đã rehash toàn artifact đầu mỗi run theo report."
+    },
+    "deviations_and_events": [
+      {
+        "type": "user_authorized_operational_change",
+        "details": {
+          "date": "2026-11-07",
+          "recorded_utc": "2026-11-06T23:17:13.803792+00:00",
+          "user_quote": "quota phải đến thứ 2 mới làm mới cứ tiếp tục gửi đi",
+          "user_authorized": true,
+          "policy": "continue_with_available_quota_no_11_5h_gate",
+          "scope": "Bỏ ngưỡng quota>=11,5h và chờ refresh cho L4/L8 đang pending; vẫn đọc và ghi quota trước/sau.",
+          "unchanged_constraints": "Tuần tự L2→L4→L8, mỗi profile tối đa một push; dừng nếu ERROR/paused/verifier/timing không đạt; không sửa source/config/profile hoặc publish dataset."
+        }
+      },
+      {
+        "type": "external_main_file_change",
+        "details": "docs/decisions.md chính thêm D030, mtime trước push L2; đã đọc, giữ nguyên, không dùng để đổi trần hoặc chọn cấu hình."
+      },
+      {
+        "type": "user_interrupted_monitoring",
+        "details": "Có khoảng dừng giám sát; tiếp tục từ state và guard có sẵn, không gửi lại profile."
+      },
+      {
+        "type": "transient_status_read_errors",
+        "details": [
+          {
+            "command": [
+              "kaggle",
+              "-W",
+              "kernels",
+              "status",
+              "ngctnnguyn1111/doanttnt-xlsr-d028"
+            ],
+            "started_utc": "2026-11-06T14:43:10.096435+00:00",
+            "ended_utc": "2026-11-06T14:43:12.314105+00:00",
+            "seconds": 2.217777500000011,
+            "exit_code": 1,
+            "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0006-status-X1-L2-lr1e-5.log"
+          },
+          {
+            "command": [
+              "kaggle",
+              "-W",
+              "kernels",
+              "status",
+              "ngctnnguyn1111/doanttnt-xlsr-d028"
+            ],
+            "started_utc": "2026-11-07T03:17:59.029279+00:00",
+            "ended_utc": "2026-11-07T03:18:01.562319+00:00",
+            "seconds": 2.5325884000012593,
+            "exit_code": 1,
+            "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18\\commands\\0029-status-X1-L4-lr1e-5.log"
+          }
+        ],
+        "handling": "Chờ tối thiểu30 phút rồi đọc tiếp; không xem lỗi API đọc là kernel ERROR."
+      },
+      {
+        "type": "quota_refresh",
+        "details": "L4 đi qua kỳ quota mới: trước8,67h/sau30h, không suy quota tiêu thụ bằng hiệu hai số này."
+      },
+      {
+        "type": "additional_read_only_check",
+        "details": "Kiểm toàn index train/dev theo speaker/file/waveform hash, và64 waveform mẫu cho sample-rate/độ dài/biên độ/normalization; không đọc test."
+      }
+    ],
+    "not_performed": [
+      "Chọn tầng/LR",
+      "Chạy LR3e-5 hoặc seed khác",
+      "Publish source hay checkpoint dataset",
+      "Đọc test-full",
+      "Commit/merge/push Git"
+    ],
+    "ready_for_training": true,
+    "selection_performed": false,
+    "unit_tests_rerun": false,
+    "unit_test_note": "T18 không thay source/config/test; kiểm thực tế bằng preflight, verifier X0 và ba verifier X1; không tuyên bố chạy lại toàn suite.",
+    "changed_or_created": {
+      "worktree_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\reports\\xlsr_t18_seed2026_x1.json",
+      "cache_scripts_logs_and_audits": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t18",
+      "main_current_state": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\current_state.md",
+      "main_output_directories": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L2-lr1e-5-seed2026",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L4-lr1e-5-seed2026",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026"
+      ]
+    },
+    "next_step": "Dừng chờ Claude kiểm độc lập; không tự chọn cấu hình."
+  }
+}

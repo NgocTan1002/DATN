@@ -1,0 +1,1614 @@
+{
+  "task": "T16",
+  "status": "blocked_before_dataset_publish",
+  "date": "2026-11-06",
+  "user_authorization": "Cho phép dry-run GPU",
+  "stopped_at_step": 3,
+  "ready_for_training": false,
+  "use_test": false,
+  "preflight": {
+    "exit_code": 0,
+    "bundle_sha256": "a5955c07a6c3859969227966baf4694f051f0a03a7a55c5357422d27704e6e0a",
+    "source_tree_sha256": "34a0256dcf5064992baa3a133194abbdd4eb98068121821ef745b085c70eca1d",
+    "file_count": 73,
+    "source_profile_bytes_unchanged": true,
+    "report": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\preflight-generated.json"
+  },
+  "dataset": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+    "version": null,
+    "published": false,
+    "remote_list_result": "No datasets found",
+    "bundle_downloaded": false,
+    "remote_bundle_verified": false
+  },
+  "kernel": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "profile": "X1-L2-lr1e-5-seed2026-dry-run",
+    "version": null,
+    "push_attempts": 0,
+    "status": "not_submitted",
+    "duration_seconds": null,
+    "output_downloaded": false,
+    "intended_output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1"
+  },
+  "quota_before": [
+    {
+      "resource": "GPU",
+      "used": "5.91h",
+      "remaining": "24.09h",
+      "total": "30.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    },
+    {
+      "resource": "TPU",
+      "used": "0.00h",
+      "remaining": "20.00h",
+      "total": "20.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    }
+  ],
+  "quota_after": [
+    {
+      "resource": "GPU",
+      "used": "5.91h",
+      "remaining": "24.09h",
+      "total": "30.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    },
+    {
+      "resource": "TPU",
+      "used": "0.00h",
+      "remaining": "20.00h",
+      "total": "20.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    }
+  ],
+  "blocker": {
+    "command": [
+      "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+      "scripts/kaggle_workflow.py",
+      "--config",
+      ".kaggle/xlsr-d028/project.json",
+      "publish-source",
+      "--message",
+      "T16 approved private XLS-R D028 source; locked bundle a5955c07",
+      "--confirm-private-upload"
+    ],
+    "exit_code": 1,
+    "message": "Kaggle CLI không trả về JSON hợp lệ.",
+    "cause": "CLI 2.2.4 prepends an outdated-version warning to datasets list stdout. The raw result is Warning + No datasets found; kaggle_dataset_exists compares the entire stdout against No datasets found then attempts json.loads and fails. With official -W flag, the same read-only query returns No datasets found cleanly.",
+    "evidence": [
+      ".cache/t16/publish-source.log",
+      ".cache/t16/dataset-list-raw.log",
+      ".cache/t16/dataset-list-clean.log"
+    ],
+    "mutation_boundary": "Failure occurred in kaggle_dataset_exists before datasets create/version. No upload or kernel push command was called.",
+    "required_next_decision": "T16 prohibits modifying source/profile and locks bundle SHA-256. Stop for an authorized follow-up to handle CLI warnings; a source fix would require a newly verified bundle hash before publishing."
+  },
+  "checks": {
+    "a_gpu_report_status": {
+      "status": "not_run",
+      "reason": "Stopped at publish-source, before dataset upload and kernel push."
+    },
+    "b_gpu_and_offline_environment": {
+      "status": "not_run",
+      "reason": "Stopped at publish-source, before dataset upload and kernel push."
+    },
+    "c_remote_pretrained_checksums": {
+      "status": "not_run",
+      "reason": "Stopped at publish-source, before dataset upload and kernel push."
+    },
+    "d_remote_data_artifacts": {
+      "status": "not_run",
+      "reason": "Stopped at publish-source, before dataset upload and kernel push."
+    },
+    "e_remote_grid_and_modes": {
+      "status": "not_run",
+      "reason": "Stopped at publish-source, before dataset upload and kernel push."
+    }
+  },
+  "f_timing_quota": {
+    "kernel_duration_seconds": null,
+    "gpu_remaining_before": "24.09h",
+    "gpu_remaining_after": "24.09h",
+    "status": "quota_read_kernel_not_submitted"
+  },
+  "commands": [
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "list",
+        "--mine",
+        "--search",
+        "doanttnt-xlsr-d028-source",
+        "--page-size",
+        "100",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:34:37.138963+00:00",
+      "ended_utc": "2026-11-06T02:34:39.235338+00:00",
+      "seconds": 2.096916300000089,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\dataset-list-clean.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "datasets",
+        "list",
+        "--mine",
+        "--search",
+        "doanttnt-xlsr-d028-source",
+        "--page-size",
+        "100",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:34:31.352868+00:00",
+      "ended_utc": "2026-11-06T02:34:33.424618+00:00",
+      "seconds": 2.0713633999999956,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\dataset-list-raw.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".kaggle/xlsr-d028/preflight.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:31:07.922472+00:00",
+      "ended_utc": "2026-11-06T02:31:26.772823+00:00",
+      "seconds": 18.85017830000004,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\preflight.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "publish-source",
+        "--message",
+        "T16 approved private XLS-R D028 source; locked bundle a5955c07",
+        "--confirm-private-upload"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:33:58.452130+00:00",
+      "ended_utc": "2026-11-06T02:34:00.930904+00:00",
+      "seconds": 2.478092400000037,
+      "exit_code": 1,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\publish-source.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:34:42.833113+00:00",
+      "ended_utc": "2026-11-06T02:34:44.778138+00:00",
+      "seconds": 1.944587599999977,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\quota-after.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T02:32:07.784410+00:00",
+      "ended_utc": "2026-11-06T02:32:09.454710+00:00",
+      "seconds": 1.6696204999999509,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16\\quota-before.log"
+    }
+  ],
+  "final_git_checks": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--numstat"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "timestamp_utc": "2026-11-06T02:36:02.675803+00:00",
+      "exit_code": 0,
+      "stdout": "10\t0\tdocs/decisions.md\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "timestamp_utc": "2026-11-06T02:36:02.766170+00:00",
+      "exit_code": 0,
+      "stdout": " M docs/decisions.md\n M src/training/full_training.py\n M src/training/xlsr_checkpoint.py\n?? .gitattributes\n?? configs/xlsr_training.json\n?? docs/guides/xlsr_training.md\n?? reports/xlsr_t15_cpu_smoke.json\n?? reports/xlsr_t15_eol_normalization.json\n?? reports/xlsr_t15_kaggle_preflight.json\n?? reports/xlsr_training_dry_run.json\n?? scripts/train_xlsr.py\n?? tests/test_xlsr_runner.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+      "timestamp_utc": "2026-11-06T02:36:02.864537+00:00",
+      "exit_code": 0,
+      "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+      "timestamp_utc": "2026-11-06T02:36:03.059161+00:00",
+      "exit_code": 0,
+      "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "timestamp_utc": "2026-11-06T02:36:03.109859+00:00",
+      "exit_code": 0,
+      "stdout": " M docs/decisions.md\n M src/training/full_training.py\n M src/training/xlsr_checkpoint.py\n?? .gitattributes\n?? configs/xlsr_training.json\n?? docs/guides/xlsr_training.md\n?? reports/xlsr_t15_cpu_smoke.json\n?? reports/xlsr_t15_eol_normalization.json\n?? reports/xlsr_t15_kaggle_preflight.json\n?? reports/xlsr_t16_kaggle_gpu_dry_run.json\n?? reports/xlsr_training_dry_run.json\n?? scripts/train_xlsr.py\n?? tests/test_xlsr_runner.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--numstat"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "timestamp_utc": "2026-11-06T02:36:03.176659+00:00",
+      "exit_code": 0,
+      "stdout": "10\t0\tdocs/decisions.md\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "timestamp_utc": "2026-11-06T02:36:03.249907+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "source_config_tests_profiles_changed": false,
+  "local_preflight_report_restored_to_original_bytes": true,
+  "files_created": [
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\reports\\xlsr_t16_kaggle_gpu_dry_run.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16/ (logs, execution records, baseline, preflight evidence)"
+  ],
+  "files_modified": [
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\current_state.md"
+  ],
+  "deviations": [
+    "Steps 3-7 could not complete because the publish command failed before uploading; stopped under the explicit prohibition on source changes. No second publish attempt or kernel push."
+  ],
+  "next_step": "Wait for user/Claude follow-up; no source edits, training gate opening, or kernel retry.",
+  "t16b": {
+    "status": "local_complete_pending_claude_review",
+    "checked_utc": "2026-11-06T02:48:01.392226+00:00",
+    "old_bundle_sha256": "a5955c07a6c3859969227966baf4694f051f0a03a7a55c5357422d27704e6e0a",
+    "new_bundle_sha256": "754bf2a8ee6d8bb7bbdb9f2984541d039e3578721c06724992ed8567c4a93691",
+    "old_source_tree_sha256": "34a0256dcf5064992baa3a133194abbdd4eb98068121821ef745b085c70eca1d",
+    "new_source_tree_sha256": "6f392d70eb872d4249fc3f913eb07abb1bb29cf077cb7d6fef84ccf43485d188",
+    "member_count": 73,
+    "changed_members": [
+      "scripts/kaggle_workflow.py"
+    ],
+    "unchanged_members": 72,
+    "member_comparison": {
+      "configs/audio.json": {
+        "old_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+        "new_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+        "unchanged": true
+      },
+      "configs/b0_full_training.json": {
+        "old_sha256": "e796b2037dd5952b72d5d0f2b8f60feb753919fa552da0685bd723b3e80e6487",
+        "new_sha256": "e796b2037dd5952b72d5d0f2b8f60feb753919fa552da0685bd723b3e80e6487",
+        "unchanged": true
+      },
+      "configs/b0_v2_training.json": {
+        "old_sha256": "f22deebddfbba2573a277983b20f85c314aa47626868d34ee1c869bd6a5552ed",
+        "new_sha256": "f22deebddfbba2573a277983b20f85c314aa47626868d34ee1c869bd6a5552ed",
+        "unchanged": true
+      },
+      "configs/kaggle_cli.example.json": {
+        "old_sha256": "d8b8ca88a3226ba70fbc06ec839c9891f2f25d6b36cd579b6cd95d01075ccc1a",
+        "new_sha256": "d8b8ca88a3226ba70fbc06ec839c9891f2f25d6b36cd579b6cd95d01075ccc1a",
+        "unchanged": true
+      },
+      "configs/lfcc_lcnn.json": {
+        "old_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+        "new_sha256": "6f7a112139d397f9dd2f2df712713dbe1b0183ee872f68b5c5246799feaaf9e0",
+        "unchanged": true
+      },
+      "configs/xlsr_normalization_pilot.json": {
+        "old_sha256": "18148e4b272b3c6335cbcb5d60852b159d6b4f1f8a3f4f243679d89f4a7b505a",
+        "new_sha256": "18148e4b272b3c6335cbcb5d60852b159d6b4f1f8a3f4f243679d89f4a7b505a",
+        "unchanged": true
+      },
+      "configs/xlsr_pretrained_candidate.json": {
+        "old_sha256": "d19c60000e62dde3b37466bad29f80cd17c63f45f98cae099886c9b288aefcc2",
+        "new_sha256": "d19c60000e62dde3b37466bad29f80cd17c63f45f98cae099886c9b288aefcc2",
+        "unchanged": true
+      },
+      "configs/xlsr_smoke.json": {
+        "old_sha256": "4817ce51967314c257899b175ac6ef1922b1c11207fb23b84e58bb27c1a9888d",
+        "new_sha256": "4817ce51967314c257899b175ac6ef1922b1c11207fb23b84e58bb27c1a9888d",
+        "unchanged": true
+      },
+      "configs/xlsr_training.json": {
+        "old_sha256": "55d3a3b18c3d66b125c3f98f0338a156099cb3e05a520100ba00af836f894a10",
+        "new_sha256": "55d3a3b18c3d66b125c3f98f0338a156099cb3e05a520100ba00af836f894a10",
+        "unchanged": true
+      },
+      "deploy/kaggle/runner.py": {
+        "old_sha256": "c3f83f99e157005ad9b5f4a7851ab26d0b0d816153dd7949ed44ca4b0a2c188d",
+        "new_sha256": "c3f83f99e157005ad9b5f4a7851ab26d0b0d816153dd7949ed44ca4b0a2c188d",
+        "unchanged": true
+      },
+      "requirements-kaggle.txt": {
+        "old_sha256": "ac1bd6778965062bbc8d00ec27e178125b19c794035f2d3bb9b5fd8f642a283f",
+        "new_sha256": "ac1bd6778965062bbc8d00ec27e178125b19c794035f2d3bb9b5fd8f642a283f",
+        "unchanged": true
+      },
+      "scripts/audio_smoke_test.py": {
+        "old_sha256": "d3f99b0d284fa7ef90b2366efdcd06322519007cbef6fed6bf5667c4beeb189e",
+        "new_sha256": "d3f99b0d284fa7ef90b2366efdcd06322519007cbef6fed6bf5667c4beeb189e",
+        "unchanged": true
+      },
+      "scripts/audit_amplitude.py": {
+        "old_sha256": "aea9a96220af04d6748b4083621e7b9fe2363b236151fde749179ab6b2cc7471",
+        "new_sha256": "aea9a96220af04d6748b4083621e7b9fe2363b236151fde749179ab6b2cc7471",
+        "unchanged": true
+      },
+      "scripts/audit_development_manifest_content.py": {
+        "old_sha256": "b2cdab8aa86a399afb28677497626546d04006de167e2a02176ff1367ebe8b39",
+        "new_sha256": "b2cdab8aa86a399afb28677497626546d04006de167e2a02176ff1367ebe8b39",
+        "unchanged": true
+      },
+      "scripts/audit_local_storage.py": {
+        "old_sha256": "ed3133c8311cfe89790f2f976682093eb5e52d735e417ad4f5fb5f1a459079b2",
+        "new_sha256": "ed3133c8311cfe89790f2f976682093eb5e52d735e417ad4f5fb5f1a459079b2",
+        "unchanged": true
+      },
+      "scripts/audit_metadata.py": {
+        "old_sha256": "9bbb92916ebb569e6b5478b7b7d5fb192a8860bb3ed4a3b8abc43a191c84afbd",
+        "new_sha256": "9bbb92916ebb569e6b5478b7b7d5fb192a8860bb3ed4a3b8abc43a191c84afbd",
+        "unchanged": true
+      },
+      "scripts/benchmark_b0_v2_cpu.py": {
+        "old_sha256": "6938220735708c485384468685776ec7de9a30b1261f672237ca8514041254bd",
+        "new_sha256": "6938220735708c485384468685776ec7de9a30b1261f672237ca8514041254bd",
+        "unchanged": true
+      },
+      "scripts/benchmark_batch_read.py": {
+        "old_sha256": "f2bea8045d860eb1f42bb9eb27f6cb15c1ad62145541ae110ac3e1292f0ca3a7",
+        "new_sha256": "f2bea8045d860eb1f42bb9eb27f6cb15c1ad62145541ae110ac3e1292f0ca3a7",
+        "unchanged": true
+      },
+      "scripts/benchmark_data_pipeline.py": {
+        "old_sha256": "a82edd179f57c330b649f6deb4ca6ff0cc1cc649d1b7f59a4329a7ca3acc162e",
+        "new_sha256": "a82edd179f57c330b649f6deb4ca6ff0cc1cc649d1b7f59a4329a7ca3acc162e",
+        "unchanged": true
+      },
+      "scripts/benchmark_dataloader_options.py": {
+        "old_sha256": "1feabde45c278d7024af3d1bf6771f517ed9addfda80c3091786d488bb535946",
+        "new_sha256": "1feabde45c278d7024af3d1bf6771f517ed9addfda80c3091786d488bb535946",
+        "unchanged": true
+      },
+      "scripts/benchmark_manifest_loaders.py": {
+        "old_sha256": "ad84e168a5b3e15b1a71fcb51ff41fb2731e00887d07ef3b71e1843254e205c3",
+        "new_sha256": "ad84e168a5b3e15b1a71fcb51ff41fb2731e00887d07ef3b71e1843254e205c3",
+        "unchanged": true
+      },
+      "scripts/benchmark_packed_artifact.py": {
+        "old_sha256": "31fe113190791b1ee086bf2d9d378015a516171c0f547014c5924dfcf9f095a7",
+        "new_sha256": "31fe113190791b1ee086bf2d9d378015a516171c0f547014c5924dfcf9f095a7",
+        "unchanged": true
+      },
+      "scripts/benchmark_xlsr_cuda.py": {
+        "old_sha256": "ee52a14c7efd0b3f881a6f71037d334533592557b92977952e5c46eee94e1a87",
+        "new_sha256": "ee52a14c7efd0b3f881a6f71037d334533592557b92977952e5c46eee94e1a87",
+        "unchanged": true
+      },
+      "scripts/build_packed_artifacts.py": {
+        "old_sha256": "cd0110ea8bf806804e6be4cc4e23803a6560d0d55a7094d6b2b5aed777f7f899",
+        "new_sha256": "cd0110ea8bf806804e6be4cc4e23803a6560d0d55a7094d6b2b5aed777f7f899",
+        "unchanged": true
+      },
+      "scripts/check_b0_full_smoke.py": {
+        "old_sha256": "edef9860f9c20973d55a91ff3551df292ab87c1e1603c87e16718d6889da72a4",
+        "new_sha256": "edef9860f9c20973d55a91ff3551df292ab87c1e1603c87e16718d6889da72a4",
+        "unchanged": true
+      },
+      "scripts/check_leakage.py": {
+        "old_sha256": "d1aa5aee58e405eb44aaab4adc429c0f4b8abbf9ced48b25ebf5b233115cdf61",
+        "new_sha256": "d1aa5aee58e405eb44aaab4adc429c0f4b8abbf9ced48b25ebf5b233115cdf61",
+        "unchanged": true
+      },
+      "scripts/check_packed_parity.py": {
+        "old_sha256": "ffaa9b9c69d419e8cc0e474077ec227357c78d58aefc47c75747dccbb0ac5115",
+        "new_sha256": "ffaa9b9c69d419e8cc0e474077ec227357c78d58aefc47c75747dccbb0ac5115",
+        "unchanged": true
+      },
+      "scripts/download_vsasv_metadata.py": {
+        "old_sha256": "dbf3601525926a18a4e44b87f263b916e635e1420183a97a189233ee81ac6b4a",
+        "new_sha256": "dbf3601525926a18a4e44b87f263b916e635e1420183a97a189233ee81ac6b4a",
+        "unchanged": true
+      },
+      "scripts/estimate_b0_full_training_budget.py": {
+        "old_sha256": "389b3f5f7efd612b1e9509b1694a9d2e75fa7c1ac476a519265df0c916552467",
+        "new_sha256": "389b3f5f7efd612b1e9509b1694a9d2e75fa7c1ac476a519265df0c916552467",
+        "unchanged": true
+      },
+      "scripts/estimate_runtime.py": {
+        "old_sha256": "83b6e2630bf4495e59e630e84a1a3b982faa0d1820163175897a1267dd8aa93a",
+        "new_sha256": "83b6e2630bf4495e59e630e84a1a3b982faa0d1820163175897a1267dd8aa93a",
+        "unchanged": true
+      },
+      "scripts/ingest_evaluation_shards.py": {
+        "old_sha256": "896c01bf2a5326e110c4050d480abc18e0e6b57b409a7da7e8773d6b28d3eaf1",
+        "new_sha256": "896c01bf2a5326e110c4050d480abc18e0e6b57b409a7da7e8773d6b28d3eaf1",
+        "unchanged": true
+      },
+      "scripts/kaggle_workflow.py": {
+        "old_sha256": "6920c0bafaee63bad576910a426e47c7d3463ae712d2720537acfa025048d135",
+        "new_sha256": "d758f9a3438bb47a9978a80130f00f93833d7384b29a20193fbee876615c06e5",
+        "unchanged": false
+      },
+      "scripts/make_development_manifest.py": {
+        "old_sha256": "6f1b68a23531cb71d8312054d24e7d038320b2be848957ba1c8c6ce78e24d646",
+        "new_sha256": "6f1b68a23531cb71d8312054d24e7d038320b2be848957ba1c8c6ce78e24d646",
+        "unchanged": true
+      },
+      "scripts/make_evaluation_manifest.py": {
+        "old_sha256": "7035cc049b62932ed71cf6c93a1b746925cd8588681d23e5dbb64fb4d08d43ff",
+        "new_sha256": "7035cc049b62932ed71cf6c93a1b746925cd8588681d23e5dbb64fb4d08d43ff",
+        "unchanged": true
+      },
+      "scripts/make_smoke_subset.py": {
+        "old_sha256": "6e7d38884e6df9bd90e3e95fe1966b95028955ceaafed64e9ad5dc20a3d2a21f",
+        "new_sha256": "6e7d38884e6df9bd90e3e95fe1966b95028955ceaafed64e9ad5dc20a3d2a21f",
+        "unchanged": true
+      },
+      "scripts/make_splits.py": {
+        "old_sha256": "3963930586f7f63ddbfcb7242c5df8c1f81cecb490d4287c5417ec82a7e2fac9",
+        "new_sha256": "3963930586f7f63ddbfcb7242c5df8c1f81cecb490d4287c5417ec82a7e2fac9",
+        "unchanged": true
+      },
+      "scripts/measure_lfcc_batch_effect.py": {
+        "old_sha256": "7776b72cdfa0b6453df28fd11f5b17cf4dbd7f57eef1cdf180bf4be255ece661",
+        "new_sha256": "7776b72cdfa0b6453df28fd11f5b17cf4dbd7f57eef1cdf180bf4be255ece661",
+        "unchanged": true
+      },
+      "scripts/plan_evaluation_shards.py": {
+        "old_sha256": "4591420b0b748a3b62b94b9e420e56415111674ae0a67b790e7cabae478822aa",
+        "new_sha256": "4591420b0b748a3b62b94b9e420e56415111674ae0a67b790e7cabae478822aa",
+        "unchanged": true
+      },
+      "scripts/smoke_test_dataset_loader.py": {
+        "old_sha256": "2a0de492d7368912b004eeadc4ca62394a5928dcbef23265a4ede4e0e22661a7",
+        "new_sha256": "2a0de492d7368912b004eeadc4ca62394a5928dcbef23265a4ede4e0e22661a7",
+        "unchanged": true
+      },
+      "scripts/smoke_test_development_manifest_loader.py": {
+        "old_sha256": "63b5a105d15be89741b1c6f09cc63b270f60963048ac6ef52e5ce7841c02f898",
+        "new_sha256": "63b5a105d15be89741b1c6f09cc63b270f60963048ac6ef52e5ce7841c02f898",
+        "unchanged": true
+      },
+      "scripts/smoke_test_xlsr.py": {
+        "old_sha256": "ad63512fd71bf465ed533cc8a7bbc27957ad20d67abeeafc56c82afdef79c9ff",
+        "new_sha256": "ad63512fd71bf465ed533cc8a7bbc27957ad20d67abeeafc56c82afdef79c9ff",
+        "unchanged": true
+      },
+      "scripts/smoke_train_lfcc_lcnn.py": {
+        "old_sha256": "03294d869537714d863dc88131ff2899f308f534361a542731fb0c1a346324cb",
+        "new_sha256": "03294d869537714d863dc88131ff2899f308f534361a542731fb0c1a346324cb",
+        "unchanged": true
+      },
+      "scripts/summarize_b0_benchmark.py": {
+        "old_sha256": "086578b705089c50b4e4253d36ba4eb0bf7d116bc45c99ff62b5d864c0102cf5",
+        "new_sha256": "086578b705089c50b4e4253d36ba4eb0bf7d116bc45c99ff62b5d864c0102cf5",
+        "unchanged": true
+      },
+      "scripts/train_b0.py": {
+        "old_sha256": "aa260cbad834a64e61d8575618ce5b4b17ddd1695c5b6eedcb49596995114072",
+        "new_sha256": "aa260cbad834a64e61d8575618ce5b4b17ddd1695c5b6eedcb49596995114072",
+        "unchanged": true
+      },
+      "scripts/train_b0_full.py": {
+        "old_sha256": "ac0e3d1bdffeda3b34ca0fefa529f07cc7879bed7916af6f9df540ccdc90644e",
+        "new_sha256": "ac0e3d1bdffeda3b34ca0fefa529f07cc7879bed7916af6f9df540ccdc90644e",
+        "unchanged": true
+      },
+      "scripts/train_xlsr.py": {
+        "old_sha256": "385c28d35e5db67a1bdbc375236c833f5a04673b240687605a6c390f5fe9f505",
+        "new_sha256": "385c28d35e5db67a1bdbc375236c833f5a04673b240687605a6c390f5fe9f505",
+        "unchanged": true
+      },
+      "scripts/verify_environment.py": {
+        "old_sha256": "259c743cd11f3d8dc14727b4665bd10ebeea7e30c3bd3ae2f934f3fe1f12467c",
+        "new_sha256": "259c743cd11f3d8dc14727b4665bd10ebeea7e30c3bd3ae2f934f3fe1f12467c",
+        "unchanged": true
+      },
+      "scripts/verify_gpu_runtime.py": {
+        "old_sha256": "c4245da35cf20df04c89f47d82d1a275ce46a4baa5ced58e8c6ffac3f4f70d89",
+        "new_sha256": "c4245da35cf20df04c89f47d82d1a275ce46a4baa5ced58e8c6ffac3f4f70d89",
+        "unchanged": true
+      },
+      "scripts/verify_vsasv_snapshot.py": {
+        "old_sha256": "87c64f784101b4f9a6063b9e21d60f2abafc50c38e6d8b3cc68a348b1a14204a",
+        "new_sha256": "87c64f784101b4f9a6063b9e21d60f2abafc50c38e6d8b3cc68a348b1a14204a",
+        "unchanged": true
+      },
+      "src/__init__.py": {
+        "old_sha256": "90d720137a0d29aa772bb140c45121b35633bb5d903d2b36de68ea94f578b1c3",
+        "new_sha256": "90d720137a0d29aa772bb140c45121b35633bb5d903d2b36de68ea94f578b1c3",
+        "unchanged": true
+      },
+      "src/data/__init__.py": {
+        "old_sha256": "41f6a666f9db1e1d1d793a60c7ba21ab1d7ae375bf8b62687eb202980cdfdc30",
+        "new_sha256": "41f6a666f9db1e1d1d793a60c7ba21ab1d7ae375bf8b62687eb202980cdfdc30",
+        "unchanged": true
+      },
+      "src/data/amplitude.py": {
+        "old_sha256": "14ebd5b1eb5a651118a4e42f2be6f129e26b4c2266127f7c66564aeacd317134",
+        "new_sha256": "14ebd5b1eb5a651118a4e42f2be6f129e26b4c2266127f7c66564aeacd317134",
+        "unchanged": true
+      },
+      "src/data/audit_summary.py": {
+        "old_sha256": "7a629f05099ab42614a415ce16143d7de4ff0b7f7459fe46b8cf1ba805713acd",
+        "new_sha256": "7a629f05099ab42614a415ce16143d7de4ff0b7f7459fe46b8cf1ba805713acd",
+        "unchanged": true
+      },
+      "src/data/content_hash.py": {
+        "old_sha256": "24797ef37a200941d2de71bf6bb72cc0eaa85ce69f8febe03eb400af8adaa1fc",
+        "new_sha256": "24797ef37a200941d2de71bf6bb72cc0eaa85ce69f8febe03eb400af8adaa1fc",
+        "unchanged": true
+      },
+      "src/data/eval_ingest.py": {
+        "old_sha256": "939a59188991a0c3c87a886ec6d62df3fb546b47e9a6a09493ad837e5d9c55af",
+        "new_sha256": "939a59188991a0c3c87a886ec6d62df3fb546b47e9a6a09493ad837e5d9c55af",
+        "unchanged": true
+      },
+      "src/data/packed.py": {
+        "old_sha256": "a558af14938337121382e525ad1d110ee327ce3de277945d8e591e87809f2595",
+        "new_sha256": "a558af14938337121382e525ad1d110ee327ce3de277945d8e591e87809f2595",
+        "unchanged": true
+      },
+      "src/data/segment.py": {
+        "old_sha256": "278bcb2ccceea11f8211e84977a433841292dd9ea0cb7899c4a0c4b639b703b3",
+        "new_sha256": "278bcb2ccceea11f8211e84977a433841292dd9ea0cb7899c4a0c4b639b703b3",
+        "unchanged": true
+      },
+      "src/data/smoke_subset.py": {
+        "old_sha256": "7cbe7f971002bf3e9a99770c3c4286cfb33c1e47b93df5211c0ef5487abc40f3",
+        "new_sha256": "7cbe7f971002bf3e9a99770c3c4286cfb33c1e47b93df5211c0ef5487abc40f3",
+        "unchanged": true
+      },
+      "src/data/vsasv.py": {
+        "old_sha256": "4974f970215c270617f54b2e9207bd903e1e3bc661bcc72ca9d649577b713f1f",
+        "new_sha256": "4974f970215c270617f54b2e9207bd903e1e3bc661bcc72ca9d649577b713f1f",
+        "unchanged": true
+      },
+      "src/data/xlsr.py": {
+        "old_sha256": "11bb6effcfa40c1eb02d58150133f095e4bb5cf24258ae61d6b73cda43522b15",
+        "new_sha256": "11bb6effcfa40c1eb02d58150133f095e4bb5cf24258ae61d6b73cda43522b15",
+        "unchanged": true
+      },
+      "src/metrics/__init__.py": {
+        "old_sha256": "56b9b31079b19b4004870f23847b13b0e3da2cd4ddc432796725b8305ea601b2",
+        "new_sha256": "56b9b31079b19b4004870f23847b13b0e3da2cd4ddc432796725b8305ea601b2",
+        "unchanged": true
+      },
+      "src/metrics/bootstrap.py": {
+        "old_sha256": "3ae4ba0d293f911d9502be078b7d46ab1a3d036a39ff072ceddad51df7f749f4",
+        "new_sha256": "3ae4ba0d293f911d9502be078b7d46ab1a3d036a39ff072ceddad51df7f749f4",
+        "unchanged": true
+      },
+      "src/metrics/classification.py": {
+        "old_sha256": "45c5e29304f8dfdba1f56284c85416a44eaa3dd5a67eef2d5326e0318c110fed",
+        "new_sha256": "45c5e29304f8dfdba1f56284c85416a44eaa3dd5a67eef2d5326e0318c110fed",
+        "unchanged": true
+      },
+      "src/metrics/eer.py": {
+        "old_sha256": "625725c36b8df9fe07eae5d0352925ac5b6b5b1a9b9670fcb48a65a5ba15b577",
+        "new_sha256": "625725c36b8df9fe07eae5d0352925ac5b6b5b1a9b9670fcb48a65a5ba15b577",
+        "unchanged": true
+      },
+      "src/metrics/evaluation.py": {
+        "old_sha256": "c39ea70df08f057fbf62f3f19f3cde71db0a6b10cde2e9400d5ef669b25c8950",
+        "new_sha256": "c39ea70df08f057fbf62f3f19f3cde71db0a6b10cde2e9400d5ef669b25c8950",
+        "unchanged": true
+      },
+      "src/models/__init__.py": {
+        "old_sha256": "05616aaa555487fc23db412a44ce74088d2040c1cf15d45ba299a1ebb60e4826",
+        "new_sha256": "05616aaa555487fc23db412a44ce74088d2040c1cf15d45ba299a1ebb60e4826",
+        "unchanged": true
+      },
+      "src/models/lfcc_lcnn.py": {
+        "old_sha256": "9b235ffad37bbdd386b6d4b55176ccf8e247f6b98a8147ff8ae7dd206f392005",
+        "new_sha256": "9b235ffad37bbdd386b6d4b55176ccf8e247f6b98a8147ff8ae7dd206f392005",
+        "unchanged": true
+      },
+      "src/models/xlsr.py": {
+        "old_sha256": "18311bbd2bc5f81516adeea3220c172dcfe48d2eef54f409b5d146612f39a255",
+        "new_sha256": "18311bbd2bc5f81516adeea3220c172dcfe48d2eef54f409b5d146612f39a255",
+        "unchanged": true
+      },
+      "src/training/__init__.py": {
+        "old_sha256": "1c49e0992b3ffa7982bfe822dc09f2b443524fc5f7d49dfde7c79740f55ea67a",
+        "new_sha256": "1c49e0992b3ffa7982bfe822dc09f2b443524fc5f7d49dfde7c79740f55ea67a",
+        "unchanged": true
+      },
+      "src/training/checkpoint.py": {
+        "old_sha256": "d939c810c7308532ce3c74137f729fdb03c4a38d258d5a9248013ac732bc28fd",
+        "new_sha256": "d939c810c7308532ce3c74137f729fdb03c4a38d258d5a9248013ac732bc28fd",
+        "unchanged": true
+      },
+      "src/training/full_training.py": {
+        "old_sha256": "44a5f1d9419d4fdca82d50a951a99bd191306c4e51affacaa2cac32d577fcec8",
+        "new_sha256": "44a5f1d9419d4fdca82d50a951a99bd191306c4e51affacaa2cac32d577fcec8",
+        "unchanged": true
+      },
+      "src/training/sampler.py": {
+        "old_sha256": "2a399979dc374563a2e22baf0f023f640abad208f92d3852c96aef2795f8f34b",
+        "new_sha256": "2a399979dc374563a2e22baf0f023f640abad208f92d3852c96aef2795f8f34b",
+        "unchanged": true
+      },
+      "src/training/xlsr_checkpoint.py": {
+        "old_sha256": "967ada19d0f7d679e109f332313f22c01ba386d9575c72888b2431a5ae4de242",
+        "new_sha256": "967ada19d0f7d679e109f332313f22c01ba386d9575c72888b2431a5ae4de242",
+        "unchanged": true
+      }
+    },
+    "kernel_metadata_unchanged": true,
+    "run_config_changed_fields": [
+      "source_bundle_sha256"
+    ],
+    "version_command_also_receives_no_warn": true,
+    "ready_for_training": false,
+    "uploaded": false,
+    "kernel_pushed": false,
+    "comparison_script": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\compare_bundle.py",
+    "new_tests": 15,
+    "test_results": {
+      "workflow-tests": {
+        "tests": 27,
+        "test_seconds": 0.988,
+        "exit_code": 0
+      },
+      "full-suite": {
+        "tests": 399,
+        "test_seconds": 173.277,
+        "exit_code": 0
+      }
+    },
+    "readonly_check": {
+      "exists": false,
+      "result": "chưa tồn tại",
+      "commands": [
+        {
+          "command": [
+            "kaggle",
+            "-W",
+            "datasets",
+            "list",
+            "--mine",
+            "--search",
+            "doanttnt-xlsr-d028-source",
+            "--page-size",
+            "100",
+            "--format",
+            "json"
+          ],
+          "exit_code": 0,
+          "stdout": "No datasets found\n",
+          "stderr": ""
+        }
+      ],
+      "write_commands_executed": 0
+    },
+    "commands": [
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".cache/t16b/compare_bundle.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:48:00.938398+00:00",
+        "ended_utc": "2026-11-06T02:48:01.417342+00:00",
+        "seconds": 0.47847170000000006,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\compare-bundle.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:42:50.364765+00:00",
+        "ended_utc": "2026-11-06T02:46:50.823225+00:00",
+        "seconds": 240.4588553000001,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\full-suite.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".kaggle/xlsr-d028/preflight.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:47:15.571341+00:00",
+        "ended_utc": "2026-11-06T02:47:27.315145+00:00",
+        "seconds": 11.744130799999994,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\preflight.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".cache/t16b/read_only_dataset_exists.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:48:13.223724+00:00",
+        "ended_utc": "2026-11-06T02:48:16.105186+00:00",
+        "seconds": 2.881075199999941,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\read-only-check.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "-m",
+          "unittest",
+          "tests.test_kaggle_workflow.KaggleWarningFlagTests.test_missing_dataset_uses_no_warn_before_parsing_stdout",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:41:33.040968+00:00",
+        "ended_utc": "2026-11-06T02:41:33.374394+00:00",
+        "seconds": 0.3341686999999638,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\red-warning-exact.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "-m",
+          "unittest",
+          "tests.test_kaggle_workflow.KaggleWarningFlagTests",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:40:15.663945+00:00",
+        "ended_utc": "2026-11-06T02:40:16.085855+00:00",
+        "seconds": 0.4221744999999828,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\red-warning.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "-m",
+          "unittest",
+          "tests.test_kaggle_workflow",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:41:49.996017+00:00",
+        "ended_utc": "2026-11-06T02:41:51.342732+00:00",
+        "seconds": 1.347113199999967,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16b\\workflow-tests.log"
+      }
+    ],
+    "final_checks": [
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+        "timestamp_utc": "2026-11-06T02:48:45.144266+00:00",
+        "exit_code": 0,
+        "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T02:48:45.511774+00:00",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--numstat"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T02:48:45.624422+00:00",
+        "exit_code": 0,
+        "stdout": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--stat"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T02:48:45.726957+00:00",
+        "exit_code": 0,
+        "stdout": " docs/decisions.md               |  10 ++++\n scripts/kaggle_workflow.py      |   5 +-\n src/training/full_training.py   |  44 +++++++++++++-\n src/training/xlsr_checkpoint.py |  10 +++-\n tests/test_kaggle_workflow.py   | 125 ++++++++++++++++++++++++++++++++++++++++\n 5 files changed, 188 insertions(+), 6 deletions(-)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T02:48:45.800377+00:00",
+        "exit_code": 0,
+        "stdout": " M docs/decisions.md\n M scripts/kaggle_workflow.py\n M src/training/full_training.py\n M src/training/xlsr_checkpoint.py\n M tests/test_kaggle_workflow.py\n?? .gitattributes\n?? configs/xlsr_training.json\n?? docs/guides/xlsr_training.md\n?? reports/xlsr_t15_cpu_smoke.json\n?? reports/xlsr_t15_eol_normalization.json\n?? reports/xlsr_t15_kaggle_preflight.json\n?? reports/xlsr_t16_kaggle_gpu_dry_run.json\n?? reports/xlsr_training_dry_run.json\n?? scripts/train_xlsr.py\n?? tests/test_xlsr_runner.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--eol"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T02:48:46.915079+00:00",
+        "exit_code": 0,
+        "stdout": "i/lf    w/lf    attr/text=auto eol=lf \t.gitignore\ni/lf    w/lf    attr/text=auto eol=lf \tREADME.md\ni/lf    w/lf    attr/text=auto eol=lf \tapp/.gitkeep\ni/-text w/-text attr/-text            \tbaocao/Bao_cao_tien_do_DATN_Nguyen_Ngoc_Tan_2026-10-21.docx\ni/-text w/-text attr/-text            \tbaocao/De_cuong_DATN_Nguyen_Ngoc_Tan_cap_nhat.docx\ni/-text w/-text attr/-text            \tbaocao/NguyenNgocTan_DeCuong_DATN.docx\ni/lf    w/lf    attr/text=auto eol=lf \tcheckpoints/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/audio.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/b0_full_training.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/b0_v2_training.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/kaggle_cli.example.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/lfcc_lcnn.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/xlsr_normalization_pilot.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/xlsr_pretrained_candidate.json\ni/lf    w/lf    attr/text=auto eol=lf \tconfigs/xlsr_smoke.json\ni/lf    w/lf    attr/text=auto eol=lf \tdata/embeddings/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdata/manifests/closed_dev_full_v1.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/manifests/closed_test_full_v1.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/manifests/development_20k_v1.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/manifests/development_20k_v2.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/metadata/VSASV_DATASET_CARD.md\ni/lf    w/lf    attr/text=auto eol=lf \tdata/metadata/vsasv_metadata.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/processed/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdata/raw/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/closed/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/closed_dev.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/closed_test.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/closed_train.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open_dev_vc.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open_seen_test_vc.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open_train_vc.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open_unseen_test_adversarial.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/open_unseen_test_replay.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/smoke_dev.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/smoke_test.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdata/splits/smoke_train.csv\ni/lf    w/lf    attr/text=auto eol=lf \tdeploy/kaggle/resume_checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \tdeploy/kaggle/runner.py\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/DE_XUAT_SAP_XEP.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_commit_2026-10-02.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_cong_viec_2026-10-05_den_2026-10-07.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_ngay_2026-09-30.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_ngay_2026-10-01.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_ngay_2026-10-02.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_ngay_2026-10-04.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_tuan_01_2026-09-28_2026-10-04.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/ke_hoach_tuan_02_2026-10-05_2026-10-11.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/tong_ket_cong_viec_2026-09-30.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/tong_ket_cong_viec_2026-10-01.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/tong_ket_cong_viec_2026-10-02.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/archive/tong_ket_tuan_01_2026-09-28_2026-10-04.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/audio_protocol.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/bao_cao_tien_do_do_an_2026-10-20.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/cai_dat_moi_truong.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/danh_gia_doc_lap_du_an_2026-11-02.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/decisions.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/b0_full_training.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/chuan_bi_du_lieu_vsasv.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/kaggle_cli_workflow.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/kaggle_gpu_smoke.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/quy_trinh_tai_va_xac_minh_du_lieu_vsasv.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/guides/xlsr_technical_smoke.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/kien_thuc_can_nam_vung_de_bao_ve_do_an.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/phan_tich_tong_the_tien_do_du_an.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-09-30.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-01.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-02.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-04.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-05.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-06.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-07.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-09.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-10.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-11.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-12.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-15.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-16.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-17.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-19.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-20.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-21.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-22.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-23.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-24.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-25.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-26.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-27.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-28.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-29.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/daily/2026-10-30.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/2026-W40.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/2026-W41.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/2026-W42.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/2026-W43.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/plans/weekly/2026-W44.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/split_protocol.md\ni/lf    w/lf    attr/text=auto eol=lf \tdocs/tong_quan_cach_thuc_hoat_dong_do_an.md\ni/lf    w/lf    attr/text=auto eol=lf \tlo_trinh_hoan_chinh_do_an_deepfake_tieng_viet.md\ni/lf    w/lf    attr/text=auto eol=lf \tlogs/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \treports/amplitude_audit.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/amplitude_audit.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/audio_smoke_test.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/audio_smoke_test.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_2.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_2.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_3.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_repeat_3.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_summary.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_benchmark_summary.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cpu_continuous.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cpu_partial.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cpu_resumed.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cpu_smoke.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cuda_continuous.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cuda_partial.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cuda_resumed.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cuda_smoke.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_cuda_smoke_recheck.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_10_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_10_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_11_v24_failure.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_11_v24_failure.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_1_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_1_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_2_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_2_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_3_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_3_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_4_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_4_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_5_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_5_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_6_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_6_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_7_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_7_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_8_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_8_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_9_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_session_9_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_smoke_kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_smoke_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_source_preflight.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_source_preflight.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_training_budget.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_full_training_budget.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_kaggle_phase1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_kaggle_phase1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_kaggle_resumed.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_kaggle_resumed.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_peak_full_session_10.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_peak_full_session_10.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_amplitude_comparison.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_amplitude_comparison.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_none.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_none.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_none_kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_none_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_peak.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_peak.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_peak_kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_peak_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs_kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs_preflight.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_pilot_rms_dbfs_v11_failure.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_kaggle_phase1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_kaggle_phase1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_kaggle_resumed.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_kaggle_resumed.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_kaggle_workflow.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_local_phase1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_local_phase1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_local_resumed.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_production_local_resumed.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_smoke_training.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_smoke_training.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/b0_v2_cpu_benchmark_1thread.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/batch_read_benchmark.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/batch_read_benchmark.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/closed_eval_full_v1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/closed_eval_full_v1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/data_pipeline_benchmark.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/data_pipeline_benchmark.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/data_pipeline_optimization.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/data_pipeline_optimization.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k_v2.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k_v2.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k_v2_content_audit.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_manifest_20k_v2_content_audit.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_shard_candidates_20k.csv\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_shard_candidates_20k_summary.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/development_shard_candidates_20k_summary.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/download_bandwidth_trial.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/download_bandwidth_trial.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/download_trial_audio_smoke.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/download_trial_audio_smoke.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/error_analysis/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \treports/evaluation_shard_plan.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/evaluation_shard_plan.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/figures/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \treports/kaggle_runtime.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/leakage_check.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/leakage_check.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/lfcc_batch_effect.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/lfcc_batch_effect.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/local_storage_audit.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/local_storage_audit.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/manifest_loader_benchmark.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/manifest_loader_benchmark.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/metadata_audit.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/metadata_audit.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_artifact_benchmark.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_artifact_benchmark.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_artifacts_v1.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_artifacts_v1.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_dev-full.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_dev-full.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_test-full.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_test-full.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_train.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/packed_parity_train.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/runtime_projection.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/runtime_projection.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/smoke_subset_summary.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/smoke_subset_summary.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/split_summary.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/split_summary.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/tables/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \treports/vsasv_shard_tree.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/vsasv_snapshot_verification.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/vsasv_snapshot_verification.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/xlsr_cpu_smoke.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/xlsr_exact_resume_preflight.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/xlsr_exact_resume_preflight.md\ni/lf    w/lf    attr/text=auto eol=lf \treports/xlsr_normalization_pilot_preflight.json\ni/lf    w/lf    attr/text=auto eol=lf \treports/xlsr_normalization_pilot_preflight.md\ni/lf    w/lf    attr/text=auto eol=lf \trequirements-kaggle.txt\ni/lf    w/lf    attr/text=auto eol=lf \trequirements-lock.txt\ni/lf    w/lf    attr/text=auto eol=lf \trequirements-xlsr.txt\ni/lf    w/lf    attr/text=auto eol=lf \trequirements.txt\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/audio_smoke_test.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/audit_amplitude.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/audit_development_manifest_content.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/audit_local_storage.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/audit_metadata.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_b0_v2_cpu.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_batch_read.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_data_pipeline.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_dataloader_options.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_manifest_loaders.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_packed_artifact.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/benchmark_xlsr_cuda.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/build_packed_artifacts.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/check_b0_full_smoke.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/check_leakage.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/check_packed_parity.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/download_vsasv_metadata.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/estimate_b0_full_training_budget.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/estimate_runtime.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/ingest_evaluation_shards.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/kaggle_workflow.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/make_development_manifest.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/make_evaluation_manifest.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/make_smoke_subset.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/make_splits.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/measure_lfcc_batch_effect.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/plan_evaluation_shards.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/smoke_test_dataset_loader.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/smoke_test_development_manifest_loader.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/smoke_test_xlsr.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/smoke_train_lfcc_lcnn.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/summarize_b0_benchmark.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/train_b0.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/train_b0_full.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/verify_environment.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/verify_gpu_runtime.py\ni/lf    w/lf    attr/text=auto eol=lf \tscripts/verify_vsasv_snapshot.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/__init__.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/__init__.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/amplitude.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/audit_summary.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/content_hash.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/eval_ingest.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/packed.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/segment.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/smoke_subset.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/vsasv.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/data/xlsr.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/metrics/__init__.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/metrics/bootstrap.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/metrics/classification.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/metrics/eer.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/metrics/evaluation.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/models/__init__.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/models/lfcc_lcnn.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/models/xlsr.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/training/__init__.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/training/checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/training/full_training.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/training/sampler.py\ni/lf    w/lf    attr/text=auto eol=lf \tsrc/training/xlsr_checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/.gitkeep\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_amplitude.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_amplitude_audit.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_audio_smoke_test.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_b0_benchmark_summary.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_b0_full_training.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_b0_full_training_budget.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_b0_training_extension.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_b0_v2_runner.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_batch_read_benchmark.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_benchmark_b0_v2_cpu.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_benchmark_xlsr_cuda.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_bootstrap_metrics.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_build_packed_artifacts.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_check_packed_parity.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_development_manifest.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_development_manifest_content_audit.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_development_manifest_loader_smoke.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_eval_ingest.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_evaluation_shard_plan.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_ingest_evaluation_shards.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_kaggle_resume_checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_kaggle_runner.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_kaggle_workflow.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_lcnn.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_lfcc_batch_independence.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_lfcc_config.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_local_storage_audit.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_make_evaluation_manifest.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_manifest_loader_benchmark.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_measure_lfcc_batch_effect.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_metrics.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_packed_assembly.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_packed_manifest_dataset.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_segment.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_smoke_subset.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_smoke_training_checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_splits.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_train_b0_entrypoint.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_training_state.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_verify_gpu_runtime.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_verify_vsasv_snapshot.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_vsasv_dataset.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_vsasv_manifest_dataset.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_xlsr.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_xlsr_checkpoint.py\ni/lf    w/lf    attr/text=auto eol=lf \ttests/test_xlsr_normalization.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+        "timestamp_utc": "2026-11-06T02:48:47.014573+00:00",
+        "exit_code": 0,
+        "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+        "stderr": ""
+      }
+    ],
+    "main_status_unchanged": true,
+    "main_workflow_unchanged": true,
+    "files_modified": [
+      "scripts/kaggle_workflow.py",
+      "tests/test_kaggle_workflow.py",
+      "reports/xlsr_t15_kaggle_preflight.json",
+      "reports/xlsr_t16_kaggle_gpu_dry_run.json (t16b only)",
+      ".kaggle/xlsr-d028/ (generated bundle/manifest/prepared artifacts)",
+      "C:/Users/Admin/Documents/DoAnTTNT/docs/current_state.md"
+    ],
+    "notes": [
+      "kaggle --version also receives -W through the shared run_process.",
+      "The task described kaggle_workflow.py as untracked; git ls-files confirms it is tracked, so its +4/-1 diff appears in git diff --numstat.",
+      "Read/write workflow actions are covered only by mocked subprocess.run; the sole actual Kaggle action was datasets list."
+    ],
+    "deviations": [],
+    "publish_attempts": 0,
+    "kernel_push_attempts": 0,
+    "next_step": "Claude checks new bundle and source tree before any renewed T16 publish/push authorization.",
+    "comparison_command": "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t16b/compare_bundle.py"
+  },
+  "rerun": {
+    "status": "complete_verified_pending_claude_review",
+    "dataset": {
+      "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+      "version": 1,
+      "private": true,
+      "remote_private": true,
+      "dataset_id": 13124346,
+      "remote_member_count": 73,
+      "all_remote_members_verified": true,
+      "reconstructed_bundle_sha256": "754bf2a8ee6d8bb7bbdb9f2984541d039e3578721c06724992ed8567c4a93691",
+      "download_layout": "Kaggle extracted uploaded project_source.zip to project_source/; single-file ZIP request returned 404; downloaded all and rebuilt exact deterministic ZIP from verified remote bytes.",
+      "reconstructed_bundle": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\remote\\project_source.reconstructed.zip"
+    },
+    "kernel": {
+      "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "version": 1,
+      "push_attempts": 1,
+      "profile": "X1-L2-lr1e-5-seed2026-dry-run",
+      "private": true,
+      "gpu": true,
+      "internet": false,
+      "gpu_machine_shape": "NvidiaTeslaT4",
+      "status": "COMPLETE",
+      "submission": {
+        "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "profile": "X1-L2-lr1e-5-seed2026-dry-run",
+        "started_utc": "2026-11-06T03:02:32.942084+00:00",
+        "started_unix": 1793934152.942084,
+        "monitor_deadline_unix": 1793941352.942084,
+        "push_attempts": 1
+      },
+      "duration_seconds": 80.736548515,
+      "log_last_event_seconds": 80.736548515,
+      "duration_basis": "Last relative timestamp in kernel execution log (includes notebook postprocessing); workflow wall time is separately 75 seconds."
+    },
+    "quota_before": [
+      {
+        "resource": "GPU",
+        "used": "5.91h",
+        "remaining": "24.09h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-07T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-07T00:00:00"
+      }
+    ],
+    "ready_for_training": false,
+    "use_test": false,
+    "commands": [
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".cache/t16-rerun/compare_dry_run.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:10:37.405360+00:00",
+        "ended_utc": "2026-11-06T03:10:37.847239+00:00",
+        "seconds": 0.44271809999963807,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\compare-dry-run.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "metadata",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "-p",
+          ".cache/t16-rerun/remote"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:59:55.755853+00:00",
+        "ended_utc": "2026-11-06T02:59:58.143152+00:00",
+        "seconds": 2.3871572000002743,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\dataset-metadata.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:59:48.995207+00:00",
+        "ended_utc": "2026-11-06T02:59:51.111088+00:00",
+        "seconds": 2.1158634000003076,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\dataset-status.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:04:03.330496+00:00",
+        "ended_utc": "2026-11-06T03:04:05.602551+00:00",
+        "seconds": 2.27070649999996,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\dataset-version.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:/Users/Admin/Documents/DoAnTTNT/kaggle_outputs/xlsr-d028-dry-run-v1"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:05:25.824489+00:00",
+        "ended_utc": "2026-11-06T03:07:21.895911+00:00",
+        "seconds": 116.07104449999997,
+        "exit_code": 4294967295,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\download-output.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:/Users/Admin/Documents/DoAnTTNT/kaggle_outputs/xlsr-d028-dry-run-v1",
+          "--file-pattern",
+          "^reports/|\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:07:22.011232+00:00",
+        "ended_utc": "2026-11-06T03:07:58.155634+00:00",
+        "seconds": 36.144945500000176,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\download-reports.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "download",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "-p",
+          ".cache/t16-rerun/remote",
+          "--unzip"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:01:17.122885+00:00",
+        "ended_utc": "2026-11-06T03:01:21.610785+00:00",
+        "seconds": 4.487510100000236,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\download-source-all.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "download",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "-f",
+          "project_source.zip",
+          "-p",
+          ".cache/t16-rerun/remote"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:00:17.152296+00:00",
+        "ended_utc": "2026-11-06T03:00:19.770917+00:00",
+        "seconds": 2.6179762000001574,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\download-source-bundle.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:07:49.854395+00:00",
+        "ended_utc": "2026-11-06T03:07:52.406780+00:00",
+        "seconds": 2.5525637999999162,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\kernel-logs-final.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:04:05.795485+00:00",
+        "ended_utc": "2026-11-06T03:04:08.002310+00:00",
+        "seconds": 2.207100000000082,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\kernel-logs-live.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".cache/t16-rerun/monitor.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:03:35.982088+00:00",
+        "ended_utc": "2026-11-06T03:04:42.018628+00:00",
+        "seconds": 66.03688509999984,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\monitor.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          ".kaggle/xlsr-d028/preflight.py"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:58:36.281840+00:00",
+        "ended_utc": "2026-11-06T02:58:47.349685+00:00",
+        "seconds": 11.068376400000034,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\preflight.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "publish-source",
+          "--message",
+          "T16 approved private source bundle 754bf2a8",
+          "--confirm-private-upload"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:59:11.853230+00:00",
+        "ended_utc": "2026-11-06T02:59:27.329901+00:00",
+        "seconds": 15.47625700000026,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\publish-source.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "pull",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          ".cache/t16-rerun/kernel-remote",
+          "--metadata"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:03:01.840358+00:00",
+        "ended_utc": "2026-11-06T03:03:03.980084+00:00",
+        "seconds": 2.1395454999997128,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\pull-kernel-metadata.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L2-lr1e-5-seed2026-dry-run"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:02:33.034421+00:00",
+        "ended_utc": "2026-11-06T03:02:37.310895+00:00",
+        "seconds": 4.2761037999998734,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\push-prepared.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:05:38.562956+00:00",
+        "ended_utc": "2026-11-06T03:05:41.563598+00:00",
+        "seconds": 3.0011264999998275,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\quota-after.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T02:58:49.392967+00:00",
+        "ended_utc": "2026-11-06T02:58:51.672876+00:00",
+        "seconds": 2.2794466999998804,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\quota-before.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "files",
+          "-d",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:00:38.729324+00:00",
+        "ended_utc": "2026-11-06T03:00:40.370876+00:00",
+        "seconds": 1.641690799999651,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\remote-source-files.log"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:02:55.949794+00:00",
+        "ended_utc": "2026-11-06T03:02:58.286181+00:00",
+        "seconds": 2.337264199999936,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\status-1.log"
+      },
+      {
+        "command": [
+          "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          ".kaggle/xlsr-d028/prepared/X1-L2-lr1e-5-seed2026-dry-run"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "started_utc": "2026-11-06T03:02:04.403865+00:00",
+        "ended_utc": "2026-11-06T03:02:04.606968+00:00",
+        "seconds": 0.20299789999990026,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\verify-prepared.log"
+      }
+    ],
+    "checks": {
+      "a": {
+        "passed": true,
+        "status": "dry_run",
+        "device": "cuda:0",
+        "use_test": false,
+        "checksums_match": true,
+        "ready_for_training": false
+      },
+      "b": {
+        "passed": true,
+        "gpu_machine_shape": "NvidiaTeslaT4",
+        "torch_before_after": "2.11.0+cu130",
+        "numpy_before_after": "2.1.3",
+        "cuda_before_after_equal": true,
+        "transformers_installed": "4.57.6",
+        "equality_evidence": "Exact remote bootstrap compares JSON {torch,cuda,numpy} before/after installation and raises on any difference; sole command returned 0 and workflow completed.",
+        "cuda_numeric_version_logged": false,
+        "cuda_numeric_version": null,
+        "reporting_limit": "Numeric torch.version.cuda is captured internally but not emitted by the locked bootstrap. Equality is verified by its mandatory guard, not by a logged version value."
+      },
+      "c": {
+        "passed": true,
+        "pretrained_checksums": {
+          "pytorch_model.bin": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+          "config.json": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+          "preprocessor_config.json": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335"
+        }
+      },
+      "d": {
+        "passed": true,
+        "coverage": {
+          "train_samples": 15885,
+          "train_shards": 57,
+          "development_samples": 38777,
+          "development_shards": 186
+        },
+        "artifacts_equal": true
+      },
+      "e": {
+        "passed": true,
+        "runs_equal": true,
+        "configurations": [
+          {
+            "run_id": "X0",
+            "trainable_parameters": 262401,
+            "blocks_training": 0,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L2-lr1e-5",
+            "trainable_parameters": 25454849,
+            "blocks_training": 2,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L2-lr3e-5",
+            "trainable_parameters": 25454849,
+            "blocks_training": 2,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L4-lr1e-5",
+            "trainable_parameters": 50647297,
+            "blocks_training": 4,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L4-lr3e-5",
+            "trainable_parameters": 50647297,
+            "blocks_training": 4,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L8-lr1e-5",
+            "trainable_parameters": 101032193,
+            "blocks_training": 8,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          },
+          {
+            "run_id": "X1-L8-lr3e-5",
+            "trainable_parameters": 101032193,
+            "blocks_training": 8,
+            "effective_layerdrop": 0.0,
+            "effective_apply_spec_augment": false
+          }
+        ]
+      }
+    },
+    "timing": {
+      "workflow_started_at": "2026-11-06T03:03:01+00:00",
+      "workflow_finished_at": "2026-11-06T03:04:16+00:00",
+      "workflow_wall_seconds": 75.0,
+      "bootstrap_command_seconds": 60.85855243099999,
+      "dry_run_runner_seconds": 23.26918198100003,
+      "kernel_log_last_event_seconds": 80.736548515
+    },
+    "quota_after": [
+      {
+        "resource": "GPU",
+        "used": "5.93h",
+        "remaining": "24.07h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-07T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-07T00:00:00"
+      }
+    ],
+    "comparison_script": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun\\compare_dry_run.py",
+    "comparison_exit_code": 0,
+    "no_training_steps_run": true,
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1",
+    "gpu_report_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\reports\\xlsr_X1-L2-lr1e-5_seed2026.json",
+    "workflow_report_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\reports\\kaggle_cli_workflow.json",
+    "kernel_log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\kernel-v1.log.json",
+    "output_sha256": {
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\reports\\xlsr_X1-L2-lr1e-5_seed2026.json": "ee1c77374c5f6d06de35c64f3162b60589857434387e890fc3e47e8017d46f26",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\reports\\kaggle_cli_workflow.json": "c1e39ff1b85e1c110a544f0677588a3ed8afff21c0546b2491869d6d409b91bf",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1\\kernel-v1.log.json": "afa898fba1068f8b324df0e8c151f9f4cec3611736b266b2041811e02a4498cb"
+    },
+    "completed_utc": "2026-11-06T03:12:16.054020+00:00",
+    "checks_f": {
+      "passed": true,
+      "timing": {
+        "workflow_started_at": "2026-11-06T03:03:01+00:00",
+        "workflow_finished_at": "2026-11-06T03:04:16+00:00",
+        "workflow_wall_seconds": 75.0,
+        "bootstrap_command_seconds": 60.85855243099999,
+        "dry_run_runner_seconds": 23.26918198100003,
+        "kernel_log_last_event_seconds": 80.736548515
+      },
+      "quota_before": [
+        {
+          "resource": "GPU",
+          "used": "5.91h",
+          "remaining": "24.09h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        }
+      ],
+      "quota_after": [
+        {
+          "resource": "GPU",
+          "used": "5.93h",
+          "remaining": "24.07h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        }
+      ]
+    },
+    "output_file_count": 124,
+    "output_bytes": 21639750,
+    "files_created": [
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t16-rerun/ (logs, downloaded source/metadata, comparison and guard scripts)",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-dry-run-v1/ (reports, log and partial offline venv download)"
+    ],
+    "files_modified": [
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\reports\\xlsr_t16_kaggle_gpu_dry_run.json (rerun only)",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\current_state.md"
+    ],
+    "deviations": [
+      "Kaggle auto-extracted uploaded ZIP into project_source/. A single-file ZIP download returned 404; all 73 remote members were downloaded/verified and deterministic ZIP reconstructed with exactly the locked SHA-256.",
+      "Initial all-output download included thousands of offline-venv files; stopped only that local download, retained partial files, and successfully fetched report/log output with CLI file filtering. No kernel retry."
+    ],
+    "reporting_limits": [
+      "Locked bootstrap does not emit numeric torch.version.cuda. Before/after equality for torch/CUDA/NumPy is proved by its mandatory JSON equality guard and successful command, with matching exact remote bootstrap code.",
+      "GPU machine is NvidiaTeslaT4 from remote metadata. Dry-run counts pretrained parameters and does not execute GPU training/forward/backward.",
+      "pip emitted conflicts for unrelated inherited Gradio/diffusers packages; installed pinned XLS-R dependencies and dry-run succeeded."
+    ],
+    "source_config_tests_profiles_changed": false,
+    "next_step": "Claude independent verification of downloaded output and rerun comparison; training gate stays closed.",
+    "final_git_checks": [
+      {
+        "command": [
+          "git",
+          "diff",
+          "--numstat"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T03:12:15.748901+00:00",
+        "exit_code": 0,
+        "stdout": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T03:12:15.804547+00:00",
+        "exit_code": 0,
+        "stdout": " M docs/decisions.md\n M scripts/kaggle_workflow.py\n M src/training/full_training.py\n M src/training/xlsr_checkpoint.py\n M tests/test_kaggle_workflow.py\n?? .gitattributes\n?? configs/xlsr_training.json\n?? docs/guides/xlsr_training.md\n?? reports/xlsr_t15_cpu_smoke.json\n?? reports/xlsr_t15_eol_normalization.json\n?? reports/xlsr_t15_kaggle_preflight.json\n?? reports/xlsr_t16_kaggle_gpu_dry_run.json\n?? reports/xlsr_training_dry_run.json\n?? scripts/train_xlsr.py\n?? tests/test_xlsr_runner.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+        "timestamp_utc": "2026-11-06T03:12:15.871325+00:00",
+        "exit_code": 0,
+        "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T03:12:16.186741+00:00",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT",
+        "timestamp_utc": "2026-11-06T03:12:16.256449+00:00",
+        "exit_code": 0,
+        "stdout": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/b0_v2_ext_seed2026.json\n?? reports/b0_v2_ext_seed2026.md\n?? reports/b0_v2_ext_seed2027.json\n?? reports/b0_v2_ext_seed2027.md\n?? reports/b0_v2_ext_seed2028.json\n?? reports/b0_v2_ext_seed2028.md\n?? reports/b0_v2_metric_recheck.json\n?? reports/b0_v2_metric_recheck.md\n?? reports/b0_v2_seed2026.json\n?? reports/b0_v2_seed2026.md\n?? reports/b0_v2_seed2027.json\n?? reports/b0_v2_seed2027.md\n?? reports/b0_v2_seed2028.json\n?? reports/b0_v2_seed2028.md\n?? reports/b0_v2_summary.json\n?? reports/b0_v2_summary.md\n?? reports/evaluation_ingest_summary.json\n?? reports/xlsr_t14_cuda_benchmark.json\n?? reports/xlsr_t14_cuda_benchmark.md\n?? reports/xlsr_t14_cuda_benchmark_v1.json\n?? reports/xlsr_t14_cuda_benchmark_v1.md\n?? reports/xlsr_t14_kaggle_preflight.json\n?? reports/xlsr_t14_kaggle_workflow.json\n?? reports/xlsr_t14_kaggle_workflow_v2.json\n?? reports/xlsr_t14_kernel_submission.json\n?? reports/xlsr_t14_offline_environment.json\n?? reports/xlsr_t14_offline_packages.json\n?? reports/xlsr_t14_offline_retry.json\n?? reports/xlsr_t14_output_verification.json\n?? reports/xlsr_t14_weights_verification.json\n?? scripts/summarize_b0_v2.py\n?? tests/test_summarize_b0_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--numstat"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T03:12:16.341279+00:00",
+        "exit_code": 0,
+        "stdout": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--short"
+        ],
+        "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "timestamp_utc": "2026-11-06T03:12:16.397123+00:00",
+        "exit_code": 0,
+        "stdout": " M docs/decisions.md\n M scripts/kaggle_workflow.py\n M src/training/full_training.py\n M src/training/xlsr_checkpoint.py\n M tests/test_kaggle_workflow.py\n?? .gitattributes\n?? configs/xlsr_training.json\n?? docs/guides/xlsr_training.md\n?? reports/xlsr_t15_cpu_smoke.json\n?? reports/xlsr_t15_eol_normalization.json\n?? reports/xlsr_t15_kaggle_preflight.json\n?? reports/xlsr_t16_kaggle_gpu_dry_run.json\n?? reports/xlsr_training_dry_run.json\n?? scripts/train_xlsr.py\n?? tests/test_xlsr_runner.py\n",
+        "stderr": ""
+      }
+    ]
+  }
+}

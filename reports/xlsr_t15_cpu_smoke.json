@@ -1,0 +1,125 @@
+{
+  "status": "passed_technical_pipeline_only",
+  "scientific_result": false,
+  "use_test": false,
+  "ready_for_training": false,
+  "run_id": "X1-L2-lr1e-5",
+  "training_seed": 2026,
+  "batch_size": 2,
+  "global_step_before_resume": 2,
+  "global_step_after_resume": 3,
+  "train_sample_exposures": 6,
+  "data": {
+    "train": {
+      "samples_used": 4,
+      "shards_used": 4,
+      "source_samples": 15885,
+      "source_shards": 57
+    },
+    "dev": {
+      "samples_used": 8,
+      "shards_used": 2,
+      "source_samples": 38777,
+      "source_shards": 186
+    }
+  },
+  "losses": [
+    0.6518310308456421,
+    0.9112668037414551,
+    0.7370573282241821
+  ],
+  "finite_loss": true,
+  "evaluated_samples": 8,
+  "trainable_parameters": 25454849,
+  "checkpoint_trainable_tensor_count": 36,
+  "checkpoint_trainable_only": true,
+  "resume_prefix_history_best_preserved": true,
+  "checksums_match_both_invocations": true,
+  "pretrained_checksums": {
+    "pytorch_model.bin": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+    "config.json": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+    "preprocessor_config.json": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335"
+  },
+  "source_tree_sha256": "0b4b506cc2762c7db21c65ea3e17cd9bc8378e1b56fc760599ea50086327c5e4",
+  "wall_seconds_by_invocation": [
+    128.1262502999998,
+    102.75481029999992
+  ],
+  "peak_rss_bytes": 2886418432,
+  "run_root": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\xlsr-technical-smoke\\run-ndeqstv7",
+  "raw_reports": [
+    ".cache/t15/smoke-first.json",
+    ".cache/t15/smoke-resumed.json"
+  ],
+  "executions": [
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X1-L2-lr1e-5",
+        "--training-seed",
+        "2026",
+        "--device",
+        "cpu",
+        "--technical-smoke",
+        "--smoke-session-steps",
+        "2",
+        "--report-json",
+        ".cache/t15/smoke-first.json",
+        "--train-artifact",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/processed/packed/train_development_20k_v2",
+        "--dev-artifact",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/processed/packed/closed_dev_full_v1",
+        "--pretrained-dir",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/raw/xlsr/wav2vec2-xls-r-300m"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-05T12:52:33.648928+00:00",
+      "ended_utc": "2026-11-05T12:54:52.746566+00:00",
+      "seconds": 139.09783770000013,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t15\\smoke-first.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X1-L2-lr1e-5",
+        "--training-seed",
+        "2026",
+        "--device",
+        "cpu",
+        "--technical-smoke",
+        "--smoke-session-steps",
+        "1",
+        "--resume",
+        "--run-root",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\xlsr-technical-smoke\\run-ndeqstv7",
+        "--report-json",
+        ".cache/t15/smoke-resumed.json",
+        "--train-artifact",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/processed/packed/train_development_20k_v2",
+        "--dev-artifact",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/processed/packed/closed_dev_full_v1",
+        "--pretrained-dir",
+        "C:/Users/Admin/Documents/DoAnTTNT/data/raw/xlsr/wav2vec2-xls-r-300m"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-05T12:55:41.359630+00:00",
+      "ended_utc": "2026-11-05T12:57:31.866921+00:00",
+      "seconds": 110.5072455999998,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t15\\smoke-resume.log"
+    }
+  ],
+  "limitations": [
+    "waveform digests locked via verified metadata/index and size; full waveforms not rehashed in technical smoke",
+    "bitwise continuous-versus-resume proof uses tiny random model and synthetic packed data in unit tests; pretrained smoke verifies load and continuation/prefix preservation only"
+  ]
+}

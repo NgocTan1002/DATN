@@ -1,0 +1,1781 @@
+{
+  "task": "T20",
+  "status": "completed_pending_claude_review",
+  "authorization": {
+    "training_gate": {
+      "date": "2026-11-06",
+      "quote": "Mở cổng, chạy"
+    },
+    "single_run": {
+      "date": "2026-11-09",
+      "quote": "Chạy tiếp LR 3e-5"
+    }
+  },
+  "profile_verification": {
+    "passed": true,
+    "profile": "X1-L8-lr3e-5-seed2026",
+    "metadata": {
+      "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "title": "DoAnTTNT XLSR D028",
+      "code_file": "runner.py",
+      "language": "python",
+      "kernel_type": "script",
+      "is_private": true,
+      "enable_gpu": true,
+      "enable_tpu": false,
+      "enable_internet": false,
+      "dataset_sources": [
+        "ngctnnguyn1111/doanttnt-t14-packed",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "ngctnnguyn1111/doanttnt-t14-weights",
+        "ngctnnguyn1111/doanttnt-t14-offline-deps"
+      ],
+      "competition_sources": [],
+      "kernel_sources": [],
+      "model_sources": []
+    },
+    "example_runner_command": [
+      "python",
+      "scripts/train_xlsr.py",
+      "--plan",
+      "configs/xlsr_training.json",
+      "--run-id",
+      "X1-L8-lr3e-5",
+      "--training-seed",
+      2026,
+      "--device",
+      "cuda:0",
+      "--train-artifact",
+      "\\data\\train_development_20k_v2",
+      "--dev-artifact",
+      "\\data\\closed_dev_full_v1",
+      "--pretrained-dir",
+      "\\weights",
+      "--run-root",
+      "\\run",
+      "--report-json",
+      "\\report",
+      "--session-steps",
+      "9930",
+      "--deadline-unix",
+      "40600.0"
+    ],
+    "run": {
+      "run_id": "X1-L8-lr3e-5",
+      "layers": 8,
+      "encoder_lr": 3e-05
+    },
+    "classifier_lr": 0.001,
+    "max_epochs": 10,
+    "patience": 2,
+    "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+    "source_file_count": 73,
+    "profile_sha256": {
+      "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+      "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+      "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+    },
+    "local_verify_execution": {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2026"
+      ],
+      "started_utc": "2026-11-08T22:13:20.294215+00:00",
+      "ended_utc": "2026-11-08T22:13:20.431444+00:00",
+      "seconds": 0.13495390000753105,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0001-verify-prepared.log"
+    },
+    "source_dataset_version_remote_check": "version2_ready",
+    "kernel_idle_and_quota_check": "passed",
+    "context_timing_discrepancy": {
+      "prompt_dev_seconds_approximately": 1980,
+      "actual_T18_dev_seconds": [
+        1696.5560365719998,
+        1696.1194834400003,
+        1675.4961397320003,
+        1667.1190782680005
+      ],
+      "actual_T18_mean_step_seconds": 1.4709533192036766,
+      "resolution": "user_confirmed_use_actual_T18",
+      "T20_stop_thresholds_unchanged": {
+        "mean_step_seconds": 2.0,
+        "dev_full_seconds": 3000
+      }
+    }
+  },
+  "push_attempts": 1,
+  "selection_performed": false,
+  "use_test": false,
+  "note": "Chưa push; đang làm rõ số đo1980giây trong bối cảnh so với T18 thực tế1667–1697giây.",
+  "claude_t19b_independent_verification": {
+    "date": "2026-11-09",
+    "source": "Bản giao T20 do người dùng chuyển; Codex không chạy lại kiểm độc lập này.",
+    "unit_suite": {
+      "tests": 376,
+      "status": "OK"
+    },
+    "score_blocks": "4 mô hình×4 điều kiện tính lại EER/FPR/miss-rate/chỉ báo lệch<1e-9.",
+    "original_reproduction": {
+      "B0_max_abs_probability_difference": 0,
+      "XLSR_max_abs_logit_difference_approx": 0.00107,
+      "decision_flips": 0
+    },
+    "independent_filters": "scipy.signal.firwin513Hann + np.convolve same; B0 80 mẫu×3seed/điều kiện maxΔp≤9,9e-6; XLS-R6mẫu/điều kiện maxΔlogit≤1,1e-4.",
+    "band_7950_8000_median_db_200_samples_per_group": {
+      "bonafide": -59,
+      "bonafide_roundtrip": -66,
+      "VC": -70,
+      "AP": -43
+    },
+    "indicators": "B0 mạnh ở2027/2028; XLS-R L8 yếu trên tập con3120; không kết luận có/không shortcut.",
+    "scope": "Worktree XLS-R, src/configs/data chính không đổi.",
+    "independent_script_location": "Ngoài repo."
+  },
+  "context_clarification": {
+    "date": "2026-11-09",
+    "user_quote": "Đính chính theo T18, tiếp tục T20",
+    "profile_and_stop_thresholds_unchanged": true
+  },
+  "source_dataset_remote": {
+    "status": "ready",
+    "current_version_number": 2
+  },
+  "kernel_status_before": {
+    "status": "COMPLETE",
+    "execution": {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc": "2026-11-08T22:15:30.007068+00:00",
+      "ended_utc": "2026-11-08T22:15:32.111707+00:00",
+      "seconds": 2.105986499998835,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0004-initial-kernel-status.log"
+    }
+  },
+  "quota_before": {
+    "gpu": {
+      "resource": "GPU",
+      "used": "3.88h",
+      "remaining": "26.12h",
+      "total": "30.00h",
+      "refreshAt": "2026-11-14T00:00:00"
+    },
+    "remaining_hours": 26.12,
+    "all_resources": [
+      {
+        "resource": "GPU",
+        "used": "3.88h",
+        "remaining": "26.12h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      }
+    ],
+    "observed_utc": "2026-11-08T22:15:33.596332+00:00"
+  },
+  "message": "Kernel COMPLETE, verifier a–g và timingT20 đạt; chưa chọn LR thắng.",
+  "updated_utc": "2026-11-09T04:19:22.056474+00:00",
+  "command_records": [
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0001-verify-prepared.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-source-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-verifier-regression.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0004-initial-kernel-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0005-quota-before.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0006-push-prepared.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0007-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0008-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0009-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0010-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0011-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0012-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0013-kernel-logs.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0014-quota-after.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0015-download-output.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0016-verify-run.json"
+  ],
+  "scope_exception_concurrent_main_changes": {
+    "observed_utc": "2026-11-08T22:21:12.988776+00:00",
+    "main_status_added": [
+      "?? reports/highband_spectrum_dev.json",
+      "?? reports/highband_spectrum_dev.md",
+      "?? scripts/analyze_highband_spectrum.py",
+      "?? tests/test_analyze_highband_spectrum.py"
+    ],
+    "file_sha256_at_observation": {
+      "reports/highband_spectrum_dev.json": "d422a50a8e68523a5e8b632065c813656995278203ccd12c0fdff5a998a13dcd",
+      "reports/highband_spectrum_dev.md": "d0c6605371979e9296a4bb1de045f893d0fe651be1683b3a06a02de53be146a9",
+      "scripts/analyze_highband_spectrum.py": "a9fa6cbe64329f840ec3b1fca3ca449213a62457b9d48b6a5268b474f73ccedc",
+      "tests/test_analyze_highband_spectrum.py": "7c347e49277fe527d25ac3cf57bfe25aec129fe0e6bc68d99cfbc83f96908ceb"
+    },
+    "actor": "Không suy đoán người/agent tạo; các lệnh T20 không ghi các đường dẫn này.",
+    "handling": "Giữ nguyên; tách chênh lệch status do tệp mới khỏi kiểm source/config/profile đã khóa.",
+    "local_stop_before_push": {
+      "reason": "main_status_unchanged false",
+      "exit_code": 1,
+      "push_called": false,
+      "push_attempts": 0
+    }
+  },
+  "verifier_regression_on_old_L8": {
+    "passed": true,
+    "run_id": "X1-L8-lr1e-5",
+    "checked_utc": "2026-11-08T22:15:27.793084+00:00",
+    "evaluation_scope": "dev-full, không phải test",
+    "use_test": false,
+    "checks": {
+      "a_controller_checkpoint": true,
+      "b_status_loss_batch_trace": true,
+      "c_best_patience": true,
+      "d_identity_modes": true,
+      "e_trainable_only": true,
+      "f_manifest_metrics": true,
+      "g_summary_timing": true
+    },
+    "status": "early_stopped",
+    "global_step": 3972,
+    "completed_epochs": 4,
+    "bad_evaluations": 2,
+    "best": {
+      "epoch": 2,
+      "global_step": 1986,
+      "generation": "g-ce724d6e82c8457d8ce3e3d7d2154349",
+      "eer": 0.008833298000141333,
+      "roc_auc": 0.9993901272398376,
+      "macro_f1": 0.9904715246705977,
+      "decision_threshold": 7.74885248054705e-05
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 993,
+        "eer": 0.012578616352201259,
+        "loss": 0.1118836970868912
+      },
+      {
+        "epoch": 2,
+        "global_step": 1986,
+        "eer": 0.008833298000141333,
+        "loss": 0.1275321024124879
+      },
+      {
+        "epoch": 3,
+        "global_step": 2979,
+        "eer": 0.011613741573946236,
+        "loss": 0.19872134428108362
+      },
+      {
+        "epoch": 4,
+        "global_step": 3972,
+        "eer": 0.012385283846341265,
+        "loss": 0.12314044439090573
+      }
+    ],
+    "per_attack_eer": {
+      "adversarial_attack": {
+        "eer": 0.0018770913245735737,
+        "threshold": 0.0031188483423174357,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      },
+      "replay": {
+        "eer": 0.05,
+        "threshold": 8.450733821518952e-06,
+        "bonafide_samples": 14151,
+        "spoof_samples": 120
+      },
+      "voice_conversion": {
+        "eer": 0.012719949120203519,
+        "threshold": 4.497523119691445e-05,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      }
+    },
+    "metric_max_abs_difference": 0.0,
+    "timing": {
+      "rehash_train_seconds": 46.902892502000014,
+      "rehash_dev_seconds": 107.33023471399997,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "backbone_load_seconds": 13.18879953299998,
+      "model_build_seconds": 0.48827561599995306,
+      "train_steps_this_invocation": 3972,
+      "train_loader_seconds": 1520.1968612700048,
+      "train_model_seconds": 4322.429722606998,
+      "train_seconds": 5842.626583877003,
+      "mean_step_seconds": 1.4709533192036766,
+      "evaluations_this_invocation": [
+        {
+          "loader_seconds": 103.28660062501058,
+          "model_seconds": 1593.069340174996,
+          "total_seconds": 1696.5560365719998,
+          "samples": 38777,
+          "throughput_samples_per_second": 22.856303690593926
+        },
+        {
+          "loader_seconds": 103.57762022800216,
+          "model_seconds": 1592.3438670189653,
+          "total_seconds": 1696.1194834400003,
+          "samples": 38777,
+          "throughput_samples_per_second": 22.862186525535378
+        },
+        {
+          "loader_seconds": 82.98069870199834,
+          "model_seconds": 1592.329427516026,
+          "total_seconds": 1675.4961397320003,
+          "samples": 38777,
+          "throughput_samples_per_second": 23.143592563694284
+        },
+        {
+          "loader_seconds": 74.83485855396611,
+          "model_seconds": 1592.0984045979967,
+          "total_seconds": 1667.1190782680005,
+          "samples": 38777,
+          "throughput_samples_per_second": 23.259886174589347
+        }
+      ],
+      "wall_seconds": 13919.733340030001,
+      "deadline_unix": 1794072257.69784,
+      "seconds_left_at_exit": 25651.361677885056,
+      "deadline_overrun_seconds": 0.0,
+      "estimates": {
+        "train_step_seconds": 1.7673716012084593,
+        "dev_full_seconds": 3015.0,
+        "max_session_hours": 11.0
+      }
+    },
+    "workflow_seconds": 13964.0,
+    "step_estimate_seconds": 1.7673716012084593,
+    "trainable_checkpoint": {
+      "parameter_count": 101032193,
+      "tensor_count": 132,
+      "names": [
+        "backbone.encoder.layers.16.attention.k_proj.bias",
+        "backbone.encoder.layers.16.attention.k_proj.weight",
+        "backbone.encoder.layers.16.attention.out_proj.bias",
+        "backbone.encoder.layers.16.attention.out_proj.weight",
+        "backbone.encoder.layers.16.attention.q_proj.bias",
+        "backbone.encoder.layers.16.attention.q_proj.weight",
+        "backbone.encoder.layers.16.attention.v_proj.bias",
+        "backbone.encoder.layers.16.attention.v_proj.weight",
+        "backbone.encoder.layers.16.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.16.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.16.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.16.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.16.final_layer_norm.bias",
+        "backbone.encoder.layers.16.final_layer_norm.weight",
+        "backbone.encoder.layers.16.layer_norm.bias",
+        "backbone.encoder.layers.16.layer_norm.weight",
+        "backbone.encoder.layers.17.attention.k_proj.bias",
+        "backbone.encoder.layers.17.attention.k_proj.weight",
+        "backbone.encoder.layers.17.attention.out_proj.bias",
+        "backbone.encoder.layers.17.attention.out_proj.weight",
+        "backbone.encoder.layers.17.attention.q_proj.bias",
+        "backbone.encoder.layers.17.attention.q_proj.weight",
+        "backbone.encoder.layers.17.attention.v_proj.bias",
+        "backbone.encoder.layers.17.attention.v_proj.weight",
+        "backbone.encoder.layers.17.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.17.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.17.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.17.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.17.final_layer_norm.bias",
+        "backbone.encoder.layers.17.final_layer_norm.weight",
+        "backbone.encoder.layers.17.layer_norm.bias",
+        "backbone.encoder.layers.17.layer_norm.weight",
+        "backbone.encoder.layers.18.attention.k_proj.bias",
+        "backbone.encoder.layers.18.attention.k_proj.weight",
+        "backbone.encoder.layers.18.attention.out_proj.bias",
+        "backbone.encoder.layers.18.attention.out_proj.weight",
+        "backbone.encoder.layers.18.attention.q_proj.bias",
+        "backbone.encoder.layers.18.attention.q_proj.weight",
+        "backbone.encoder.layers.18.attention.v_proj.bias",
+        "backbone.encoder.layers.18.attention.v_proj.weight",
+        "backbone.encoder.layers.18.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.18.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.18.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.18.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.18.final_layer_norm.bias",
+        "backbone.encoder.layers.18.final_layer_norm.weight",
+        "backbone.encoder.layers.18.layer_norm.bias",
+        "backbone.encoder.layers.18.layer_norm.weight",
+        "backbone.encoder.layers.19.attention.k_proj.bias",
+        "backbone.encoder.layers.19.attention.k_proj.weight",
+        "backbone.encoder.layers.19.attention.out_proj.bias",
+        "backbone.encoder.layers.19.attention.out_proj.weight",
+        "backbone.encoder.layers.19.attention.q_proj.bias",
+        "backbone.encoder.layers.19.attention.q_proj.weight",
+        "backbone.encoder.layers.19.attention.v_proj.bias",
+        "backbone.encoder.layers.19.attention.v_proj.weight",
+        "backbone.encoder.layers.19.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.19.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.19.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.19.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.19.final_layer_norm.bias",
+        "backbone.encoder.layers.19.final_layer_norm.weight",
+        "backbone.encoder.layers.19.layer_norm.bias",
+        "backbone.encoder.layers.19.layer_norm.weight",
+        "backbone.encoder.layers.20.attention.k_proj.bias",
+        "backbone.encoder.layers.20.attention.k_proj.weight",
+        "backbone.encoder.layers.20.attention.out_proj.bias",
+        "backbone.encoder.layers.20.attention.out_proj.weight",
+        "backbone.encoder.layers.20.attention.q_proj.bias",
+        "backbone.encoder.layers.20.attention.q_proj.weight",
+        "backbone.encoder.layers.20.attention.v_proj.bias",
+        "backbone.encoder.layers.20.attention.v_proj.weight",
+        "backbone.encoder.layers.20.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.20.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.20.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.20.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.20.final_layer_norm.bias",
+        "backbone.encoder.layers.20.final_layer_norm.weight",
+        "backbone.encoder.layers.20.layer_norm.bias",
+        "backbone.encoder.layers.20.layer_norm.weight",
+        "backbone.encoder.layers.21.attention.k_proj.bias",
+        "backbone.encoder.layers.21.attention.k_proj.weight",
+        "backbone.encoder.layers.21.attention.out_proj.bias",
+        "backbone.encoder.layers.21.attention.out_proj.weight",
+        "backbone.encoder.layers.21.attention.q_proj.bias",
+        "backbone.encoder.layers.21.attention.q_proj.weight",
+        "backbone.encoder.layers.21.attention.v_proj.bias",
+        "backbone.encoder.layers.21.attention.v_proj.weight",
+        "backbone.encoder.layers.21.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.21.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.21.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.21.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.21.final_layer_norm.bias",
+        "backbone.encoder.layers.21.final_layer_norm.weight",
+        "backbone.encoder.layers.21.layer_norm.bias",
+        "backbone.encoder.layers.21.layer_norm.weight",
+        "backbone.encoder.layers.22.attention.k_proj.bias",
+        "backbone.encoder.layers.22.attention.k_proj.weight",
+        "backbone.encoder.layers.22.attention.out_proj.bias",
+        "backbone.encoder.layers.22.attention.out_proj.weight",
+        "backbone.encoder.layers.22.attention.q_proj.bias",
+        "backbone.encoder.layers.22.attention.q_proj.weight",
+        "backbone.encoder.layers.22.attention.v_proj.bias",
+        "backbone.encoder.layers.22.attention.v_proj.weight",
+        "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.22.final_layer_norm.bias",
+        "backbone.encoder.layers.22.final_layer_norm.weight",
+        "backbone.encoder.layers.22.layer_norm.bias",
+        "backbone.encoder.layers.22.layer_norm.weight",
+        "backbone.encoder.layers.23.attention.k_proj.bias",
+        "backbone.encoder.layers.23.attention.k_proj.weight",
+        "backbone.encoder.layers.23.attention.out_proj.bias",
+        "backbone.encoder.layers.23.attention.out_proj.weight",
+        "backbone.encoder.layers.23.attention.q_proj.bias",
+        "backbone.encoder.layers.23.attention.q_proj.weight",
+        "backbone.encoder.layers.23.attention.v_proj.bias",
+        "backbone.encoder.layers.23.attention.v_proj.weight",
+        "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.23.final_layer_norm.bias",
+        "backbone.encoder.layers.23.final_layer_norm.weight",
+        "backbone.encoder.layers.23.layer_norm.bias",
+        "backbone.encoder.layers.23.layer_norm.weight",
+        "classifier.0.bias",
+        "classifier.0.weight",
+        "classifier.3.bias",
+        "classifier.3.weight"
+      ],
+      "shapes_verified_with_meta_model": true
+    },
+    "remaining_generations": [
+      "g-6886d33bae1b4e1e90c22b6bf0bb6c68",
+      "g-ce724d6e82c8457d8ce3e3d7d2154349"
+    ],
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+    "output_bytes": 2607305766,
+    "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+    "report_sha256": "22b00c4baf1e39430124ff96830ddfc43a6d305aa01446735506fc880f428e3f",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+  },
+  "kernel_version": 6,
+  "push_execution": {
+    "command": [
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+      "-B",
+      "scripts/kaggle_workflow.py",
+      "--config",
+      ".kaggle/xlsr-d028/project.json",
+      "push-prepared-kernel",
+      "--kernel-dir",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2026"
+    ],
+    "started_utc": "2026-11-08T22:21:29.092632+00:00",
+    "ended_utc": "2026-11-08T22:21:33.003934+00:00",
+    "seconds": 3.9115796999976737,
+    "exit_code": 0,
+    "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0006-push-prepared.log"
+  },
+  "next_status_unix": 1794199379.3983548,
+  "last_status_execution": {
+    "command": [
+      "kaggle",
+      "-W",
+      "kernels",
+      "status",
+      "ngctnnguyn1111/doanttnt-xlsr-d028"
+    ],
+    "started_utc": "2026-11-09T04:12:56.153119+00:00",
+    "ended_utc": "2026-11-09T04:12:59.394901+00:00",
+    "seconds": 3.2438070999996853,
+    "exit_code": 0,
+    "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0012-status.log"
+  },
+  "monitor_starts": [
+    {
+      "utc": "2026-11-08T22:22:02.919933+00:00",
+      "pid": 18408
+    },
+    {
+      "utc": "2026-11-09T04:12:56.136995+00:00",
+      "pid": 18172
+    }
+  ],
+  "last_kernel_status": "COMPLETE",
+  "kernel_status": "COMPLETE",
+  "kernel_logs_execution": {
+    "command": [
+      "kaggle",
+      "-W",
+      "kernels",
+      "logs",
+      "ngctnnguyn1111/doanttnt-xlsr-d028"
+    ],
+    "started_utc": "2026-11-09T04:12:59.517777+00:00",
+    "ended_utc": "2026-11-09T04:13:03.072935+00:00",
+    "seconds": 3.5523395000000164,
+    "exit_code": 0,
+    "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0013-kernel-logs.log"
+  },
+  "quota_after": {
+    "gpu": {
+      "resource": "GPU",
+      "used": "7.97h",
+      "remaining": "22.03h",
+      "total": "30.00h",
+      "refreshAt": "2026-11-14T00:00:00"
+    },
+    "all_resources": [
+      {
+        "resource": "GPU",
+        "used": "7.97h",
+        "remaining": "22.03h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      }
+    ],
+    "remaining_hours": 22.03,
+    "observed_utc": "2026-11-09T04:13:05.144007+00:00"
+  },
+  "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+  "download_execution": {
+    "command": [
+      "kaggle",
+      "-W",
+      "kernels",
+      "output",
+      "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "-p",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+      "--file-pattern",
+      "^reports/|^checkpoints/|^[^/]+\\.log$",
+      "--page-size",
+      "200"
+    ],
+    "started_utc": "2026-11-09T04:13:05.144007+00:00",
+    "ended_utc": "2026-11-09T04:18:47.468688+00:00",
+    "seconds": 342.31639859999996,
+    "exit_code": 0,
+    "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0015-download-output.log"
+  },
+  "raw_summary": {
+    "runner_status": "early_stopped",
+    "completed_epochs": 4,
+    "global_step": 3972,
+    "history": [
+      {
+        "epoch": 1,
+        "eer": 0.013968975879152115,
+        "loss": 0.08069323317874942
+      },
+      {
+        "epoch": 2,
+        "eer": 0.008162105092178998,
+        "loss": 0.0887507777727561
+      },
+      {
+        "epoch": 3,
+        "eer": 0.01331925607081946,
+        "loss": 0.08265094634486123
+      },
+      {
+        "epoch": 4,
+        "eer": 0.012225284432195605,
+        "loss": 0.04765382224073699
+      }
+    ],
+    "best": {
+      "epoch": 2,
+      "global_step": 1986,
+      "generation": "g-eb35f3c2379f4a47bd22744c9be1dd8f",
+      "eer": 0.008162105092178998,
+      "roc_auc": 0.9989520866248541,
+      "macro_f1": 0.9912206651042532,
+      "decision_threshold": 0.00015767214536590907
+    },
+    "timing": {
+      "rehash_train_seconds": 46.56943670099997,
+      "rehash_dev_seconds": 108.50393706500006,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "backbone_load_seconds": 16.861106009000082,
+      "model_build_seconds": 0.4930983340000239,
+      "train_steps_this_invocation": 3972,
+      "train_loader_seconds": 1633.156663631023,
+      "train_model_seconds": 4558.846741917986,
+      "train_seconds": 6192.003405549009,
+      "mean_step_seconds": 1.5589132440959237,
+      "evaluations_this_invocation": [
+        {
+          "loader_seconds": 103.93196201098726,
+          "model_seconds": 1681.6766566759802,
+          "total_seconds": 1785.8244855830003,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.713780000804984
+        },
+        {
+          "loader_seconds": 105.20914882300349,
+          "model_seconds": 1682.0132849430383,
+          "total_seconds": 1787.4076452640002,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.694547465288835
+        },
+        {
+          "loader_seconds": 86.54423152898016,
+          "model_seconds": 1681.3302682129615,
+          "total_seconds": 1768.0805429280008,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.931693188469787
+        },
+        {
+          "loader_seconds": 75.54269617100363,
+          "model_seconds": 1681.1899895789793,
+          "total_seconds": 1756.9320185980014,
+          "samples": 38777,
+          "throughput_samples_per_second": 22.070859651669
+        }
+      ],
+      "wall_seconds": 14668.469401563001,
+      "deadline_unix": 1794216500.036659,
+      "seconds_left_at_exit": 24893.02285504341,
+      "deadline_overrun_seconds": 0.0,
+      "estimates": {
+        "train_step_seconds": 1.7673716012084593,
+        "dev_full_seconds": 3015.0,
+        "max_session_hours": 11.0
+      }
+    },
+    "report_sha256": "d04f933bb28786f34107a27b18a93ab685c1dc0d8491fe3d4b73db55eb0b96df"
+  },
+  "verification_execution": {
+    "command": [
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+      "-B",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\verify_run.py",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+      "X1-L8-lr3e-5"
+    ],
+    "started_utc": "2026-11-09T04:18:47.952691+00:00",
+    "ended_utc": "2026-11-09T04:19:19.759353+00:00",
+    "seconds": 31.80643510000027,
+    "exit_code": 0,
+    "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0016-verify-run.log"
+  },
+  "verification": {
+    "passed": true,
+    "run_id": "X1-L8-lr3e-5",
+    "checked_utc": "2026-11-09T04:19:18.593523+00:00",
+    "evaluation_scope": "dev-full, không phải test",
+    "use_test": false,
+    "checks": {
+      "a_controller_checkpoint": true,
+      "b_status_loss_batch_trace": true,
+      "c_best_patience": true,
+      "d_identity_modes": true,
+      "e_trainable_only": true,
+      "f_manifest_metrics": true,
+      "g_summary_timing": true
+    },
+    "status": "early_stopped",
+    "global_step": 3972,
+    "completed_epochs": 4,
+    "bad_evaluations": 2,
+    "best": {
+      "epoch": 2,
+      "global_step": 1986,
+      "generation": "g-eb35f3c2379f4a47bd22744c9be1dd8f",
+      "eer": 0.008162105092178998,
+      "roc_auc": 0.9989520866248541,
+      "macro_f1": 0.9912206651042532,
+      "decision_threshold": 0.00015767214536590907
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 993,
+        "eer": 0.013968975879152115,
+        "loss": 0.08069323317874942
+      },
+      {
+        "epoch": 2,
+        "global_step": 1986,
+        "eer": 0.008162105092178998,
+        "loss": 0.0887507777727561
+      },
+      {
+        "epoch": 3,
+        "global_step": 2979,
+        "eer": 0.01331925607081946,
+        "loss": 0.08265094634486123
+      },
+      {
+        "epoch": 4,
+        "global_step": 3972,
+        "eer": 0.012225284432195605,
+        "loss": 0.04765382224073699
+      }
+    ],
+    "per_attack_eer": {
+      "adversarial_attack": {
+        "eer": 0.0017138659920019586,
+        "threshold": 0.7380594651056759,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      },
+      "replay": {
+        "eer": 0.041666666666666664,
+        "threshold": 1.7234797553555836e-06,
+        "bonafide_samples": 14151,
+        "spoof_samples": 120
+      },
+      "voice_conversion": {
+        "eer": 0.011507385946298866,
+        "threshold": 3.15630669477081e-05,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      }
+    },
+    "metric_max_abs_difference": 0.0,
+    "timing": {
+      "rehash_train_seconds": 46.56943670099997,
+      "rehash_dev_seconds": 108.50393706500006,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "backbone_load_seconds": 16.861106009000082,
+      "model_build_seconds": 0.4930983340000239,
+      "train_steps_this_invocation": 3972,
+      "train_loader_seconds": 1633.156663631023,
+      "train_model_seconds": 4558.846741917986,
+      "train_seconds": 6192.003405549009,
+      "mean_step_seconds": 1.5589132440959237,
+      "evaluations_this_invocation": [
+        {
+          "loader_seconds": 103.93196201098726,
+          "model_seconds": 1681.6766566759802,
+          "total_seconds": 1785.8244855830003,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.713780000804984
+        },
+        {
+          "loader_seconds": 105.20914882300349,
+          "model_seconds": 1682.0132849430383,
+          "total_seconds": 1787.4076452640002,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.694547465288835
+        },
+        {
+          "loader_seconds": 86.54423152898016,
+          "model_seconds": 1681.3302682129615,
+          "total_seconds": 1768.0805429280008,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.931693188469787
+        },
+        {
+          "loader_seconds": 75.54269617100363,
+          "model_seconds": 1681.1899895789793,
+          "total_seconds": 1756.9320185980014,
+          "samples": 38777,
+          "throughput_samples_per_second": 22.070859651669
+        }
+      ],
+      "wall_seconds": 14668.469401563001,
+      "deadline_unix": 1794216500.036659,
+      "seconds_left_at_exit": 24893.02285504341,
+      "deadline_overrun_seconds": 0.0,
+      "estimates": {
+        "train_step_seconds": 1.7673716012084593,
+        "dev_full_seconds": 3015.0,
+        "max_session_hours": 11.0
+      }
+    },
+    "workflow_seconds": 14727.0,
+    "step_estimate_seconds": 1.7673716012084593,
+    "trainable_checkpoint": {
+      "parameter_count": 101032193,
+      "tensor_count": 132,
+      "names": [
+        "backbone.encoder.layers.16.attention.k_proj.bias",
+        "backbone.encoder.layers.16.attention.k_proj.weight",
+        "backbone.encoder.layers.16.attention.out_proj.bias",
+        "backbone.encoder.layers.16.attention.out_proj.weight",
+        "backbone.encoder.layers.16.attention.q_proj.bias",
+        "backbone.encoder.layers.16.attention.q_proj.weight",
+        "backbone.encoder.layers.16.attention.v_proj.bias",
+        "backbone.encoder.layers.16.attention.v_proj.weight",
+        "backbone.encoder.layers.16.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.16.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.16.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.16.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.16.final_layer_norm.bias",
+        "backbone.encoder.layers.16.final_layer_norm.weight",
+        "backbone.encoder.layers.16.layer_norm.bias",
+        "backbone.encoder.layers.16.layer_norm.weight",
+        "backbone.encoder.layers.17.attention.k_proj.bias",
+        "backbone.encoder.layers.17.attention.k_proj.weight",
+        "backbone.encoder.layers.17.attention.out_proj.bias",
+        "backbone.encoder.layers.17.attention.out_proj.weight",
+        "backbone.encoder.layers.17.attention.q_proj.bias",
+        "backbone.encoder.layers.17.attention.q_proj.weight",
+        "backbone.encoder.layers.17.attention.v_proj.bias",
+        "backbone.encoder.layers.17.attention.v_proj.weight",
+        "backbone.encoder.layers.17.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.17.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.17.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.17.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.17.final_layer_norm.bias",
+        "backbone.encoder.layers.17.final_layer_norm.weight",
+        "backbone.encoder.layers.17.layer_norm.bias",
+        "backbone.encoder.layers.17.layer_norm.weight",
+        "backbone.encoder.layers.18.attention.k_proj.bias",
+        "backbone.encoder.layers.18.attention.k_proj.weight",
+        "backbone.encoder.layers.18.attention.out_proj.bias",
+        "backbone.encoder.layers.18.attention.out_proj.weight",
+        "backbone.encoder.layers.18.attention.q_proj.bias",
+        "backbone.encoder.layers.18.attention.q_proj.weight",
+        "backbone.encoder.layers.18.attention.v_proj.bias",
+        "backbone.encoder.layers.18.attention.v_proj.weight",
+        "backbone.encoder.layers.18.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.18.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.18.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.18.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.18.final_layer_norm.bias",
+        "backbone.encoder.layers.18.final_layer_norm.weight",
+        "backbone.encoder.layers.18.layer_norm.bias",
+        "backbone.encoder.layers.18.layer_norm.weight",
+        "backbone.encoder.layers.19.attention.k_proj.bias",
+        "backbone.encoder.layers.19.attention.k_proj.weight",
+        "backbone.encoder.layers.19.attention.out_proj.bias",
+        "backbone.encoder.layers.19.attention.out_proj.weight",
+        "backbone.encoder.layers.19.attention.q_proj.bias",
+        "backbone.encoder.layers.19.attention.q_proj.weight",
+        "backbone.encoder.layers.19.attention.v_proj.bias",
+        "backbone.encoder.layers.19.attention.v_proj.weight",
+        "backbone.encoder.layers.19.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.19.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.19.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.19.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.19.final_layer_norm.bias",
+        "backbone.encoder.layers.19.final_layer_norm.weight",
+        "backbone.encoder.layers.19.layer_norm.bias",
+        "backbone.encoder.layers.19.layer_norm.weight",
+        "backbone.encoder.layers.20.attention.k_proj.bias",
+        "backbone.encoder.layers.20.attention.k_proj.weight",
+        "backbone.encoder.layers.20.attention.out_proj.bias",
+        "backbone.encoder.layers.20.attention.out_proj.weight",
+        "backbone.encoder.layers.20.attention.q_proj.bias",
+        "backbone.encoder.layers.20.attention.q_proj.weight",
+        "backbone.encoder.layers.20.attention.v_proj.bias",
+        "backbone.encoder.layers.20.attention.v_proj.weight",
+        "backbone.encoder.layers.20.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.20.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.20.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.20.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.20.final_layer_norm.bias",
+        "backbone.encoder.layers.20.final_layer_norm.weight",
+        "backbone.encoder.layers.20.layer_norm.bias",
+        "backbone.encoder.layers.20.layer_norm.weight",
+        "backbone.encoder.layers.21.attention.k_proj.bias",
+        "backbone.encoder.layers.21.attention.k_proj.weight",
+        "backbone.encoder.layers.21.attention.out_proj.bias",
+        "backbone.encoder.layers.21.attention.out_proj.weight",
+        "backbone.encoder.layers.21.attention.q_proj.bias",
+        "backbone.encoder.layers.21.attention.q_proj.weight",
+        "backbone.encoder.layers.21.attention.v_proj.bias",
+        "backbone.encoder.layers.21.attention.v_proj.weight",
+        "backbone.encoder.layers.21.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.21.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.21.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.21.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.21.final_layer_norm.bias",
+        "backbone.encoder.layers.21.final_layer_norm.weight",
+        "backbone.encoder.layers.21.layer_norm.bias",
+        "backbone.encoder.layers.21.layer_norm.weight",
+        "backbone.encoder.layers.22.attention.k_proj.bias",
+        "backbone.encoder.layers.22.attention.k_proj.weight",
+        "backbone.encoder.layers.22.attention.out_proj.bias",
+        "backbone.encoder.layers.22.attention.out_proj.weight",
+        "backbone.encoder.layers.22.attention.q_proj.bias",
+        "backbone.encoder.layers.22.attention.q_proj.weight",
+        "backbone.encoder.layers.22.attention.v_proj.bias",
+        "backbone.encoder.layers.22.attention.v_proj.weight",
+        "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.22.final_layer_norm.bias",
+        "backbone.encoder.layers.22.final_layer_norm.weight",
+        "backbone.encoder.layers.22.layer_norm.bias",
+        "backbone.encoder.layers.22.layer_norm.weight",
+        "backbone.encoder.layers.23.attention.k_proj.bias",
+        "backbone.encoder.layers.23.attention.k_proj.weight",
+        "backbone.encoder.layers.23.attention.out_proj.bias",
+        "backbone.encoder.layers.23.attention.out_proj.weight",
+        "backbone.encoder.layers.23.attention.q_proj.bias",
+        "backbone.encoder.layers.23.attention.q_proj.weight",
+        "backbone.encoder.layers.23.attention.v_proj.bias",
+        "backbone.encoder.layers.23.attention.v_proj.weight",
+        "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+        "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+        "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+        "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+        "backbone.encoder.layers.23.final_layer_norm.bias",
+        "backbone.encoder.layers.23.final_layer_norm.weight",
+        "backbone.encoder.layers.23.layer_norm.bias",
+        "backbone.encoder.layers.23.layer_norm.weight",
+        "classifier.0.bias",
+        "classifier.0.weight",
+        "classifier.3.bias",
+        "classifier.3.weight"
+      ],
+      "shapes_verified_with_meta_model": true
+    },
+    "remaining_generations": [
+      "g-9cce459c61c24aacb667b23d7d0f4774",
+      "g-eb35f3c2379f4a47bd22744c9be1dd8f"
+    ],
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+    "output_bytes": 2608538179,
+    "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+    "report_sha256": "d04f933bb28786f34107a27b18a93ab685c1dc0d8491fe3d4b73db55eb0b96df",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+  },
+  "t20_timing_checks": {
+    "mean_step_at_most_2_seconds": true,
+    "all_dev_at_most_3000_seconds": true,
+    "deadline_overrun_zero": true
+  },
+  "comparison_data_only": [
+    {
+      "run_id": "X1-L8-lr1e-5",
+      "eer": 0.008833298000141333,
+      "verified": true
+    },
+    {
+      "run_id": "X1-L8-lr3e-5",
+      "eer": 0.008162105092178998,
+      "verified": true
+    }
+  ],
+  "final_scope_audit": {
+    "checked_utc": "2026-11-09T04:22:18.436738+00:00",
+    "changed_worktree_protected": [],
+    "changed_main_protected": [],
+    "prepared_sha256_before": {
+      "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+      "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+      "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+    },
+    "prepared_sha256_after": {
+      "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+      "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+      "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+    },
+    "prepared_unchanged": true,
+    "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+    "main_status_unchanged": false,
+    "new_worktree_status": [
+      "?? reports/xlsr_t20_seed2026_l8_lr3e-5.json"
+    ],
+    "removed_worktree_status": [],
+    "main_status_added": [
+      "?? reports/highband_spectrum_dev.json",
+      "?? reports/highband_spectrum_dev.md",
+      "?? scripts/analyze_highband_spectrum.py",
+      "?? tests/test_analyze_highband_spectrum.py"
+    ],
+    "main_status_removed": [],
+    "concurrent_main_changes": {
+      "observed_utc": "2026-11-08T22:21:12.988776+00:00",
+      "main_status_added": [
+        "?? reports/highband_spectrum_dev.json",
+        "?? reports/highband_spectrum_dev.md",
+        "?? scripts/analyze_highband_spectrum.py",
+        "?? tests/test_analyze_highband_spectrum.py"
+      ],
+      "file_sha256_at_observation": {
+        "reports/highband_spectrum_dev.json": "d422a50a8e68523a5e8b632065c813656995278203ccd12c0fdff5a998a13dcd",
+        "reports/highband_spectrum_dev.md": "d0c6605371979e9296a4bb1de045f893d0fe651be1683b3a06a02de53be146a9",
+        "scripts/analyze_highband_spectrum.py": "a9fa6cbe64329f840ec3b1fca3ca449213a62457b9d48b6a5268b474f73ccedc",
+        "tests/test_analyze_highband_spectrum.py": "7c347e49277fe527d25ac3cf57bfe25aec129fe0e6bc68d99cfbc83f96908ceb"
+      },
+      "actor": "Không suy đoán người/agent tạo; các lệnh T20 không ghi các đường dẫn này.",
+      "handling": "Giữ nguyên; tách chênh lệch status do tệp mới khỏi kiểm source/config/profile đã khóa.",
+      "local_stop_before_push": {
+        "reason": "main_status_unchanged false",
+        "exit_code": 1,
+        "push_called": false,
+        "push_attempts": 0
+      }
+    },
+    "main_status_external_only": true,
+    "passed": true
+  },
+  "final_handoff": {
+    "finalized_utc": "2026-11-09T04:22:18.906672+00:00",
+    "status": "completed_pending_claude_review",
+    "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "kernel_version": 6,
+    "kernel_status": "COMPLETE",
+    "push_attempts": 1,
+    "training_resume_sessions": 0,
+    "selection_performed": false,
+    "runner_status": "early_stopped",
+    "completed_epochs": 4,
+    "global_step": 3972,
+    "bad_evaluations": 2,
+    "best": {
+      "epoch": 2,
+      "global_step": 1986,
+      "generation": "g-eb35f3c2379f4a47bd22744c9be1dd8f",
+      "eer": 0.008162105092178998,
+      "roc_auc": 0.9989520866248541,
+      "macro_f1": 0.9912206651042532,
+      "decision_threshold": 0.00015767214536590907
+    },
+    "per_attack_eer": {
+      "adversarial_attack": {
+        "eer": 0.0017138659920019586,
+        "threshold": 0.7380594651056759,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      },
+      "replay": {
+        "eer": 0.041666666666666664,
+        "threshold": 1.7234797553555836e-06,
+        "bonafide_samples": 14151,
+        "spoof_samples": 120
+      },
+      "voice_conversion": {
+        "eer": 0.011507385946298866,
+        "threshold": 3.15630669477081e-05,
+        "bonafide_samples": 14151,
+        "spoof_samples": 12253
+      }
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "global_step": 993,
+        "eer": 0.013968975879152115,
+        "loss": 0.08069323317874942
+      },
+      {
+        "epoch": 2,
+        "global_step": 1986,
+        "eer": 0.008162105092178998,
+        "loss": 0.0887507777727561
+      },
+      {
+        "epoch": 3,
+        "global_step": 2979,
+        "eer": 0.01331925607081946,
+        "loss": 0.08265094634486123
+      },
+      {
+        "epoch": 4,
+        "global_step": 3972,
+        "eer": 0.012225284432195605,
+        "loss": 0.04765382224073699
+      }
+    ],
+    "timing": {
+      "rehash_train_seconds": 46.56943670099997,
+      "rehash_dev_seconds": 108.50393706500006,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "backbone_load_seconds": 16.861106009000082,
+      "model_build_seconds": 0.4930983340000239,
+      "train_steps_this_invocation": 3972,
+      "train_loader_seconds": 1633.156663631023,
+      "train_model_seconds": 4558.846741917986,
+      "train_seconds": 6192.003405549009,
+      "mean_step_seconds": 1.5589132440959237,
+      "evaluations_this_invocation": [
+        {
+          "loader_seconds": 103.93196201098726,
+          "model_seconds": 1681.6766566759802,
+          "total_seconds": 1785.8244855830003,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.713780000804984
+        },
+        {
+          "loader_seconds": 105.20914882300349,
+          "model_seconds": 1682.0132849430383,
+          "total_seconds": 1787.4076452640002,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.694547465288835
+        },
+        {
+          "loader_seconds": 86.54423152898016,
+          "model_seconds": 1681.3302682129615,
+          "total_seconds": 1768.0805429280008,
+          "samples": 38777,
+          "throughput_samples_per_second": 21.931693188469787
+        },
+        {
+          "loader_seconds": 75.54269617100363,
+          "model_seconds": 1681.1899895789793,
+          "total_seconds": 1756.9320185980014,
+          "samples": 38777,
+          "throughput_samples_per_second": 22.070859651669
+        }
+      ],
+      "wall_seconds": 14668.469401563001,
+      "deadline_unix": 1794216500.036659,
+      "seconds_left_at_exit": 24893.02285504341,
+      "deadline_overrun_seconds": 0.0,
+      "estimates": {
+        "train_step_seconds": 1.7673716012084593,
+        "dev_full_seconds": 3015.0,
+        "max_session_hours": 11.0
+      }
+    },
+    "t20_timing_checks": {
+      "mean_step_at_most_2_seconds": true,
+      "all_dev_at_most_3000_seconds": true,
+      "deadline_overrun_zero": true
+    },
+    "verification_checks": {
+      "a_controller_checkpoint": true,
+      "b_status_loss_batch_trace": true,
+      "c_best_patience": true,
+      "d_identity_modes": true,
+      "e_trainable_only": true,
+      "f_manifest_metrics": true,
+      "g_summary_timing": true
+    },
+    "verification_execution": {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\verify_run.py",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+        "X1-L8-lr3e-5"
+      ],
+      "started_utc": "2026-11-09T04:18:47.952691+00:00",
+      "ended_utc": "2026-11-09T04:19:19.759353+00:00",
+      "seconds": 31.80643510000027,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0016-verify-run.log"
+    },
+    "metric_max_abs_difference": 0.0,
+    "identity": {
+      "run": {
+        "run_id": "X1-L8-lr3e-5",
+        "layers": 8,
+        "encoder_lr": 3e-05
+      },
+      "training_seed": 2026,
+      "data_seed": 2026,
+      "device": "cuda:0",
+      "trainable_only": true,
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "batch_size": 16,
+      "classifier_lr": 0.001,
+      "max_epochs": 10,
+      "patience": 2
+    },
+    "data": {
+      "train_samples": 15885,
+      "train_shards": 57,
+      "dev_samples": 38777,
+      "dev_shards": 186,
+      "use_test": false
+    },
+    "workflow": {
+      "started_at": "2026-11-08T22:28:14+00:00",
+      "finished_at": "2026-11-09T02:33:41+00:00",
+      "seconds": 14727.0,
+      "kernel_final_log_elapsed_seconds": 14737.521851327
+    },
+    "quota_before": {
+      "gpu": {
+        "resource": "GPU",
+        "used": "3.88h",
+        "remaining": "26.12h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      },
+      "remaining_hours": 26.12,
+      "all_resources": [
+        {
+          "resource": "GPU",
+          "used": "3.88h",
+          "remaining": "26.12h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        }
+      ],
+      "observed_utc": "2026-11-08T22:15:33.596332+00:00"
+    },
+    "quota_after": {
+      "gpu": {
+        "resource": "GPU",
+        "used": "7.97h",
+        "remaining": "22.03h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      },
+      "all_resources": [
+        {
+          "resource": "GPU",
+          "used": "7.97h",
+          "remaining": "22.03h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        }
+      ],
+      "remaining_hours": 22.03,
+      "observed_utc": "2026-11-09T04:13:05.144007+00:00"
+    },
+    "quota_used_hours": 4.09,
+    "comparison_data_only": [
+      {
+        "run_id": "X1-L8-lr1e-5",
+        "eer": 0.008833298000141333,
+        "verified": true
+      },
+      {
+        "run_id": "X1-L8-lr3e-5",
+        "eer": 0.008162105092178998,
+        "verified": true
+      }
+    ],
+    "commands": [
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2026"
+        ],
+        "started_utc": "2026-11-08T22:13:20.294215+00:00",
+        "ended_utc": "2026-11-08T22:13:20.431444+00:00",
+        "seconds": 0.13495390000753105,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0001-verify-prepared.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0001-verify-prepared.json"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr1e-5-seed2026",
+          "X1-L8-lr1e-5"
+        ],
+        "started_utc": "2026-11-08T22:14:19.781113+00:00",
+        "ended_utc": "2026-11-08T22:15:28.843429+00:00",
+        "seconds": 69.05653850000817,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-verifier-regression.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-verifier-regression.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "datasets",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-08T22:15:24.094406+00:00",
+        "ended_utc": "2026-11-08T22:15:30.007068+00:00",
+        "seconds": 5.912593000000925,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-source-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0002-source-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-08T22:15:30.007068+00:00",
+        "ended_utc": "2026-11-08T22:15:32.111707+00:00",
+        "seconds": 2.105986499998835,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0004-initial-kernel-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0004-initial-kernel-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-08T22:15:32.115111+00:00",
+        "ended_utc": "2026-11-08T22:15:33.596332+00:00",
+        "seconds": 1.489222799995332,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0005-quota-before.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0005-quota-before.json"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2026"
+        ],
+        "started_utc": "2026-11-08T22:21:29.092632+00:00",
+        "ended_utc": "2026-11-08T22:21:33.003934+00:00",
+        "seconds": 3.9115796999976737,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0006-push-prepared.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0006-push-prepared.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-08T22:51:33.008576+00:00",
+        "ended_utc": "2026-11-08T22:51:34.284833+00:00",
+        "seconds": 1.2754003000009106,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0007-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0007-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-08T23:21:34.286223+00:00",
+        "ended_utc": "2026-11-08T23:21:35.580922+00:00",
+        "seconds": 1.2955502999975579,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0008-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0008-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-08T23:51:35.583699+00:00",
+        "ended_utc": "2026-11-08T23:51:36.799777+00:00",
+        "seconds": 1.219389499994577,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0009-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0009-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T00:21:36.801808+00:00",
+        "ended_utc": "2026-11-09T00:21:38.127450+00:00",
+        "seconds": 1.3284920000005513,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0010-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0010-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T00:51:38.127904+00:00",
+        "ended_utc": "2026-11-09T00:51:40.858507+00:00",
+        "seconds": 2.730133200006094,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0011-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0011-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T04:12:56.153119+00:00",
+        "ended_utc": "2026-11-09T04:12:59.394901+00:00",
+        "seconds": 3.2438070999996853,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0012-status.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0012-status.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T04:12:59.517777+00:00",
+        "ended_utc": "2026-11-09T04:13:03.072935+00:00",
+        "seconds": 3.5523395000000164,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0013-kernel-logs.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0013-kernel-logs.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-09T04:13:03.072935+00:00",
+        "ended_utc": "2026-11-09T04:13:05.144007+00:00",
+        "seconds": 2.0718188999999256,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0014-quota-after.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0014-quota-after.json"
+      },
+      {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-09T04:13:05.144007+00:00",
+        "ended_utc": "2026-11-09T04:18:47.468688+00:00",
+        "seconds": 342.31639859999996,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0015-download-output.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0015-download-output.json"
+      },
+      {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+          "X1-L8-lr3e-5"
+        ],
+        "started_utc": "2026-11-09T04:18:47.952691+00:00",
+        "ended_utc": "2026-11-09T04:19:19.759353+00:00",
+        "seconds": 31.80643510000027,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0016-verify-run.log",
+        "record_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\commands\\0016-verify-run.json"
+      }
+    ],
+    "scope": {
+      "checked_utc": "2026-11-09T04:22:18.436738+00:00",
+      "changed_worktree_protected": [],
+      "changed_main_protected": [],
+      "prepared_sha256_before": {
+        "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+        "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+      },
+      "prepared_sha256_after": {
+        "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+        "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+      },
+      "prepared_unchanged": true,
+      "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+      "main_status_unchanged": false,
+      "new_worktree_status": [
+        "?? reports/xlsr_t20_seed2026_l8_lr3e-5.json"
+      ],
+      "removed_worktree_status": [],
+      "main_status_added": [
+        "?? reports/highband_spectrum_dev.json",
+        "?? reports/highband_spectrum_dev.md",
+        "?? scripts/analyze_highband_spectrum.py",
+        "?? tests/test_analyze_highband_spectrum.py"
+      ],
+      "main_status_removed": [],
+      "concurrent_main_changes": {
+        "observed_utc": "2026-11-08T22:21:12.988776+00:00",
+        "main_status_added": [
+          "?? reports/highband_spectrum_dev.json",
+          "?? reports/highband_spectrum_dev.md",
+          "?? scripts/analyze_highband_spectrum.py",
+          "?? tests/test_analyze_highband_spectrum.py"
+        ],
+        "file_sha256_at_observation": {
+          "reports/highband_spectrum_dev.json": "d422a50a8e68523a5e8b632065c813656995278203ccd12c0fdff5a998a13dcd",
+          "reports/highband_spectrum_dev.md": "d0c6605371979e9296a4bb1de045f893d0fe651be1683b3a06a02de53be146a9",
+          "scripts/analyze_highband_spectrum.py": "a9fa6cbe64329f840ec3b1fca3ca449213a62457b9d48b6a5268b474f73ccedc",
+          "tests/test_analyze_highband_spectrum.py": "7c347e49277fe527d25ac3cf57bfe25aec129fe0e6bc68d99cfbc83f96908ceb"
+        },
+        "actor": "Không suy đoán người/agent tạo; các lệnh T20 không ghi các đường dẫn này.",
+        "handling": "Giữ nguyên; tách chênh lệch status do tệp mới khỏi kiểm source/config/profile đã khóa.",
+        "local_stop_before_push": {
+          "reason": "main_status_unchanged false",
+          "exit_code": 1,
+          "push_called": false,
+          "push_attempts": 0
+        }
+      },
+      "main_status_external_only": true,
+      "passed": true
+    },
+    "prepared_sha256": {
+      "kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+      "run-config.json": "554aee9f0c04851842292109253c72780f7ad52688b138efcc4b34be0ad89179",
+      "runner.py": "170bf96fbd945a8d4ba6161f84ae9635c7be595cc5d070a5c7c4686366b9b57b"
+    },
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+    "output_files": 8,
+    "output_bytes": 2608538179,
+    "raw_report_sha256": "d04f933bb28786f34107a27b18a93ab685c1dc0d8491fe3d4b73db55eb0b96df",
+    "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+    "verifier_source_diff": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20\\verifier_changes.diff",
+    "monitor_starts": [
+      {
+        "utc": "2026-11-08T22:22:02.919933+00:00",
+        "pid": 18408
+      },
+      {
+        "utc": "2026-11-09T04:12:56.136995+00:00",
+        "pid": 18172
+      }
+    ],
+    "status_intervals": [
+      {
+        "previous_response_utc": "2026-11-08T22:51:34.284833+00:00",
+        "next_request_utc": "2026-11-08T23:21:34.286223+00:00",
+        "seconds": 1800.00139
+      },
+      {
+        "previous_response_utc": "2026-11-08T23:21:35.580922+00:00",
+        "next_request_utc": "2026-11-08T23:51:35.583699+00:00",
+        "seconds": 1800.002777
+      },
+      {
+        "previous_response_utc": "2026-11-08T23:51:36.799777+00:00",
+        "next_request_utc": "2026-11-09T00:21:36.801808+00:00",
+        "seconds": 1800.002031
+      },
+      {
+        "previous_response_utc": "2026-11-09T00:21:38.127450+00:00",
+        "next_request_utc": "2026-11-09T00:51:38.127904+00:00",
+        "seconds": 1800.000454
+      },
+      {
+        "previous_response_utc": "2026-11-09T00:51:40.858507+00:00",
+        "next_request_utc": "2026-11-09T04:12:56.153119+00:00",
+        "seconds": 12075.294612
+      }
+    ],
+    "deviations": [
+      {
+        "type": "context_correction_user_confirmed",
+        "details": {
+          "date": "2026-11-09",
+          "user_quote": "Đính chính theo T18, tiếp tục T20",
+          "profile_and_stop_thresholds_unchanged": true
+        }
+      },
+      {
+        "type": "concurrent_main_additions",
+        "details": {
+          "observed_utc": "2026-11-08T22:21:12.988776+00:00",
+          "main_status_added": [
+            "?? reports/highband_spectrum_dev.json",
+            "?? reports/highband_spectrum_dev.md",
+            "?? scripts/analyze_highband_spectrum.py",
+            "?? tests/test_analyze_highband_spectrum.py"
+          ],
+          "file_sha256_at_observation": {
+            "reports/highband_spectrum_dev.json": "d422a50a8e68523a5e8b632065c813656995278203ccd12c0fdff5a998a13dcd",
+            "reports/highband_spectrum_dev.md": "d0c6605371979e9296a4bb1de045f893d0fe651be1683b3a06a02de53be146a9",
+            "scripts/analyze_highband_spectrum.py": "a9fa6cbe64329f840ec3b1fca3ca449213a62457b9d48b6a5268b474f73ccedc",
+            "tests/test_analyze_highband_spectrum.py": "7c347e49277fe527d25ac3cf57bfe25aec129fe0e6bc68d99cfbc83f96908ceb"
+          },
+          "actor": "Không suy đoán người/agent tạo; các lệnh T20 không ghi các đường dẫn này.",
+          "handling": "Giữ nguyên; tách chênh lệch status do tệp mới khỏi kiểm source/config/profile đã khóa.",
+          "local_stop_before_push": {
+            "reason": "main_status_unchanged false",
+            "exit_code": 1,
+            "push_called": false,
+            "push_attempts": 0
+          }
+        },
+        "note": "Raw main Git status khác baseline; các file bảo vệ và profile không đổi. Không nhận các file mới này là thay đổi của T20."
+      },
+      {
+        "type": "local_monitor_gap",
+        "intervals": [
+          {
+            "previous_response_utc": "2026-11-09T00:51:40.858507+00:00",
+            "next_request_utc": "2026-11-09T04:12:56.153119+00:00",
+            "seconds": 12075.294612
+          }
+        ],
+        "details": "Monitor cục bộ không còn sống khi người dùng báo xong; nguyên nhân chưa xác định. Tiếp tục thu kết quả bằng monitor cục bộ, không push hoặc resume huấn luyện."
+      },
+      {
+        "type": "additional_verifier_regression",
+        "details": "Bản sao T20 kiểm output L8-lr1e-5 cũ đạt a–g/exit0 trước push; không sửa bản T18."
+      }
+    ],
+    "claude_t19b_verification": {
+      "date": "2026-11-09",
+      "source": "Bản giao T20 do người dùng chuyển; Codex không chạy lại kiểm độc lập này.",
+      "unit_suite": {
+        "tests": 376,
+        "status": "OK"
+      },
+      "score_blocks": "4 mô hình×4 điều kiện tính lại EER/FPR/miss-rate/chỉ báo lệch<1e-9.",
+      "original_reproduction": {
+        "B0_max_abs_probability_difference": 0,
+        "XLSR_max_abs_logit_difference_approx": 0.00107,
+        "decision_flips": 0
+      },
+      "independent_filters": "scipy.signal.firwin513Hann + np.convolve same; B0 80 mẫu×3seed/điều kiện maxΔp≤9,9e-6; XLS-R6mẫu/điều kiện maxΔlogit≤1,1e-4.",
+      "band_7950_8000_median_db_200_samples_per_group": {
+        "bonafide": -59,
+        "bonafide_roundtrip": -66,
+        "VC": -70,
+        "AP": -43
+      },
+      "indicators": "B0 mạnh ở2027/2028; XLS-R L8 yếu trên tập con3120; không kết luận có/không shortcut.",
+      "scope": "Worktree XLS-R, src/configs/data chính không đổi.",
+      "independent_script_location": "Ngoài repo."
+    },
+    "changed_or_created": {
+      "worktree_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\reports\\xlsr_t20_seed2026_l8_lr3e-5.json",
+      "cache": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t20",
+      "main_output": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+      "main_current_state": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\current_state.md"
+    },
+    "not_performed": [
+      "Dataset publish/version/update",
+      "Second kernel push",
+      "Training resume",
+      "Other profile/seed/account",
+      "Test-full",
+      "Choose winning configuration",
+      "Source/config/profile/decisions/T18 edits",
+      "Git commit/push"
+    ],
+    "next_action": "Dừng chờ Claude kiểm độc lập; chỉ đặt số liệu hai LR cạnh nhau, không chọn cấu hình."
+  }
+}

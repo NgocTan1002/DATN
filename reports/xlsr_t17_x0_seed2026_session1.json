@@ -1,0 +1,1356 @@
+{
+  "task": "T17_continued_X0_seed2026_session1",
+  "status": "completed_verified_pending_claude_review",
+  "updated_utc": "2026-11-06T12:43:58.596479+00:00",
+  "previous_local_attempt_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\report-before-continue.json",
+  "authorization": {
+    "date": "2026-11-06",
+    "quote": "Mở cổng, chạy",
+    "scope_this_task": "publish private source v2 and one first X0 session; local transfer payload only"
+  },
+  "source_dataset": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+    "version": 2,
+    "private": true,
+    "bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+    "remote_member_count": 73,
+    "remote_hash_verified": true
+  },
+  "kernel": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "version": 2,
+    "profile": "X0-seed2026",
+    "push_attempts": 1,
+    "status": "COMPLETE",
+    "metadata": {
+      "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "id_no": 142982687,
+      "title": "DoAnTTNT XLSR D028",
+      "code_file": "doanttnt-xlsr-d028.py",
+      "language": "python",
+      "kernel_type": "script",
+      "is_private": true,
+      "enable_gpu": true,
+      "enable_tpu": false,
+      "enable_internet": false,
+      "keywords": [],
+      "dataset_sources": [
+        "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "ngctnnguyn1111/doanttnt-t14-packed",
+        "ngctnnguyn1111/doanttnt-t14-weights",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source"
+      ],
+      "kernel_sources": [],
+      "competition_sources": [],
+      "model_sources": [],
+      "docker_image": "gcr.io/kaggle-private-byod/python@sha256:de153e6d303881930c51286216393d56f56b26458d0661350305a1e8144eea01",
+      "machine_shape": "NvidiaTeslaT4"
+    },
+    "push_execution": {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        ".kaggle/xlsr-d028/prepared/X0-seed2026"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:06:37.243233+00:00",
+      "ended_utc": "2026-11-06T04:06:40.782331+00:00",
+      "seconds": 3.539068999999472,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-push-x0.log"
+    },
+    "last_status_observation": {
+      "state": "RUNNING",
+      "timestamp_utc": "2026-11-06T07:08:17.413763+00:00",
+      "elapsed_seconds_since_push": 10898.291229009628,
+      "log_snapshots": 40,
+      "events_seen": 0
+    },
+    "runner_status": "max_epochs",
+    "workflow_started_utc": "2026-11-06T04:07:03+00:00",
+    "workflow_finished_utc": "2026-11-06T11:44:34+00:00",
+    "kernel_log_duration_seconds": 27455.048327553
+  },
+  "quota_before": [
+    {
+      "resource": "GPU",
+      "used": "5.93h",
+      "remaining": "24.07h",
+      "total": "30.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    },
+    {
+      "resource": "TPU",
+      "used": "0.00h",
+      "remaining": "20.00h",
+      "total": "20.00h",
+      "refreshAt": "2026-11-07T00:00:00"
+    }
+  ],
+  "transfer_payload": {
+    "built": true,
+    "published": false,
+    "destination": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\transfer-x0-s1",
+    "dataset_ref_for_future_metadata_only": "ngctnnguyn1111/doanttnt-xlsr-x0-seed2026-s1-checkpoint",
+    "manifest_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\transfer-x0-s1\\b0_resume_manifest.json",
+    "manifest_sha256": "406ec3079c981e86acec4ea2e3aa410e5dfdbabfd209c306aa2c5da0df79975b",
+    "expected_step": 9930,
+    "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+    "identity_sha256": "35c22daf95d11e2b51522230b6f21140067c8c28b09fd49963fc1dfeb77aed71",
+    "file_count": 3,
+    "bytes": 178703240,
+    "all_copied_checksums_match": true,
+    "pointer": {
+      "checkpoint_version": 4,
+      "latest": {
+        "generation": "g-abed3ebec5414723ba47db431882f748",
+        "checkpoint_sha256": "782b1e01e87c687c0ddaff5759f7d5af288438fe5785a3c12746db8b3138eddb",
+        "state_sha256": "485f8c901638448d6e5167da66a49057aef0ad95fa304ea2205afcb4bd2b8b35"
+      },
+      "best": {
+        "generation": "g-abed3ebec5414723ba47db431882f748",
+        "checkpoint_sha256": "782b1e01e87c687c0ddaff5759f7d5af288438fe5785a3c12746db8b3138eddb",
+        "state_sha256": "485f8c901638448d6e5167da66a49057aef0ad95fa304ea2205afcb4bd2b8b35"
+      }
+    },
+    "run_terminal_state": "max_epochs",
+    "purpose": "Local archive/review payload; no checkpoint dataset published and no further session submitted."
+  },
+  "output_path": "C:/Users/Admin/Documents/DoAnTTNT/kaggle_outputs/xlsr-d028-x0-seed2026-s1",
+  "commands": [
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".kaggle/xlsr-d028/preflight.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:01:49.248767+00:00",
+      "ended_utc": "2026-11-06T04:01:59.893184+00:00",
+      "seconds": 10.644612899999629,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-preflight.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:02:14.342788+00:00",
+      "ended_utc": "2026-11-06T04:02:16.780920+00:00",
+      "seconds": 2.438600299999962,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-quota-before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "metadata",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "-p",
+        ".cache/t17/remote-before"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:03:18.340758+00:00",
+      "ended_utc": "2026-11-06T04:03:20.509663+00:00",
+      "seconds": 2.169024200000422,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-source-metadata-before.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "publish-source",
+        "--message",
+        "T17 X0 seed2026 ready telemetry bundle 5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+        "--confirm-private-upload"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:04:00.851804+00:00",
+      "ended_utc": "2026-11-06T04:04:10.696951+00:00",
+      "seconds": 9.84483900000032,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-publish-source.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:04:51.866112+00:00",
+      "ended_utc": "2026-11-06T04:04:55.168133+00:00",
+      "seconds": 3.3020778000000064,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-source-status.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "-p",
+        ".cache/t17/remote-5fbc",
+        "--unzip"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:04:52.938660+00:00",
+      "ended_utc": "2026-11-06T04:04:58.027873+00:00",
+      "seconds": 5.089538000000175,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-source-download.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/verify_remote_5fbc.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:05:44.035943+00:00",
+      "ended_utc": "2026-11-06T04:05:45.932483+00:00",
+      "seconds": 1.8971668000003774,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-verify-remote.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        ".kaggle/xlsr-d028/prepared/X0-seed2026"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:05:46.347434+00:00",
+      "ended_utc": "2026-11-06T04:05:46.537618+00:00",
+      "seconds": 0.19033690000014758,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-verify-prepared.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "metadata",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "-p",
+        ".cache/t17/remote-5fbc"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:06:11.008210+00:00",
+      "ended_utc": "2026-11-06T04:06:13.416031+00:00",
+      "seconds": 2.408262900000409,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-source-metadata-after.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:06:11.989802+00:00",
+      "ended_utc": "2026-11-06T04:06:14.103570+00:00",
+      "seconds": 2.113698099999965,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-kernel-status-before.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        ".kaggle/xlsr-d028/prepared/X0-seed2026"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:06:37.243233+00:00",
+      "ended_utc": "2026-11-06T04:06:40.782331+00:00",
+      "seconds": 3.539068999999472,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-push-x0.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "pull",
+        "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "-p",
+        ".cache/t17/kernel-remote-x0",
+        "--metadata"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:06:59.931979+00:00",
+      "ended_utc": "2026-11-06T04:07:02.979087+00:00",
+      "seconds": 3.0475494000002072,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-kernel-pull.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:07:01.139863+00:00",
+      "ended_utc": "2026-11-06T04:07:03.027560+00:00",
+      "seconds": 1.8874125000002095,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-status-first.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:07:03.148008+00:00",
+      "ended_utc": "2026-11-06T04:07:05.308331+00:00",
+      "seconds": 2.1608239000006506,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-logs-first.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/monitor_x0.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:09:04.908947+00:00",
+      "ended_utc": "2026-11-06T07:09:15.882162+00:00",
+      "seconds": 10810.973994200001,
+      "exit_code": 4294967295,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-monitor.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:11:49.832657+00:00",
+      "ended_utc": "2026-11-06T04:11:51.012670+00:00",
+      "seconds": 1.1802278000004662,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-logs-help.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "ngctnnguyn1111/doanttnt-xlsr-d028/2",
+        "--follow"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:12:10.486401+00:00",
+      "ended_utc": "2026-11-06T04:12:13.087125+00:00",
+      "seconds": 2.600846000000274,
+      "exit_code": 1,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-follow.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "--follow"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:12:35.827996+00:00",
+      "ended_utc": "2026-11-06T04:40:40.519706+00:00",
+      "seconds": 1684.6920129999999,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-follow-current.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/follow_until_done.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:45:59.847916+00:00",
+      "ended_utc": "2026-11-06T07:09:15.484456+00:00",
+      "seconds": 8595.637296600002,
+      "exit_code": 4294967295,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-follow-persistent.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/update_live_report.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T04:57:33.043047+00:00",
+      "ended_utc": "2026-11-06T04:57:33.261037+00:00",
+      "seconds": 0.21805270000004384,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-epoch1.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/update_live_report.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T05:38:52.505271+00:00",
+      "ended_utc": "2026-11-06T05:38:52.682890+00:00",
+      "seconds": 0.17819179999969492,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-epoch2.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/update_live_report.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T06:23:12.903988+00:00",
+      "ended_utc": "2026-11-06T06:23:13.099182+00:00",
+      "seconds": 0.1956341999994038,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-live-epoch3.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:36:01.147377+00:00",
+      "ended_utc": "2026-11-06T12:36:04.877997+00:00",
+      "seconds": 3.729684200000065,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect-status-final.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:36:01.967123+00:00",
+      "ended_utc": "2026-11-06T12:36:04.855841+00:00",
+      "seconds": 2.888562200000024,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-quota-after.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:36:49.676146+00:00",
+      "ended_utc": "2026-11-06T12:36:52.951794+00:00",
+      "seconds": 3.2759444000000713,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-logs-final.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "output",
+        "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "-p",
+        "C:/Users/Admin/Documents/DoAnTTNT/kaggle_outputs/xlsr-d028-x0-seed2026-s1",
+        "--file-pattern",
+        "^(reports/|checkpoints/)|\\.log$|(^|/)kaggle_workflow_report\\.json$",
+        "--page-size",
+        "200"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:36:49.851653+00:00",
+      "ended_utc": "2026-11-06T12:38:20.420793+00:00",
+      "seconds": 90.56949250000002,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect-download-output.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/verify_session1.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:39:02.325244+00:00",
+      "ended_utc": "2026-11-06T12:39:55.766000+00:00",
+      "seconds": 53.44046019999996,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect-verify-session1.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/build_transfer.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:40:51.577198+00:00",
+      "ended_utc": "2026-11-06T12:41:17.934220+00:00",
+      "seconds": 26.357180699999844,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect-build-payload.log"
+    },
+    {
+      "command": [
+        "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe",
+        ".cache/t17/finalize_session1.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_utc": "2026-11-06T12:43:57.701781+00:00",
+      "ended_utc": "2026-11-06T12:43:58.948968+00:00",
+      "seconds": 1.2475895000000037,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect-finalize-session1.log"
+    }
+  ],
+  "next_step": "Stop for Claude review of output/checkpoint/payload. No session 2 or other profile push; no checkpoint dataset publish.",
+  "live_observations": {
+    "last_checked_utc": "2026-11-06T06:23:13.051435+00:00",
+    "bootstrap": [
+      {
+        "timestamp_utc": "2026-11-06T04:07:29.003179+00:00",
+        "event": "bootstrap_start",
+        "elapsed_seconds": 1.1920928955078125e-06
+      },
+      {
+        "timestamp_utc": "2026-11-06T04:07:42.828398+00:00",
+        "event": "offline_checksum_end",
+        "elapsed_seconds": 13.825219869613647
+      },
+      {
+        "timestamp_utc": "2026-11-06T04:08:04.430737+00:00",
+        "event": "venv_pip_end",
+        "elapsed_seconds": 35.42755961418152
+      },
+      {
+        "timestamp_utc": "2026-11-06T04:08:04.430982+00:00",
+        "event": "runner_start",
+        "elapsed_seconds": 35.427804470062256
+      }
+    ],
+    "rehash_completed": [
+      {
+        "timestamp_utc": "2026-11-06T04:09:29.797811+00:00",
+        "event": "rehash_train_end",
+        "seconds": 55.25868247900007,
+        "status": "ok"
+      },
+      {
+        "timestamp_utc": "2026-11-06T04:11:29.885988+00:00",
+        "event": "rehash_dev_end",
+        "seconds": 120.08800326700009,
+        "status": "ok"
+      }
+    ],
+    "first_checkpoint": {
+      "timestamp_utc": "2026-11-06T04:11:30.706630+00:00",
+      "event": "checkpoint",
+      "global_step": 0,
+      "epoch": 1,
+      "completed_epochs": 0,
+      "mean_loss_last_64": null,
+      "mean_step_seconds": 0.0,
+      "observed_steps_this_invocation": 0,
+      "timing_window_steps": 0,
+      "new_best": false
+    },
+    "first_training_checkpoint": {
+      "timestamp_utc": "2026-11-06T04:12:16.334927+00:00",
+      "event": "checkpoint",
+      "global_step": 64,
+      "epoch": 1,
+      "completed_epochs": 0,
+      "mean_loss_last_64": 0.6629955777898431,
+      "mean_step_seconds": 0.7111946519687322,
+      "observed_steps_this_invocation": 64,
+      "timing_window_steps": 64,
+      "new_best": false
+    },
+    "last_checkpoint": {
+      "timestamp_utc": "2026-11-06T07:09:12.887273+00:00",
+      "event": "checkpoint",
+      "global_step": 4096,
+      "epoch": 5,
+      "completed_epochs": 4,
+      "mean_loss_last_64": 0.10204099593102,
+      "mean_step_seconds": 0.7654654027028869,
+      "observed_steps_this_invocation": 4096,
+      "timing_window_steps": 64,
+      "new_best": false
+    },
+    "evaluations": [
+      {
+        "timestamp_utc": "2026-11-06T04:54:30.643970+00:00",
+        "event": "evaluate_end",
+        "eer": 0.08797964808140768,
+        "loss": 0.38862046268476436,
+        "loader_seconds": 76.78437327000074,
+        "model_seconds": 1751.8028120389888,
+        "total_seconds": 1828.808834684,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.20341900398807
+      },
+      {
+        "timestamp_utc": "2026-11-06T05:38:22.695679+00:00",
+        "event": "evaluate_end",
+        "eer": 0.07858101900925729,
+        "loss": 0.2111019528926051,
+        "loader_seconds": 74.44803037102065,
+        "model_seconds": 1751.97427909802,
+        "total_seconds": 1826.6295471570002,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.22871605813737
+      },
+      {
+        "timestamp_utc": "2026-11-06T06:22:34.860450+00:00",
+        "event": "evaluate_end",
+        "eer": 0.07285704190516572,
+        "loss": 0.18190248308164733,
+        "loader_seconds": 74.9444966650417,
+        "model_seconds": 1751.3998646229948,
+        "total_seconds": 1826.5518339260007,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.229619263885056
+      },
+      {
+        "timestamp_utc": "2026-11-06T07:07:17.909678+00:00",
+        "event": "evaluate_end",
+        "eer": 0.0661089904978478,
+        "loss": 0.18066256657120275,
+        "loader_seconds": 74.65056534203904,
+        "model_seconds": 1751.7500273589721,
+        "total_seconds": 1826.6039672080005,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.229013347250852
+      }
+    ],
+    "validation_status": "Observed live only; final output and checkpoint not downloaded or verified.",
+    "log_method": "CLI --follow with read-only reconnects; version URL /2 stream returned 404; current reference follows v2."
+  },
+  "user_monitoring_instruction": "tạm thời không cần theo dõi liên tục nhue đang làm",
+  "monitoring": {
+    "active": false,
+    "reason": "User requested temporary stop of continuous monitoring.",
+    "local_process_cleanup": {
+      "timestamp_utc": "2026-11-06T07:09:14.6912324Z",
+      "reason": "User requested temporary stop of continuous monitoring",
+      "kernel_cancelled": false,
+      "process_ids": [
+        8688,
+        7216,
+        20964,
+        4468,
+        15456,
+        22556,
+        6304,
+        10964,
+        19952,
+        22892,
+        15432,
+        16920,
+        23516
+      ],
+      "commands": [
+        {
+          "ProcessId": 8688,
+          "ParentProcessId": 17292,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe\" .cache/t17/run_logged.py continue-monitor C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/monitor_x0.py"
+        },
+        {
+          "ProcessId": 7216,
+          "ParentProcessId": 8688,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" .cache/t17/run_logged.py continue-monitor C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/monitor_x0.py"
+        },
+        {
+          "ProcessId": 20964,
+          "ParentProcessId": 7216,
+          "Name": "python.exe",
+          "CommandLine": "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/monitor_x0.py"
+        },
+        {
+          "ProcessId": 4468,
+          "ParentProcessId": 20964,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" .cache/t17/monitor_x0.py"
+        },
+        {
+          "ProcessId": 15456,
+          "ParentProcessId": 14244,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe\" -u .cache/t17/watch_stream.py"
+        },
+        {
+          "ProcessId": 22556,
+          "ParentProcessId": 15456,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -u .cache/t17/watch_stream.py"
+        },
+        {
+          "ProcessId": 6304,
+          "ParentProcessId": 17284,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe\" .cache/t17/run_logged.py continue-live-follow-persistent C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/follow_until_done.py"
+        },
+        {
+          "ProcessId": 10964,
+          "ParentProcessId": 6304,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" .cache/t17/run_logged.py continue-live-follow-persistent C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/follow_until_done.py"
+        },
+        {
+          "ProcessId": 19952,
+          "ParentProcessId": 10964,
+          "Name": "python.exe",
+          "CommandLine": "C:/Users/Admin/Documents/DoAnTTNT/.venv/Scripts/python.exe .cache/t17/follow_until_done.py"
+        },
+        {
+          "ProcessId": 22892,
+          "ParentProcessId": 19952,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" .cache/t17/follow_until_done.py"
+        },
+        {
+          "ProcessId": 15432,
+          "ParentProcessId": 22892,
+          "Name": "kaggle.exe",
+          "CommandLine": "kaggle -W kernels logs ngctnnguyn1111/doanttnt-xlsr-d028 --follow"
+        },
+        {
+          "ProcessId": 16920,
+          "ParentProcessId": 15432,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\AppData\\Local\\pipx\\pipx\\venvs\\kaggle\\Scripts\\python.exe\"  \"c:\\users\\admin\\.local\\bin\\kaggle.exe\" -W kernels logs ngctnnguyn1111/doanttnt-xlsr-d028 --follow"
+        },
+        {
+          "ProcessId": 23516,
+          "ParentProcessId": 16920,
+          "Name": "python.exe",
+          "CommandLine": "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python311\\python.exe\" \"c:\\users\\admin\\.local\\bin\\kaggle.exe\" -W kernels logs ngctnnguyn1111/doanttnt-xlsr-d028 --follow"
+        }
+      ]
+    },
+    "remote_kernel_cancelled": false,
+    "no_additional_push": true,
+    "completion_collected_after_user_notification": true
+  },
+  "protected_files_unchanged": true,
+  "tracked_numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+  "session_checks": {
+    "6a_runner_state": {
+      "status": "max_epochs",
+      "stop": {
+        "timestamp_utc": "2026-11-06T11:44:28.313779+00:00",
+        "event": "stop",
+        "reason": "max_epochs",
+        "pause_cause": null,
+        "global_step": 9930
+      },
+      "global_step": 9930,
+      "completed_epochs": 10,
+      "bad_evaluations": 0,
+      "needs_evaluation": false
+    },
+    "6b_rehash_identity": {
+      "passed": true,
+      "rehash_performed": {
+        "train": true,
+        "dev": true
+      },
+      "use_test": false,
+      "ready_for_training": true,
+      "run_id": "X0",
+      "training_seed": 2026,
+      "data_seed": 2026,
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "artifacts": {
+        "train": {
+          "split": "closed_train",
+          "samples": 15885,
+          "shards": 57,
+          "metadata_sha256": "9ce34ceb9883a56347de4aedf8d1a39fa7e8eae753dc006919bf634d376250a9",
+          "index_sha256": "b71825930d9a344484ecbc78102876b1ee5a873e2b2c7d724906cf5766094332",
+          "waveforms_sha256": "e09517c8e367bfb4e24563f92d90d2f7ee0ad7d5c7a58dc78862db742ab6614d",
+          "manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728"
+        },
+        "dev": {
+          "split": "closed_dev",
+          "samples": 38777,
+          "shards": 186,
+          "metadata_sha256": "5537af3384c6ffd83093a5e4175676ddbef1b5a5b5607c5daa87285e6de13f14",
+          "index_sha256": "364f1993332ec889dd7301357a1aa6145d14c65c56bfa3db334668b93f01b8d6",
+          "waveforms_sha256": "579e5e85a020aeab70c8ad912023f5ee4efaef19f8e61af4fd2c923ee692f648",
+          "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360"
+        }
+      },
+      "pretrained": {
+        "pytorch_model.bin": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+        "config.json": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+        "preprocessor_config.json": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335"
+      }
+    },
+    "6c_timing": {
+      "timing": {
+        "rehash_train_seconds": 55.25868247900007,
+        "rehash_dev_seconds": 120.08800326700009,
+        "rehash_performed": {
+          "train": true,
+          "dev": true
+        },
+        "backbone_load_seconds": 12.947210362999954,
+        "model_build_seconds": 0.48645711100004974,
+        "train_steps_this_invocation": 9930,
+        "train_loader_seconds": 321.96757492902316,
+        "train_model_seconds": 7286.90609548184,
+        "train_seconds": 7608.873670410863,
+        "mean_step_seconds": 0.7662511249154947,
+        "evaluations_this_invocation": [
+          {
+            "loader_seconds": 76.78437327000074,
+            "model_seconds": 1751.8028120389888,
+            "total_seconds": 1828.808834684,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.20341900398807
+          },
+          {
+            "loader_seconds": 74.44803037102065,
+            "model_seconds": 1751.97427909802,
+            "total_seconds": 1826.6295471570002,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.22871605813737
+          },
+          {
+            "loader_seconds": 74.9444966650417,
+            "model_seconds": 1751.3998646229948,
+            "total_seconds": 1826.5518339260007,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229619263885056
+          },
+          {
+            "loader_seconds": 74.65056534203904,
+            "model_seconds": 1751.7500273589721,
+            "total_seconds": 1826.6039672080005,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229013347250852
+          },
+          {
+            "loader_seconds": 74.6196500390015,
+            "model_seconds": 1750.1857806669595,
+            "total_seconds": 1825.0288495450004,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.247335355639738
+          },
+          {
+            "loader_seconds": 74.55098758894565,
+            "model_seconds": 1751.461321626026,
+            "total_seconds": 1826.224002518,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.233430261859567
+          },
+          {
+            "loader_seconds": 74.68978464705287,
+            "model_seconds": 1751.2168973370026,
+            "total_seconds": 1826.121081846999,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.234626983649772
+          },
+          {
+            "loader_seconds": 74.4030842059874,
+            "model_seconds": 1752.0723573810465,
+            "total_seconds": 1826.6896123779989,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.228018015342954
+          },
+          {
+            "loader_seconds": 74.76899220790438,
+            "model_seconds": 1749.9832275119588,
+            "total_seconds": 1824.966300344,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.24806359037461
+          },
+          {
+            "loader_seconds": 74.07531071706762,
+            "model_seconds": 1751.9175898350259,
+            "total_seconds": 1826.2081339680008,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.23361476643136
+          }
+        ],
+        "wall_seconds": 27381.811832519,
+        "deadline_unix": 1793977649.0031776,
+        "seconds_left_at_exit": 12180.682601213455,
+        "deadline_overrun_seconds": 0.0,
+        "estimates": {
+          "train_step_seconds": 1.0876132930513596,
+          "dev_full_seconds": 3015.0,
+          "max_session_hours": 11.0
+        }
+      },
+      "bootstrap_events": {
+        "bootstrap_start": {
+          "timestamp_utc": "2026-11-06T04:07:29.003179+00:00",
+          "event": "bootstrap_start",
+          "elapsed_seconds": 1.1920928955078125e-06
+        },
+        "offline_checksum_end": {
+          "timestamp_utc": "2026-11-06T04:07:42.828398+00:00",
+          "event": "offline_checksum_end",
+          "elapsed_seconds": 13.825219869613647
+        },
+        "venv_pip_end": {
+          "timestamp_utc": "2026-11-06T04:08:04.430737+00:00",
+          "event": "venv_pip_end",
+          "elapsed_seconds": 35.42755961418152
+        },
+        "runner_start": {
+          "timestamp_utc": "2026-11-06T04:08:04.430982+00:00",
+          "event": "runner_start",
+          "elapsed_seconds": 35.427804470062256
+        },
+        "runner_end": {
+          "timestamp_utc": "2026-11-06T11:44:34.080892+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 27425.077714681625,
+          "exit_code": 0
+        }
+      },
+      "bootstrap_until_runner_seconds": 35.427804470062256,
+      "kernel_log_duration_seconds": 27455.048327553,
+      "bootstrap_through_runner_end_seconds": 27425.077714681625,
+      "limit_seconds": 39600,
+      "step_estimate_seconds": 1.0876132930513596,
+      "mean_step_to_estimate_ratio": 0.7045253398528576,
+      "evaluation_limit_seconds": 3015,
+      "gpu": "NvidiaTeslaT4"
+    },
+    "6d_losses_history_best": {
+      "all_losses_finite": true,
+      "loss_count": 9930,
+      "loss_min": 0.0012387610040605068,
+      "loss_max": 1.0140403509140015,
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 993,
+          "eer": 0.08797964808140768,
+          "loss": 0.38862046268476436,
+          "timing": {
+            "loader_seconds": 76.78437327000074,
+            "model_seconds": 1751.8028120389888,
+            "total_seconds": 1828.808834684,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.20341900398807
+          }
+        },
+        {
+          "epoch": 2,
+          "global_step": 1986,
+          "eer": 0.07858101900925729,
+          "loss": 0.2111019528926051,
+          "timing": {
+            "loader_seconds": 74.44803037102065,
+            "model_seconds": 1751.97427909802,
+            "total_seconds": 1826.6295471570002,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.22871605813737
+          }
+        },
+        {
+          "epoch": 3,
+          "global_step": 2979,
+          "eer": 0.07285704190516572,
+          "loss": 0.18190248308164733,
+          "timing": {
+            "loader_seconds": 74.9444966650417,
+            "model_seconds": 1751.3998646229948,
+            "total_seconds": 1826.5518339260007,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229619263885056
+          }
+        },
+        {
+          "epoch": 4,
+          "global_step": 3972,
+          "eer": 0.0661089904978478,
+          "loss": 0.18066256657120275,
+          "timing": {
+            "loader_seconds": 74.65056534203904,
+            "model_seconds": 1751.7500273589721,
+            "total_seconds": 1826.6039672080005,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229013347250852
+          }
+        },
+        {
+          "epoch": 5,
+          "global_step": 4965,
+          "eer": 0.062398417072998376,
+          "loss": 0.18192316425692384,
+          "timing": {
+            "loader_seconds": 74.6196500390015,
+            "model_seconds": 1750.1857806669595,
+            "total_seconds": 1825.0288495450004,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.247335355639738
+          }
+        },
+        {
+          "epoch": 6,
+          "global_step": 5958,
+          "eer": 0.05398911737686383,
+          "loss": 0.12665299718752734,
+          "timing": {
+            "loader_seconds": 74.55098758894565,
+            "model_seconds": 1751.461321626026,
+            "total_seconds": 1826.224002518,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.233430261859567
+          }
+        },
+        {
+          "epoch": 7,
+          "global_step": 6951,
+          "eer": 0.05095046286481521,
+          "loss": 0.14490378400505582,
+          "timing": {
+            "loader_seconds": 74.68978464705287,
+            "model_seconds": 1751.2168973370026,
+            "total_seconds": 1826.121081846999,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.234626983649772
+          }
+        },
+        {
+          "epoch": 8,
+          "global_step": 7944,
+          "eer": 0.04904247049678468,
+          "loss": 0.18223748218347618,
+          "timing": {
+            "loader_seconds": 74.4030842059874,
+            "model_seconds": 1752.0723573810465,
+            "total_seconds": 1826.6896123779989,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.228018015342954
+          }
+        },
+        {
+          "epoch": 9,
+          "global_step": 8937,
+          "eer": 0.04522648576072363,
+          "loss": 0.19891467353665881,
+          "timing": {
+            "loader_seconds": 74.76899220790438,
+            "model_seconds": 1749.9832275119588,
+            "total_seconds": 1824.966300344,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.24806359037461
+          }
+        },
+        {
+          "epoch": 10,
+          "global_step": 9930,
+          "eer": 0.04198814261349793,
+          "loss": 0.12023125115355347,
+          "timing": {
+            "loader_seconds": 74.07531071706762,
+            "model_seconds": 1751.9175898350259,
+            "total_seconds": 1826.2081339680008,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.23361476643136
+          }
+        }
+      ],
+      "best": {
+        "epoch": 10,
+        "global_step": 9930,
+        "generation": "g-abed3ebec5414723ba47db431882f748",
+        "eer": 0.04198814261349793,
+        "threshold": 0.3805544692138009
+      }
+    },
+    "6e_checkpoint": {
+      "loaded_by": "GenerationStore",
+      "run_root": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-x0-seed2026-s1\\checkpoints\\xlsr_X0_seed2026",
+      "latest": {
+        "checkpoint_version": 4,
+        "latest": {
+          "generation": "g-abed3ebec5414723ba47db431882f748",
+          "checkpoint_sha256": "782b1e01e87c687c0ddaff5759f7d5af288438fe5785a3c12746db8b3138eddb",
+          "state_sha256": "485f8c901638448d6e5167da66a49057aef0ad95fa304ea2205afcb4bd2b8b35"
+        },
+        "best": {
+          "generation": "g-abed3ebec5414723ba47db431882f748",
+          "checkpoint_sha256": "782b1e01e87c687c0ddaff5759f7d5af288438fe5785a3c12746db8b3138eddb",
+          "state_sha256": "485f8c901638448d6e5167da66a49057aef0ad95fa304ea2205afcb4bd2b8b35"
+        }
+      },
+      "trainable_only": true,
+      "trainable_parameters": 262401,
+      "trainable_names": [
+        "classifier.0.weight",
+        "classifier.0.bias",
+        "classifier.3.weight",
+        "classifier.3.bias"
+      ],
+      "remaining_generations": [
+        "g-abed3ebec5414723ba47db431882f748"
+      ],
+      "generation_count": 1,
+      "output_bytes": 303484147,
+      "files": [
+        {
+          "path": "checkpoints/xlsr_X0_seed2026/g-abed3ebec5414723ba47db431882f748/checkpoint.pt",
+          "bytes": 62793325,
+          "sha256": "782b1e01e87c687c0ddaff5759f7d5af288438fe5785a3c12746db8b3138eddb"
+        },
+        {
+          "path": "checkpoints/xlsr_X0_seed2026/g-abed3ebec5414723ba47db431882f748/state.json",
+          "bytes": 115907573,
+          "sha256": "485f8c901638448d6e5167da66a49057aef0ad95fa304ea2205afcb4bd2b8b35"
+        },
+        {
+          "path": "checkpoints/xlsr_X0_seed2026/LATEST.json",
+          "bytes": 538,
+          "sha256": "880a7b5c7344263d8bf3e0af5f29b4142f489b0035314b1f49cf507f1419ac79"
+        },
+        {
+          "path": "doanttnt-xlsr-d028.log",
+          "bytes": 83889,
+          "sha256": "b3506629330ec0c4f331dc30f061cbf36de2880010fd3840e21acf4857559b95"
+        },
+        {
+          "path": "reports/kaggle_cli_workflow.json",
+          "bytes": 21858,
+          "sha256": "af8059b0cb9ace8fa15956a41360810fc6dd82db0d94c459049cf2fc40ab60bc"
+        },
+        {
+          "path": "reports/xlsr_X0_seed2026.json",
+          "bytes": 124676964,
+          "sha256": "37831bf02df59ae3707593843098d904d86c624dfd803e75ca34e2f77be22e07"
+        }
+      ]
+    },
+    "6f_quota": {
+      "before": [
+        {
+          "resource": "GPU",
+          "used": "5.93h",
+          "remaining": "24.07h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        }
+      ],
+      "after": [
+        {
+          "resource": "GPU",
+          "used": "13.56h",
+          "remaining": "16.44h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-07T00:00:00"
+        }
+      ]
+    }
+  },
+  "timing": {
+    "rehash_train_seconds": 55.25868247900007,
+    "rehash_dev_seconds": 120.08800326700009,
+    "rehash_performed": {
+      "train": true,
+      "dev": true
+    },
+    "backbone_load_seconds": 12.947210362999954,
+    "model_build_seconds": 0.48645711100004974,
+    "train_steps_this_invocation": 9930,
+    "train_loader_seconds": 321.96757492902316,
+    "train_model_seconds": 7286.90609548184,
+    "train_seconds": 7608.873670410863,
+    "mean_step_seconds": 0.7662511249154947,
+    "evaluations_this_invocation": [
+      {
+        "loader_seconds": 76.78437327000074,
+        "model_seconds": 1751.8028120389888,
+        "total_seconds": 1828.808834684,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.20341900398807
+      },
+      {
+        "loader_seconds": 74.44803037102065,
+        "model_seconds": 1751.97427909802,
+        "total_seconds": 1826.6295471570002,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.22871605813737
+      },
+      {
+        "loader_seconds": 74.9444966650417,
+        "model_seconds": 1751.3998646229948,
+        "total_seconds": 1826.5518339260007,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.229619263885056
+      },
+      {
+        "loader_seconds": 74.65056534203904,
+        "model_seconds": 1751.7500273589721,
+        "total_seconds": 1826.6039672080005,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.229013347250852
+      },
+      {
+        "loader_seconds": 74.6196500390015,
+        "model_seconds": 1750.1857806669595,
+        "total_seconds": 1825.0288495450004,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.247335355639738
+      },
+      {
+        "loader_seconds": 74.55098758894565,
+        "model_seconds": 1751.461321626026,
+        "total_seconds": 1826.224002518,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.233430261859567
+      },
+      {
+        "loader_seconds": 74.68978464705287,
+        "model_seconds": 1751.2168973370026,
+        "total_seconds": 1826.121081846999,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.234626983649772
+      },
+      {
+        "loader_seconds": 74.4030842059874,
+        "model_seconds": 1752.0723573810465,
+        "total_seconds": 1826.6896123779989,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.228018015342954
+      },
+      {
+        "loader_seconds": 74.76899220790438,
+        "model_seconds": 1749.9832275119588,
+        "total_seconds": 1824.966300344,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.24806359037461
+      },
+      {
+        "loader_seconds": 74.07531071706762,
+        "model_seconds": 1751.9175898350259,
+        "total_seconds": 1826.2081339680008,
+        "samples": 38777,
+        "throughput_samples_per_second": 21.23361476643136
+      }
+    ],
+    "wall_seconds": 27381.811832519,
+    "deadline_unix": 1793977649.0031776,
+    "seconds_left_at_exit": 12180.682601213455,
+    "deadline_overrun_seconds": 0.0,
+    "estimates": {
+      "train_step_seconds": 1.0876132930513596,
+      "dev_full_seconds": 3015.0,
+      "max_session_hours": 11.0
+    }
+  },
+  "threshold_violations": [],
+  "monitor_command_records": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-monitor-commands.jsonl",
+  "stream_reconnect_records": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\continue-stream-reconnects.jsonl",
+  "scope_verification": {
+    "worktree_numstat_unchanged": true,
+    "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+    "all_locked_source_config_test_profile_hashes_unchanged": true,
+    "main_status_unchanged_since_collection_start": true,
+    "r1_files_preserved": true,
+    "main_baseline": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t17\\collect_baseline.json"
+  },
+  "files_created_or_updated": [
+    "reports/xlsr_t17_x0_seed2026_session1.json",
+    ".cache/t17/ (execution logs, verifiers, local transfer payload)",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-x0-seed2026-s1",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT\\docs\\current_state.md"
+  ],
+  "deviations": [
+    "Continuous local monitoring was stopped on user request; kernel continued independently. Final output collected after user reported completion.",
+    "Used CLI action names verify-prepared-kernel and push-prepared-kernel supported by the installed workflow.",
+    "Downloaded reports/checkpoints/root log; excluded the venv and copied source tree, as in T16. Six output files, all inventoried and hashed.",
+    "One read-only version-qualified log stream returned 404; current-reference stream worked with read-only reconnects. No repeated kernel push.",
+    "R1 intentionally added main-repository files while this job ran; final collection compares against a fresh main baseline and verifies R1 hashes. XLS-R protected files and numstat still match original T17 baseline."
+  ],
+  "limitations": [
+    "Single training seed on dev-full, not test.",
+    "EER improved through the epoch-10 cap; max_epochs is the stopping rule, not evidence of convergence.",
+    "Timing from this X0 T4 run does not replace estimates for X1 without independent checks."
+  ],
+  "final_audit": {
+    "source_config_test_profile_unchanged": true,
+    "r1_hashes_unchanged": true,
+    "main_status_unchanged": true,
+    "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+    "diff_check_exit_code": 0,
+    "kernel_push_count": 1,
+    "checkpoint_payload_published": false
+  }
+}

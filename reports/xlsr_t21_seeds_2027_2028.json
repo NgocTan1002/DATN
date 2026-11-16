@@ -1,0 +1,1423 @@
+{
+  "task": "T21",
+  "created_utc": "2026-11-09T05:18:29.684312+00:00",
+  "status": "stopped_runner_paused",
+  "message": "X1-L8-lr3e-5-seed2027 paused; không resume.",
+  "authorization": [
+    {
+      "date": "2026-11-06",
+      "quote": "Mở cổng, chạy"
+    },
+    {
+      "date": "2026-11-09",
+      "quote": "Soạn cả hai",
+      "scope": "T21 tối đa1push mỗi4profile, tuần tự; không dataset/resume/run khác"
+    }
+  ],
+  "final_X1_protocol": "X1-L8-lr3e-5 theo D028 mục5b và bản giao T21; không chọn lại",
+  "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+  "source_dataset": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+    "version": 2,
+    "remote_status": {
+      "status": "ready",
+      "current_version_number": 2
+    },
+    "execution": {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "--format",
+        "json"
+      ],
+      "started_utc": "2026-11-09T05:18:25.597184+00:00",
+      "ended_utc": "2026-11-09T05:18:29.683175+00:00",
+      "seconds": 4.0855836999999156,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0001-source-version.log"
+    }
+  },
+  "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+  "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+  "profile_verification": {
+    "X1-L8-lr3e-5-seed2027": {
+      "passed": true,
+      "profile": "X1-L8-lr3e-5-seed2027",
+      "training_seed": 2027,
+      "data_seed": 2026,
+      "metadata": {
+        "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "title": "DoAnTTNT XLSR D028",
+        "code_file": "runner.py",
+        "language": "python",
+        "kernel_type": "script",
+        "is_private": true,
+        "enable_gpu": true,
+        "enable_tpu": false,
+        "enable_internet": false,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps"
+        ],
+        "competition_sources": [],
+        "kernel_sources": [],
+        "model_sources": []
+      },
+      "run": {
+        "run_id": "X1-L8-lr3e-5",
+        "layers": 8,
+        "encoder_lr": 3e-05
+      },
+      "classifier_lr": 0.001,
+      "max_epochs": 10,
+      "patience": 2,
+      "example_runner_command": [
+        "python",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X1-L8-lr3e-5",
+        "--training-seed",
+        "2027",
+        "--device",
+        "cuda:0",
+        "--train-artifact",
+        "\\data\\train_development_20k_v2",
+        "--dev-artifact",
+        "\\data\\closed_dev_full_v1",
+        "--pretrained-dir",
+        "\\weights",
+        "--run-root",
+        "\\run",
+        "--report-json",
+        "\\report",
+        "--session-steps",
+        "9930",
+        "--deadline-unix",
+        "40600.0"
+      ],
+      "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "source_file_count": 73,
+      "profile_sha256": {
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/run-config.json": "06bd50ad3d19fa91e4bb6285784fa63caabc47c16a8bc41e4ae465cb32b69ea0",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/runner.py": "8d6add4f32967aad398dcef583b62102f49b6b17f59f49d4d8717def3b52ad9d"
+      },
+      "local_verify_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2027"
+        ],
+        "started_utc": "2026-11-09T05:14:21.199072+00:00",
+        "ended_utc": "2026-11-09T05:14:21.378910+00:00",
+        "seconds": 0.1805129999993369,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X1-L8-lr3e-5-seed2027.log"
+      }
+    },
+    "X1-L8-lr3e-5-seed2028": {
+      "passed": true,
+      "profile": "X1-L8-lr3e-5-seed2028",
+      "training_seed": 2028,
+      "data_seed": 2026,
+      "metadata": {
+        "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "title": "DoAnTTNT XLSR D028",
+        "code_file": "runner.py",
+        "language": "python",
+        "kernel_type": "script",
+        "is_private": true,
+        "enable_gpu": true,
+        "enable_tpu": false,
+        "enable_internet": false,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps"
+        ],
+        "competition_sources": [],
+        "kernel_sources": [],
+        "model_sources": []
+      },
+      "run": {
+        "run_id": "X1-L8-lr3e-5",
+        "layers": 8,
+        "encoder_lr": 3e-05
+      },
+      "classifier_lr": 0.001,
+      "max_epochs": 10,
+      "patience": 2,
+      "example_runner_command": [
+        "python",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X1-L8-lr3e-5",
+        "--training-seed",
+        "2028",
+        "--device",
+        "cuda:0",
+        "--train-artifact",
+        "\\data\\train_development_20k_v2",
+        "--dev-artifact",
+        "\\data\\closed_dev_full_v1",
+        "--pretrained-dir",
+        "\\weights",
+        "--run-root",
+        "\\run",
+        "--report-json",
+        "\\report",
+        "--session-steps",
+        "9930",
+        "--deadline-unix",
+        "40600.0"
+      ],
+      "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "source_file_count": 73,
+      "profile_sha256": {
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/run-config.json": "ac2c6034955c9787142c7430f4ac087eff089b0abf78241b1192dbc9338d3cce",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/runner.py": "8b095f6eacd1856c8c42e25612bb060ee2df7f085a919de2c245878fcca999fc"
+      },
+      "local_verify_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2028"
+        ],
+        "started_utc": "2026-11-09T05:14:21.389014+00:00",
+        "ended_utc": "2026-11-09T05:14:21.566559+00:00",
+        "seconds": 0.17769829999997455,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X1-L8-lr3e-5-seed2028.log"
+      }
+    },
+    "X0-seed2027": {
+      "passed": true,
+      "profile": "X0-seed2027",
+      "training_seed": 2027,
+      "data_seed": 2026,
+      "metadata": {
+        "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "title": "DoAnTTNT XLSR D028",
+        "code_file": "runner.py",
+        "language": "python",
+        "kernel_type": "script",
+        "is_private": true,
+        "enable_gpu": true,
+        "enable_tpu": false,
+        "enable_internet": false,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps"
+        ],
+        "competition_sources": [],
+        "kernel_sources": [],
+        "model_sources": []
+      },
+      "run": {
+        "run_id": "X0",
+        "layers": 0,
+        "encoder_lr": null
+      },
+      "classifier_lr": 0.001,
+      "max_epochs": 10,
+      "patience": 2,
+      "example_runner_command": [
+        "python",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X0",
+        "--training-seed",
+        "2027",
+        "--device",
+        "cuda:0",
+        "--train-artifact",
+        "\\data\\train_development_20k_v2",
+        "--dev-artifact",
+        "\\data\\closed_dev_full_v1",
+        "--pretrained-dir",
+        "\\weights",
+        "--run-root",
+        "\\run",
+        "--report-json",
+        "\\report",
+        "--session-steps",
+        "9930",
+        "--deadline-unix",
+        "40600.0"
+      ],
+      "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "source_file_count": 73,
+      "profile_sha256": {
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/run-config.json": "638fb6dfe9d0335caedc41cf03b78b93952f05a6b5e3ce6683be307bb89b57b6",
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/runner.py": "6f7d857bcb18c60a9fdf616ef07af580c32049b1fc27e7f4118854037144f03c"
+      },
+      "local_verify_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X0-seed2027"
+        ],
+        "started_utc": "2026-11-09T05:14:21.578092+00:00",
+        "ended_utc": "2026-11-09T05:14:21.740693+00:00",
+        "seconds": 0.1631450999993831,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X0-seed2027.log"
+      }
+    },
+    "X0-seed2028": {
+      "passed": true,
+      "profile": "X0-seed2028",
+      "training_seed": 2028,
+      "data_seed": 2026,
+      "metadata": {
+        "id": "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "title": "DoAnTTNT XLSR D028",
+        "code_file": "runner.py",
+        "language": "python",
+        "kernel_type": "script",
+        "is_private": true,
+        "enable_gpu": true,
+        "enable_tpu": false,
+        "enable_internet": false,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps"
+        ],
+        "competition_sources": [],
+        "kernel_sources": [],
+        "model_sources": []
+      },
+      "run": {
+        "run_id": "X0",
+        "layers": 0,
+        "encoder_lr": null
+      },
+      "classifier_lr": 0.001,
+      "max_epochs": 10,
+      "patience": 2,
+      "example_runner_command": [
+        "python",
+        "scripts/train_xlsr.py",
+        "--plan",
+        "configs/xlsr_training.json",
+        "--run-id",
+        "X0",
+        "--training-seed",
+        "2028",
+        "--device",
+        "cuda:0",
+        "--train-artifact",
+        "\\data\\train_development_20k_v2",
+        "--dev-artifact",
+        "\\data\\closed_dev_full_v1",
+        "--pretrained-dir",
+        "\\weights",
+        "--run-root",
+        "\\run",
+        "--report-json",
+        "\\report",
+        "--session-steps",
+        "9930",
+        "--deadline-unix",
+        "40600.0"
+      ],
+      "source_bundle_sha256": "5fbc0765cfa2491e680b6309e0cddf2c9ece1ea971cff7c42b080b6c996156c8",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89",
+      "source_file_count": 73,
+      "profile_sha256": {
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/run-config.json": "27c8c7fab052fe6c6c233be41be6c6a45f3e200cde7e2d3beec343f637330ab3",
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/runner.py": "017994af2d406c7ef39ecf693e03dbbed9e3eb0ebdb2bd5a2ed6c0bd70183b55"
+      },
+      "local_verify_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "verify-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X0-seed2028"
+        ],
+        "started_utc": "2026-11-09T05:14:21.748905+00:00",
+        "ended_utc": "2026-11-09T05:14:21.933660+00:00",
+        "seconds": 0.1853860999999597,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X0-seed2028.log"
+      }
+    }
+  },
+  "verifier_regression_seed2026": {
+    "X0": {
+      "passed": true,
+      "run_id": "X0",
+      "training_seed": 2026,
+      "checked_utc": "2026-11-09T05:16:17.839321+00:00",
+      "evaluation_scope": "dev-full, không phải test",
+      "use_test": false,
+      "checks": {
+        "a_controller_checkpoint": true,
+        "b_status_loss_batch_trace": true,
+        "c_best_patience": true,
+        "d_identity_modes": true,
+        "e_trainable_only": true,
+        "f_manifest_metrics": true,
+        "g_summary_timing": true
+      },
+      "status": "max_epochs",
+      "global_step": 9930,
+      "completed_epochs": 10,
+      "bad_evaluations": 0,
+      "best": {
+        "epoch": 10,
+        "global_step": 9930,
+        "generation": "g-abed3ebec5414723ba47db431882f748",
+        "eer": 0.04198814261349793,
+        "roc_auc": 0.9929541603471963,
+        "macro_f1": 0.9550028487595204,
+        "decision_threshold": 0.3805544692138009
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 993,
+          "eer": 0.08797964808140768,
+          "loss": 0.38862046268476436
+        },
+        {
+          "epoch": 2,
+          "global_step": 1986,
+          "eer": 0.07858101900925729,
+          "loss": 0.2111019528926051
+        },
+        {
+          "epoch": 3,
+          "global_step": 2979,
+          "eer": 0.07285704190516572,
+          "loss": 0.18190248308164733
+        },
+        {
+          "epoch": 4,
+          "global_step": 3972,
+          "eer": 0.0661089904978478,
+          "loss": 0.18066256657120275
+        },
+        {
+          "epoch": 5,
+          "global_step": 4965,
+          "eer": 0.062398417072998376,
+          "loss": 0.18192316425692384
+        },
+        {
+          "epoch": 6,
+          "global_step": 5958,
+          "eer": 0.05398911737686383,
+          "loss": 0.12665299718752734
+        },
+        {
+          "epoch": 7,
+          "global_step": 6951,
+          "eer": 0.05095046286481521,
+          "loss": 0.14490378400505582
+        },
+        {
+          "epoch": 8,
+          "global_step": 7944,
+          "eer": 0.04904247049678468,
+          "loss": 0.18223748218347618
+        },
+        {
+          "epoch": 9,
+          "global_step": 8937,
+          "eer": 0.04522648576072363,
+          "loss": 0.19891467353665881
+        },
+        {
+          "epoch": 10,
+          "global_step": 9930,
+          "eer": 0.04198814261349793,
+          "loss": 0.12023125115355347
+        }
+      ],
+      "per_attack_eer": {
+        "adversarial_attack": {
+          "eer": 0.014118991267444708,
+          "threshold": 0.7423734397661693,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253
+        },
+        "replay": {
+          "eer": 0.10833333333333334,
+          "threshold": 0.08494128845632076,
+          "bonafide_samples": 14151,
+          "spoof_samples": 120
+        },
+        "voice_conversion": {
+          "eer": 0.05427178291286835,
+          "threshold": 0.27858128748835714,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253
+        }
+      },
+      "metric_max_abs_difference": 0.0,
+      "timing": {
+        "rehash_train_seconds": 55.25868247900007,
+        "rehash_dev_seconds": 120.08800326700009,
+        "rehash_performed": {
+          "train": true,
+          "dev": true
+        },
+        "backbone_load_seconds": 12.947210362999954,
+        "model_build_seconds": 0.48645711100004974,
+        "train_steps_this_invocation": 9930,
+        "train_loader_seconds": 321.96757492902316,
+        "train_model_seconds": 7286.90609548184,
+        "train_seconds": 7608.873670410863,
+        "mean_step_seconds": 0.7662511249154947,
+        "evaluations_this_invocation": [
+          {
+            "loader_seconds": 76.78437327000074,
+            "model_seconds": 1751.8028120389888,
+            "total_seconds": 1828.808834684,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.20341900398807
+          },
+          {
+            "loader_seconds": 74.44803037102065,
+            "model_seconds": 1751.97427909802,
+            "total_seconds": 1826.6295471570002,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.22871605813737
+          },
+          {
+            "loader_seconds": 74.9444966650417,
+            "model_seconds": 1751.3998646229948,
+            "total_seconds": 1826.5518339260007,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229619263885056
+          },
+          {
+            "loader_seconds": 74.65056534203904,
+            "model_seconds": 1751.7500273589721,
+            "total_seconds": 1826.6039672080005,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.229013347250852
+          },
+          {
+            "loader_seconds": 74.6196500390015,
+            "model_seconds": 1750.1857806669595,
+            "total_seconds": 1825.0288495450004,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.247335355639738
+          },
+          {
+            "loader_seconds": 74.55098758894565,
+            "model_seconds": 1751.461321626026,
+            "total_seconds": 1826.224002518,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.233430261859567
+          },
+          {
+            "loader_seconds": 74.68978464705287,
+            "model_seconds": 1751.2168973370026,
+            "total_seconds": 1826.121081846999,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.234626983649772
+          },
+          {
+            "loader_seconds": 74.4030842059874,
+            "model_seconds": 1752.0723573810465,
+            "total_seconds": 1826.6896123779989,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.228018015342954
+          },
+          {
+            "loader_seconds": 74.76899220790438,
+            "model_seconds": 1749.9832275119588,
+            "total_seconds": 1824.966300344,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.24806359037461
+          },
+          {
+            "loader_seconds": 74.07531071706762,
+            "model_seconds": 1751.9175898350259,
+            "total_seconds": 1826.2081339680008,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.23361476643136
+          }
+        ],
+        "wall_seconds": 27381.811832519,
+        "deadline_unix": 1793977649.0031776,
+        "seconds_left_at_exit": 12180.682601213455,
+        "deadline_overrun_seconds": 0.0,
+        "estimates": {
+          "train_step_seconds": 1.0876132930513596,
+          "dev_full_seconds": 3015.0,
+          "max_session_hours": 11.0
+        }
+      },
+      "workflow_seconds": 27451.0,
+      "step_estimate_seconds": 1.0876132930513596,
+      "trainable_checkpoint": {
+        "parameter_count": 262401,
+        "tensor_count": 4,
+        "names": [
+          "classifier.0.bias",
+          "classifier.0.weight",
+          "classifier.3.bias",
+          "classifier.3.weight"
+        ],
+        "shapes_verified_with_meta_model": true
+      },
+      "remaining_generations": [
+        "g-abed3ebec5414723ba47db431882f748"
+      ],
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-x0-seed2026-s1",
+      "output_bytes": 303484147,
+      "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+      "report_sha256": "37831bf02df59ae3707593843098d904d86c624dfd803e75ca34e2f77be22e07",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+    },
+    "X1-L8-lr3e-5": {
+      "passed": true,
+      "run_id": "X1-L8-lr3e-5",
+      "training_seed": 2026,
+      "checked_utc": "2026-11-09T05:16:23.752338+00:00",
+      "evaluation_scope": "dev-full, không phải test",
+      "use_test": false,
+      "checks": {
+        "a_controller_checkpoint": true,
+        "b_status_loss_batch_trace": true,
+        "c_best_patience": true,
+        "d_identity_modes": true,
+        "e_trainable_only": true,
+        "f_manifest_metrics": true,
+        "g_summary_timing": true
+      },
+      "status": "early_stopped",
+      "global_step": 3972,
+      "completed_epochs": 4,
+      "bad_evaluations": 2,
+      "best": {
+        "epoch": 2,
+        "global_step": 1986,
+        "generation": "g-eb35f3c2379f4a47bd22744c9be1dd8f",
+        "eer": 0.008162105092178998,
+        "roc_auc": 0.9989520866248541,
+        "macro_f1": 0.9912206651042532,
+        "decision_threshold": 0.00015767214536590907
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "global_step": 993,
+          "eer": 0.013968975879152115,
+          "loss": 0.08069323317874942
+        },
+        {
+          "epoch": 2,
+          "global_step": 1986,
+          "eer": 0.008162105092178998,
+          "loss": 0.0887507777727561
+        },
+        {
+          "epoch": 3,
+          "global_step": 2979,
+          "eer": 0.01331925607081946,
+          "loss": 0.08265094634486123
+        },
+        {
+          "epoch": 4,
+          "global_step": 3972,
+          "eer": 0.012225284432195605,
+          "loss": 0.04765382224073699
+        }
+      ],
+      "per_attack_eer": {
+        "adversarial_attack": {
+          "eer": 0.0017138659920019586,
+          "threshold": 0.7380594651056759,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253
+        },
+        "replay": {
+          "eer": 0.041666666666666664,
+          "threshold": 1.7234797553555836e-06,
+          "bonafide_samples": 14151,
+          "spoof_samples": 120
+        },
+        "voice_conversion": {
+          "eer": 0.011507385946298866,
+          "threshold": 3.15630669477081e-05,
+          "bonafide_samples": 14151,
+          "spoof_samples": 12253
+        }
+      },
+      "metric_max_abs_difference": 0.0,
+      "timing": {
+        "rehash_train_seconds": 46.56943670099997,
+        "rehash_dev_seconds": 108.50393706500006,
+        "rehash_performed": {
+          "train": true,
+          "dev": true
+        },
+        "backbone_load_seconds": 16.861106009000082,
+        "model_build_seconds": 0.4930983340000239,
+        "train_steps_this_invocation": 3972,
+        "train_loader_seconds": 1633.156663631023,
+        "train_model_seconds": 4558.846741917986,
+        "train_seconds": 6192.003405549009,
+        "mean_step_seconds": 1.5589132440959237,
+        "evaluations_this_invocation": [
+          {
+            "loader_seconds": 103.93196201098726,
+            "model_seconds": 1681.6766566759802,
+            "total_seconds": 1785.8244855830003,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.713780000804984
+          },
+          {
+            "loader_seconds": 105.20914882300349,
+            "model_seconds": 1682.0132849430383,
+            "total_seconds": 1787.4076452640002,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.694547465288835
+          },
+          {
+            "loader_seconds": 86.54423152898016,
+            "model_seconds": 1681.3302682129615,
+            "total_seconds": 1768.0805429280008,
+            "samples": 38777,
+            "throughput_samples_per_second": 21.931693188469787
+          },
+          {
+            "loader_seconds": 75.54269617100363,
+            "model_seconds": 1681.1899895789793,
+            "total_seconds": 1756.9320185980014,
+            "samples": 38777,
+            "throughput_samples_per_second": 22.070859651669
+          }
+        ],
+        "wall_seconds": 14668.469401563001,
+        "deadline_unix": 1794216500.036659,
+        "seconds_left_at_exit": 24893.02285504341,
+        "deadline_overrun_seconds": 0.0,
+        "estimates": {
+          "train_step_seconds": 1.7673716012084593,
+          "dev_full_seconds": 3015.0,
+          "max_session_hours": 11.0
+        }
+      },
+      "workflow_seconds": 14727.0,
+      "step_estimate_seconds": 1.7673716012084593,
+      "trainable_checkpoint": {
+        "parameter_count": 101032193,
+        "tensor_count": 132,
+        "names": [
+          "backbone.encoder.layers.16.attention.k_proj.bias",
+          "backbone.encoder.layers.16.attention.k_proj.weight",
+          "backbone.encoder.layers.16.attention.out_proj.bias",
+          "backbone.encoder.layers.16.attention.out_proj.weight",
+          "backbone.encoder.layers.16.attention.q_proj.bias",
+          "backbone.encoder.layers.16.attention.q_proj.weight",
+          "backbone.encoder.layers.16.attention.v_proj.bias",
+          "backbone.encoder.layers.16.attention.v_proj.weight",
+          "backbone.encoder.layers.16.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.16.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.16.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.16.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.16.final_layer_norm.bias",
+          "backbone.encoder.layers.16.final_layer_norm.weight",
+          "backbone.encoder.layers.16.layer_norm.bias",
+          "backbone.encoder.layers.16.layer_norm.weight",
+          "backbone.encoder.layers.17.attention.k_proj.bias",
+          "backbone.encoder.layers.17.attention.k_proj.weight",
+          "backbone.encoder.layers.17.attention.out_proj.bias",
+          "backbone.encoder.layers.17.attention.out_proj.weight",
+          "backbone.encoder.layers.17.attention.q_proj.bias",
+          "backbone.encoder.layers.17.attention.q_proj.weight",
+          "backbone.encoder.layers.17.attention.v_proj.bias",
+          "backbone.encoder.layers.17.attention.v_proj.weight",
+          "backbone.encoder.layers.17.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.17.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.17.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.17.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.17.final_layer_norm.bias",
+          "backbone.encoder.layers.17.final_layer_norm.weight",
+          "backbone.encoder.layers.17.layer_norm.bias",
+          "backbone.encoder.layers.17.layer_norm.weight",
+          "backbone.encoder.layers.18.attention.k_proj.bias",
+          "backbone.encoder.layers.18.attention.k_proj.weight",
+          "backbone.encoder.layers.18.attention.out_proj.bias",
+          "backbone.encoder.layers.18.attention.out_proj.weight",
+          "backbone.encoder.layers.18.attention.q_proj.bias",
+          "backbone.encoder.layers.18.attention.q_proj.weight",
+          "backbone.encoder.layers.18.attention.v_proj.bias",
+          "backbone.encoder.layers.18.attention.v_proj.weight",
+          "backbone.encoder.layers.18.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.18.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.18.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.18.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.18.final_layer_norm.bias",
+          "backbone.encoder.layers.18.final_layer_norm.weight",
+          "backbone.encoder.layers.18.layer_norm.bias",
+          "backbone.encoder.layers.18.layer_norm.weight",
+          "backbone.encoder.layers.19.attention.k_proj.bias",
+          "backbone.encoder.layers.19.attention.k_proj.weight",
+          "backbone.encoder.layers.19.attention.out_proj.bias",
+          "backbone.encoder.layers.19.attention.out_proj.weight",
+          "backbone.encoder.layers.19.attention.q_proj.bias",
+          "backbone.encoder.layers.19.attention.q_proj.weight",
+          "backbone.encoder.layers.19.attention.v_proj.bias",
+          "backbone.encoder.layers.19.attention.v_proj.weight",
+          "backbone.encoder.layers.19.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.19.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.19.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.19.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.19.final_layer_norm.bias",
+          "backbone.encoder.layers.19.final_layer_norm.weight",
+          "backbone.encoder.layers.19.layer_norm.bias",
+          "backbone.encoder.layers.19.layer_norm.weight",
+          "backbone.encoder.layers.20.attention.k_proj.bias",
+          "backbone.encoder.layers.20.attention.k_proj.weight",
+          "backbone.encoder.layers.20.attention.out_proj.bias",
+          "backbone.encoder.layers.20.attention.out_proj.weight",
+          "backbone.encoder.layers.20.attention.q_proj.bias",
+          "backbone.encoder.layers.20.attention.q_proj.weight",
+          "backbone.encoder.layers.20.attention.v_proj.bias",
+          "backbone.encoder.layers.20.attention.v_proj.weight",
+          "backbone.encoder.layers.20.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.20.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.20.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.20.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.20.final_layer_norm.bias",
+          "backbone.encoder.layers.20.final_layer_norm.weight",
+          "backbone.encoder.layers.20.layer_norm.bias",
+          "backbone.encoder.layers.20.layer_norm.weight",
+          "backbone.encoder.layers.21.attention.k_proj.bias",
+          "backbone.encoder.layers.21.attention.k_proj.weight",
+          "backbone.encoder.layers.21.attention.out_proj.bias",
+          "backbone.encoder.layers.21.attention.out_proj.weight",
+          "backbone.encoder.layers.21.attention.q_proj.bias",
+          "backbone.encoder.layers.21.attention.q_proj.weight",
+          "backbone.encoder.layers.21.attention.v_proj.bias",
+          "backbone.encoder.layers.21.attention.v_proj.weight",
+          "backbone.encoder.layers.21.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.21.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.21.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.21.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.21.final_layer_norm.bias",
+          "backbone.encoder.layers.21.final_layer_norm.weight",
+          "backbone.encoder.layers.21.layer_norm.bias",
+          "backbone.encoder.layers.21.layer_norm.weight",
+          "backbone.encoder.layers.22.attention.k_proj.bias",
+          "backbone.encoder.layers.22.attention.k_proj.weight",
+          "backbone.encoder.layers.22.attention.out_proj.bias",
+          "backbone.encoder.layers.22.attention.out_proj.weight",
+          "backbone.encoder.layers.22.attention.q_proj.bias",
+          "backbone.encoder.layers.22.attention.q_proj.weight",
+          "backbone.encoder.layers.22.attention.v_proj.bias",
+          "backbone.encoder.layers.22.attention.v_proj.weight",
+          "backbone.encoder.layers.22.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.22.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.22.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.22.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.22.final_layer_norm.bias",
+          "backbone.encoder.layers.22.final_layer_norm.weight",
+          "backbone.encoder.layers.22.layer_norm.bias",
+          "backbone.encoder.layers.22.layer_norm.weight",
+          "backbone.encoder.layers.23.attention.k_proj.bias",
+          "backbone.encoder.layers.23.attention.k_proj.weight",
+          "backbone.encoder.layers.23.attention.out_proj.bias",
+          "backbone.encoder.layers.23.attention.out_proj.weight",
+          "backbone.encoder.layers.23.attention.q_proj.bias",
+          "backbone.encoder.layers.23.attention.q_proj.weight",
+          "backbone.encoder.layers.23.attention.v_proj.bias",
+          "backbone.encoder.layers.23.attention.v_proj.weight",
+          "backbone.encoder.layers.23.feed_forward.intermediate_dense.bias",
+          "backbone.encoder.layers.23.feed_forward.intermediate_dense.weight",
+          "backbone.encoder.layers.23.feed_forward.output_dense.bias",
+          "backbone.encoder.layers.23.feed_forward.output_dense.weight",
+          "backbone.encoder.layers.23.final_layer_norm.bias",
+          "backbone.encoder.layers.23.final_layer_norm.weight",
+          "backbone.encoder.layers.23.layer_norm.bias",
+          "backbone.encoder.layers.23.layer_norm.weight",
+          "classifier.0.bias",
+          "classifier.0.weight",
+          "classifier.3.bias",
+          "classifier.3.weight"
+        ],
+        "shapes_verified_with_meta_model": true
+      },
+      "remaining_generations": [
+        "g-9cce459c61c24aacb667b23d7d0f4774",
+        "g-eb35f3c2379f4a47bd22744c9be1dd8f"
+      ],
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2026",
+      "output_bytes": 2608538179,
+      "manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+      "report_sha256": "d04f933bb28786f34107a27b18a93ab685c1dc0d8491fe3d4b73db55eb0b96df",
+      "source_tree_sha256": "faeb10973cbd00af5bfc51d3b477163892407e33418a16f645bddcae09c06f89"
+    }
+  },
+  "fixed_order": [
+    "X1-L8-lr3e-5-seed2027",
+    "X1-L8-lr3e-5-seed2028",
+    "X0-seed2027",
+    "X0-seed2028"
+  ],
+  "runs": {
+    "X1-L8-lr3e-5-seed2027": {
+      "status": "paused",
+      "push_attempts": 1,
+      "kernel_status_before": "COMPLETE",
+      "idle_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T05:18:30.086156+00:00",
+        "ended_utc": "2026-11-09T05:18:32.654788+00:00",
+        "seconds": 2.5694753999996465,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0002-idle-before-X1-L8-lr3e-5-seed2027.log"
+      },
+      "quota_before": {
+        "gpu": {
+          "resource": "GPU",
+          "used": "7.97h",
+          "remaining": "22.03h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "7.97h",
+            "remaining": "22.03h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 22.03,
+        "observed_utc": "2026-11-09T05:18:34.999459+00:00",
+        "execution": {
+          "command": [
+            "kaggle",
+            "-W",
+            "quota",
+            "--format",
+            "json"
+          ],
+          "started_utc": "2026-11-09T05:18:32.657789+00:00",
+          "ended_utc": "2026-11-09T05:18:34.999459+00:00",
+          "seconds": 2.3408741999992344,
+          "exit_code": 0,
+          "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0003-quota-before-X1-L8-lr3e-5-seed2027.log"
+        }
+      },
+      "required_quota_hours": 10.5,
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2027",
+      "push_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "scripts/kaggle_workflow.py",
+          "--config",
+          ".kaggle/xlsr-d028/project.json",
+          "push-prepared-kernel",
+          "--kernel-dir",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\X1-L8-lr3e-5-seed2027"
+        ],
+        "started_utc": "2026-11-09T05:18:35.038395+00:00",
+        "ended_utc": "2026-11-09T05:18:38.937614+00:00",
+        "seconds": 3.9000888999999006,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0004-push-X1-L8-lr3e-5-seed2027.log"
+      },
+      "kernel_version": 7,
+      "submitted_utc": "2026-11-09T05:18:38.937614+00:00",
+      "next_status_unix": 1794240108.8183825,
+      "last_status_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T15:31:46.298430+00:00",
+        "ended_utc": "2026-11-09T15:31:48.816833+00:00",
+        "seconds": 2.514171599999827,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0019-status-X1-L8-lr3e-5-seed2027.log"
+      },
+      "last_kernel_status": "COMPLETE",
+      "kernel_status": "COMPLETE",
+      "logs_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T15:31:48.938565+00:00",
+        "ended_utc": "2026-11-09T15:31:51.698888+00:00",
+        "seconds": 2.7591412000001583,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0020-logs-X1-L8-lr3e-5-seed2027.log"
+      },
+      "quota_after": {
+        "gpu": {
+          "resource": "GPU",
+          "used": "18.15h",
+          "remaining": "11.85h",
+          "total": "30.00h",
+          "refreshAt": "2026-11-14T00:00:00"
+        },
+        "all_resources": [
+          {
+            "resource": "GPU",
+            "used": "18.15h",
+            "remaining": "11.85h",
+            "total": "30.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          },
+          {
+            "resource": "TPU",
+            "used": "0.00h",
+            "remaining": "20.00h",
+            "total": "20.00h",
+            "refreshAt": "2026-11-14T00:00:00"
+          }
+        ],
+        "remaining_hours": 11.85,
+        "observed_utc": "2026-11-09T15:31:56.348447+00:00",
+        "execution": {
+          "command": [
+            "kaggle",
+            "-W",
+            "quota",
+            "--format",
+            "json"
+          ],
+          "started_utc": "2026-11-09T15:31:51.704348+00:00",
+          "ended_utc": "2026-11-09T15:31:56.348447+00:00",
+          "seconds": 4.644284800000605,
+          "exit_code": 0,
+          "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0021-quota-after-X1-L8-lr3e-5-seed2027.log"
+        }
+      },
+      "download_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "output",
+          "ngctnnguyn1111/doanttnt-xlsr-d028",
+          "-p",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2027",
+          "--file-pattern",
+          "^reports/|^checkpoints/|^[^/]+\\.log$",
+          "--page-size",
+          "200"
+        ],
+        "started_utc": "2026-11-09T15:31:56.370392+00:00",
+        "ended_utc": "2026-11-09T15:38:22.973119+00:00",
+        "seconds": 386.6057989000001,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0022-output-X1-L8-lr3e-5-seed2027.log"
+      },
+      "raw_summary": {
+        "status": "paused",
+        "completed_epochs": 9,
+        "global_step": 9930,
+        "history": [
+          {
+            "epoch": 1,
+            "eer": 0.012083951664193343,
+            "loss": 0.04444390885040098
+          },
+          {
+            "epoch": 2,
+            "eer": 0.011942618896191082,
+            "loss": 0.08981798803661073
+          },
+          {
+            "epoch": 3,
+            "eer": 0.012437283584198997,
+            "loss": 0.08665328304142371
+          },
+          {
+            "epoch": 4,
+            "eer": 0.011165288672178645,
+            "loss": 0.05669748442620759
+          },
+          {
+            "epoch": 5,
+            "eer": 0.012437283584198997,
+            "loss": 0.12206618531150577
+          },
+          {
+            "epoch": 6,
+            "eer": 0.009786404613010639,
+            "loss": 0.08915523144468326
+          },
+          {
+            "epoch": 7,
+            "eer": 0.01218224640623731,
+            "loss": 0.06503830520495453
+          },
+          {
+            "epoch": 8,
+            "eer": 0.00840929969613455,
+            "loss": 0.05073848971066185
+          },
+          {
+            "epoch": 9,
+            "eer": 0.012588321286445221,
+            "loss": 0.10532343078720463
+          }
+        ],
+        "best": {
+          "epoch": 8,
+          "global_step": 7944,
+          "generation": "g-282249872e1b414a9d94f0b1803cdff3",
+          "eer": 0.00840929969613455,
+          "roc_auc": 0.9990448387647419,
+          "macro_f1": 0.9909154610083258,
+          "decision_threshold": 0.312245149623715
+        },
+        "timing": {
+          "rehash_train_seconds": 45.88959340399998,
+          "rehash_dev_seconds": 105.53274006299995,
+          "rehash_performed": {
+            "train": true,
+            "dev": true
+          },
+          "backbone_load_seconds": 13.241605248999974,
+          "model_build_seconds": 0.48474435399998583,
+          "train_steps_this_invocation": 9930,
+          "train_loader_seconds": 2321.8898988110222,
+          "train_model_seconds": 12591.489223246932,
+          "train_seconds": 14913.379122057955,
+          "mean_step_seconds": 1.501850868283782,
+          "evaluations_this_invocation": [
+            {
+              "loader_seconds": 100.3660313939954,
+              "model_seconds": 1891.8997021870114,
+              "total_seconds": 1992.5065344649997,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.461416727755857
+            },
+            {
+              "loader_seconds": 102.58775371198408,
+              "model_seconds": 1889.7165664820204,
+              "total_seconds": 1992.51418026,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.461342049239544
+            },
+            {
+              "loader_seconds": 70.41104035998433,
+              "model_seconds": 1896.13747216493,
+              "total_seconds": 1966.7295084720008,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.716488634030195
+            },
+            {
+              "loader_seconds": 70.94481854496553,
+              "model_seconds": 1895.2794367200004,
+              "total_seconds": 1966.4076227789992,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.719716070465047
+            },
+            {
+              "loader_seconds": 71.43634568323978,
+              "model_seconds": 1894.6831060410404,
+              "total_seconds": 1966.3089862499983,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.72070527631198
+            },
+            {
+              "loader_seconds": 72.07814538595267,
+              "model_seconds": 1894.4976895949767,
+              "total_seconds": 1966.755551631999,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.71622755447322
+            },
+            {
+              "loader_seconds": 72.8220251839266,
+              "model_seconds": 1893.0879453419002,
+              "total_seconds": 1966.0898032939986,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.722903773282777
+            },
+            {
+              "loader_seconds": 72.69919015786581,
+              "model_seconds": 1894.0064959099109,
+              "total_seconds": 1966.888147818001,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.714898400815464
+            },
+            {
+              "loader_seconds": 70.75794984128152,
+              "model_seconds": 1891.7007001699312,
+              "total_seconds": 1962.637874070002,
+              "samples": 38777,
+              "throughput_samples_per_second": 19.757592835802438
+            }
+          ],
+          "wall_seconds": 36561.423775899,
+          "deadline_unix": 1794241131.851369,
+          "seconds_left_at_exit": 3008.2045674324036,
+          "deadline_overrun_seconds": 0.0,
+          "estimates": {
+            "train_step_seconds": 1.7673716012084593,
+            "dev_full_seconds": 3015.0,
+            "max_session_hours": 11.0
+          }
+        }
+      },
+      "verification_execution": {
+        "command": [
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+          "-B",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\verify_run.py",
+          "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1-L8-lr3e-5-seed2027",
+          "X1-L8-lr3e-5",
+          "--seed",
+          "2027"
+        ],
+        "started_utc": "2026-11-09T15:38:24.778606+00:00",
+        "ended_utc": "2026-11-09T15:38:38.680144+00:00",
+        "seconds": 13.892818399999669,
+        "exit_code": 1,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0023-verify-X1-L8-lr3e-5-seed2027.log"
+      },
+      "verification": {
+        "passed": false,
+        "run_id": "X1-L8-lr3e-5",
+        "error": "Runner chưa hoàn tất run (paused hoặc trạng thái không hợp lệ).",
+        "checked_utc": "2026-11-09T15:38:38.056655+00:00"
+      },
+      "timing_T21": {
+        "mean_step_at_most_2_seconds": true,
+        "all_dev_at_most_3000_seconds": true,
+        "deadline_overrun_zero": true
+      }
+    },
+    "X1-L8-lr3e-5-seed2028": {
+      "status": "not_run",
+      "push_attempts": 0
+    },
+    "X0-seed2027": {
+      "status": "not_run",
+      "push_attempts": 0
+    },
+    "X0-seed2028": {
+      "status": "not_run",
+      "push_attempts": 0
+    }
+  },
+  "network_dataset_writes": 0,
+  "kernel_resumes": 0,
+  "use_test": false,
+  "statistics_data_only": {},
+  "deviations": [
+    "Helper prepare.py ban đầu lỗi cú pháp dấu nháy, exit1 trước baseline/kiểm/push; đã sửa helper cục bộ, không sửa source."
+  ],
+  "updated_utc": "2026-11-09T15:38:39.413533+00:00",
+  "command_records": [
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0001-source-version.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0002-idle-before-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0003-quota-before-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0004-push-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0005-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0006-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0007-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0008-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0009-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0010-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0011-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0012-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0013-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0014-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0015-manual-progress-status.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0016-manual-progress-quota.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0017-manual-progress-logs.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0018-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0019-status-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0020-logs-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0021-quota-after-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0022-output-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0023-verify-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X0-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X0-seed2028.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X1-L8-lr3e-5-seed2027.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\prepare-X1-L8-lr3e-5-seed2028.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\regression-X0.json",
+    "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\regression-X1-L8-lr3e-5.json"
+  ],
+  "active_profile": "X1-L8-lr3e-5-seed2027",
+  "monitor_starts": [
+    {
+      "utc": "2026-11-09T05:18:56.417440+00:00",
+      "pid": 19624
+    },
+    {
+      "utc": "2026-11-09T14:33:18.933972+00:00",
+      "pid": 3828
+    }
+  ],
+  "manual_progress_checks": [
+    {
+      "utc": "2026-11-09T14:31:42.485463+00:00",
+      "kernel_status": "RUNNING",
+      "status_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "status",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T14:31:37.787005+00:00",
+        "ended_utc": "2026-11-09T14:31:42.485463+00:00",
+        "seconds": 4.69922729999962,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0015-manual-progress-status.log"
+      },
+      "quota_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "quota",
+          "--format",
+          "json"
+        ],
+        "started_utc": "2026-11-09T14:31:42.491190+00:00",
+        "ended_utc": "2026-11-09T14:31:45.396979+00:00",
+        "seconds": 2.9055205000004207,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0016-manual-progress-quota.log"
+      },
+      "gpu": {
+        "resource": "GPU",
+        "used": "17.19h",
+        "remaining": "12.81h",
+        "total": "30.00h",
+        "refreshAt": "2026-11-14T00:00:00"
+      },
+      "remaining_hours": 12.81,
+      "progress_epochs_available": false,
+      "logs_execution": {
+        "command": [
+          "kaggle",
+          "-W",
+          "kernels",
+          "logs",
+          "ngctnnguyn1111/doanttnt-xlsr-d028"
+        ],
+        "started_utc": "2026-11-09T14:31:45.400534+00:00",
+        "ended_utc": "2026-11-09T14:31:47.511228+00:00",
+        "seconds": 2.1110399999997753,
+        "exit_code": 0,
+        "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t21\\commands\\0017-manual-progress-logs.log"
+      }
+    }
+  ],
+  "monitor_interruptions": [
+    {
+      "last_persisted_utc": "2026-11-09T10:19:04.105901+00:00",
+      "recovery_observed_utc": "2026-11-09T14:33:18.438228+00:00",
+      "cause": "Chưa xác định vì sao tiến trình monitor cục bộ kết thúc. Lần đọc cuối exit1 kernels.get denied; lần đọc thủ công mới exit0 RUNNING.",
+      "training_restarted": false,
+      "kernel_repush": false
+    }
+  ],
+  "finished_utc": "2026-11-09T15:38:38.693789+00:00",
+  "final_scope_audit": {
+    "utc": "2026-11-09T15:38:39.360517+00:00",
+    "changed_protected": [],
+    "new_protected_files": [],
+    "profile_sha256": {
+      "X1-L8-lr3e-5-seed2027": {
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/run-config.json": "06bd50ad3d19fa91e4bb6285784fa63caabc47c16a8bc41e4ae465cb32b69ea0",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2027/runner.py": "8d6add4f32967aad398dcef583b62102f49b6b17f59f49d4d8717def3b52ad9d"
+      },
+      "X1-L8-lr3e-5-seed2028": {
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/run-config.json": "ac2c6034955c9787142c7430f4ac087eff089b0abf78241b1192dbc9338d3cce",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-seed2028/runner.py": "8b095f6eacd1856c8c42e25612bb060ee2df7f085a919de2c245878fcca999fc"
+      },
+      "X0-seed2027": {
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/run-config.json": "638fb6dfe9d0335caedc41cf03b78b93952f05a6b5e3ce6683be307bb89b57b6",
+        ".kaggle/xlsr-d028/prepared/X0-seed2027/runner.py": "6f7d857bcb18c60a9fdf616ef07af580c32049b1fc27e7f4118854037144f03c"
+      },
+      "X0-seed2028": {
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/kernel-metadata.json": "20640822d4b549df17e2444623f50d5bc3e8709ad91fc49da4dcd6c7c2250c3c",
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/run-config.json": "27c8c7fab052fe6c6c233be41be6c6a45f3e200cde7e2d3beec343f637330ab3",
+        ".kaggle/xlsr-d028/prepared/X0-seed2028/runner.py": "017994af2d406c7ef39ecf693e03dbbed9e3eb0ebdb2bd5a2ed6c0bd70183b55"
+      }
+    },
+    "profiles_unchanged": true,
+    "numstat": "10\t0\tdocs/decisions.md\n4\t1\tscripts/kaggle_workflow.py\n41\t3\tsrc/training/full_training.py\n8\t2\tsrc/training/xlsr_checkpoint.py\n125\t0\ttests/test_kaggle_workflow.py\n",
+    "worktree_status_added": [
+      "?? reports/xlsr_t21_seeds_2027_2028.json"
+    ],
+    "worktree_status_removed": [],
+    "main_status": " M reports/leakage_check.json\n M reports/leakage_check.md\n?? baocao/Bao_cao_tien_do_v3.docx\n?? baocao/Huong-dan-trinh-bay-DATN-26-2-2020.docx\n?? baocao/Nhom05.docx\n?? baocao/phuong_phap_du_lieu_va_b0.md\n?? docs/figures/\n?? docs/progress-audit.md\n?? docs/progress-report.md\n?? reports/Bao_cao_tien_do.docx\n?? reports/Bao_cao_tien_do_dinh_dang.docx\n?? reports/Bao_cao_tien_do_v2.docx\n?? reports/Bao_cao_tien_do_v3.docx\n?? reports/b0_full_session_10_kaggle_runtime.json\n?? reports/b0_full_session_10_kaggle_workflow.json\n?? reports/b0_full_session_10_preflight.json\n?? reports/b0_full_session_10_preflight.md\n?? reports/b0_full_session_10_resume_input.json\n?? reports/b0_full_session_10_transfer_check.json\n?? reports/b0_full_session_11_preflight.json\n?? reports/b0_full_session_11_preflight.md\n?? reports/b0_full_session_11_transfer_check.json\n?? reports/b0_full_session_1_kaggle_runtime.json\n?? reports/b0_full_session_1_kaggle_workflow.json\n?? reports/b0_full_session_2_embedded_check.json\n?? reports/b0_full_session_2_kaggle_runtime.json\n?? reports/b0_full_session_2_kaggle_workflow.json\n?? reports/b0_full_session_2_preflight.json\n?? reports/b0_full_session_2_preflight.md\n?? reports/b0_full_session_2_resume_input.json\n?? reports/b0_full_session_2_transfer_check.json\n?? reports/b0_full_session_3_embedded_check.json\n?? reports/b0_full_session_3_kaggle_runtime.json\n?? reports/b0_full_session_3_kaggle_workflow.json\n?? reports/b0_full_session_3_preflight.json\n?? reports/b0_full_session_3_preflight.md\n?? reports/b0_full_session_3_resume_input.json\n?? reports/b0_full_session_3_transfer_check.json\n?? reports/b0_full_session_4_embedded_check.json\n?? reports/b0_full_session_4_kaggle_runtime.json\n?? reports/b0_full_session_4_kaggle_workflow.json\n?? reports/b0_full_session_4_preflight.json\n?? reports/b0_full_session_4_preflight.md\n?? reports/b0_full_session_4_resume_input.json\n?? reports/b0_full_session_4_transfer_check.json\n?? reports/b0_full_session_5_embedded_check.json\n?? reports/b0_full_session_5_kaggle_runtime.json\n?? reports/b0_full_session_5_kaggle_workflow.json\n?? reports/b0_full_session_5_preflight.json\n?? reports/b0_full_session_5_preflight.md\n?? reports/b0_full_session_5_resume_input.json\n?? reports/b0_full_session_5_transfer_check.json\n?? reports/b0_full_session_6_embedded_check.json\n?? reports/b0_full_session_6_kaggle_runtime.json\n?? reports/b0_full_session_6_kaggle_workflow.json\n?? reports/b0_full_session_6_preflight.json\n?? reports/b0_full_session_6_preflight.md\n?? reports/b0_full_session_6_resume_input.json\n?? reports/b0_full_session_6_transfer_check.json\n?? reports/b0_full_session_7_embedded_check.json\n?? reports/b0_full_session_7_kaggle_runtime.json\n?? reports/b0_full_session_7_kaggle_workflow.json\n?? reports/b0_full_session_7_preflight.json\n?? reports/b0_full_session_7_preflight.md\n?? reports/b0_full_session_7_resume_input.json\n?? reports/b0_full_session_7_transfer_check.json\n?? reports/b0_full_session_8_kaggle_runtime.json\n?? reports/b0_full_session_8_kaggle_workflow.json\n?? reports/b0_full_session_8_preflight.json\n?? reports/b0_full_session_8_preflight.md\n?? reports/b0_full_session_8_resume_input.json\n?? reports/b0_full_session_9_kaggle_runtime.json\n?? reports/b0_full_session_9_kaggle_workflow.json\n?? reports/b0_full_session_9_preflight.json\n?? reports/b0_full_session_9_preflight.md\n?? reports/b0_full_session_9_resume_input.json\n?? reports/b0_full_session_9_transfer_check.json\n?? reports/b0_peak_full_session_1.json\n?? reports/b0_peak_full_session_1.md\n?? reports/b0_peak_full_session_2.json\n?? reports/b0_peak_full_session_2.md\n?? reports/b0_peak_full_session_3.json\n?? reports/b0_peak_full_session_3.md\n?? reports/b0_peak_full_session_4.json\n?? reports/b0_peak_full_session_4.md\n?? reports/b0_peak_full_session_5.json\n?? reports/b0_peak_full_session_5.md\n?? reports/b0_peak_full_session_6.json\n?? reports/b0_peak_full_session_6.md\n?? reports/b0_peak_full_session_7.json\n?? reports/b0_peak_full_session_7.md\n?? reports/b0_peak_full_session_8.json\n?? reports/b0_peak_full_session_8.md\n?? reports/b0_peak_full_session_9.json\n?? reports/b0_peak_full_session_9.md\n?? reports/highband_spectrum_dev.json\n?? reports/highband_spectrum_dev.md\n?? reports/shortcut_probe_dev_x1_final.json\n?? reports/shortcut_probe_dev_x1_final.md\n?? scripts/analyze_highband_spectrum.py\n?? scripts/probe_shortcut_x1_final.py\n?? tests/test_analyze_highband_spectrum.py\n?? tests/test_probe_shortcut_x1_final.py\n",
+    "main_concurrency_note": "T22/R2a có thể ghi độc lập; T21 chỉ ghi output bốn run và hai dòng trạng thái T20/T21.",
+    "passed": true
+  }
+}
