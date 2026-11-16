@@ -1,0 +1,33 @@
+{
+  "source": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\scripts\\probe_shortcut_dev.py",
+  "source_sha256": "c7b2eda543726671bd0182f4f04156d4d93eb718c1128ce18bcae66d24c2f8a3",
+  "seed": 2026,
+  "waveforms": [
+    "seeded_gaussian_noise",
+    "mixed_3k_7p5k_tones",
+    "seeded_boundary_impulses"
+  ],
+  "fixture_sha256": "e19e3303c3747b7eaa14cb8c30f351de997e7ce812be379d36b09d97be4a25d1",
+  "inputs_sha256": "0eb33d197deb29b5186126b2047d034d4be54483c5aa22b66b7c5729c582e792",
+  "outputs_sha256": "6b82e323b8e88fccb47eb92800f747a39f82eab21370ba43b510d556c1f422bd",
+  "torch": "2.11.0+cpu",
+  "filter_parameters": {
+    "operation": "linear_phase_windowed_sinc",
+    "cutoff_hz": 7000,
+    "taps": 513,
+    "window": "symmetric_Hann",
+    "sample_rate": 16000,
+    "fft_length": 65536,
+    "delay_compensation_samples": 256,
+    "boundary": "zero_extension",
+    "coefficient_float32_sha256": "973b82a36db8dab4f802de2102c5feed2bfb8cf6bb5846472c07d9984ab4c977",
+    "response_db": {
+      "3000": 2.470312563578589e-07,
+      "4000": 3.8034457100841807e-07,
+      "6000": 1.2904362614004098e-05,
+      "7000": -6.020603458515398,
+      "7500": -97.84141174703096
+    },
+    "repeak": true
+  }
+}

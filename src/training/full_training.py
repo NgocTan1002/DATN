@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 import os
+import shutil
 import uuid
 from pathlib import Path
 from typing import Any, Callable
@@ -32,8 +33,9 @@ def write_json(path: Path, value: dict[str, Any]) -> None:
 class GenerationStore:
     """Chỉ LATEST.json đã commit có quyền quyết định trạng thái khôi phục."""
 
-    def __init__(self, root: Path, fault: Callable[[str], None] | None = None) -> None:
+    def __init__(self, root: Path, fault: Callable[[str], None] | None = None, *, prune: bool = False) -> None:
         self.root = root.resolve()
+        self.prune = prune
         self.fault = fault or (lambda _stage: None)
 
     def _file(self, generation: str, filename: str) -> Path:
@@ -76,6 +78,20 @@ class GenerationStore:
         self.fault("before_pointer")
         os.replace(staging, self.root / "LATEST.json")
         self.fault("after_pointer")
+        if self.prune:
+            keep = {current["generation"]}
+            if best_ref:
+                keep.add(best_ref["generation"])
+            pending = payload["controller"].get("pending_generation")
+            if pending:
+                self._file(pending, "checkpoint.pt")
+                keep.add(pending)
+            for candidate in self.root.glob("g-*"):
+                if candidate.name not in keep and candidate.is_dir() and not candidate.is_symlink():
+                    self._file(candidate.name, "checkpoint.pt")
+                    if not candidate.resolve().is_relative_to(self.root):
+                        raise ValueError("Generation nằm ngoài thư mục checkpoint.")
+                    shutil.rmtree(candidate)
         return payload
 
     def load(self) -> dict[str, Any]:
@@ -195,6 +211,9 @@ def run_training(
     checkpoint_interval: int,
     resume: bool,
     fault: Callable[[str], None] | None = None,
+    trainable_only: bool = False,
+    can_start: Callable[[str, int], bool] | None = None,
+    retain_evaluations: bool = False,
     extend_max_epochs: bool = False,
     source_transition: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -243,7 +262,18 @@ def run_training(
             or state["global_step"] > max_epochs * steps_per_epoch
         ):
             raise ValueError("Controller/progress/sampler full training không nhất quán.")
-        model.load_state_dict(payload["model"])
+        if trainable_only:
+            parameters = {n: p for n, p in model.named_parameters() if p.requires_grad}
+            if set(payload["model"]) != set(parameters):
+                raise ValueError("Danh sách tham số trainable không khớp checkpoint.")
+            with torch.no_grad():
+                for name, parameter in parameters.items():
+                    saved = payload["model"][name]
+                    if saved.shape != parameter.shape or saved.dtype != parameter.dtype:
+                        raise ValueError("Tensor trainable không tương thích checkpoint.")
+                    parameter.copy_(saved.to(parameter.device))
+        else:
+            model.load_state_dict(payload["model"])
         optimizer.load_state_dict(payload["optimizer"])
         _restore_rng_state(payload["rng"])
         if extend_max_epochs:
@@ -255,7 +285,7 @@ def run_training(
         nonlocal state
         payload = {
             "checkpoint_version": 4, "identity": identity,
-            "model": model.state_dict(), "optimizer": optimizer.state_dict(),
+            "model": ({n: p.detach().cpu().clone() for n, p in model.named_parameters() if p.requires_grad} if trainable_only else model.state_dict()), "optimizer": optimizer.state_dict(),
             "sampler": sampler.state_dict(), "rng": _capture_rng_state(),
             "controller": state,
         }
@@ -267,6 +297,9 @@ def run_training(
     iterator = iter(sampler)
     while True:
         if state["needs_evaluation"]:
+            if can_start is not None and not can_start("evaluation", development_samples):
+                commit()
+                break
             fault("before_evaluation")
             development = evaluate()
             for key in ("eer", "loss", "eer_threshold", "roc_auc", "macro_f1", "decision_threshold"):
@@ -277,6 +310,8 @@ def run_training(
             epoch = sampler.epoch + 1
             improved = state["best"] is None or development["eer"] < state["best"]["development"]["eer"]
             state["history"].append({"epoch": epoch, "global_step": state["global_step"], "eer": development["eer"], "loss": development["loss"]})
+            if retain_evaluations:
+                state["history"][-1]["development"] = development
             state["completed_epochs"] = epoch
             state["last_evaluated_step"] = state["global_step"]
             state["needs_evaluation"] = False
@@ -299,6 +334,9 @@ def run_training(
         if len(sampler) == 0:
             sampler.set_epoch(sampler.epoch + 1)
             iterator = iter(sampler)
+        if can_start is not None and not can_start("training", 1):
+            commit()
+            break
         batch = next(iterator)
         loss = train_step(batch, sampler.epoch)
         if not math.isfinite(loss):

@@ -56,6 +56,8 @@ class XLSRTrainingRunIdentity:
     encoder_learning_rate: float | None
     classifier_learning_rate: float
     step_budget: int
+    data_seed: int = 2026
+    training_seed: int | None = None
 
     def __post_init__(self) -> None:
         for name in (
@@ -81,8 +83,12 @@ class XLSRTrainingRunIdentity:
             raise ValueError("amplitude_policy không được rỗng.")
         if self.waveform_normalization not in WAVEFORM_NORMALIZATION_MODES:
             raise ValueError("Chế độ normalization waveform XLS-R không hợp lệ.")
-        if self.seed != 2026:
-            raise ValueError("XLS-R phải giữ seed nghiên cứu đã khóa là 2026.")
+        if self.data_seed != 2026:
+            raise ValueError("XLS-R phải giữ seed dữ liệu đã khóa là 2026.")
+        if self.training_seed is None:
+            object.__setattr__(self, "training_seed", self.seed)
+        if self.training_seed not in (2026, 2027, 2028) or self.seed != self.training_seed:
+            raise ValueError("Seed huấn luyện XLS-R phải thuộc 2026/2027/2028 và khớp seed sampler.")
         if self.mode not in {"X0", "X1"}:
             raise ValueError("mode XLS-R phải là X0 hoặc X1.")
         if isinstance(self.num_unfrozen_layers, bool) or not isinstance(

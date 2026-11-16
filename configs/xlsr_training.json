@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "xlsr-d028",
+  "status": "ready",
+  "decision": "D028",
+  "implementation": {
+    "ready_for_training": true,
+    "current_entrypoint": "scripts/train_xlsr.py",
+    "missing": []
+  },
+  "data": {
+    "snapshot": "VSASV-HF-public-snapshot-v1",
+    "backend": "packed",
+    "data_seed": 2026,
+    "train_manifest": "data/manifests/development_20k_v2.csv",
+    "train_manifest_sha256": "f549423b1fb33665f7e5606cdf56321bc8cd07246a0cdf0b90cd918c0c09e728",
+    "development_manifest": "data/manifests/closed_dev_full_v1.csv",
+    "development_manifest_sha256": "a79f1bb2595bc46b08ce30b8652234b1858cc26e558e2ccd33632435df1a5360",
+    "train_artifact": "data/processed/packed/train_development_20k_v2",
+    "train_artifact_waveforms_sha256": "e09517c8e367bfb4e24563f92d90d2f7ee0ad7d5c7a58dc78862db742ab6614d",
+    "development_artifact": "data/processed/packed/closed_dev_full_v1",
+    "development_artifact_waveforms_sha256": "579e5e85a020aeab70c8ad912023f5ee4efaef19f8e61af4fd2c923ee692f648",
+    "sample_selection_sha256": "696af9bf85c40528a678fd91743196379bbe3676925003b31e825d88ec30005e",
+    "train_split": "closed_train",
+    "development_split": "closed_dev",
+    "train_samples": 15885,
+    "development_samples": 38777,
+    "use_test": false,
+    "train_metadata_sha256": "9ce34ceb9883a56347de4aedf8d1a39fa7e8eae753dc006919bf634d376250a9",
+    "development_metadata_sha256": "5537af3384c6ffd83093a5e4175676ddbef1b5a5b5607c5daa87285e6de13f14"
+  },
+  "model": {
+    "audio_config": "configs/audio.json",
+    "audio_config_sha256": "0f6c788894da54085b4e9d48bffb2b35e55afb3c0588c6fb9803fe6679bbbee5",
+    "amplitude_policy": "peak",
+    "precision": "float32",
+    "amp": false,
+    "classifier_hidden_features": 128,
+    "classifier_dropout": 0.2
+  },
+  "training": {
+    "training_seeds": [
+      2026,
+      2027,
+      2028
+    ],
+    "training_seed_scope": [
+      "model_initialization",
+      "sampler",
+      "random_crop",
+      "dropout"
+    ],
+    "batch_size": 16,
+    "num_workers": 0,
+    "optimizer": "Adam",
+    "loss": "BCEWithLogitsLoss",
+    "scheduler": null,
+    "gradient_clipping": null,
+    "shuffle": true,
+    "drop_last": false,
+    "max_epochs": 10,
+    "steps_per_epoch": 993,
+    "max_optimizer_steps": 9930,
+    "max_train_sample_exposures": 158850,
+    "classifier_learning_rate": 0.001,
+    "encoder_learning_rates": [
+      1e-05,
+      3e-05
+    ],
+    "gpus_per_run": 1
+  },
+  "evaluation": {
+    "schedule": "after_each_completed_epoch_before_next_epoch",
+    "full_development": true,
+    "partial_epoch_evaluation": false,
+    "threshold_source": "development_eer_of_selected_checkpoint",
+    "selection_metric": "eer",
+    "mode": "min",
+    "strict_improvement": true,
+    "equal_eer_action": "keep_earliest_checkpoint",
+    "patience": 2,
+    "minimum_completed_epochs": 1,
+    "min_delta": 0.0,
+    "allow_loss_tie_break": false,
+    "nonfinite_action": "fail_without_committing_evaluation"
+  },
+  "sessions": {
+    "checkpoint_every_completed_steps": 64,
+    "quota_shortage_action": "pause_and_resume_same_identity",
+    "auto_monitor": false,
+    "max_session_hours": 11.0,
+    "dev_full_estimated_seconds": 3015.0,
+    "train_step_estimated_seconds": {
+      "0": 1.0876132930513596,
+      "2": 1.2688821752265864,
+      "4": 1.404833836858006,
+      "8": 1.7673716012084593
+    },
+    "local_default_session_steps": 512,
+    "kaggle_session_steps_source": "training.max_optimizer_steps",
+    "kaggle_stop_condition": "run_complete_or_insufficient_time_budget",
+    "deadline_origin": "bootstrap_start_unix",
+    "commit_safety_seconds": 120
+  },
+  "checkpoint_contract": {
+    "planned_full_training_checkpoint_version": 4,
+    "authoritative_commit": "atomic_LATEST_json_to_immutable_generation",
+    "preserve_latest_and_best": true,
+    "preserve_pending_evaluation": true,
+    "preserve_evaluation_history_and_patience": true,
+    "freeze_all_semantic_plan_fields_in_identity": true,
+    "identity_includes": [
+      "training_seed",
+      "data_seed",
+      "backend",
+      "device",
+      "artifact_checksums"
+    ],
+    "trainable_only": true,
+    "prune_generations": true
+  },
+  "outputs": {
+    "root_template": "checkpoints/xlsr_{run_id}_seed{training_seed}",
+    "report_json_template": "reports/xlsr_{run_id}_seed{training_seed}.json"
+  },
+  "pretrained": {
+    "provider": "Hugging Face",
+    "model_id": "facebook/wav2vec2-xls-r-300m",
+    "revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+    "model_api": "https://huggingface.co/api/models/facebook/wav2vec2-xls-r-300m",
+    "last_modified": "2022-08-10T08:11:47Z",
+    "weights_downloaded": true,
+    "weights_sha256": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+    "config_sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+    "preprocessor_config_sha256": "a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335",
+    "hidden_size": 1024,
+    "num_hidden_layers": 24,
+    "feat_extract_norm": "layer",
+    "do_stable_layer_norm": true,
+    "layerdrop": 0.1,
+    "sampling_rate_hz": 16000,
+    "do_normalize": true,
+    "return_attention_mask": true,
+    "waveform_normalization": "processor_zero_mean_unit_variance",
+    "backbone_training": false,
+    "frozen_blocks_training": false,
+    "opened_blocks_training": true,
+    "effective_layerdrop": 0.0,
+    "configured_apply_spec_augment": true,
+    "effective_apply_spec_augment": false,
+    "mode_decision": "D029"
+  },
+  "grid": [
+    {
+      "run_id": "X0",
+      "layers": 0,
+      "encoder_lr": null
+    },
+    {
+      "run_id": "X1-L2-lr1e-5",
+      "layers": 2,
+      "encoder_lr": 1e-05
+    },
+    {
+      "run_id": "X1-L2-lr3e-5",
+      "layers": 2,
+      "encoder_lr": 3e-05
+    },
+    {
+      "run_id": "X1-L4-lr1e-5",
+      "layers": 4,
+      "encoder_lr": 1e-05
+    },
+    {
+      "run_id": "X1-L4-lr3e-5",
+      "layers": 4,
+      "encoder_lr": 3e-05
+    },
+    {
+      "run_id": "X1-L8-lr1e-5",
+      "layers": 8,
+      "encoder_lr": 1e-05
+    },
+    {
+      "run_id": "X1-L8-lr3e-5",
+      "layers": 8,
+      "encoder_lr": 3e-05
+    }
+  ]
+}

@@ -169,9 +169,12 @@ def load_config(path: Path) -> WorkflowConfig:
 def run_process(
     command: Sequence[str], *, capture_output: bool = False
 ) -> subprocess.CompletedProcess[str]:
+    process_command = list(command)
+    if process_command and process_command[0] == "kaggle" and process_command[1:2] != ["-W"]:
+        process_command.insert(1, "-W")
     try:
         return subprocess.run(
-            list(command),
+            process_command,
             cwd=PROJECT_ROOT,
             env={
                 **os.environ,
@@ -535,6 +538,114 @@ def prepare_kernel(config: WorkflowConfig, profile: str) -> Path:
         "kernel_sources": [],
         "model_sources": [],
     }
+    write_json(kernel_dir / "kernel-metadata.json", metadata)
+    verify_prepared_kernel(
+        kernel_dir,
+        expected_kernel_ref=config.kernel_ref,
+    )
+    return kernel_dir
+
+
+XLSR_PAIR_X0_PROFILE = "X0-seed2027-X0-seed2028"
+XLSR_PAIR_X0_DRY_RUN_PROFILE = "X0-seed2027-X0-seed2028-dry-run"
+XLSR_EXTRA_DATASET_SOURCES = (
+    "ngctnnguyn1111/doanttnt-t14-weights",
+    "ngctnnguyn1111/doanttnt-t14-offline-deps",
+)
+# SDK không liệt kê tên hợp lệ; xác nhận NvidiaTeslaT4 ở lần push dry-run cặp đầu tiên.
+KAGGLE_PAIR_GPU_ACCELERATOR = "NvidiaTeslaT4"
+
+
+def build_xlsr_pair_profiles(
+    base_command: Sequence[str],
+    *,
+    run_id: str = "X0",
+    first_seed: int = 2027,
+    second_seed: int = 2028,
+    pairs: Sequence[tuple[str, int, int]] | None = None,
+) -> dict[str, list[list[str]]]:
+    """Sinh profile cặp 2 run song song (kèm dry-run) theo D033 mục 1."""
+
+    if pairs is not None:
+        profiles: dict[str, list[list[str]]] = {}
+        for pair_run_id, seed_a, seed_b in pairs:
+            generated = build_xlsr_pair_profiles(
+                base_command, run_id=pair_run_id, first_seed=seed_a, second_seed=seed_b
+            )
+            if profiles.keys() & generated.keys():
+                raise WorkflowError("Danh sách cặp XLS-R có profile trùng nhau.")
+            profiles.update(generated)
+        return profiles
+    if first_seed == second_seed:
+        raise WorkflowError("Hai seed trong profile cặp không được trùng nhau.")
+    profile_name = f"{run_id}-seed{first_seed}-{run_id}-seed{second_seed}"
+    pair_command = list(base_command) + [
+        "--run-id",
+        run_id,
+        "--training-seed",
+        str(first_seed),
+        "--second-run-id",
+        run_id,
+        "--second-training-seed",
+        str(second_seed),
+    ]
+    return {
+        profile_name: [pair_command],
+        f"{profile_name}-dry-run": [pair_command + ["--dry-run"]],
+    }
+
+
+def build_xlsr_pair_kernel_metadata(
+    config: WorkflowConfig,
+    commands: Sequence[Sequence[str]],
+    *,
+    extra_dataset_sources: Sequence[str] = XLSR_EXTRA_DATASET_SOURCES,
+) -> dict[str, Any]:
+    """Sinh metadata kernel cho chế độ cặp: private, GPU NvidiaTeslaT4, offline, đủ 4 dataset."""
+
+    if not config.enable_gpu:
+        raise WorkflowError("Profile cặp XLS-R yêu cầu bật GPU (enable_gpu=true).")
+    if config.enable_internet:
+        raise WorkflowError("Profile cặp XLS-R yêu cầu tắt internet (enable_internet=false).")
+    dataset_sources = required_dataset_sources(config, commands) + list(
+        extra_dataset_sources
+    )
+    return {
+        "id": config.kernel_ref,
+        "title": config.kernel_title,
+        "code_file": "runner.py",
+        "language": "python",
+        "kernel_type": "script",
+        "is_private": True,
+        "enable_gpu": True,
+        "machine_shape": KAGGLE_PAIR_GPU_ACCELERATOR,
+        "enable_tpu": False,
+        "enable_internet": False,
+        "dataset_sources": dataset_sources,
+        "competition_sources": [],
+        "kernel_sources": [],
+        "model_sources": [],
+    }
+
+
+def prepare_xlsr_pair_kernel(
+    config: WorkflowConfig,
+    profile: str,
+    *,
+    extra_dataset_sources: Sequence[str] = XLSR_EXTRA_DATASET_SOURCES,
+    pair_profiles: Sequence[str] | None = None,
+) -> Path:
+    """Chuẩn bị kernel cho profile cặp XLS-R mà không đụng tới các profile một run."""
+
+    if pair_profiles is not None and profile not in pair_profiles:
+        raise WorkflowError("Profile không thuộc danh sách cặp XLS-R đã đăng ký.")
+    kernel_dir = prepare_kernel(config, profile)
+    commands = render_commands(config, profile)
+    metadata = build_xlsr_pair_kernel_metadata(
+        config,
+        commands,
+        extra_dataset_sources=extra_dataset_sources,
+    )
     write_json(kernel_dir / "kernel-metadata.json", metadata)
     verify_prepared_kernel(
         kernel_dir,

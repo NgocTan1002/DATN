@@ -178,7 +178,9 @@ class KaggleWorkflowTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
             root = Path(temporary)
             payload = config_payload(root.relative_to(PROJECT_ROOT).as_posix())
-            config = kaggle_workflow.load_config(self.write_config(root, payload))
+            cfg_path = root / "project.json"
+            cfg_path.write_text(json.dumps(payload), encoding="utf-8")
+            config = kaggle_workflow.load_config(cfg_path)
             commands = kaggle_workflow.render_commands(config, "runtime")
             self.assertEqual(
                 commands[0],
@@ -196,7 +198,9 @@ class KaggleWorkflowTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
             root = Path(temporary)
             payload = config_payload(root.relative_to(PROJECT_ROOT).as_posix())
-            config = kaggle_workflow.load_config(self.write_config(root, payload))
+            cfg_path = root / "project.json"
+            cfg_path.write_text(json.dumps(payload), encoding="utf-8")
+            config = kaggle_workflow.load_config(cfg_path)
             selected = [PROJECT_ROOT / "requirements-kaggle.txt"]
             with mock.patch.object(kaggle_workflow, "source_files", return_value=selected):
                 first = kaggle_workflow.bundle_source(config)
@@ -210,7 +214,9 @@ class KaggleWorkflowTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
             root = Path(temporary)
             payload = config_payload(root.relative_to(PROJECT_ROOT).as_posix())
-            config = kaggle_workflow.load_config(self.write_config(root, payload))
+            cfg_path = root / "project.json"
+            cfg_path.write_text(json.dumps(payload), encoding="utf-8")
+            config = kaggle_workflow.load_config(cfg_path)
             source_dir = config.workspace_dir / "source_dataset"
             source_dir.mkdir(parents=True)
             (source_dir / "source_manifest.json").write_text(
@@ -258,7 +264,9 @@ class KaggleWorkflowTests(unittest.TestCase):
                     ]
                 ]
             }
-            config = kaggle_workflow.load_config(self.write_config(root, payload))
+            cfg_path = root / "project.json"
+            cfg_path.write_text(json.dumps(payload), encoding="utf-8")
+            config = kaggle_workflow.load_config(cfg_path)
             source_dir = config.workspace_dir / "source_dataset"
             source_dir.mkdir(parents=True)
             (source_dir / "source_manifest.json").write_text(
@@ -349,6 +357,162 @@ class KaggleWorkflowTests(unittest.TestCase):
             [normalized(command) for command in training_commands],
             [normalized(training_commands[0])] * 3,
         )
+
+
+
+class KaggleWarningFlagTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp=tempfile.TemporaryDirectory(dir=PROJECT_ROOT)
+        self.root=Path(self.temp.name)
+        path=self.root/"config.json"
+        path.write_text(json.dumps(config_payload(self.root.relative_to(PROJECT_ROOT).as_posix())),encoding="utf-8")
+        self.config=kaggle_workflow.load_config(path)
+
+    def tearDown(self) -> None:
+        self.temp.cleanup()
+
+    def assert_quiet(self, run: mock.Mock) -> None:
+        self.assertGreater(len(run.call_args_list),0)
+        for call in run.call_args_list:
+            command=call.args[0]
+            self.assertEqual(command[:2],["kaggle","-W"])
+            self.assertEqual(command.count("-W"),1)
+
+    def test_missing_dataset_uses_no_warn_before_parsing_stdout(self) -> None:
+        def cli(command: list[str], **kwargs: object) -> CompletedProcess[str]:
+            stdout = "No datasets found\n" if command[1:2] == ["-W"] else "Warning: outdated version\nNo datasets found\n"
+            return CompletedProcess(command,0,stdout,"")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",side_effect=cli) as run:
+            self.assertFalse(kaggle_workflow.kaggle_dataset_exists("owner/project-source"))
+        self.assert_quiet(run)
+
+    def test_dataset_exists_parses_matching_json(self) -> None:
+        result=CompletedProcess([],0,json.dumps([{"ref":"owner/project-source"}]),"")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=result) as run:
+            self.assertTrue(kaggle_workflow.kaggle_dataset_exists("owner/project-source"))
+        self.assert_quiet(run)
+
+    def test_dataset_exists_returns_false_for_other_refs(self) -> None:
+        result=CompletedProcess([],0,json.dumps([{"ref":"owner/other"}]),"")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=result) as run:
+            self.assertFalse(kaggle_workflow.kaggle_dataset_exists("owner/project-source"))
+        self.assert_quiet(run)
+
+    def test_doctor_calls_version_files_and_dataset_list_with_no_warn(self) -> None:
+        files=[{"name":f"{i}.parquet"} for i in range(68)]
+        files += [{"name":name} for name in ["development_20k_v2.csv","smoke_train.csv","smoke_dev.csv"]]
+        def cli(command: list[str], **kwargs: object) -> CompletedProcess[str]:
+            if "--version" in command:stdout="Kaggle CLI 2.2.4"
+            elif "files" in command:stdout=json.dumps(files)
+            else:stdout="No datasets found\n"
+            return CompletedProcess(command,0,stdout,"")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",side_effect=cli) as run, \
+             mock.patch.object(kaggle_workflow.shutil,"which",return_value="kaggle"):
+            kaggle_workflow.doctor(self.config,offline=False)
+        self.assert_quiet(run)
+        self.assertEqual(run.call_count,3)
+
+    def test_publish_create_calls_list_and_create_with_no_warn(self) -> None:
+        result=CompletedProcess([],0,"No datasets found\n","")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=result) as run, \
+             mock.patch.object(kaggle_workflow,"bundle_source",return_value={"bundle_sha256":"a"*64}):
+            self.assertEqual(kaggle_workflow.publish_source(self.config,"fixture"),"created")
+        self.assert_quiet(run)
+        self.assertIn("create",run.call_args.args[0])
+
+    def test_publish_version_calls_list_and_version_with_no_warn(self) -> None:
+        result=CompletedProcess([],0,json.dumps([{"ref":"owner/project-source"}]),"")
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=result) as run, \
+             mock.patch.object(kaggle_workflow,"bundle_source",return_value={"bundle_sha256":"a"*64}):
+            self.assertEqual(kaggle_workflow.publish_source(self.config,"fixture"),"versioned")
+        self.assert_quiet(run)
+        self.assertIn("version",run.call_args.args[0])
+
+    def test_push_prepared_uses_no_warn(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=CompletedProcess([],0,"","")) as run, \
+             mock.patch.object(kaggle_workflow,"verify_prepared_kernel",return_value={"profile":"fixture"}):
+            kaggle_workflow.push_prepared_kernel(self.config,self.root/"prepared")
+        self.assert_quiet(run)
+        self.assertIn("push",run.call_args.args[0])
+
+    def test_status_uses_no_warn(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=CompletedProcess([],0,"complete","")) as run:
+            kaggle_workflow.kernel_status(self.config)
+        self.assert_quiet(run)
+
+    def test_wait_uses_no_warn_for_each_poll(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run",side_effect=[
+                CompletedProcess([],0,"running",""),CompletedProcess([],0,"complete","")]) as run, \
+             mock.patch.object(kaggle_workflow.time,"sleep"):
+            kaggle_workflow.wait_for_kernel(self.config,timeout_seconds=60,interval_seconds=1)
+        self.assert_quiet(run)
+        self.assertEqual(run.call_count,2)
+
+    def test_output_uses_no_warn(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=CompletedProcess([],0,"","")) as run:
+            kaggle_workflow.download_output(self.config,self.root/"output",force=True)
+        self.assert_quiet(run)
+        self.assertEqual(run.call_args.args[0][-1],"--force")
+
+    def test_dataset_files_uses_no_warn_and_keeps_json_parsing(self) -> None:
+        values=[{"name":"fixture.csv"}]
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=CompletedProcess([],0,json.dumps(values),"")) as run:
+            self.assertEqual(kaggle_workflow.read_dataset_files("owner/project-source"),values)
+        self.assert_quiet(run)
+
+    def test_version_command_also_uses_no_warn(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run",return_value=CompletedProcess([],0,"2.2.4","")) as run:
+            kaggle_workflow.run_process(["kaggle","--version"])
+        self.assertEqual(run.call_args.args[0],["kaggle","-W","--version"])
+
+    def test_other_commands_unchanged(self) -> None:
+        for command in [["git","status","--short"],["python","-V"],["tool","kaggle","status"]]:
+            with self.subTest(command=command),mock.patch.object(kaggle_workflow.subprocess,"run") as run:
+                kaggle_workflow.run_process(command)
+                self.assertEqual(run.call_args.args[0],command)
+                self.assertNotIn("-W",run.call_args.args[0])
+
+    def test_existing_no_warn_is_not_duplicated(self) -> None:
+        with mock.patch.object(kaggle_workflow.subprocess,"run") as run:
+            kaggle_workflow.run_process(["kaggle","-W","quota"])
+        self.assert_quiet(run)
+
+    def test_callers_command_list_is_not_mutated(self) -> None:
+        command=["kaggle","datasets","list"]
+        with mock.patch.object(kaggle_workflow.subprocess,"run"):
+            kaggle_workflow.run_process(command)
+        self.assertEqual(command,["kaggle","datasets","list"])
+
+    def test_xlsr_pair_profile_and_kernel_metadata_d033(self) -> None:
+        base_cmd = ["python", "-c", "pass", "--data-root", "{data_root}", "--working-root", "{working_root}"]
+        pair = kaggle_workflow.build_xlsr_pair_profiles(base_cmd)
+        self.assertIn("X0-seed2027-X0-seed2028", pair)
+        self.assertIn("X0-seed2027-X0-seed2028-dry-run", pair)
+        with tempfile.TemporaryDirectory(dir=PROJECT_ROOT) as temporary:
+            root = Path(temporary)
+            payload = config_payload(root.relative_to(PROJECT_ROOT).as_posix())
+            payload["profiles"].update(pair)
+            cfg_path = root / "project.json"
+            cfg_path.write_text(json.dumps(payload), encoding="utf-8")
+            config = kaggle_workflow.load_config(cfg_path)
+            source_dir = config.workspace_dir / "source_dataset"
+            source_dir.mkdir(parents=True)
+            (source_dir / "source_manifest.json").write_text(
+                json.dumps({"bundle_sha256": "b" * 64}), encoding="utf-8"
+            )
+            kernel_dir = kaggle_workflow.prepare_xlsr_pair_kernel(
+                config, "X0-seed2027-X0-seed2028"
+            )
+            meta = json.loads((kernel_dir / "kernel-metadata.json").read_text(encoding="utf-8"))
+            self.assertTrue(meta["is_private"])
+            self.assertTrue(meta["enable_gpu"])
+            self.assertEqual(meta["machine_shape"], "NvidiaTeslaT4")
+            self.assertNotIn("gpu" + "_type", meta)
+            single = kaggle_workflow.prepare_kernel(config, config.default_profile)
+            single_meta = json.loads((single / "kernel-metadata.json").read_text(encoding="utf-8"))
+            self.assertNotIn("machine_shape", single_meta)
+            self.assertFalse(meta["enable_internet"])
+            self.assertEqual(len(meta["dataset_sources"]), 4)
 
 
 if __name__ == "__main__":
