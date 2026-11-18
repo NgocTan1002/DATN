@@ -1,4 +1,4 @@
-"""T23: đánh giá checkpoint best; nhánh test có gate/registry/T22/khóa một lần."""
+"""T23: đánh giá checkpoint best; nhánh test có gate/registry/T22/khóa một lần (D032 và X1R D035)."""
 from __future__ import annotations
 
 import argparse
@@ -21,7 +21,18 @@ os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", USE_TF="0", USE_
 import numpy as np
 import torch
 from scripts import probe_shortcut_dev as shared
-from scripts.build_model_registry import CONFIG, DRAFT, atomic_json, load_json, require, sha256_file, utc, validate_config, validate_registry
+from scripts.build_model_registry import (
+    CONFIG,
+    DRAFT,
+    LOWPASS_7K_COEFFICIENT_SHA256,
+    atomic_json,
+    load_json,
+    require,
+    sha256_file,
+    utc,
+    validate_config,
+    validate_registry,
+)
 from src.data.packed import PackedManifestDataset
 from src.data.xlsr import apply_xlsr_waveform_normalization
 from src.metrics.bootstrap import confusion_at_threshold, per_utt_type_eer
@@ -30,10 +41,32 @@ from src.metrics.eer import equal_error_rate
 from src.models.lfcc_lcnn import build_lcnn_from_config, build_lfcc_transform, lfcc_features
 from src.models.xlsr import XLSRBinaryClassifier, load_xlsr_backbone
 
+X1R_DRAFT = ROOT / "reports/model_registry_x1r_draft.json"
+PRE_TEST_CHECKS = (
+    "entrypoint_dev_claude_verified",
+    "bootstrap_dev_claude_verified",
+    "t22_claude_verified",
+    "test_dataset_inventory_checked",
+)
+
+
+def verify_lowpass_7k_filter(config: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Kiểm tra hệ số và tham số bộ lọc thông thấp 7 kHz theo D035."""
+    params = shared.filter_parameters("lowpass_7k")
+    require(
+        params.get("coefficient_float32_sha256") == LOWPASS_7K_COEFFICIENT_SHA256,
+        "SHA-256 hệ số bộ lọc lowpass_7k không khớp D035.",
+    )
+    if config is not None and config.get("decision") == "D035":
+        require(params == config["input_condition"]["filter"], "Tham số bộ lọc lowpass_7k lệch config X1R.")
+    return params
+
 
 def authorize_test(config: dict[str, Any], selected_ids: list[str], root: Path = ROOT) -> dict[str, Any]:
     """Kiểm gate hoàn toàn trước khi chạm đường dẫn manifest/packed test."""
     require(config.get("test_gate_open") is True, "Cổng test đang đóng; không mở dữ liệu test.")
+    validate_config(config)
+    decision = config["decision"]
     registry_path = root / config["registry_path"]
     require(registry_path.is_file(), "Thiếu registry chính thức.")
     content = registry_path.read_bytes()
@@ -43,19 +76,28 @@ def authorize_test(config: dict[str, Any], selected_ids: list[str], root: Path =
     validate_registry(registry, config, complete=True)
     require(bool(selected_ids) and len(set(selected_ids)) == len(selected_ids) and
             set(selected_ids).issubset({x["model_id"] for x in registry["entries"]}), "Danh sách mục chấm test không hợp lệ.")
-    report_path = root / config["t22_report"]
-    require(report_path.is_file(), "Thiếu report T22.")
-    report = load_json(report_path)
-    indicator = report.get("results", {}).get("X1-L8-lr3e-5-seed2026", {}).get("indicators", {})
-    require(report.get("status") == "complete", "T22 chưa hoàn tất; cấm chấm test.")
-    require(indicator.get("available_indicator_level") == "weak", "T22 chưa có chỉ báo weak; strong/chưa có thì cấm test.")
-    final = next(x for x in registry["entries"] if x["model_id"] == "X1-L8-lr3e-5-seed2026")
-    require(report.get("use_test") is False and report.get("subset_files_sha256") == shared.SUBSET_SHA and
-            report.get("identity", {}).get("models", {}).get(final["model_id"], {}).get("checkpoint_sha256") == final["checkpoint_sha256"],
-            "Report T22 không khớp checkpoint X1 cuối/tập con đã khóa.")
-    checks = ("entrypoint_dev_claude_verified", "bootstrap_dev_claude_verified", "t22_claude_verified", "test_dataset_inventory_checked")
-    require(all(config.get("pre_test_checks", {}).get(key) is True for key in checks),
-            "Thiếu xác nhận kiểm dev/T22/inventory theo D032 mục8.")
+    if decision == "D035":
+        d032_path = root / "configs/test_evaluation.json"
+        require(d032_path.is_file(), "Thiếu cấu hình D032 để kiểm cổng test X1R.")
+        d032_config = load_json(d032_path)
+        require(d032_config.get("decision") == "D032", "Cấu hình kiểm cổng X1R phải là D032.")
+        validate_config(d032_config)
+        require(d032_config.get("test_gate_open") is True, "Cổng test D032 đang đóng; không mở dữ liệu test.")
+        require(all(d032_config.get("pre_test_checks", {}).get(key) is True for key in PRE_TEST_CHECKS),
+                "Thiếu xác nhận kiểm dev/T22/inventory theo D032 mục8.")
+    else:
+        report_path = root / config["t22_report"]
+        require(report_path.is_file(), "Thiếu report T22.")
+        report = load_json(report_path)
+        indicator = report.get("results", {}).get("X1-L8-lr3e-5-seed2026", {}).get("indicators", {})
+        require(report.get("status") == "complete", "T22 chưa hoàn tất; cấm chấm test.")
+        require(indicator.get("available_indicator_level") == "weak", "T22 chưa có chỉ báo weak; strong/chưa có thì cấm test.")
+        final = next(x for x in registry["entries"] if x["model_id"] == "X1-L8-lr3e-5-seed2026")
+        require(report.get("use_test") is False and report.get("subset_files_sha256") == shared.SUBSET_SHA and
+                report.get("identity", {}).get("models", {}).get(final["model_id"], {}).get("checkpoint_sha256") == final["checkpoint_sha256"],
+                "Report T22 không khớp checkpoint X1 cuối/tập con đã khóa.")
+        require(all(config.get("pre_test_checks", {}).get(key) is True for key in PRE_TEST_CHECKS),
+                "Thiếu xác nhận kiểm dev/T22/inventory theo D032 mục8.")
     locks = root / config["locks_dir"]
     require(not any((locks / (name + ".lock")).exists() for name in selected_ids), "Đã có khóa chấm một lần; không chấm lại.")
     locks.mkdir(parents=True, exist_ok=True)
@@ -105,8 +147,26 @@ def reproduction(records: list[dict[str, Any]], reference: dict[str, dict[str, A
         delta = np.abs(np.asarray(current) - saved)
         return {"passed": bool(delta.max() <= 1e-5 and not flips.any()), "samples": len(records),
                 "max_abs_probability_difference": float(delta.max()), "decision_flips": int(flips.sum())}
-    delta = np.abs(np.asarray([r["raw_logit"] for r in records]) - shared.stable_logit(saved))
-    distances = np.abs(shared.stable_logit(saved) - shared.stable_logit([threshold])[0])
+    saved_f64 = np.asarray(saved, dtype=np.float64)
+    old_logits = shared.stable_logit(saved_f64)
+    delta = np.abs(np.asarray([r["raw_logit"] for r in records], dtype=np.float64) - old_logits)
+    distances = np.abs(old_logits - shared.stable_logit([threshold])[0])
+    if family == "X1R":
+        require(bool((saved_f64.astype(np.float32).astype(np.float64) == saved_f64).all()),
+                "Score tham chiếu X1R không biểu diễn chính xác bằng float32; dừng D034.")
+        probabilities = saved_f64.astype(np.float32)
+        below = np.nextafter(probabilities, np.float32(0), dtype=np.float32).astype(np.float64)
+        above = np.nextafter(probabilities, np.float32(1), dtype=np.float32).astype(np.float64)
+        gaps = np.maximum(np.abs(shared.stable_logit(above) - old_logits),
+                          np.abs(old_logits - shared.stable_logit(below)))
+        excess = delta - (.05 + gaps)
+        return {"passed": bool((excess <= 0).all() and (distances[flips] <= .05).all()),
+                "criterion": "D034", "samples": len(records),
+                "max_abs_logit_difference": float(delta.max()), "median_abs_logit_difference": float(np.median(delta)),
+                "max_float32_gap_logit": float(gaps.max()), "max_excess_over_tolerance": float(excess.max()),
+                "samples_over_0_05_without_gap": int((delta > .05).sum()),
+                "decision_flips": int(flips.sum()), "flips_outside_0_05_margin": int((distances[flips] > .05).sum()),
+                "logit_source": "raw_logit CPU so stable_logit(score lưu)"}
     return {"passed": bool(delta.max() <= .05 and (distances[flips] <= .05).all()), "samples": len(records),
             "max_abs_logit_difference": float(delta.max()), "median_abs_logit_difference": float(np.median(delta)),
             "decision_flips": int(flips.sum()), "flips_outside_0_05_margin": int((distances[flips] > .05).sum()),
@@ -164,6 +224,7 @@ class Models:
                 self.lfcc = build_lfcc_transform(config["lfcc"]).eval()
             self.b0[name] = model
         else:
+            require(item["family"] in ("X0", "X1", "X1R"), "Họ mô hình không hợp lệ: " + str(item["family"]))
             self.xlsr = None
             self.xlsr_id = None
             gc.collect()
@@ -187,8 +248,14 @@ class Models:
     def score(self, names: list[str], indices: list[int], rows: list[dict[str, Any]],
               dataset: PackedManifestDataset, condition: str) -> dict[str, list[dict[str, Any]]]:
         models = {name: self.load(name) for name in names}
-        b0 = self.entries[names[0]]["family"] == "B0-v2"
+        families = {self.entries[name]["family"] for name in names}
+        require(len(families) == 1, "Không trộn họ mô hình trong cùng batch.")
+        family = next(iter(families))
+        b0 = family == "B0-v2"
         require(b0 or len(names) == 1, "Chỉ gom chung batch cho B0.")
+        if family == "X1R":
+            require(condition == "lowpass_7k", "X1R chỉ chấp nhận điều kiện lowpass_7k.")
+            verify_lowpass_7k_filter()
         result = {name: [] for name in names}
         batch_size = 8 if b0 else 2
         with torch.inference_mode():
@@ -218,16 +285,23 @@ def run(config: dict[str, Any], registry: dict[str, Any], split: str, selected: 
         # Dùng đúng snapshot vừa kiểm digest, không dùng object do caller cung cấp.
         registry = authorize_test(config, selected, root)
     validate_registry(registry, config)
+    decision = config["decision"]
+    if decision == "D035":
+        verify_lowpass_7k_filter(config)
     require(limit is None or limit > 0, "Limit phải là số nguyên dương.")
     entries = [x for x in registry["entries"] if x["model_id"] in selected]
     require(len(entries) == len(set(selected)) and entries, "Danh sách mô hình không khớp registry.")
+    allowed_families = {"X1R"} if decision == "D035" else {"B0-v2", "X0", "X1"}
+    require(all(x["family"] in allowed_families for x in entries), "Họ mô hình không khớp quyết định của config.")
     require(all(x["status"] == "present" and x["claude_verified"] for x in entries), "Chỉ chấm mục present đã được Claude kiểm.")
     rows, dataset = open_split(config, split, root)
     began = time.perf_counter()
-    report: dict[str, Any] = {"decision": "D032", "status": "running", "split": split, "use_test": split == "test",
+    report: dict[str, Any] = {"decision": decision, "status": "running", "split": split, "use_test": split == "test",
         "scope": "dev-full, không phải test" if split == "dev" else "test-full, registry cố định",
         "created_utc": utc(), "artifact_samples": len(rows), "artifact_shards": len({r["shard"] for r in rows}),
         "registry_sha256": shared.digest(registry), "models": {}}
+    if decision == "D035":
+        report["input_condition"] = config["input_condition"]
     try:
         models = Models(entries, root)
         groups = [[x["model_id"] for x in entries if x["family"] == "B0-v2"]]
@@ -244,7 +318,8 @@ def run(config: dict[str, Any], registry: dict[str, Any], split: str, selected: 
             if limit is not None:
                 indices = indices[:limit]
             allowed = config["conditions_by_family"][item["family"]]
-            requested = (allowed if split == "test" else ["original"]) if conditions is None else conditions
+            default_conditions = ["lowpass_7k"] if item["family"] == "X1R" else (allowed if split == "test" else ["original"])
+            requested = default_conditions if conditions is None else conditions
             require(requested and len(set(requested)) == len(requested) and set(requested).issubset(allowed), "Điều kiện không hợp lệ cho mô hình.")
             for condition in requested:
                 started = time.perf_counter()
@@ -257,22 +332,24 @@ def run(config: dict[str, Any], registry: dict[str, Any], split: str, selected: 
                              "samples": len(records), "shards": len({rows[i]["shard"] for i in indices}),
                              "selection": selection, "files_sha256": shared.file_list_sha([r["file"] for r in records]),
                              "checkpoint_sha256": entry["checkpoint_sha256"], "seconds": time.perf_counter() - started}
-                    if split == "dev" and condition == "original":
+                    reference_condition = "lowpass_7k" if entry["family"] == "X1R" else "original"
+                    if split == "dev" and condition == reference_condition:
                         require(sha256_file(root / entry["source_report"]) == entry["source_report_sha256"],
                                 "Report tham chiếu đã đổi sau registry.")
                         source = load_json(root / entry["source_report"])["controller"]["best"]["development"]["records"]
                         value["reproduction"] = reproduction(records, {r["file"]: r for r in source}, entry["decision_threshold"], entry["family"])
                     report["models"].setdefault(name, {})[condition] = value
                     atomic_json(output.parent / (output.stem + "-" + name + "-" + condition + "-scores.json"),
-                                {"decision": "D032", "split": split, "model_id": name, "condition": condition,
+                                {"decision": decision, "split": split, "model_id": name, "condition": condition,
                                  "checkpoint_sha256": entry["checkpoint_sha256"], **value})
                     atomic_json(output, report)
                     require(value.get("reproduction", {}).get("passed", True), "Tái tạo không đạt: " + name)
         report.update(status="complete", wall_seconds=time.perf_counter() - began)
         report["seed_summaries"] = {}
-        for family in ("B0-v2", "X0", "X1"):
+        for family in ("B0-v2", "X0", "X1", "X1R"):
             items = [x for x in entries if x["family"] == family]
-            eers = [report["models"][x["model_id"]].get("original", {}).get("metrics", {}).get("eer") for x in items]
+            base_condition = "lowpass_7k" if family == "X1R" else "original"
+            eers = [report["models"][x["model_id"]].get(base_condition, {}).get("metrics", {}).get("eer") for x in items]
             if len(eers) == 3 and all(x is not None for x in eers):
                 report["seed_summaries"][family] = {"mean_eer": statistics.mean(eers), "sample_sd_eer": statistics.stdev(eers), "ddof": 1}
         atomic_json(output, report)
@@ -304,7 +381,8 @@ def main() -> int:
                     "Test chỉ dùng registry chính thức đã khóa.")
             registry_path = ROOT / config["registry_path"]
         else:
-            registry_path = args.registry or DRAFT
+            default_draft = X1R_DRAFT if config["decision"] == "D035" else DRAFT
+            registry_path = args.registry or default_draft
         registry = load_json(registry_path)
         selected = args.models or [x["model_id"] for x in registry["entries"] if x["status"] == "present" and x["claude_verified"]]
         torch.set_num_threads(8)
