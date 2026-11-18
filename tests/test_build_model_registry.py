@@ -172,9 +172,135 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(old, registry.protocol_sha256(self.config))
 
     def test_cli_refuses_official_registry_without_writing(self) -> None:
-        with patch.object(registry, "ROOT", self.root), patch("sys.argv", ["registry", "--output", str(self.root / "reports/model_registry_v1.json")]), patch.object(registry, "atomic_json") as write:
-            self.assertEqual(registry.main(), 1)
-        write.assert_not_called()
+        for official in ("reports/model_registry_v1.json", "reports/model_registry_x1r.json"):
+            with self.subTest(official=official), patch.object(registry, "ROOT", self.root), patch(
+                "sys.argv", ["registry", "--output", str(self.root / official)]
+            ), patch.object(registry, "atomic_json") as write:
+                self.assertEqual(registry.main(), 1)
+            write.assert_not_called()
+
+
+class X1RRegistryTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temp = registry.ROOT / ".cache/reg_x1r/temp_tests"
+        temp.mkdir(parents=True, exist_ok=True)
+        self.directory = tempfile.TemporaryDirectory(dir=temp)
+        self.root = Path(self.directory.name)
+        self.config_path = registry.ROOT / "configs/test_evaluation_x1r.json"
+        self.config = registry.load_json(self.config_path)
+
+    def tearDown(self) -> None:
+        self.directory.cleanup()
+
+    def create_x1r_fixture(self, spec: dict, index: int = 1, *, include_ic: bool = True) -> tuple[Path, Path]:
+        generation = f"g-{index:032x}"
+        report_path = self.root / spec["source_report"]
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        ckpt_path = (
+            report_path.parent.parent
+            / "checkpoints"
+            / f"xlsr_{spec['run_id']}_seed{spec['training_seed']}"
+            / generation
+            / "checkpoint.pt"
+        )
+        ckpt_path.parent.mkdir(parents=True, exist_ok=True)
+        ckpt_path.write_bytes(f"x1r-{spec['training_seed']}".encode("utf-8"))
+        identity = {
+            "run_id": spec["run_id"],
+            "training_seed": spec["training_seed"],
+            "data_seed": 2026,
+            "source_tree_sha256": "b" * 64,
+        }
+        if include_ic:
+            identity["input_condition"] = deepcopy(self.config["input_condition"])
+        report = {
+            "status": "early_stopped",
+            "training_seed": spec["training_seed"],
+            "development_samples": 38777,
+            "source_tree_sha256": "b" * 64,
+            "identity": identity,
+            "controller": {
+                "best": {
+                    "generation": generation,
+                    "epoch": 6,
+                    "development": {"eer": 0.009, "decision_threshold": 0.01},
+                }
+            },
+            "checkpoints": {
+                "best": {
+                    "generation": generation,
+                    "checkpoint_sha256": registry.sha256_file(ckpt_path),
+                }
+            },
+        }
+        report_path.write_text(json.dumps(report), encoding="utf-8")
+        return report_path, ckpt_path
+
+    def test_real_x1r_config_valid_three_seeds_and_gate_closed(self) -> None:
+        registry.validate_config(self.config)
+        self.assertEqual(self.config["decision"], "D035")
+        self.assertFalse(self.config["test_gate_open"])
+        self.assertEqual(
+            set(self.config["claude_verified"]),
+            {
+                "X1-L8-lr3e-5-lp7k-seed2026",
+                "X1-L8-lr3e-5-lp7k-seed2027",
+                "X1-L8-lr3e-5-lp7k-seed2028",
+            },
+        )
+        self.assertEqual(len(self.config["required_models"]), 3)
+        self.assertEqual([x["training_seed"] for x in self.config["required_models"]], [2026, 2027, 2028])
+        self.assertEqual(
+            self.config["input_condition"]["filter"]["coefficient_float32_sha256"],
+            registry.LOWPASS_7K_COEFFICIENT_SHA256,
+        )
+
+    def test_x1r_build_three_entries_incomplete_when_claude_verified_empty(self) -> None:
+        cfg = deepcopy(self.config)
+        cfg["claude_verified"] = []
+        for idx, spec in enumerate(cfg["required_models"], 1):
+            self.create_x1r_fixture(spec, idx)
+        value = registry.build_registry(cfg, self.root)
+        self.assertEqual(value["decision"], "D035")
+        self.assertFalse(value["complete"])
+        self.assertEqual(len(value["entries"]), 3)
+        for entry in value["entries"]:
+            self.assertEqual(entry["status"], "present")
+            self.assertEqual(entry["input_condition"], "lowpass_7k")
+            self.assertFalse(entry["claude_verified"])
+        seed2026 = next(x for x in value["entries"] if x["training_seed"] == 2026)
+        self.assertIn("T30B 9 epoch + T32B resume", seed2026["verification_note"])
+        registry.validate_registry(value, cfg, complete=False)
+        verified_value = registry.build_registry(self.config, self.root)
+        self.assertTrue(verified_value["complete"])
+        registry.validate_registry(verified_value, self.config, complete=True)
+
+    def test_x1r_rejects_missing_seed_and_test_path_and_wrong_filter_sha(self) -> None:
+        missing_seed = deepcopy(self.config)
+        missing_seed["required_models"] = missing_seed["required_models"][:2]
+        with self.assertRaisesRegex(ValueError, "3 mục"):
+            registry.validate_config(missing_seed)
+
+        test_path_cfg = deepcopy(self.config)
+        test_path_cfg["required_models"][0]["source_report"] = "data/closed_test_report.json"
+        with self.assertRaisesRegex(ValueError, "dữ liệu test"):
+            registry.validate_config(test_path_cfg)
+
+        bad_sha_cfg = deepcopy(self.config)
+        bad_sha_cfg["input_condition"]["filter"]["coefficient_float32_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "coefficient_float32_sha256"):
+            registry.validate_config(bad_sha_cfg)
+
+    def test_x1r_rejects_report_missing_input_condition(self) -> None:
+        self.create_x1r_fixture(self.config["required_models"][0], 1, include_ic=False)
+        with self.assertRaisesRegex(ValueError, "input_condition"):
+            registry.build_registry(self.config, self.root)
+
+    def test_d032_protocol_sha_unchanged_by_d035_support(self) -> None:
+        d032_config = registry.load_json(registry.CONFIG)
+        d032_draft = registry.load_json(registry.DRAFT)
+        self.assertEqual(registry.protocol_sha256(d032_config), d032_draft["protocol_sha256"])
+        registry.validate_registry(d032_draft, d032_config, complete=True)
 
 
 if __name__ == "__main__":
