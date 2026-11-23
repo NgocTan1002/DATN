@@ -55,5 +55,5 @@
 <text x="810.00" y="568.00" >Seed 2028</text>
 <text x="560.00" y="540.00" text-anchor="middle">Epoch</text>
 <text x="550.00" y="605.00" text-anchor="middle" class="small">Vòng tròn: best theo EER; dấu ×: kết thúc dừng sớm.</text>
-<text x="550.00" y="632.00" text-anchor="middle" class="small">Nguồn: reports/b0_v2_dev_analysis.json · Không dùng tập test.</text>
+<text x="550.00" y="632.00" text-anchor="middle" class="small">Không dùng tập test.</text>
 </svg>

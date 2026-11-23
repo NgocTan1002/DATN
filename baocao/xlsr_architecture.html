@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiến trúc tương tác XLS-R (wav2vec 2.0)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes flowDash {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+    .edge-animated {
+      stroke-dasharray: 6 6;
+      animation: flowDash 1s linear infinite;
+    }
+    .node-card {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .node-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Header & Controls -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 mb-6 shadow-xl">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              wav2vec 2.0 Backbone
+            </span>
+            <span id="badge-params" class="px-2.5 py-0.5 text-xs font-mono rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              ~317M tham số
+            </span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-bold text-white mt-1.5">
+            Kiến trúc mô hình XLS-R & Luồng xử lý Tensor
+          </h1>
+          <p id="mode-description" class="text-sm text-slate-400 mt-1">
+            Giữ khóa CNN và các tầng Transformer đầu; mở khóa 8 tầng Transformer cuối cùng để tinh chỉnh đặc trưng theo bài toán đích.
+          </p>
+        </div>
+
+        <!-- Control Selectors -->
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <!-- Mode Selector -->
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">
+              Chế độ huấn luyện
+            </label>
+            <div id="mode-controls" class="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800">
+              <button data-mode="pretrain" class="mode-btn px-3 py-1.5 text-xs font-medium rounded-lg transition">
+                Pre-training
+              </button>
+              <button data-mode="frozen" class="mode-btn px-3 py-1.5 text-xs font-medium rounded-lg transition">
+                Đóng băng toàn bộ
+              </button>
+              <button data-mode="unfreeze8" class="mode-btn px-3 py-1.5 text-xs font-medium rounded-lg transition">
+                Mở 8 tầng cuối
+              </button>
+            </div>
+          </div>
+
+          <!-- Variant Selector -->
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">
+              Phiên bản XLS-R
+            </label>
+            <div id="variant-controls" class="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800">
+              <button data-variant="300M" class="variant-btn px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition">
+                300M
+              </button>
+              <button data-variant="1B" class="variant-btn px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition">
+                1B
+              </button>
+              <button data-variant="2B" class="variant-btn px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition">
+                2B
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded-sm bg-emerald-500/20 border border-emerald-400 inline-block"></span>
+          <span>Cập nhật trọng số (Trainable / Active)</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded-sm bg-slate-800 border border-slate-600 inline-block"></span>
+          <span>Đóng băng trọng số (Frozen)</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-3 h-3 rounded-sm bg-amber-500/20 border border-amber-400 inline-block"></span>
+          <span>Nhánh Pre-training (Tự giám sát)</span>
+        </div>
+        <span class="ml-auto text-slate-500 italic hidden sm:inline">
+          * Nhấp vào từng khối để xem thông số chi tiết
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Workspace: Diagram + Inspector -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- Architecture Canvas (8 cols) -->
+      <div id="diagram-wrapper" class="lg:col-span-8 relative bg-slate-900/70 border border-slate-800 rounded-2xl p-6 overflow-x-auto">
+        <!-- SVG Layer for Edges -->
+        <svg id="edges-svg" class="absolute inset-0 w-full h-full pointer-events-none z-0">
+          <defs>
+            <marker id="arrow-active" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399" />
+            </marker>
+            <marker id="arrow-frozen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+            </marker>
+            <marker id="arrow-pretrain" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
+            </marker>
+          </defs>
+          <g id="edges-group"></g>
+        </svg>
+
+        <!-- Nodes Grid -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-6 min-w-[540px]">
+          
+          <!-- Row 1: Raw Audio -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-raw_audio" data-node="raw_audio" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="hidden md:block md:col-span-5"></div>
+
+          <!-- Row 2: Feature Encoder -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-feature_encoder" data-node="feature_encoder" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="hidden md:block md:col-span-5"></div>
+
+          <!-- Row 3: Feature Projection + Quantizer (Branch) -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-projection_pos" data-node="projection_pos" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="md:col-span-5 flex justify-center items-center">
+            <div id="node-quantizer" data-node="quantizer" class="node-card w-full max-w-xs rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+
+          <!-- Row 4: Masking -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-masking" data-node="masking" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="hidden md:block md:col-span-5"></div>
+
+          <!-- Row 5: Transformer Early -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-transformer_early" data-node="transformer_early" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="hidden md:block md:col-span-5"></div>
+
+          <!-- Row 6: Transformer Late (Last 8) + Contrastive Loss -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-transformer_late" data-node="transformer_late" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="md:col-span-5 flex justify-center items-center">
+            <div id="node-contrastive_loss" data-node="contrastive_loss" class="node-card w-full max-w-xs rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+
+          <!-- Row 7: Downstream Backend -->
+          <div class="md:col-span-7 flex justify-center">
+            <div id="node-downstream_backend" data-node="downstream_backend" class="node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer"></div>
+          </div>
+          <div class="hidden md:block md:col-span-5"></div>
+
+        </div>
+      </div>
+
+      <!-- Detail Inspector Panel (4 cols) -->
+      <div class="lg:col-span-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-5 sticky top-6 shadow-xl">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">
+            Chi tiết thành phần
+          </span>
+          <span id="inspector-status" class="px-2.5 py-0.5 text-xs font-medium rounded-full"></span>
+        </div>
+
+        <h2 id="inspector-title" class="text-lg font-bold text-white"></h2>
+        <p id="inspector-subtitle" class="text-xs text-slate-400 mt-0.5 mb-4"></p>
+
+        <!-- Tensor Shapes Box -->
+        <div class="grid grid-cols-2 gap-2.5 mb-4">
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5">
+            <div class="text-[11px] text-slate-500">Tensor đầu vào</div>
+            <div id="inspector-in-shape" class="text-xs font-mono font-semibold text-sky-300 mt-0.5"></div>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5">
+            <div class="text-[11px] text-slate-500">Tensor đầu ra</div>
+            <div id="inspector-out-shape" class="text-xs font-mono font-semibold text-emerald-300 mt-0.5"></div>
+          </div>
+        </div>
+
+        <!-- Specs List -->
+        <div class="space-y-2">
+          <div class="text-xs font-semibold text-slate-300">Thông số kỹ thuật:</div>
+          <ul id="inspector-details" class="space-y-2 text-xs text-slate-300 leading-relaxed list-disc pl-4"></ul>
+        </div>
+
+        <!-- Variant Summary Footer -->
+        <div class="mt-5 pt-4 border-t border-slate-800">
+          <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-2">
+            Cấu hình phiên bản <span id="inspector-variant-name" class="text-slate-300"></span>
+          </div>
+          <div id="inspector-variant-grid" class="grid grid-cols-2 gap-2 text-xs"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 1. DỮ LIỆU CẤU HÌNH CÁC BIẾN THỂ XLS-R
+    const VARIANTS = {
+      "300M": {
+        totalParams: "~317M tham số",
+        transformerLayers: 24,
+        hiddenDim: 1024,
+        ffnDim: 4096,
+        heads: 16,
+        headDim: 64,
+        unfrozenStart: 17
+      },
+      "1B": {
+        totalParams: "~965M tham số",
+        transformerLayers: 48,
+        hiddenDim: 1280,
+        ffnDim: 5120,
+        heads: 16,
+        headDim: 80,
+        unfrozenStart: 41
+      },
+      "2B": {
+        totalParams: "~2.16B tham số",
+        transformerLayers: 48,
+        hiddenDim: 1920,
+        ffnDim: 7680,
+        heads: 16,
+        headDim: 120,
+        unfrozenStart: 41
+      }
+    };
+
+    // 2. DỮ LIỆU CHẾ ĐỘ HUẤN LUYỆN
+    const MODES = {
+      pretrain: {
+        description: "Huấn luyện tự giám sát trên 436.000 giờ âm thanh bằng Contrastive Loss giữa đầu ra Transformer bị che (Masking) và nhãn rời rạc từ Quantization Module.",
+        states: {
+          raw_audio: "input",
+          feature_encoder: "active",
+          projection_pos: "active",
+          masking: "active",
+          transformer_early: "active",
+          transformer_late: "active",
+          quantizer: "pretrain",
+          contrastive_loss: "pretrain",
+          downstream_backend: "hidden"
+        }
+      },
+      frozen: {
+        description: "Khóa toàn bộ trọng số XLS-R (requires_grad = False). XLS-R đóng vai trò bộ trích xuất đặc trưng cố định cho mạng Backend phía sau.",
+        states: {
+          raw_audio: "input",
+          feature_encoder: "frozen",
+          projection_pos: "frozen",
+          masking: "bypass",
+          transformer_early: "frozen",
+          transformer_late: "frozen",
+          quantizer: "hidden",
+          contrastive_loss: "hidden",
+          downstream_backend: "active"
+        }
+      },
+      unfreeze8: {
+        description: "Giữ khóa CNN và các tầng Transformer đầu; mở khóa 8 tầng Transformer cuối cùng để tinh chỉnh không gian đặc trưng theo bài toán đích.",
+        states: {
+          raw_audio: "input",
+          feature_encoder: "frozen",
+          projection_pos: "frozen",
+          masking: "bypass",
+          transformer_early: "frozen",
+          transformer_late: "active",
+          quantizer: "hidden",
+          contrastive_loss: "hidden",
+          downstream_backend: "active"
+        }
+      }
+    };
+
+    // 3. DANH SÁCH CÁC KHỐI KIẾN TRÚC
+    function getNodes(v, mode) {
+      const earlyEnd = v.unfrozenStart - 1;
+      return {
+        raw_audio: {
+          title: "1. Sóng âm thô (Raw Waveform)",
+          subtitle: "Đầu vào âm thanh 16 kHz (ví dụ mẫu 4 giây)",
+          inShape: "Audio 16kHz",
+          outShape: "[B, 64000]",
+          details: [
+            "Tần số lấy mẫu chuẩn bắt buộc: 16,000 Hz (mono).",
+            "Chuẩn hóa biên độ (zero-mean, unit-variance) trước khi đưa vào mạng.",
+            "Không cần trích xuất đặc trưng thủ công (MFCC / Mel-Spectrogram)."
+          ]
+        },
+        feature_encoder: {
+          title: "2. Feature Encoder (7 tầng Conv1D)",
+          subtitle: "Trích xuất đặc trưng âm học cục bộ (giảm mẫu 320x)",
+          inShape: "[B, 64000]",
+          outShape: "[B, 200, 512]",
+          details: [
+            "Gồm 7 khối tích chập 1D nối tiếp, mỗi khối 512 kênh + LayerNorm + GELU.",
+            "Tầng 1: kernel=10, stride=5 | Tầng 2–5: kernel=3, stride=2 | Tầng 6–7: kernel=2, stride=2.",
+            "Tổng stride = 320 → mỗi khung (frame) tương ứng 20ms âm thanh (tần số khung 50 Hz)."
+          ]
+        },
+        projection_pos: {
+          title: "3. Feature Projection & Pos Embed",
+          subtitle: `Chiếu tuyến tính 512 → ${v.hiddenDim} + Relative Conv1D`,
+          inShape: "[B, 200, 512]",
+          outShape: `[B, 200, ${v.hiddenDim}]`,
+          details: [
+            `Lớp Linear chiếu đặc trưng từ 512 chiều lên chiều ẩn D = ${v.hiddenDim} kèm LayerNorm & Dropout.`,
+            "Mã hóa vị trí tương đối bằng Grouped Conv1D (kernel=128, groups=16) thay vì sin/cos cố định."
+          ]
+        },
+        masking: {
+          title: "4. Time-step Masking",
+          subtitle: mode === "pretrain" ? "Đang bật: Che ngẫu nhiên các khung liên tiếp" : "Bỏ qua (Bypass) khi Fine-tuning / Inference",
+          inShape: `[B, 200, ${v.hiddenDim}]`,
+          outShape: `[B, 200, ${v.hiddenDim}]`,
+          details: [
+            "Trong Pre-training: Che khoảng 49% số khung theo từng chuỗi 10 khung liên tiếp và thay bằng vector mặt nạ học được.",
+            "Trong Fine-tuning / Inference: Dữ liệu đi thẳng qua mà không bị che (hoặc dùng SpecAugment nhẹ)."
+          ]
+        },
+        transformer_early: {
+          title: `5A. Context Network (Tầng 1 – ${earlyEnd})`,
+          subtitle: `${earlyEnd} tầng Transformer Encoder đầu (Pre-LayerNorm)`,
+          inShape: `[B, 200, ${v.hiddenDim}]`,
+          outShape: `[B, 200, ${v.hiddenDim}]`,
+          details: [
+            `Mỗi tầng gồm Multi-Head Self-Attention (${v.heads} heads, head_dim=${v.headDim}) và FFN (${v.ffnDim} chiều).`,
+            "Sử dụng kiến trúc Pre-LayerNorm giúp ổn định gradient ở quy mô lớn.",
+            "Học các đặc trưng âm vị, cao độ và cấu trúc ngữ âm nền tảng."
+          ]
+        },
+        transformer_late: {
+          title: `5B. Context Network (Tầng ${v.unfrozenStart} – ${v.transformerLayers})`,
+          subtitle: "8 tầng Transformer Encoder cuối cùng",
+          inShape: `[B, 200, ${v.hiddenDim}]`,
+          outShape: `[B, 200, ${v.hiddenDim}]`,
+          details: [
+            "Tổng hợp biểu diễn ngữ cảnh cấp cao toàn chuỗi âm thanh.",
+            "Khi mở khóa 8 tầng cuối: Cho phép nắn lại không gian đặc trưng theo bài toán đích (ví dụ: phát hiện giọng giả deepfake, nhận diện người nói).",
+            "Khuyến nghị dùng Learning Rate nhỏ (1e-5 đến 3e-5) cho khối này."
+          ]
+        },
+        quantizer: {
+          title: "Quantization Module (Nhánh Pre-train)",
+          subtitle: "Product Quantization (G=2 codebooks, V=320)",
+          inShape: "[B, 200, 512]",
+          outShape: `[B, 200, ${v.hiddenDim}]`,
+          details: [
+            "Rời rạc hóa đầu ra của Feature Encoder thành các đơn vị âm thanh giả (latent speech units).",
+            "Sử dụng G=2 bảng mã, mỗi bảng V=320 vector (tạo 102,400 tổ hợp) thông qua Gumbel-Softmax.",
+            "Tự động loại bỏ hoàn toàn khi chuyển sang Fine-tuning."
+          ]
+        },
+        contrastive_loss: {
+          title: "Contrastive Loss + Diversity Loss",
+          subtitle: "Hàm mất mát tự giám sát (InfoNCE)",
+          inShape: `c_t & q_t [${v.hiddenDim}]`,
+          outShape: "Scalar Loss",
+          details: [
+            "Yêu cầu mô hình phân biệt vector lượng tử hóa đúng q_t tại vị trí bị che với K=100 mẫu nhiễu (distractors).",
+            "Diversity Loss khuyến khích sử dụng đồng đều tất cả 320 mục trong mỗi codebook."
+          ]
+        },
+        downstream_backend: {
+          title: "6. Downstream Backend / Classifier",
+          subtitle: "Mạng phân loại bài toán đích (BiGRU / AASIST / Linear)",
+          inShape: `[B, 200, ${v.hiddenDim}]`,
+          outShape: "[B, Num_Classes]",
+          details: [
+            "Nhận đặc trưng từ tầng cuối (hoặc tổng có trọng số của tất cả các tầng Transformer).",
+            "Kết hợp với mạng backend (BiGRU, Conformer, AASIST hoặc Attention Pooling + Linear).",
+            "Tối ưu hóa bằng Cross-Entropy / BCE Loss và đánh giá bằng chỉ số EER hoặc WER."
+          ]
+        }
+      };
+    }
+
+    // 4. DANH SÁCH CÁC ĐƯỜNG NỐI (EDGES)
+    const EDGES = [
+      { from: "raw_audio", to: "feature_encoder", type: "main" },
+      { from: "feature_encoder", to: "projection_pos", type: "main" },
+      { from: "projection_pos", to: "masking", type: "main" },
+      { from: "masking", to: "transformer_early", type: "main" },
+      { from: "transformer_early", to: "transformer_late", type: "main" },
+      { from: "feature_encoder", to: "quantizer", type: "pretrain" },
+      { from: "quantizer", to: "contrastive_loss", type: "pretrain" },
+      { from: "transformer_late", to: "contrastive_loss", type: "pretrain" },
+      { from: "transformer_late", to: "downstream_backend", type: "downstream" }
+    ];
+
+    // TRẠNG THÁI ỨNG DỤNG
+    let state = {
+      variant: "300M",
+      mode: "unfreeze8",
+      selectedNode: "transformer_late",
+      hoveredNode: null
+    };
+
+    // HÀM RENDER GIAO DIỆN
+    function render() {
+      const v = VARIANTS[state.variant];
+      const m = MODES[state.mode];
+      const nodesData = getNodes(v, state.mode);
+
+      // Update Header
+      document.getElementById("badge-params").textContent = v.totalParams;
+      document.getElementById("mode-description").textContent = m.description;
+
+      // Update Control Buttons
+      document.querySelectorAll(".mode-btn").forEach(btn => {
+        const active = btn.dataset.mode === state.mode;
+        btn.className = `mode-btn px-3 py-1.5 text-xs font-medium rounded-lg transition cursor-pointer ${
+          active ? "bg-indigo-600 text-white shadow" : "text-slate-400 hover:text-white"
+        }`;
+      });
+
+      document.querySelectorAll(".variant-btn").forEach(btn => {
+        const active = btn.dataset.variant === state.variant;
+        btn.className = `variant-btn px-3 py-1.5 text-xs font-mono font-semibold rounded-lg transition cursor-pointer ${
+          active ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-white"
+        }`;
+      });
+
+      // Render Each Node Card
+      Object.entries(nodesData).forEach(([id, data]) => {
+        const el = document.getElementById(`node-${id}`);
+        const nodeState = m.states[id];
+        const isSelected = state.selectedNode === id;
+
+        if (nodeState === "hidden") {
+          el.classList.add("opacity-20", "pointer-events-none", "scale-95");
+        } else {
+          el.classList.remove("opacity-20", "pointer-events-none", "scale-95");
+        }
+
+        // Styling by state
+        let cardStyle = "bg-slate-800/80 border-slate-700 text-slate-200";
+        let badgeHtml = "";
+
+        if (nodeState === "active") {
+          cardStyle = "bg-emerald-950/50 border-emerald-500/70 text-white shadow-lg shadow-emerald-950/30";
+          badgeHtml = `<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Trainable</span>`;
+        } else if (nodeState === "frozen") {
+          cardStyle = "bg-slate-900/90 border-slate-700/80 text-slate-300";
+          badgeHtml = `<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-slate-800 text-slate-400 border border-slate-600">🔒 Frozen</span>`;
+        } else if (nodeState === "pretrain") {
+          cardStyle = "bg-amber-950/40 border-amber-500/60 text-amber-100";
+          badgeHtml = `<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">Pre-train</span>`;
+        } else if (nodeState === "bypass") {
+          cardStyle = "bg-slate-900/50 border-dashed border-slate-700 text-slate-400";
+          badgeHtml = `<span class="px-2 py-0.5 text-[10px] font-medium rounded bg-slate-800/70 text-slate-500">Bypass</span>`;
+        } else if (nodeState === "input") {
+          cardStyle = "bg-sky-950/40 border-sky-500/50 text-sky-100";
+          badgeHtml = `<span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-sky-500/20 text-sky-300">Input</span>`;
+        }
+
+        const ringStyle = isSelected ? "ring-2 ring-indigo-400 ring-offset-2 ring-offset-slate-950" : "";
+        el.className = `node-card w-full max-w-sm rounded-xl border p-3.5 cursor-pointer ${cardStyle} ${ringStyle}`;
+
+        el.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <div class="font-semibold text-sm leading-snug">${data.title}</div>
+            <div class="shrink-0">${badgeHtml}</div>
+          </div>
+          <div class="text-xs text-slate-400 mt-1">${data.subtitle}</div>
+          <div class="mt-2.5 pt-2 border-t border-slate-700/50 flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-500">Out:</span>
+            <span class="text-indigo-300 font-semibold">${data.outShape}</span>
+          </div>
+        `;
+      });
+
+      // Render Inspector Panel
+      const selData = nodesData[state.selectedNode];
+      const selState = m.states[state.selectedNode];
+      document.getElementById("inspector-title").textContent = selData.title;
+      document.getElementById("inspector-subtitle").textContent = selData.subtitle;
+      document.getElementById("inspector-in-shape").textContent = selData.inShape;
+      document.getElementById("inspector-out-shape").textContent = selData.outShape;
+
+      const statusBadge = document.getElementById("inspector-status");
+      const statusMap = {
+        active: ["Đang huấn luyện", "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"],
+        frozen: ["Đóng băng (Frozen)", "bg-slate-800 text-slate-300 border border-slate-600"],
+        pretrain: ["Nhánh Pre-training", "bg-amber-500/20 text-amber-300 border border-amber-500/40"],
+        bypass: ["Bỏ qua (Bypass)", "bg-slate-800 text-slate-400 border border-slate-700"],
+        input: ["Dữ liệu đầu vào", "bg-sky-500/20 text-sky-300 border border-sky-500/40"],
+        hidden: ["Không sử dụng", "bg-slate-800 text-slate-500"]
+      };
+      const [stText, stClass] = statusMap[selState] || statusMap.frozen;
+      statusBadge.textContent = stText;
+      statusBadge.className = `px-2.5 py-0.5 text-xs font-medium rounded-full ${stClass}`;
+
+      document.getElementById("inspector-details").innerHTML = selData.details
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+      document.getElementById("inspector-variant-name").textContent = `XLS-R-${state.variant}`;
+      document.getElementById("inspector-variant-grid").innerHTML = `
+        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+          <span class="text-slate-500 block text-[10px]">Số tầng Transformer</span>
+          <span class="font-mono font-semibold text-slate-200">${v.transformerLayers} tầng</span>
+        </div>
+        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+          <span class="text-slate-500 block text-[10px]">Chiều ẩn (Hidden D)</span>
+          <span class="font-mono font-semibold text-slate-200">${v.hiddenDim}</span>
+        </div>
+        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+          <span class="text-slate-500 block text-[10px]">Chiều FFN</span>
+          <span class="font-mono font-semibold text-slate-200">${v.ffnDim}</span>
+        </div>
+        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+          <span class="text-slate-500 block text-[10px]">Attention Heads</span>
+          <span class="font-mono font-semibold text-slate-200">${v.heads} × ${v.headDim}d</span>
+        </div>
+      `;
+
+      // Draw SVG Edges after DOM layout settles
+      requestAnimationFrame(drawEdges);
+    }
+
+    // HÀM VẼ ĐƯỜNG NỐI SVG ĐỘNG
+    function drawEdges() {
+      const wrapper = document.getElementById("diagram-wrapper");
+      const svgGroup = document.getElementById("edges-group");
+      const wrapRect = wrapper.getBoundingClientRect();
+      const m = MODES[state.mode];
+
+      svgGroup.innerHTML = "";
+
+      EDGES.forEach(edge => {
+        const fromState = m.states[edge.from];
+        const toState = m.states[edge.to];
+        if (fromState === "hidden" || toState === "hidden") return;
+
+        const fromEl = document.getElementById(`node-${edge.from}`);
+        const toEl = document.getElementById(`node-${edge.to}`);
+        const r1 = fromEl.getBoundingClientRect();
+        const r2 = toEl.getBoundingClientRect();
+
+        let x1, y1, x2, y2, pathD;
+
+        if (edge.type === "main" || edge.type === "downstream") {
+          x1 = r1.left - wrapRect.left + r1.width / 2;
+          y1 = r1.bottom - wrapRect.top;
+          x2 = r2.left - wrapRect.left + r2.width / 2;
+          y2 = r2.top - wrapRect.top - 4;
+          pathD = `M ${x1} ${y1} L ${x2} ${y2}`;
+        } else if (edge.from === "feature_encoder" && edge.to === "quantizer") {
+          x1 = r1.right - wrapRect.left;
+          y1 = r1.top - wrapRect.top + r1.height / 2;
+          x2 = r2.left - wrapRect.left + r2.width / 2;
+          y2 = r2.top - wrapRect.top - 4;
+          pathD = `M ${x1} ${y1} C ${x2} ${y1}, ${x2} ${y1 + 20}, ${x2} ${y2}`;
+        } else if (edge.from === "quantizer" && edge.to === "contrastive_loss") {
+          x1 = r1.left - wrapRect.left + r1.width / 2;
+          y1 = r1.bottom - wrapRect.top;
+          x2 = r2.left - wrapRect.left + r2.width / 2;
+          y2 = r2.top - wrapRect.top - 4;
+          pathD = `M ${x1} ${y1} L ${x2} ${y2}`;
+        } else if (edge.from === "transformer_late" && edge.to === "contrastive_loss") {
+          x1 = r1.right - wrapRect.left;
+          y1 = r1.top - wrapRect.top + r1.height / 2;
+          x2 = r2.left - wrapRect.left - 4;
+          y2 = r2.top - wrapRect.top + r2.height / 2;
+          pathD = `M ${x1} ${y1} L ${x2} ${y2}`;
+        }
+
+        const isHighlighted =
+          state.hoveredNode === edge.from || state.hoveredNode === edge.to;
+
+        let stroke = "#64748b";
+        let marker = "url(#arrow-frozen)";
+        let animClass = "";
+
+        if (edge.type === "pretrain") {
+          stroke = "#fbbf24";
+          marker = "url(#arrow-pretrain)";
+          animClass = "edge-animated";
+        } else if (toState === "active") {
+          stroke = "#34d399";
+          marker = "url(#arrow-active)";
+          animClass = "edge-animated";
+        }
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", pathD);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", stroke);
+        path.setAttribute("stroke-width", isHighlighted ? "3" : "2");
+        path.setAttribute("marker-end", marker);
+        if (animClass) path.setAttribute("class", animClass);
+
+        svgGroup.appendChild(path);
+      });
+    }
+
+    // EVENT LISTENERS
+    document.querySelectorAll(".mode-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.mode = btn.dataset.mode;
+        if (state.mode === "pretrain" && state.selectedNode === "downstream_backend") {
+          state.selectedNode = "contrastive_loss";
+        } else if (state.mode !== "pretrain" && (state.selectedNode === "quantizer" || state.selectedNode === "contrastive_loss")) {
+          state.selectedNode = "transformer_late";
+        }
+        render();
+      });
+    });
+
+    document.querySelectorAll(".variant-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.variant = btn.dataset.variant;
+        render();
+      });
+    });
+
+    document.querySelectorAll(".node-card").forEach(card => {
+      card.addEventListener("click", () => {
+        state.selectedNode = card.dataset.node;
+        render();
+      });
+      card.addEventListener("mouseenter", () => {
+        state.hoveredNode = card.dataset.node;
+        drawEdges();
+      });
+      card.addEventListener("mouseleave", () => {
+        state.hoveredNode = null;
+        drawEdges();
+      });
+    });
+
+    window.addEventListener("resize", drawEdges);
+
+    // Khởi tạo lần đầu
+    render();
+  </script>
+</body>
+</html>

@@ -498,3 +498,29 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Đính chính:** phần Giới hạn của D033 ghi "Gói Google AI Pro có thể không có chạy nền". Theo người dùng, gói Colab đang dùng có chạy nền. Giới hạn còn lại: thời gian tối đa mỗi phiên và việc cấp loại GPU không được bảo đảm; đơn vị điện toán vẫn bị trừ khi chạy nền. Từ 15/11/2026, quota GPU Kaggle của tài khoản là 45 giờ mỗi tuần (D036).
 
 **Không thay đổi:** các mục Quyết định 1–5 của D033, gồm phép kiểm tương đương bắt buộc ở mục 4 trước khi dùng Colab cho run khoa học, quy tắc một loại GPU cho ba seed ở mục 3 và việc giữ registry v1 trên Kaggle T4 ở mục 5.
+
+## 2026-11-18 — D037: Scale2 chạy trước với hạn chót 07/12, chấm test XLS-R trên Colab L4
+
+**Xác nhận:** người dùng chọn phương án C ngày 18/11/2026 (nguyên văn "được tôi duyệt C") và duyệt bản nháp do Claude trình bày trong cuộc trò chuyện, nguyên văn "duyệt nguyên văn".
+
+**Bối cảnh:** registry v1 (9 mục) và registry phụ X1R (3 mục) đã đủ và được Claude kiểm. Các kiểm tra lối tắt (T22, REG-X1R, SC-01, SC-02) không cho chỉ báo mạnh với mô hình XLS-R nào. Kho test-full cục bộ khớp 3/3 SHA (`reports/pre_test_inventory.json`). Chấm XLS-R trên CPU mất khoảng 1,65 giây/mẫu nên không khả thi cho test-full. Ngày 18/11/2026, phép kiểm tương đương D033 mục 4 trên Colab GPU NVIDIA L4 đạt: chênh EER 0,000000 điểm %, 0 mẫu đổi quyết định, chênh score tối đa 0,00002 (`G:\My Drive\DoAnTTNT_colab_outputs\parity_x1_seed2026`, bản sao `.cache/colab_parity/`). Scale2 (D036) chưa chạy.
+
+**Quyết định:**
+
+1. **Thứ tự và hạn chót.** Scale2 chạy trước theo D036. Cổng test được mở khi scale2 hoàn tất, hoặc vào ngày 07/12/2026, tùy mốc nào đến trước, với điều kiện các mục ở mục 6 đã đạt và người dùng mở cổng trong cuộc trò chuyện. Nếu đến 07/12 scale2 chưa đủ ba seed của một mô hình, chỉ các seed đã hoàn tất được đăng ký và chấm test; báo cáo ghi rõ chưa đủ (D036 mục 9). Không bỏ seed, không chọn seed theo test.
+2. **Huấn luyện scale2.** X1 ×2 chạy trên Kaggle T4 như D036 mục 6, không dùng Colab để huấn luyện, giữ cùng loại GPU với ×1. B0 ×2 chạy trên CPU cục bộ.
+3. **Nơi chấm test.** B0 v2 (×1 và ×2) chấm trên CPU cục bộ qua `scripts/evaluate_full_split.py`. X0, X1, X1R và X1 ×2 chấm trên Colab GPU L4, đúng loại GPU đã qua phép kiểm tương đương, cùng code, pipeline và điều kiện như entrypoint (D032 mục 6, D035, D036 mục 7). Ba seed của cùng một mô hình chấm trên cùng loại GPU. Nếu Colab không cấp L4, chờ hoặc chạy phép kiểm tương đương mới cho loại GPU khác trước khi dùng. Kaggle T4 là phương án dự phòng; khi dùng thì test-full phải được upload lên Kaggle, và việc upload cần người dùng xác nhận riêng.
+4. **Luật một lần khi chạy trên Colab.** Trước khi chấm, entrypoint trên máy cục bộ kiểm cổng, tạo khóa cho các mô hình sẽ chấm, rồi ghi một file cấp phép (danh sách mô hình, điều kiện, SHA registry, SHA checkpoint, SHA từng khóa). File cấp phép được đưa lên Drive cùng test-full. Notebook Colab từ chối chạy nếu thiếu file cấp phép, nếu SHA registry, checkpoint hay test-full lệch, hoặc nếu mô hình không có trong danh sách.
+5. **Sự cố kỹ thuật.** Nếu phiên Colab dừng trước khi ghi bất kỳ score test nào (lỗi môi trường, mất phiên, hết đơn vị), được chạy lại với cùng file cấp phép, ghi nhận lý do. Score của mỗi mô hình × điều kiện đã ghi xong là cuối cùng và không chấm lại; phần chưa chấm được tiếp tục ở lần chạy sau với cùng cấp phép. Mọi trường hợp khác áp dụng D032 mục 7 (lập quyết định mới).
+6. **Điều kiện trước khi mở cổng:**
+   - Các registry chính thức (`reports/model_registry_v1.json`, `reports/model_registry_x1r.json`, và `reports/model_registry_scale2.json` với các mục đã hoàn tất) được tạo từ bản nháp đã kiểm, SHA điền vào các config.
+   - `t22_claude_verified` và `test_dataset_inventory_checked` bật true.
+   - Test-full có trên Drive, SHA khớp bản cục bộ.
+   - Notebook chấm test Colab được chạy thử trên dev-full với một mô hình, và tái tạo đạt.
+   - Người dùng mở cổng trong cuộc trò chuyện.
+
+**Lý do:** Colab L4 đã qua phép kiểm tương đương, nhanh gấp khoảng hai lần Kaggle T4, và chấm toàn bộ test XLS-R ước tính chỉ khoảng 8–10 đơn vị Colab. Nhờ đó quota Kaggle (khoảng 106 giờ đến 07/12) dành trọn cho scale2. Scale2 trả lời trực tiếp câu hỏi về tác động của quy mô dữ liệu. Hạn chót 07/12 giữ hơn ba tuần để viết báo cáo trước 03/01/2027. Khóa tạo trên máy cục bộ giữ được luật một lần dù việc chấm chạy trên máy tạm.
+
+**Giới hạn:** phép kiểm tương đương chỉ dùng một checkpoint (X1 seed 2026) trên dev-full; tính tương đương của các mô hình khác trên Colab L4 được suy ra, không đo riêng. Nếu scale2 không xong trước 07/12, so sánh ×1 với ×2 thiếu seed.
+
+**Không thay đổi:** D025, D028, D031, D032 (trừ cách thực hiện luật một lần ở mục 4–5), D033, D034, D035, D036 (trừ thứ tự ở mục 1 và nơi chấm test ở mục 3); metadata, split, seed dữ liệu `2026`, `configs/audio.json`. Không mở cổng test.

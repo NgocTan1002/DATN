@@ -35,5 +35,5 @@
 <text x="860.00" y="537.00" text-anchor="middle" class="small">120 mẫu spoof</text>
 <text x="550.00" y="572.00" text-anchor="middle" class="small">Thanh: trung bình 3 seed; vạch: ± độ lệch chuẩn mẫu (n−1).</text>
 <text x="550.00" y="605.00" text-anchor="middle" class="small">* Replay chỉ 120 mẫu spoof: không đủ để kết luận.</text>
-<text x="550.00" y="632.00" text-anchor="middle" class="small">Nguồn: reports/b0_v2_dev_analysis.json · Bonafide chung cho từng nhóm.</text>
+<text x="550.00" y="632.00" text-anchor="middle" class="small">Bonafide chung cho từng nhóm.</text>
 </svg>
