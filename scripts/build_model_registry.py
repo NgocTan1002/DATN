@@ -289,12 +289,71 @@ def write_markdown(path: Path, registry: dict[str, Any]) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
+FREEZE_COMPARED_KEYS: tuple[str, ...] = (
+    "model_id", "checkpoint_sha256", "generation", "decision_threshold", "dev_eer", "source_report_sha256", "identity",
+)
+
+
+def freeze_registry(config: dict[str, Any], draft: dict[str, Any], draft_path: Path, root: Path = ROOT) -> dict[str, Any]:
+    """Đóng băng bản nháp thành registry chính thức sau khi dựng lại từ nguồn và đối chiếu từng mục (D037 mục 6)."""
+    validate_config(config)
+    require(draft.get("role") == "draft", "Chỉ đóng băng từ bản nháp có role=draft.")
+    validate_registry(draft, config, complete=True)
+    rebuilt = build_registry(config, root)
+    require(rebuilt["protocol_sha256"] == draft["protocol_sha256"] == protocol_sha256(config),
+            "protocol_sha256 của bản nháp lệch protocol hiện tại.")
+    require(len(rebuilt["entries"]) == len(draft["entries"]), "Số mục dựng lại khác bản nháp.")
+    draft_by_id = {x["model_id"]: x for x in draft["entries"]}
+    for entry in rebuilt["entries"]:
+        old = draft_by_id.get(entry["model_id"])
+        require(old is not None, "Bản nháp thiếu mục: " + entry["model_id"])
+        for key in FREEZE_COMPARED_KEYS:
+            require(key in old and key in entry and old[key] == entry[key],
+                    f"Bản nháp lệch nguồn ở mục {entry['model_id']}, trường {key}; dừng, không ghi registry.")
+        require(old == entry, f"Bản nháp lệch nguồn ở mục {entry['model_id']} (trường khác); dừng, không ghi registry.")
+        require(entry["status"] == "present" and entry["claude_verified"] is True, "Mục chưa present/Claude kiểm: " + entry["model_id"])
+    require(rebuilt["complete"] is True and draft["complete"] is True, "Registry chưa complete; không đóng băng.")
+    frozen = {**draft, "role": "official", "frozen_utc": utc(), "draft_path": str(draft_path.as_posix()),
+              "draft_sha256": sha256_file(draft_path),
+              "scope": "Registry chính thức đóng băng từ bản nháp đã kiểm; chọn trên dev-full, chưa chấm test."}
+    validate_registry(frozen, config, complete=True)
+    return frozen
+
+
+def write_official_markdown(path: Path, registry: dict[str, Any]) -> None:
+    """Ghi .md registry chính thức, header khác bản nháp."""
+    write_markdown(path, registry)
+    lines = path.read_text(encoding="utf-8").splitlines()
+    name = "X1R (D035)" if registry["decision"] == "D035" else "v1 (D032)"
+    head = [f"# Registry chính thức — {name}", "",
+            f"Đóng băng theo D037 mục 6 lúc {registry['frozen_utc']}; số mục present và Claude kiểm: {len(registry['entries'])}/{len(registry['entries'])}; complete: {registry['complete']}.",
+            f"Bản nháp nguồn: `{registry['draft_path']}` (SHA-256 `{registry['draft_sha256']}`).",
+            "Cổng test vẫn đóng; registry này chưa chấm test.", ""]
+    body = [x for x in lines[1:] if not x.startswith(("Quyết định:", "Snapshot UTC", "Không phải registry chính thức", "# "))]
+    while body and body[0] == "":
+        body.pop(0)
+    path.write_text("\n".join(head + body) + "\n", encoding="utf-8", newline="\n")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=CONFIG)
     parser.add_argument("--output", type=Path, default=DRAFT)
+    parser.add_argument("--freeze", action="store_true", help="Đóng băng bản nháp thành registry chính thức.")
+    parser.add_argument("--draft", type=Path)
     args = parser.parse_args()
     try:
+        if args.freeze:
+            require(args.draft is not None, "Chế độ --freeze cần --draft.")
+            config = load_json(args.config)
+            frozen = freeze_registry(config, load_json(args.draft), args.draft)
+            require(args.output.resolve() == (ROOT / config["registry_path"]).resolve(),
+                    "Registry chính thức phải ghi đúng registry_path của config.")
+            require(not args.output.exists(), "Registry chính thức đã tồn tại; không ghi đè.")
+            atomic_json(args.output, frozen)
+            write_official_markdown(args.output.with_suffix(".md"), frozen)
+            print(json.dumps({"status": "official", "entries": len(frozen["entries"]), "sha256": sha256_file(args.output)}, ensure_ascii=False))
+            return 0
         forbidden = {
             (ROOT / "reports/model_registry_v1.json").resolve(),
             (ROOT / "reports/model_registry_x1r.json").resolve(),

@@ -1,0 +1,760 @@
+{
+  "task": "PREP-01",
+  "generated_utc": "2026-11-18T03:03:23.821534+00:00",
+  "no_test_labels_or_content_read": true,
+  "local_test_inventory": {
+    "no_test_labels_or_content_read": true,
+    "all_checks_passed": true,
+    "checks": {
+      "manifest_sha_matches_context": true,
+      "manifest_sha_matches_metadata": true,
+      "manifest_sha_matches_config_v1": true,
+      "manifest_sha_matches_config_x1r": true,
+      "index_sha_matches_context": true,
+      "index_sha_matches_metadata": true,
+      "waveforms_sha_matches_context": true,
+      "waveforms_sha_matches_metadata": true,
+      "artifact_count_matches_context": true,
+      "artifact_count_matches_config_v1": true,
+      "artifact_count_matches_config_x1r": true,
+      "chunk_shard_count_matches_context": true,
+      "waveforms_bytes_equals_total_samples_x4": true
+    },
+    "metadata_summary": {
+      "path": "data/processed/packed/closed_test_full_v1/metadata.json",
+      "sha256": "7e16da487f4d066f9694acd62b099ab4b70cc9158429b21c6e85c5fd1185ee9b",
+      "bytes": 960,
+      "format_version": "vsasv-packed-v1",
+      "preprocessing_stage": "post_resample_pre_amplitude_pre_crop",
+      "dtype": "float32-le",
+      "target_sample_rate": 16000,
+      "crop_seed": 2026,
+      "split": "closed_test",
+      "artifact_count": 30698,
+      "chunk_shard_count": 162,
+      "total_samples": 3060286845,
+      "expected_waveforms_bytes": 12241147380
+    },
+    "files": {
+      "manifest": {
+        "path": "data/manifests/closed_test_full_v1.csv",
+        "sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+        "bytes": 4538521,
+        "expected_context_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+        "expected_metadata_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+        "expected_config_v1_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+        "expected_config_x1r_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266",
+        "matched": true
+      },
+      "index": {
+        "path": "data/processed/packed/closed_test_full_v1/index.csv",
+        "sha256": "8f862032b6af42e1d35ff7d9e862308afb781308d13f24178a4bb1409237c78a",
+        "bytes": 5955247,
+        "expected_context_sha256": "8f862032b6af42e1d35ff7d9e862308afb781308d13f24178a4bb1409237c78a",
+        "expected_metadata_sha256": "8f862032b6af42e1d35ff7d9e862308afb781308d13f24178a4bb1409237c78a",
+        "matched": true
+      },
+      "waveforms": {
+        "path": "data/processed/packed/closed_test_full_v1/waveforms.f32",
+        "sha256": "556bb99de8c39ed8f8568ae36d170907f4ac2959b9c4ab2f1a8d4e48423b32b2",
+        "bytes": 12241147380,
+        "expected_bytes_total_samples_x4": 12241147380,
+        "expected_context_sha256": "556bb99de8c39ed8f8568ae36d170907f4ac2959b9c4ab2f1a8d4e48423b32b2",
+        "expected_metadata_sha256": "556bb99de8c39ed8f8568ae36d170907f4ac2959b9c4ab2f1a8d4e48423b32b2",
+        "matched": true
+      }
+    }
+  },
+  "kaggle_inventory": {
+    "quota": {
+      "resources": [
+        {
+          "resource": "GPU",
+          "used": "28.94h",
+          "remaining": "16.06h",
+          "total": "45.00h",
+          "used_hours": 28.94,
+          "remaining_hours": 16.06,
+          "total_hours": 45.0,
+          "refresh_at": "2026-11-21T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "used_hours": 0.0,
+          "remaining_hours": 20.0,
+          "total_hours": 20.0,
+          "refresh_at": "2026-11-21T00:00:00"
+        }
+      ],
+      "gpu": {
+        "resource": "GPU",
+        "used": "28.94h",
+        "remaining": "16.06h",
+        "total": "45.00h",
+        "used_hours": 28.94,
+        "remaining_hours": 16.06,
+        "total_hours": 45.0,
+        "refresh_at": "2026-11-21T00:00:00"
+      }
+    },
+    "quota_log": ".cache/prep01/kaggle_quota.log",
+    "datasets_list_log": ".cache/prep01/kaggle_datasets_list.log",
+    "all_my_datasets": [
+      {
+        "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "title": "DoAnTTNT XLSR D028 X1R seed 2026 resume1",
+        "size_bytes": 2264023613,
+        "last_updated": "2026-11-16 16:08:49.583000",
+        "download_count": 1,
+        "vote_count": 0,
+        "usability_rating": 0.375
+      },
+      {
+        "ref": "ngctnnguyn1111/doantnnt-b0-full-resume",
+        "title": "DoAnTTNT B0 Full Resume",
+        "size_bytes": 555805242,
+        "last_updated": "2026-11-01 14:41:37.777000",
+        "download_count": 12,
+        "vote_count": 0,
+        "usability_rating": 0.375
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "title": "DoAnTTNT XLSR D028 Source",
+        "size_bytes": 284336,
+        "last_updated": "2026-11-15 05:59:57.803000",
+        "download_count": 4,
+        "vote_count": 0,
+        "usability_rating": 0.25
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-t14-offline-deps",
+        "title": "DoAnTTNT T14 Offline Transformers 4.57.6",
+        "size_bytes": 39744500,
+        "last_updated": "2026-11-03 13:45:50.327000",
+        "download_count": 21,
+        "vote_count": 0,
+        "usability_rating": 0.25
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-t14-packed",
+        "title": "DoAnTTNT T14 packed",
+        "size_bytes": 13757151484,
+        "last_updated": "2026-11-03 10:43:49.433000",
+        "download_count": 6,
+        "vote_count": 0,
+        "usability_rating": 0.23529412
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-t14-weights",
+        "title": "DoAnTTNT T14 weights",
+        "size_bytes": 769465284,
+        "last_updated": "2026-11-03 08:59:03.700000",
+        "download_count": 4,
+        "vote_count": 0,
+        "usability_rating": 0.25
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-s2027-resume1",
+        "title": "DoAnTTNT XLSR D028 seed 2027 resume1",
+        "size_bytes": 2265454414,
+        "last_updated": "2026-11-10 08:23:55.820000",
+        "download_count": 0,
+        "vote_count": 0,
+        "usability_rating": 0.375
+      },
+      {
+        "ref": "ngctnnguyn1111/doanttnt-t14-source",
+        "title": "DoAnTTNT T14 source",
+        "size_bytes": 259773,
+        "last_updated": "2026-11-03 08:56:07.993000",
+        "download_count": 1,
+        "vote_count": 0,
+        "usability_rating": 0.25
+      },
+      {
+        "ref": "ngctnnguyn1111/vsasv-development-v2-2026-10-13",
+        "title": "VSASV Development v2 2026-10-13",
+        "size_bytes": 0,
+        "last_updated": "2026-10-13 07:01:04.010000",
+        "download_count": 1,
+        "vote_count": 0,
+        "usability_rating": 0.29411766
+      },
+      {
+        "ref": "ngctnnguyn1111/doantnnt-project-source",
+        "title": "DoAnTTNT Project Source",
+        "size_bytes": 192597,
+        "last_updated": "2026-10-24 09:32:57.950000",
+        "download_count": 11,
+        "vote_count": 0,
+        "usability_rating": 0.25
+      }
+    ],
+    "candidate_filter_keywords": [
+      "packed",
+      "test",
+      "eval"
+    ],
+    "inspected_candidate_datasets": [
+      {
+        "ref": "ngctnnguyn1111/doanttnt-t14-packed",
+        "title": "DoAnTTNT T14 packed",
+        "dataset_zip_size_bytes": 13757151484,
+        "files_log": ".cache/prep01/kaggle_files_doanttnt-t14-packed.log",
+        "files": [
+          {
+            "name": "closed_dev_full_v1/index.csv",
+            "size_bytes": 7684400,
+            "creation_date": "2026-11-03 10:45:23.851000"
+          },
+          {
+            "name": "closed_dev_full_v1/metadata.json",
+            "size_bytes": 957,
+            "creation_date": "2026-11-03 10:45:23.577000"
+          },
+          {
+            "name": "closed_dev_full_v1/waveforms.f32",
+            "size_bytes": 13454011384,
+            "creation_date": "2026-11-03 10:55:59.539000"
+          },
+          {
+            "name": "train_development_20k_v2/index.csv",
+            "size_bytes": 3121751,
+            "creation_date": "2026-11-03 10:45:23.611000"
+          },
+          {
+            "name": "train_development_20k_v2/metadata.json",
+            "size_bytes": 958,
+            "creation_date": "2026-11-03 10:45:23.543000"
+          },
+          {
+            "name": "train_development_20k_v2/waveforms.f32",
+            "size_bytes": 5792780884,
+            "creation_date": "2026-11-03 10:49:53.241000"
+          }
+        ],
+        "contains_closed_test_full_v1": false
+      }
+    ],
+    "has_test_full_on_kaggle": false,
+    "matched_test_full_files": [],
+    "remote_hash_note": "Lệnh chỉ đọc 'kaggle -W datasets files' chỉ trả tên và kích thước byte (không trả SHA-256). Không tìm thấy thư mục hay file nào tên closed_test_full_v1 trong tài khoản Kaggle."
+  },
+  "cost_estimate": {
+    "scale_basis": {
+      "dev_full_samples": 38777,
+      "dev_full_shards": 186,
+      "test_full_samples": 30698,
+      "test_full_shards": 162,
+      "scale_factor_test_over_dev": 0.7916548469453542,
+      "dev_full_bonafide_samples": 14151,
+      "dev_bonafide_ratio": 0.3649328210021404,
+      "approx_test_bonafide_samples": 11202.707739123707,
+      "approximation_note": "Không đọc nhãn tập test; số mẫu bonafide để ước tính roundtrip_40k dùng xấp xỉ theo tỷ lệ bonafide của dev-full (14151/38777 = 0.364933).",
+      "safety_factor": 1.25
+    },
+    "gpu_t4": {
+      "X0": {
+        "sources": [
+          "W/reports/xlsr_t17_x0_seed2026_session1.json (timing.evaluations_this_invocation)",
+          "W/reports/xlsr_t28_x0_pair_seed2027_2028.json (phase_b.verifier_results.{2027,2028}.result.timing.evaluations_this_invocation)",
+          "reports/xlsr_t14_cuda_benchmark.md (X0 batch=16)"
+        ],
+        "t14_benchmark_dev_full_hours": 0.6488605,
+        "by_seed": {
+          "2026_single": {
+            "evaluation_count": 10,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 1826.3832163575,
+            "min_total_seconds": 1824.966300344,
+            "max_total_seconds": 1828.808834684,
+            "mean_loader_seconds": 74.79352750540616,
+            "mean_model_seconds": 1751.3764157476994,
+            "mean_gpu_hours_per_eval": 0.5073286712104167,
+            "individual_total_seconds": [
+              1828.808834684,
+              1826.6295471570002,
+              1826.5518339260007,
+              1826.6039672080005,
+              1825.0288495450004,
+              1826.224002518,
+              1826.121081846999,
+              1826.6896123779989,
+              1824.966300344,
+              1826.2081339680008
+            ]
+          },
+          "2027_pair": {
+            "evaluation_count": 10,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 1941.1981389469997,
+            "min_total_seconds": 1929.1840496529999,
+            "max_total_seconds": 1948.1473817179995,
+            "mean_loader_seconds": 72.12843904100387,
+            "mean_model_seconds": 1868.8519405119112,
+            "mean_gpu_hours_per_eval": 0.5392217052630555,
+            "individual_total_seconds": [
+              1929.1840496529999,
+              1930.0062049570006,
+              1938.413831152001,
+              1942.1138406499995,
+              1948.1473817179995,
+              1947.7496234689988,
+              1945.5800993639969,
+              1946.086055961001,
+              1945.305812581999,
+              1939.394489964001
+            ]
+          },
+          "2028_pair": {
+            "evaluation_count": 10,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 2080.1667535181004,
+            "min_total_seconds": 2075.6562159839996,
+            "max_total_seconds": 2087.4102727760005,
+            "mean_loader_seconds": 72.43821947787765,
+            "mean_model_seconds": 2007.5151745178894,
+            "mean_gpu_hours_per_eval": 0.5778240981994723,
+            "individual_total_seconds": [
+              2087.4102727760005,
+              2084.5790671389996,
+              2085.2169162090013,
+              2079.712166106001,
+              2081.1332375600014,
+              2076.4547844689987,
+              2077.6926456600013,
+              2077.6654284729993,
+              2076.1468008049997,
+              2075.6562159839996
+            ]
+          }
+        },
+        "pooled_dev_full": {
+          "evaluation_count": 30,
+          "samples_per_eval": 38777,
+          "includes_lowpass_7k_in_loader": false,
+          "mean_total_seconds": 1949.2493696075333,
+          "min_total_seconds": 1824.966300344,
+          "max_total_seconds": 2087.4102727760005,
+          "mean_loader_seconds": 73.12006200809589,
+          "mean_model_seconds": 1875.9145102591667,
+          "mean_gpu_hours_per_eval": 0.5414581582243148,
+          "individual_total_seconds": [
+            1828.808834684,
+            1826.6295471570002,
+            1826.5518339260007,
+            1826.6039672080005,
+            1825.0288495450004,
+            1826.224002518,
+            1826.121081846999,
+            1826.6896123779989,
+            1824.966300344,
+            1826.2081339680008,
+            1929.1840496529999,
+            1930.0062049570006,
+            1938.413831152001,
+            1942.1138406499995,
+            1948.1473817179995,
+            1947.7496234689988,
+            1945.5800993639969,
+            1946.086055961001,
+            1945.305812581999,
+            1939.394489964001,
+            2087.4102727760005,
+            2084.5790671389996,
+            2085.2169162090013,
+            2079.712166106001,
+            2081.1332375600014,
+            2076.4547844689987,
+            2077.6926456600013,
+            2077.6654284729993,
+            2076.1468008049997,
+            2075.6562159839996
+          ]
+        },
+        "projected_test_full_pass_seconds": 1543.1327113549798,
+        "projected_test_full_pass_hours": 0.4286479753763833,
+        "required_conditions": [
+          "original"
+        ],
+        "seeds": 3,
+        "equivalent_test_passes": 3.0,
+        "estimated_gpu_hours_base": 1.2859439261291499,
+        "estimated_gpu_hours_plus_25pct": 1.6074299076614373
+      },
+      "X1": {
+        "run_id": "X1-L8-lr3e-5",
+        "sources": [
+          "W/reports/xlsr_t20_seed2026_l8_lr3e-5.json (final_handoff.timing.evaluations_this_invocation)",
+          "W/reports/xlsr_t21_seeds_2027_2028.json (runs.X1-L8-lr3e-5-seed2027.raw_summary.timing.evaluations_this_invocation)",
+          "W/reports/xlsr_t24b_resume_run.json (verification.standard_a_g.timing.evaluations_this_invocation)",
+          "W/reports/xlsr_t26_x1_seed2028.json (timing.evaluations_this_invocation)",
+          "reports/xlsr_t14_cuda_benchmark.md (X1 layers=8 batch=16)"
+        ],
+        "t14_benchmark_dev_full_hours": 0.65788382,
+        "by_seed": {
+          "2026_single": {
+            "evaluation_count": 4,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 1774.5611730932505,
+            "min_total_seconds": 1756.9320185980014,
+            "max_total_seconds": 1787.4076452640002,
+            "mean_loader_seconds": 92.80700963349364,
+            "mean_model_seconds": 1681.55254985274,
+            "mean_gpu_hours_per_eval": 0.4929336591925696,
+            "individual_total_seconds": [
+              1785.8244855830003,
+              1787.4076452640002,
+              1768.0805429280008,
+              1756.9320185980014
+            ]
+          },
+          "2027_single_plus_resume": {
+            "evaluation_count": 10,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 1947.8961693255999,
+            "min_total_seconds": 1732.1234842160002,
+            "max_total_seconds": 1992.51418026,
+            "mean_loader_seconds": 81.33201699841962,
+            "mean_model_seconds": 1866.372805526272,
+            "mean_gpu_hours_per_eval": 0.5410822692571111,
+            "individual_total_seconds": [
+              1992.5065344649997,
+              1992.51418026,
+              1966.7295084720008,
+              1966.4076227789992,
+              1966.3089862499983,
+              1966.755551631999,
+              1966.0898032939986,
+              1966.888147818001,
+              1962.637874070002,
+              1732.1234842160002
+            ]
+          },
+          "2028_single": {
+            "evaluation_count": 7,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": false,
+            "mean_total_seconds": 1910.822449226286,
+            "min_total_seconds": 1899.5876545359988,
+            "max_total_seconds": 1937.6166568010003,
+            "mean_loader_seconds": 84.55409231898777,
+            "mean_model_seconds": 1826.0748508145423,
+            "mean_gpu_hours_per_eval": 0.5307840136739683,
+            "individual_total_seconds": [
+              1931.6737047029997,
+              1937.6166568010003,
+              1901.8307745220009,
+              1899.5876545359988,
+              1901.7160371960017,
+              1903.7200698119996,
+              1899.6122470139999
+            ]
+          }
+        },
+        "pooled_dev_full": {
+          "evaluation_count": 21,
+          "samples_per_eval": 38777,
+          "includes_lowpass_7k_in_loader": false,
+          "mean_total_seconds": 1902.5220728672857,
+          "min_total_seconds": 1732.1234842160002,
+          "max_total_seconds": 1992.51418026,
+          "mean_loader_seconds": 84.59175498814692,
+          "mean_model_seconds": 1817.7362957321654,
+          "mean_gpu_hours_per_eval": 0.528478353574246,
+          "individual_total_seconds": [
+            1785.8244855830003,
+            1787.4076452640002,
+            1768.0805429280008,
+            1756.9320185980014,
+            1992.5065344649997,
+            1992.51418026,
+            1966.7295084720008,
+            1966.4076227789992,
+            1966.3089862499983,
+            1966.755551631999,
+            1966.0898032939986,
+            1966.888147818001,
+            1962.637874070002,
+            1732.1234842160002,
+            1931.6737047029997,
+            1937.6166568010003,
+            1901.8307745220009,
+            1899.5876545359988,
+            1901.7160371960017,
+            1903.7200698119996,
+            1899.6122470139999
+          ]
+        },
+        "projected_test_full_pass_seconds": 1506.140820405909,
+        "projected_test_full_pass_hours": 0.4183724501127525,
+        "required_conditions_d032": [
+          "original (toàn bộ)",
+          "lowpass_7k (toàn bộ)",
+          "lowpass_4k (toàn bộ)",
+          "roundtrip_40k (chỉ bonafide, xấp xỉ theo tỷ lệ dev-full)"
+        ],
+        "seeds": 3,
+        "equivalent_test_passes_d032": 10.094798463006422,
+        "equivalent_test_passes_if_roundtrip_full": 12.0,
+        "estimated_gpu_hours_base": 4.223385566362444,
+        "estimated_gpu_hours_plus_25pct": 5.279231957953056,
+        "sensitivity_with_x1r_lowpass_overhead_base": 4.420877725071207,
+        "sensitivity_with_x1r_lowpass_overhead_plus_25pct": 5.526097156339008,
+        "sensitivity_full_12_passes_if_unoptimized_base": 5.217961560061792,
+        "implementation_note": "Theo D032 mục 6 và bước 4, roundtrip_40k chỉ cần chấm phần bonafide (≈36,49% mẫu). Tuy nhiên scripts/evaluate_full_split.py hiện duyệt đủ len(indices) cho từng điều kiện (= 12 lượt với X1) trừ khi tái sử dụng điểm spoof từ original như scripts/probe_shortcut_dev.py."
+      },
+      "X1R": {
+        "run_id": "X1-L8-lr3e-5-lp7k",
+        "sources": [
+          "W/reports/xlsr_t30_x1r_pair_seed2026_2027.json (phase_b.runs.{2026,2027}.timing.evaluations_this_invocation)",
+          "W/reports/xlsr_t32b_x1r_seed2026_resume_run.json (verify_resume.timing.evaluation_seconds)",
+          "W/reports/xlsr_t31_x1r_seed2028.json (phase_b.run.timing.evaluations_this_invocation)"
+        ],
+        "by_seed": {
+          "2026_pair": {
+            "evaluation_count": 9,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": true,
+            "mean_total_seconds": 1948.0946471485556,
+            "min_total_seconds": 1904.4884753800002,
+            "max_total_seconds": 1970.5549346160005,
+            "mean_loader_seconds": 251.9615289319987,
+            "mean_model_seconds": 1695.9341511419534,
+            "mean_gpu_hours_per_eval": 0.5411374019857099,
+            "individual_total_seconds": [
+              1904.4884753800002,
+              1935.6904118540006,
+              1954.8424737180012,
+              1970.5549346160005,
+              1952.9205809909981,
+              1960.181919914001,
+              1966.7678254849998,
+              1953.3148367059985,
+              1934.0903656730006
+            ]
+          },
+          "2026_resume_single": {
+            "evaluation_count": 1,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": true,
+            "mean_total_seconds": 2038.8311581090002,
+            "mean_gpu_hours_per_eval": 0.5663419883636112
+          },
+          "2027_pair": {
+            "evaluation_count": 8,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": true,
+            "mean_total_seconds": 2149.160311261001,
+            "min_total_seconds": 2117.8392293310008,
+            "max_total_seconds": 2179.4306865960025,
+            "mean_loader_seconds": 250.67285280389405,
+            "mean_model_seconds": 1898.2898242363779,
+            "mean_gpu_hours_per_eval": 0.5969889753502781,
+            "individual_total_seconds": [
+              2124.966531549,
+              2117.8392293310008,
+              2145.531671505001,
+              2150.571631015,
+              2138.104356822001,
+              2171.796056694002,
+              2165.042326576,
+              2179.4306865960025
+            ]
+          },
+          "2028_single": {
+            "evaluation_count": 8,
+            "samples_per_eval": 38777,
+            "includes_lowpass_7k_in_loader": true,
+            "mean_total_seconds": 2074.037685581,
+            "min_total_seconds": 2056.391605517998,
+            "max_total_seconds": 2099.7914836170003,
+            "mean_loader_seconds": 263.5883657576262,
+            "mean_model_seconds": 1810.2361895258637,
+            "mean_gpu_hours_per_eval": 0.5761215793280555,
+            "individual_total_seconds": [
+              2096.2495629249997,
+              2099.7914836170003,
+              2091.329922949999,
+              2073.0541716080006,
+              2057.1669028720025,
+              2056.391605517998,
+              2058.4404513320005,
+              2059.8773838259985
+            ]
+          }
+        },
+        "pooled_dev_full": {
+          "evaluation_count": 26,
+          "samples_per_eval": 38777,
+          "includes_lowpass_7k_in_loader": true,
+          "mean_total_seconds": 2052.202575276231,
+          "min_total_seconds": 1904.4884753800002,
+          "max_total_seconds": 2179.4306865960025,
+          "mean_gpu_hours_per_eval": 0.5700562709100642
+        },
+        "projected_test_full_pass_seconds": 1624.6361156311664,
+        "projected_test_full_pass_hours": 0.4512878098975462,
+        "required_conditions_d035": [
+          "lowpass_7k (toàn bộ)"
+        ],
+        "seeds": 3,
+        "equivalent_test_passes": 3.0,
+        "estimated_gpu_hours_base": 1.3538634296926386,
+        "estimated_gpu_hours_plus_25pct": 1.6923292871157982
+      },
+      "totals": {
+        "total_equivalent_passes_d032_d035": 16.09479846300642,
+        "total_gpu_hours_base": 6.863192922184233,
+        "total_gpu_hours_plus_25pct": 8.578991152730291,
+        "sensitivity_with_x1_lowpass_overhead_base": 7.060685080892995,
+        "sensitivity_with_x1_lowpass_overhead_plus_25pct": 8.825856351116244,
+        "sensitivity_unoptimized_18_passes_base": 7.857768915883581,
+        "sensitivity_unoptimized_18_passes_plus_25pct": 9.822211144854476,
+        "remaining_kaggle_gpu_hours": 16.06,
+        "fits_current_weekly_quota_with_safety": true
+      }
+    },
+    "cpu_b0_v2": {
+      "primary_source_t19b": {
+        "source": "reports/shortcut_probe_dev.json (sessions[0].stages ii–v, 3 seed B0-v2 gộp batch=8, 8 luồng CPU)",
+        "dev_full_seconds": {
+          "original_3seeds": 5171.4482441999935,
+          "roundtrip_40k_bonafide_3seeds": 1726.7175876000038,
+          "lowpass_7k_3seeds": 5396.550686799994,
+          "lowpass_4k_3seeds": 8718.887953899997,
+          "all_4_conditions_3seeds": 21013.60447249999
+        },
+        "projected_test_full_seconds": {
+          "original_3seeds": 4094.0020682479662,
+          "roundtrip_40k_bonafide_3seeds_approx": 1366.9643475293321,
+          "lowpass_7k_3seeds": 4272.205507991495,
+          "lowpass_4k_3seeds": 6902.349908678394,
+          "all_4_conditions_3seeds": 16635.521832447186
+        },
+        "projected_test_full_hours": {
+          "original_3seeds_base": 1.1372227967355462,
+          "original_3seeds_plus_25pct": 1.4215284959194328,
+          "all_4_conditions_3seeds_base": 4.620978286790885,
+          "all_4_conditions_3seeds_plus_25pct": 5.776222858488606
+        }
+      },
+      "reference_1thread_ext_and_benchmark": {
+        "source_ext": "reports/b0_v2_ext_seed{2026,2027,2028}.json (resources: (elapsed - train_loader - train_model) / 2)",
+        "ext_by_seed": {
+          "2026": {
+            "two_dev_evals_seconds": 2510.659448700003,
+            "one_dev_eval_seconds": 1255.3297243500015,
+            "one_test_eval_seconds_scaled": 993.787860796254
+          },
+          "2027": {
+            "two_dev_evals_seconds": 2358.1680173999994,
+            "one_dev_eval_seconds": 1179.0840086999997,
+            "one_test_eval_seconds_scaled": 933.4275704431129
+          },
+          "2028": {
+            "two_dev_evals_seconds": 2240.302680000037,
+            "one_dev_eval_seconds": 1120.1513400000185,
+            "one_test_eval_seconds_scaled": 886.773237623348
+          }
+        },
+        "ext_mean_one_dev_eval_seconds": 1184.8550243500065,
+        "ext_mean_one_test_eval_hours": 0.26055450637617733,
+        "ext_three_seeds_original_test_hours": 0.7816635191285319,
+        "source_benchmark": "reports/b0_v2_cpu_benchmark_1thread.json (measured.seconds_per_dev_sample)",
+        "benchmark_one_dev_eval_seconds": 1811.3608122180108,
+        "benchmark_three_seeds_original_test_hours": 1.1949771387993848
+      }
+    }
+  },
+  "registry_freeze_checklist": {
+    "official_registries": {
+      "v1": {
+        "path": "reports/model_registry_v1.json",
+        "exists": false
+      },
+      "x1r": {
+        "path": "reports/model_registry_x1r.json",
+        "exists": false
+      }
+    },
+    "configs": {
+      "test_evaluation": {
+        "path": "configs/test_evaluation.json",
+        "test_gate_open": false,
+        "registry_path": "reports/model_registry_v1.json",
+        "registry_sha256": null,
+        "pre_test_checks": {
+          "entrypoint_dev_claude_verified": true,
+          "bootstrap_dev_claude_verified": true,
+          "t22_claude_verified": false,
+          "test_dataset_inventory_checked": false
+        }
+      },
+      "test_evaluation_x1r": {
+        "path": "configs/test_evaluation_x1r.json",
+        "test_gate_open": false,
+        "registry_path": "reports/model_registry_x1r.json",
+        "registry_sha256": null
+      }
+    },
+    "draft_registries": {
+      "v1": {
+        "role": "draft",
+        "complete": true,
+        "entry_count": 9,
+        "present_count": 9,
+        "claude_verified_count": 9,
+        "protocol_sha256": "30a21493d1c9ae130152c2927ced29a8644922317c93bd234d9b04189480e94c",
+        "md_header_lines": [
+          "# Registry mô hình v1 — snapshot chưa đầy đủ",
+          "",
+          "Quyết định: D032; complete: True",
+          "Snapshot UTC: 2026-11-15T01:24:32.033330+00:00",
+          "Không phải registry chính thức; không mở cổng test.",
+          ""
+        ],
+        "md_header_says_chua_day_du": true
+      },
+      "x1r": {
+        "role": "draft",
+        "complete": true,
+        "entry_count": 3,
+        "present_count": 3,
+        "claude_verified_count": 3,
+        "protocol_sha256": "8e0deeefcf6e3a6827ff583145102f56c0083349041b564cdcdc841ba111584a",
+        "md_header_lines": [
+          "# Registry phụ mô hình X1R — snapshot chưa đầy đủ",
+          "",
+          "Quyết định: D035; complete: True; input_condition: lowpass_7k",
+          "SHA-256 hệ số bộ lọc 7 kHz: `973b82a36db8dab4f802de2102c5feed2bfb8cf6bb5846472c07d9984ab4c977`",
+          "Snapshot UTC: 2026-11-17T06:32:35.190531+00:00",
+          "Không phải registry chính thức; không mở cổng test."
+        ],
+        "md_header_says_chua_day_du": true
+      },
+      "scale2_files_present": []
+    },
+    "missing_items_to_freeze_registry": [
+      "Tạo registry chính thức reports/model_registry_v1.json (hiện chưa tồn tại; chỉ có bản nháp reports/model_registry_v1_draft.json với role='draft'; scripts/build_model_registry.py đang chặn ghi ra đường dẫn chính thức).",
+      "Tạo registry chính thức X1R reports/model_registry_x1r.json (hiện chưa tồn tại; chỉ có bản nháp reports/model_registry_x1r_draft.json với role='draft').",
+      "Điền registry_sha256 vào configs/test_evaluation.json (hiện đang null).",
+      "Điền registry_sha256 vào configs/test_evaluation_x1r.json (hiện đang null).",
+      "Cập nhật pre_test_checks.t22_claude_verified=true trong configs/test_evaluation.json (T22b đã được Claude kiểm ĐẠT 13/11/2026 nhưng cờ trong config vẫn đang false).",
+      "Upload dataset closed_test_full_v1 lên Kaggle (hoặc tạo dataset test trên Kaggle), kiểm khớp kích thước/checksum và cập nhật pre_test_checks.test_dataset_inventory_checked=true.",
+      "Tiêu đề reports/model_registry_v1_draft.md vẫn ghi '# Registry mô hình v1 — snapshot chưa đầy đủ' và 'Không phải registry chính thức; không mở cổng test.' (dù JSON nháp đã complete=True, 9/9 mục present và claude_verified=True).",
+      "Tiêu đề reports/model_registry_x1r_draft.md vẫn ghi '# Registry phụ mô hình X1R — snapshot chưa đầy đủ' (dù JSON nháp đã complete=True, 3/3 mục present và claude_verified=True).",
+      "Theo D036 (scale2), cần hoàn tất và đăng ký registry phụ 6 mục trước khi mở cổng test nếu giữ phạm vi đánh giá gồm scale2.",
+      "Cổng test hiện vẫn đóng (test_gate_open=false trong cả hai config); chỉ người dùng xác nhận mới được mở."
+    ]
+  }
+}

@@ -3,7 +3,7 @@
   "decision": "D032",
   "test_gate_open": false,
   "registry_path": "reports/model_registry_v1.json",
-  "registry_sha256": null,
+  "registry_sha256": "4a4feef965b9ca50d8b609b9f9bdea7561dfc821427972cd0fd4320ef23a3c5c",
   "required_models": [
     {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2026, "source_report": "reports/b0_v2_ext_seed2026.json"},
     {"family": "B0-v2", "run_id": "B0-v2", "training_seed": 2027, "source_report": "reports/b0_v2_ext_seed2027.json"},
@@ -27,5 +27,5 @@
   "test": {"manifest": "data/manifests/closed_test_full_v1.csv", "manifest_sha256": "0a7a70bc8ededdd83e5f6df06580fc954c6f2da848366e37bc265331ca17d266", "artifact": "data/processed/packed/closed_test_full_v1", "samples": 30698},
   "t22_report": "reports/shortcut_probe_dev_x1_final.json",
   "locks_dir": ".cache/test_once",
-  "pre_test_checks": {"entrypoint_dev_claude_verified": true, "bootstrap_dev_claude_verified": true, "t22_claude_verified": false, "test_dataset_inventory_checked": false}
+  "pre_test_checks": {"entrypoint_dev_claude_verified": true, "bootstrap_dev_claude_verified": true, "t22_claude_verified": true, "test_dataset_inventory_checked": true}
 }

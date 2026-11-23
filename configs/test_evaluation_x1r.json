@@ -3,7 +3,7 @@
   "decision": "D035",
   "test_gate_open": false,
   "registry_path": "reports/model_registry_x1r.json",
-  "registry_sha256": null,
+  "registry_sha256": "d5e404ef6eaec0aa67324c6d4838455aefb9e5dfb9aee4bbbc7ff93bb3bd8d09",
   "required_models": [
     {
       "family": "X1R",

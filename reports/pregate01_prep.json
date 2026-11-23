@@ -1,0 +1,104 @@
+{
+ "task": "PREGATE-01",
+ "no_test_data_touched": true,
+ "test_gate_open": {
+  "v1": false,
+  "x1r": false
+ },
+ "registries": {
+  "v1": "4a4feef965b9ca50d8b609b9f9bdea7561dfc821427972cd0fd4320ef23a3c5c",
+  "x1r": "d5e404ef6eaec0aa67324c6d4838455aefb9e5dfb9aee4bbbc7ff93bb3bd8d09"
+ },
+ "configs_sha256": {
+  "configs/test_evaluation.json": {
+   "before": "939be22ae10759a15ec3f02d539f1b80effbdca591b631c5d4ae730910a265e4",
+   "after": "36f37ce25076591edb020fe8d26830b2e0ab5e1b3f3fa1f28b7013533d53568b"
+  },
+  "configs/test_evaluation_x1r.json": {
+   "before": "788368072a4539fb5512f0c54c4c828f9cc290035daffbe244755b24b63147fd",
+   "after": "a5167fa5f80f39a6fb1b098496b4c5c3e93c583befbde12864024499cb40bd71"
+  }
+ },
+ "fields_changed": {
+  "configs/test_evaluation.json": [
+   "registry_sha256",
+   "pre_test_checks.t22_claude_verified",
+   "pre_test_checks.test_dataset_inventory_checked"
+  ],
+  "configs/test_evaluation_x1r.json": [
+   "registry_sha256"
+  ]
+ },
+ "simulation": {
+  "a_permit_dev_sha256": "361615ca340619bec708f071ca3b7a32c67a02b925bee856de2170f2210d6329",
+  "b_c_identical_scores_and_d034_reproduction": {
+   "X1-L8-lr3e-5-seed2026": {
+    "identical_scores": 200,
+    "reproduction": {
+     "decision_flips": 0,
+     "flips_outside_0_05_margin": 0,
+     "logit_source": "raw_logit CPU so stable_logit(score lưu)",
+     "max_abs_logit_difference": 6.100777134498969e-05,
+     "median_abs_logit_difference": 1.8437987625574692e-06,
+     "passed": true,
+     "samples": 200
+    },
+    "eer_200": null,
+    "selection": "first_rows_of_T19b_subset",
+    "device": "cpu",
+    "versions": {
+     "cuda": "None",
+     "numpy": "2.5.3",
+     "torch": "2.11.0+cpu",
+     "transformers": "4.57.6"
+    }
+   },
+   "B0-v2-seed2026": {
+    "identical_scores": 200,
+    "reproduction": {
+     "decision_flips": 0,
+     "max_abs_probability_difference": 0.0,
+     "passed": true,
+     "samples": 200
+    },
+    "eer_200": null,
+    "selection": "first_manifest_rows",
+    "device": "cpu",
+    "versions": {
+     "cuda": "None",
+     "numpy": "2.5.3",
+     "torch": "2.11.0+cpu",
+     "transformers": "4.57.6"
+    }
+   }
+  },
+  "d_rerun_skipped_2_no_rescore": true,
+  "e_tampered_checkpoint_sha_rejected_before_data": "permit_sha256 không khớp (log step6e_tampered.log)",
+  "f_test_permit_refused_gate_closed": true,
+  "test_once_files_before_after": [
+   0,
+   0
+  ],
+  "note_numpy": "máy cục bộ numpy 2.5.3/torch 2.11.0+cpu khác ghim Colab (numpy 2.1.3); chỉ mô phỏng CPU"
+ },
+ "suite": {
+  "tests": 545,
+  "exit": 0,
+  "log": ".cache/pregate01/suite.log"
+ },
+ "drive_files_for_pregate02": [
+  "source snapshot repo (scripts, src, configs, colab/xlsr_colab_entry.py) gồm evaluate_full_split.py mới",
+  "reports/model_registry_v1.json",
+  "file cấp phép dev (tạo trên máy)",
+  "dev-full có sẵn trên DoAnTTNT_backup: closed_dev_full_v1.csv + thư mục packed",
+  "trọng số wav2vec2-xls-r-300m (có sẵn)",
+  "checkpoint X1 seed 2026 + report Kaggle nguồn (có sẵn)"
+ ],
+ "d037_clause6": {
+  "1_registry_official_sha_in_config": "đạt",
+  "2_t22_and_inventory_flags_true": "đạt (D032)",
+  "3_test_full_on_drive_sha_match": "chưa (cần xác nhận riêng)",
+  "4_colab_dev_dry_run": "chưa (PREGATE-02)",
+  "5_user_opens_gate": "chưa"
+ }
+}
