@@ -9,8 +9,15 @@ from pathlib import Path
 import duckdb
 import numpy as np
 
-from scripts.check_packed_parity import check_artifact_parity, render_markdown
+from scripts.check_packed_parity import (
+    DEFAULT_TARGETS,
+    check_artifact_parity,
+    parse_args,
+    render_markdown,
+    verify_d017_content_hashes_for_packed,
+)
 from src.data import MANIFEST_COLUMNS, assemble_packed_from_chunks
+from src.data.content_hash import waveform_sha256
 from src.data.eval_ingest import WantedRecord, ingest_shard
 
 
@@ -145,6 +152,51 @@ class PackedParityTests(unittest.TestCase):
              "artifacts": {"test-full": result}}
         )
         self.assertIn("| test-full | 2 | 1 | 50,00% | 1 |", text)
+
+    def test_scale2_defaults_and_d017_verification(self) -> None:
+        self.assertEqual(parse_args([]).targets, list(DEFAULT_TARGETS))
+
+        artifact, _manifest = self._artifact("closed_train", "development-scale2-v1")
+        audit_rows = []
+        for index, rows in self.rows.items():
+            for f, s, u, rate, row_split, _n in rows:
+                if row_split == "closed_train":
+                    audit_rows.append(
+                        {
+                            "split": row_split,
+                            "file": f,
+                            "speaker_id": s,
+                            "utt_type": u,
+                            "native_sample_rate": rate,
+                            "waveform_sha256": waveform_sha256(self.audio[f], rate),
+                        }
+                    )
+        audit_path = self.root / "scale2_audit.json"
+        audit_path.write_text(json.dumps({"row_hashes": audit_rows}), encoding="utf-8")
+
+        d017 = verify_d017_content_hashes_for_packed(
+            artifact_dir=artifact, parquet_dir=self.parquet_dir, audit_json_path=audit_path, raw_mismatches_observed=0
+        )
+        self.assertTrue(d017["passed"])
+        self.assertEqual(d017["transitive_parquet_bridge"]["d017_audit_matched"], 3)
+        self.assertEqual(d017["stored_slice_sha256_mismatches"], 0)
+        self.assertIn("40000", d017["direct_on_packed_float32"]["by_sample_rate"])
+
+        # Phát hiện ngay khi hash audit lệch
+        audit_rows[0]["waveform_sha256"] = "0" * 64
+        audit_path.write_text(json.dumps({"row_hashes": audit_rows}), encoding="utf-8")
+        d017_bad = verify_d017_content_hashes_for_packed(
+            artifact_dir=artifact, parquet_dir=self.parquet_dir, audit_json_path=audit_path, raw_mismatches_observed=0
+        )
+        self.assertFalse(d017_bad["passed"])
+        self.assertEqual(d017_bad["transitive_parquet_bridge"]["d017_audit_mismatches"], 1)
+
+        # Từ chối closed_test
+        test_artifact, _test_m = self._artifact("closed_test", "closed-test-full-v1")
+        with self.assertRaisesRegex(ValueError, "closed_test"):
+            verify_d017_content_hashes_for_packed(
+                artifact_dir=test_artifact, parquet_dir=self.parquet_dir, audit_json_path=audit_path
+            )
 
 
 if __name__ == "__main__":

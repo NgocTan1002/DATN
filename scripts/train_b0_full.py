@@ -60,11 +60,22 @@ def semantic_plan(plan: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _validate_shared(plan: dict[str, Any], *, max_epochs: int = 3, patience: int = 1) -> None:
+def _validate_shared(
+    plan: dict[str, Any],
+    *,
+    max_epochs: int = 3,
+    patience: int = 1,
+    train_samples: int = 15885,
+) -> None:
     t, e, m = (plan[k] for k in ("training", "evaluation", "model"))
-    expected_training = {**_TRAINING_EXPECTED, "max_epochs": max_epochs,
-                         "max_optimizer_steps": 1986 * max_epochs,
-                         "max_train_sample_exposures": 15885 * max_epochs}
+    steps_per_epoch = (train_samples + 8 - 1) // 8
+    expected_training = {
+        **_TRAINING_EXPECTED,
+        "max_epochs": max_epochs,
+        "steps_per_epoch": steps_per_epoch,
+        "max_optimizer_steps": steps_per_epoch * max_epochs,
+        "max_train_sample_exposures": train_samples * max_epochs,
+    }
     if any(t.get(k) != v for k, v in expected_training.items()):
         raise ValueError("Cấu hình training không khớp D023.")
     if (
@@ -94,32 +105,65 @@ def validate_plan(plan: dict[str, Any]) -> None:
         raise ValueError("Đặc tả dữ liệu/model/evaluation/phiên không khớp D023.")
 
 
-def validate_plan_v2(plan: dict[str, Any]) -> None:
-    """Đặc tả D027: cấu hình D023, nhưng packed, dev-full và ba seed huấn luyện."""
+def _validate_packed_v2_common(
+    plan: dict[str, Any],
+    *,
+    expected_decision: str,
+    expected_train_samples: int,
+    allowed_epoch_patience: tuple[tuple[int, int], ...],
+    label: str,
+) -> None:
+    """Kiểm tra chung cho đặc tả B0 v2 (D027) và B0 v2 scale2 (D036)."""
 
     d, t = plan["data"], plan["training"]
     if "seed" in t:
-        raise ValueError("B0 v2 không dùng trường seed chung; cần training_seeds tách khỏi data_seed.")
+        raise ValueError(f"{label} không dùng trường seed chung; cần training_seeds tách khỏi data_seed.")
     if tuple(t.get("training_seeds", ())) != B0_V2_TRAINING_SEEDS:
-        raise ValueError("Seed huấn luyện B0 v2 phải đúng 2026, 2027, 2028 (D026/D027).")
+        raise ValueError(f"Seed huấn luyện {label} phải đúng 2026, 2027, 2028 (D026/D027).")
     if t.get("training_seed_scope") != ["model_initialization", "sampler", "random_crop"]:
         raise ValueError("Phạm vi seed huấn luyện không khớp D026.")
     epochs, patience = t.get("max_epochs"), plan["evaluation"].get("patience")
-    if (epochs, patience) not in ((3, 1), (10, 2)):
-        raise ValueError("B0 v2 chỉ chấp nhận trần/patience D027 (3/1) hoặc D028 (10/2).")
-    _validate_shared(plan, max_epochs=epochs, patience=patience)
+    if (epochs, patience) not in allowed_epoch_patience:
+        raise ValueError(f"{label} không chấp nhận trần/patience ({epochs}/{patience}).")
+    _validate_shared(plan, max_epochs=epochs, patience=patience, train_samples=expected_train_samples)
     if (
-        plan["decision"] != "D027"
+        plan.get("decision") != expected_decision
         or plan["model"].get("lfcc_features") != "per_sample"
         or d["use_test"] or d["backend"] != "packed" or d["data_seed"] != DATA_SEED
         or d["train_split"] != "closed_train" or d["development_split"] != "closed_dev"
-        or (d["train_samples"], d["development_samples"]) != (15885, 38777)
+        or (d["train_samples"], d["development_samples"]) != (expected_train_samples, 38777)
     ):
-        raise ValueError("Đặc tả dữ liệu/model của B0 v2 không khớp D027.")
+        raise ValueError(f"Đặc tả dữ liệu/model của {label} không khớp {expected_decision}.")
     for key in ("train_artifact_waveforms_sha256", "development_artifact_waveforms_sha256"):
         value = d.get(key)
         if not isinstance(value, str) or len(value) != 64:
-            raise ValueError(f"Checksum artifact {key} chưa được khóa trong đặc tả B0 v2.")
+            raise ValueError(f"Checksum artifact {key} chưa được khóa trong đặc tả {label}.")
+
+
+def validate_plan_v2(plan: dict[str, Any]) -> None:
+    """Đặc tả D027: cấu hình D023, nhưng packed, dev-full và ba seed huấn luyện."""
+
+    _validate_packed_v2_common(
+        plan,
+        expected_decision="D027",
+        expected_train_samples=15885,
+        allowed_epoch_patience=((3, 1), (10, 2)),
+        label="B0 v2",
+    )
+
+
+def validate_plan_scale2(plan: dict[str, Any]) -> None:
+    """Đặc tả D036: B0 v2 trên tập train ×2 (31.770 mẫu), trần 10 epoch, patience 2."""
+
+    if plan.get("base_decision") != "D027":
+        raise ValueError("Đặc tả B0 v2 scale2 phải khai báo base_decision là D027.")
+    _validate_packed_v2_common(
+        plan,
+        expected_decision="D036",
+        expected_train_samples=31770,
+        allowed_epoch_patience=((10, 2),),
+        label="B0 v2 scale2",
+    )
 
 
 def verify_extension_source(
@@ -248,7 +292,7 @@ def _open_d027(args: argparse.Namespace, plan: dict[str, Any], audio: dict[str, 
     train = _packed(train_dir, training=True, seed=args.training_seed, audio=audio)
     dev = _packed(dev_dir, training=False, seed=args.training_seed, audio=audio)
     try:
-        _check_artifact(train, split="closed_train", samples=15885, manifest_sha256=d["train_manifest_sha256"], waveforms_sha256=d["train_artifact_waveforms_sha256"], name="train")
+        _check_artifact(train, split="closed_train", samples=int(d["train_samples"]), manifest_sha256=d["train_manifest_sha256"], waveforms_sha256=d["train_artifact_waveforms_sha256"], name="train")
         _check_artifact(dev, split="closed_dev", samples=38777, manifest_sha256=d["development_manifest_sha256"], waveforms_sha256=d["development_artifact_waveforms_sha256"], name="dev-full")
         train_indices, dev_indices = _select(args, plan, train.records, dev.records)
     except Exception:
@@ -295,10 +339,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--smoke-session-steps", type=int, default=128)
     args = parser.parse_args(argv)
     plan = common._load_json(args.plan, "đặc tả full training")
-    is_v2 = plan.get("decision") == "D027"
-    (validate_plan_v2 if is_v2 else validate_plan)(plan)
-    label = "B0 v2 D027" if is_v2 else "B0 D023"
-    if args.extend_max_epochs and (not args.resume or not is_v2):
+    decision = plan.get("decision")
+    is_v2 = decision == "D027"
+    is_scale2 = decision == "D036"
+    is_packed_v2 = is_v2 or is_scale2
+    if is_scale2:
+        validate_plan_scale2(plan)
+        label = "B0 v2 scale2 D036"
+    elif is_v2:
+        validate_plan_v2(plan)
+        label = "B0 v2 D027"
+    else:
+        validate_plan(plan)
+        label = "B0 D023"
+    if args.extend_max_epochs and (not args.resume or not is_packed_v2):
         raise ValueError("Nối dài D028 chỉ áp dụng B0 v2 với --resume.")
     if args.extension_source_bundle is not None and not args.extend_max_epochs:
         raise ValueError("--extension-source-bundle chỉ dùng khi nối dài có kiểm chứng.")
@@ -316,7 +370,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     torch.set_num_threads(1)
     config = common._load_json(ROOT / plan["model"]["config"], "mô hình")
     audio = common._load_json(ROOT / plan["model"]["audio_config"], "audio")
-    data = _open_d027(args, plan, audio, device) if is_v2 else _open_d023(args, plan, audio)
+    data = _open_d027(args, plan, audio, device) if is_packed_v2 else _open_d023(args, plan, audio)
     try:
         seed = data.training_seed
         train, dev, train_indices, dev_indices = data.train, data.dev, data.train_indices, data.dev_indices
@@ -374,7 +428,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.report_json.parent.mkdir(parents=True, exist_ok=True)
         write_json(args.report_json, report)
         args.report_md.parent.mkdir(parents=True, exist_ok=True)
-        if is_v2:
+        if is_packed_v2:
             scope = f"- Seed huấn luyện/dữ liệu: {seed}/{DATA_SEED}; backend packed; thiết bị {device.type}\n"
         else:
             scope = f"- Used shards: {report['used_shards']} (source manifest 20.000/66 shard)\n"

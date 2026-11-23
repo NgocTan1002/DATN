@@ -1,0 +1,192 @@
+{
+  "task": "SCALE2-04 (tiếp 2)",
+  "status": "READY_VERIFIED",
+  "target_dataset": {
+    "id": "ngctnnguyn1111/doanttnt-scale2-packed-v1",
+    "dataset_id": 13459408,
+    "url": "https://www.kaggle.com/datasets/ngctnnguyn1111/doanttnt-scale2-packed-v1",
+    "title": "DoAnTTNT scale2 packed v1",
+    "isPrivate": true,
+    "license": "CC0-1.0",
+    "metadata_file": ".cache/scale2_03/kaggle_dataset/dataset-metadata.json",
+    "metadata_size": 357,
+    "metadata_sha256": "3c18a16c3b021c7ffb4069cae49bb763cb6c9c0fecaf949de23594da8e717867"
+  },
+  "exactly_one_dataset_created": true,
+  "attempts": {
+    "attempt_1_relative_path": {
+      "status": "STOPPED_CREATE_PATH_ERROR",
+      "lock_file": ".cache/scale2_04/DATASET_CREATE_FAILED_PATH_20261118.lock",
+      "log_file": ".cache/scale2_04/dataset_create.log",
+      "stop_file": ".cache/scale2_04/step3_create_stop.json",
+      "command": "kaggle -W datasets create --path .cache/scale2_04/upload --dir-mode skip --keep-tabular",
+      "started_at": "2026-11-18T21:26:23+07:00",
+      "ended_at": "2026-11-18T21:27:24+07:00",
+      "exit_code": 1,
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\.kaggle/uploads\\\\.cache/scale2_04/upload_index.csv.json'",
+      "datasets_created": 0
+    },
+    "attempt_2_auth_required": {
+      "status": "STOPPED_CREATE_2_AUTH_REQUIRED",
+      "lock_file": ".cache/scale2_04/DATASET_CREATE_FAILED_AUTH_20261118.lock",
+      "log_file": ".cache/scale2_04/dataset_create_2.log",
+      "summary_file": ".cache/scale2_04/dataset_create_2_summary.json",
+      "stop_file": ".cache/scale2_04/step3_create_2_stop.json",
+      "command": "kaggle -W datasets create --path \"C:\\Users\\Admin\\Documents\\DoAnTTNT\\.cache\\scale2_04\\upload\" --dir-mode skip --keep-tabular",
+      "started_at": "2026-11-18T21:48:27+07:00",
+      "ended_at": "2026-11-18T21:48:30+07:00",
+      "duration_seconds": 2.747,
+      "exit_code": 1,
+      "error": "Authentication required to call the Kaggle API.",
+      "datasets_created": 0
+    },
+    "attempt_3_success": {
+      "status": "SUCCEEDED",
+      "preflight_file": ".cache/scale2_04/preflight_3.json",
+      "lock_file": ".cache/scale2_04/DATASET_CREATE_ONCE_3.lock",
+      "log_file": ".cache/scale2_04/dataset_create_3.log",
+      "stderr_log_file": ".cache/scale2_04/dataset_create_3_stderr.log",
+      "summary_file": ".cache/scale2_04/dataset_create_3_summary.json",
+      "command": "kaggle -W datasets create --path \"C:\\Users\\Admin\\Documents\\DoAnTTNT\\.cache\\scale2_04\\upload\" --dir-mode skip --keep-tabular",
+      "started_at": "2026-11-18T22:04:33+07:00",
+      "ended_at": "2026-11-18T22:22:19+07:00",
+      "duration_seconds": 1065.96,
+      "exit_code": 0,
+      "datasets_created": 1,
+      "file_upload_timings": [
+        {
+          "file": "index.csv",
+          "started_at": "2026-11-18T22:04:35+07:00",
+          "ended_at": "2026-11-18T22:04:40+07:00",
+          "duration_seconds": 4.202,
+          "cli_detail": "(6MB)",
+          "exact_bytes": 6280248
+        },
+        {
+          "file": "metadata.json",
+          "started_at": "2026-11-18T22:04:40+07:00",
+          "ended_at": "2026-11-18T22:04:42+07:00",
+          "duration_seconds": 2.056,
+          "cli_detail": "(964B)",
+          "exact_bytes": 964
+        },
+        {
+          "file": "waveforms.f32",
+          "started_at": "2026-11-18T22:04:42+07:00",
+          "ended_at": "2026-11-18T22:22:15+07:00",
+          "duration_seconds": 1053.542,
+          "cli_detail": "(11GB)",
+          "exact_bytes": 12123780480
+        }
+      ]
+    }
+  },
+  "remote_verification": {
+    "file": ".cache/scale2_04/remote_verify.json",
+    "status": "ready",
+    "ready_at": "2026-11-18T22:30:25+07:00",
+    "is_private": true,
+    "remote_file_count": 3,
+    "remote_total_bytes": 12130061692,
+    "downloaded_payload": false,
+    "remote_files": [
+      {
+        "name": "index.csv",
+        "size": 6280248,
+        "local_size": 6280248,
+        "matched": true,
+        "creationDate": "2026-11-18T15:22:37.259000"
+      },
+      {
+        "name": "metadata.json",
+        "size": 964,
+        "local_size": 964,
+        "matched": true,
+        "creationDate": "2026-11-18T15:22:36.820000"
+      },
+      {
+        "name": "waveforms.f32",
+        "size": 12123780480,
+        "local_size": 12123780480,
+        "matched": true,
+        "creationDate": "2026-11-18T15:27:13.674000"
+      }
+    ],
+    "datasets_mine_before_count": 10,
+    "datasets_mine_after_count": 11,
+    "added_datasets": [
+      "ngctnnguyn1111/doanttnt-scale2-packed-v1"
+    ],
+    "prior_datasets_unchanged": true
+  },
+  "quota": {
+    "before": {
+      "checked_at": "2026-11-18T22:02:04+07:00",
+      "gpu": {
+        "used": "28.94h",
+        "remaining": "16.06h",
+        "total": "45.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      },
+      "tpu": {
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      }
+    },
+    "after": {
+      "checked_at": "2026-11-18T22:32:30+07:00",
+      "gpu": {
+        "used": "28.94h",
+        "remaining": "16.06h",
+        "total": "45.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      },
+      "tpu": {
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      }
+    }
+  },
+  "post_unlink_verification": {
+    "file": ".cache/scale2_04/post_unlink_verify.json",
+    "checked_at": "2026-11-18T22:54:39+07:00",
+    "unlinked_hardlinks": [
+      "index.csv",
+      "metadata.json",
+      "waveforms.f32"
+    ],
+    "original_artifacts_intact": true,
+    "original_artifacts": {
+      "index.csv": {
+        "size": 6280248,
+        "st_ino": 6192449487790201,
+        "st_nlink": 1,
+        "sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080",
+        "matched": true
+      },
+      "metadata.json": {
+        "size": 964,
+        "st_ino": 3659174697720356,
+        "st_nlink": 1,
+        "sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d",
+        "matched": true
+      },
+      "waveforms.f32": {
+        "size": 12123780480,
+        "st_ino": 2251799813784224,
+        "st_nlink": 1,
+        "sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e",
+        "matched": true
+      }
+    }
+  },
+  "expected_kernel_paths": [
+    "/kaggle/input/doanttnt-scale2-packed-v1/index.csv",
+    "/kaggle/input/doanttnt-scale2-packed-v1/metadata.json",
+    "/kaggle/input/doanttnt-scale2-packed-v1/waveforms.f32"
+  ]
+}

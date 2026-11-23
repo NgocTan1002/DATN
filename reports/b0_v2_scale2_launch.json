@@ -1,0 +1,113 @@
+{
+  "task": "B0S-02",
+  "decision": "D036",
+  "status": "ĐANG CHẠY (đã qua kiểm chứng lượt đầu)",
+  "coordinator": {
+    "coordinator_pids": [
+      6300,
+      10776
+    ],
+    "coordinator_pid": 10776,
+    "train_pids_initial": [
+      7688,
+      7852,
+      7912,
+      13784,
+      15564,
+      22344,
+      22872,
+      24276,
+      24620
+    ],
+    "launched_utc7": "2026-11-20T22:50:21.788564+07:00",
+    "command": ".venv\\\\Scripts\\\\python.exe .cache\\\\b0s\\\\coordinator.py (IsDaemon=True)",
+    "cwd": "C:\\\\Users\\\\Admin\\\\Documents\\\\DoAnTTNT"
+  },
+  "preflight": {
+    "config_sha256_expected": "a2e4cf4bbbd9b3fb1a73a6b3e279a023f416d20f32b6d75434bc8e9c288d8018",
+    "config_sha256_actual": "a2e4cf4bbbd9b3fb1a73a6b3e279a023f416d20f32b6d75434bc8e9c288d8018",
+    "a_config_sha_match": true,
+    "b_no_checkpoints_no_audit": true,
+    "b_existing": [],
+    "c_no_running_processes": true,
+    "c_running": [],
+    "d_disk_free_gib": 55.931,
+    "d_disk_ok": true,
+    "e_ram_available_gib": 6.9,
+    "e_ram_ok": true,
+    "passed": true,
+    "time_utc7": "2026-11-20T22:48:20.963392+07:00"
+  },
+  "first_invocation": {
+    "passed": true,
+    "min_ram_available_gib": 5.809,
+    "ram_below_1gib": false,
+    "per_seed": {
+      "2026": {
+        "exit_code": 0,
+        "status_current_report": "paused",
+        "train_samples": 31770,
+        "development_samples": 38777,
+        "global_step_call1": 512,
+        "global_step_current_report": 1024,
+        "plan_sha256": "a2e4cf4bbbd9b3fb1a73a6b3e279a023f416d20f32b6d75434bc8e9c288d8018",
+        "elapsed_seconds_call1": 631.106,
+        "seconds_per_step_call1": 1.2326,
+        "call2_started": true,
+        "call2_pid": 22660,
+        "peak_memory": {
+          "peak_private_mib": 1134.0,
+          "peak_rss_mib": 4258.3
+        }
+      },
+      "2027": {
+        "exit_code": 0,
+        "status_current_report": "paused",
+        "train_samples": 31770,
+        "development_samples": 38777,
+        "global_step_call1": 512,
+        "global_step_current_report": 1024,
+        "plan_sha256": "a2e4cf4bbbd9b3fb1a73a6b3e279a023f416d20f32b6d75434bc8e9c288d8018",
+        "elapsed_seconds_call1": 631.127,
+        "seconds_per_step_call1": 1.2327,
+        "call2_started": true,
+        "call2_pid": 12104,
+        "peak_memory": {
+          "peak_private_mib": 1137.1,
+          "peak_rss_mib": 4311.6
+        }
+      },
+      "2028": {
+        "exit_code": 0,
+        "status_current_report": "paused",
+        "train_samples": 31770,
+        "development_samples": 38777,
+        "global_step_call1": 512,
+        "global_step_current_report": 1024,
+        "plan_sha256": "a2e4cf4bbbd9b3fb1a73a6b3e279a023f416d20f32b6d75434bc8e9c288d8018",
+        "elapsed_seconds_call1": 631.147,
+        "seconds_per_step_call1": 1.2327,
+        "call2_started": true,
+        "call2_pid": 20108,
+        "peak_memory": {
+          "peak_private_mib": 1162.8,
+          "peak_rss_mib": 4464.0
+        }
+      }
+    }
+  },
+  "projection": {
+    "is_projection": true,
+    "note": "Phép chiếu ước lượng từ lượt đầu (call 1, 512 bước đã gồm thời gian băm toàn bộ artifact ~12 GB) khi 3 seed chạy song song; các lượt sau không băm lại waveforms nên thực tế có thể nhanh hơn.",
+    "benchmark_1thread_sec_per_step": 1.074529,
+    "benchmark_1thread_sec_per_dev_sample": 0.046712,
+    "observed_call1_mean_sec_per_step": 1.2327,
+    "parallel_slowdown_factor_vs_1thread": 1.147,
+    "estimated_dev_sample_sec_parallel": 0.053587,
+    "estimated_hours_per_epoch_per_seed": 1.937,
+    "estimated_hours_5_epochs": 9.69,
+    "estimated_hours_7_epochs": 13.56,
+    "estimated_hours_10_epochs": 19.37
+  },
+  "progress_check_command": "Get-Content logs\\b0_v2_scale2_execution.jsonl -Tail 10"
+}

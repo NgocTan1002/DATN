@@ -1,0 +1,126 @@
+{
+  "report_version": 1,
+  "task": "SCALE2-03",
+  "decision": "D036",
+  "generated_at": "2026-11-18T16:55:18+0700",
+  "status": "ĐẠT",
+  "train_chunks": {
+    "ingested": 89,
+    "already_done": 0
+  },
+  "shard_verification": {
+    "checked_shards": 89,
+    "manifest_rows_scanned": 31770,
+    "total_shard_bytes": 15217312359,
+    "all_matched": true
+  },
+  "artifact": {
+    "name": "train-scale2",
+    "split": "closed_train",
+    "artifact_dir": "data/processed/packed/train_development_scale2_v1",
+    "manifest": "development_scale2_v1.csv",
+    "manifest_version": "development-scale2-v1",
+    "source_manifest_sha256": "6533fced4b3a25ebab9f037a62d34774b44c2fa1f00d17040fd815bd17fa51a3",
+    "artifact_count": 31770,
+    "total_samples": 3030945120,
+    "waveform_bytes": 12123780480,
+    "chunk_shard_count": 89,
+    "index_sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080",
+    "waveforms_sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e",
+    "metadata_sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d",
+    "build_seconds": 86.535,
+    "verify_seconds": 48.885,
+    "verified_rows": 31770,
+    "format_version": "vsasv-packed-v1",
+    "preprocessing_stage": "post_resample_pre_amplitude_pre_crop",
+    "dtype": "float32-le",
+    "crop_seed": 2026
+  },
+  "bit_comparison_with_v1": {
+    "checked_prefix_rows": 15885,
+    "matched_index_rows": 15885,
+    "matched_waveform_byte_slices": 15885,
+    "prefix_total_samples": 1448195221,
+    "prefix_total_bytes": 5792780884,
+    "passed": true,
+    "seconds": 8.677
+  },
+  "smoke_load": {
+    "sample_count": 200,
+    "seed": 2026,
+    "sampled_indices_preview": [
+      3903,
+      10468,
+      16466,
+      31173,
+      16771,
+      21207,
+      28180,
+      31226,
+      3363,
+      28970
+    ],
+    "expected_shape": [
+      64000
+    ],
+    "expected_dtype": "torch.float32",
+    "all_finite": true,
+    "labels_and_metadata_matched": true,
+    "eval_seconds": 1.477,
+    "training_seconds": 0.947,
+    "total_read_seconds": 2.424,
+    "v1_prefix_indices_checked": 80,
+    "v1_prefix_training_checked": 80,
+    "passed": true
+  },
+  "parity_and_d017": {
+    "report_path": "reports/packed_parity_train_scale2_v1.json",
+    "status": "ĐẠT",
+    "passed": true,
+    "seconds": 5850.95,
+    "raw_mismatches": 0,
+    "metadata_mismatches": 0,
+    "eval_item_mismatches": 0,
+    "train_item_mismatches": {
+      "seed2026_epoch0": 0,
+      "seed2027_epoch1": 0,
+      "seed2028_epoch2": 0
+    },
+    "d017_direct_16k_matched": 23073,
+    "d017_direct_16k_total": 23073,
+    "d017_transitive_matched": 31770,
+    "d017_transitive_total": 31770,
+    "d017_passed": true
+  },
+  "kaggle_dataset": {
+    "dataset_metadata_path": ".cache/scale2_03/kaggle_dataset/dataset-metadata.json",
+    "dataset_metadata_sha256": "3c18a16c3b021c7ffb4069cae49bb763cb6c9c0fecaf949de23594da8e717867",
+    "id": "ngctnnguyn1111/doanttnt-scale2-packed-v1",
+    "title": "DoAnTTNT scale2 packed v1",
+    "licenses": [
+      "CC0-1.0"
+    ],
+    "isPrivate": true,
+    "planned_content_dir": "data/processed/packed/train_development_scale2_v1",
+    "files": [
+      {
+        "file": "index.csv",
+        "size_bytes": 6280248,
+        "sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080"
+      },
+      {
+        "file": "metadata.json",
+        "size_bytes": 964,
+        "sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d"
+      },
+      {
+        "file": "waveforms.f32",
+        "size_bytes": 12123780480,
+        "sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e"
+      }
+    ],
+    "expected_total_bytes": 12130061692,
+    "expected_total_gb": 12.13,
+    "expected_total_gib": 11.297
+  }
+}

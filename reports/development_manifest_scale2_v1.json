@@ -1,0 +1,343 @@
+{
+  "task": "SCALE2-02",
+  "decision": "D036",
+  "generated_at_utc": "2026-11-18T08:34:55.781206+00:00",
+  "status": "ĐẠT",
+  "technical_passed": true,
+  "manifest_version": "development-scale2-v1",
+  "source_snapshot": "VSASV-HF-public-snapshot-v1",
+  "seed": 2026,
+  "quota": {
+    "current_train_total": 15885,
+    "current_train_speakers": 153,
+    "additional_total": 15885,
+    "scale2_total": 31770,
+    "current_train": {
+      "bonafide": 7134,
+      "voice_conversion": 4348,
+      "adversarial_attack": 4348,
+      "replay": 55
+    },
+    "scale2_quota": {
+      "bonafide": 14267,
+      "voice_conversion": 8697,
+      "adversarial_attack": 8697,
+      "replay": 109
+    },
+    "additional_needed": {
+      "bonafide": 7133,
+      "voice_conversion": 4349,
+      "adversarial_attack": 4349,
+      "replay": 54
+    },
+    "additional_selected": {
+      "bonafide": 7133,
+      "voice_conversion": 4349,
+      "adversarial_attack": 4349,
+      "replay": 54
+    }
+  },
+  "deduplication": {
+    "raw_counts_by_utt_type": {
+      "bonafide": 9424,
+      "voice_conversion": 6157,
+      "adversarial_attack": 4403,
+      "replay": 105
+    },
+    "clean_counts_by_utt_type": {
+      "bonafide": 9249,
+      "voice_conversion": 6157,
+      "adversarial_attack": 4403,
+      "replay": 105
+    },
+    "dropped_totals_by_utt_type": {
+      "bonafide": 175,
+      "voice_conversion": 0,
+      "adversarial_attack": 0,
+      "replay": 0
+    },
+    "dropped_by_primary_reason": {
+      "train_overlap": {
+        "bonafide": 60,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "dev_overlap": {
+        "bonafide": 45,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "test_overlap": {
+        "bonafide": 0,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "internal_duplicate": {
+        "bonafide": 70,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      }
+    },
+    "overlap_presence_by_source": {
+      "in_train_current": {
+        "bonafide": 60,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "in_dev_all": {
+        "bonafide": 45,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "in_test_all": {
+        "bonafide": 1,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      }
+    },
+    "observed_drop_rate_by_utt_type": {
+      "bonafide": 0.018569609507640066,
+      "voice_conversion": 0.0,
+      "adversarial_attack": 0.0,
+      "replay": 0.0
+    },
+    "observed_drop_rate_overall": 0.00871123500423117,
+    "internal_duplicate_group_count": 70,
+    "internal_duplicate_groups_sample": [
+      {
+        "content_sha256": "0276da423b5c09620d7752747773cfda71190e18d2f977b46fd9723e485517d6",
+        "representative_file": "id00803/00000.wav",
+        "representative_order_sha256": "8ee833cc64cbf04d4e054b1deb965352e13e278c561b85af018401dc31643c06",
+        "removed_files": [
+          "id00975/00000.wav"
+        ]
+      },
+      {
+        "content_sha256": "04a491896e0975a2a7f2e871fcbb58c0fa13027eb92094e57e31dbf05db8e39c",
+        "representative_file": "id00760/00043.wav",
+        "representative_order_sha256": "449fad8bc369f63517e3510d2b0c4f0dd194a6cddbdaa4f3196a2f67936d0995",
+        "removed_files": [
+          "id00760/00021.wav"
+        ]
+      },
+      {
+        "content_sha256": "069c1c5984ac25d1061a26e76d848c213f44dee307ef9cb6c6f0aa4e58ce32c8",
+        "representative_file": "id00803/00018.wav",
+        "representative_order_sha256": "5e0d30d553b72d22627ef59ceb03a838e415bd231014fcfd4e2806c6e0a87c57",
+        "removed_files": [
+          "id00975/00015.wav"
+        ]
+      },
+      {
+        "content_sha256": "09417a35813b19e76586962b21fedcbba18a1cdabe83f67ec551d1b11c7f790a",
+        "representative_file": "id00760/00004.wav",
+        "representative_order_sha256": "48b79089688340e0ac024eb9c3beb99c0251aa144a5df52de38b9cf6dde34007",
+        "removed_files": [
+          "id00760/00026.wav"
+        ]
+      },
+      {
+        "content_sha256": "0af7f9bf4e9726e89533cad3fb603855c95e0b5e65ffd08bc803f98cd56ad890",
+        "representative_file": "id00760/00023.wav",
+        "representative_order_sha256": "476e3a96a681e1b61b175cfc44a19ffc75470507f29a6a1b15fb01db1c93e8c7",
+        "removed_files": [
+          "id00760/00001.wav"
+        ]
+      },
+      {
+        "content_sha256": "16a197ed8a32c7d0942fcfbc26b895ddda4c6b7a5924fe1d5a4e711680ee9cda",
+        "representative_file": "id00724/00006.wav",
+        "representative_order_sha256": "c4ce7cbd858a34466b2034f50eee13a0c0b5de58c449dfbb893ed482627b8d6a",
+        "removed_files": [
+          "id00724/00030.wav"
+        ]
+      },
+      {
+        "content_sha256": "17cd89d01145c1ec9b76a6818ba83a6768640e3d035d0160f26a6d9ab1459adc",
+        "representative_file": "id00760/00020.wav",
+        "representative_order_sha256": "42c6734bad5bcb3d09ed728245af684a1ca72b5b81e630c2d6cec7f9a7430888",
+        "removed_files": [
+          "id00760/00042.wav"
+        ]
+      },
+      {
+        "content_sha256": "20684bd90790eec2e7c38c24741df81383df4cf79a98106a3623e6e4cbe6a851",
+        "representative_file": "id00724/00042.wav",
+        "representative_order_sha256": "1a2f746963e0c532e072101f921e620f5eb834aca51807c44e6f321213f19dce",
+        "removed_files": [
+          "id00724/00018.wav"
+        ]
+      },
+      {
+        "content_sha256": "278dbf53a0cc3fb3d07d3e9b1d95c284ba2f22ae44869151f288d5fdcc29c98f",
+        "representative_file": "id00803/00008.wav",
+        "representative_order_sha256": "14c157e682aee5561054636c5cdcaff73fd9179a73642509387b17d5e7ca8ed6",
+        "removed_files": [
+          "id00975/00006.wav"
+        ]
+      },
+      {
+        "content_sha256": "2e51358bda24555de14b83387e63bb0dbfae179329c559551fbdff91728bc585",
+        "representative_file": "id00760/00027.wav",
+        "representative_order_sha256": "955eab91279702e0c9f0764d9b6d9560f521440b2f28a1834899c983c50921be",
+        "removed_files": [
+          "id00760/00005.wav"
+        ]
+      },
+      {
+        "content_sha256": "30870102a07341411f622f79ce4a348a771c161ef160390519ff6cb39624ad8b",
+        "representative_file": "id00724/00032.wav",
+        "representative_order_sha256": "088e7cc78602c3a1801d050d5184cb263ec8e0c040f58fa817acd2433b7fe4f5",
+        "removed_files": [
+          "id00724/00008.wav"
+        ]
+      },
+      {
+        "content_sha256": "374f4bcaa513e1b15c81f84af51860a3e12ffb904b0b79fab283b3a5c8ad8cbe",
+        "representative_file": "id00760/00019.wav",
+        "representative_order_sha256": "21d394ba1d6f4022953c3ecb9c31965f2f6fc89d522036e1b066fddb752b2da3",
+        "removed_files": [
+          "id00760/00041.wav"
+        ]
+      },
+      {
+        "content_sha256": "3a3a2806f1d1c717b8f7f762a8c5c375871a168c0345c81db9c9421ce999b1dc",
+        "representative_file": "id00724/00000.wav",
+        "representative_order_sha256": "7a0098426fde224e18c1ea740c3539fed788e9c3dc83c7e966a8a21ba65b19ea",
+        "removed_files": [
+          "id00724/00024.wav"
+        ]
+      },
+      {
+        "content_sha256": "3cbf47f34aa319160e9e52d66235b974e770b1212c6fd51f3e68d78bd6ff2b1b",
+        "representative_file": "id00760/00009.wav",
+        "representative_order_sha256": "609914890e3c40764dcc496e3e286dcde587bee18971c688eab4c4779681c145",
+        "removed_files": [
+          "id00760/00031.wav"
+        ]
+      },
+      {
+        "content_sha256": "3ddbef13720d09f4836f5c1c93a5d07fc745103cc4e02fb63a3915e29852252c",
+        "representative_file": "id00724/00002.wav",
+        "representative_order_sha256": "9a04d1091f13aa860f892e48f6636eea9db86cb6300adcfa5dddd11f9765888d",
+        "removed_files": [
+          "id00724/00026.wav"
+        ]
+      },
+      {
+        "content_sha256": "41d6c31a0c787acfa70af3a956570423bcdf9b21e5a1e852e34078b1bc1b600b",
+        "representative_file": "id00542/00079.wav",
+        "representative_order_sha256": "3a1d50d3f9a0d25f89cc8d22a0a998f88af7e0fac0eb3c32ccb8aaa4b9f92434",
+        "removed_files": [
+          "id00542/00006.wav"
+        ]
+      },
+      {
+        "content_sha256": "41f84e8306825471842a46b43b86293f581e4d9a13717eaec8e349c4b870259a",
+        "representative_file": "id00760/00025.wav",
+        "representative_order_sha256": "4539e42bb334172d49979328f97765e40346c70be9b4a84896fc84bdf89c7948",
+        "removed_files": [
+          "id00760/00003.wav"
+        ]
+      },
+      {
+        "content_sha256": "434b29202f2d834c8c98b31c388823a07c0c05c99638846a261332f92ae72a69",
+        "representative_file": "id00760/00030.wav",
+        "representative_order_sha256": "7b40c270af8a19d4113deb981615711d8f09988405e19b9ac379bab457e1bd7f",
+        "removed_files": [
+          "id00760/00008.wav"
+        ]
+      },
+      {
+        "content_sha256": "48f8787ea648e3301e933717afb9930e5b3516535e21936512d11262c17e4df3",
+        "representative_file": "id00542/00080.wav",
+        "representative_order_sha256": "1c1e8cb1ec4701806ff1a67a1c0cafbba97b814fb431d39aac0a8e74e7f126bc",
+        "removed_files": [
+          "id00542/00007.wav"
+        ]
+      },
+      {
+        "content_sha256": "4c3f89d42ea61b6fe07969d443418dd0442a706963f21ec2aa05536bfdbebf82",
+        "representative_file": "id00737/00066.wav",
+        "representative_order_sha256": "c548292c7cd90dc2db094bbe1777a01e609a5853f05adb359c133c4ce63c11f0",
+        "removed_files": [
+          "id00737/00005.wav"
+        ]
+      }
+    ],
+    "selected_local_counts_by_utt_type": {
+      "bonafide": 7133,
+      "voice_conversion": 4349,
+      "adversarial_attack": 4349,
+      "replay": 54
+    },
+    "shortfalls_by_utt_type": {
+      "bonafide": 0,
+      "voice_conversion": 0,
+      "adversarial_attack": 0,
+      "replay": 0
+    },
+    "surplus_local_by_utt_type": {
+      "bonafide": 2116,
+      "voice_conversion": 1808,
+      "adversarial_attack": 54,
+      "replay": 51
+    },
+    "total_raw": 20089,
+    "total_clean": 19914,
+    "total_dropped": 175,
+    "total_shortfall": 0
+  },
+  "manifest": {
+    "path": "data/manifests/development_scale2_v1.csv",
+    "sha256": "6533fced4b3a25ebab9f037a62d34774b44c2fa1f00d17040fd815bd17fa51a3",
+    "version": "development-scale2-v1",
+    "source_snapshot": "VSASV-HF-public-snapshot-v1",
+    "samples": 31770,
+    "counts_by_split": {
+      "closed_train": 31770
+    },
+    "counts_by_utt_type": {
+      "bonafide": 14267,
+      "voice_conversion": 8697,
+      "adversarial_attack": 8697,
+      "replay": 109
+    },
+    "speakers": 225,
+    "shards": 89,
+    "row_order_rule": "Dòng 1..15.885 giữ nguyên thứ tự gốc của closed_train trong development_20k_v2.csv (để bảo toàn source_index và _crop_seed); dòng 15.886..31.770 là 15.885 mẫu mới xếp theo utt_type (bonafide, voice_conversion, adversarial_attack, replay) và SHA256('2026|file') tăng dần."
+  },
+  "independent_audit_summary": {
+    "report_path": "reports/development_manifest_scale2_v1_content_audit.json",
+    "audit_seconds": 1527.912,
+    "checks": {
+      "expected_files": 31770,
+      "audited_files": 31770,
+      "unique_content_hashes": 31770,
+      "duplicate_groups_total": 0,
+      "dev_full_hash_overlaps": 0,
+      "test_full_hash_overlaps": 0,
+      "new_rows_all_ledger_dev_overlaps": 0,
+      "new_rows_all_ledger_test_overlaps": 0,
+      "contains_exact_current_train_prefix": true,
+      "current_train_hash_mismatches": 0,
+      "speaker_overlap_with_closed_dev": 0,
+      "metadata_and_sample_rate_match": true
+    }
+  },
+  "timing_seconds": {
+    "download_and_verify_shards": 13.202,
+    "hash_new_candidates": 0.534,
+    "independent_audit": 1527.912,
+    "total_elapsed": 1546.534,
+    "initial_download_and_verify_seconds": 505.276,
+    "initial_new_candidate_hashing_seconds": 963.618
+  }
+}

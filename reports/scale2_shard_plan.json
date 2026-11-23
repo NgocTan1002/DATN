@@ -1,0 +1,2537 @@
+{
+  "task": "SCALE2-01",
+  "decision": "D036",
+  "generated_at_utc": "2026-11-18T06:01:49.757785+00:00",
+  "repository": "hustep-lab/VSASV-Dataset",
+  "revision": "92de668616780ed4f3d7f58a82262f82b56b4557",
+  "seed": 2026,
+  "no_test_selection_guarantee": "Không đọc audio dev/test; không dùng bảng split của closed_test hay utt_type/speaker_id của closed_test; thứ tự chọn shard hoàn toàn chỉ phụ thuộc SHA256('2026|shard').",
+  "hash_sources": {
+    "audit_summary": {
+      "path": "reports/development_manifest_20k_v2_content_audit.json",
+      "sha256": "25aec6dd922ec532ae3980f35d2ed232ca26f12dfada163ebb9787b32356d0df",
+      "audited_current_train_rows": 15885,
+      "unique_current_train_hashes": 15885
+    },
+    "ledger_summary": {
+      "path": "data/processed/eval_chunks/content_hash_ledger.csv",
+      "sha256": "6676ae932d80e3d8a4768ec21b4f339d1e51fd37319a7d1a088f6ef0160ea65a",
+      "expected_sha256": "6676ae932d80e3d8a4768ec21b4f339d1e51fd37319a7d1a088f6ef0160ea65a",
+      "rows": 69964,
+      "split_counts": {
+        "closed_dev": 39116,
+        "closed_test": 30848
+      },
+      "decision_counts": {
+        "dev_overlap": 41,
+        "internal_duplicate": 407,
+        "kept": 69475,
+        "train_overlap": 41
+      },
+      "unique_dev_hashes_all": 38815,
+      "unique_dev_hashes_kept": 38777,
+      "unique_test_hashes_all": 30742,
+      "unique_test_hashes_kept": 30698,
+      "dedup_policy_note": "Loại trùng theo content_sha256 của MỌI dòng closed_dev và closed_test trong ledger (gồm cả kept lẫn internal_duplicate/overlap, vì mọi dòng đều là nội dung thuộc dev/test gốc); không đọc hay dùng cột utt_type/speaker_id của closed_test."
+    }
+  },
+  "local_pool": {
+    "parquet_dir": "data/raw/vsasv_parquet/data",
+    "expected_shards": 68,
+    "verified_shards": 68,
+    "total_bytes": 10580529098,
+    "all_size_and_sha_matched": true,
+    "all_geometry_files_matched": true,
+    "candidate_hash_cache_hit": true,
+    "candidate_cache_csv": ".cache/scale2_01/local_candidates_scale2.csv",
+    "candidate_cache_json": ".cache/scale2_01/local_candidates_scale2.json"
+  },
+  "quota": {
+    "closed_train_full_counts": {
+      "bonafide": 67809,
+      "voice_conversion": 41335,
+      "adversarial_attack": 41335,
+      "replay": 520
+    },
+    "current_train": {
+      "bonafide": 7134,
+      "voice_conversion": 4348,
+      "adversarial_attack": 4348,
+      "replay": 55
+    },
+    "scale2_total": {
+      "bonafide": 14267,
+      "voice_conversion": 8697,
+      "adversarial_attack": 8697,
+      "replay": 109
+    },
+    "additional_needed": {
+      "bonafide": 7133,
+      "voice_conversion": 4349,
+      "adversarial_attack": 4349,
+      "replay": 54
+    }
+  },
+  "local_dedup": {
+    "raw_counts_by_utt_type": {
+      "bonafide": 3428,
+      "voice_conversion": 2825,
+      "adversarial_attack": 539,
+      "replay": 90
+    },
+    "clean_counts_by_utt_type": {
+      "bonafide": 3347,
+      "voice_conversion": 2825,
+      "adversarial_attack": 539,
+      "replay": 90
+    },
+    "dropped_totals_by_utt_type": {
+      "bonafide": 81,
+      "voice_conversion": 0,
+      "adversarial_attack": 0,
+      "replay": 0
+    },
+    "dropped_by_primary_reason": {
+      "train_overlap": {
+        "bonafide": 43,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "dev_overlap": {
+        "bonafide": 31,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "test_overlap": {
+        "bonafide": 0,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "internal_duplicate": {
+        "bonafide": 7,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      }
+    },
+    "overlap_presence_by_source": {
+      "in_train_current": {
+        "bonafide": 43,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "in_dev_all": {
+        "bonafide": 31,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      },
+      "in_test_all": {
+        "bonafide": 1,
+        "voice_conversion": 0,
+        "adversarial_attack": 0,
+        "replay": 0
+      }
+    },
+    "observed_drop_rate_by_utt_type": {
+      "bonafide": 0.023628938156359393,
+      "voice_conversion": 0.0,
+      "adversarial_attack": 0.0,
+      "replay": 0.0
+    },
+    "observed_drop_rate_overall": 0.011769834350479512,
+    "internal_duplicate_group_count": 7,
+    "internal_duplicate_groups_sample": [
+      {
+        "content_sha256": "4c3f89d42ea61b6fe07969d443418dd0442a706963f21ec2aa05536bfdbebf82",
+        "representative_file": "id00737/00066.wav",
+        "representative_order_sha256": "c548292c7cd90dc2db094bbe1777a01e609a5853f05adb359c133c4ce63c11f0",
+        "removed_files": [
+          "id00737/00005.wav"
+        ]
+      },
+      {
+        "content_sha256": "82cdddfe785227e2754ddecff1e07ba6480a01ffbdb68faeba4a3c63a04ca029",
+        "representative_file": "id00737/00044.wav",
+        "representative_order_sha256": "b1e6c08ac80fd4b04a2200383cb746845fa23775eda769572767487ccdd3d8fc",
+        "removed_files": [
+          "id00737/00105.wav"
+        ]
+      },
+      {
+        "content_sha256": "8c89addd3a21f456b35d5c7aa9d89108684d281e9c3fe418739a9b70828b4cf5",
+        "representative_file": "id00737/00088.wav",
+        "representative_order_sha256": "bd4f5e55e76246eb4883fb49719800400d48c8cdfacdd97edfa095a3b135ba8e",
+        "removed_files": [
+          "id00737/00027.wav"
+        ]
+      },
+      {
+        "content_sha256": "a033462a038ee2303099781b144eb81478ffa5c99c03f5e7f9bc23b897e510aa",
+        "representative_file": "id00737/00085.wav",
+        "representative_order_sha256": "b6ff06591edcafd639801b3721bae0be3a47b7c77ee433a37565119e3e18bd29",
+        "removed_files": [
+          "id00737/00024.wav"
+        ]
+      },
+      {
+        "content_sha256": "c7bc6c263f28a4c8fbeec8f5f109977d3345634c205ffeb84970128b4156a490",
+        "representative_file": "id00737/00067.wav",
+        "representative_order_sha256": "ec4b13cefb91931116af3d9751c136df39b8d37c9b967444d134f5aa9936964a",
+        "removed_files": [
+          "id00737/00006.wav"
+        ]
+      },
+      {
+        "content_sha256": "cdf659b4a4493922df6fdd1b42f375d9f60a6d01576f6fdd3259d6f270a1a0c2",
+        "representative_file": "id00737/00017.wav",
+        "representative_order_sha256": "b957059230ba7442cd1bdb612970e6d2b282ab6d35a677a6ade7841d23597f40",
+        "removed_files": [
+          "id00737/00078.wav"
+        ]
+      },
+      {
+        "content_sha256": "eff197a42ea94f82c378fd2ab64d528a631cddf7c445a61c54e92c57c2b4648b",
+        "representative_file": "id00737/00010.wav",
+        "representative_order_sha256": "bc7929d783b23ab4ff62c218c8a28085e356feceb8f452319a4d94595e715a8e",
+        "removed_files": [
+          "id00737/00071.wav"
+        ]
+      }
+    ],
+    "selected_local_counts_by_utt_type": {
+      "bonafide": 3347,
+      "voice_conversion": 2825,
+      "adversarial_attack": 539,
+      "replay": 54
+    },
+    "shortfalls_by_utt_type": {
+      "bonafide": 3786,
+      "voice_conversion": 1524,
+      "adversarial_attack": 3810,
+      "replay": 0
+    },
+    "surplus_local_by_utt_type": {
+      "bonafide": 0,
+      "voice_conversion": 0,
+      "adversarial_attack": 0,
+      "replay": 36
+    },
+    "total_raw": 6882,
+    "total_clean": 6801,
+    "total_dropped": 81,
+    "total_shortfall": 9120
+  },
+  "remote_shard_plan": {
+    "selection_basis_note": "Thứ tự shard chỉ phụ thuộc SHA256('2026|<tên_shard>') và số dòng closed_train trong data/splits/closed_train.csv + data/metadata/vsasv_metadata.csv; tuyệt đối không đọc hay dùng closed_test để chọn shard.",
+    "ceiling": {
+      "max_shards": 120,
+      "max_bytes_gb": 10000000000,
+      "max_bytes_gib": 10737418240
+    },
+    "total_remote_shards_available": 364,
+    "base_plan_pre_dedup": {
+      "targets_by_utt_type": {
+        "bonafide": 3786,
+        "voice_conversion": 1524,
+        "adversarial_attack": 3810,
+        "replay": 0
+      },
+      "satisfied": true,
+      "shard_count": 35,
+      "total_bytes": 6753103437,
+      "total_gb": 6.753,
+      "total_gib": 6.289,
+      "cumulative_by_utt_type": {
+        "bonafide": 5996,
+        "voice_conversion": 3332,
+        "adversarial_attack": 3864,
+        "replay": 15
+      },
+      "exceeds_shard_ceiling": false,
+      "exceeds_bytes_ceiling_gb": false,
+      "exceeds_bytes_ceiling_gib": false,
+      "exceeds_ceiling": false,
+      "stopping_shard": "train-00408-of-00432.parquet",
+      "shards": [
+        {
+          "order_position": 1,
+          "shard": "train-00204-of-00432.parquet",
+          "shard_index": 204,
+          "order_sha256": "005ed7e0ff706f706104749d2773ef42162d3e757aff38bdc9f91de2dd3724eb",
+          "size_bytes": 144701034,
+          "sha256": "5d5073c80591143972cea80d7fd4085fd15f2fe16fed9e19a2d98db80d26deec",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_bytes": 144701034
+        },
+        {
+          "order_position": 2,
+          "shard": "train-00200-of-00432.parquet",
+          "shard_index": 200,
+          "order_sha256": "00dd8fd43fd0f2827990039efd282ed6a208e827f0d6bf0711244a9cf60975e4",
+          "size_bytes": 129819988,
+          "sha256": "2973529c51b97be4d75b8f9d15ba8274814091350b3a104f9be39be689864e4d",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 9,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 9,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_bytes": 274521022
+        },
+        {
+          "order_position": 3,
+          "shard": "train-00115-of-00432.parquet",
+          "shard_index": 115,
+          "order_sha256": "01c7b6d246e1138e88b350319c3ffeb3d14cbbd906bb770a1ac301f33c575c54",
+          "size_bytes": 122751249,
+          "sha256": "a86a6025b2288ed6544ea1db25ac1428e80e9f7cc21829faf0638654650b87a4",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 386,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 395,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_bytes": 397272271
+        },
+        {
+          "order_position": 4,
+          "shard": "train-00393-of-00432.parquet",
+          "shard_index": 393,
+          "order_sha256": "026d83f8230d7e5cd3f616f6918b7932662ad6aa3c43cd2a02e5b4d0d3100e5d",
+          "size_bytes": 39306423,
+          "sha256": "fa94a6602a48a9ae47e78f0bb25cfd0586868eaf434070a6c272016554d56e42",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 511,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 906,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_bytes": 436578694
+        },
+        {
+          "order_position": 5,
+          "shard": "train-00402-of-00432.parquet",
+          "shard_index": 402,
+          "order_sha256": "027709eb6f447210cda7ca13498f6135b23c5f67001463c8e7b351eb5092945d",
+          "size_bytes": 181099873,
+          "sha256": "20c5aab6e23294f260085e4114212bfac20304c61350662620a4679ec4b3e10b",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 446,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 1352,
+            "voice_conversion": 512,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 617678567
+        },
+        {
+          "order_position": 6,
+          "shard": "train-00325-of-00432.parquet",
+          "shard_index": 325,
+          "order_sha256": "03801d6c1c78f124ba384f8dea085010fb2ef9fe4fc155ed578a0f6853697a3a",
+          "size_bytes": 145604183,
+          "sha256": "87d10f2d592ab9cbbc60143c791b77ef94ae766ee1d7b1a6b9291846abeb52cc",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 511,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 1352,
+            "voice_conversion": 1023,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 763282750
+        },
+        {
+          "order_position": 7,
+          "shard": "train-00117-of-00432.parquet",
+          "shard_index": 117,
+          "order_sha256": "03d74292959e5589786b3aca53a743ffcbaf4fb1241f3a8b4a71edc2bdb3566a",
+          "size_bytes": 222136829,
+          "sha256": "a9ac0bc681eca7b53b5fbee1a83af3aa226b6e75072ebcc74ded29fd53ce88eb",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 506,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 1858,
+            "voice_conversion": 1023,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 985419579
+        },
+        {
+          "order_position": 8,
+          "shard": "train-00327-of-00432.parquet",
+          "shard_index": 327,
+          "order_sha256": "04be1e6b40e70ae3bd2d9c242566f5be47a5c0ef8c8b8351db2257aba85ae6df",
+          "size_bytes": 117536081,
+          "sha256": "a8d5d6258304869b2222f7e9c8b4852e2632eb224d847b965fd5f196681669d0",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 511,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 1858,
+            "voice_conversion": 1534,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 1102955660
+        },
+        {
+          "order_position": 9,
+          "shard": "train-00191-of-00432.parquet",
+          "shard_index": 191,
+          "order_sha256": "04cfe39d4712a6c19682dc7540e40dbfd30306eebfe9df085a169cc91c9e70a5",
+          "size_bytes": 141903880,
+          "sha256": "2a6105f517c44c68c3dc9467b40fa4aa477ad1eabc10872019168bb34f676817",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 1858,
+            "voice_conversion": 1534,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 1244859540
+        },
+        {
+          "order_position": 10,
+          "shard": "train-00114-of-00432.parquet",
+          "shard_index": 114,
+          "order_sha256": "0514a53e73e899223e8f68ba677bf91e5ddf059fb627d96cc143b4e0472c684e",
+          "size_bytes": 138682063,
+          "sha256": "9960e72fd0bae090c37b56232be1064af7d0fc6702d6041d93fd7f8b357cbaf7",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 474,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2332,
+            "voice_conversion": 1534,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 1383541603
+        },
+        {
+          "order_position": 11,
+          "shard": "train-00145-of-00432.parquet",
+          "shard_index": 145,
+          "order_sha256": "05589fd08212232f1ece572354e376293f82e3f2bced090f26686d492cb6750d",
+          "size_bytes": 175607729,
+          "sha256": "93eb8e73ec6bb821341ce64f45041e207a8c2093be6d4175f462de65ee770b7b",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 405,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2737,
+            "voice_conversion": 1534,
+            "adversarial_attack": 0,
+            "replay": 15
+          },
+          "cumulative_bytes": 1559149332
+        },
+        {
+          "order_position": 12,
+          "shard": "train-00172-of-00432.parquet",
+          "shard_index": 172,
+          "order_sha256": "059b15fa1d86eed716fc18e60af28c7c2eb7e941d9aa36f775742bb58982f686",
+          "size_bytes": 165364857,
+          "sha256": "6f6f475dc43445360924a603b8c650e6c1f0a4292ed89e72f21d14c996f95cc3",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 5,
+            "voice_conversion": 156,
+            "adversarial_attack": 154,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2742,
+            "voice_conversion": 1690,
+            "adversarial_attack": 154,
+            "replay": 15
+          },
+          "cumulative_bytes": 1724514189
+        },
+        {
+          "order_position": 13,
+          "shard": "train-00429-of-00432.parquet",
+          "shard_index": 429,
+          "order_sha256": "065c7ba52a3db0d370306b9e091797f54ea3da2b0a4fadf9f5b266366748b402",
+          "size_bytes": 897748804,
+          "sha256": "a28055ecde39801c8a662eb30e5d0001721c502eba32be76469d82f4d7f6f749",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 234,
+            "adversarial_attack": 123,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2742,
+            "voice_conversion": 1924,
+            "adversarial_attack": 277,
+            "replay": 15
+          },
+          "cumulative_bytes": 2622262993
+        },
+        {
+          "order_position": 14,
+          "shard": "train-00281-of-00432.parquet",
+          "shard_index": 281,
+          "order_sha256": "0723e4762495288867f4eb5c9c614585f507ef7abe1bb86a64abb2034102e64a",
+          "size_bytes": 162473779,
+          "sha256": "450173725060c04d40a784abfaa1d3a6f7051152b40f34f203ec47ed4d3fba9d",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2742,
+            "voice_conversion": 1924,
+            "adversarial_attack": 277,
+            "replay": 15
+          },
+          "cumulative_bytes": 2784736772
+        },
+        {
+          "order_position": 15,
+          "shard": "train-00053-of-00432.parquet",
+          "shard_index": 53,
+          "order_sha256": "07966911b259d334f6eedbb25f5c2860d5a741462e9399aff2695602e8641903",
+          "size_bytes": 96428273,
+          "sha256": "09f75f1fb797c243940e8d775aa613d13592b01411d3a30971a693764c29a0b7",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 179,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2921,
+            "voice_conversion": 1924,
+            "adversarial_attack": 277,
+            "replay": 15
+          },
+          "cumulative_bytes": 2881165045
+        },
+        {
+          "order_position": 16,
+          "shard": "train-00267-of-00432.parquet",
+          "shard_index": 267,
+          "order_sha256": "081255db71e6ffd58b3ba65b6bbc8ddf7b2c36049cd402c87cacd47197cbca94",
+          "size_bytes": 228418310,
+          "sha256": "b75c55a3b6c67e1d476d4bf12c4e0d5a39e1e487eafedfe434302861d68ace18",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 11,
+            "voice_conversion": 0,
+            "adversarial_attack": 80,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 2932,
+            "voice_conversion": 1924,
+            "adversarial_attack": 357,
+            "replay": 15
+          },
+          "cumulative_bytes": 3109583355
+        },
+        {
+          "order_position": 17,
+          "shard": "train-00039-of-00432.parquet",
+          "shard_index": 39,
+          "order_sha256": "082cd23a53746bda43af86bfd281ecf737349bbac0423b214b3122d8e2b31ea4",
+          "size_bytes": 107613117,
+          "sha256": "9bbe6604dd02a90ba9a8c3f4d1561814e59771df055ffa9f94cff4b83fca319f",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 375,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3307,
+            "voice_conversion": 1924,
+            "adversarial_attack": 357,
+            "replay": 15
+          },
+          "cumulative_bytes": 3217196472
+        },
+        {
+          "order_position": 18,
+          "shard": "train-00329-of-00432.parquet",
+          "shard_index": 329,
+          "order_sha256": "0873516e386276dd99a7f8dd3ae3b552e0a735ac29d4c463bdbfedb1b25a7c8c",
+          "size_bytes": 133742230,
+          "sha256": "ee7b9dce6217adf7f68858d27120d3f5f975c52a4a9c42c7923de0f17484a648",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 511,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3307,
+            "voice_conversion": 1924,
+            "adversarial_attack": 868,
+            "replay": 15
+          },
+          "cumulative_bytes": 3350938702
+        },
+        {
+          "order_position": 19,
+          "shard": "train-00302-of-00432.parquet",
+          "shard_index": 302,
+          "order_sha256": "096422bcf170a21ab9c4cd5b5c6dfef05dc691a443bbbe1d64117576df9c11e6",
+          "size_bytes": 182892480,
+          "sha256": "16c5740f63d180e40c746e72c979d8b7d8fcda893564904680b3359ad66ca7d9",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 6,
+            "voice_conversion": 82,
+            "adversarial_attack": 82,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3313,
+            "voice_conversion": 2006,
+            "adversarial_attack": 950,
+            "replay": 15
+          },
+          "cumulative_bytes": 3533831182
+        },
+        {
+          "order_position": 20,
+          "shard": "train-00363-of-00432.parquet",
+          "shard_index": 363,
+          "order_sha256": "09ef79b2e1421b2228bf955f2b48ca0a85a0eee3af606c163f3f4dd0d7ec1071",
+          "size_bytes": 164917600,
+          "sha256": "09e031f81406047ce84175af1de9c6b3ee588a0600c9432057796c9438753133",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 511,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3313,
+            "voice_conversion": 2006,
+            "adversarial_attack": 1461,
+            "replay": 15
+          },
+          "cumulative_bytes": 3698748782
+        },
+        {
+          "order_position": 21,
+          "shard": "train-00243-of-00432.parquet",
+          "shard_index": 243,
+          "order_sha256": "0ac32e20a4ff410d7a5b17135a0ccc4673e6d80a0429701be0070154ecdfe0ae",
+          "size_bytes": 158779058,
+          "sha256": "03d7527337ea1b1df48e53f140caf7baa630195526b64b70223f22347123b4d9",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3313,
+            "voice_conversion": 2006,
+            "adversarial_attack": 1461,
+            "replay": 15
+          },
+          "cumulative_bytes": 3857527840
+        },
+        {
+          "order_position": 22,
+          "shard": "train-00104-of-00432.parquet",
+          "shard_index": 104,
+          "order_sha256": "0bc7b109476044e0489601acb6c6e65bc1ede848366d855ced7f242925a5ec9b",
+          "size_bytes": 153434517,
+          "sha256": "7192bcbb6b0022c51155493f250c36a2e6883e59100f817ea202dc12ab9cdb71",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 278,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 3591,
+            "voice_conversion": 2006,
+            "adversarial_attack": 1461,
+            "replay": 15
+          },
+          "cumulative_bytes": 4010962357
+        },
+        {
+          "order_position": 23,
+          "shard": "train-00012-of-00432.parquet",
+          "shard_index": 12,
+          "order_sha256": "0bcc42b510f3706afbac24cef95b66ca298dc25bafe321acdfbb267d633634a6",
+          "size_bytes": 90955955,
+          "sha256": "27f201d80b586dde4af0e092eb7b3e59cf3a41141c16765c0c32c4c6ca0f2aa4",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 512,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4103,
+            "voice_conversion": 2006,
+            "adversarial_attack": 1461,
+            "replay": 15
+          },
+          "cumulative_bytes": 4101918312
+        },
+        {
+          "order_position": 24,
+          "shard": "train-00368-of-00432.parquet",
+          "shard_index": 368,
+          "order_sha256": "0bcd4d0b253fe655a26f661398f0a447f5f4c72cfcc3c5965a463df8a8dbb6b7",
+          "size_bytes": 141044232,
+          "sha256": "6d8453f721d9f55b12d924a574df52eaa64f28fa23c2c73e5f699d8f919ebe92",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 511,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4103,
+            "voice_conversion": 2006,
+            "adversarial_attack": 1972,
+            "replay": 15
+          },
+          "cumulative_bytes": 4242962544
+        },
+        {
+          "order_position": 25,
+          "shard": "train-00410-of-00432.parquet",
+          "shard_index": 410,
+          "order_sha256": "0bdd535f5065b1698a62292e295e718136e2165414392e19507f07977a6693ee",
+          "size_bytes": 696966177,
+          "sha256": "9b394604d254a0b508b332a0b8f313f610ee2a068ffeaf0772babdbdb84ac369",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 222,
+            "adversarial_attack": 275,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4103,
+            "voice_conversion": 2228,
+            "adversarial_attack": 2247,
+            "replay": 15
+          },
+          "cumulative_bytes": 4939928721
+        },
+        {
+          "order_position": 26,
+          "shard": "train-00158-of-00432.parquet",
+          "shard_index": 158,
+          "order_sha256": "0d3ef7d86216af1b3360fecef96ad15c64f44085612ca69f94e32945472d44e6",
+          "size_bytes": 227860499,
+          "sha256": "97686ebbfaf327c49c9de130b896c8bc4422ec2b68447f1328642a900331f3f1",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 371,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4474,
+            "voice_conversion": 2228,
+            "adversarial_attack": 2247,
+            "replay": 15
+          },
+          "cumulative_bytes": 5167789220
+        },
+        {
+          "order_position": 27,
+          "shard": "train-00387-of-00432.parquet",
+          "shard_index": 387,
+          "order_sha256": "0d79388d34f1d121c32a38de78341c52f38e4f00092ec5fa319c758a0b0b9f3a",
+          "size_bytes": 125697135,
+          "sha256": "f52b760cdcd4dddce4978e4f10debce92ab1f09869030c118a9489dd90e8ad08",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 138,
+            "voice_conversion": 0,
+            "adversarial_attack": 373,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4612,
+            "voice_conversion": 2228,
+            "adversarial_attack": 2620,
+            "replay": 15
+          },
+          "cumulative_bytes": 5293486355
+        },
+        {
+          "order_position": 28,
+          "shard": "train-00077-of-00432.parquet",
+          "shard_index": 77,
+          "order_sha256": "0e54b77245561fe8a1ae5b3deec9d170ae0b6533cbb1c7a1deb5654cf02ebf13",
+          "size_bytes": 134186202,
+          "sha256": "76f9dde9aa9fc5aeed1ad177bb6d2b5928d2aa6578eca836923ea470445355a2",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 377,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4989,
+            "voice_conversion": 2228,
+            "adversarial_attack": 2620,
+            "replay": 15
+          },
+          "cumulative_bytes": 5427672557
+        },
+        {
+          "order_position": 29,
+          "shard": "train-00178-of-00432.parquet",
+          "shard_index": 178,
+          "order_sha256": "0e70495bc9afbc30f758bc6b08b73ad5abc01ab2791eaafc05e504bd76df33e1",
+          "size_bytes": 162511188,
+          "sha256": "0fdc45d866db665828a6dee37283ef7aed2b6a821115178f21bdc5c583eb5403",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 454,
+            "adversarial_attack": 58,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 4989,
+            "voice_conversion": 2682,
+            "adversarial_attack": 2678,
+            "replay": 15
+          },
+          "cumulative_bytes": 5590183745
+        },
+        {
+          "order_position": 30,
+          "shard": "train-00150-of-00432.parquet",
+          "shard_index": 150,
+          "order_sha256": "0f9bafa345074e67c38c9710fadbe2a20361c108011d70d070232a7a6f9bfac3",
+          "size_bytes": 204352196,
+          "sha256": "201d918b092f05fef2335a9f749f95312899434aeb46c37c5434f221d0683c43",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 495,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5484,
+            "voice_conversion": 2682,
+            "adversarial_attack": 2678,
+            "replay": 15
+          },
+          "cumulative_bytes": 5794535941
+        },
+        {
+          "order_position": 31,
+          "shard": "train-00057-of-00432.parquet",
+          "shard_index": 57,
+          "order_sha256": "0ffca774b37d4574c1f7e30f769787eb2460d7fcab9a84a8bede5a60cb35448a",
+          "size_bytes": 78912995,
+          "sha256": "3cb8e53ffb99061509985d751b676664636d652bb98f76d5af57908e4b400003",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 512,
+            "voice_conversion": 0,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5996,
+            "voice_conversion": 2682,
+            "adversarial_attack": 2678,
+            "replay": 15
+          },
+          "cumulative_bytes": 5873448936
+        },
+        {
+          "order_position": 32,
+          "shard": "train-00181-of-00432.parquet",
+          "shard_index": 181,
+          "order_sha256": "11c282d63b41edd94f2f764f0491ad7223148ba0e9b78cbd4b5f15689a68653a",
+          "size_bytes": 180326974,
+          "sha256": "1d6229580289d0ed38a87d5192173e875d7483b0826d62cee3e556e3dc8ffb48",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 512,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5996,
+            "voice_conversion": 2682,
+            "adversarial_attack": 3190,
+            "replay": 15
+          },
+          "cumulative_bytes": 6053775910
+        },
+        {
+          "order_position": 33,
+          "shard": "train-00356-of-00432.parquet",
+          "shard_index": 356,
+          "order_sha256": "12948debced63932f3d8c296ec3e41412d210ece5b645a30c0ba0d3c60e942dd",
+          "size_bytes": 151498074,
+          "sha256": "c2b7603232f1e152cbd30676a96c5608ea59ead66eeb5589ee94d1ae4a825556",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 511,
+            "adversarial_attack": 0,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5996,
+            "voice_conversion": 3193,
+            "adversarial_attack": 3190,
+            "replay": 15
+          },
+          "cumulative_bytes": 6205273984
+        },
+        {
+          "order_position": 34,
+          "shard": "train-00362-of-00432.parquet",
+          "shard_index": 362,
+          "order_sha256": "12a7fb1614191eee322f85935d023a465c582c37c9a4fe62dc46498a468c7b4e",
+          "size_bytes": 131037783,
+          "sha256": "acc746c0b7d2beef7b2cb1f23f211e4a25aa4a4c4c4646528754099f1e87717a",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 0,
+            "adversarial_attack": 511,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5996,
+            "voice_conversion": 3193,
+            "adversarial_attack": 3701,
+            "replay": 15
+          },
+          "cumulative_bytes": 6336311767
+        },
+        {
+          "order_position": 35,
+          "shard": "train-00408-of-00432.parquet",
+          "shard_index": 408,
+          "order_sha256": "13a332ca8d6be63e65ba7f147246b9a2a7631bb37b8dc89a3376122148172459",
+          "size_bytes": 416791670,
+          "sha256": "ad58ff225ace793310eb9f46511c0b48ba3b1489dbf04df1f1675719c6fae9f9",
+          "closed_train_unselected_by_utt_type": {
+            "bonafide": 0,
+            "voice_conversion": 139,
+            "adversarial_attack": 163,
+            "replay": 0
+          },
+          "cumulative_by_utt_type": {
+            "bonafide": 5996,
+            "voice_conversion": 3332,
+            "adversarial_attack": 3864,
+            "replay": 15
+          },
+          "cumulative_bytes": 6753103437
+        }
+      ]
+    },
+    "reserve_estimate_by_utt_type_rate": {
+      "is_estimate": true,
+      "note": "Ước tính chia thiếu hụt mỗi utt_type cho (1 - tỷ_lệ_loại_trùng_utt_type_ở_bước_4); chỉ mang tính lập kế hoạch trước khử trùng shard mới.",
+      "rates_used": {
+        "bonafide": 0.023628938156359393,
+        "voice_conversion": 0.0,
+        "adversarial_attack": 0.0,
+        "replay": 0.0
+      },
+      "plan": {
+        "targets_by_utt_type": {
+          "bonafide": 3878,
+          "voice_conversion": 1524,
+          "adversarial_attack": 3810,
+          "replay": 0
+        },
+        "satisfied": true,
+        "shard_count": 35,
+        "total_bytes": 6753103437,
+        "total_gb": 6.753,
+        "total_gib": 6.289,
+        "cumulative_by_utt_type": {
+          "bonafide": 5996,
+          "voice_conversion": 3332,
+          "adversarial_attack": 3864,
+          "replay": 15
+        },
+        "exceeds_shard_ceiling": false,
+        "exceeds_bytes_ceiling_gb": false,
+        "exceeds_bytes_ceiling_gib": false,
+        "exceeds_ceiling": false,
+        "stopping_shard": "train-00408-of-00432.parquet",
+        "shards": [
+          {
+            "order_position": 1,
+            "shard": "train-00204-of-00432.parquet",
+            "shard_index": 204,
+            "order_sha256": "005ed7e0ff706f706104749d2773ef42162d3e757aff38bdc9f91de2dd3724eb",
+            "size_bytes": 144701034,
+            "sha256": "5d5073c80591143972cea80d7fd4085fd15f2fe16fed9e19a2d98db80d26deec",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 144701034
+          },
+          {
+            "order_position": 2,
+            "shard": "train-00200-of-00432.parquet",
+            "shard_index": 200,
+            "order_sha256": "00dd8fd43fd0f2827990039efd282ed6a208e827f0d6bf0711244a9cf60975e4",
+            "size_bytes": 129819988,
+            "sha256": "2973529c51b97be4d75b8f9d15ba8274814091350b3a104f9be39be689864e4d",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 9,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 9,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 274521022
+          },
+          {
+            "order_position": 3,
+            "shard": "train-00115-of-00432.parquet",
+            "shard_index": 115,
+            "order_sha256": "01c7b6d246e1138e88b350319c3ffeb3d14cbbd906bb770a1ac301f33c575c54",
+            "size_bytes": 122751249,
+            "sha256": "a86a6025b2288ed6544ea1db25ac1428e80e9f7cc21829faf0638654650b87a4",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 386,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 395,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 397272271
+          },
+          {
+            "order_position": 4,
+            "shard": "train-00393-of-00432.parquet",
+            "shard_index": 393,
+            "order_sha256": "026d83f8230d7e5cd3f616f6918b7932662ad6aa3c43cd2a02e5b4d0d3100e5d",
+            "size_bytes": 39306423,
+            "sha256": "fa94a6602a48a9ae47e78f0bb25cfd0586868eaf434070a6c272016554d56e42",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 511,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 906,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 436578694
+          },
+          {
+            "order_position": 5,
+            "shard": "train-00402-of-00432.parquet",
+            "shard_index": 402,
+            "order_sha256": "027709eb6f447210cda7ca13498f6135b23c5f67001463c8e7b351eb5092945d",
+            "size_bytes": 181099873,
+            "sha256": "20c5aab6e23294f260085e4114212bfac20304c61350662620a4679ec4b3e10b",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 446,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1352,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 617678567
+          },
+          {
+            "order_position": 6,
+            "shard": "train-00325-of-00432.parquet",
+            "shard_index": 325,
+            "order_sha256": "03801d6c1c78f124ba384f8dea085010fb2ef9fe4fc155ed578a0f6853697a3a",
+            "size_bytes": 145604183,
+            "sha256": "87d10f2d592ab9cbbc60143c791b77ef94ae766ee1d7b1a6b9291846abeb52cc",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1352,
+              "voice_conversion": 1023,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 763282750
+          },
+          {
+            "order_position": 7,
+            "shard": "train-00117-of-00432.parquet",
+            "shard_index": 117,
+            "order_sha256": "03d74292959e5589786b3aca53a743ffcbaf4fb1241f3a8b4a71edc2bdb3566a",
+            "size_bytes": 222136829,
+            "sha256": "a9ac0bc681eca7b53b5fbee1a83af3aa226b6e75072ebcc74ded29fd53ce88eb",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 506,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1023,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 985419579
+          },
+          {
+            "order_position": 8,
+            "shard": "train-00327-of-00432.parquet",
+            "shard_index": 327,
+            "order_sha256": "04be1e6b40e70ae3bd2d9c242566f5be47a5c0ef8c8b8351db2257aba85ae6df",
+            "size_bytes": 117536081,
+            "sha256": "a8d5d6258304869b2222f7e9c8b4852e2632eb224d847b965fd5f196681669d0",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1102955660
+          },
+          {
+            "order_position": 9,
+            "shard": "train-00191-of-00432.parquet",
+            "shard_index": 191,
+            "order_sha256": "04cfe39d4712a6c19682dc7540e40dbfd30306eebfe9df085a169cc91c9e70a5",
+            "size_bytes": 141903880,
+            "sha256": "2a6105f517c44c68c3dc9467b40fa4aa477ad1eabc10872019168bb34f676817",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1244859540
+          },
+          {
+            "order_position": 10,
+            "shard": "train-00114-of-00432.parquet",
+            "shard_index": 114,
+            "order_sha256": "0514a53e73e899223e8f68ba677bf91e5ddf059fb627d96cc143b4e0472c684e",
+            "size_bytes": 138682063,
+            "sha256": "9960e72fd0bae090c37b56232be1064af7d0fc6702d6041d93fd7f8b357cbaf7",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 474,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2332,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1383541603
+          },
+          {
+            "order_position": 11,
+            "shard": "train-00145-of-00432.parquet",
+            "shard_index": 145,
+            "order_sha256": "05589fd08212232f1ece572354e376293f82e3f2bced090f26686d492cb6750d",
+            "size_bytes": 175607729,
+            "sha256": "93eb8e73ec6bb821341ce64f45041e207a8c2093be6d4175f462de65ee770b7b",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 405,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2737,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1559149332
+          },
+          {
+            "order_position": 12,
+            "shard": "train-00172-of-00432.parquet",
+            "shard_index": 172,
+            "order_sha256": "059b15fa1d86eed716fc18e60af28c7c2eb7e941d9aa36f775742bb58982f686",
+            "size_bytes": 165364857,
+            "sha256": "6f6f475dc43445360924a603b8c650e6c1f0a4292ed89e72f21d14c996f95cc3",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 5,
+              "voice_conversion": 156,
+              "adversarial_attack": 154,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1690,
+              "adversarial_attack": 154,
+              "replay": 15
+            },
+            "cumulative_bytes": 1724514189
+          },
+          {
+            "order_position": 13,
+            "shard": "train-00429-of-00432.parquet",
+            "shard_index": 429,
+            "order_sha256": "065c7ba52a3db0d370306b9e091797f54ea3da2b0a4fadf9f5b266366748b402",
+            "size_bytes": 897748804,
+            "sha256": "a28055ecde39801c8a662eb30e5d0001721c502eba32be76469d82f4d7f6f749",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 234,
+              "adversarial_attack": 123,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2622262993
+          },
+          {
+            "order_position": 14,
+            "shard": "train-00281-of-00432.parquet",
+            "shard_index": 281,
+            "order_sha256": "0723e4762495288867f4eb5c9c614585f507ef7abe1bb86a64abb2034102e64a",
+            "size_bytes": 162473779,
+            "sha256": "450173725060c04d40a784abfaa1d3a6f7051152b40f34f203ec47ed4d3fba9d",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2784736772
+          },
+          {
+            "order_position": 15,
+            "shard": "train-00053-of-00432.parquet",
+            "shard_index": 53,
+            "order_sha256": "07966911b259d334f6eedbb25f5c2860d5a741462e9399aff2695602e8641903",
+            "size_bytes": 96428273,
+            "sha256": "09f75f1fb797c243940e8d775aa613d13592b01411d3a30971a693764c29a0b7",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 179,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2921,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2881165045
+          },
+          {
+            "order_position": 16,
+            "shard": "train-00267-of-00432.parquet",
+            "shard_index": 267,
+            "order_sha256": "081255db71e6ffd58b3ba65b6bbc8ddf7b2c36049cd402c87cacd47197cbca94",
+            "size_bytes": 228418310,
+            "sha256": "b75c55a3b6c67e1d476d4bf12c4e0d5a39e1e487eafedfe434302861d68ace18",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 11,
+              "voice_conversion": 0,
+              "adversarial_attack": 80,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2932,
+              "voice_conversion": 1924,
+              "adversarial_attack": 357,
+              "replay": 15
+            },
+            "cumulative_bytes": 3109583355
+          },
+          {
+            "order_position": 17,
+            "shard": "train-00039-of-00432.parquet",
+            "shard_index": 39,
+            "order_sha256": "082cd23a53746bda43af86bfd281ecf737349bbac0423b214b3122d8e2b31ea4",
+            "size_bytes": 107613117,
+            "sha256": "9bbe6604dd02a90ba9a8c3f4d1561814e59771df055ffa9f94cff4b83fca319f",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 375,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3307,
+              "voice_conversion": 1924,
+              "adversarial_attack": 357,
+              "replay": 15
+            },
+            "cumulative_bytes": 3217196472
+          },
+          {
+            "order_position": 18,
+            "shard": "train-00329-of-00432.parquet",
+            "shard_index": 329,
+            "order_sha256": "0873516e386276dd99a7f8dd3ae3b552e0a735ac29d4c463bdbfedb1b25a7c8c",
+            "size_bytes": 133742230,
+            "sha256": "ee7b9dce6217adf7f68858d27120d3f5f975c52a4a9c42c7923de0f17484a648",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3307,
+              "voice_conversion": 1924,
+              "adversarial_attack": 868,
+              "replay": 15
+            },
+            "cumulative_bytes": 3350938702
+          },
+          {
+            "order_position": 19,
+            "shard": "train-00302-of-00432.parquet",
+            "shard_index": 302,
+            "order_sha256": "096422bcf170a21ab9c4cd5b5c6dfef05dc691a443bbbe1d64117576df9c11e6",
+            "size_bytes": 182892480,
+            "sha256": "16c5740f63d180e40c746e72c979d8b7d8fcda893564904680b3359ad66ca7d9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 6,
+              "voice_conversion": 82,
+              "adversarial_attack": 82,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 950,
+              "replay": 15
+            },
+            "cumulative_bytes": 3533831182
+          },
+          {
+            "order_position": 20,
+            "shard": "train-00363-of-00432.parquet",
+            "shard_index": 363,
+            "order_sha256": "09ef79b2e1421b2228bf955f2b48ca0a85a0eee3af606c163f3f4dd0d7ec1071",
+            "size_bytes": 164917600,
+            "sha256": "09e031f81406047ce84175af1de9c6b3ee588a0600c9432057796c9438753133",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 3698748782
+          },
+          {
+            "order_position": 21,
+            "shard": "train-00243-of-00432.parquet",
+            "shard_index": 243,
+            "order_sha256": "0ac32e20a4ff410d7a5b17135a0ccc4673e6d80a0429701be0070154ecdfe0ae",
+            "size_bytes": 158779058,
+            "sha256": "03d7527337ea1b1df48e53f140caf7baa630195526b64b70223f22347123b4d9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 3857527840
+          },
+          {
+            "order_position": 22,
+            "shard": "train-00104-of-00432.parquet",
+            "shard_index": 104,
+            "order_sha256": "0bc7b109476044e0489601acb6c6e65bc1ede848366d855ced7f242925a5ec9b",
+            "size_bytes": 153434517,
+            "sha256": "7192bcbb6b0022c51155493f250c36a2e6883e59100f817ea202dc12ab9cdb71",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 278,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3591,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 4010962357
+          },
+          {
+            "order_position": 23,
+            "shard": "train-00012-of-00432.parquet",
+            "shard_index": 12,
+            "order_sha256": "0bcc42b510f3706afbac24cef95b66ca298dc25bafe321acdfbb267d633634a6",
+            "size_bytes": 90955955,
+            "sha256": "27f201d80b586dde4af0e092eb7b3e59cf3a41141c16765c0c32c4c6ca0f2aa4",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 512,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 4101918312
+          },
+          {
+            "order_position": 24,
+            "shard": "train-00368-of-00432.parquet",
+            "shard_index": 368,
+            "order_sha256": "0bcd4d0b253fe655a26f661398f0a447f5f4c72cfcc3c5965a463df8a8dbb6b7",
+            "size_bytes": 141044232,
+            "sha256": "6d8453f721d9f55b12d924a574df52eaa64f28fa23c2c73e5f699d8f919ebe92",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1972,
+              "replay": 15
+            },
+            "cumulative_bytes": 4242962544
+          },
+          {
+            "order_position": 25,
+            "shard": "train-00410-of-00432.parquet",
+            "shard_index": 410,
+            "order_sha256": "0bdd535f5065b1698a62292e295e718136e2165414392e19507f07977a6693ee",
+            "size_bytes": 696966177,
+            "sha256": "9b394604d254a0b508b332a0b8f313f610ee2a068ffeaf0772babdbdb84ac369",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 222,
+              "adversarial_attack": 275,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2247,
+              "replay": 15
+            },
+            "cumulative_bytes": 4939928721
+          },
+          {
+            "order_position": 26,
+            "shard": "train-00158-of-00432.parquet",
+            "shard_index": 158,
+            "order_sha256": "0d3ef7d86216af1b3360fecef96ad15c64f44085612ca69f94e32945472d44e6",
+            "size_bytes": 227860499,
+            "sha256": "97686ebbfaf327c49c9de130b896c8bc4422ec2b68447f1328642a900331f3f1",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 371,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4474,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2247,
+              "replay": 15
+            },
+            "cumulative_bytes": 5167789220
+          },
+          {
+            "order_position": 27,
+            "shard": "train-00387-of-00432.parquet",
+            "shard_index": 387,
+            "order_sha256": "0d79388d34f1d121c32a38de78341c52f38e4f00092ec5fa319c758a0b0b9f3a",
+            "size_bytes": 125697135,
+            "sha256": "f52b760cdcd4dddce4978e4f10debce92ab1f09869030c118a9489dd90e8ad08",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 138,
+              "voice_conversion": 0,
+              "adversarial_attack": 373,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4612,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2620,
+              "replay": 15
+            },
+            "cumulative_bytes": 5293486355
+          },
+          {
+            "order_position": 28,
+            "shard": "train-00077-of-00432.parquet",
+            "shard_index": 77,
+            "order_sha256": "0e54b77245561fe8a1ae5b3deec9d170ae0b6533cbb1c7a1deb5654cf02ebf13",
+            "size_bytes": 134186202,
+            "sha256": "76f9dde9aa9fc5aeed1ad177bb6d2b5928d2aa6578eca836923ea470445355a2",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 377,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4989,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2620,
+              "replay": 15
+            },
+            "cumulative_bytes": 5427672557
+          },
+          {
+            "order_position": 29,
+            "shard": "train-00178-of-00432.parquet",
+            "shard_index": 178,
+            "order_sha256": "0e70495bc9afbc30f758bc6b08b73ad5abc01ab2791eaafc05e504bd76df33e1",
+            "size_bytes": 162511188,
+            "sha256": "0fdc45d866db665828a6dee37283ef7aed2b6a821115178f21bdc5c583eb5403",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 454,
+              "adversarial_attack": 58,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4989,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5590183745
+          },
+          {
+            "order_position": 30,
+            "shard": "train-00150-of-00432.parquet",
+            "shard_index": 150,
+            "order_sha256": "0f9bafa345074e67c38c9710fadbe2a20361c108011d70d070232a7a6f9bfac3",
+            "size_bytes": 204352196,
+            "sha256": "201d918b092f05fef2335a9f749f95312899434aeb46c37c5434f221d0683c43",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 495,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5484,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5794535941
+          },
+          {
+            "order_position": 31,
+            "shard": "train-00057-of-00432.parquet",
+            "shard_index": 57,
+            "order_sha256": "0ffca774b37d4574c1f7e30f769787eb2460d7fcab9a84a8bede5a60cb35448a",
+            "size_bytes": 78912995,
+            "sha256": "3cb8e53ffb99061509985d751b676664636d652bb98f76d5af57908e4b400003",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 512,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5873448936
+          },
+          {
+            "order_position": 32,
+            "shard": "train-00181-of-00432.parquet",
+            "shard_index": 181,
+            "order_sha256": "11c282d63b41edd94f2f764f0491ad7223148ba0e9b78cbd4b5f15689a68653a",
+            "size_bytes": 180326974,
+            "sha256": "1d6229580289d0ed38a87d5192173e875d7483b0826d62cee3e556e3dc8ffb48",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 512,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 2682,
+              "adversarial_attack": 3190,
+              "replay": 15
+            },
+            "cumulative_bytes": 6053775910
+          },
+          {
+            "order_position": 33,
+            "shard": "train-00356-of-00432.parquet",
+            "shard_index": 356,
+            "order_sha256": "12948debced63932f3d8c296ec3e41412d210ece5b645a30c0ba0d3c60e942dd",
+            "size_bytes": 151498074,
+            "sha256": "c2b7603232f1e152cbd30676a96c5608ea59ead66eeb5589ee94d1ae4a825556",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3193,
+              "adversarial_attack": 3190,
+              "replay": 15
+            },
+            "cumulative_bytes": 6205273984
+          },
+          {
+            "order_position": 34,
+            "shard": "train-00362-of-00432.parquet",
+            "shard_index": 362,
+            "order_sha256": "12a7fb1614191eee322f85935d023a465c582c37c9a4fe62dc46498a468c7b4e",
+            "size_bytes": 131037783,
+            "sha256": "acc746c0b7d2beef7b2cb1f23f211e4a25aa4a4c4c4646528754099f1e87717a",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3193,
+              "adversarial_attack": 3701,
+              "replay": 15
+            },
+            "cumulative_bytes": 6336311767
+          },
+          {
+            "order_position": 35,
+            "shard": "train-00408-of-00432.parquet",
+            "shard_index": 408,
+            "order_sha256": "13a332ca8d6be63e65ba7f147246b9a2a7631bb37b8dc89a3376122148172459",
+            "size_bytes": 416791670,
+            "sha256": "ad58ff225ace793310eb9f46511c0b48ba3b1489dbf04df1f1675719c6fae9f9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 139,
+              "adversarial_attack": 163,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3332,
+              "adversarial_attack": 3864,
+              "replay": 15
+            },
+            "cumulative_bytes": 6753103437
+          }
+        ]
+      }
+    },
+    "reserve_estimate_overall_rate": {
+      "is_estimate": true,
+      "note": "Ước tính chia thiếu hụt mọi utt_type cho (1 - tỷ_lệ_loại_trùng_chung_toàn_pool_cục_bộ_bước_4); đề phòng trường hợp shard mới có tỷ lệ trùng VC/AP khác 0% dù cục bộ VC/AP ít trùng.",
+      "rate_used": 0.011769834350479512,
+      "plan": {
+        "targets_by_utt_type": {
+          "bonafide": 3832,
+          "voice_conversion": 1543,
+          "adversarial_attack": 3856,
+          "replay": 0
+        },
+        "satisfied": true,
+        "shard_count": 35,
+        "total_bytes": 6753103437,
+        "total_gb": 6.753,
+        "total_gib": 6.289,
+        "cumulative_by_utt_type": {
+          "bonafide": 5996,
+          "voice_conversion": 3332,
+          "adversarial_attack": 3864,
+          "replay": 15
+        },
+        "exceeds_shard_ceiling": false,
+        "exceeds_bytes_ceiling_gb": false,
+        "exceeds_bytes_ceiling_gib": false,
+        "exceeds_ceiling": false,
+        "stopping_shard": "train-00408-of-00432.parquet",
+        "shards": [
+          {
+            "order_position": 1,
+            "shard": "train-00204-of-00432.parquet",
+            "shard_index": 204,
+            "order_sha256": "005ed7e0ff706f706104749d2773ef42162d3e757aff38bdc9f91de2dd3724eb",
+            "size_bytes": 144701034,
+            "sha256": "5d5073c80591143972cea80d7fd4085fd15f2fe16fed9e19a2d98db80d26deec",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 144701034
+          },
+          {
+            "order_position": 2,
+            "shard": "train-00200-of-00432.parquet",
+            "shard_index": 200,
+            "order_sha256": "00dd8fd43fd0f2827990039efd282ed6a208e827f0d6bf0711244a9cf60975e4",
+            "size_bytes": 129819988,
+            "sha256": "2973529c51b97be4d75b8f9d15ba8274814091350b3a104f9be39be689864e4d",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 9,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 9,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 274521022
+          },
+          {
+            "order_position": 3,
+            "shard": "train-00115-of-00432.parquet",
+            "shard_index": 115,
+            "order_sha256": "01c7b6d246e1138e88b350319c3ffeb3d14cbbd906bb770a1ac301f33c575c54",
+            "size_bytes": 122751249,
+            "sha256": "a86a6025b2288ed6544ea1db25ac1428e80e9f7cc21829faf0638654650b87a4",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 386,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 395,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 397272271
+          },
+          {
+            "order_position": 4,
+            "shard": "train-00393-of-00432.parquet",
+            "shard_index": 393,
+            "order_sha256": "026d83f8230d7e5cd3f616f6918b7932662ad6aa3c43cd2a02e5b4d0d3100e5d",
+            "size_bytes": 39306423,
+            "sha256": "fa94a6602a48a9ae47e78f0bb25cfd0586868eaf434070a6c272016554d56e42",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 511,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 906,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_bytes": 436578694
+          },
+          {
+            "order_position": 5,
+            "shard": "train-00402-of-00432.parquet",
+            "shard_index": 402,
+            "order_sha256": "027709eb6f447210cda7ca13498f6135b23c5f67001463c8e7b351eb5092945d",
+            "size_bytes": 181099873,
+            "sha256": "20c5aab6e23294f260085e4114212bfac20304c61350662620a4679ec4b3e10b",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 446,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1352,
+              "voice_conversion": 512,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 617678567
+          },
+          {
+            "order_position": 6,
+            "shard": "train-00325-of-00432.parquet",
+            "shard_index": 325,
+            "order_sha256": "03801d6c1c78f124ba384f8dea085010fb2ef9fe4fc155ed578a0f6853697a3a",
+            "size_bytes": 145604183,
+            "sha256": "87d10f2d592ab9cbbc60143c791b77ef94ae766ee1d7b1a6b9291846abeb52cc",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1352,
+              "voice_conversion": 1023,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 763282750
+          },
+          {
+            "order_position": 7,
+            "shard": "train-00117-of-00432.parquet",
+            "shard_index": 117,
+            "order_sha256": "03d74292959e5589786b3aca53a743ffcbaf4fb1241f3a8b4a71edc2bdb3566a",
+            "size_bytes": 222136829,
+            "sha256": "a9ac0bc681eca7b53b5fbee1a83af3aa226b6e75072ebcc74ded29fd53ce88eb",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 506,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1023,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 985419579
+          },
+          {
+            "order_position": 8,
+            "shard": "train-00327-of-00432.parquet",
+            "shard_index": 327,
+            "order_sha256": "04be1e6b40e70ae3bd2d9c242566f5be47a5c0ef8c8b8351db2257aba85ae6df",
+            "size_bytes": 117536081,
+            "sha256": "a8d5d6258304869b2222f7e9c8b4852e2632eb224d847b965fd5f196681669d0",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1102955660
+          },
+          {
+            "order_position": 9,
+            "shard": "train-00191-of-00432.parquet",
+            "shard_index": 191,
+            "order_sha256": "04cfe39d4712a6c19682dc7540e40dbfd30306eebfe9df085a169cc91c9e70a5",
+            "size_bytes": 141903880,
+            "sha256": "2a6105f517c44c68c3dc9467b40fa4aa477ad1eabc10872019168bb34f676817",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 1858,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1244859540
+          },
+          {
+            "order_position": 10,
+            "shard": "train-00114-of-00432.parquet",
+            "shard_index": 114,
+            "order_sha256": "0514a53e73e899223e8f68ba677bf91e5ddf059fb627d96cc143b4e0472c684e",
+            "size_bytes": 138682063,
+            "sha256": "9960e72fd0bae090c37b56232be1064af7d0fc6702d6041d93fd7f8b357cbaf7",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 474,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2332,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1383541603
+          },
+          {
+            "order_position": 11,
+            "shard": "train-00145-of-00432.parquet",
+            "shard_index": 145,
+            "order_sha256": "05589fd08212232f1ece572354e376293f82e3f2bced090f26686d492cb6750d",
+            "size_bytes": 175607729,
+            "sha256": "93eb8e73ec6bb821341ce64f45041e207a8c2093be6d4175f462de65ee770b7b",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 405,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2737,
+              "voice_conversion": 1534,
+              "adversarial_attack": 0,
+              "replay": 15
+            },
+            "cumulative_bytes": 1559149332
+          },
+          {
+            "order_position": 12,
+            "shard": "train-00172-of-00432.parquet",
+            "shard_index": 172,
+            "order_sha256": "059b15fa1d86eed716fc18e60af28c7c2eb7e941d9aa36f775742bb58982f686",
+            "size_bytes": 165364857,
+            "sha256": "6f6f475dc43445360924a603b8c650e6c1f0a4292ed89e72f21d14c996f95cc3",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 5,
+              "voice_conversion": 156,
+              "adversarial_attack": 154,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1690,
+              "adversarial_attack": 154,
+              "replay": 15
+            },
+            "cumulative_bytes": 1724514189
+          },
+          {
+            "order_position": 13,
+            "shard": "train-00429-of-00432.parquet",
+            "shard_index": 429,
+            "order_sha256": "065c7ba52a3db0d370306b9e091797f54ea3da2b0a4fadf9f5b266366748b402",
+            "size_bytes": 897748804,
+            "sha256": "a28055ecde39801c8a662eb30e5d0001721c502eba32be76469d82f4d7f6f749",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 234,
+              "adversarial_attack": 123,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2622262993
+          },
+          {
+            "order_position": 14,
+            "shard": "train-00281-of-00432.parquet",
+            "shard_index": 281,
+            "order_sha256": "0723e4762495288867f4eb5c9c614585f507ef7abe1bb86a64abb2034102e64a",
+            "size_bytes": 162473779,
+            "sha256": "450173725060c04d40a784abfaa1d3a6f7051152b40f34f203ec47ed4d3fba9d",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2742,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2784736772
+          },
+          {
+            "order_position": 15,
+            "shard": "train-00053-of-00432.parquet",
+            "shard_index": 53,
+            "order_sha256": "07966911b259d334f6eedbb25f5c2860d5a741462e9399aff2695602e8641903",
+            "size_bytes": 96428273,
+            "sha256": "09f75f1fb797c243940e8d775aa613d13592b01411d3a30971a693764c29a0b7",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 179,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2921,
+              "voice_conversion": 1924,
+              "adversarial_attack": 277,
+              "replay": 15
+            },
+            "cumulative_bytes": 2881165045
+          },
+          {
+            "order_position": 16,
+            "shard": "train-00267-of-00432.parquet",
+            "shard_index": 267,
+            "order_sha256": "081255db71e6ffd58b3ba65b6bbc8ddf7b2c36049cd402c87cacd47197cbca94",
+            "size_bytes": 228418310,
+            "sha256": "b75c55a3b6c67e1d476d4bf12c4e0d5a39e1e487eafedfe434302861d68ace18",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 11,
+              "voice_conversion": 0,
+              "adversarial_attack": 80,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 2932,
+              "voice_conversion": 1924,
+              "adversarial_attack": 357,
+              "replay": 15
+            },
+            "cumulative_bytes": 3109583355
+          },
+          {
+            "order_position": 17,
+            "shard": "train-00039-of-00432.parquet",
+            "shard_index": 39,
+            "order_sha256": "082cd23a53746bda43af86bfd281ecf737349bbac0423b214b3122d8e2b31ea4",
+            "size_bytes": 107613117,
+            "sha256": "9bbe6604dd02a90ba9a8c3f4d1561814e59771df055ffa9f94cff4b83fca319f",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 375,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3307,
+              "voice_conversion": 1924,
+              "adversarial_attack": 357,
+              "replay": 15
+            },
+            "cumulative_bytes": 3217196472
+          },
+          {
+            "order_position": 18,
+            "shard": "train-00329-of-00432.parquet",
+            "shard_index": 329,
+            "order_sha256": "0873516e386276dd99a7f8dd3ae3b552e0a735ac29d4c463bdbfedb1b25a7c8c",
+            "size_bytes": 133742230,
+            "sha256": "ee7b9dce6217adf7f68858d27120d3f5f975c52a4a9c42c7923de0f17484a648",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3307,
+              "voice_conversion": 1924,
+              "adversarial_attack": 868,
+              "replay": 15
+            },
+            "cumulative_bytes": 3350938702
+          },
+          {
+            "order_position": 19,
+            "shard": "train-00302-of-00432.parquet",
+            "shard_index": 302,
+            "order_sha256": "096422bcf170a21ab9c4cd5b5c6dfef05dc691a443bbbe1d64117576df9c11e6",
+            "size_bytes": 182892480,
+            "sha256": "16c5740f63d180e40c746e72c979d8b7d8fcda893564904680b3359ad66ca7d9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 6,
+              "voice_conversion": 82,
+              "adversarial_attack": 82,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 950,
+              "replay": 15
+            },
+            "cumulative_bytes": 3533831182
+          },
+          {
+            "order_position": 20,
+            "shard": "train-00363-of-00432.parquet",
+            "shard_index": 363,
+            "order_sha256": "09ef79b2e1421b2228bf955f2b48ca0a85a0eee3af606c163f3f4dd0d7ec1071",
+            "size_bytes": 164917600,
+            "sha256": "09e031f81406047ce84175af1de9c6b3ee588a0600c9432057796c9438753133",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 3698748782
+          },
+          {
+            "order_position": 21,
+            "shard": "train-00243-of-00432.parquet",
+            "shard_index": 243,
+            "order_sha256": "0ac32e20a4ff410d7a5b17135a0ccc4673e6d80a0429701be0070154ecdfe0ae",
+            "size_bytes": 158779058,
+            "sha256": "03d7527337ea1b1df48e53f140caf7baa630195526b64b70223f22347123b4d9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3313,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 3857527840
+          },
+          {
+            "order_position": 22,
+            "shard": "train-00104-of-00432.parquet",
+            "shard_index": 104,
+            "order_sha256": "0bc7b109476044e0489601acb6c6e65bc1ede848366d855ced7f242925a5ec9b",
+            "size_bytes": 153434517,
+            "sha256": "7192bcbb6b0022c51155493f250c36a2e6883e59100f817ea202dc12ab9cdb71",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 278,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 3591,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 4010962357
+          },
+          {
+            "order_position": 23,
+            "shard": "train-00012-of-00432.parquet",
+            "shard_index": 12,
+            "order_sha256": "0bcc42b510f3706afbac24cef95b66ca298dc25bafe321acdfbb267d633634a6",
+            "size_bytes": 90955955,
+            "sha256": "27f201d80b586dde4af0e092eb7b3e59cf3a41141c16765c0c32c4c6ca0f2aa4",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 512,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1461,
+              "replay": 15
+            },
+            "cumulative_bytes": 4101918312
+          },
+          {
+            "order_position": 24,
+            "shard": "train-00368-of-00432.parquet",
+            "shard_index": 368,
+            "order_sha256": "0bcd4d0b253fe655a26f661398f0a447f5f4c72cfcc3c5965a463df8a8dbb6b7",
+            "size_bytes": 141044232,
+            "sha256": "6d8453f721d9f55b12d924a574df52eaa64f28fa23c2c73e5f699d8f919ebe92",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2006,
+              "adversarial_attack": 1972,
+              "replay": 15
+            },
+            "cumulative_bytes": 4242962544
+          },
+          {
+            "order_position": 25,
+            "shard": "train-00410-of-00432.parquet",
+            "shard_index": 410,
+            "order_sha256": "0bdd535f5065b1698a62292e295e718136e2165414392e19507f07977a6693ee",
+            "size_bytes": 696966177,
+            "sha256": "9b394604d254a0b508b332a0b8f313f610ee2a068ffeaf0772babdbdb84ac369",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 222,
+              "adversarial_attack": 275,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4103,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2247,
+              "replay": 15
+            },
+            "cumulative_bytes": 4939928721
+          },
+          {
+            "order_position": 26,
+            "shard": "train-00158-of-00432.parquet",
+            "shard_index": 158,
+            "order_sha256": "0d3ef7d86216af1b3360fecef96ad15c64f44085612ca69f94e32945472d44e6",
+            "size_bytes": 227860499,
+            "sha256": "97686ebbfaf327c49c9de130b896c8bc4422ec2b68447f1328642a900331f3f1",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 371,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4474,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2247,
+              "replay": 15
+            },
+            "cumulative_bytes": 5167789220
+          },
+          {
+            "order_position": 27,
+            "shard": "train-00387-of-00432.parquet",
+            "shard_index": 387,
+            "order_sha256": "0d79388d34f1d121c32a38de78341c52f38e4f00092ec5fa319c758a0b0b9f3a",
+            "size_bytes": 125697135,
+            "sha256": "f52b760cdcd4dddce4978e4f10debce92ab1f09869030c118a9489dd90e8ad08",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 138,
+              "voice_conversion": 0,
+              "adversarial_attack": 373,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4612,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2620,
+              "replay": 15
+            },
+            "cumulative_bytes": 5293486355
+          },
+          {
+            "order_position": 28,
+            "shard": "train-00077-of-00432.parquet",
+            "shard_index": 77,
+            "order_sha256": "0e54b77245561fe8a1ae5b3deec9d170ae0b6533cbb1c7a1deb5654cf02ebf13",
+            "size_bytes": 134186202,
+            "sha256": "76f9dde9aa9fc5aeed1ad177bb6d2b5928d2aa6578eca836923ea470445355a2",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 377,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4989,
+              "voice_conversion": 2228,
+              "adversarial_attack": 2620,
+              "replay": 15
+            },
+            "cumulative_bytes": 5427672557
+          },
+          {
+            "order_position": 29,
+            "shard": "train-00178-of-00432.parquet",
+            "shard_index": 178,
+            "order_sha256": "0e70495bc9afbc30f758bc6b08b73ad5abc01ab2791eaafc05e504bd76df33e1",
+            "size_bytes": 162511188,
+            "sha256": "0fdc45d866db665828a6dee37283ef7aed2b6a821115178f21bdc5c583eb5403",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 454,
+              "adversarial_attack": 58,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 4989,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5590183745
+          },
+          {
+            "order_position": 30,
+            "shard": "train-00150-of-00432.parquet",
+            "shard_index": 150,
+            "order_sha256": "0f9bafa345074e67c38c9710fadbe2a20361c108011d70d070232a7a6f9bfac3",
+            "size_bytes": 204352196,
+            "sha256": "201d918b092f05fef2335a9f749f95312899434aeb46c37c5434f221d0683c43",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 495,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5484,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5794535941
+          },
+          {
+            "order_position": 31,
+            "shard": "train-00057-of-00432.parquet",
+            "shard_index": 57,
+            "order_sha256": "0ffca774b37d4574c1f7e30f769787eb2460d7fcab9a84a8bede5a60cb35448a",
+            "size_bytes": 78912995,
+            "sha256": "3cb8e53ffb99061509985d751b676664636d652bb98f76d5af57908e4b400003",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 512,
+              "voice_conversion": 0,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 2682,
+              "adversarial_attack": 2678,
+              "replay": 15
+            },
+            "cumulative_bytes": 5873448936
+          },
+          {
+            "order_position": 32,
+            "shard": "train-00181-of-00432.parquet",
+            "shard_index": 181,
+            "order_sha256": "11c282d63b41edd94f2f764f0491ad7223148ba0e9b78cbd4b5f15689a68653a",
+            "size_bytes": 180326974,
+            "sha256": "1d6229580289d0ed38a87d5192173e875d7483b0826d62cee3e556e3dc8ffb48",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 512,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 2682,
+              "adversarial_attack": 3190,
+              "replay": 15
+            },
+            "cumulative_bytes": 6053775910
+          },
+          {
+            "order_position": 33,
+            "shard": "train-00356-of-00432.parquet",
+            "shard_index": 356,
+            "order_sha256": "12948debced63932f3d8c296ec3e41412d210ece5b645a30c0ba0d3c60e942dd",
+            "size_bytes": 151498074,
+            "sha256": "c2b7603232f1e152cbd30676a96c5608ea59ead66eeb5589ee94d1ae4a825556",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 511,
+              "adversarial_attack": 0,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3193,
+              "adversarial_attack": 3190,
+              "replay": 15
+            },
+            "cumulative_bytes": 6205273984
+          },
+          {
+            "order_position": 34,
+            "shard": "train-00362-of-00432.parquet",
+            "shard_index": 362,
+            "order_sha256": "12a7fb1614191eee322f85935d023a465c582c37c9a4fe62dc46498a468c7b4e",
+            "size_bytes": 131037783,
+            "sha256": "acc746c0b7d2beef7b2cb1f23f211e4a25aa4a4c4c4646528754099f1e87717a",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 0,
+              "adversarial_attack": 511,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3193,
+              "adversarial_attack": 3701,
+              "replay": 15
+            },
+            "cumulative_bytes": 6336311767
+          },
+          {
+            "order_position": 35,
+            "shard": "train-00408-of-00432.parquet",
+            "shard_index": 408,
+            "order_sha256": "13a332ca8d6be63e65ba7f147246b9a2a7631bb37b8dc89a3376122148172459",
+            "size_bytes": 416791670,
+            "sha256": "ad58ff225ace793310eb9f46511c0b48ba3b1489dbf04df1f1675719c6fae9f9",
+            "closed_train_unselected_by_utt_type": {
+              "bonafide": 0,
+              "voice_conversion": 139,
+              "adversarial_attack": 163,
+              "replay": 0
+            },
+            "cumulative_by_utt_type": {
+              "bonafide": 5996,
+              "voice_conversion": 3332,
+              "adversarial_attack": 3864,
+              "replay": 15
+            },
+            "cumulative_bytes": 6753103437
+          }
+        ]
+      }
+    },
+    "any_exceeds_ceiling": false
+  }
+}
