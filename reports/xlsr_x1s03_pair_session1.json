@@ -1,0 +1,536 @@
+{
+  "task": "X1S-03",
+  "status": "completed_pending_claude_review",
+  "updated_utc7": "2026-11-19T22:59:16.985831+07:00",
+  "authorization": {
+    "date": "2026-11-19",
+    "verbatim": "Cho phép run thật",
+    "scope": "Một lần push-prepared-kernel profile scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027 (phiên 1)."
+  },
+  "x1s01_sha_fix": {
+    "sha_check_log": ".cache/x1s03/sha_check.log",
+    "script": ".cache/x1s03/fix_x1s01_sha.py",
+    "diff_file": ".cache/x1s03/report_fix.diff",
+    "expected_sha256": "9b4b44cee285b8e32d596750cc74244a691702dfdb2c25324f49ee625a52f411",
+    "chars_17_to_20": "2d59"
+  },
+  "kernel": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "profile": "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027",
+    "kernel_version": 17,
+    "pushed_utc7": "2026-11-19T09:26:44.718742+07:00",
+    "terminal_status": "complete",
+    "workflow_started_at_utc": "2026-11-19T02:27:06+00:00",
+    "workflow_finished_at_utc": "2026-11-19T13:26:09+00:00",
+    "workflow_elapsed_seconds": 39534.962014502,
+    "source_bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "output_directory": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-s1-v1"
+  },
+  "checks_a_to_f": {
+    "a_hardware_and_scale2_checksum": {
+      "pair_gpu_check": {
+        "timestamp_utc": "2026-11-19T02:27:26.933268+00:00",
+        "event": "pair_gpu_check",
+        "elapsed_seconds": 11.971036911010742,
+        "gpu_count": 2
+      },
+      "scale2_checksum_end": {
+        "timestamp_utc": "2026-11-19T02:28:31.262228+00:00",
+        "event": "scale2_checksum_end",
+        "elapsed_seconds": 76.2999975681305,
+        "directory": "/kaggle/input/doanttnt-scale2-packed-v1",
+        "hash_seconds": 61.504,
+        "files": {
+          "index.csv": {
+            "bytes": 6280248,
+            "sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080"
+          },
+          "metadata.json": {
+            "bytes": 964,
+            "sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d"
+          },
+          "waveforms.f32": {
+            "bytes": 12123780480,
+            "sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e"
+          }
+        }
+      }
+    },
+    "b_runners": {
+      "seed_2026": {
+        "runner_end": {
+          "timestamp_utc": "2026-11-19T13:25:50.765566+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 39515.80333566666,
+          "slot": "A",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2026",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        },
+        "status": "paused",
+        "pause_cause": "budget_before_training",
+        "global_step": 11491,
+        "steps_this_invocation": 11491,
+        "completed_epochs": 5,
+        "best_epoch": 4,
+        "best_global_step": 7944,
+        "best_eer": 0.0032079915536424915,
+        "eer_history": [
+          {
+            "epoch": 1,
+            "global_step": 1986,
+            "eer": 0.005482010882806789,
+            "threshold": null,
+            "loss": 0.042867945962154326,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 2,
+            "global_step": 3972,
+            "eer": 0.004020141314058312,
+            "threshold": null,
+            "loss": 0.0219049402429172,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 3,
+            "global_step": 5958,
+            "eer": 0.004020141314058312,
+            "threshold": null,
+            "loss": 0.021696038209934876,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 4,
+            "global_step": 7944,
+            "eer": 0.0032079915536424915,
+            "threshold": null,
+            "loss": 0.02041213267086589,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 5,
+            "global_step": 9930,
+            "eer": 0.004310649424068971,
+            "threshold": null,
+            "loss": 0.03319423213969498,
+            "samples": null,
+            "generation": null
+          }
+        ],
+        "plan_sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+        "identity_plan_matches_scale2_config": true,
+        "use_test": false
+      },
+      "seed_2027": {
+        "runner_end": {
+          "timestamp_utc": "2026-11-19T13:26:09.812288+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 39534.85005688667,
+          "slot": "B",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2027",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        },
+        "status": "paused",
+        "pause_cause": "budget_before_training",
+        "global_step": 13120,
+        "steps_this_invocation": 13120,
+        "completed_epochs": 6,
+        "best_epoch": 6,
+        "best_global_step": 11916,
+        "best_eer": 0.002395841793226671,
+        "eer_history": [
+          {
+            "epoch": 1,
+            "global_step": 1986,
+            "eer": 0.005075936002598879,
+            "threshold": null,
+            "loss": 0.021096678137173024,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 2,
+            "global_step": 3972,
+            "eer": 0.004832291074474133,
+            "threshold": null,
+            "loss": 0.029198926760242452,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 3,
+            "global_step": 5958,
+            "eer": 0.004522648576072362,
+            "threshold": null,
+            "loss": 0.05085643543430616,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 4,
+            "global_step": 7944,
+            "eer": 0.0058880857630146995,
+            "threshold": null,
+            "loss": 0.05062166451032341,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 5,
+            "global_step": 9930,
+            "eer": 0.0038171038739543573,
+            "threshold": null,
+            "loss": 0.01925229003997323,
+            "samples": null,
+            "generation": null
+          },
+          {
+            "epoch": 6,
+            "global_step": 11916,
+            "eer": 0.002395841793226671,
+            "threshold": null,
+            "loss": 0.019498150372392168,
+            "samples": null,
+            "generation": null
+          }
+        ],
+        "plan_sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+        "identity_plan_matches_scale2_config": true,
+        "use_test": false
+      }
+    },
+    "c_checkpoints": {
+      "2026": {
+        "latest": {
+          "generation": "g-f0deb62f783f4f5095a2f44a0702dfe2",
+          "checkpoint_sha256": "d5737f3fda2067ab638645400e43558c5252a7ca76312ef1516eb02676805329",
+          "checkpoint_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-f0deb62f783f4f5095a2f44a0702dfe2/checkpoint.pt",
+            "bytes": 1245609947,
+            "sha256": "d5737f3fda2067ab638645400e43558c5252a7ca76312ef1516eb02676805329"
+          },
+          "state_sha256": "447e77d834bd614c9796777f1d74d83d475260f0422023163e0c3a59754a84a4",
+          "state_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-f0deb62f783f4f5095a2f44a0702dfe2/state.json",
+            "bytes": 62615055,
+            "sha256": "447e77d834bd614c9796777f1d74d83d475260f0422023163e0c3a59754a84a4"
+          },
+          "verified_present_and_sha_match": true
+        },
+        "best": {
+          "generation": "g-6d3cd386b2514c7292a0e976f48ad28e",
+          "checkpoint_sha256": "a86925f2ab5d276a0526e877a8c8adbe9557a66c38c598dd77442cdca5405cc4",
+          "checkpoint_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-6d3cd386b2514c7292a0e976f48ad28e/checkpoint.pt",
+            "bytes": 1240034267,
+            "sha256": "a86925f2ab5d276a0526e877a8c8adbe9557a66c38c598dd77442cdca5405cc4"
+          },
+          "state_sha256": "50fd8391a4f12c32eaf95282ee3264eb03a0543c3264484d54a532a1855238eb",
+          "state_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-6d3cd386b2514c7292a0e976f48ad28e/state.json",
+            "bytes": 52024959,
+            "sha256": "50fd8391a4f12c32eaf95282ee3264eb03a0543c3264484d54a532a1855238eb"
+          },
+          "verified_present_and_sha_match": true
+        },
+        "latest_global_step": 11491,
+        "latest_completed_epochs": 5,
+        "best_global_step": 7944,
+        "LATEST_json_sha256": "dba7078c86fc21d8178a2b7508bfccdd7e6330763682be5963fa4748b662ccea"
+      },
+      "2027": {
+        "latest": {
+          "generation": "g-b19748034808412f8a006986895313e6",
+          "checkpoint_sha256": "1236c6ae612311a83b9f43a4139d758275b6ac8bf9e6d0f7b56fb67713329bc5",
+          "checkpoint_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-b19748034808412f8a006986895313e6/checkpoint.pt",
+            "bytes": 1251061211,
+            "sha256": "1236c6ae612311a83b9f43a4139d758275b6ac8bf9e6d0f7b56fb67713329bc5"
+          },
+          "state_sha256": "3374d907b894d62f5bb888cbec07a1cecd6c2625a32965290e8c8b003e6245e0",
+          "state_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-b19748034808412f8a006986895313e6/state.json",
+            "bytes": 75544432,
+            "sha256": "3374d907b894d62f5bb888cbec07a1cecd6c2625a32965290e8c8b003e6245e0"
+          },
+          "verified_present_and_sha_match": true
+        },
+        "best": {
+          "generation": "g-2f64908aa31b4ea09320fa58bfec0277",
+          "checkpoint_sha256": "a9ed12b3cdb3805f46836cb2a371e07014fdab835704eacf6956edecb31c4e6f",
+          "checkpoint_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-2f64908aa31b4ea09320fa58bfec0277/checkpoint.pt",
+            "bytes": 1250983067,
+            "sha256": "a9ed12b3cdb3805f46836cb2a371e07014fdab835704eacf6956edecb31c4e6f"
+          },
+          "state_sha256": "61bf95032c0865d68e097c059782e2cc2784362fa576fcfa51dfa49274b47071",
+          "state_file": {
+            "path": "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-2f64908aa31b4ea09320fa58bfec0277/state.json",
+            "bytes": 75253548,
+            "sha256": "61bf95032c0865d68e097c059782e2cc2784362fa576fcfa51dfa49274b47071"
+          },
+          "verified_present_and_sha_match": true
+        },
+        "latest_global_step": 13120,
+        "latest_completed_epochs": 6,
+        "best_global_step": 11916,
+        "LATEST_json_sha256": "e0ce78b79d0e7b9b5179367643336d8165ef25dca3090c808c5b9d79633b566a"
+      }
+    },
+    "d_timing_and_remaining_sessions": {
+      "2026": {
+        "mean_step_seconds": 2.008739,
+        "mean_eval_seconds": 2357.621,
+        "eval_seconds_per_epoch": [
+          1964.7,
+          2155.846,
+          2426.445,
+          2594.413,
+          2646.7
+        ],
+        "remaining_steps_to_max_10ep": 8369,
+        "remaining_evals_to_max_10ep": 5,
+        "estimated_max_remaining_hours": 8.11,
+        "estimated_remaining_sessions": 1
+      },
+      "2027": {
+        "mean_step_seconds": 1.810937,
+        "mean_eval_seconds": 1722.687,
+        "eval_seconds_per_epoch": [
+          1700.583,
+          1721.402,
+          1733.241,
+          1732.304,
+          1723.446,
+          1725.148
+        ],
+        "remaining_steps_to_max_10ep": 6740,
+        "remaining_evals_to_max_10ep": 4,
+        "estimated_max_remaining_hours": 5.47,
+        "estimated_remaining_sessions": 1
+      },
+      "pair_resume_sessions_needed": 1
+    },
+    "e_no_test_files_or_scores": {
+      "non_env_file_count": 16,
+      "non_env_paths": [
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-6d3cd386b2514c7292a0e976f48ad28e/checkpoint.pt",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-6d3cd386b2514c7292a0e976f48ad28e/state.json",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-f0deb62f783f4f5095a2f44a0702dfe2/checkpoint.pt",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/g-f0deb62f783f4f5095a2f44a0702dfe2/state.json",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026/LATEST.json",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-2f64908aa31b4ea09320fa58bfec0277/checkpoint.pt",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-2f64908aa31b4ea09320fa58bfec0277/state.json",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-b19748034808412f8a006986895313e6/checkpoint.pt",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/g-b19748034808412f8a006986895313e6/state.json",
+        "checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027/LATEST.json",
+        "doanttnt-xlsr-d028.log",
+        "reports/kaggle_cli_workflow.json",
+        "reports/xlsr_scale2_X1-L8-lr3e-5_seed2026.json",
+        "reports/xlsr_scale2_X1-L8-lr3e-5_seed2027.json",
+        "xlsr_scale2_X1-L8-lr3e-5_seed2026.log",
+        "xlsr_scale2_X1-L8-lr3e-5_seed2027.log"
+      ],
+      "test_score_files": [],
+      "note": "Trong non_env_paths chi co LATEST.json khop chuoi con 'test' cua tu 'latest'; khong co bat ky du lieu hay diem test nao."
+    },
+    "f_quota": {
+      "before": [
+        {
+          "resource": "GPU",
+          "used": "28.98h",
+          "remaining": "16.02h",
+          "total": "45.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        }
+      ],
+      "after": [
+        {
+          "resource": "GPU",
+          "used": "39.97h",
+          "remaining": "5.03h",
+          "total": "45.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        }
+      ],
+      "gpu_quota_deducted_hours": 10.99,
+      "within_11_5h_limit": true
+    }
+  },
+  "git_status_W_short": [
+    " M docs/decisions.md",
+    " M scripts/kaggle_workflow.py",
+    " M scripts/train_xlsr.py",
+    "?? configs/xlsr_training_scale2.json",
+    "?? data/manifests/development_scale2_v1.csv",
+    "?? reports/xlsr_t32b_x1r_seed2026_resume_run.json",
+    "?? reports/xlsr_x1s01_prep.json",
+    "?? reports/xlsr_x1s01_prep.md",
+    "?? reports/xlsr_x1s02_pair_dry_run.json",
+    "?? reports/xlsr_x1s02_pair_dry_run.md",
+    "?? tests/test_xlsr_scale2.py"
+  ],
+  "deviations": [
+    "Lan dung truoc Buoc 2 o luot dau X1S-03 do doc nham ky tu 17-20 ('2d59' nhin nham thanh '2569'). Sau chi dan X1S-03 (tiep), da kiem bang python -I (.cache/x1s03/sha_check.log) va sua bang script (.cache/x1s03/fix_x1s01_sha.py) co assert dat.",
+    "Trong Buoc 1 preflight, git_status_after.log cua X1S-02 duoc chup truoc khi tao xlsr_x1s02_pair_dry_run.json/.md; da loai tru dung hai file report X1S-02 do va xac nhan khong co file code/config/test moi.",
+    "3 lan poll dau trong status_polls.jsonl gap loi mang WinError 10065 (unreachable host) va server Antigravity restart luc ~20:24; da kiem tra trang thai RUNNING + quota luc 20:25:18 (task-1435) va khoi dong lai step4_watch.py (task-1439) ghi poll #4 trang thai COMPLETE luc 20:41:53+07:00."
+  ],
+  "next_step": "Cho Claude kiem X1S-03; sau khi quota lam moi luc 2026-11-21 00:00 UTC va duoc nguoi dung cho phep rieng, tao dataset checkpoint resume va push phien 2 cap cho seed 2026 + seed 2027 (chi can 1 phien cap nua).",
+  "commands_with_utc7_exit_codes": [
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "started_utc7": "2026-11-19T09:25:07.766503+07:00",
+      "finished_utc7": "2026-11-19T09:25:09.969879+07:00",
+      "elapsed_seconds": 2.203,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\quota_before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T09:25:09.969879+07:00",
+      "finished_utc7": "2026-11-19T09:25:12.129276+07:00",
+      "elapsed_seconds": 2.159,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\kernel_status_before.log"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "status",
+        "--short"
+      ],
+      "started_utc7": "2026-11-19T09:25:12.130283+07:00",
+      "finished_utc7": "2026-11-19T09:25:12.179966+07:00",
+      "elapsed_seconds": 0.05,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\git_status_before.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027"
+      ],
+      "started_utc7": "2026-11-19T09:25:12.316473+07:00",
+      "finished_utc7": "2026-11-19T09:25:12.629582+07:00",
+      "elapsed_seconds": 0.313,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\verify_prepared_before.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027"
+      ],
+      "started_utc7": "2026-11-19T09:26:40.560681+07:00",
+      "finished_utc7": "2026-11-19T09:26:44.718742+07:00",
+      "elapsed_seconds": 4.159,
+      "exit_code": 0,
+      "kernel_version": 17,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\push.log"
+    },
+    {
+      "poll_index": 1,
+      "started_utc7": "2026-11-19T09:43:42.450014+07:00",
+      "finished_utc7": "2026-11-19T09:43:43.235521+07:00",
+      "elapsed_seconds": 0.794,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "HTTPSConnectionPool(host='api.kaggle.com', port=443): Max retries exceeded with url: /v1/kernels.KernelsApiService/GetKernelSessionStatus (Caused by NewConnectionError(\"HTTPSConnection(host='api.kaggle.com', port=443): Failed to establish a new connection: [WinError 10065] A socket operation was attempted to an unreachable host\"))"
+    },
+    {
+      "poll_index": 2,
+      "started_utc7": "2026-11-19T09:59:43.247077+07:00",
+      "finished_utc7": "2026-11-19T09:59:43.855471+07:00",
+      "elapsed_seconds": 0.609,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "HTTPSConnectionPool(host='api.kaggle.com', port=443): Max retries exceeded with url: /v1/kernels.KernelsApiService/GetKernelSessionStatus (Caused by NewConnectionError(\"HTTPSConnection(host='api.kaggle.com', port=443): Failed to establish a new connection: [WinError 10065] A socket operation was attempted to an unreachable host\"))"
+    },
+    {
+      "poll_index": 3,
+      "started_utc7": "2026-11-19T10:15:43.857465+07:00",
+      "finished_utc7": "2026-11-19T10:15:45.164392+07:00",
+      "elapsed_seconds": 1.307,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "HTTPSConnectionPool(host='api.kaggle.com', port=443): Max retries exceeded with url: /v1/kernels.KernelsApiService/GetKernelSessionStatus (Caused by NewConnectionError(\"HTTPSConnection(host='api.kaggle.com', port=443): Failed to establish a new connection: [WinError 10065] A socket operation was attempted to an unreachable host\"))"
+    },
+    {
+      "poll_index": 4,
+      "started_utc7": "2026-11-19T20:41:49.925052+07:00",
+      "finished_utc7": "2026-11-19T20:41:53.035478+07:00",
+      "elapsed_seconds": 3.111,
+      "exit_code": 0,
+      "stdout": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "output",
+        "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-s1-v1",
+        "--force"
+      ],
+      "started_utc7": "2026-11-19T21:10:49.102066+07:00",
+      "finished_utc7": "2026-11-19T22:46:07.957148+07:00",
+      "elapsed_seconds": 5718.855,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s03\\kernel_output_download.log",
+      "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-s1-v1"
+    }
+  ]
+}

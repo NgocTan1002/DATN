@@ -1,0 +1,599 @@
+{
+  "task": "X1S-02",
+  "status": "completed_pending_claude_review",
+  "updated_utc7": "2026-11-19T07:25:02.769919+07:00",
+  "authorization": {
+    "date": "2026-11-19",
+    "verbatim": "Cho phép publish và dry-run",
+    "scope": "Một lần publish-source bundle 9ac6f814 lên ngctnnguyn1111/doanttnt-xlsr-d028-source và một lần push kernel dry-run profile scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run."
+  },
+  "source_dataset": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+    "bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "remote_manifest_bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "remote_manifest_matches_local": true,
+    "expected_member_count": 76,
+    "verified_member_count": 76,
+    "mismatches": [],
+    "remote_dataset_list_item": [
+      {
+        "ref": "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "title": "DoAnTTNT XLSR D028 Source",
+        "size": 288370,
+        "lastUpdated": "2026-11-18T22:33:33.740000",
+        "downloadCount": 4,
+        "voteCount": 0,
+        "usabilityRating": 0.25
+      }
+    ],
+    "version_note": "Kaggle CLI datasets list/metadata không trả trường currentVersionNumber dạng số nguyên; xác minh qua lastUpdated 2026-11-18T22:33:33.740000 và 76/76 member + source_manifest.json khớp SHA cục bộ."
+  },
+  "kernel": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "profile": "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run",
+    "kernel_version": 16,
+    "final_status": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+    "workflow_started_at_utc": "2026-11-18T22:35:56+00:00",
+    "workflow_finished_at_utc": "2026-11-18T22:38:38+00:00",
+    "workflow_elapsed_seconds": 146.328113255,
+    "source_layout": "directory",
+    "source_bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "output_directory": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-dry-run-v1"
+  },
+  "checks_a_to_f": {
+    "a_pair_gpu_check": {
+      "pair_gpu_check_event": {
+        "timestamp_utc": "2026-11-18T22:36:22.457082+00:00",
+        "event": "pair_gpu_check",
+        "elapsed_seconds": 10.119029998779297,
+        "gpu_count": 2
+      },
+      "slot_A_hardware": {
+        "device": "cuda:0",
+        "has_gpu": true,
+        "gpu_name": "Tesla T4",
+        "gpu_status": "Tesla T4",
+        "visible_gpu_count": 1,
+        "nvidia_driver": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  580.178.04  Release Build  (builder@c5860cfef26e)  Thu Oct 22 17:04:29 UTC 2026",
+        "cuda_version": "13.0",
+        "torch_version": "2.11.0+cu130",
+        "transformers_version": "4.57.6",
+        "numpy_version": "2.1.3",
+        "tf32": {
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false
+        },
+        "omp_num_threads": "2"
+      },
+      "slot_B_hardware": {
+        "device": "cuda:0",
+        "has_gpu": true,
+        "gpu_name": "Tesla T4",
+        "gpu_status": "Tesla T4",
+        "visible_gpu_count": 1,
+        "nvidia_driver": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  580.178.04  Release Build  (builder@c5860cfef26e)  Thu Oct 22 17:04:29 UTC 2026",
+        "cuda_version": "13.0",
+        "torch_version": "2.11.0+cu130",
+        "transformers_version": "4.57.6",
+        "numpy_version": "2.1.3",
+        "tf32": {
+          "cuda_matmul_allow_tf32": false,
+          "cudnn_allow_tf32": false
+        },
+        "omp_num_threads": "2"
+      }
+    },
+    "b_scale2_checksum_end": {
+      "timestamp_utc": "2026-11-18T22:37:40.283983+00:00",
+      "event": "scale2_checksum_end",
+      "elapsed_seconds": 87.94593119621277,
+      "directory": "/kaggle/input/doanttnt-scale2-packed-v1",
+      "hash_seconds": 73.155,
+      "files": {
+        "index.csv": {
+          "bytes": 6280248,
+          "sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080"
+        },
+        "metadata.json": {
+          "bytes": 964,
+          "sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d"
+        },
+        "waveforms.f32": {
+          "bytes": 12123780480,
+          "sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e"
+        }
+      }
+    },
+    "c_runners": {
+      "runner_end_events": [
+        {
+          "timestamp_utc": "2026-11-18T22:38:38.558585+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 146.22053289413452,
+          "slot": "A",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2026",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        },
+        {
+          "timestamp_utc": "2026-11-18T22:38:38.564464+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 146.22641158103943,
+          "slot": "B",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2027",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        }
+      ],
+      "seed_2026": {
+        "exit_code": 0,
+        "status": "dry_run",
+        "train_samples": 31770,
+        "development_samples": 38777,
+        "train_shards": 89,
+        "development_shards": 186,
+        "use_test": false,
+        "plan_sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+        "checksums_match": true,
+        "ready_for_training": false,
+        "wall_seconds": 40.100800091999986
+      },
+      "seed_2027": {
+        "exit_code": 0,
+        "status": "dry_run",
+        "train_samples": 31770,
+        "development_samples": 38777,
+        "train_shards": 89,
+        "development_shards": 186,
+        "use_test": false,
+        "plan_sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+        "checksums_match": true,
+        "ready_for_training": false,
+        "wall_seconds": 40.09979509699997
+      }
+    },
+    "d_bootstrap_stage_timings": {
+      "bootstrap_start": {
+        "timestamp_utc": "2026-11-18T22:36:12.338053+00:00",
+        "event": "bootstrap_start",
+        "elapsed_seconds": 1.1920928955078125e-06
+      },
+      "pair_gpu_check": {
+        "timestamp_utc": "2026-11-18T22:36:22.457082+00:00",
+        "event": "pair_gpu_check",
+        "elapsed_seconds": 10.119029998779297,
+        "gpu_count": 2
+      },
+      "offline_checksum_end": {
+        "timestamp_utc": "2026-11-18T22:36:27.128548+00:00",
+        "event": "offline_checksum_end",
+        "elapsed_seconds": 14.79049563407898
+      },
+      "scale2_checksum_end": {
+        "timestamp_utc": "2026-11-18T22:37:40.283983+00:00",
+        "event": "scale2_checksum_end",
+        "elapsed_seconds": 87.94593119621277,
+        "directory": "/kaggle/input/doanttnt-scale2-packed-v1",
+        "hash_seconds": 73.155,
+        "files": {
+          "index.csv": {
+            "bytes": 6280248,
+            "sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080"
+          },
+          "metadata.json": {
+            "bytes": 964,
+            "sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d"
+          },
+          "waveforms.f32": {
+            "bytes": 12123780480,
+            "sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e"
+          }
+        }
+      },
+      "venv_pip_end": {
+        "timestamp_utc": "2026-11-18T22:37:54.818006+00:00",
+        "event": "venv_pip_end",
+        "elapsed_seconds": 102.47995352745056
+      },
+      "runner_start": [
+        {
+          "timestamp_utc": "2026-11-18T22:37:54.818523+00:00",
+          "event": "runner_start",
+          "elapsed_seconds": 102.48047065734863,
+          "slot": "A",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2026",
+          "cuda_visible_devices": "0",
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2",
+          "log_path": "/kaggle/working/xlsr_scale2_X1-L8-lr3e-5_seed2026.log",
+          "run_root": "/kaggle/working/checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026",
+          "report": "/kaggle/working/reports/xlsr_scale2_X1-L8-lr3e-5_seed2026.json"
+        },
+        {
+          "timestamp_utc": "2026-11-18T22:37:54.819517+00:00",
+          "event": "runner_start",
+          "elapsed_seconds": 102.48146510124207,
+          "slot": "B",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2027",
+          "cuda_visible_devices": "1",
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2",
+          "log_path": "/kaggle/working/xlsr_scale2_X1-L8-lr3e-5_seed2027.log",
+          "run_root": "/kaggle/working/checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027",
+          "report": "/kaggle/working/reports/xlsr_scale2_X1-L8-lr3e-5_seed2027.json"
+        }
+      ],
+      "runner_end": [
+        {
+          "timestamp_utc": "2026-11-18T22:38:38.558585+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 146.22053289413452,
+          "slot": "A",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2026",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        },
+        {
+          "timestamp_utc": "2026-11-18T22:38:38.564464+00:00",
+          "event": "runner_end",
+          "elapsed_seconds": 146.22641158103943,
+          "slot": "B",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2027",
+          "exit_code": 0,
+          "omp_num_threads": "2",
+          "mkl_num_threads": "2"
+        }
+      ]
+    },
+    "e_no_checkpoints_or_test_scores": {
+      "checkpoint_or_weight_files": [],
+      "non_env_output_files": [
+        "doanttnt-xlsr-d028.log",
+        "reports/kaggle_cli_workflow.json",
+        "reports/xlsr_scale2_X1-L8-lr3e-5_seed2026.json",
+        "reports/xlsr_scale2_X1-L8-lr3e-5_seed2027.json",
+        "xlsr_scale2_X1-L8-lr3e-5_seed2026.log",
+        "xlsr_scale2_X1-L8-lr3e-5_seed2027.log"
+      ],
+      "test_score_files_outside_env": [],
+      "note": "Hai file chứa chuỗi 'test' trong liệt kê thô của step5_check.json đều là transformers/testing_utils.py và testing_utils.cpython-313.pyc bên trong .xlsr-offline-env."
+    },
+    "f_quota": {
+      "before": [
+        {
+          "resource": "GPU",
+          "used": "28.94h",
+          "remaining": "16.06h",
+          "total": "45.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        }
+      ],
+      "after": [
+        {
+          "resource": "GPU",
+          "used": "28.98h",
+          "remaining": "16.02h",
+          "total": "45.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        },
+        {
+          "resource": "TPU",
+          "used": "0.00h",
+          "remaining": "20.00h",
+          "total": "20.00h",
+          "refreshAt": "2026-11-21T00:00:00"
+        }
+      ],
+      "gpu_quota_deducted_hours": 0.04,
+      "within_0_3h_limit": true
+    }
+  },
+  "x1s01_report_fixes": {
+    "diff_file": ".cache/x1s02/report_fix.diff",
+    "item_1_x1_config_sha": "Tại thời điểm Bước 2, cả reports/xlsr_x1s01_prep.json (dòng 144) và reports/xlsr_x1s01_prep.md (dòng 50) đã chứa đủ 64 ký tự 9b4b44cee285b8e325696750cc74244a691702dfdb2c25324f49ee625a52f411.",
+    "item_2_dataset_names": "Đã sửa ngctnnguyn1111/doanttnt-xlsr-r-300m-weights -> ngctnnguyn1111/doanttnt-t14-weights và ngctnnguyn1111/doanttnt-xlsr-d028-offline-deps -> ngctnnguyn1111/doanttnt-t14-offline-deps trong cả hai file."
+  },
+  "git_status_W_short": [
+    " M docs/decisions.md",
+    " M scripts/kaggle_workflow.py",
+    " M scripts/train_xlsr.py",
+    "?? configs/xlsr_training_scale2.json",
+    "?? data/manifests/development_scale2_v1.csv",
+    "?? reports/xlsr_t32b_x1r_seed2026_resume_run.json",
+    "?? reports/xlsr_x1s01_prep.json",
+    "?? reports/xlsr_x1s01_prep.md",
+    "?? tests/test_xlsr_scale2.py"
+  ],
+  "deviations": [
+    "Kaggle CLI datasets list/metadata không trả trường currentVersionNumber cho ngctnnguyn1111/doanttnt-xlsr-d028-source; đã ghi nhận thay thế bằng lastUpdated 2026-11-18T22:33:33.740000 và xác minh SHA-256 76/76 file + source_manifest.json khớp cục bộ.",
+    "Lỗi (1) của report X1S-01 đã không còn trên đĩa tại Bước 2 (cả prep.json và prep.md đã có đủ 64 ký tự 9b4b44ce...), nên .cache/x1s02/report_fix.diff chỉ ghi thay đổi cho lỗi (2)."
+  ],
+  "next_step": "Chờ Claude kiểm X1S-02 và xin phép người dùng cho lần push huấn luyện thật cặp scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027.",
+  "commands_with_utc7_exit_codes": [
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "started_utc7": "2026-11-19T05:31:26.997700+07:00",
+      "finished_utc7": "2026-11-19T05:31:29.414303+07:00",
+      "elapsed_seconds": 2.417,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\quota_before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:31:29.415695+07:00",
+      "finished_utc7": "2026-11-19T05:31:30.518599+07:00",
+      "elapsed_seconds": 1.104,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_before.log"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "status",
+        "--short"
+      ],
+      "started_utc7": "2026-11-19T05:31:30.518599+07:00",
+      "finished_utc7": "2026-11-19T05:31:30.553359+07:00",
+      "elapsed_seconds": 0.036,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\git_status_before.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\workflow\\kernel"
+      ],
+      "started_utc7": "2026-11-19T05:31:30.553359+07:00",
+      "finished_utc7": "2026-11-19T05:31:30.731350+07:00",
+      "elapsed_seconds": 0.175,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\verify_prepared_before.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "publish-source",
+        "--message",
+        "X1S-02: bundle 9ac6f814 (D036 scale2)",
+        "--confirm-private-upload"
+      ],
+      "started_utc7": "2026-11-19T05:33:09.297945+07:00",
+      "finished_utc7": "2026-11-19T05:33:17.120229+07:00",
+      "elapsed_seconds": 7.824,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\publish.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source"
+      ],
+      "started_utc7": "2026-11-19T05:33:17.120229+07:00",
+      "finished_utc7": "2026-11-19T05:33:18.228744+07:00",
+      "elapsed_seconds": 1.104,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\source_status_01.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\remote_source",
+        "--unzip"
+      ],
+      "started_utc7": "2026-11-19T05:33:20.051365+07:00",
+      "finished_utc7": "2026-11-19T05:33:24.150025+07:00",
+      "elapsed_seconds": 4.101,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\source_download.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\workflow\\kernel"
+      ],
+      "started_utc7": "2026-11-19T05:35:31.896125+07:00",
+      "finished_utc7": "2026-11-19T05:35:35.879495+07:00",
+      "elapsed_seconds": 3.99,
+      "exit_code": 0,
+      "stdout": "Kernel version 16 successfully pushed.  Please check progress at https://www.kaggle.com/code/ngctnnguyn1111/doanttnt-xlsr-d028\nĐã gửi kernel riêng tư: ngctnnguyn1111/doanttnt-xlsr-d028 (profile=scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run).",
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\push.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:36:10.894976+07:00",
+      "finished_utc7": "2026-11-19T05:36:12.019095+07:00",
+      "elapsed_seconds": 1.13,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_01.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:36:47.027175+07:00",
+      "finished_utc7": "2026-11-19T05:36:48.161863+07:00",
+      "elapsed_seconds": 1.145,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_02.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:37:23.178029+07:00",
+      "finished_utc7": "2026-11-19T05:37:24.261167+07:00",
+      "elapsed_seconds": 1.084,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_03.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:37:59.263187+07:00",
+      "finished_utc7": "2026-11-19T05:38:01.035912+07:00",
+      "elapsed_seconds": 1.773,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_04.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:38:36.038363+07:00",
+      "finished_utc7": "2026-11-19T05:38:37.805971+07:00",
+      "elapsed_seconds": 1.776,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_05.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T05:39:12.815910+07:00",
+      "finished_utc7": "2026-11-19T05:39:13.886267+07:00",
+      "elapsed_seconds": 1.07,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_06.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T06:18:54.426026+07:00",
+      "finished_utc7": "2026-11-19T06:18:56.259119+07:00",
+      "elapsed_seconds": 1.833,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_status_after.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "started_utc7": "2026-11-19T06:18:56.259119+07:00",
+      "finished_utc7": "2026-11-19T06:18:57.493870+07:00",
+      "elapsed_seconds": 1.231,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\quota_after.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "output",
+        "ngctnnguyn1111/doanttnt-xlsr-d028",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-dry-run-v1",
+        "--force"
+      ],
+      "started_utc7": "2026-11-19T06:18:57.493870+07:00",
+      "finished_utc7": "2026-11-19T07:18:09.175420+07:00",
+      "elapsed_seconds": 3551.677,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\kernel_output_download.log"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "status",
+        "--short"
+      ],
+      "started_utc7": "2026-11-19T07:18:09.180566+07:00",
+      "finished_utc7": "2026-11-19T07:18:09.230116+07:00",
+      "elapsed_seconds": 0.051,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s02\\git_status_after.log"
+    }
+  ]
+}

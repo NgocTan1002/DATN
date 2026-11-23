@@ -1,0 +1,175 @@
+{
+  "task": "X1S-04B",
+  "decision": "D036",
+  "status": "ĐẠT",
+  "datasets": {
+    "2026": {
+      "ref": "ngctnnguyn1111/doanttnt-xlsr-scale2-s2026-resume1",
+      "datasetId": 13534901,
+      "isPrivate": true,
+      "manifest_sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd",
+      "remote_files": [
+        {
+          "name": "LATEST.json",
+          "bytes": 538
+        },
+        {
+          "name": "b0_resume_manifest.json",
+          "bytes": 2057
+        },
+        {
+          "name": "g-6d3cd386b2514c7292a0e976f48ad28e__checkpoint.pt",
+          "bytes": 1240034267
+        },
+        {
+          "name": "g-6d3cd386b2514c7292a0e976f48ad28e__state.json",
+          "bytes": 52024959
+        },
+        {
+          "name": "g-f0deb62f783f4f5095a2f44a0702dfe2__checkpoint.pt",
+          "bytes": 1245609947
+        },
+        {
+          "name": "g-f0deb62f783f4f5095a2f44a0702dfe2__state.json",
+          "bytes": 62615055
+        }
+      ],
+      "downloaded_sha_checks": {
+        "b0_resume_manifest.json": {
+          "sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd",
+          "bytes": 2057,
+          "matched": true
+        },
+        "LATEST.json": {
+          "sha256": "dba7078c86fc21d8178a2b7508bfccdd7e6330763682be5963fa4748b662ccea",
+          "bytes": 538,
+          "matched": true
+        }
+      }
+    },
+    "2027": {
+      "ref": "ngctnnguyn1111/doanttnt-xlsr-scale2-s2027-resume1",
+      "datasetId": 13535177,
+      "isPrivate": true,
+      "manifest_sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3",
+      "remote_files": [
+        {
+          "name": "LATEST.json",
+          "bytes": 538
+        },
+        {
+          "name": "b0_resume_manifest.json",
+          "bytes": 2057
+        },
+        {
+          "name": "g-2f64908aa31b4ea09320fa58bfec0277__checkpoint.pt",
+          "bytes": 1250983067
+        },
+        {
+          "name": "g-2f64908aa31b4ea09320fa58bfec0277__state.json",
+          "bytes": 75253548
+        },
+        {
+          "name": "g-b19748034808412f8a006986895313e6__checkpoint.pt",
+          "bytes": 1251061211
+        },
+        {
+          "name": "g-b19748034808412f8a006986895313e6__state.json",
+          "bytes": 75544432
+        }
+      ],
+      "downloaded_sha_checks": {
+        "b0_resume_manifest.json": {
+          "sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3",
+          "bytes": 2057,
+          "matched": true
+        },
+        "LATEST.json": {
+          "sha256": "e0ce78b79d0e7b9b5179367643336d8165ef25dca3090c808c5b9d79633b566a",
+          "bytes": 538,
+          "matched": true
+        }
+      }
+    }
+  },
+  "s3_status": "Dataset seed 2027 đã sẵn sàng cho S3 nhưng S3 chưa push.",
+  "kernel_s2": {
+    "ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "version": 18,
+    "pushed_utc7": "2026-11-21T11:24:05.876081+07:00",
+    "post_push_status": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.RUNNING\""
+  },
+  "quota": {
+    "before_gpu_remaining_hours": 45.0,
+    "before_push_gpu_remaining_hours": 45.0,
+    "after_push_gpu": {
+      "resource": "GPU",
+      "used": "0.10h",
+      "remaining": "44.90h",
+      "total": "45.00h",
+      "refreshAt": "2026-11-28T00:00:00"
+    }
+  },
+  "commands": [
+    {
+      "step": "preflight",
+      "exit_code": 0,
+      "log": ".cache/x1s04b/preflight.json"
+    },
+    {
+      "step": "create_s2026",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "create",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\resume_s2026",
+        "--dir-mode",
+        "skip"
+      ],
+      "exit_code": 0,
+      "log": ".cache/x1s04b/dataset_create_s2026.log"
+    },
+    {
+      "step": "create_s2027",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "create",
+        "-p",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\resume_s2027",
+        "--dir-mode",
+        "skip"
+      ],
+      "exit_code": 0,
+      "log": ".cache/x1s04b/dataset_create_s2027.log"
+    },
+    {
+      "step": "remote_verify",
+      "exit_code": 0,
+      "log": ".cache/x1s04b/remote_verify.json"
+    },
+    {
+      "step": "push_s2",
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-resume1-scale2-X1-L8-lr3e-5-seed2028"
+      ],
+      "exit_code": 0,
+      "log": ".cache/x1s04b/push_s2.log"
+    },
+    {
+      "step": "post_push_status",
+      "exit_code": 0,
+      "log": ".cache/x1s04b/post_push_status.json"
+    }
+  ]
+}

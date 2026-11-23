@@ -523,21 +523,24 @@ def prepare_kernel(config: WorkflowConfig, profile: str) -> Path:
     )
     (kernel_dir / "runner.py").write_text(rendered_runner, encoding="utf-8")
     write_json(kernel_dir / "run-config.json", run_config)
-    metadata = {
-        "id": config.kernel_ref,
-        "title": config.kernel_title,
-        "code_file": "runner.py",
-        "language": "python",
-        "kernel_type": "script",
-        "is_private": True,
-        "enable_gpu": config.enable_gpu,
-        "enable_tpu": False,
-        "enable_internet": config.enable_internet,
-        "dataset_sources": required_dataset_sources(config, commands),
-        "competition_sources": [],
-        "kernel_sources": [],
-        "model_sources": [],
-    }
+    if is_scale2_profile(commands, profile):
+        metadata = build_xlsr_pair_kernel_metadata(config, commands)
+    else:
+        metadata = {
+            "id": config.kernel_ref,
+            "title": config.kernel_title,
+            "code_file": "runner.py",
+            "language": "python",
+            "kernel_type": "script",
+            "is_private": True,
+            "enable_gpu": config.enable_gpu,
+            "enable_tpu": False,
+            "enable_internet": config.enable_internet,
+            "dataset_sources": required_dataset_sources(config, commands),
+            "competition_sources": [],
+            "kernel_sources": [],
+            "model_sources": [],
+        }
     write_json(kernel_dir / "kernel-metadata.json", metadata)
     verify_prepared_kernel(
         kernel_dir,
@@ -552,8 +555,39 @@ XLSR_EXTRA_DATASET_SOURCES = (
     "ngctnnguyn1111/doanttnt-t14-weights",
     "ngctnnguyn1111/doanttnt-t14-offline-deps",
 )
+SCALE2_TRAIN_DATASET_SOURCE = "ngctnnguyn1111/doanttnt-scale2-packed-v1"
+XLSR_SCALE2_EXTRA_DATASET_SOURCES = XLSR_EXTRA_DATASET_SOURCES + (
+    SCALE2_TRAIN_DATASET_SOURCE,
+)
+XLSR_SCALE2_PAIR_PROFILE = (
+    "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027"
+)
+XLSR_SCALE2_PAIR_DRY_RUN_PROFILE = f"{XLSR_SCALE2_PAIR_PROFILE}-dry-run"
+XLSR_SCALE2_SINGLE_PROFILE = "scale2-X1-L8-lr3e-5-seed2028"
+XLSR_SCALE2_SINGLE_DRY_RUN_PROFILE = f"{XLSR_SCALE2_SINGLE_PROFILE}-dry-run"
+XLSR_SCALE2_PROFILES = (
+    XLSR_SCALE2_PAIR_PROFILE,
+    XLSR_SCALE2_PAIR_DRY_RUN_PROFILE,
+    XLSR_SCALE2_SINGLE_PROFILE,
+    XLSR_SCALE2_SINGLE_DRY_RUN_PROFILE,
+)
 # SDK không liệt kê tên hợp lệ; xác nhận NvidiaTeslaT4 ở lần push dry-run cặp đầu tiên.
 KAGGLE_PAIR_GPU_ACCELERATOR = "NvidiaTeslaT4"
+
+
+def is_scale2_profile(
+    commands: Sequence[Sequence[str]], profile: str | None = None
+) -> bool:
+    """Kiểm tra profile hoặc lệnh có thuộc thí nghiệm scale2 (D036) hay không."""
+
+    if profile is not None and "scale2" in profile:
+        return True
+    return any(
+        "configs/xlsr_training_scale2.json" in part
+        or "doanttnt-scale2-packed-v1" in part
+        for command in commands
+        for part in command
+    )
 
 
 def build_xlsr_pair_profiles(
@@ -563,6 +597,8 @@ def build_xlsr_pair_profiles(
     first_seed: int = 2027,
     second_seed: int = 2028,
     pairs: Sequence[tuple[str, int, int]] | None = None,
+    profile_prefix: str = "",
+    extra_args: Sequence[str] = (),
 ) -> dict[str, list[list[str]]]:
     """Sinh profile cặp 2 run song song (kèm dry-run) theo D033 mục 1."""
 
@@ -570,7 +606,12 @@ def build_xlsr_pair_profiles(
         profiles: dict[str, list[list[str]]] = {}
         for pair_run_id, seed_a, seed_b in pairs:
             generated = build_xlsr_pair_profiles(
-                base_command, run_id=pair_run_id, first_seed=seed_a, second_seed=seed_b
+                base_command,
+                run_id=pair_run_id,
+                first_seed=seed_a,
+                second_seed=seed_b,
+                profile_prefix=profile_prefix,
+                extra_args=extra_args,
             )
             if profiles.keys() & generated.keys():
                 raise WorkflowError("Danh sách cặp XLS-R có profile trùng nhau.")
@@ -578,8 +619,11 @@ def build_xlsr_pair_profiles(
         return profiles
     if first_seed == second_seed:
         raise WorkflowError("Hai seed trong profile cặp không được trùng nhau.")
-    profile_name = f"{run_id}-seed{first_seed}-{run_id}-seed{second_seed}"
-    pair_command = list(base_command) + [
+    profile_name = (
+        f"{profile_prefix}{run_id}-seed{first_seed}"
+        f"-{profile_prefix}{run_id}-seed{second_seed}"
+    )
+    pair_command = list(base_command) + list(extra_args) + [
         "--run-id",
         run_id,
         "--training-seed",
@@ -595,20 +639,60 @@ def build_xlsr_pair_profiles(
     }
 
 
+def build_xlsr_scale2_profiles(
+    base_command: Sequence[str],
+) -> dict[str, list[list[str]]]:
+    """Sinh 4 profile scale2 (cặp 2026+2027 và một run 2028, kèm bản dry-run)."""
+
+    train_slug = SCALE2_TRAIN_DATASET_SOURCE.split("/", maxsplit=1)[1]
+    scale2_args = [
+        "--plan",
+        "configs/xlsr_training_scale2.json",
+        "--train-artifact",
+        f"/kaggle/input/{train_slug}",
+    ]
+    profiles = build_xlsr_pair_profiles(
+        base_command,
+        run_id="X1-L8-lr3e-5",
+        first_seed=2026,
+        second_seed=2027,
+        profile_prefix="scale2-",
+        extra_args=scale2_args,
+    )
+    single_cmd = list(base_command) + scale2_args + [
+        "--run-id",
+        "X1-L8-lr3e-5",
+        "--training-seed",
+        "2028",
+    ]
+    profiles[XLSR_SCALE2_SINGLE_PROFILE] = [single_cmd]
+    profiles[XLSR_SCALE2_SINGLE_DRY_RUN_PROFILE] = [single_cmd + ["--dry-run"]]
+    return profiles
+
+
 def build_xlsr_pair_kernel_metadata(
     config: WorkflowConfig,
     commands: Sequence[Sequence[str]],
     *,
-    extra_dataset_sources: Sequence[str] = XLSR_EXTRA_DATASET_SOURCES,
+    extra_dataset_sources: Sequence[str] | None = None,
 ) -> dict[str, Any]:
-    """Sinh metadata kernel cho chế độ cặp: private, GPU NvidiaTeslaT4, offline, đủ 4 dataset."""
+    """Sinh metadata kernel cho chế độ cặp hoặc scale2: private, T4, offline."""
 
     if not config.enable_gpu:
         raise WorkflowError("Profile cặp XLS-R yêu cầu bật GPU (enable_gpu=true).")
     if config.enable_internet:
         raise WorkflowError("Profile cặp XLS-R yêu cầu tắt internet (enable_internet=false).")
-    dataset_sources = required_dataset_sources(config, commands) + list(
+    selected_extra = (
         extra_dataset_sources
+        if extra_dataset_sources is not None
+        else (
+            XLSR_SCALE2_EXTRA_DATASET_SOURCES
+            if is_scale2_profile(commands)
+            else XLSR_EXTRA_DATASET_SOURCES
+        )
+    )
+    dataset_sources = required_dataset_sources(config, commands) + list(
+        selected_extra
     )
     return {
         "id": config.kernel_ref,
@@ -632,7 +716,7 @@ def prepare_xlsr_pair_kernel(
     config: WorkflowConfig,
     profile: str,
     *,
-    extra_dataset_sources: Sequence[str] = XLSR_EXTRA_DATASET_SOURCES,
+    extra_dataset_sources: Sequence[str] | None = None,
     pair_profiles: Sequence[str] | None = None,
 ) -> Path:
     """Chuẩn bị kernel cho profile cặp XLS-R mà không đụng tới các profile một run."""

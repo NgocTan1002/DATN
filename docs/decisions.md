@@ -309,3 +309,13 @@ Tài liệu này ghi các quyết định ảnh hưởng đến phạm vi, giao 
 **Giới hạn:** chi phí chiếu từ 30 bước đo và 512 mẫu dev, chưa gồm checkpoint, khởi động và biến thiên Kaggle; hệ số an toàn 25% là ước tính, không phải số đo. Lưới tầng, learning rate và trần 10 epoch là lựa chọn có lý do, không phải tối ưu; EER vẫn có thể còn giảm sau epoch 10. Learning rate cố định có thể bất lợi cho XLS-R so với lịch có warmup. B0 và XLS-R vẫn khác batch (8 và 16). Seed bổ sung của X0/X1 chỉ đo dao động khởi tạo, sampler và crop. Kết quả chỉ áp dụng cho `VSASV-HF-public-snapshot-v1` và 15.885 mẫu train.
 
 **Không thay đổi:** metadata, split, seed dữ liệu `2026`, `configs/audio.json`, D022, D025, D026 (trừ mục 7), D027 (trừ mục 2). Không dùng test; cổng `ready_for_training` của B0 nối dài và XLS-R vẫn đóng cho tới khi người dùng xác nhận.
+
+## 2026-11-05 — D029: Ghi riêng cấu hình và trạng thái hiệu lực LayerDrop/SpecAugment XLS-R
+
+**Xác nhận:** người dùng trả lời nguyên văn "đồng ý" ngày 05/11/2026 cho đề xuất D029 và tiếp tục T15 từ bước 6.
+
+**Quyết định:** giữ hành vi wrapper đã dùng trong T14: config pretrained `layerdrop=0.1`, `apply_spec_augment=true` không đổi; backbone và encoder luôn eval, chỉ các block mở và classifier ở train. Do đó effective LayerDrop bằng 0 và effective SpecAugment tắt. Identity/report ghi riêng configured/effective, không sửa config pretrained hoặc trọng số. Điều kiện dừng bước 5 T15 đã được giải quyết theo cách diễn giải này, cho phép tiếp tục công việc cục bộ bước 6–12.
+
+**Bằng chứng:** `reports/xlsr_t15_eol_normalization.json`, source T14 trong bundle khớp HEAD, probe mode nhỏ exit 0; Transformers 4.57.6 kiểm cờ training ở encoder cho LayerDrop và backbone cho masking.
+
+**Phạm vi:** không mở ready_for_training, không chạy huấn luyện khoa học, test-full, upload/push/chạy Kaggle, commit hoặc merge. D025/D026/D028 giữ nguyên. Quyết định được ghi trong worktree XLS-R; không sửa docs/decisions.md ở thư mục chính.

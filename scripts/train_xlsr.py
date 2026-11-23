@@ -41,6 +41,20 @@ GRID = [{'run_id': 'X0', 'layers': 0, 'encoder_lr': None}] + [
     for n in (2, 4, 8) for lr in ('1e-5', '3e-5')]
 VARIANTS = {'X1-L8-lr3e-5-lp7k': {'base_run_id': 'X1-L8-lr3e-5',
             'input_condition': 'lowpass_7k', 'decision': 'D035'}}
+SCALE2_GRID = [{'run_id': 'X1-L8-lr3e-5', 'layers': 8, 'encoder_lr': 3e-05}]
+SCALE2_DATA_SPEC = {
+    'train_manifest': 'data/manifests/development_scale2_v1.csv',
+    'train_manifest_sha256': '6533fced4b3a25ebab9f037a62d34774b44c2fa1f00d17040fd815bd17fa51a3',
+    'train_artifact': 'data/processed/packed/train_development_scale2_v1',
+    'train_artifact_waveforms_sha256': '260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e',
+    'train_artifact_index_sha256': '7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080',
+    'train_metadata_sha256': '3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d',
+    'train_samples': 31770,
+}
+SCALE2_OUTPUTS = {
+    'root_template': 'checkpoints/xlsr_scale2_{run_id}_seed{training_seed}',
+    'report_json_template': 'reports/xlsr_scale2_{run_id}_seed{training_seed}.json',
+}
 
 
 class InputConditionDataset(torch.utils.data.Dataset[dict[str, Any]]):
@@ -72,21 +86,21 @@ def input_condition_identity(run_id: str) -> dict[str, Any] | None:
             'implementation_sha256': sha256(Path(lowpass.__file__))}
 
 
-def validate_plan(plan: dict[str, Any], run_id: str, seed: int) -> dict[str, Any]:
-    """Từ chối thay đổi giao thức D028 hoặc run ngoài lưới."""
+def _validate_shared_d028_fields(plan: dict[str, Any]) -> None:
+    """Kiểm tra các trường bất biến dùng chung giữa D028 (×1) và D036 (scale2)."""
     d, t, m, e, p = (plan[k] for k in ('data', 'training', 'model', 'evaluation', 'pretrained'))
-    expected = {'batch_size':16, 'num_workers':0, 'optimizer':'Adam',
-                'classifier_learning_rate':.001, 'encoder_learning_rates':[1e-5,3e-5],
-                'max_epochs':10, 'steps_per_epoch':993, 'max_optimizer_steps':9930,
-                'max_train_sample_exposures':158850, 'scheduler':None, 'gradient_clipping':None,
-                'drop_last':False, 'shuffle':True, 'loss':'BCEWithLogitsLoss', 'gpus_per_run':1,
-                'training_seeds':[2026,2027,2028]}
-    if (plan['decision'] != 'D028' or plan['grid'] != GRID
-        or any(t.get(k) != v for k,v in expected.items())
+    shared_training = {
+        'batch_size': 16, 'num_workers': 0, 'optimizer': 'Adam',
+        'classifier_learning_rate': .001, 'encoder_learning_rates': [1e-5, 3e-5],
+        'max_epochs': 10, 'scheduler': None, 'gradient_clipping': None,
+        'drop_last': False, 'shuffle': True, 'loss': 'BCEWithLogitsLoss', 'gpus_per_run': 1,
+        'training_seeds': [2026, 2027, 2028],
+    }
+    if (any(t.get(k) != v for k, v in shared_training.items())
         or d['data_seed'] != 2026 or d['use_test'] is not False
         or d['backend'] != 'packed' or d['train_split'] != 'closed_train'
         or d['development_split'] != 'closed_dev'
-        or (d['train_samples'],d['development_samples']) != (15885,38777)
+        or d['development_samples'] != 38777
         or m['amplitude_policy'] != 'peak' or m['precision'] != 'float32' or m['amp']
         or m['classifier_hidden_features'] != 128 or m['classifier_dropout'] != .2
         or p['waveform_normalization'] != NORMALIZATION
@@ -106,7 +120,35 @@ def validate_plan(plan: dict[str, Any], run_id: str, seed: int) -> dict[str, Any
         or p['config_sha256'] != '0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac'
         or p['preprocessor_config_sha256'] != 'a2254a5b58f72cd4de3632f8eee64f3f098b7c1402128d2f419e7d00ae13e335'):
         raise ValueError('Pretrained không khớp revision/checksum khóa D021.')
-    if seed not in (2026,2027,2028):
+
+
+def validate_plan(plan: dict[str, Any], run_id: str, seed: int) -> dict[str, Any]:
+    """Từ chối thay đổi giao thức D028/D036 hoặc run ngoài lưới."""
+    _validate_shared_d028_fields(plan)
+    d, t = plan['data'], plan['training']
+    decision = plan.get('decision')
+    if decision == 'D036':
+        if (plan.get('base_decision') != 'D028'
+            or plan.get('experiment_id') != 'xlsr-d036-scale2'
+            or plan.get('grid') != SCALE2_GRID
+            or any(d.get(k) != v for k, v in SCALE2_DATA_SPEC.items())
+            or t.get('steps_per_epoch') != 1986
+            or t.get('max_optimizer_steps') != 19860
+            or t.get('max_train_sample_exposures') != 317700
+            or plan.get('outputs') != SCALE2_OUTPUTS):
+            raise ValueError('Đặc tả scale2 không khớp D036/D028.')
+        if seed not in (2026, 2027, 2028):
+            raise ValueError('Seed huấn luyện phải thuộc 2026/2027/2028.')
+        if run_id != 'X1-L8-lr3e-5':
+            raise ValueError('Cấu hình scale2 (D036) chỉ cho phép run X1-L8-lr3e-5.')
+        return dict(SCALE2_GRID[0])
+    if (decision != 'D028' or plan['grid'] != GRID
+        or d['train_samples'] != 15885
+        or t.get('steps_per_epoch') != 993
+        or t.get('max_optimizer_steps') != 9930
+        or t.get('max_train_sample_exposures') != 158850):
+        raise ValueError('Đặc tả không khớp D028.')
+    if seed not in (2026, 2027, 2028):
         raise ValueError('Seed huấn luyện phải thuộc 2026/2027/2028.')
     base_run_id = VARIANTS[run_id]['base_run_id'] if run_id in VARIANTS else run_id
     for run in GRID:
@@ -131,6 +173,11 @@ def open_artifact(path: Path, plan: dict[str, Any], *, training: bool, seed: int
     # Kiểm metadata trước khi loader mở memmap; không băm waveform trong dry-run.
     if sha256(path / 'metadata.json') != d[prefix+'_metadata_sha256']:
         raise ValueError('Checksum metadata packed không khớp plan.')
+    index_key = prefix + '_artifact_index_sha256'
+    if index_key in d:
+        metadata = json.loads((path / 'metadata.json').read_text(encoding='utf-8'))
+        if sha256(path / metadata['index_file']) != d[index_key]:
+            raise ValueError('Checksum index packed không khớp plan.')
     ds = PackedManifestDataset(path, training=training, amplitude_policy='peak', seed=seed)
     if (ds.split != d[prefix+'_split'] or ds.split not in ('closed_train','closed_dev')
         or len(ds) != d[prefix+'_samples'] or ds.target_sample_rate != 16000
@@ -536,7 +583,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise ValueError('Layerdrop cấu hình pretrain không khớp T14.')
             if args.dry_run:
                 counts = []
-                for configuration in ([run] if condition is not None else GRID):
+                for configuration in ([run] if condition is not None else plan['grid']):
                     model = timing.phase('model_build', lambda: build_model(backbone,configuration,args.training_seed))
                     counts.append({**configuration,'modes':effective_modes(model),'trainable_parameters':sum(p.numel() for p in model.parameters() if p.requires_grad)})
                 report = {'status':'dry_run','use_test':False,'training_seed':args.training_seed,'data_seed':2026,

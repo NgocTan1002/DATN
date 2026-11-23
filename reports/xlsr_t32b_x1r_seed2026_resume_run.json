@@ -1,0 +1,953 @@
+{
+  "task": "T32B",
+  "status": "resume_run_complete_verified_resume_only",
+  "generated_at_utc7": "2026-11-17T05:40:23+07:00",
+  "run_id": "X1-L8-lr3e-5-lp7k",
+  "training_seed": 2026,
+  "use_test": false,
+  "dataset_ref": "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+  "auth_incident_and_retry": {
+    "first_attempt_log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_create.log",
+    "first_attempt_exit_code": 1,
+    "first_attempt_uploaded_before_error": 4,
+    "first_attempt_error_line": "Authentication required to call the Kaggle API.",
+    "old_lock_renamed_to": "DATASET_CREATE_FAILED_AUTH_20261116.lock",
+    "second_lock_created": "DATASET_CREATE_ONCE_2.lock",
+    "second_attempt_log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_create_2.log",
+    "second_attempt_exit_code": 0,
+    "successful_dataset_creations": 1
+  },
+  "preflight_before_retry": {
+    "checked_at_utc7": "2026-11-16T23:06:38+07:00",
+    "kernel_before": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+    "gpu_remaining_hours": 16.69,
+    "datasets_mine_count": 9
+  },
+  "remote_dataset_verification": {
+    "checked_at_utc7": "2026-11-16T23:20:05+07:00",
+    "passed": true,
+    "dataset_ref": "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+    "status": "ready",
+    "is_private": true,
+    "dataset_id": 13399307,
+    "server_files": [
+      {
+        "name": "LATEST.json",
+        "size": 538,
+        "creationDate": "2026-11-16T16:08:51.241000"
+      },
+      {
+        "name": "b0_resume_manifest.json",
+        "size": 2057,
+        "creationDate": "2026-11-16T16:08:51.220000"
+      },
+      {
+        "name": "g-8f038cf83b5a479d98b36a32bfbf7a3e__checkpoint.pt",
+        "size": 1266842843,
+        "creationDate": "2026-11-16T16:09:16.847000"
+      },
+      {
+        "name": "g-8f038cf83b5a479d98b36a32bfbf7a3e__state.json",
+        "size": 105365174,
+        "creationDate": "2026-11-16T16:08:52.690000"
+      },
+      {
+        "name": "g-98c5c2e9fc9e4f3cad966e8c6147add8__checkpoint.pt",
+        "size": 1261368667,
+        "creationDate": "2026-11-16T16:09:12.400000"
+      },
+      {
+        "name": "g-98c5c2e9fc9e4f3cad966e8c6147add8__state.json",
+        "size": 94457310,
+        "creationDate": "2026-11-16T16:08:52.836000"
+      }
+    ],
+    "downloaded_payload_file_count": 6,
+    "file_comparisons": {
+      "b0_resume_manifest.json": {
+        "source": "dataset_download",
+        "local_sha256": "70d1ca3ef315af9568dd60ee99a5232f151d0e52d66314ebba7597fc454bcd29",
+        "remote_sha256": "70d1ca3ef315af9568dd60ee99a5232f151d0e52d66314ebba7597fc454bcd29",
+        "bytes": 2057,
+        "matched": true
+      },
+      "dataset-metadata.json": {
+        "local_sha256": "b7a574619cd60da9b9141542829feafbeec4f84ab99959b58179aa9a6831c2cd",
+        "local_bytes": 358,
+        "remote_sha256": null,
+        "note": "Kaggle không đóng gói dataset-metadata.json vào archive tải về; đã kiểm tra info.isPrivate=True qua datasets metadata.",
+        "matched": true
+      },
+      "g-8f038cf83b5a479d98b36a32bfbf7a3e__checkpoint.pt": {
+        "source": "dataset_download",
+        "local_sha256": "d2b3a62414f4699aeb232facf3d3e153c88d0e47518f576fa50fca0bba824df1",
+        "remote_sha256": "d2b3a62414f4699aeb232facf3d3e153c88d0e47518f576fa50fca0bba824df1",
+        "bytes": 1266842843,
+        "matched": true
+      },
+      "g-8f038cf83b5a479d98b36a32bfbf7a3e__state.json": {
+        "source": "dataset_download",
+        "local_sha256": "efda9053040ca463f47c11efd3e473d4c5b477883852783f604076c2151ce121",
+        "remote_sha256": "efda9053040ca463f47c11efd3e473d4c5b477883852783f604076c2151ce121",
+        "bytes": 105365174,
+        "matched": true
+      },
+      "g-98c5c2e9fc9e4f3cad966e8c6147add8__checkpoint.pt": {
+        "source": "dataset_download",
+        "local_sha256": "1eba926cc391fac92f9a2fad7be83b80888a5d6e1df08a785a3c5f18417419b9",
+        "remote_sha256": "1eba926cc391fac92f9a2fad7be83b80888a5d6e1df08a785a3c5f18417419b9",
+        "bytes": 1261368667,
+        "matched": true
+      },
+      "g-98c5c2e9fc9e4f3cad966e8c6147add8__state.json": {
+        "source": "dataset_download",
+        "local_sha256": "f27ec8c67c227336cb385f80b34f4fa2628f4748d205db872629b07dc77d0b15",
+        "remote_sha256": "f27ec8c67c227336cb385f80b34f4fa2628f4748d205db872629b07dc77d0b15",
+        "bytes": 94457310,
+        "matched": true
+      },
+      "LATEST.json": {
+        "source": "dataset_download",
+        "local_sha256": "cf90eb526d10476de76920bef998fea9d1b478a7899b5bbaf32fc0eed2cfc360",
+        "remote_sha256": "cf90eb526d10476de76920bef998fea9d1b478a7899b5bbaf32fc0eed2cfc360",
+        "bytes": 538,
+        "matched": true
+      }
+    }
+  },
+  "kernel": {
+    "kernel_ref": "ngctnnguyn1111/doanttnt-xlsr-d028",
+    "version": 15,
+    "pushed_at_utc7": "2026-11-16T23:33:03+07:00",
+    "terminal_status": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+    "run_status": "early_stopped",
+    "push_lock": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\PUSH_ONCE.lock"
+  },
+  "quota": {
+    "before": [
+      {
+        "resource": "GPU",
+        "used": "28.31h",
+        "remaining": "16.69h",
+        "total": "45.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      }
+    ],
+    "after": [
+      {
+        "resource": "GPU",
+        "used": "28.94h",
+        "remaining": "16.06h",
+        "total": "45.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      }
+    ],
+    "gpu_remaining_before_hours": 16.69,
+    "gpu_remaining_after_hours": 16.06,
+    "gpu_used_hours": 0.63,
+    "datasets_mine_after": [
+      "ngctnnguyn1111/doantnnt-b0-full-resume",
+      "ngctnnguyn1111/doantnnt-project-source",
+      "ngctnnguyn1111/doanttnt-t14-offline-deps",
+      "ngctnnguyn1111/doanttnt-t14-packed",
+      "ngctnnguyn1111/doanttnt-t14-source",
+      "ngctnnguyn1111/doanttnt-t14-weights",
+      "ngctnnguyn1111/doanttnt-xlsr-d028-s2027-resume1",
+      "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+      "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+      "ngctnnguyn1111/vsasv-development-v2-2026-10-13"
+    ]
+  },
+  "output_inventory": {
+    "downloaded_at_utc7": "2026-11-17T05:35:32+07:00",
+    "started_at_utc7": "2026-11-17T05:29:32+07:00",
+    "output_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1R-seed2026-resume1-v1",
+    "command": [
+      "kaggle",
+      "-W",
+      "kernels",
+      "output",
+      "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "--path",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1R-seed2026-resume1-v1",
+      "--file-pattern",
+      "^reports/|^checkpoints/|^[^/]+\\.log$",
+      "--page-size",
+      "200"
+    ],
+    "file_count": 9,
+    "total_bytes": 2868035281,
+    "files": [
+      {
+        "path": "checkpoints/xlsr_X1-L8-lr3e-5-lp7k_seed2026/g-757392466de941618636fac6563edbaf/checkpoint.pt",
+        "bytes": 1272188443,
+        "sha256": "d6e1563f60e375e1ea9e991831520a4de3fa2aa6cc0744b4d0c1f563c274ce6d"
+      },
+      {
+        "path": "checkpoints/xlsr_X1-L8-lr3e-5-lp7k_seed2026/g-757392466de941618636fac6563edbaf/state.json",
+        "bytes": 115602979,
+        "sha256": "2e6dbfcd0fe298d382099a8e84f2be749e1c5e3eff64ef9994f8a45ccc8f6476"
+      },
+      {
+        "path": "checkpoints/xlsr_X1-L8-lr3e-5-lp7k_seed2026/g-98c5c2e9fc9e4f3cad966e8c6147add8/checkpoint.pt",
+        "bytes": 1261368667,
+        "sha256": "1eba926cc391fac92f9a2fad7be83b80888a5d6e1df08a785a3c5f18417419b9"
+      },
+      {
+        "path": "checkpoints/xlsr_X1-L8-lr3e-5-lp7k_seed2026/g-98c5c2e9fc9e4f3cad966e8c6147add8/state.json",
+        "bytes": 94457310,
+        "sha256": "f27ec8c67c227336cb385f80b34f4fa2628f4748d205db872629b07dc77d0b15"
+      },
+      {
+        "path": "checkpoints/xlsr_X1-L8-lr3e-5-lp7k_seed2026/LATEST.json",
+        "bytes": 538,
+        "sha256": "707d33bfd46544de1e6c9e3bd2b1c3a1bd1ae985d9d303e579e3b72b1e5710cf"
+      },
+      {
+        "path": "doanttnt-xlsr-d028.log",
+        "bytes": 10936,
+        "sha256": "e4af98e2a7c5e7310c11e17e0f954bb904d032e10bc29c9c827723266b68ce9e"
+      },
+      {
+        "path": "reports/kaggle_cli_workflow.json",
+        "bytes": 33406,
+        "sha256": "4bad8a63768f483278cc7eab3e5f9cdc4d8ab080174d98951231488a062be343"
+      },
+      {
+        "path": "reports/xlsr_resume_input.json",
+        "bytes": 1028,
+        "sha256": "ae7d6b89f75531b6894585a4fd36bd795a70327b0a66419fcd8f5c9b2977e3b3"
+      },
+      {
+        "path": "reports/xlsr_X1-L8-lr3e-5-lp7k_seed2026.json",
+        "bytes": 124371974,
+        "sha256": "8ac5358945bc4cfecee1232200739ebba05c9111a7e4c66e4a286895868238de"
+      }
+    ]
+  },
+  "verify_resume": {
+    "passed": true,
+    "resume_checks": {
+      "restore_manifest_step_identity_pointer": true,
+      "zero_extra_training": true,
+      "history_first_nine_identical": true,
+      "history_ten_complete": true,
+      "identity_identical": true,
+      "dev_full_38777_186": true,
+      "epoch10_metric_recalculated": true,
+      "best_rule_strict_improvement": true,
+      "best_checkpoint_sha_matches_pointer": true
+    },
+    "epoch10_improved_best": false,
+    "timing": {
+      "restore_seconds": 71.80017757415771,
+      "evaluation_seconds": 2038.8311581090002,
+      "runner_wall_seconds": 2120.754711434,
+      "bootstrap_total_seconds": 2232.163573741913,
+      "train_steps_this_invocation": 0,
+      "deadline_overrun_seconds": 0.0
+    },
+    "kernel_milestones": {
+      "bootstrap_start": {
+        "timestamp_utc": "2026-11-16T18:10:12.753213+00:00",
+        "event": "bootstrap_start",
+        "elapsed_seconds": 9.5367431640625e-07
+      },
+      "venv_pip_end": {
+        "timestamp_utc": "2026-11-16T18:10:44.557031+00:00",
+        "event": "venv_pip_end",
+        "elapsed_seconds": 31.803819179534912
+      },
+      "restore_end": {
+        "timestamp_utc": "2026-11-16T18:11:56.357208+00:00",
+        "event": "restore_end",
+        "elapsed_seconds": 103.60399675369263
+      },
+      "runner_start": {
+        "timestamp_utc": "2026-11-16T18:11:56.357513+00:00",
+        "event": "runner_start",
+        "elapsed_seconds": 103.60430145263672
+      },
+      "runner_end": {
+        "timestamp_utc": "2026-11-16T18:47:24.916785+00:00",
+        "event": "runner_end",
+        "elapsed_seconds": 2232.163573741913,
+        "exit_code": 0
+      }
+    },
+    "diff_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_resume.diff"
+  },
+  "verifier_a_g": {
+    "passed": false,
+    "error": "Rehash đầu phiên không đạt.",
+    "note": "Giữ nguyên logic kiểm của T30B theo yêu cầu Bước 8; thất bại do phiên resume đặt rehash_performed={'train': False, 'dev': False}.",
+    "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_seed2026.log",
+    "diff_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_run.diff"
+  },
+  "epoch10": {
+    "eer": 0.01762364980102331,
+    "eer_percent": 1.762365,
+    "eer_threshold": 1.9562743398098634e-05,
+    "decision_threshold": 1.9562743398098634e-05,
+    "roc_auc": 0.9934770014838563,
+    "macro_f1": 0.9810522044871179,
+    "loss": 0.21328079666414654,
+    "max_abs_difference": 0.0
+  },
+  "final_best": {
+    "epoch": 8,
+    "global_step": 7944,
+    "generation": "g-98c5c2e9fc9e4f3cad966e8c6147add8",
+    "checkpoint_sha256": "1eba926cc391fac92f9a2fad7be83b80888a5d6e1df08a785a3c5f18417419b9",
+    "decision_threshold": 1.3129237507729687e-06,
+    "eer": 0.008568179972386908,
+    "roc_auc": 0.9939293656290817,
+    "macro_f1": 0.9907766909383229,
+    "eer_percent": 0.856818
+  },
+  "commands": [
+    {
+      "name": "01-kernel-before",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T22:33:15+07:00",
+      "ended_at_utc7": "2026-11-16T22:33:19+07:00",
+      "duration_seconds": 3.195,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\01-kernel-before.log"
+    },
+    {
+      "name": "02-quota-before",
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T22:33:19+07:00",
+      "ended_at_utc7": "2026-11-16T22:33:21+07:00",
+      "duration_seconds": 2.086,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\02-quota-before.log"
+    },
+    {
+      "name": "03-datasets-before",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "list",
+        "--mine",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T22:33:21+07:00",
+      "ended_at_utc7": "2026-11-16T22:33:23+07:00",
+      "duration_seconds": 1.821,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\03-datasets-before.log"
+    },
+    {
+      "name": "dataset_create",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "create",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32\\resume_input",
+        "--dir-mode",
+        "skip",
+        "--keep-tabular"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T22:41:35+07:00",
+      "ended_at_utc7": "2026-11-16T22:47:00+07:00",
+      "duration_seconds": 324.484,
+      "exit_code": 1,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_create.log"
+    },
+    {
+      "name": "04-kernel-before-2",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:06:31+07:00",
+      "ended_at_utc7": "2026-11-16T23:06:34+07:00",
+      "duration_seconds": 2.632,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\04-kernel-before-2.log"
+    },
+    {
+      "name": "05-quota-before-2",
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:06:34+07:00",
+      "ended_at_utc7": "2026-11-16T23:06:36+07:00",
+      "duration_seconds": 2.034,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\05-quota-before-2.log"
+    },
+    {
+      "name": "06-datasets-before-2",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "list",
+        "--mine",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:06:36+07:00",
+      "ended_at_utc7": "2026-11-16T23:06:38+07:00",
+      "duration_seconds": 2.428,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\06-datasets-before-2.log"
+    },
+    {
+      "name": "dataset_create_2",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "create",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32\\resume_input",
+        "--dir-mode",
+        "skip",
+        "--keep-tabular"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:07:37+07:00",
+      "ended_at_utc7": "2026-11-16T23:08:38+07:00",
+      "duration_seconds": 60.764,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_create_2.log"
+    },
+    {
+      "name": "dataset_download",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\remote_verify",
+        "--unzip"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:09:11+07:00",
+      "ended_at_utc7": "2026-11-16T23:09:13+07:00",
+      "duration_seconds": 2.398,
+      "exit_code": 1,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_download.log"
+    },
+    {
+      "name": "dataset_status_01",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:12:07+07:00",
+      "ended_at_utc7": "2026-11-16T23:12:09+07:00",
+      "duration_seconds": 2.023,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_status_01.log"
+    },
+    {
+      "name": "dataset_files",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "files",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:12:09+07:00",
+      "ended_at_utc7": "2026-11-16T23:12:12+07:00",
+      "duration_seconds": 2.519,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_files.log"
+    },
+    {
+      "name": "dataset_metadata",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "metadata",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\server_metadata"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:12:12+07:00",
+      "ended_at_utc7": "2026-11-16T23:12:15+07:00",
+      "duration_seconds": 3.175,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_metadata.log"
+    },
+    {
+      "name": "dataset_download_01",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\remote_verify",
+        "--unzip"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:12:15+07:00",
+      "ended_at_utc7": "2026-11-16T23:12:18+07:00",
+      "duration_seconds": 3.276,
+      "exit_code": 1,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_download_01.log"
+    },
+    {
+      "name": "dataset_download_02",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\remote_verify",
+        "--unzip"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:13:18+07:00",
+      "ended_at_utc7": "2026-11-16T23:13:22+07:00",
+      "duration_seconds": 3.295,
+      "exit_code": 1,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_download_02.log"
+    },
+    {
+      "name": "dataset_download_03",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "download",
+        "ngctnnguyn1111/doanttnt-xlsr-d028-x1r-s2026-resume1",
+        "--path",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\remote_verify",
+        "--unzip"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:14:22+07:00",
+      "ended_at_utc7": "2026-11-16T23:19:58+07:00",
+      "duration_seconds": 336.067,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\dataset_download_03.log"
+    },
+    {
+      "name": "push",
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "push-prepared-kernel",
+        "--kernel-dir",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-lp7k-seed2026-resume1"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:32:59+07:00",
+      "ended_at_utc7": "2026-11-16T23:33:03+07:00",
+      "duration_seconds": 4.4,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\push.log"
+    },
+    {
+      "name": "verify_prepared_kernel",
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        ".kaggle/xlsr-d028/prepared/X1-L8-lr3e-5-lp7k-seed2026-resume1"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:32:59+07:00",
+      "ended_at_utc7": "2026-11-16T23:32:59+07:00",
+      "duration_seconds": 0.431,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_prepared_kernel.log"
+    },
+    {
+      "name": "kernel_status_01",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:33:47+07:00",
+      "ended_at_utc7": "2026-11-16T23:33:50+07:00",
+      "duration_seconds": 2.463,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_01.log"
+    },
+    {
+      "name": "kernel_status_02",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:43:50+07:00",
+      "ended_at_utc7": "2026-11-16T23:43:51+07:00",
+      "duration_seconds": 1.096,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_02.log"
+    },
+    {
+      "name": "kernel_status_03",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-16T23:53:51+07:00",
+      "ended_at_utc7": "2026-11-16T23:53:52+07:00",
+      "duration_seconds": 1.146,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_03.log"
+    },
+    {
+      "name": "kernel_status_04",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:03:52+07:00",
+      "ended_at_utc7": "2026-11-17T00:03:54+07:00",
+      "duration_seconds": 1.872,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_04.log"
+    },
+    {
+      "name": "kernel_status_05",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:13:54+07:00",
+      "ended_at_utc7": "2026-11-17T00:13:55+07:00",
+      "duration_seconds": 1.127,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_05.log"
+    },
+    {
+      "name": "kernel_status_06",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:23:55+07:00",
+      "ended_at_utc7": "2026-11-17T00:23:56+07:00",
+      "duration_seconds": 1.049,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_06.log"
+    },
+    {
+      "name": "kernel_status_07",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:33:56+07:00",
+      "ended_at_utc7": "2026-11-17T00:33:58+07:00",
+      "duration_seconds": 1.675,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_07.log"
+    },
+    {
+      "name": "kernel_status_08",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:43:58+07:00",
+      "ended_at_utc7": "2026-11-17T00:43:59+07:00",
+      "duration_seconds": 1.708,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_08.log"
+    },
+    {
+      "name": "kernel_status_09",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T00:53:59+07:00",
+      "ended_at_utc7": "2026-11-17T00:54:00+07:00",
+      "duration_seconds": 1.061,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_09.log"
+    },
+    {
+      "name": "kernel_status_10",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:04:00+07:00",
+      "ended_at_utc7": "2026-11-17T01:04:02+07:00",
+      "duration_seconds": 1.707,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_10.log"
+    },
+    {
+      "name": "kernel_status_11",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:14:02+07:00",
+      "ended_at_utc7": "2026-11-17T01:14:03+07:00",
+      "duration_seconds": 1.064,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_11.log"
+    },
+    {
+      "name": "kernel_status_12",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:24:03+07:00",
+      "ended_at_utc7": "2026-11-17T01:24:05+07:00",
+      "duration_seconds": 1.833,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_12.log"
+    },
+    {
+      "name": "kernel_status_13",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:34:05+07:00",
+      "ended_at_utc7": "2026-11-17T01:34:06+07:00",
+      "duration_seconds": 1.042,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_13.log"
+    },
+    {
+      "name": "kernel_status_14",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:44:06+07:00",
+      "ended_at_utc7": "2026-11-17T01:44:07+07:00",
+      "duration_seconds": 1.083,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_14.log"
+    },
+    {
+      "name": "kernel_status_15",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:54:07+07:00",
+      "ended_at_utc7": "2026-11-17T01:54:08+07:00",
+      "duration_seconds": 1.012,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_status_15.log"
+    },
+    {
+      "name": "kernel_logs",
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "logs",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T01:54:08+07:00",
+      "ended_at_utc7": "2026-11-17T01:54:10+07:00",
+      "duration_seconds": 1.741,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\kernel_logs.log"
+    },
+    {
+      "name": "quota_after",
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T05:35:35+07:00",
+      "ended_at_utc7": "2026-11-17T05:35:37+07:00",
+      "duration_seconds": 2.043,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\quota_after.log"
+    },
+    {
+      "name": "datasets_after",
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "list",
+        "--mine",
+        "--format",
+        "json"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T05:35:37+07:00",
+      "ended_at_utc7": "2026-11-17T05:35:39+07:00",
+      "duration_seconds": 1.765,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\datasets_after.log"
+    },
+    {
+      "name": "verify_resume",
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_resume.py"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T05:36:04+07:00",
+      "ended_at_utc7": "2026-11-17T05:36:20+07:00",
+      "duration_seconds": 16.377,
+      "exit_code": 0,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_resume.log"
+    },
+    {
+      "name": "verify_seed2026",
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_run.py",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1R-seed2026-resume1-v1",
+        "X1-L8-lr3e-5-lp7k",
+        "--seed",
+        "2026"
+      ],
+      "cwd": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+      "started_at_utc7": "2026-11-17T05:36:20+07:00",
+      "ended_at_utc7": "2026-11-17T05:36:25+07:00",
+      "duration_seconds": 4.486,
+      "exit_code": 1,
+      "log_path": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\t32b\\verify_seed2026.log"
+    }
+  ],
+  "next_action": "Chờ Claude kiểm; X1R đủ 3 seed, lập registry phụ theo D035 mục 4 bằng bản giao việc riêng"
+}

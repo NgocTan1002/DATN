@@ -1,0 +1,628 @@
+{
+  "task": "X1S-04A",
+  "status": "prepared_local_only_pending_claude_review",
+  "updated_utc7": "2026-11-19T23:28:05.523897+07:00",
+  "authorization": "Không có; chỉ thao tác cục bộ, 0 thao tác ghi Kaggle hay Drive.",
+  "preflight": {
+    "all_checks_passed": true,
+    "bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "kernel_status": "ngctnnguyn1111/doanttnt-xlsr-d028 has status \"KernelWorkerStatus.COMPLETE\"",
+    "dataset_refs_absent": true,
+    "checkpoint_rehash_all_match": true,
+    "quota": [
+      {
+        "resource": "GPU",
+        "used": "39.97h",
+        "remaining": "5.03h",
+        "total": "45.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      },
+      {
+        "resource": "TPU",
+        "used": "0.00h",
+        "remaining": "20.00h",
+        "total": "20.00h",
+        "refreshAt": "2026-11-21T00:00:00"
+      }
+    ]
+  },
+  "source_tree_sha256": "32713f9d89a4b0d47e7b2dfdf77c18d4a4d553ea50c263ef2a564e4d74845400",
+  "payloads": {
+    "2026": {
+      "seed": 2026,
+      "dataset_ref": "ngctnnguyn1111/doanttnt-xlsr-scale2-s2026-resume1",
+      "title": "DoAnTTNT XLSR Scale2 S2026 Resume1",
+      "payload_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\resume_s2026",
+      "global_step": 11491,
+      "source_tree_sha256": "32713f9d89a4b0d47e7b2dfdf77c18d4a4d553ea50c263ef2a564e4d74845400",
+      "identity_sha256": "779b850e1e8a289386c7c811e07c816dccbe9239b3d95c57efafcb17a6117c59",
+      "pointer": {
+        "checkpoint_version": 4,
+        "latest": {
+          "generation": "g-f0deb62f783f4f5095a2f44a0702dfe2",
+          "checkpoint_sha256": "d5737f3fda2067ab638645400e43558c5252a7ca76312ef1516eb02676805329",
+          "state_sha256": "447e77d834bd614c9796777f1d74d83d475260f0422023163e0c3a59754a84a4"
+        },
+        "best": {
+          "generation": "g-6d3cd386b2514c7292a0e976f48ad28e",
+          "checkpoint_sha256": "a86925f2ab5d276a0526e877a8c8adbe9557a66c38c598dd77442cdca5405cc4",
+          "state_sha256": "50fd8391a4f12c32eaf95282ee3264eb03a0543c3264484d54a532a1855238eb"
+        }
+      },
+      "manifest_name": "b0_resume_manifest.json",
+      "manifest_sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd",
+      "payload_file_count": 5,
+      "payload_bytes": 2600284766,
+      "manifest_files": [
+        {
+          "path": "LATEST.json",
+          "file": "LATEST.json",
+          "sha256": "dba7078c86fc21d8178a2b7508bfccdd7e6330763682be5963fa4748b662ccea",
+          "bytes": 538
+        },
+        {
+          "path": "g-6d3cd386b2514c7292a0e976f48ad28e/checkpoint.pt",
+          "file": "g-6d3cd386b2514c7292a0e976f48ad28e__checkpoint.pt",
+          "sha256": "a86925f2ab5d276a0526e877a8c8adbe9557a66c38c598dd77442cdca5405cc4",
+          "bytes": 1240034267
+        },
+        {
+          "path": "g-6d3cd386b2514c7292a0e976f48ad28e/state.json",
+          "file": "g-6d3cd386b2514c7292a0e976f48ad28e__state.json",
+          "sha256": "50fd8391a4f12c32eaf95282ee3264eb03a0543c3264484d54a532a1855238eb",
+          "bytes": 52024959
+        },
+        {
+          "path": "g-f0deb62f783f4f5095a2f44a0702dfe2/checkpoint.pt",
+          "file": "g-f0deb62f783f4f5095a2f44a0702dfe2__checkpoint.pt",
+          "sha256": "d5737f3fda2067ab638645400e43558c5252a7ca76312ef1516eb02676805329",
+          "bytes": 1245609947
+        },
+        {
+          "path": "g-f0deb62f783f4f5095a2f44a0702dfe2/state.json",
+          "file": "g-f0deb62f783f4f5095a2f44a0702dfe2__state.json",
+          "sha256": "447e77d834bd614c9796777f1d74d83d475260f0422023163e0c3a59754a84a4",
+          "bytes": 62615055
+        }
+      ],
+      "inventory": [
+        {
+          "path": "b0_resume_manifest.json",
+          "bytes": 2057,
+          "sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd"
+        },
+        {
+          "path": "dataset-metadata.json",
+          "bytes": 327,
+          "sha256": "bc1b8e16ca8ee22270a31c1a9cff23266cbd36fb75371f89c6d99b958184542c"
+        },
+        {
+          "path": "g-6d3cd386b2514c7292a0e976f48ad28e__checkpoint.pt",
+          "bytes": 1240034267,
+          "sha256": "a86925f2ab5d276a0526e877a8c8adbe9557a66c38c598dd77442cdca5405cc4"
+        },
+        {
+          "path": "g-6d3cd386b2514c7292a0e976f48ad28e__state.json",
+          "bytes": 52024959,
+          "sha256": "50fd8391a4f12c32eaf95282ee3264eb03a0543c3264484d54a532a1855238eb"
+        },
+        {
+          "path": "g-f0deb62f783f4f5095a2f44a0702dfe2__checkpoint.pt",
+          "bytes": 1245609947,
+          "sha256": "d5737f3fda2067ab638645400e43558c5252a7ca76312ef1516eb02676805329"
+        },
+        {
+          "path": "g-f0deb62f783f4f5095a2f44a0702dfe2__state.json",
+          "bytes": 62615055,
+          "sha256": "447e77d834bd614c9796777f1d74d83d475260f0422023163e0c3a59754a84a4"
+        },
+        {
+          "path": "LATEST.json",
+          "bytes": 538,
+          "sha256": "dba7078c86fc21d8178a2b7508bfccdd7e6330763682be5963fa4748b662ccea"
+        }
+      ],
+      "total_bytes": 2600287150,
+      "elapsed_seconds": 27.627
+    },
+    "2027": {
+      "seed": 2027,
+      "dataset_ref": "ngctnnguyn1111/doanttnt-xlsr-scale2-s2027-resume1",
+      "title": "DoAnTTNT XLSR Scale2 S2027 Resume1",
+      "payload_dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\resume_s2027",
+      "global_step": 13120,
+      "source_tree_sha256": "32713f9d89a4b0d47e7b2dfdf77c18d4a4d553ea50c263ef2a564e4d74845400",
+      "identity_sha256": "b94d45a82e2f5b74848ebd67abac8801c7925d162a65347077f5f7b88c62f0f3",
+      "pointer": {
+        "checkpoint_version": 4,
+        "latest": {
+          "generation": "g-b19748034808412f8a006986895313e6",
+          "checkpoint_sha256": "1236c6ae612311a83b9f43a4139d758275b6ac8bf9e6d0f7b56fb67713329bc5",
+          "state_sha256": "3374d907b894d62f5bb888cbec07a1cecd6c2625a32965290e8c8b003e6245e0"
+        },
+        "best": {
+          "generation": "g-2f64908aa31b4ea09320fa58bfec0277",
+          "checkpoint_sha256": "a9ed12b3cdb3805f46836cb2a371e07014fdab835704eacf6956edecb31c4e6f",
+          "state_sha256": "61bf95032c0865d68e097c059782e2cc2784362fa576fcfa51dfa49274b47071"
+        }
+      },
+      "manifest_name": "b0_resume_manifest.json",
+      "manifest_sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3",
+      "payload_file_count": 5,
+      "payload_bytes": 2652842796,
+      "manifest_files": [
+        {
+          "path": "LATEST.json",
+          "file": "LATEST.json",
+          "sha256": "e0ce78b79d0e7b9b5179367643336d8165ef25dca3090c808c5b9d79633b566a",
+          "bytes": 538
+        },
+        {
+          "path": "g-2f64908aa31b4ea09320fa58bfec0277/checkpoint.pt",
+          "file": "g-2f64908aa31b4ea09320fa58bfec0277__checkpoint.pt",
+          "sha256": "a9ed12b3cdb3805f46836cb2a371e07014fdab835704eacf6956edecb31c4e6f",
+          "bytes": 1250983067
+        },
+        {
+          "path": "g-2f64908aa31b4ea09320fa58bfec0277/state.json",
+          "file": "g-2f64908aa31b4ea09320fa58bfec0277__state.json",
+          "sha256": "61bf95032c0865d68e097c059782e2cc2784362fa576fcfa51dfa49274b47071",
+          "bytes": 75253548
+        },
+        {
+          "path": "g-b19748034808412f8a006986895313e6/checkpoint.pt",
+          "file": "g-b19748034808412f8a006986895313e6__checkpoint.pt",
+          "sha256": "1236c6ae612311a83b9f43a4139d758275b6ac8bf9e6d0f7b56fb67713329bc5",
+          "bytes": 1251061211
+        },
+        {
+          "path": "g-b19748034808412f8a006986895313e6/state.json",
+          "file": "g-b19748034808412f8a006986895313e6__state.json",
+          "sha256": "3374d907b894d62f5bb888cbec07a1cecd6c2625a32965290e8c8b003e6245e0",
+          "bytes": 75544432
+        }
+      ],
+      "inventory": [
+        {
+          "path": "b0_resume_manifest.json",
+          "bytes": 2057,
+          "sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3"
+        },
+        {
+          "path": "dataset-metadata.json",
+          "bytes": 327,
+          "sha256": "045f84dba88752b0bce24f2e4527f0dac5d0cf0dc8c369b57d4b1a64fc5cb1e6"
+        },
+        {
+          "path": "g-2f64908aa31b4ea09320fa58bfec0277__checkpoint.pt",
+          "bytes": 1250983067,
+          "sha256": "a9ed12b3cdb3805f46836cb2a371e07014fdab835704eacf6956edecb31c4e6f"
+        },
+        {
+          "path": "g-2f64908aa31b4ea09320fa58bfec0277__state.json",
+          "bytes": 75253548,
+          "sha256": "61bf95032c0865d68e097c059782e2cc2784362fa576fcfa51dfa49274b47071"
+        },
+        {
+          "path": "g-b19748034808412f8a006986895313e6__checkpoint.pt",
+          "bytes": 1251061211,
+          "sha256": "1236c6ae612311a83b9f43a4139d758275b6ac8bf9e6d0f7b56fb67713329bc5"
+        },
+        {
+          "path": "g-b19748034808412f8a006986895313e6__state.json",
+          "bytes": 75544432,
+          "sha256": "3374d907b894d62f5bb888cbec07a1cecd6c2625a32965290e8c8b003e6245e0"
+        },
+        {
+          "path": "LATEST.json",
+          "bytes": 538,
+          "sha256": "e0ce78b79d0e7b9b5179367643336d8165ef25dca3090c808c5b9d79633b566a"
+        }
+      ],
+      "total_bytes": 2652845180,
+      "elapsed_seconds": 32.861
+    }
+  },
+  "kernels": {
+    "S2": {
+      "dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-resume1-scale2-X1-L8-lr3e-5-seed2028",
+      "files": {
+        "kernel-metadata.json": {
+          "bytes": 703,
+          "sha256": "9bc0ef80d2aeebecbd14424a837f13591ba3a4e57d71da60926eb112e4e11692"
+        },
+        "run-config.json": {
+          "bytes": 37224,
+          "sha256": "b87d459f8a327b9cba97bffd3b24f034e86a3eba0b74f18c869885afca786946"
+        },
+        "runner.py": {
+          "bytes": 61129,
+          "sha256": "4f024f8429d2a78a7df91ef8a295e4f64222f7220471a9c24adbe1b24b702c28"
+        }
+      },
+      "checks": {
+        "profile": "scale2-X1-L8-lr3e-5-seed2026-resume1-scale2-X1-L8-lr3e-5-seed2028",
+        "verify_exit_code": 0,
+        "bootstrap_exact_match": true,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps",
+          "ngctnnguyn1111/doanttnt-scale2-packed-v1",
+          "ngctnnguyn1111/doanttnt-xlsr-scale2-s2026-resume1"
+        ],
+        "resume_dataset_count": 1,
+        "source_bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+        "parsed_args": {
+          "data_root": "__KAGGLE_DATA_ROOT__",
+          "working_root": "\\kaggle\\working",
+          "plan": "configs/xlsr_training_scale2.json",
+          "train_artifact": "\\kaggle\\input\\doanttnt-scale2-packed-v1",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2026",
+          "dry_run": false,
+          "resume_manifest_sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd",
+          "expected_step": 11491,
+          "second_run_id": "X1-L8-lr3e-5",
+          "second_training_seed": "2028",
+          "second_resume_manifest_sha256": null,
+          "second_expected_step": null
+        },
+        "runner_commands": {
+          "slot_A_seed2026": {
+            "run_root": "/kaggle/working/checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2026",
+            "command": [
+              "/kaggle/working/.xlsr-offline-env/bin/python",
+              "scripts/train_xlsr.py",
+              "--plan",
+              "configs/xlsr_training_scale2.json",
+              "--run-id",
+              "X1-L8-lr3e-5",
+              "--training-seed",
+              "2026",
+              "--device",
+              "cuda:0",
+              "--train-artifact",
+              "\\kaggle\\input\\doanttnt-scale2-packed-v1",
+              "--dev-artifact",
+              "__KAGGLE_DATA_ROOT__\\closed_dev_full_v1",
+              "--pretrained-dir",
+              "\\kaggle\\input\\doanttnt-t14-weights",
+              "--run-root",
+              "\\kaggle\\working\\checkpoints\\xlsr_scale2_X1-L8-lr3e-5_seed2026",
+              "--report-json",
+              "\\kaggle\\working\\reports\\xlsr_scale2_X1-L8-lr3e-5_seed2026.json",
+              "--session-steps",
+              "19860",
+              "--deadline-unix",
+              "1700039600.0",
+              "--resume"
+            ]
+          },
+          "slot_B_seed2028": {
+            "run_root": "/kaggle/working/checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2028",
+            "command": [
+              "/kaggle/working/.xlsr-offline-env/bin/python",
+              "scripts/train_xlsr.py",
+              "--plan",
+              "configs/xlsr_training_scale2.json",
+              "--run-id",
+              "X1-L8-lr3e-5",
+              "--training-seed",
+              "2028",
+              "--device",
+              "cuda:0",
+              "--train-artifact",
+              "\\kaggle\\input\\doanttnt-scale2-packed-v1",
+              "--dev-artifact",
+              "__KAGGLE_DATA_ROOT__\\closed_dev_full_v1",
+              "--pretrained-dir",
+              "\\kaggle\\input\\doanttnt-t14-weights",
+              "--run-root",
+              "\\kaggle\\working\\checkpoints\\xlsr_scale2_X1-L8-lr3e-5_seed2028",
+              "--report-json",
+              "\\kaggle\\working\\reports\\xlsr_scale2_X1-L8-lr3e-5_seed2028.json",
+              "--session-steps",
+              "19860",
+              "--deadline-unix",
+              "1700039600.0"
+            ]
+          }
+        }
+      }
+    },
+    "S3": {
+      "dir": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2027-resume1",
+      "files": {
+        "kernel-metadata.json": {
+          "bytes": 703,
+          "sha256": "824354982aeee109b62973546510aca54a70e40d088005cc18d2bd17e3227389"
+        },
+        "run-config.json": {
+          "bytes": 37098,
+          "sha256": "fedf835c8144349e084ec73a6826a0ca2b8aa3f50312933cd875e2dc1961908c"
+        },
+        "runner.py": {
+          "bytes": 61001,
+          "sha256": "2af6ff7faac401db163766d938247ef75d8e678910a2c4f451013f1fb5c111ec"
+        }
+      },
+      "checks": {
+        "profile": "scale2-X1-L8-lr3e-5-seed2027-resume1",
+        "verify_exit_code": 0,
+        "bootstrap_exact_match": true,
+        "dataset_sources": [
+          "ngctnnguyn1111/doanttnt-t14-packed",
+          "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+          "ngctnnguyn1111/doanttnt-t14-weights",
+          "ngctnnguyn1111/doanttnt-t14-offline-deps",
+          "ngctnnguyn1111/doanttnt-scale2-packed-v1",
+          "ngctnnguyn1111/doanttnt-xlsr-scale2-s2027-resume1"
+        ],
+        "resume_dataset_count": 1,
+        "source_bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+        "parsed_args": {
+          "data_root": "__KAGGLE_DATA_ROOT__",
+          "working_root": "\\kaggle\\working",
+          "plan": "configs/xlsr_training_scale2.json",
+          "train_artifact": "\\kaggle\\input\\doanttnt-scale2-packed-v1",
+          "run_id": "X1-L8-lr3e-5",
+          "training_seed": "2027",
+          "dry_run": false,
+          "resume_manifest_sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3",
+          "expected_step": 13120,
+          "second_run_id": null,
+          "second_training_seed": null,
+          "second_resume_manifest_sha256": null,
+          "second_expected_step": null
+        },
+        "runner_commands": {
+          "single_seed2027": {
+            "run_root": "/kaggle/working/checkpoints/xlsr_scale2_X1-L8-lr3e-5_seed2027",
+            "command": [
+              "/kaggle/working/.xlsr-offline-env/bin/python",
+              "scripts/train_xlsr.py",
+              "--plan",
+              "configs/xlsr_training_scale2.json",
+              "--run-id",
+              "X1-L8-lr3e-5",
+              "--training-seed",
+              "2027",
+              "--device",
+              "cuda:0",
+              "--train-artifact",
+              "\\kaggle\\input\\doanttnt-scale2-packed-v1",
+              "--dev-artifact",
+              "__KAGGLE_DATA_ROOT__\\closed_dev_full_v1",
+              "--pretrained-dir",
+              "\\kaggle\\input\\doanttnt-t14-weights",
+              "--run-root",
+              "\\kaggle\\working\\checkpoints\\xlsr_scale2_X1-L8-lr3e-5_seed2027",
+              "--report-json",
+              "\\kaggle\\working\\reports\\xlsr_scale2_X1-L8-lr3e-5_seed2027.json",
+              "--session-steps",
+              "19860",
+              "--deadline-unix",
+              "1700039600.0",
+              "--resume"
+            ]
+          }
+        }
+      }
+    },
+    "base_single_prepared": {
+      "kernel-metadata.json": {
+        "bytes": 645,
+        "sha256": "706ba803de33fba7b77575168f4136314866f266dac3eb8cda9ef73fa1736b74"
+      },
+      "run-config.json": {
+        "bytes": 36938,
+        "sha256": "6f48f9fd4698126bf4a30916792e4f5d3d46b21e23d69ee96c81e67ff3f17495"
+      },
+      "runner.py": {
+        "bytes": 61133,
+        "sha256": "5e3ebc6e88e92c3b5bd561187583e9acd0225a5982e818afc7ba6c35b263f59f"
+      }
+    },
+    "base_pair_unchanged_sha": {
+      "kernel-metadata.json": "706ba803de33fba7b77575168f4136314866f266dac3eb8cda9ef73fa1736b74",
+      "run-config.json": "5a6107271170d034ccfd8e4b93072689999d14f479d780c5cab16c5dba38499f",
+      "runner.py": "7f69845ca2ee8d034bd0a1d04c00b4b0a2ec1b37a03f490a90690b2713fb4018"
+    }
+  },
+  "restore_simulations": {
+    "positive_seed_2026": {
+      "passed": true,
+      "restored_global_step": 11491,
+      "files_verified": 5,
+      "latest_json_sha256_matches_source": true,
+      "manifest_sha256": "9012282f20cd4dbe818f845f1cd02b133fee5cf0297fed2b40276675e0d8ccbd"
+    },
+    "positive_seed_2027": {
+      "passed": true,
+      "restored_global_step": 13120,
+      "files_verified": 5,
+      "latest_json_sha256_matches_source": true,
+      "manifest_sha256": "86429f1520d02e7f14931be39e32c8340be34272a4cf7886de9774c771406ec3"
+    },
+    "negative_both_payloads": {
+      "passed": true,
+      "raised_error_type": "ValueError",
+      "error_message": "Không xác định được duy nhất manifest checkpoint đầu vào."
+    }
+  },
+  "s2_quota_estimate": {
+    "slot_A_seed2026_resume": {
+      "max_remaining_steps": 8369,
+      "max_remaining_dev_evals": 5,
+      "step_seconds_x1s03": 2.0087,
+      "dev_seconds_x1s03": 2357.6,
+      "estimated_max_seconds": 28598.8,
+      "estimated_max_hours": 7.94
+    },
+    "slot_B_seed2028_fresh": {
+      "session_limit_hours": 11.0,
+      "expected_behavior": "Chạy hết hạn 11,0 giờ trên phiên S2 rồi pause; cần S4 để hoàn tất."
+    },
+    "expected_s2_wall_hours": "~11.0h (bị chi phối bởi slot B)",
+    "expected_s2_gpu_quota_hours": "~11.0h (cần đợi quota làm mới lúc 2026-11-21 00:00 UTC; hiện chỉ còn 5,03h)"
+  },
+  "planned_x1s04b_commands_not_run": {
+    "status": "NOT_RUN",
+    "create_private_dataset_s2026": [
+      "kaggle",
+      "-W",
+      "datasets",
+      "create",
+      "-p",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\resume_s2026",
+      "--dir-mode",
+      "skip"
+    ],
+    "privacy_note": "KHÔNG truyền --public (Kaggle mặc định private).",
+    "check_remote_dataset": [
+      "kaggle",
+      "-W",
+      "datasets",
+      "status",
+      "ngctnnguyn1111/doanttnt-xlsr-scale2-s2026-resume1",
+      "&&",
+      "kaggle",
+      "-W",
+      "datasets",
+      "files",
+      "ngctnnguyn1111/doanttnt-xlsr-scale2-s2026-resume1",
+      "--page-size",
+      "100",
+      "--format",
+      "json"
+    ],
+    "push_S2": [
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+      "-B",
+      "scripts/kaggle_workflow.py",
+      "--config",
+      ".kaggle/xlsr-d028/project.json",
+      "push-prepared-kernel",
+      "--kernel-dir",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-resume1-scale2-X1-L8-lr3e-5-seed2028"
+    ],
+    "download_output_filtered": [
+      "kaggle",
+      "-W",
+      "kernels",
+      "output",
+      "ngctnnguyn1111/doanttnt-xlsr-d028",
+      "-p",
+      "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d036-scale2-pair-s2-v1",
+      "--file-pattern",
+      "^reports/|^checkpoints/|^[^/]+\\.log$",
+      "--page-size",
+      "200",
+      "--force"
+    ]
+  },
+  "deviations": [
+    "Trong bước 6 kiểm tra lệnh runner giải mã trên Windows, Path('/kaggle/input/...') chuyển dấu '/' thành '\\'; đã chuẩn hóa dấu phân cách khi assert chuỗi đường dẫn POSIX dự kiến trên Kaggle.",
+    "Thư mục prepared gốc cho profile đơn (scale2-X1-L8-lr3e-5-seed2028) chưa có sẵn trong .kaggle/xlsr-d028/prepared/, nên đã chuẩn bị trước bằng prepare_xlsr_pair_kernel rồi sao sang bản resume S3 mà không sửa bản gốc."
+  ],
+  "commands_with_utc7_exit_codes": [
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr",
+        "status",
+        "--short"
+      ],
+      "started_utc7": "2026-11-19T23:12:29.515213+07:00",
+      "finished_utc7": "2026-11-19T23:12:29.565089+07:00",
+      "elapsed_seconds": 0.046,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\git_status_before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "quota",
+        "--format",
+        "json"
+      ],
+      "started_utc7": "2026-11-19T23:12:29.570335+07:00",
+      "finished_utc7": "2026-11-19T23:12:31.141648+07:00",
+      "elapsed_seconds": 1.573,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\quota_before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "kernels",
+        "status",
+        "ngctnnguyn1111/doanttnt-xlsr-d028"
+      ],
+      "started_utc7": "2026-11-19T23:12:31.141648+07:00",
+      "finished_utc7": "2026-11-19T23:12:33.007230+07:00",
+      "elapsed_seconds": 1.868,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\kernel_status_before.log"
+    },
+    {
+      "command": [
+        "kaggle",
+        "-W",
+        "datasets",
+        "list",
+        "--mine",
+        "--search",
+        "xlsr-scale2",
+        "--page-size",
+        "100",
+        "--format",
+        "json"
+      ],
+      "started_utc7": "2026-11-19T23:12:33.014278+07:00",
+      "finished_utc7": "2026-11-19T23:12:34.485116+07:00",
+      "elapsed_seconds": 1.472,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\datasets_list_before.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2026-resume1-scale2-X1-L8-lr3e-5-seed2028"
+      ],
+      "started_utc7": "2026-11-19T23:26:51.794160+07:00",
+      "finished_utc7": "2026-11-19T23:26:51.970783+07:00",
+      "elapsed_seconds": 0.19,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\verify_S2.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT\\.venv\\Scripts\\python.exe",
+        "-B",
+        "scripts/kaggle_workflow.py",
+        "--config",
+        ".kaggle/xlsr-d028/project.json",
+        "verify-prepared-kernel",
+        "--kernel-dir",
+        "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.kaggle\\xlsr-d028\\prepared\\scale2-X1-L8-lr3e-5-seed2027-resume1"
+      ],
+      "started_utc7": "2026-11-19T23:26:51.987064+07:00",
+      "finished_utc7": "2026-11-19T23:26:52.168758+07:00",
+      "elapsed_seconds": 0.186,
+      "exit_code": 0,
+      "log": "C:\\Users\\Admin\\Documents\\DoAnTTNT-xlsr\\.cache\\x1s04a\\verify_S3.log"
+    }
+  ]
+}

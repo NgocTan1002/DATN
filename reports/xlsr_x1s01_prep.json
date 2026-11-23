@@ -1,0 +1,167 @@
+{
+  "task": "X1S-01",
+  "status": "prepared_no_kaggle_write",
+  "git_head_worktree_xlsr": "adfc82d217c56d462453cb4189d79871e92634ba",
+  "plan": {
+    "path": "configs/xlsr_training_scale2.json",
+    "sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+    "size_bytes": 5768,
+    "experiment_id": "xlsr-d036-scale2",
+    "decision": "D036",
+    "base_decision": "D028",
+    "grid": [
+      {
+        "run_id": "X1-L8-lr3e-5",
+        "layers": 8,
+        "encoder_lr": 3e-05
+      }
+    ],
+    "allowed_seeds": [2026, 2027, 2028],
+    "training": {
+      "steps_per_epoch": 1986,
+      "max_optimizer_steps": 19860,
+      "max_train_sample_exposures": 317700
+    },
+    "outputs": {
+      "root_template": "checkpoints/xlsr_scale2_{run_id}_seed{training_seed}",
+      "report_json_template": "reports/xlsr_scale2_{run_id}_seed{training_seed}.json"
+    }
+  },
+  "data_and_artifacts": {
+    "train_manifest": "data/manifests/development_scale2_v1.csv",
+    "train_manifest_sha256": "6533fced4b3a25ebab9f037a62d34774b44c2fa1f00d17040fd815bd17fa51a3",
+    "train_manifest_size_bytes": 4875923,
+    "train_artifact": "data/processed/packed/train_development_scale2_v1",
+    "train_artifact_index_sha256": "7eb18914d7d2ea3b101273d0ab4a4e882a0cac4c8676ae5c018a281086aa8080",
+    "train_artifact_waveforms_sha256": "260d93d3762f20b564400d023d599d4151d8e74be618441aed255675f3e3da5e",
+    "train_metadata_sha256": "3341f75b45f089c4b6b2f71ca3659233a87c6232d416a247b5886d7e0ecec48d",
+    "train_samples": 31770,
+    "train_shards": 89,
+    "development_samples": 38777,
+    "development_shards": 186,
+    "sample_selection_sha256": "b76b56a3fdfa53ee0a5fa28f98c31c800b9351073b39a2133da32d0086895ac2"
+  },
+  "dry_run_verification": {
+    "x1_scale2_seed2026": {
+      "exit_code": 0,
+      "log_path": ".cache/x1s01/dry_run_2026.log",
+      "report_path": ".cache/x1s01/dry_run_2026_report.json",
+      "train_samples": 31770,
+      "development_samples": 38777,
+      "train_shards": 89,
+      "development_shards": 186,
+      "steps_per_epoch": 1986,
+      "runs": ["X1-L8-lr3e-5"],
+      "sample_selection_sha256": "b76b56a3fdfa53ee0a5fa28f98c31c800b9351073b39a2133da32d0086895ac2",
+      "plan_sha256": "3ea92e5724d04d6f5ec427c113bf1d15e276a6ee99662b7857f737e4eff10b64",
+      "wall_seconds": 8.748,
+      "pretrained_dir_used": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\raw\\xlsr\\wav2vec2-xls-r-300m"
+    },
+    "x0_scale2_rejected": {
+      "exit_code": 1,
+      "log_path": ".cache/x1s01/dry_run_x0_rejected.log",
+      "expected_error": "LỖI: Cấu hình scale2 (D036) chỉ cho phép run X1-L8-lr3e-5."
+    }
+  },
+  "timing_and_quota_projection": {
+    "t31_reference_report": "C:\\Users\\Admin\\Documents\\DoAnTTNT\\kaggle_outputs\\xlsr-d028-X1R-seed2028-v1\\reports\\xlsr_X1-L8-lr3e-5-lp7k_seed2028.json",
+    "t31_observed": {
+      "status": "early_stopped",
+      "stop_epoch": 8,
+      "global_step": 7944,
+      "wall_seconds": 32545.149,
+      "mean_step_seconds": 1.57073,
+      "epoch1_mean_step_seconds": 1.858936,
+      "dev_eval_seconds_range": [2056.39, 2099.79],
+      "rehash_train_seconds": 49.455,
+      "rehash_dev_seconds": 117.152
+    },
+    "scale2_projection_per_epoch": {
+      "train_steps": 1986,
+      "avg_train_seconds": 3119.5,
+      "conservative_train_seconds": 3691.8,
+      "avg_eval_seconds": 2075.0,
+      "conservative_eval_seconds": 2100.0,
+      "avg_epoch_hours": 1.44,
+      "conservative_epoch_hours": 1.61,
+      "startup_and_rehash_hours_approx": 0.08
+    },
+    "sessions_per_run_11h_limit": {
+      "early_stop_le_6_to_7_epochs": 1,
+      "epochs_8_to_10": 2
+    },
+    "kaggle_quota": {
+      "before_edits": {
+        "gpu_used_hours": 28.94,
+        "gpu_remaining_hours": 16.06,
+        "gpu_total_hours": 45.0,
+        "refresh_at": "2026-11-21T00:00:00",
+        "tpu_used_hours": 0.0,
+        "tpu_total_hours": 20.0
+      },
+      "after_edits": {
+        "gpu_used_hours": 28.94,
+        "gpu_remaining_hours": 16.06,
+        "gpu_total_hours": 45.0,
+        "refresh_at": "2026-11-21T00:00:00",
+        "tpu_used_hours": 0.0,
+        "tpu_total_hours": 20.0
+      },
+      "recommended_execution_order": [
+        "1. Publish updated source bundle (no GPU cost) and run pair dry-run kernel.",
+        "2. Push real pair kernel scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027 (~11h max per session for 2 seeds, fits inside 16.06h remaining).",
+        "3. Resume pair if needed and run single kernel scale2-X1-L8-lr3e-5-seed2028 after or alongside weekly quota refresh (45.00h at 2026-11-21T00:00:00 UTC)."
+      ]
+    }
+  },
+  "bundle_and_kernel": {
+    "step8_json": ".cache/x1s01/step8_bundle_and_kernel.json",
+    "source_zip_path": ".kaggle/xlsr-d028/workflow/source_dataset/project_source.zip",
+    "source_file_count": 76,
+    "source_zip_bytes": 277546,
+    "bundle_sha256": "9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1",
+    "prepared_kernel_dir": ".kaggle/xlsr-d028/workflow/kernel",
+    "prepared_profile": "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run",
+    "runner_sha256": "8f00f7ffe6de2de3e3cdf0d65832324bc15868e76d2f81c3e5eb40d97f370686",
+    "dataset_sources": [
+      "ngctnnguyn1111/doanttnt-xlsr-d028-source",
+      "ngctnnguyn1111/doanttnt-t14-weights",
+      "ngctnnguyn1111/doanttnt-t14-offline-deps",
+      "ngctnnguyn1111/doanttnt-t14-packed",
+      "ngctnnguyn1111/doanttnt-scale2-packed-v1"
+    ],
+    "verify_prepared_kernel_exit_code": 0
+  },
+  "profiles_added": [
+    "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027",
+    "scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run",
+    "scale2-X1-L8-lr3e-5-seed2028",
+    "scale2-X1-L8-lr3e-5-seed2028-dry-run"
+  ],
+  "baseline_comparison": {
+    "baseline_file": ".cache/x1s01/baseline.json",
+    "x1_config_unchanged": true,
+    "x1_config_sha256": "9b4b44cee285b8e32d596750cc74244a691702dfdb2c25324f49ee625a52f411",
+    "existing_x1_profiles_count": 52,
+    "existing_x1_profiles_preserved_byte_for_byte": true,
+    "total_profiles_after": 56
+  },
+  "tests": {
+    "baseline_total": 450,
+    "new_scale2_tests": 6,
+    "post_edit_total": 456,
+    "post_edit_exit_code": 0,
+    "post_edit_duration_seconds": 122.276
+  },
+  "pending_kaggle_writes_requiring_approval": [
+    "publish-source (update ngctnnguyn1111/doanttnt-xlsr-d028-source with project_source.zip SHA 9ac6f8144c4959809007e42a1df7db15923fd9cea1f6433679e8a81090accac1)",
+    "push pair dry-run kernel scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027-dry-run",
+    "push real pair kernel scale2-X1-L8-lr3e-5-seed2026-scale2-X1-L8-lr3e-5-seed2027",
+    "resume pair kernel if stop_epoch >= 7 or 8",
+    "push single kernel scale2-X1-L8-lr3e-5-seed2028 (and resume if needed)"
+  ],
+  "deviations": [
+    "Step 6 dry-run used --pretrained-dir C:\\Users\\Admin\\Documents\\DoAnTTNT\\data\\raw\\xlsr\\wav2vec2-xls-r-300m instead of C:\\Users\\Admin\\Documents\\DoAnTTNT\\.kaggle\\t14\\download\\weights because the .kaggle weights folder was empty on disk while wav2vec2-xls-r-300m holds the D021 pretrained checkpoint (pytorch_model.bin SHA d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0).",
+    "Step 7(e) mentioned 4 dataset sources, whereas scale2 profiles require 5 dataset_sources so the kernel mounts both closed_dev_full_v1 (ngctnnguyn1111/doanttnt-t14-packed) and scale2 train files (ngctnnguyn1111/doanttnt-scale2-packed-v1) alongside source, weights, and offline-deps."
+  ]
+}
